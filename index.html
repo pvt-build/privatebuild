@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRIVATE BUILD — Freedom Map</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d0d10'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='50' font-family='sans-serif' font-weight='800' fill='%23e8e8f8'%3EPB%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -2303,6 +2304,88 @@ main { padding-bottom: 120px; }
   .roi-calc { margin: 0 16px 28px; }
   .roi-result { grid-template-columns: 1fr; }
 }
+
+/* ─── SCROLL REVEAL ─── */
+.sr { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.sr.visible { opacity: 1; transform: translateY(0); }
+.sr:nth-child(2) { transition-delay: 0.08s; }
+.sr:nth-child(3) { transition-delay: 0.16s; }
+.sr:nth-child(4) { transition-delay: 0.24s; }
+
+/* ─── ROI CALCULATOR – más visible ─── */
+.roi-calc {
+  margin: 0 56px 40px !important;
+  background: linear-gradient(180deg, rgba(30,30,50,0.95) 0%, var(--bg2) 100%) !important;
+  border: 1px solid var(--border2) !important;
+  border-top: 3px solid var(--green) !important;
+  border-radius: 8px;
+  overflow: visible;
+  position: relative;
+}
+.roi-calc-headline {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--metal3);
+  text-align: center;
+  padding: 20px 24px 0;
+  letter-spacing: 0.02em;
+}
+.roi-calc-sub {
+  font-size: 11px;
+  color: var(--gray3);
+  text-align: center;
+  padding: 4px 24px 12px;
+}
+.roi-scenario-tab {
+  display: flex !important;
+  border-bottom: 1px solid var(--border2) !important;
+  background: rgba(255,255,255,0.02);
+}
+.roi-tab {
+  flex: 1;
+  padding: 14px 16px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.15em !important;
+}
+.roi-slider {
+  accent-color: var(--green) !important;
+}
+.roi-slider::-webkit-slider-thumb {
+  width: 20px !important;
+  height: 20px !important;
+}
+/* slider auto-animate on scroll */
+.roi-calc.animate-in .roi-slider {
+  animation: sliderWiggle 1.2s ease 0.3s;
+}
+@keyframes sliderWiggle {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(10px); }
+  40% { transform: translateX(-6px); }
+  60% { transform: translateX(4px); }
+  80% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
+/* ─── SECTION HEADLINES ─── */
+.section-headline {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--metal3);
+  padding: 0 56px;
+  margin-bottom: -8px;
+  letter-spacing: 0.01em;
+}
+@media(max-width:768px) {
+  .section-headline { font-size: 18px; padding: 0 24px; }
+  .roi-calc { margin: 0 24px 32px !important; }
+}
+@media(max-width:540px) {
+  .section-headline { font-size: 16px; padding: 0 16px; }
+  .roi-calc { margin: 0 16px 28px !important; }
+}
+
 </style>
 </head>
 <body>
@@ -2626,6 +2709,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Recursos Disponibles</div>
   <div class="sdiv"><div class="sdiv-label">Repositorio — SKILLER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
@@ -2692,6 +2776,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">Stack mínimo — SKILLER</div><div class="sdiv-line"></div></div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
@@ -2775,8 +2860,9 @@ main { padding-bottom: 120px; }
   </div>
 
 
-<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
-  <div class="roi-calc" id="roi-phase-0">
+<div class="roi-calc" id="roi-phase-0">
+    <div class="roi-calc-headline">Calculadora de Retorno</div>
+<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-0','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-0','opt')">Escenario óptimo</button>
@@ -3044,6 +3130,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Recursos Disponibles</div>
   <div class="sdiv"><div class="sdiv-label">Repositorio — OPERATOR</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
@@ -3109,9 +3196,10 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">Stack mínimo — OPERATOR</div><div class="sdiv-line"></div></div>
   <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-    Incluye todo el stack de Skiller (Claude, Notion, Instagram, Fathom) + las siguientes herramientas nuevas:
+    Incluye todo el stack de Skiller (Claude, Notion, Instagram, Fathom) + nuevas herramientas:
   </div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
@@ -3175,35 +3263,36 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://miro.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='M'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://www.gohighlevel.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='G'" /></div>
             <div>
-              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Miro</div>
-              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Estrategia visual</div>
+              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">GHL Starter</div>
+              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">CRM + Pipeline</div>
             </div>
           </div>
         </div>
-        <div class="wc-focus">Mapear el proceso de venta</div>
+        <div class="wc-focus">Tu primer sistema de ventas real</div>
         <ul class="wc-tasks">
-          <li>◆ Diagrama del customer journey real</li>
-          <li>◆ Mapa de objeciones y respuestas</li>
-          <li>◆ Visual de la oferta y sus componentes</li>
-          <li>◆ Retrospectiva visual de la fase</li>
+          <li>◆ Pipeline visual de prospectos</li>
+          <li>◆ Seguimiento automático post-llamada</li>
+          <li>◆ Landing pages para captar leads</li>
+          <li>◆ Calendario de reservas integrado</li>
         </ul>
-        <div class="wc-milestone">⬡ Gratis · útil para claridad visual</div>
+        <div class="wc-milestone">⬡ Starter $49/mes · se paga solo con 1 cierre</div>
       </div>
     </div>
   </div>
 
 
-<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
-  <div class="roi-calc" id="roi-phase-1">
+<div class="roi-calc" id="roi-phase-1">
+    <div class="roi-calc-headline">Calculadora de Retorno</div>
+<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-1','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-1','opt')">Escenario óptimo</button>
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — OPERATOR</div>
-      <div class="roi-subtitle" id="roi-phase-1-sub">Claude Pro $20 — ese es todo tu costo fijo</div>
+      <div class="roi-subtitle" id="roi-phase-1-sub">Claude Pro $20 + GHL Starter $49 = $69 total</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -3230,7 +3319,7 @@ main { padding-bottom: 120px; }
     <div class="roi-results">
       <div class="roi-result-item">
         <div class="roi-result-label">Inversión mensual</div>
-        <div class="roi-result-val glow-red" id="roi-phase-1-inversion">-$20</div>
+        <div class="roi-result-val glow-red" id="roi-phase-1-inversion">-$69</div>
       </div>
       <div class="roi-result-item">
         <div class="roi-result-label">Ingreso bruto</div>
@@ -3464,6 +3553,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Recursos Disponibles</div>
   <div class="sdiv"><div class="sdiv-label">Repositorio — BUILDER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
@@ -3530,9 +3620,10 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">Stack mínimo — BUILDER</div><div class="sdiv-line"></div></div>
   <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-    Incluye todo el stack anterior (Claude, Notion, Instagram, Fathom, Miro) + nuevas herramientas:
+    Incluye todo el stack anterior (Claude, Notion, Instagram, Fathom, GHL) + nuevas herramientas:
   </div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
@@ -3558,21 +3649,21 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://openai.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='G'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://n8n.io/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='n8n'" /></div>
             <div>
-              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">GPT</div>
-              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Complemento</div>
+              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">n8n</div>
+              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Automatización</div>
             </div>
           </div>
         </div>
-        <div class="wc-focus">Segundo cerebro para validar</div>
+        <div class="wc-focus">Workflows automatizados</div>
         <ul class="wc-tasks">
-          <li>◆ Validar ideas con perspectiva distinta</li>
-          <li>◆ Browsing para research de mercado</li>
-          <li>◆ Generación de imágenes para contenido</li>
-          <li>◆ Custom GPT con tu voz para copy</li>
+          <li>◆ Conectar herramientas sin código</li>
+          <li>◆ Automatizar seguimiento de leads</li>
+          <li>◆ Secuencias de email + CRM</li>
+          <li>◆ Integrar Claude con tu pipeline</li>
         </ul>
-        <div class="wc-milestone">⬡ Plus $20/mes · si puedes, sí</div>
+        <div class="wc-milestone">⬡ Self-hosted gratis · Cloud desde $20/mes</div>
       </div>
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
@@ -3616,15 +3707,16 @@ main { padding-bottom: 120px; }
   </div>
 
 
-<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
-  <div class="roi-calc" id="roi-phase-2">
+<div class="roi-calc" id="roi-phase-2">
+    <div class="roi-calc-headline">Calculadora de Retorno</div>
+<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-2','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-2','opt')">Escenario óptimo</button>
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — BUILDER</div>
-      <div class="roi-subtitle" id="roi-phase-2-sub">Claude $20 + Miro $8 + GPT $20 = $48 total</div>
+      <div class="roi-subtitle" id="roi-phase-2-sub">Claude $20 + GHL $49 + n8n $20 = $89 total</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -3651,7 +3743,7 @@ main { padding-bottom: 120px; }
     <div class="roi-results">
       <div class="roi-result-item">
         <div class="roi-result-label">Inversión mensual</div>
-        <div class="roi-result-val glow-red" id="roi-phase-2-inversion">-$48</div>
+        <div class="roi-result-val glow-red" id="roi-phase-2-inversion">-$89</div>
       </div>
       <div class="roi-result-item">
         <div class="roi-result-label">Ingreso bruto</div>
@@ -3885,6 +3977,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Recursos Disponibles</div>
   <div class="sdiv"><div class="sdiv-label">Repositorio — OWNER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
@@ -3952,9 +4045,10 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">⚙ Stack completo — OWNER</div><div class="sdiv-line"></div></div>
   <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-    Incluye todo el stack anterior (Claude, Notion, Instagram, Fathom, Miro, GPT, Poppy) + herramientas de escala:
+    Incluye todo el stack anterior (Claude, Notion, Instagram, Fathom, GHL, n8n, Miro, Poppy) + herramientas de escala:
   </div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
@@ -4018,35 +4112,36 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://openai.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='G'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://miro.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='M'" /></div>
             <div>
-              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">GPT + Miro</div>
-              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Estrategia</div>
+              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Miro</div>
+              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Estrategia visual</div>
             </div>
           </div>
         </div>
         <div class="wc-focus">Decisiones y visión de negocio</div>
         <ul class="wc-tasks">
-          <li>◆ GPT para research de mercado y competencia</li>
-          <li>◆ Miro para mapas estratégicos de la siguiente fase</li>
+          <li>◆ Mapas estratégicos de la siguiente fase</li>
           <li>◆ Retrospectivas visuales de 90 días</li>
-          <li>◆ Diseño del producto de la siguiente iteración</li>
+          <li>◆ Diagrama del embudo completo</li>
+          <li>◆ Propuestas visuales para clientes</li>
         </ul>
-        <div class="wc-milestone">⬡ GPT $20/mes · Miro gratis o Starter</div>
+        <div class="wc-milestone">⬡ Gratis · Starter $8/mes si escala</div>
       </div>
     </div>
   </div>
 
 
-<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
-  <div class="roi-calc" id="roi-phase-3">
+<div class="roi-calc" id="roi-phase-3">
+    <div class="roi-calc-headline">Calculadora de Retorno</div>
+<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-3','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-3','opt')">Escenario óptimo</button>
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — OWNER</div>
-      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + tools $48 = $165 stack completo</div>
+      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + n8n $20 + Miro $8 = $145 stack completo</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -4073,7 +4168,7 @@ main { padding-bottom: 120px; }
     <div class="roi-results">
       <div class="roi-result-item">
         <div class="roi-result-label">Inversión mensual</div>
-        <div class="roi-result-val glow-red" id="roi-phase-3-inversion">-$165</div>
+        <div class="roi-result-val glow-red" id="roi-phase-3-inversion">-$145</div>
       </div>
       <div class="roi-result-item">
         <div class="roi-result-label">Ingreso bruto</div>
@@ -4488,16 +4583,16 @@ const roiConfig = {
     opt: { tools:0,   mentoria:0, precio_min:50,  precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:4,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'El límite es tu capacidad de agendar y cerrar. 4 ventas a $300 = $1.200 neto.' }
   },
   'phase-1': {
-    min: { tools:20,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude Pro $20 — ese es todo tu costo fijo',             nota:'1 venta de $300 ya cubre el stack 15 veces. 100 contactos/mes para 2–4 cierres.' },
-    opt: { tools:20,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack, precio más alto, margen del 99%',           nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $20 = 0.8% del ingreso.' }
+    min: { tools:69,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude Pro $20 + GHL Starter $49 = $69 total',             nota:'1 venta de $300 ya cubre el stack. 100 contactos/mes para 2–4 cierres.' },
+    opt: { tools:69,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack $69, precio más alto, margen del 97%',       nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $69 = 2.8% del ingreso.' }
   },
   'phase-2': {
-    min: { tools:48,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude $20 + Miro $8 + GPT $20 = $48 total',            nota:'2 high-tickets = stack cubierto 41 veces. Con proceso documentado, es reproducible.' },
-    opt: { tools:48,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1% del ingreso cuando el ticket sube',           nota:'3 × $2K = $6.000. $48 de stack. Margen 99.2%. El negocio fondea el próximo trimestre.' }
+    min: { tools:89,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude $20 + GHL $49 + n8n $20 = $89 total',            nota:'2 high-tickets = stack cubierto 22 veces. Con proceso documentado, es reproducible.' },
+    opt: { tools:89,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1.5% del ingreso cuando el ticket sube',         nota:'3 × $2K = $6.000. $89 de stack. Margen 98.5%. El negocio fondea el próximo trimestre.' }
   },
   'phase-3': {
-    min: { tools:165, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + tools $48 = $165',               nota:'3 × $2K = $6K. Stack = 2.7%. El sistema opera, tú diseñas.' },
-    opt: { tools:165, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 1.1%. Para esto se construyó todo.' }
+    min: { tools:145, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + n8n $20 + Miro $8 = $145',       nota:'3 × $2K = $6K. Stack = 2.4%. El sistema opera, tú diseñas.' },
+    opt: { tools:145, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 0.9%. Para esto se construyó todo.' }
   }
 };
 
@@ -4576,8 +4671,28 @@ function initROI() {
 }
 
 
+
+// ─── SCROLL REVEAL ───
+function initScrollReveal() {
+  document.querySelectorAll('.sdiv, .attrs-wrap, .inner-wrap, .weeks-wrap, .roi-calc, .deliv-wrap, .income-wrap, .roi-calc, .fail-grid, .section-headline').forEach(el => {
+    el.classList.add('sr');
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.classList.contains('roi-calc')) {
+          entry.target.classList.add('animate-in');
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+}
+
 window.addEventListener('load', () => {
-  // App starts locked behind splash — unlockApp() handles init
+  initScrollReveal();
 });
 </script>
 </body>
