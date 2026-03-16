@@ -1,0 +1,72 @@
+name: Sync Notion → Private Build
+
+on:
+  # Ejecuta automáticamente cada hora
+  schedule:
+    - cron: "0 * * * *"
+
+  # O manualmente desde GitHub
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: "Solo sincronizar fase (0-3, vacío = todas)"
+        required: false
+        default: ""
+
+  # O cuando haces push al repo (para cambios manuales al HTML)
+  push:
+    branches: [main]
+    paths-ignore:
+      - "index.html"   # evita loop infinito
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # necesario para git push
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Configure git
+        run: |
+          git config user.name  "Private Build Bot"
+          git config user.email "bot@privatebuild.co"
+
+      - name: Run Notion sync
+        env:
+          NOTION_TOKEN:            ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_PHASES:        ${{ secrets.NOTION_DB_PHASES }}
+          NOTION_DB_ATTRIBUTES:    ${{ secrets.NOTION_DB_ATTRIBUTES }}
+          NOTION_DB_DELIVERABLES:  ${{ secrets.NOTION_DB_DELIVERABLES }}
+          NOTION_DB_ACTIONS:       ${{ secrets.NOTION_DB_ACTIONS }}
+          NOTION_DB_FAILURES:      ${{ secrets.NOTION_DB_FAILURES }}
+          NOTION_DB_TOOLS:         ${{ secrets.NOTION_DB_TOOLS }}
+          NOTION_DB_COMMUNITY:     ${{ secrets.NOTION_DB_COMMUNITY }}
+          NOTION_DB_MENTORSHIPS:   ${{ secrets.NOTION_DB_MENTORSHIPS }}
+        run: |
+          PHASE_ARG=""
+          if [ -n "${{ github.event.inputs.phase }}" ]; then
+            PHASE_ARG="--phase ${{ github.event.inputs.phase }}"
+          fi
+          python .privatebuild/sync.py $PHASE_ARG --stats
+
+      - name: Push updated HTML
+        run: |
+          git add index.html
+          git diff --staged --quiet && echo "Sin cambios" && exit 0
+          git commit -m "sync: $(date +'%Y-%m-%d %H:%M') [bot]"
+          git push
