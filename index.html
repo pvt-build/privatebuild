@@ -60,6 +60,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   cursor: default;
+  -webkit-text-size-adjust: 100%;
 }
 
 /* clean — no overlays */
@@ -243,6 +244,7 @@ body {
   color: var(--gray3);
   border: 1px solid var(--border2);
 }
+.splash-btn-community { border-color: var(--green) !important; color: var(--green) !important; }
 .splash-btn-secondary:hover {
   border-color: var(--green);
   color: var(--green);
@@ -1065,12 +1067,12 @@ main { position:relative; z-index:1; }
 
 .deliv-item {
   background: linear-gradient(145deg, var(--bg3) 0%, var(--bg2) 100%);
-  border: 1px solid var(--border);
-  border-top-color: var(--border2);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--border2);
   padding: 16px 18px;
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(.2,.8,.3,1);
   position: relative;
@@ -1085,7 +1087,9 @@ main { position:relative; z-index:1; }
 .deliv-item:hover { background: var(--bg3); }
 
 .deliv-item.done {
-  background: var(--bg3);
+  background: rgba(56,176,104,0.06);
+  border-left-color: var(--green) !important;
+  border-color: rgba(56,176,104,0.2);
 }
 .deliv-item.done::before {
   content:'';
@@ -1197,6 +1201,7 @@ main { position:relative; z-index:1; }
   position: fixed;
   bottom: 0; left: 0; right: 0;
   z-index: 600;
+  will-change: transform;
   background: rgba(13,13,16,0.97);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--border2);
@@ -1395,7 +1400,7 @@ main { position:relative; z-index:1; }
   flex: 1;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.07);
-  padding: 12px 14px;
+  padding: 16px 16px 14px;
   text-align: left;
   position: relative;
   transition: all 0.2s;
@@ -1408,22 +1413,32 @@ main { position:relative; z-index:1; }
 .sj-num {
   font-size: 8px;
   font-weight: 800;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   color: var(--gray5);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 .sj-name {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 800;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
+  line-height: 1;
 }
 .sj-desc {
   font-size: 10px;
   font-weight: 300;
   color: var(--gray4);
-  line-height: 1.4;
+  line-height: 1.45;
+}
+.sj-etapa {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gray5);
+  margin-bottom: 8px;
 }
 .sj-1 .sj-name { color: var(--metal2); }
 .sj-2 .sj-name { color: #e88c30; }
@@ -1977,6 +1992,68 @@ main { position:relative; z-index:1; }
 .repo-cta:hover { color: var(--metal4); }
 .repo-cta-arrow { margin-left: auto; color: var(--gray4); }
 
+
+/* ─── REPO LOCKED STATE ──────────────────── */
+.repo-card {
+  position: relative;
+}
+.repo-locked-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray5);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+.repo-lock-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13,13,16,0.88);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+.repo-card:hover .repo-lock-overlay,
+.repo-card:focus-within .repo-lock-overlay {
+  opacity: 1;
+}
+.repo-card.repo-locked:hover,
+.repo-card.repo-locked:active {
+  cursor: pointer;
+}
+.repo-lock-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+.repo-lock-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--metal2);
+  text-align: center;
+  padding: 0 20px;
+}
+.repo-lock-sub {
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--gray4);
+  text-align: center;
+  padding: 0 20px;
+}
+
 /* ─── BRIGHTENED EXISTING COMPONENTS ─────── */
 .attr-name { color: var(--metal3) !important; }
 .attr-desc { color: var(--gray3) !important; }
@@ -2015,9 +2092,217 @@ main { padding-bottom: 120px; }
   .deliv-grid { grid-template-columns: 1fr; }
   .weeks-grid { grid-template-columns: 1fr; }
   .fail-grid  { grid-template-columns: 1fr; }
+  .repo-grid  { grid-template-columns: 1fr; }
+  .inner-grid { grid-template-columns: 1fr; }
+  .income-grid { grid-template-columns: 1fr; }
+  .ph-block { grid-template-columns: 1fr; padding: 24px 16px 0; }
+  .ph-giant { display: none; }
+  .ph-stats-col { min-width: unset; }
+  .snav { padding: 8px 16px; gap: 8px; }
+  .snav-logo { display: none; }
+  .app-header-top { padding: 12px 16px; flex-wrap: wrap; }
+  .app-header-actions { flex-wrap: wrap; gap: 4px; }
+  .splash-journey { flex-direction: column; gap: 8px; }
+  .sj-arrow { transform: rotate(90deg); align-self: center; }
+  .bottom-bar { flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
+  .bb-phases { flex-wrap: wrap; }
+  .bb-phase-pill { font-size: 7px; padding: 4px 7px; }
+  footer { padding: 28px 16px !important; }
+  .sdiv { padding: 28px 16px 16px; }
+  .attrs-wrap, .weeks-wrap, .inner-wrap, .deliv-wrap, .income-wrap { padding-left: 16px; padding-right: 16px; }
+}
+@media(max-width:380px) {
+  .splash-title { font-size: 64px; }
+  .splash-inner { padding: 24px 16px; }
 }
 
 
+
+/* ─── ROI CALCULATOR INTERACTIVO ─────────── */
+.roi-calc {
+  margin: 0 56px 40px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--border2);
+  overflow: visible;
+  position: relative;
+}
+.roi-scenario-tab {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.roi-tab {
+  flex: 1;
+  padding: 11px 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gray5);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.roi-tab:last-child { border-right: none; }
+.roi-tab.active { background: var(--bg3); color: var(--metal2); }
+.roi-tab.min.active { border-bottom: 2px solid var(--gray3); }
+.roi-tab.opt.active { border-bottom: 2px solid var(--green); }
+
+.roi-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.roi-title {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--metal2);
+}
+.roi-subtitle {
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--gray4);
+}
+
+/* Sliders area */
+.roi-sliders {
+  padding: 20px 24px 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 32px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+.roi-slider-group { display: flex; flex-direction: column; gap: 8px; }
+.roi-slider-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray5);
+}
+.roi-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.roi-slider {
+  -webkit-appearance: none;
+  flex: 1;
+  height: 3px;
+  background: var(--bg4);
+  outline: none;
+  cursor: pointer;
+}
+.roi-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--metal2);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.roi-slider::-webkit-slider-thumb:hover { background: var(--metal4); }
+.roi-slider-val {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--metal2);
+  min-width: 64px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Results */
+.roi-results {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+.roi-result-item {
+  background: var(--bg2);
+  padding: 16px 20px;
+  text-align: center;
+}
+.roi-result-label {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gray5);
+  margin-bottom: 8px;
+}
+.roi-result-val {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.roi-result-val.glow-green {
+  color: var(--green);
+  text-shadow: 0 0 20px rgba(56,176,104,0.5), 0 0 40px rgba(56,176,104,0.25);
+}
+.roi-result-val.glow-gold {
+  background: linear-gradient(135deg, #c8a840, #f0d870, #c8a840);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 8px rgba(200,168,64,0.5));
+}
+.roi-result-val.glow-red {
+  color: var(--red);
+  text-shadow: 0 0 16px rgba(224,53,53,0.4);
+}
+.roi-result-val.metal {
+  background: var(--metal-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.roi-note {
+  padding: 12px 24px;
+  font-size: 10px;
+  color: var(--gray5);
+  border-top: 1px solid var(--border);
+  font-style: italic;
+  line-height: 1.6;
+}
+.roi-be-banner {
+  padding: 10px 24px;
+  background: rgba(56,176,104,0.06);
+  border-top: 1px solid rgba(56,176,104,0.15);
+  font-size: 11px;
+  color: var(--gray3);
+}
+.roi-be-banner strong { color: var(--green); font-weight: 700; }
+@media(max-width:800px) {
+  .roi-calc { margin: 0 24px 32px; }
+  .roi-sliders { grid-template-columns: 1fr; }
+  .roi-results { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:540px) {
+  .roi-calc { margin: 0 16px 28px; }
+  .roi-results { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:800px) {
+  .roi-calc { margin: 0 24px 32px; }
+  .roi-body { grid-template-columns: 1fr; }
+  .roi-result { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:540px) {
+  .roi-calc { margin: 0 16px 28px; }
+  .roi-result { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -2031,33 +2316,31 @@ main { padding-bottom: 120px; }
       <div class="splash-title">PRIVATE<br>BUILD</div>
     </div>
 
-    <div class="splash-arrow">SKILLER &nbsp;<span>→</span>&nbsp; OWNER</div>
 
-    <p class="splash-tagline">Desarrolla tus skills, sella tu identidad<br>y multiplícala con IA para construir<br>una vida en libertad real.</p>
-    <p class="splash-sub">No eres el único, ni tampoco el último.</p>
+    <p class="splash-tagline">Desarrolla tus skills, sella tu identidad<br>y multiplícala con herramientas + IA para<br>construir tu negocio y libertad real.</p>
 
     <!-- Journey preview — 4 stages -->
     <div class="splash-journey">
       <div class="sj-item sj-1">
-        <div class="sj-num">01</div>
+        <div class="sj-etapa">Etapa 01</div>
         <div class="sj-name">SKILLER</div>
         <div class="sj-desc">Defines quién eres y qué vendes. Manual, sin sistema.</div>
       </div>
       <div class="sj-arrow">→</div>
       <div class="sj-item sj-2">
-        <div class="sj-num">02</div>
+        <div class="sj-etapa">Etapa 02</div>
         <div class="sj-name">OPERATOR</div>
         <div class="sj-desc">Potencias con IA. La oferta probada escala.</div>
       </div>
       <div class="sj-arrow">→</div>
       <div class="sj-item sj-3">
-        <div class="sj-num">03</div>
+        <div class="sj-etapa">Etapa 03</div>
         <div class="sj-name">BUILDER</div>
         <div class="sj-desc">Workflows automáticos. Dejas de operar, empiezas a construir.</div>
       </div>
       <div class="sj-arrow">→</div>
       <div class="sj-item sj-4">
-        <div class="sj-num">04</div>
+        <div class="sj-etapa">Etapa 04</div>
         <div class="sj-name">OWNER</div>
         <div class="sj-desc">Infraestructura de agentes. El sistema trabaja sin ti.</div>
       </div>
@@ -2065,11 +2348,11 @@ main { padding-bottom: 120px; }
 
     <div class="splash-ctas">
       <button class="splash-btn splash-btn-primary" onclick="unlockApp('form')">
-        ◉ &nbsp;Comenzar el desafío
+        ◉ &nbsp;COMENZAR
       </button>
-      <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t"
+      <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20vengo%20de%20Private%20Build"
          target="_blank"
-         class="splash-btn splash-btn-secondary"
+         class="splash-btn splash-btn-secondary splash-btn-community"
          onclick="unlockApp('community')">
         🏴‍☠️ &nbsp;Unirme a la comunidad
       </a>
@@ -2108,8 +2391,6 @@ main { padding-bottom: 120px; }
   <div class="app-header-top">
     <div class="app-logo">🔒 Private Build</div>
     <div class="app-header-actions">
-      <a href="https://forms.gle/sGzi3f9RwKd4uXjC6" target="_blank" class="app-header-btn red">◉ Empieza aquí</a>
-      <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank" class="app-header-btn green">🏴‍☠️ Comunidad</a>
       <div class="app-header-btn" style="cursor:default;border-color:var(--border)">
         <span id="pcRank" style="background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800">SKILLER</span>
         &nbsp;·&nbsp; <span id="pcXpCur" style="color:var(--gray3)">0 XP</span>
@@ -2167,12 +2448,12 @@ main { padding-bottom: 120px; }
 <div class="phase-section active" id="phase-0">
 
   <div class="ph-block">
-    <div class="ph-giant"><span class="ph-giant-outline">01</span>01</div>
+    <div class="ph-giant"><span class="ph-giant-outline">01</span><span style="background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;color:transparent">01</span><div style="font-size:9px;font-weight:700;letter-spacing:0.35em;color:var(--gray5);margin-top:4px;text-transform:uppercase">FASE 01</div></div>
     <div class="ph-meta">
       <div style="width:40px;height:3px;background:#6060a0;margin-bottom:12px;box-shadow:0 0 12px #6060a088"></div>
       <div class="ph-phase-tag">Mes 01 · Punto de inicio · SKILLER</div>
       <div class="ph-phase-name" style="background:linear-gradient(135deg,#c0c0d8 0%,#f0f0ff 40%,#d0d0e8 100%);-webkit-background-clip:text;background-clip:text;color:transparent">SKILLER</div>
-      <div class="ph-why">Esta fase existe para <strong>eliminar la confusión</strong>. No ejecutas porque no sabes exactamente qué hacer ni en qué orden. La mentalidad noob no es una crítica — es el estado honesto de alguien con potencial sin dirección. Aquí defines quién eres, qué vendes y a quién. Sin esto, todo lo demás es ruido.</div>
+      <div class="ph-why">Esta fase existe para <strong>eliminar la confusión</strong>. No ejecutas porque no sabes exactamente qué hacer ni en qué orden. No ejecutar no es un defecto de carácter — es falta de dirección clara. Aquí defines quién eres, qué vendes y a quién. Sin esto, todo lo demás es ruido.</div>
     </div>
     <div class="ph-stats-col">
       <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val red">$0 – $500</div></div>
@@ -2182,7 +2463,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Atributos — inicio vs fin de fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
       <div class="attr-cell">
@@ -2327,19 +2608,19 @@ main { padding-bottom: 120px; }
       <div class="fail-card">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Publicar en modo aprendizaje, no en modo performance</div>
-        <div class="fail-body">El Noob que publica pensando en qué aprende hoy — no en cuántos likes consigue — acumula velocidad. Cada post es un rep. Los reps se convierten en músculo. El músculo se convierte en resultados.</div>
+        <div class="fail-body">Publicar pensando en qué aprendes hoy — no en cuántos likes consigues — acumula velocidad. Cada post es un rep. Los reps se convierten en músculo. El músculo se convierte en resultados.</div>
         <span class="fail-tag fail-tag-boost">Multiplica velocidad x2</span>
       </div>
       <div class="fail-card">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Documentar todo desde el día 1</div>
-        <div class="fail-body">Brain Doc activo + Notion con cada aprendizaje = sistema que crece contigo. El Noob que documenta en el mes 1 llega al mes 4 con un activo de conocimiento que ningún curso puede darte.</div>
+        <div class="fail-body">Brain Doc activo + Notion con cada aprendizaje = sistema que crece contigo. Quien documenta en el mes 1 llega al mes 4 con un activo de conocimiento que ningún curso puede darte.</div>
         <span class="fail-tag fail-tag-boost">Activo compounding</span>
       </div>
       <div class="fail-card">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Usar Claude como copiloto de claridad, no como buscador</div>
-        <div class="fail-body">Claude no es Google. Es un cerebro externo que procesa tu contexto y te devuelve claridad. El Noob que mantiene un Brain Doc actualizado y lo usa para iterar su oferta avanza en días lo que otros tardan semanas.</div>
+        <div class="fail-body">Claude no es Google. Es un cerebro externo que procesa tu contexto y te devuelve claridad. Mantener un Brain Doc actualizado y usarlo para iterar tu oferta te hace avanzar en días lo que otros tardan semanas.</div>
         <span class="fail-tag fail-tag-boost">Velocidad de iteración x3</span>
       </div>
     </div>
@@ -2348,7 +2629,12 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Repositorio de Recursos — Mes 1</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🧭</div>
           <div><div class="repo-title">Frameworks de Claridad</div><div class="repo-subtitle">Modelos de pensamiento para el mes 1</div></div>
@@ -2361,9 +2647,14 @@ main { padding-bottom: 120px; }
             <li>Plantilla de Brain Document para Claude Projects</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">⚡</div>
           <div><div class="repo-title">Automatizaciones Mes 1</div><div class="repo-subtitle">Operar más rápido desde el inicio</div></div>
@@ -2376,9 +2667,14 @@ main { padding-bottom: 120px; }
             <li>Script de discovery call con Fathom integrado</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🏴‍☠️</div>
           <div><div class="repo-title">Comunidad + 1:1</div><div class="repo-subtitle">No navegues esto solo</div></div>
@@ -2391,7 +2687,7 @@ main { padding-bottom: 120px; }
             <li>Biblioteca de primeras ofertas que sí funcionaron (con contexto)</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -2417,12 +2713,12 @@ main { padding-bottom: 120px; }
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Notion — estructura básica</div>
         <div class="inner-quote">"Sin sistema de captura, tu mente se vuelve el sistema. Y falla."</div>
-        <div class="inner-body">Crea un workspace en Notion con 3 páginas: (1) Brain Doc — quién eres, qué vendes, a quién; (2) Pipeline — leads contactados, estado, próximo paso; (3) Diario de aprendizajes — cada semana, 3 líneas de lo que funcionó y lo que no. Nada más. El sistema crece con vos.</div>
+        <div class="inner-body">Crea un workspace en Notion con 3 páginas: (1) Brain Doc — quién eres, qué vendes, a quién; (2) Pipeline — leads contactados, estado, próximo paso; (3) Diario de aprendizajes — cada semana, 3 líneas de lo que funcionó y lo que no. Nada más. El sistema crece con tú.</div>
       </div>
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Sin organización pasa esto</div>
         <div class="inner-quote">"Tienes 20 tabs abiertos y ningún lead seguido."</div>
-        <div class="inner-body">El Noob opera en modo reactivo: responde a lo urgente, olvida lo importante. Sin Notion como sistema de captura, los leads se pierden, los aprendizajes se olvidan y cada semana partes de cero. La organización no es burocracia — es el piso sobre el que se construye todo lo demás.</div>
+        <div class="inner-body">Sin sistema, operas en modo reactivo: respondes lo urgente, olvidas lo importante. Sin Notion como sistema de captura, los leads se pierden, los aprendizajes se olvidan y cada semana partes de cero. La organización no es burocracia — es el piso sobre el que se construye todo lo demás.</div>
       </div>
     </div>
   </div>
@@ -2509,13 +2805,70 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-0">
+    <div class="roi-scenario-tab">
+      <button class="roi-tab min active" onclick="roiScenario('phase-0','min')">Escenario mínimo</button>
+      <button class="roi-tab opt"        onclick="roiScenario('phase-0','opt')">Escenario óptimo</button>
+    </div>
+    <div class="roi-header">
+      <div class="roi-title">Retorno real — SKILLER</div>
+      <div class="roi-subtitle" id="roi-phase-0-sub">Stack $0 — todo lo que ganas es ganancia neta</div>
+    </div>
+    <div class="roi-sliders">
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ticket medio por venta</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-0-slider-precio"
+            min="50" max="500" step="50"
+            value="150"
+            oninput="roiCalc('phase-0')">
+          <div class="roi-slider-val" id="roi-phase-0-precio-val">$150</div>
+        </div>
+      </div>
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ventas en el mes</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-0-slider-ventas"
+            min="1" max="10" step="1"
+            value="2"
+            oninput="roiCalc('phase-0')">
+          <div class="roi-slider-val" id="roi-phase-0-ventas-val">2</div>
+        </div>
+      </div>
+    </div>
+    <div class="roi-results">
+      <div class="roi-result-item">
+        <div class="roi-result-label">Inversión mensual</div>
+        <div class="roi-result-val glow-red" id="roi-phase-0-inversion">-$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ingreso bruto</div>
+        <div class="roi-result-val metal" id="roi-phase-0-ingreso">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ganancia neta</div>
+        <div class="roi-result-val glow-green" id="roi-phase-0-ganancia">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">ROI</div>
+        <div class="roi-result-val glow-gold" id="roi-phase-0-roi">—</div>
+      </div>
+    </div>
+    <div class="roi-be-banner" id="roi-phase-0-be">
+      Mueve los sliders para ver tu retorno real.
+    </div>
+    <div class="roi-note" id="roi-phase-0-note">En esta fase el stack es completamente gratis (Claude, Notion, Instagram). Tu único costo es tiempo. Con 1 sola venta ya estás en positivo.</div>
+  </div>
+
   <div class="sdiv"><div class="sdiv-label">Finanzas — SKILLER</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ El error que paraliza</div>
         <div class="inner-quote">"No tengo plata para invertir en esto."</div>
-        <div class="inner-body">El Noob con deuda mala (tarjeta rotativa, créditos de consumo sin retorno) opera desde la escasez. Cada gasto en herramientas genera culpa. Cada semana sin ingreso, pánico. Antes de escalar tienes que estabilizar: saber exactamente cuánto gastas, cuánto debes, cuánto necesitas para vivir sin presión. Ese número es tu número de libertad mínima.</div>
+        <div class="inner-body">Tienes deuda mala (tarjeta rotativa, créditos de consumo sin retorno) y operas desde la escasez. Gastar en herramientas te genera culpa. Cada semana sin ingreso, pánico. Tienes membresías activas a aplicaciones que no te aportan valor ni ingresos. Antes de escalar tienes que estabilizar: saber exactamente cuánto gastas, cuánto debes, cuánto necesitas para vivir sin presión. Ese número es tu número de libertad mínima.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Qué hacer en esta fase</div>
@@ -2525,8 +2878,11 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Entregables de fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
+    <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+    </div>
     <div class="deliv-grid" data-phase="0">
       <div class="deliv-item" onclick="toggleDeliv(this,0,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Brain Document</div><div class="dt-desc">Contexto en Claude con historia, oferta y audiencia</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,0,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Oferta de 1 Frase</div><div class="dt-desc">Pitch validado con 3 personas reales</div></div></div>
@@ -2541,12 +2897,12 @@ main { padding-bottom: 120px; }
 <!-- ══════════════ FASE 2: OPERATOR ══════════════ -->
 <div class="phase-section" id="phase-1">
   <div class="ph-block">
-    <div class="ph-giant"><span class="ph-giant-outline">02</span>02</div>
+    <div class="ph-giant"><span class="ph-giant-outline">02</span><span style="background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;color:transparent">02</span><div style="font-size:9px;font-weight:700;letter-spacing:0.35em;color:var(--gray5);margin-top:4px;text-transform:uppercase">FASE 02</div></div>
     <div class="ph-meta">
       <div style="width:40px;height:3px;background:#e88c30;margin-bottom:12px;box-shadow:0 0 12px #e88c3088"></div>
       <div class="ph-phase-tag">Fase 02 · Mes 02 · Validación en campo</div>
       <div class="ph-phase-name" style="background:linear-gradient(135deg,#b86820 0%,#e88c30 40%,#ffb060 100%);-webkit-background-clip:text;background-clip:text;color:transparent">OPERATOR</div>
-      <div class="ph-why">El Beta Tester no asume — <strong>prueba todo</strong>. Esta fase existe porque la mayoría opera con hipótesis no verificadas. Mensaje, precio, canal, proceso: todo es beta hasta que el mercado confirma con dinero o con rechazo claro. Aquí aprendes más que en cualquier curso.</div>
+      <div class="ph-why">El OPERATOR no asume — <strong>prueba todo</strong>. Esta fase existe porque la mayoría opera con hipótesis no verificadas. Mensaje, precio, canal, proceso: todo es beta hasta que el mercado confirma con dinero o con rechazo claro. Aquí aprendes más que en cualquier curso.</div>
     </div>
     <div class="ph-stats-col">
       <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val metal">$500 – $2K</div></div>
@@ -2556,7 +2912,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Atributos — evolución en esta fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
       <div class="attr-cell">
@@ -2683,7 +3039,7 @@ main { padding-bottom: 120px; }
       <div class="fail-card">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Cobrar $100 por algo que vale $500 para "no asustar"</div>
-        <div class="fail-body">El precio bajo no genera confianza — la destruye. Un cliente que paga $100 no valora lo que recibe de la misma forma que uno que paga $500. Y vos empezás a creer que eso es lo que vale tu trabajo. Precio bajo = señal equivocada al mercado y a tu propia mente.</div>
+        <div class="fail-body">El precio bajo no genera confianza — la destruye. Un cliente que paga $100 no valora lo que recibe de la misma forma que uno que paga $500. Y tú empiezas a creer que eso es lo que vale tu trabajo. Precio bajo = señal equivocada al mercado y a tu propia mente.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 75%</span>
       </div>
       <div class="fail-card">
@@ -2722,7 +3078,12 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Repositorio de Recursos — Mes 2</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🧭</div>
           <div><div class="repo-title">Frameworks de Venta</div><div class="repo-subtitle">Sistemas para cerrar con datos reales</div></div>
@@ -2735,9 +3096,14 @@ main { padding-bottom: 120px; }
             <li>Template de seguimiento post-llamada en 3 pasos</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">⚡</div>
           <div><div class="repo-title">Automatizaciones Mes 2</div><div class="repo-subtitle">Outreach y seguimiento sin perder leads</div></div>
@@ -2749,9 +3115,14 @@ main { padding-bottom: 120px; }
             <li>Notion: CRM automático con estado de lead actualizado</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🏴‍☠️</div>
           <div><div class="repo-title">Comunidad + 1:1</div><div class="repo-subtitle">Feedback de ventas en tiempo real</div></div>
@@ -2764,7 +3135,7 @@ main { padding-bottom: 120px; }
             <li>Biblioteca de cierres reales con contexto de cada uno</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -2774,7 +3145,7 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Todavía no está listo para cobrarlo bien."</div>
-        <div class="inner-body">El beta tester subestima su propio valor. Cobra poco para no asustar y termina atrayendo clientes que no valoran lo que reciben. El precio bajo no es humildad — es una señal falsa al mercado. Si resuelves un problema real, cobrarlo bien es un acto de respeto.</div>
+        <div class="inner-body">La tentación acá es subestimar tu propio valor. Cobra poco para no asustar y termina atrayendo clientes que no valoran lo que reciben. El precio bajo no es humildad — es una señal falsa al mercado. Si resuelves un problema real, cobrarlo bien es un acto de respeto.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
@@ -2788,7 +3159,7 @@ main { padding-bottom: 120px; }
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card build">
-        <div class="inner-label build-l">▸ Notion evoluciona con vos</div>
+        <div class="inner-label build-l">▸ Notion evoluciona con tú</div>
         <div class="inner-quote">"Tu pipeline ya no es una lista — es un sistema vivo."</div>
         <div class="inner-body">Agrega a tu Notion: (1) Base de datos de leads con columnas: fuente, estado, último contacto, objeción principal; (2) Registro de llamadas con notas de Fathom integradas; (3) Página de "aprendizajes de venta" — 1 entrada por llamada. En esta fase empiezas a ver patrones. Notion es donde esos patrones se vuelven sistema.</div>
       </div>
@@ -2882,6 +3253,63 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-1">
+    <div class="roi-scenario-tab">
+      <button class="roi-tab min active" onclick="roiScenario('phase-1','min')">Escenario mínimo</button>
+      <button class="roi-tab opt"        onclick="roiScenario('phase-1','opt')">Escenario óptimo</button>
+    </div>
+    <div class="roi-header">
+      <div class="roi-title">Retorno real — OPERATOR</div>
+      <div class="roi-subtitle" id="roi-phase-1-sub">Claude Pro $20 — ese es todo tu costo fijo</div>
+    </div>
+    <div class="roi-sliders">
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ticket medio por venta</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-1-slider-precio"
+            min="100" max="1000" step="50"
+            value="300"
+            oninput="roiCalc('phase-1')">
+          <div class="roi-slider-val" id="roi-phase-1-precio-val">$300</div>
+        </div>
+      </div>
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ventas en el mes</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-1-slider-ventas"
+            min="1" max="15" step="1"
+            value="2"
+            oninput="roiCalc('phase-1')">
+          <div class="roi-slider-val" id="roi-phase-1-ventas-val">2</div>
+        </div>
+      </div>
+    </div>
+    <div class="roi-results">
+      <div class="roi-result-item">
+        <div class="roi-result-label">Inversión mensual</div>
+        <div class="roi-result-val glow-red" id="roi-phase-1-inversion">-$20</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ingreso bruto</div>
+        <div class="roi-result-val metal" id="roi-phase-1-ingreso">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ganancia neta</div>
+        <div class="roi-result-val glow-green" id="roi-phase-1-ganancia">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">ROI</div>
+        <div class="roi-result-val glow-gold" id="roi-phase-1-roi">—</div>
+      </div>
+    </div>
+    <div class="roi-be-banner" id="roi-phase-1-be">
+      Mueve los sliders para ver tu retorno real.
+    </div>
+    <div class="roi-note" id="roi-phase-1-note">Con 1 venta de $300 ya cubres el stack 15 veces. El juego acá es volumen de outreach: 100 contactos al mes para conseguir 2–4 cierres.</div>
+  </div>
+
   <div class="sdiv"><div class="sdiv-label">Finanzas — OPERATOR</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
@@ -2898,8 +3326,11 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Entregables de fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
+    <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+    </div>
     <div class="deliv-grid" data-phase="1">
       <div class="deliv-item" onclick="toggleDeliv(this,1,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">100 Prospectos Contactados</div><div class="dt-desc">Con tracking de response rate por mensaje en Notion</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,1,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Script de Ventas v2</div><div class="dt-desc">Basado en objeciones reales de Fathom</div></div></div>
@@ -2914,7 +3345,7 @@ main { padding-bottom: 120px; }
 <!-- ══════════════ FASE 3: BUILDER ══════════════ -->
 <div class="phase-section" id="phase-2">
   <div class="ph-block">
-    <div class="ph-giant"><span class="ph-giant-outline">03</span>03</div>
+    <div class="ph-giant"><span class="ph-giant-outline">03</span><span style="background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;color:transparent">03</span><div style="font-size:9px;font-weight:700;letter-spacing:0.35em;color:var(--gray5);margin-top:4px;text-transform:uppercase">FASE 03</div></div>
     <div class="ph-meta">
       <div style="width:40px;height:3px;background:#3a9fff;margin-bottom:12px;box-shadow:0 0 12px #3a9fff88"></div>
       <div class="ph-phase-tag">Fase 03 · Mes 03 · Construcción de activos</div>
@@ -2929,7 +3360,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Atributos — evolución en esta fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
       <div class="attr-cell">
@@ -3095,7 +3526,12 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Repositorio de Recursos — Mes 3</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🧭</div>
           <div><div class="repo-title">Frameworks de Sistemas</div><div class="repo-subtitle">Build que genera autoridad y leads</div></div>
@@ -3108,9 +3544,14 @@ main { padding-bottom: 120px; }
             <li>Template de playbook: documenta tu proceso para replicar y vender</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">⚡</div>
           <div><div class="repo-title">Automatizaciones Mes 3</div><div class="repo-subtitle">Content y build a velocidad IA</div></div>
@@ -3123,9 +3564,14 @@ main { padding-bottom: 120px; }
             <li>Notion AI: generación de contenido desde el playbook documentado</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🏴‍☠️</div>
           <div><div class="repo-title">Comunidad + 1:1</div><div class="repo-subtitle">Lanzar tools con audiencia real</div></div>
@@ -3138,7 +3584,7 @@ main { padding-bottom: 120px; }
             <li>Base de casos de éxito con métricas para armar tu portfolio</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -3256,6 +3702,63 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-2">
+    <div class="roi-scenario-tab">
+      <button class="roi-tab min active" onclick="roiScenario('phase-2','min')">Escenario mínimo</button>
+      <button class="roi-tab opt"        onclick="roiScenario('phase-2','opt')">Escenario óptimo</button>
+    </div>
+    <div class="roi-header">
+      <div class="roi-title">Retorno real — BUILDER</div>
+      <div class="roi-subtitle" id="roi-phase-2-sub">Claude $20 + Miro $8 + GPT $20 = $48 total</div>
+    </div>
+    <div class="roi-sliders">
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ticket medio por venta</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-2-slider-precio"
+            min="500" max="3000" step="100"
+            value="1000"
+            oninput="roiCalc('phase-2')">
+          <div class="roi-slider-val" id="roi-phase-2-precio-val">$1000</div>
+        </div>
+      </div>
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ventas en el mes</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-2-slider-ventas"
+            min="1" max="10" step="1"
+            value="2"
+            oninput="roiCalc('phase-2')">
+          <div class="roi-slider-val" id="roi-phase-2-ventas-val">2</div>
+        </div>
+      </div>
+    </div>
+    <div class="roi-results">
+      <div class="roi-result-item">
+        <div class="roi-result-label">Inversión mensual</div>
+        <div class="roi-result-val glow-red" id="roi-phase-2-inversion">-$48</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ingreso bruto</div>
+        <div class="roi-result-val metal" id="roi-phase-2-ingreso">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ganancia neta</div>
+        <div class="roi-result-val glow-green" id="roi-phase-2-ganancia">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">ROI</div>
+        <div class="roi-result-val glow-gold" id="roi-phase-2-roi">—</div>
+      </div>
+    </div>
+    <div class="roi-be-banner" id="roi-phase-2-be">
+      Mueve los sliders para ver tu retorno real.
+    </div>
+    <div class="roi-note" id="roi-phase-2-note">High-ticket desde esta fase. 2 cierres a $1K y el stack queda cubierto 41 veces. Con proceso documentado, cada venta es reproducible.</div>
+  </div>
+
   <div class="sdiv"><div class="sdiv-label">Finanzas — BUILDER</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
@@ -3267,13 +3770,16 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Invertir en stack antes de tener ingresos</div>
         <div class="inner-quote">"Necesito GHL para escalar — lo pago con tarjeta."</div>
-        <div class="inner-body">GHL, herramientas premium, suscripciones múltiples antes de tener ingresos recurrentes que las justifiquen es deuda mala disfrazada de inversión. Regla de esta fase: toda herramienta nueva debe estar cubierta por los ingresos del mes anterior. Si no llega, no entra. El stack crece con el negocio — no antes.</div>
+        <div class="inner-body">Acumular herramientas premium y suscripciones antes de tener ingresos recurrentes que las justifiquen es deuda mala disfrazada de inversión. Regla de esta fase: toda herramienta nueva debe estar cubierta por los ingresos del mes anterior. Si no llega, no entra. El stack crece con el negocio — no antes.</div>
       </div>
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Entregables de fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
+    <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+    </div>
     <div class="deliv-grid" data-phase="2">
       <div class="deliv-item" onclick="toggleDeliv(this,2,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Content Engine Activo</div><div class="dt-desc">Publicando 3x/semana con sistema Claude</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,2,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Tool Pública Lanzada</div><div class="dt-desc">Con +50 usuarios y distribuida</div></div></div>
@@ -3288,7 +3794,7 @@ main { padding-bottom: 120px; }
 <!-- ══════════════ FASE 4: OWNER ══════════════ -->
 <div class="phase-section" id="phase-3">
   <div class="ph-block">
-    <div class="ph-giant"><span class="ph-giant-outline">04</span>04</div>
+    <div class="ph-giant"><span class="ph-giant-outline">04</span><span style="background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;color:transparent">04</span><div style="font-size:9px;font-weight:700;letter-spacing:0.35em;color:var(--gray5);margin-top:4px;text-transform:uppercase">FASE 04</div></div>
     <div class="ph-meta">
       <div style="width:40px;height:3px;background:#c8a840;margin-bottom:12px;box-shadow:0 0 12px #c8a84088"></div>
       <div class="ph-phase-tag">Fase 04 · Mes 04 · El desafío real</div>
@@ -3303,7 +3809,7 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Atributos — estado al llegar a Player</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
       <div class="attr-cell">
@@ -3469,7 +3975,12 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Repositorio de Recursos — Mes 4</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="repo-grid">
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🧭</div>
           <div><div class="repo-title">Frameworks de Escala</div><div class="repo-subtitle">Crecer sin crecer en horas</div></div>
@@ -3482,9 +3993,14 @@ main { padding-bottom: 120px; }
             <li>Matriz de retro: qué medir, cómo decidir, qué escalar, qué eliminar</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">⚡</div>
           <div><div class="repo-title">Automatizaciones Mes 4</div><div class="repo-subtitle">El stack completo operando</div></div>
@@ -3498,9 +4014,14 @@ main { padding-bottom: 120px; }
             <li>Poppy: repurposing de sesiones de comunidad para Instagram y TikTok</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
       </div>
-      <div class="repo-card">
+      <div class="repo-card repo-locked">
+      <div class="repo-lock-overlay">
+        <div class="repo-lock-icon">🔒</div>
+        <div class="repo-lock-label">Disponible en Private Build</div>
+        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
+      </div>
         <div class="repo-card-head">
           <div class="repo-icon">🏴‍☠️</div>
           <div><div class="repo-title">Comunidad + 1:1</div><div class="repo-subtitle">El desafío colectivo empieza aquí</div></div>
@@ -3513,7 +4034,7 @@ main { padding-bottom: 120px; }
             <li>Directorio de colaboraciones: players que buscan partners para escalar juntos</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
+        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank">🏴‍☠️ Únete <span class="repo-cta-arrow">→</span></a>
       </div>
     </div>
   </div>
@@ -3544,7 +4065,7 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Operar sin métricas visibles</div>
         <div class="inner-quote">"Sé más o menos cuánto entró este mes."</div>
-        <div class="inner-body">El Player que no tiene sus métricas en un dashboard visible opera a ciegas. CAC sin saber, LTV adivinado, conversion rate sin medir. Eso es aceptable en Noob — es inaceptable aquí. Si no puedes decir exactamente qué canal te trae más clientes a menor costo, no sabes dónde escalar. Y sin eso, cualquier decisión de inversión es un gasto.</div>
+        <div class="inner-body">El Player que no tiene sus métricas en un dashboard visible opera a ciegas. CAC sin saber, LTV adivinado, conversion rate sin medir. Eso era aceptable al inicio — es inaceptable aquí. Si no puedes decir exactamente qué canal te trae más clientes a menor costo, no sabes dónde escalar. Y sin eso, cualquier decisión de inversión es un gasto.</div>
       </div>
     </div>
   </div>
@@ -3631,6 +4152,63 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
+
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-3">
+    <div class="roi-scenario-tab">
+      <button class="roi-tab min active" onclick="roiScenario('phase-3','min')">Escenario mínimo</button>
+      <button class="roi-tab opt"        onclick="roiScenario('phase-3','opt')">Escenario óptimo</button>
+    </div>
+    <div class="roi-header">
+      <div class="roi-title">Retorno real — OWNER</div>
+      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + tools $48 = $165 stack completo</div>
+    </div>
+    <div class="roi-sliders">
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ticket medio por venta</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-3-slider-precio"
+            min="1000" max="5000" step="250"
+            value="2000"
+            oninput="roiCalc('phase-3')">
+          <div class="roi-slider-val" id="roi-phase-3-precio-val">$2000</div>
+        </div>
+      </div>
+      <div class="roi-slider-group">
+        <div class="roi-slider-label">Ventas en el mes</div>
+        <div class="roi-slider-row">
+          <input type="range" class="roi-slider" id="roi-phase-3-slider-ventas"
+            min="1" max="10" step="1"
+            value="3"
+            oninput="roiCalc('phase-3')">
+          <div class="roi-slider-val" id="roi-phase-3-ventas-val">3</div>
+        </div>
+      </div>
+    </div>
+    <div class="roi-results">
+      <div class="roi-result-item">
+        <div class="roi-result-label">Inversión mensual</div>
+        <div class="roi-result-val glow-red" id="roi-phase-3-inversion">-$165</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ingreso bruto</div>
+        <div class="roi-result-val metal" id="roi-phase-3-ingreso">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">Ganancia neta</div>
+        <div class="roi-result-val glow-green" id="roi-phase-3-ganancia">$0</div>
+      </div>
+      <div class="roi-result-item">
+        <div class="roi-result-label">ROI</div>
+        <div class="roi-result-val glow-gold" id="roi-phase-3-roi">—</div>
+      </div>
+    </div>
+    <div class="roi-be-banner" id="roi-phase-3-be">
+      Mueve los sliders para ver tu retorno real.
+    </div>
+    <div class="roi-note" id="roi-phase-3-note">El sistema opera solo. Vos defines estrategia, el stack ejecuta. Con 3 ventas de $2K el stack representa 2.7% del ingreso total.</div>
+  </div>
+
   <div class="sdiv"><div class="sdiv-label">Finanzas — OWNER</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
@@ -3678,8 +4256,11 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Entregables de fase</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
+    <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+    </div>
     <div class="deliv-grid" data-phase="3">
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Embudo End-to-End en GHL</div><div class="dt-desc">Con conversión medida en cada paso</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Comunidad Seed 30+</div><div class="dt-desc">Con ritual de contenido semanal activo</div></div></div>
@@ -3699,7 +4280,7 @@ main { padding-bottom: 120px; }
   <div style="max-width:420px;">
     <div style="font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">🔒 Private Build</div>
     <p style="font-size:16px;font-weight:700;color:var(--metal3);line-height:1.5;margin-bottom:6px;">Emprender es solitario,<br>para quienes <em style="color:var(--red);font-style:normal;font-weight:800">no saben</em> pedir ayuda.</p>
-    <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank"
+    <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20vengo%20de%20Private%20Build" target="_blank"
        style="display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:10px 20px;background:transparent;border:1px solid var(--green);color:var(--green);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
        onmouseover="this.style.boxShadow='0 0 20px rgba(56,176,104,0.3)'"
        onmouseout="this.style.boxShadow=''">
@@ -3787,10 +4368,7 @@ function unlockApp(source) {
   if (appUnlocked) return;
   appUnlocked = true;
 
-  // If form button, open form in new tab
-  if (source === 'form') {
-    window.open('https://forms.gle/sGzi3f9RwKd4uXjC6', '_blank');
-  }
+  // Form removed from splash — lives in "Necesito ayuda" footer
   // Fade out splash
   document.getElementById('splash').classList.add('hidden');
   // Reveal app
@@ -3806,6 +4384,7 @@ function unlockApp(source) {
     });
     updateStats();
     updateUnlocks();
+    initROI();
   }, 300);
 }
 
@@ -3815,12 +4394,15 @@ function footerNext() {
 }
 
 function switchPhase(n) {
-  // Block if phase not unlocked
-  const xp = document.querySelectorAll('.deliv-item.done').length * 25;
   if (!appUnlocked) return;
-  if (n > 0 && xp < xpThresh[n]) {
-    showToast('⚠ Completa el mes anterior primero — ' + xpThresh[n] + ' XP necesarios');
-    return;
+  // Block: fase anterior debe estar completa
+  if (n > 0) {
+    const prevAll  = document.querySelectorAll('[data-phase="'+(n-1)+'"] .deliv-item');
+    const prevDone = document.querySelectorAll('[data-phase="'+(n-1)+'"] .deliv-item.done');
+    if (prevAll.length > 0 && prevDone.length < prevAll.length) {
+      showToast('⚠ Completa todos los entregables del mes anterior primero');
+      return;
+    }
   }
   currentPhase = n;
   document.querySelectorAll('.phase-section').forEach((s,i) => s.classList.toggle('active', i===n));
@@ -4013,6 +4595,101 @@ function showToast(msg) {
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.classList.remove('show'), 2600);
 }
+
+// ─── ROI Calculator Interactivo ───────────
+const roiConfig = {
+  'phase-0': {
+    min: { tools:0,   mentoria:0, precio_min:50,  precio_max:500,  precio_step:50,  precio_def:150, ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Stack $0 — todo lo que ganas es ganancia neta',          nota:'Stack completamente gratis. Con 1 sola venta ya estás en positivo.' },
+    opt: { tools:0,   mentoria:0, precio_min:50,  precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:4,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'El límite es tu capacidad de agendar y cerrar. 4 ventas a $300 = $1.200 neto.' }
+  },
+  'phase-1': {
+    min: { tools:20,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude Pro $20 — ese es todo tu costo fijo',             nota:'1 venta de $300 ya cubre el stack 15 veces. 100 contactos/mes para 2–4 cierres.' },
+    opt: { tools:20,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack, precio más alto, margen del 99%',           nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $20 = 0.8% del ingreso.' }
+  },
+  'phase-2': {
+    min: { tools:48,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude $20 + Miro $8 + GPT $20 = $48 total',            nota:'2 high-tickets = stack cubierto 41 veces. Con proceso documentado, es reproducible.' },
+    opt: { tools:48,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1% del ingreso cuando el ticket sube',           nota:'3 × $2K = $6.000. $48 de stack. Margen 99.2%. El negocio fondea el próximo trimestre.' }
+  },
+  'phase-3': {
+    min: { tools:165, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + tools $48 = $165',               nota:'3 × $2K = $6K. Stack = 2.7%. El sistema opera, tú diseñas.' },
+    opt: { tools:165, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 1.1%. Para esto se construyó todo.' }
+  }
+};
+
+let roiScenarios = { 'phase-0':'min','phase-1':'min','phase-2':'min','phase-3':'min' };
+
+function roiScenario(pid, scenario) {
+  roiScenarios[pid] = scenario;
+  const cfg = roiConfig[pid][scenario];
+  const tabs = document.querySelectorAll('#roi-' + pid + ' .roi-tab');
+  tabs.forEach(t => t.classList.toggle('active', t.classList.contains(scenario)));
+  // Reset sliders to scenario defaults
+  const sliderP = document.getElementById('roi-'+pid+'-slider-precio');
+  const sliderV = document.getElementById('roi-'+pid+'-slider-ventas');
+  if (sliderP) {
+    sliderP.min = cfg.precio_min; sliderP.max = cfg.precio_max;
+    sliderP.step = cfg.precio_step; sliderP.value = cfg.precio_def;
+  }
+  if (sliderV) {
+    sliderV.min = cfg.ventas_min; sliderV.max = cfg.ventas_max;
+    sliderV.value = cfg.ventas_def;
+  }
+  const sub = document.getElementById('roi-'+pid+'-sub');
+  const note = document.getElementById('roi-'+pid+'-note');
+  if (sub) sub.textContent = cfg.sub;
+  if (note) note.textContent = cfg.nota;
+  roiCalc(pid);
+}
+
+function roiCalc(pid) {
+  const cfg = roiConfig[pid][roiScenarios[pid]];
+  const sliderP = document.getElementById('roi-'+pid+'-slider-precio');
+  const sliderV = document.getElementById('roi-'+pid+'-slider-ventas');
+  if (!sliderP) return;
+  const precio = parseInt(sliderP.value);
+  const ventas = parseInt(sliderV.value);
+  const costo = cfg.tools + (cfg.mentoria || 0);
+  const ingreso = precio * ventas;
+  const ganancia = ingreso - costo;
+  const roi = costo > 0 ? (ingreso / costo).toFixed(1) + 'x' : '∞';
+  const beVentas = costo > 0 ? Math.ceil(costo / precio) : 1;
+
+  // Update display values
+  const $ = id => document.getElementById('roi-'+pid+'-'+id);
+  if ($('precio-val')) $('precio-val').textContent = '$' + precio.toLocaleString();
+  if ($('ventas-val')) $('ventas-val').textContent = ventas;
+  if ($('inversion'))  $('inversion').textContent  = '-$' + costo.toLocaleString();
+  if ($('ingreso'))    $('ingreso').textContent    = '$' + ingreso.toLocaleString();
+  if ($('ganancia'))   {
+    $('ganancia').textContent = (ganancia >= 0 ? '+' : '') + '$' + ganancia.toLocaleString();
+    $('ganancia').className = 'roi-result-val ' + (ganancia >= 0 ? 'glow-green' : 'glow-red');
+  }
+  if ($('roi'))        $('roi').textContent = roi;
+
+  // Break-even banner
+  const be = $('be');
+  if (be) {
+    if (ganancia > 0) {
+      be.innerHTML = 'Con <strong>' + beVentas + ' venta' + (beVentas > 1 ? 's' : '') + '</strong> cubres la inversión. Las demás ' + Math.max(0, ventas - beVentas) + ' son ganancia pura.';
+      be.style.background = 'rgba(56,176,104,0.06)';
+      be.style.borderTopColor = 'rgba(56,176,104,0.15)';
+    } else if (ganancia === 0) {
+      be.innerHTML = 'Exacto break-even. Una venta más y estás en positivo.';
+    } else {
+      be.innerHTML = 'Necesitas al menos <strong>' + beVentas + ' venta' + (beVentas > 1 ? 's' : '') + '</strong> para cubrir la inversión del mes.';
+      be.style.background = 'rgba(224,53,53,0.04)';
+      be.style.borderTopColor = 'rgba(224,53,53,0.15)';
+    }
+  }
+}
+
+// Initialize all ROI calculators on load
+function initROI() {
+  ['phase-0','phase-1','phase-2','phase-3'].forEach(pid => {
+    roiCalc(pid);
+  });
+}
+
 
 window.addEventListener('load', () => {
   // App starts locked behind splash — unlockApp() handles init
