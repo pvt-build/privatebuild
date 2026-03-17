@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRIVATE BUILD — Freedom Map</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230d0d10'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-size='50' font-family='sans-serif' font-weight='800' fill='%23e8e8f8'%3EPB%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="claude-favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -2386,6 +2386,10 @@ main { padding-bottom: 120px; }
   .roi-calc { margin: 0 16px 28px !important; }
 }
 
+
+/* Fix repo-grid to 2 columns */
+.repo-grid { grid-template-columns: repeat(2, 1fr) !important; }
+@media(max-width:768px) { .repo-grid { grid-template-columns: 1fr !important; } }
 </style>
 </head>
 <body>
@@ -2759,9 +2763,14 @@ main { padding-bottom: 120px; }
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card trap">
-        <div class="inner-label trap-l">▸ Trampa → Salida</div>
+        <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Necesito tener todo perfecto antes de salir."</div>
-        <div class="inner-body">La fase termina cuando publicas imperfecto y toleras el rechazo. El logro real no es el primer cliente — es verte como alguien que ejecuta. El ingreso sigue a la identidad.</div>
+        <div class="inner-body">La preparación no es el trabajo — es el calentamiento. Esta fase termina cuando publicas imperfecto y toleras el rechazo. El miedo se disuelve con exposición, no con más planificación.</div>
+      </div>
+      <div class="inner-card build">
+        <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
+        <div class="inner-quote">"La identidad de alguien que ya comenzó."</div>
+        <div class="inner-body">El mayor logro no es el primer cliente — es verte como alguien que ejecuta. Ese cambio de identidad es el cimiento. El ingreso sigue a la identidad, nunca al revés.</div>
       </div>
     </div>
   </div>
@@ -2783,7 +2792,7 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Core / IA</div>
@@ -3179,9 +3188,14 @@ main { padding-bottom: 120px; }
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card trap">
-        <div class="inner-label trap-l">▸ Trampa → Salida</div>
+        <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Todavía no está listo para cobrarlo bien."</div>
-        <div class="inner-body">Cobrar poco es señal falsa al mercado. El activo real es el músculo de iteración rápida: probar, medir, ajustar. Eso separa a quien escala de quien se estanca.</div>
+        <div class="inner-body">Cobrar poco no es humildad — es una señal falsa al mercado. Si resuelves un problema real, el precio justo es un acto de respeto hacia tu trabajo y tu cliente.</div>
+      </div>
+      <div class="inner-card build">
+        <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
+        <div class="inner-quote">"Iterar más rápido que el mercado cambia."</div>
+        <div class="inner-body">El activo no es el cliente beta — es el músculo de iteración rápida. Probar, medir, ajustar sin drama. Eso separa a quien escala de quien se estanca.</div>
       </div>
     </div>
   </div>
@@ -3206,7 +3220,7 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Core / IA</div>
@@ -3603,9 +3617,14 @@ main { padding-bottom: 120px; }
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card trap">
-        <div class="inner-label trap-l">▸ Trampa → Salida</div>
+        <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Construyo más de lo que vendo."</div>
-        <div class="inner-body">Construir sin vender es hobby. El logro real es el pensamiento de producto: ver procesos repetitivos como automatizaciones y tareas como activos.</div>
+        <div class="inner-body">Construir sin vender es hobby. Por cada hora construyendo, una hora vendiendo. Una tool no publicada vale exactamente cero.</div>
+      </div>
+      <div class="inner-card build">
+        <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
+        <div class="inner-quote">"Pensamiento de producto como superpoder."</div>
+        <div class="inner-body">Empiezas a ver el mundo en sistemas y activos, no tareas. Un proceso repetitivo se convierte en automatización. Ese modo mental multiplicado por tiempo es exponencial.</div>
       </div>
     </div>
   </div>
@@ -3630,7 +3649,7 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Core / Build</div>
@@ -4028,9 +4047,14 @@ main { padding-bottom: 120px; }
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card trap">
-        <div class="inner-label trap-l">▸ Trampa → Salida</div>
+        <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Ahora que funciona, escalo todo al mismo tiempo."</div>
-        <div class="inner-body">Una palanca bien ejecutada vale más que diez en progreso. El activo real: tomar decisiones desde experiencia, no teoría.</div>
+        <div class="inner-body">Escalar todo a la vez fragmenta el foco y mata el momentum. Una palanca bien ejecutada vale más que diez en progreso.</div>
+      </div>
+      <div class="inner-card build">
+        <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
+        <div class="inner-quote">"Una identidad que no depende del resultado de la semana."</div>
+        <div class="inner-body">Tomas decisiones desde la experiencia real, no la teoría. Desde la identidad del que ya ejecutó. Ese activo no te lo puede quitar nadie.</div>
       </div>
     </div>
   </div>
@@ -4074,7 +4098,7 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Agentes + build</div>
@@ -4256,12 +4280,12 @@ main { padding-bottom: 120px; }
 </main>
 
 <!-- FOOTER -->
-<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
-  <div style="max-width:420px;">
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;">
+  <div style="max-width:420px;text-align:center;">
     <div style="font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">🔒 Private Build</div>
     <p style="font-size:16px;font-weight:700;color:var(--metal3);line-height:1.5;margin-bottom:6px;">Emprender es solitario,<br>para quienes <em style="color:var(--red);font-style:normal;font-weight:800">no saben</em> pedir ayuda.</p>
     <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20vengo%20de%20Private%20Build" target="_blank"
-       style="display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:10px 20px;background:transparent;border:1px solid var(--green);color:var(--green);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
+       style="display:inline-flex;align-items:center;gap:10px;margin:14px auto 0;padding:10px 20px;background:transparent;border:1px solid var(--green);color:var(--green);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
        onmouseover="this.style.boxShadow='0 0 20px rgba(56,176,104,0.3)'"
        onmouseout="this.style.boxShadow=''">
       Necesito ayuda →
