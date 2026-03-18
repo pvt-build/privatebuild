@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PRIVATE BUILD — Freedom Map</title>
-<link rel="icon" type="image/png" href="claude-favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -23,9 +22,9 @@
   --white:    #ffffff;
   --gray1:    #f4f4f8;
   --gray2:    #d8d8ec;
-  --gray3:    #a8a8c0;
-  --gray4:    #70708c;
-  --gray5:    #45455c;
+  --gray3:    #c4c4dc;
+  --gray4:    #9898b4;
+  --gray5:    #686888;
 
   --red:      #e03535;
   --red-glow: rgba(224,53,53,0.4);
@@ -96,8 +95,8 @@ body {
 
 .splash-inner {
   text-align: center;
-  padding: 40px 24px;
-  max-width: 680px;
+  padding: 32px 24px 28px;
+  max-width: 760px;
   width: 100%;
 }
 
@@ -107,7 +106,7 @@ body {
   letter-spacing: 0.45em;
   text-transform: uppercase;
   color: var(--gray4);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +115,7 @@ body {
 .splash-eyebrow::before,
 .splash-eyebrow::after {
   content: '';
-  width: 48px;
+  width: 40px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gray5));
 }
@@ -125,9 +124,9 @@ body {
 }
 
 .splash-title {
-  font-size: clamp(72px, 14vw, 160px);
+  font-size: clamp(52px, 9vw, 100px);
   font-weight: 800;
-  line-height: 0.85;
+  line-height: 0.88;
   letter-spacing: -0.03em;
   background: linear-gradient(160deg,
     #606080 0%,
@@ -141,7 +140,7 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   animation: titleShimmer 6s ease-in-out infinite;
   background-size: 200% 100%;
   position: relative;
@@ -152,17 +151,16 @@ body {
   50%       { background-position: 100% 50%; }
 }
 
-/* Deep emboss/bevel effect on title */
 .splash-title-wrap {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 .splash-title-shadow {
   position: absolute;
   inset: 0;
-  font-size: clamp(72px, 14vw, 160px);
+  font-size: clamp(52px, 9vw, 100px);
   font-weight: 800;
-  line-height: 0.85;
+  line-height: 0.88;
   letter-spacing: -0.03em;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255,255,255,0.04);
@@ -173,22 +171,22 @@ body {
 }
 
 .splash-arrow {
-  font-size: clamp(11px, 1.8vw, 15px);
+  font-size: clamp(10px, 1.5vw, 13px);
   font-weight: 600;
-  letter-spacing: 0.6em;
+  letter-spacing: 0.5em;
   text-transform: uppercase;
   color: var(--gray4);
-  margin-bottom: 28px;
+  margin-bottom: 16px;
 }
 .splash-arrow span { color: var(--gray5); font-weight: 400; }
 
 .splash-tagline {
-  font-size: clamp(16px, 2.8vw, 24px);
+  font-size: clamp(15px, 2.2vw, 20px);
   font-weight: 700;
   color: var(--metal3);
-  line-height: 1.35;
-  margin: 20px 0 10px;
-  letter-spacing: -0.015em;
+  line-height: 1.4;
+  margin: 12px 0 8px;
+  letter-spacing: -0.01em;
   text-shadow: 0 2px 20px rgba(255,255,255,0.06);
 }
 
@@ -245,7 +243,21 @@ body {
   color: var(--gray3);
   border: 1px solid var(--border2);
 }
-.splash-btn-community { border-color: var(--green) !important; color: var(--green) !important; }
+.splash-btn-community {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(56,176,104,0.35) !important;
+}
+.splash-btn-community:hover {
+  background: #2ea05a !important;
+  box-shadow: 0 6px 28px rgba(56,176,104,0.55) !important;
+  transform: translateY(-2px);
+}
+.splash-btn .btn-emoji {
+  font-size: 18px;
+  line-height: 1;
+}
 .splash-btn-secondary:hover {
   border-color: var(--green);
   color: var(--green);
@@ -686,11 +698,11 @@ main { position:relative; z-index:1; }
 }
 
 .ph-why {
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--gray3);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--gray2);
   max-width: 500px;
-  line-height: 1.8;
+  line-height: 1.7;
   border-left: 2px solid var(--border2);
   padding-left: 14px;
 }
@@ -909,12 +921,6 @@ main { position:relative; z-index:1; }
   align-items: flex-end;
 }
 
-.wc-num {
-  font-size: 40px;
-  font-weight: 800;
-  line-height: 1;
-  color: var(--bg4);
-}
 
 .wc-days {
   font-size: 8px;
@@ -1390,10 +1396,10 @@ main { position:relative; z-index:1; }
 /* SPLASH JOURNEY */
 .splash-journey {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 6px;
-  margin: 20px auto 28px;
-  max-width: 680px;
+  margin: 14px auto 20px;
+  max-width: 760px;
   width: 100%;
   padding: 0 8px;
 }
@@ -1429,8 +1435,8 @@ main { position:relative; z-index:1; }
 }
 .sj-desc {
   font-size: 10px;
-  font-weight: 300;
-  color: var(--gray4);
+  font-weight: 400;
+  color: var(--gray3);
   line-height: 1.45;
 }
 .sj-etapa {
@@ -1483,14 +1489,14 @@ main { position:relative; z-index:1; }
   transform: scale(1) translateY(0);
 }
 .levelup-rank {
-  font-size: clamp(56px, 10vw, 96px);
+  font-size: clamp(48px, 9vw, 88px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: var(--blue-grad);
+  background: var(--lu-grad, var(--blue-grad));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  filter: drop-shadow(0 0 30px var(--blue-glow));
+  filter: drop-shadow(0 0 30px var(--lu-glow, var(--blue-glow)));
   line-height: 1;
   margin-bottom: 12px;
 }
@@ -1499,19 +1505,26 @@ main { position:relative; z-index:1; }
   font-weight: 800;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--blue);
-  text-shadow: 0 0 20px var(--blue-glow);
+  color: var(--lu-color, var(--blue));
+  text-shadow: 0 0 20px var(--lu-glow, var(--blue-glow));
   margin-bottom: 6px;
 }
 .levelup-sub {
   font-size: 13px;
-  font-weight: 300;
-  color: var(--gray3);
+  font-weight: 400;
+  color: var(--gray2);
   margin-bottom: 28px;
+  max-width: 380px;
+}
+.levelup-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
 }
 .levelup-continue {
-  padding: 10px 28px;
-  background: var(--blue);
+  padding: 12px 32px;
+  background: var(--lu-color, var(--blue));
   border: none;
   color: #fff;
   font-family: 'Open Sans', sans-serif;
@@ -1520,20 +1533,46 @@ main { position:relative; z-index:1; }
   letter-spacing: 0.25em;
   text-transform: uppercase;
   cursor: pointer;
-  box-shadow: 0 0 24px var(--blue-glow);
+  box-shadow: 0 0 24px var(--lu-glow, var(--blue-glow));
   transition: all 0.2s;
+  min-width: 260px;
 }
 .levelup-continue:hover {
-  box-shadow: 0 0 40px var(--blue-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px var(--lu-glow, var(--blue-glow));
+}
+.levelup-share {
+  padding: 11px 32px;
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 260px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.levelup-share:hover {
+  background: rgba(56,176,104,0.1);
   transform: translateY(-2px);
 }
-/* Blue flash */
-@keyframes blueFlash {
-  0% { background: rgba(68,136,255,0); }
-  20% { background: rgba(68,136,255,0.15); }
-  100% { background: rgba(0,10,30,0.88); }
-}
-.levelup-overlay.active { animation: blueFlash 0.6s ease forwards; }
+/* Phase flash colors */
+@keyframes phaseFlash0 { 0%{background:rgba(192,192,216,0)} 20%{background:rgba(192,192,216,0.1)} 100%{background:rgba(0,5,15,0.88)} }
+@keyframes phaseFlash1 { 0%{background:rgba(232,140,48,0)} 20%{background:rgba(232,140,48,0.12)} 100%{background:rgba(15,8,0,0.88)} }
+@keyframes phaseFlash2 { 0%{background:rgba(58,159,255,0)} 20%{background:rgba(58,159,255,0.12)} 100%{background:rgba(0,8,20,0.88)} }
+@keyframes phaseFlash3 { 0%{background:rgba(200,168,64,0)} 20%{background:rgba(200,168,64,0.12)} 100%{background:rgba(10,8,0,0.88)} }
+.levelup-overlay.active.phase-0 { animation: phaseFlash0 0.6s ease forwards; }
+.levelup-overlay.active.phase-1 { animation: phaseFlash1 0.6s ease forwards; }
+.levelup-overlay.active.phase-2 { animation: phaseFlash2 0.6s ease forwards; }
+.levelup-overlay.active.phase-3 { animation: phaseFlash3 0.6s ease forwards; }
 
 /* Particle burst */
 .levelup-particles {
@@ -1961,8 +2000,8 @@ main { position:relative; z-index:1; }
 }
 .repo-items li {
   font-size: 11px;
-  font-weight: 300;
-  color: var(--gray3);
+  font-weight: 400;
+  color: var(--gray2);
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -2014,7 +2053,7 @@ main { position:relative; z-index:1; }
 .repo-lock-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(13,13,16,0.88);
+  background: rgba(13,13,16,0.58);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2024,7 +2063,7 @@ main { position:relative; z-index:1; }
   transition: opacity 0.2s;
   pointer-events: none;
   z-index: 10;
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
 }
 .repo-card:hover .repo-lock-overlay,
 .repo-card:focus-within .repo-lock-overlay {
@@ -2054,6 +2093,114 @@ main { position:relative; z-index:1; }
   text-align: center;
   padding: 0 20px;
 }
+
+
+
+/* ─── IDENTIFICATION QUIZ ─────────────────── */
+.splash-quiz {
+  margin: 16px auto 20px;
+  max-width: 680px;
+  width: 100%;
+  padding: 0 8px;
+}
+.quiz-question {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray4);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.quiz-opt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  color: var(--gray3);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  width: 100%;
+}
+.quiz-opt:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.15);
+  color: var(--metal2);
+}
+.quiz-opt.selected {
+  border-color: var(--green);
+  background: rgba(56,176,104,0.08);
+  color: var(--metal3);
+}
+.quiz-opt-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+.quiz-result {
+  display: none;
+  margin-top: 12px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--green);
+  background: rgba(56,176,104,0.06);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--gray2);
+  line-height: 1.6;
+}
+.quiz-result.show { display: block; }
+.quiz-result strong { color: var(--green); }
+.quiz-result.warn {
+  border-left-color: var(--red);
+  background: rgba(224,53,53,0.05);
+}
+.quiz-result.warn strong { color: var(--red); }
+.quiz-toggle {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  padding: 8px 0;
+  display: block;
+  width: 100%;
+  text-align: center;
+  transition: color 0.15s;
+  margin-bottom: 8px;
+}
+.quiz-toggle:hover { color: var(--gray3); }
+@media(max-width:540px) {
+  .quiz-opt { font-size: 11px; padding: 10px 12px; }
+}
+
+/* ─── NICHO TAGS ───────────────────────────── */
+.nicho-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 0;
+}
+.nicho-fav  { background: rgba(56,176,104,0.1); border: 1px solid rgba(56,176,104,0.3); color: var(--green); }
+.nicho-chal { background: rgba(224,53,53,0.08); border: 1px solid rgba(224,53,53,0.25); color: var(--red); }
 
 /* ─── BRIGHTENED EXISTING COMPONENTS ─────── */
 .attr-name { color: var(--metal3) !important; }
@@ -2113,8 +2260,8 @@ main { padding-bottom: 120px; }
   .attrs-wrap, .weeks-wrap, .inner-wrap, .deliv-wrap, .income-wrap { padding-left: 16px; padding-right: 16px; }
 }
 @media(max-width:380px) {
-  .splash-title { font-size: 64px; }
-  .splash-inner { padding: 24px 16px; }
+  .splash-title { font-size: 48px; }
+  .splash-inner { padding: 20px 16px 16px; }
 }
 
 
@@ -2170,8 +2317,8 @@ main { padding-bottom: 120px; }
 }
 .roi-subtitle {
   font-size: 10px;
-  font-weight: 300;
-  color: var(--gray4);
+  font-weight: 400;
+  color: var(--gray3);
 }
 
 /* Sliders area */
@@ -2189,7 +2336,7 @@ main { padding-bottom: 120px; }
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gray5);
+  color: var(--gray4);
 }
 .roi-slider-row {
   display: flex;
@@ -2240,7 +2387,7 @@ main { padding-bottom: 120px; }
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--gray5);
+  color: var(--gray4);
   margin-bottom: 8px;
 }
 .roi-result-val {
@@ -2273,7 +2420,7 @@ main { padding-bottom: 120px; }
 .roi-note {
   padding: 12px 24px;
   font-size: 10px;
-  color: var(--gray5);
+  color: var(--gray3);
   border-top: 1px solid var(--border);
   font-style: italic;
   line-height: 1.6;
@@ -2283,7 +2430,7 @@ main { padding-bottom: 120px; }
   background: rgba(56,176,104,0.06);
   border-top: 1px solid rgba(56,176,104,0.15);
   font-size: 11px;
-  color: var(--gray3);
+  color: var(--gray2);
 }
 .roi-be-banner strong { color: var(--green); font-weight: 700; }
 @media(max-width:800px) {
@@ -2304,118 +2451,6 @@ main { padding-bottom: 120px; }
   .roi-calc { margin: 0 16px 28px; }
   .roi-result { grid-template-columns: 1fr; }
 }
-
-/* ─── SCROLL REVEAL ─── */
-.sr { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
-.sr.visible { opacity: 1; transform: translateY(0); }
-.sr:nth-child(2) { transition-delay: 0.08s; }
-.sr:nth-child(3) { transition-delay: 0.16s; }
-.sr:nth-child(4) { transition-delay: 0.24s; }
-
-/* ─── ROI CALCULATOR – más visible ─── */
-.roi-calc {
-  margin: 0 56px 40px !important;
-  background: linear-gradient(180deg, rgba(30,30,50,0.95) 0%, var(--bg2) 100%) !important;
-  border: 1px solid var(--border2) !important;
-  border-top: 3px solid var(--green) !important;
-  border-radius: 8px;
-  overflow: visible;
-  position: relative;
-}
-.roi-calc-headline {
-  font-size: 18px;
-  font-weight: 800;
-  color: var(--metal3);
-  text-align: center;
-  padding: 20px 24px 0;
-  letter-spacing: 0.02em;
-}
-.roi-calc-sub {
-  font-size: 11px;
-  color: var(--gray3);
-  text-align: center;
-  padding: 4px 24px 12px;
-}
-.roi-scenario-tab {
-  display: flex !important;
-  border-bottom: 1px solid var(--border2) !important;
-  background: rgba(255,255,255,0.02);
-}
-.roi-tab {
-  flex: 1;
-  padding: 14px 16px !important;
-  font-size: 11px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.15em !important;
-}
-.roi-slider {
-  accent-color: var(--green) !important;
-}
-.roi-slider::-webkit-slider-thumb {
-  width: 20px !important;
-  height: 20px !important;
-}
-/* slider auto-animate on scroll */
-.roi-calc.animate-in .roi-slider {
-  animation: sliderWiggle 1.2s ease 0.3s;
-}
-@keyframes sliderWiggle {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(10px); }
-  40% { transform: translateX(-6px); }
-  60% { transform: translateX(4px); }
-  80% { transform: translateX(-2px); }
-  100% { transform: translateX(0); }
-}
-
-/* ─── SECTION HEADLINES ─── */
-.section-headline {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--metal3);
-  padding: 0 56px;
-  margin-bottom: -8px;
-  letter-spacing: 0.01em;
-}
-@media(max-width:768px) {
-  .section-headline { font-size: 18px; padding: 0 24px; }
-  .roi-calc { margin: 0 24px 32px !important; }
-}
-@media(max-width:540px) {
-  .section-headline { font-size: 16px; padding: 0 16px; }
-  .roi-calc { margin: 0 16px 28px !important; }
-}
-
-
-/* Fix repo-grid to 2 columns */
-.repo-grid { grid-template-columns: repeat(2, 1fr) !important; }
-@media(max-width:768px) { .repo-grid { grid-template-columns: 1fr !important; } }
-
-/* Calculator scroll animation */
-@keyframes sliderWiggle {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(15px); }
-  40% { transform: translateX(-5px); }
-  60% { transform: translateX(8px); }
-  80% { transform: translateX(-2px); }
-  100% { transform: translateX(0); }
-}
-.roi-calc.in-view .roi-slider { animation: sliderWiggle 1.2s ease-out; }
-.roi-calc.in-view .roi-calc-headline { animation: fadeUp 0.6s ease-out; }
-.roi-calc { opacity: 0.3; transition: opacity 0.5s; }
-.roi-calc.in-view { opacity: 1; }
-
-/* Bigger calculator */
-.roi-calc-headline { font-size: 28px !important; font-weight: 900 !important; letter-spacing: -0.02em; }
-.roi-calc-sub { font-size: 14px !important; margin-bottom: 16px; }
-.roi-scenario-tab button { font-size: 12px !important; padding: 10px 24px !important; }
-.roi-slider { height: 8px !important; }
-.roi-slider::-webkit-slider-thumb { width: 22px !important; height: 22px !important; }
-.roi-result-val { font-size: 24px !important; }
-
-/* Bigger section headlines */
-.section-headline { font-size: 32px !important; font-weight: 900 !important; }
-.sdiv-label { font-size: 11px !important; font-weight: 800 !important; }
 </style>
 </head>
 <body>
@@ -2454,20 +2489,58 @@ main { padding-bottom: 120px; }
       <div class="sj-arrow">→</div>
       <div class="sj-item sj-4">
         <div class="sj-etapa">Etapa 04</div>
-        <div class="sj-name">OWNER</div>
+        <div class="sj-name">FOUNDER</div>
         <div class="sj-desc">Infraestructura de agentes. El sistema trabaja sin ti.</div>
       </div>
     </div>
 
+    <!-- IDENTIFICATION QUIZ -->
+    <div class="splash-quiz" id="splashQuiz">
+      <button class="quiz-toggle" onclick="toggleQuiz()" id="quizToggle">
+        ▿ ¿Cómo sé si esto es para mí?
+      </button>
+      <div id="quizBody" style="display:none">
+        <div class="quiz-question">Identifícate — ¿cuál te describe mejor ahora?</div>
+        <div class="quiz-options">
+          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
+            <span class="quiz-opt-icon">💼</span>
+            Tengo una habilidad o servicio, pero no sé cómo estructurar la oferta, conseguir clientes o cobrar bien.
+          </button>
+          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
+            <span class="quiz-opt-icon">📈</span>
+            Ya tengo clientes, pero trabajo demasiado, cobro poco y todo depende de mí. Necesito sistema.
+          </button>
+          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
+            <span class="quiz-opt-icon">🤖</span>
+            Quiero usar IA para escalar lo que hago, pero no sé por dónde empezar sin perder lo que ya tengo.
+          </button>
+          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
+            <span class="quiz-opt-icon">🏗️</span>
+            Tengo ingresos pero quiero construir algo propio — comunidad, producto, marca — que no dependa solo de mi tiempo.
+          </button>
+          <button class="quiz-opt" onclick="selectProfile(this, 'maybe')">
+            <span class="quiz-opt-icon">🎓</span>
+            Todavía estoy en formación o no tengo ninguna habilidad que el mercado pague hoy.
+          </button>
+          <button class="quiz-opt" onclick="selectProfile(this, 'no')">
+            <span class="quiz-opt-icon">🏢</span>
+            Tengo empleo estable y no planeo cambiar nada en los próximos 12 meses.
+          </button>
+        </div>
+        <div class="quiz-result" id="quizResult"></div>
+      </div>
+    </div>
+
+
     <div class="splash-ctas">
       <button class="splash-btn splash-btn-primary" onclick="unlockApp('form')">
-        ◉ &nbsp;COMENZAR
+        <span class="btn-emoji" style="font-size:16px">◉</span> &nbsp;COMENZAR
       </button>
-      <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20vengo%20de%20Private%20Build"
+      <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t"
          target="_blank"
          class="splash-btn splash-btn-secondary splash-btn-community"
          onclick="unlockApp('community')">
-        🏴‍☠️ &nbsp;Unirme a la comunidad
+        <span class="btn-emoji">🏴‍☠️</span> &nbsp;Unirme a la comunidad
       </a>
     </div>
   </div>
@@ -2491,7 +2564,7 @@ main { padding-bottom: 120px; }
     <div class="splash-road-item">
       <div class="splash-road-bar"></div>
       <div class="splash-road-num">04</div>
-      <div class="splash-road-name">OWNER</div>
+      <div class="splash-road-name">FOUNDER</div>
     </div>
   </div>
 </div>
@@ -2515,25 +2588,25 @@ main { padding-bottom: 120px; }
       <div class="pt-locked">●</div>
       <div class="pt-num">01</div>
       <div class="pt-name">SKILLER</div>
-      <div class="pt-days">Mes 01 · $0–$500</div>
+      <div class="pt-days">Mes 01 · $0–$1,500</div>
     </div>
     <div class="pt-item" onclick="switchPhase(1)">
       <div class="pt-locked">○</div>
       <div class="pt-num">02</div>
       <div class="pt-name">OPERATOR</div>
-      <div class="pt-days">Mes 02 · $500–$2K</div>
+      <div class="pt-days">Mes 02 · $1,500–$3K</div>
     </div>
     <div class="pt-item" onclick="switchPhase(2)">
       <div class="pt-locked">○</div>
       <div class="pt-num">03</div>
       <div class="pt-name">BUILDER</div>
-      <div class="pt-days">Mes 03 · $2K–$8K</div>
+      <div class="pt-days">Mes 03 · $3K–$10K</div>
     </div>
     <div class="pt-item" onclick="switchPhase(3)">
       <div class="pt-locked">○</div>
       <div class="pt-num">04</div>
-      <div class="pt-name">OWNER</div>
-      <div class="pt-days">Mes 04 · $5K–$15K</div>
+      <div class="pt-name">FOUNDER</div>
+      <div class="pt-days">Mes 04 · $10K+</div>
     </div>
   </div>
 </header>
@@ -2545,7 +2618,7 @@ main { padding-bottom: 120px; }
     <button class="snav-btn active" onclick="switchPhase(0)">SKILLER</button>
     <button class="snav-btn" onclick="switchPhase(1)">OPERATOR</button>
     <button class="snav-btn" onclick="switchPhase(2)">BUILDER</button>
-    <button class="snav-btn" onclick="switchPhase(3)">OWNER</button>
+    <button class="snav-btn" onclick="switchPhase(3)">FOUNDER</button>
   </div>
   <div class="snav-progress">
     <span class="snav-prog-label">progress</span>
@@ -2566,16 +2639,35 @@ main { padding-bottom: 120px; }
       <div style="width:40px;height:3px;background:#6060a0;margin-bottom:12px;box-shadow:0 0 12px #6060a088"></div>
       <div class="ph-phase-tag">Mes 01 · Punto de inicio · SKILLER</div>
       <div class="ph-phase-name" style="background:linear-gradient(135deg,#c0c0d8 0%,#f0f0ff 40%,#d0d0e8 100%);-webkit-background-clip:text;background-clip:text;color:transparent">SKILLER</div>
-      <div class="ph-why">Esta fase existe para <strong>eliminar la confusión</strong>. No ejecutas porque no sabes exactamente qué hacer ni en qué orden. No ejecutar no es un defecto de carácter — es falta de dirección clara. Aquí defines quién eres, qué vendes y a quién. Sin esto, todo lo demás es ruido.</div>
+      <div class="ph-why">El punto de partida es siempre el mismo: <strong>vender tu tiempo y habilidad directamente</strong>. DFY (Done For You) — tú ejecutas, el cliente paga por resultados. No hay producto, no hay sistema, no hay escala todavía. Solo tu skill, tu oferta en una frase y la primera conversación de venta real. Sin haber vendido tu tiempo no sabes qué duele en el mercado, cuánto paga, ni qué palabras lo mueven a comprar.</div>
     </div>
     <div class="ph-stats-col">
-      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val red">$0 – $500</div></div>
+      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val red">$0 – $1,500</div></div>
       <div class="ph-stat-item"><div class="psi-label">Hrs / mes</div><div class="psi-val metal">5 – 8 hrs</div></div>
       <div class="ph-stat-item"><div class="psi-label">Duración</div><div class="psi-val metal">30 días</div></div>
       <div class="ph-stat-item"><div class="psi-label">Estado</div><div class="psi-val green">● ACTIVO</div></div>
     </div>
   </div>
 
+
+  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
+  <div class="attrs-wrap" style="padding-bottom:8px;">
+    <div style="background:var(--bg2);border:1px solid var(--border);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Social media manager — gestiona cuentas de marcas y personas</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Editor de video — reels, YouTube, TikTok, podcast clips</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Diseñador gráfico / UX — identidad visual, apps, web</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Copywriter — emails, ads, landing pages, scripts de venta</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Gestor de pauta — Meta Ads, Google Ads, TikTok Ads</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Asistente virtual / operaciones — admin, CRM, soporte</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Fotógrafo / videógrafo comercial — marcas, e-commerce, eventos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador web — sitios, Shopify, landing pages</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Especialista en SEO / contenido — tráfico orgánico, blogs</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Traductor / localizador — contenido, legal, técnico</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Closer de ventas — cierra para otros, comisión por deal</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Community manager — engagement, moderación, crecimiento</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Podcast producer — edición, distribución, show notes</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Prompt engineer — creación de sistemas y prompts para empresas</div>
+        </div>
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Coach de vida / ejecutivo — procesos, metas, mentalidad</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Nutricionista / entrenador personal — salud y rendimiento</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor de negocios — ventas, operaciones, estrategia PyME</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado / asesor legal — startups, contratos, compliance</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador / asesor financiero — impuestos, P&L, estructura</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto / diseñador de interiores — proyectos de alto valor</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Headhunter / reclutador — talento tech, ejecutivos, nichos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Terapeuta / psicólogo — servicios de salud mental privada</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Ingeniero / técnico industrial — consultoría de procesos y eficiencia</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Profesor universitario — tutorías, mentoría académica privada</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Veterinario — consultas online, contenido de nicho</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Odontólogo / dentista — práctica privada, marketing dental</div>
+        </div>
+      </div>
+      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
+        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">Si tienes un skill y sabes que hay personas que pagan por él — ya puedes empezar. El ciclo rápido vende en semanas porque el resultado es visible y el cliente decide solo. El ciclo más largo paga tickets de $3K a $10K+ pero requiere más confianza previa. Ambos encajan en el mapa — ajusta tu runway según cuál seas tú.</span>
+      </div>
+    </div>
+  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -2646,7 +2738,7 @@ main { padding-bottom: 120px; }
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M1-A</div><div class="wc-days">Prioridad 1</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 1</div></div>
         <div class="wc-focus">Claridad Total</div>
         <ul class="wc-tasks">
           <li>◆ Historia de credibilidad en 200 palabras</li>
@@ -2658,7 +2750,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Brain Doc activo</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M1-B</div><div class="wc-days">Prioridad 2</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 2</div></div>
         <div class="wc-focus">Oferta en 1 Frase</div>
         <ul class="wc-tasks">
           <li>◆ Diseñar oferta de transformación (no servicio)</li>
@@ -2670,7 +2762,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Oferta articulada y testeada</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M1-C</div><div class="wc-days">Prioridad 3</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 3</div></div>
         <div class="wc-focus">Primeras Conversaciones</div>
         <ul class="wc-tasks">
           <li>◆ 10 mensajes en frío a potenciales clientes</li>
@@ -2682,7 +2774,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ 3 llamadas de discovery</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M1-D</div><div class="wc-days">Prioridad 4</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 4</div></div>
         <div class="wc-focus">Primer Cierre</div>
         <ul class="wc-tasks">
           <li>◆ 20 mensajes con versión mejorada</li>
@@ -2739,49 +2831,38 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="section-headline">Recursos Disponibles</div>
-  <div class="sdiv"><div class="sdiv-label">Repositorio — SKILLER</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">🏴‍☠️ Comunidad — cómo usarla en esta fase</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
-    <div class="repo-grid">
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">🧭</div>
-          <div><div class="repo-title">Frameworks de Claridad</div><div class="repo-subtitle">Modelos de pensamiento para el mes 1</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>Framework de oferta en 1 frase: [Quién] + [Problema] + [Resultado] + [Tiempo]</li>
-            <li>Matriz de skills: lo que sabes hacer / lo que el mercado paga / lo que te da energía</li>
-            <li>Audit de identidad: 5 resultados reales que puedes demostrar hoy</li>
-            <li>Plantilla de Brain Document para Claude Projects</li>
+    <div class="community-guide" style="background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1px solid var(--border);border-left:3px solid #c0c0d8;padding:24px 28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;">
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Cómo participar</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c0c0d8;flex-shrink:0">◆</span> Comparte tus logros y hallazgos de esta fase — sin filtro, sin perfeccionismo.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c0c0d8;flex-shrink:0">◆</span> Haz preguntas específicas de la etapa. Cuanto más concreto, mejor respuesta.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c0c0d8;flex-shrink:0">◆</span> Nutre a los demás: si ya pasaste por algo, comparte qué hiciste.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c0c0d8;flex-shrink:0">◆</span> Deja el ego. No compitas — aporta. La comunidad crece cuando todos suman.</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
-      </div>
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">⚡</div>
-          <div><div class="repo-title">Automatizaciones Mes 1</div><div class="repo-subtitle">Operar más rápido desde el inicio</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>Claude: Prompt de Brain Document + generador de oferta en 1 frase</li>
-            <li>AntiGravity: Setup inicial para outreach manual-asistido</li>
-            <li>Template de mensajes en frío en 3 variantes para testear</li>
-            <li>Script de discovery call con Fathom integrado</li>
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Temas frecuentes en SKILLER</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Definir mi oferta en 1 frase que funcione</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cómo tener mi primera conversación de venta sin sentirme raro</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Brain Document: qué incluir y cómo estructurarlo</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cuánto cobrar por mi primer servicio DFY</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--green);color:#fff;font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          🏴‍☠️ Ir a la comunidad
+        </a>
+        <a href="https://forms.gle/sGzi3f9RwKd4uXjC6" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:transparent;border:1px solid var(--red-dim);color:var(--red);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          ◉ Pedir ayuda 1:1
+        </a>
       </div>
     </div>
   </div>
@@ -2791,34 +2872,39 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Necesito tener todo perfecto antes de salir."</div>
-        <div class="inner-body">La preparación no es el trabajo — es el calentamiento. Esta fase termina cuando publicas imperfecto y toleras el rechazo. El miedo se disuelve con exposición, no con más planificación.</div>
+        <div class="inner-body">El SKILLER cree que la preparación es el trabajo. No lo es. La preparación es el calentamiento. Esta fase termina cuando publicas imperfecto, hablas con desconocidos y toleras el rechazo sin colapsar. El miedo al "qué dirán" se disuelve solo con exposición repetida — no con más planificación.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
         <div class="inner-quote">"La identidad de alguien que ya comenzó."</div>
-        <div class="inner-body">El mayor logro no es el primer cliente — es verte como alguien que ejecuta. Ese cambio de identidad es el cimiento. El ingreso sigue a la identidad, nunca al revés.</div>
+        <div class="inner-body">El mayor logro no es el primer cliente. Es mirarte al espejo y decir: "soy alguien que ejecuta". Ese cambio de identidad es el cimiento de todo. Sin él, cada fase será frágil. Con él, cada tropiezo es dato, no fracaso. El ingreso sigue a la identidad — nunca al revés.</div>
       </div>
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Organización mínima</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Organización mínima requerida</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card build">
-        <div class="inner-label build-l">▸ Notion con 3 páginas</div>
-        <div class="inner-body">Brain Doc (quién eres, qué vendes), Pipeline (leads + estado), Diario semanal. Sin sistema operas reactivo y cada semana partes de cero.</div>
+        <div class="inner-label build-l">▸ Notion — estructura básica</div>
+        <div class="inner-quote">"Sin sistema de captura, tu mente se vuelve el sistema. Y falla."</div>
+        <div class="inner-body">Crea un workspace en Notion con 3 páginas: (1) Brain Doc — quién eres, qué vendes, a quién; (2) Pipeline — leads contactados, estado, próximo paso; (3) Diario de aprendizajes — cada semana, 3 líneas de lo que funcionó y lo que no. Nada más. El sistema crece con tú.</div>
+      </div>
+      <div class="inner-card trap">
+        <div class="inner-label trap-l">▸ Sin organización pasa esto</div>
+        <div class="inner-quote">"Tienes 20 tabs abiertos y ningún lead seguido."</div>
+        <div class="inner-body">Sin sistema, operas en modo reactivo: respondes lo urgente, olvidas lo importante. Sin Notion como sistema de captura, los leads se pierden, los aprendizajes se olvidan y cada semana partes de cero. La organización no es burocracia — es el piso sobre el que se construye todo lo demás.</div>
       </div>
     </div>
   </div>
 
-  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">Stack mínimo — SKILLER</div><div class="sdiv-line"></div></div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Core / IA</div>
@@ -2895,9 +2981,8 @@ main { padding-bottom: 120px; }
   </div>
 
 
-<div class="roi-calc" id="roi-phase-0">
-    <div class="roi-calc-headline">Calculadora de Retorno</div>
-<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-0">
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-0','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-0','opt')">Escenario óptimo</button>
@@ -2971,7 +3056,7 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
     <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Skiller%20y%20quiero%20saber%20m%C3%A1s" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
     </div>
     <div class="deliv-grid" data-phase="0">
       <div class="deliv-item" onclick="toggleDeliv(this,0,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Brain Document</div><div class="dt-desc">Contexto en Claude con historia, oferta y audiencia</div></div></div>
@@ -2992,16 +3077,35 @@ main { padding-bottom: 120px; }
       <div style="width:40px;height:3px;background:#e88c30;margin-bottom:12px;box-shadow:0 0 12px #e88c3088"></div>
       <div class="ph-phase-tag">Fase 02 · Mes 02 · Validación en campo</div>
       <div class="ph-phase-name" style="background:linear-gradient(135deg,#b86820 0%,#e88c30 40%,#ffb060 100%);-webkit-background-clip:text;background-clip:text;color:transparent">OPERATOR</div>
-      <div class="ph-why">El OPERATOR no asume — <strong>prueba todo</strong>. Esta fase existe porque la mayoría opera con hipótesis no verificadas. Mensaje, precio, canal, proceso: todo es beta hasta que el mercado confirma con dinero o con rechazo claro. Aquí aprendes más que en cualquier curso.</div>
+      <div class="ph-why">Sigues vendiendo tu tiempo — pero ahora <strong>con IA como copiloto</strong>. Lo que en el mes 1 hacías manualmente (outreach, seguimiento, análisis de llamadas) ahora lo automatizas parcialmente. El servicio sigue siendo DFY, pero más rápido, con más margen y con datos reales. El objetivo de esta fase es escalar el número de clientes sin escalar las horas. El primer paso para dejar de ser el cuello de botella de tu propio negocio.</div>
     </div>
     <div class="ph-stats-col">
-      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val metal">$500 – $2K</div></div>
+      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val metal">$1,500 – $3K</div></div>
       <div class="ph-stat-item"><div class="psi-label">Hrs / mes</div><div class="psi-val metal">6 – 10 hrs</div></div>
       <div class="ph-stat-item"><div class="psi-label">Duración</div><div class="psi-val metal">30 días</div></div>
       <div class="ph-stat-item"><div class="psi-label">Estado</div><div class="psi-val" style="color:var(--gray4)">○ BLOQUEADO</div></div>
     </div>
   </div>
 
+
+  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
+  <div class="attrs-wrap" style="padding-bottom:8px;">
+    <div style="background:var(--bg2);border:1px solid var(--border);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Social media manager — automatizando creación y scheduling con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Copywriter — produciendo 5x más contenido con Claude y GPT</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Editor de video — clips automáticos con Poppy y CapCut IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Gestor de pauta — optimización y reportes con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Especialista en SEO — contenido a escala, clustering semántico</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador web / no-code — Webflow, Bubble, Framer + IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Consultor de automatización — Make, Zapier, n8n para PyMEs</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Outreach specialist — secuencias y prospección con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Flipper digital — compra/venta de cuentas, dominios, sitios</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Trader con sistema — bots, análisis técnico, gestión de riesgo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Closer de ventas — comisiones más altas con proceso IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Prompt engineer — sistemas de IA empaquetados para clientes</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Email marketer — secuencias automatizadas, nurture campaigns</div>
+        </div>
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Coach ejecutivo — programa estructurado de 3 meses</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor de negocios — transformación con IA para medianas empresas</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado / legal tech — automatización de contratos y documentos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador / CFO fraccionado — reporting y forecast con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / profesional de salud — telehealth, contenido de autoridad</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto — diseño asistido con IA, renders, presupuestos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Reclutador — sourcing y filtrado automatizado con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Educador / profesor — cursos propios, cohorts pagos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Veterinario — protocolos digitales, telemedicina animal</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Ingeniero — consultoría de procesos con data analytics</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Odontólogo — marketing digital para clínica, captación online</div>
+        </div>
+      </div>
+      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
+        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">En esta fase, el skill no cambia — cambia cómo lo entregas. Lo que hacías en 10 horas ahora lo haces en 2. Eso libera tiempo para más clientes o para subir el ticket. Los de ciclo más largo compensan con contratos recurrentes que estabilizan el ingreso mes a mes.</span>
+      </div>
+    </div>
+  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -3072,7 +3176,7 @@ main { padding-bottom: 120px; }
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M2-A</div><div class="wc-days">Prioridad 1</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 1</div></div>
         <div class="wc-focus">Volumen de Contacto</div>
         <ul class="wc-tasks">
           <li>◆ 30 mensajes en frío con secuencia de 3 pasos</li>
@@ -3084,7 +3188,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ 100 prospectos listados</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M2-B</div><div class="wc-days">Prioridad 2</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 2</div></div>
         <div class="wc-focus">Conversaciones de Calidad</div>
         <ul class="wc-tasks">
           <li>◆ 5 llamadas discovery con script optimizado</li>
@@ -3096,7 +3200,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Script de ventas v2 listo</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M2-C</div><div class="wc-days">Prioridad 3</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 3</div></div>
         <div class="wc-focus">Primer Ingreso Real</div>
         <ul class="wc-tasks">
           <li>◆ Ofrecer beta de programa con descuento</li>
@@ -3108,7 +3212,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Primer dinero real en cuenta</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M2-D</div><div class="wc-days">Prioridad 4</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 4</div></div>
         <div class="wc-focus">Iteración por Data</div>
         <ul class="wc-tasks">
           <li>◆ Ajustar precio según respuesta del mercado</li>
@@ -3165,48 +3269,38 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="section-headline">Recursos Disponibles</div>
-  <div class="sdiv"><div class="sdiv-label">Repositorio — OPERATOR</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">🏴‍☠️ Comunidad — cómo usarla en esta fase</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
-    <div class="repo-grid">
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">🧭</div>
-          <div><div class="repo-title">Frameworks de Venta</div><div class="repo-subtitle">Sistemas para cerrar con datos reales</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>Script de discovery call v2 con puntos de objeción marcados</li>
-            <li>Framework de precio: cómo justificar $500-$2K sin disculparte</li>
-            <li>Matriz de objeciones: objeción → respuesta → validación</li>
-            <li>Template de seguimiento post-llamada en 3 pasos</li>
+    <div class="community-guide" style="background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1px solid var(--border);border-left:3px solid #e88c30;padding:24px 28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;">
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Cómo participar</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#e88c30;flex-shrink:0">◆</span> Comparte tus logros y hallazgos de esta fase — sin filtro, sin perfeccionismo.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#e88c30;flex-shrink:0">◆</span> Haz preguntas específicas de la etapa. Cuanto más concreto, mejor respuesta.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#e88c30;flex-shrink:0">◆</span> Nutre a los demás: si ya pasaste por algo, comparte qué hiciste.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#e88c30;flex-shrink:0">◆</span> Deja el ego. No compitas — aporta. La comunidad crece cuando todos suman.</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
-      </div>
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">⚡</div>
-          <div><div class="repo-title">Automatizaciones Mes 2</div><div class="repo-subtitle">Outreach y seguimiento sin perder leads</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>AntiGravity: secuencia de outreach en 3 toques automatizada</li>
-            <li>Claude: análisis de transcripciones Fathom + extracción de objeciones</li>
-            <li>Notion: CRM automático con estado de lead actualizado</li>
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Temas frecuentes en OPERATOR</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Scripts de mensajes que están funcionando ahora</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cómo manejar la objeción "está caro"</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Pasar de $300 a $600 sin perder clientes</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Automatizar el seguimiento sin perder el toque humano</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--green);color:#fff;font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          🏴‍☠️ Ir a la comunidad
+        </a>
+        <a href="https://forms.gle/sGzi3f9RwKd4uXjC6" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:transparent;border:1px solid var(--red-dim);color:var(--red);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          ◉ Pedir ayuda 1:1
+        </a>
       </div>
     </div>
   </div>
@@ -3216,37 +3310,39 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Todavía no está listo para cobrarlo bien."</div>
-        <div class="inner-body">Cobrar poco no es humildad — es una señal falsa al mercado. Si resuelves un problema real, el precio justo es un acto de respeto hacia tu trabajo y tu cliente.</div>
+        <div class="inner-body">La tentación acá es subestimar tu propio valor. Cobra poco para no asustar y termina atrayendo clientes que no valoran lo que reciben. El precio bajo no es humildad — es una señal falsa al mercado. Si resuelves un problema real, cobrarlo bien es un acto de respeto.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
-        <div class="inner-quote">"Iterar más rápido que el mercado cambia."</div>
-        <div class="inner-body">El activo no es el cliente beta — es el músculo de iteración rápida. Probar, medir, ajustar sin drama. Eso separa a quien escala de quien se estanca.</div>
+        <div class="inner-quote">"La capacidad de aprender más rápido que el mercado cambia."</div>
+        <div class="inner-body">El activo más valioso no es el cliente beta — es el músculo de iteración rápida. Alguien que itera en días tiene ventaja infinita sobre quien tarda semanas. Probar, medir, ajustar sin drama: eso separa a quien escala de quien se estanca.</div>
       </div>
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Organización</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Organización — actualizar el sistema</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card build">
-        <div class="inner-label build-l">▸ Notion evoluciona</div>
-        <div class="inner-body">Base de leads (fuente, estado, objeción), registro de llamadas con Fathom, aprendizajes por llamada. Con 20-30 prospectos la memoria falla — sin Notion actualizado, tu pipeline es ilusión.</div>
+        <div class="inner-label build-l">▸ Notion evoluciona con tú</div>
+        <div class="inner-quote">"Tu pipeline ya no es una lista — es un sistema vivo."</div>
+        <div class="inner-body">Agrega a tu Notion: (1) Base de datos de leads con columnas: fuente, estado, último contacto, objeción principal; (2) Registro de llamadas con notas de Fathom integradas; (3) Página de "aprendizajes de venta" — 1 entrada por llamada. En esta fase empiezas a ver patrones. Notion es donde esos patrones se vuelven sistema.</div>
+      </div>
+      <div class="inner-card trap">
+        <div class="inner-label trap-l">▸ El error de organización aquí</div>
+        <div class="inner-quote">"Tengo todo en mi cabeza / en WhatsApp."</div>
+        <div class="inner-body">Cuando empiezas a tener 20-30 prospectos activos, la memoria falla. La persona que te respondió hace 10 días y no seguiste — se fue. El sistema es lo que te permite dar seguimiento sin energía mental extra. Sin Notion actualizado, tu pipeline es una ilusión.</div>
       </div>
     </div>
   </div>
 
-  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">Stack mínimo — OPERATOR</div><div class="sdiv-line"></div></div>
-  <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-    Incluye todo el stack de Skiller (Claude, Notion, Instagram, Fathom) + nuevas herramientas:
-  </div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Core / IA</div>
@@ -3260,7 +3356,7 @@ main { padding-bottom: 120px; }
           <li>◆ Generar respuestas a objeciones</li>
           <li>◆ Escribir caso de éxito del cliente beta</li>
         </ul>
-        <div class="wc-milestone">⬡ Claude free + GPT custom (incluido en programa)</div>
+        <div class="wc-milestone">⬡ Claude Pro recomendado desde aquí</div>
       </div>
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
@@ -3303,36 +3399,35 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://www.gohighlevel.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='G'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://miro.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='M'" /></div>
             <div>
-              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">GHL Starter</div>
-              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">CRM + Pipeline</div>
+              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Miro</div>
+              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Estrategia visual</div>
             </div>
           </div>
         </div>
-        <div class="wc-focus">Tu primer sistema de ventas real</div>
+        <div class="wc-focus">Mapear el proceso de venta</div>
         <ul class="wc-tasks">
-          <li>◆ Pipeline visual de prospectos</li>
-          <li>◆ Seguimiento automático post-llamada</li>
-          <li>◆ Landing pages para captar leads</li>
-          <li>◆ Calendario de reservas integrado</li>
+          <li>◆ Diagrama del customer journey real</li>
+          <li>◆ Mapa de objeciones y respuestas</li>
+          <li>◆ Visual de la oferta y sus componentes</li>
+          <li>◆ Retrospectiva visual de la fase</li>
         </ul>
-        <div class="wc-milestone">⬡ Starter $49/mes · se paga solo con 1 cierre</div>
+        <div class="wc-milestone">⬡ Gratis · útil para claridad visual</div>
       </div>
     </div>
   </div>
 
 
-<div class="roi-calc" id="roi-phase-1">
-    <div class="roi-calc-headline">Calculadora de Retorno</div>
-<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-1">
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-1','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-1','opt')">Escenario óptimo</button>
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — OPERATOR</div>
-      <div class="roi-subtitle" id="roi-phase-1-sub">Claude free + GPT custom (incluido) + GHL Lite $49 = $49 total</div>
+      <div class="roi-subtitle" id="roi-phase-1-sub">Claude Pro $20 — ese es todo tu costo fijo</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -3359,7 +3454,7 @@ main { padding-bottom: 120px; }
     <div class="roi-results">
       <div class="roi-result-item">
         <div class="roi-result-label">Inversión mensual</div>
-        <div class="roi-result-val glow-red" id="roi-phase-1-inversion">-$69</div>
+        <div class="roi-result-val glow-red" id="roi-phase-1-inversion">-$20</div>
       </div>
       <div class="roi-result-item">
         <div class="roi-result-label">Ingreso bruto</div>
@@ -3377,7 +3472,7 @@ main { padding-bottom: 120px; }
     <div class="roi-be-banner" id="roi-phase-1-be">
       Mueve los sliders para ver tu retorno real.
     </div>
-    <div class="roi-note" id="roi-phase-1-note">Con 1 venta de $300 ya cubres el stack 15 veces. El juego acá es volumen de outreach: 100 contactos al mes para conseguir 2–4 cierres.</div>
+    <div class="roi-note" id="roi-phase-1-note">Con 1 venta de $500 ya cubres el stack 25 veces. El juego acá es volumen de outreach: 100 contactos al mes para conseguir 3–5 cierres.</div>
   </div>
 
   <div class="sdiv"><div class="sdiv-label">Finanzas — OPERATOR</div><div class="sdiv-line"></div></div>
@@ -3399,7 +3494,7 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
     <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Operator%20y%20quiero%20avanzar" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
     </div>
     <div class="deliv-grid" data-phase="1">
       <div class="deliv-item" onclick="toggleDeliv(this,1,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">100 Prospectos Contactados</div><div class="dt-desc">Con tracking de response rate por mensaje en Notion</div></div></div>
@@ -3423,13 +3518,32 @@ main { padding-bottom: 120px; }
       <div class="ph-why">El Builder deja de trabajar solo en el negocio y empieza a trabajar <strong>en el negocio</strong>. Construyes sistemas que funcionan sin ti: contenido que atrae, herramientas que demuestran, procesos que convierten. La autoridad deja de ser declarada — empieza a ser demostrada.</div>
     </div>
     <div class="ph-stats-col">
-      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val metal">$2K – $8K</div></div>
+      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val metal">$3K – $10K</div></div>
       <div class="ph-stat-item"><div class="psi-label">Hrs / mes</div><div class="psi-val metal">8 – 15 hrs</div></div>
       <div class="ph-stat-item"><div class="psi-label">Duración</div><div class="psi-val metal">30 días</div></div>
       <div class="ph-stat-item"><div class="psi-label">Estado</div><div class="psi-val" style="color:var(--gray4)">○ BLOQUEADO</div></div>
     </div>
   </div>
 
+
+  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
+  <div class="attrs-wrap" style="padding-bottom:8px;">
+    <div style="background:var(--bg2);border:1px solid var(--border);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Marketer / growth — herramientas públicas, newsletters, comunidad</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador con IA — scripts, herramientas open-source, SaaS micro</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Creador de contenido — canal + oferta educativa propia</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Automatizador — workflows empaquetados como servicio o producto</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Community builder — grupos de nicho con acceso pago</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Consultor de productividad — sistema documentado + curso</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>E-commerce — operación sistematizada con IA y equipo mínimo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Coach con audiencia — masterclass, cohort, programa propio</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Prompt engineer — framework propio vendido como licencia</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Diseñador — brand studio con proceso sistematizado</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Closer / sales — equipo de ventas propio, comisiones de red</div>
+        </div>
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / salud — plataforma educativa, comunidad de pacientes</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado — contenido de autoridad, consultoría empaquetada</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto / ingeniero — metodología propia como curso o consultoría</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador — sistema fiscal como producto o programa grupal</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Educador — plataforma de cursos especializada en su nicho</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Trader — señales, formación, comunidad de inversores</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Fitness / nutrición — programa online con resultados documentados</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor corporativo — metodología propia licenciable</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Odontólogo — clínica con marca personal, contenido educativo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Veterinario — plataforma de protocolos, comunidad de profesionales</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Psicólogo — programa de bienestar corporativo, consultoría de equipo</div>
+        </div>
+      </div>
+      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
+        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">Aquí dejas de vender horas y empiezas a construir activos: herramientas, contenido, comunidades, productos. Los de ciclo rápido tienen audiencia o demanda inmediata. Los de ciclo más largo construyen posicionamiento de industria — son los que en 12 meses se convierten en referentes de su nicho.</span>
+      </div>
+    </div>
+  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -3500,7 +3614,7 @@ main { padding-bottom: 120px; }
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M3-A</div><div class="wc-days">Prioridad 1</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 1</div></div>
         <div class="wc-focus">Content Engine ON</div>
         <ul class="wc-tasks">
           <li>◆ 3 pilares de contenido inamovibles</li>
@@ -3512,7 +3626,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Content engine activo</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M3-B</div><div class="wc-days">Prioridad 2</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 2</div></div>
         <div class="wc-focus">Primera Tool Pública</div>
         <ul class="wc-tasks">
           <li>◆ Construir herramienta gratuita con Claude</li>
@@ -3524,7 +3638,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Tool pública con 50+ usuarios</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M3-C</div><div class="wc-days">Prioridad 3</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 3</div></div>
         <div class="wc-focus">Primer High Ticket</div>
         <ul class="wc-tasks">
           <li>◆ Cerrar primer cliente a $1K–3K</li>
@@ -3536,7 +3650,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Primer high ticket cerrado</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M3-D</div><div class="wc-days">Prioridad 4</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 4</div></div>
         <div class="wc-focus">Consolidar Sistema</div>
         <ul class="wc-tasks">
           <li>◆ Playbook completo documentado</li>
@@ -3593,49 +3707,38 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="section-headline">Recursos Disponibles</div>
-  <div class="sdiv"><div class="sdiv-label">Repositorio — BUILDER</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">🏴‍☠️ Comunidad — cómo usarla en esta fase</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
-    <div class="repo-grid">
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">🧭</div>
-          <div><div class="repo-title">Frameworks de Sistemas</div><div class="repo-subtitle">Build que genera autoridad y leads</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>Framework de content engine: 1 idea → 5 formatos en 30 minutos con Claude</li>
-            <li>Checklist de tool pública: qué necesita para generar leads reales</li>
-            <li>Estructura de propuesta high ticket reutilizable</li>
-            <li>Template de playbook: documenta tu proceso para replicar y vender</li>
+    <div class="community-guide" style="background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1px solid var(--border);border-left:3px solid #3a9fff;padding:24px 28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;">
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Cómo participar</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#3a9fff;flex-shrink:0">◆</span> Comparte tus logros y hallazgos de esta fase — sin filtro, sin perfeccionismo.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#3a9fff;flex-shrink:0">◆</span> Haz preguntas específicas de la etapa. Cuanto más concreto, mejor respuesta.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#3a9fff;flex-shrink:0">◆</span> Nutre a los demás: si ya pasaste por algo, comparte qué hiciste.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#3a9fff;flex-shrink:0">◆</span> Deja el ego. No compitas — aporta. La comunidad crece cuando todos suman.</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
-      </div>
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">⚡</div>
-          <div><div class="repo-title">Automatizaciones Mes 3</div><div class="repo-subtitle">Content y build a velocidad IA</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>Claude Code: build de tools públicas (scripts, HTML/React) desde terminal con IA</li>
-            <li>AntiGravity + OpenClaw: pipeline de outreach a 50+ contactos/semana</li>
-            <li>Poppy: clips automáticos del proceso de build para Instagram/TikTok</li>
-            <li>Notion AI: generación de contenido desde el playbook documentado</li>
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Temas frecuentes en BUILDER</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cómo documentar un proceso para que sea replicable</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Primer high ticket: cómo estructurar la propuesta</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Claude Code: primeras builds que generan leads</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cuándo y cómo subir el precio sin drama</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--green);color:#fff;font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          🏴‍☠️ Ir a la comunidad
+        </a>
+        <a href="https://forms.gle/sGzi3f9RwKd4uXjC6" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:transparent;border:1px solid var(--red-dim);color:var(--red);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          ◉ Pedir ayuda 1:1
+        </a>
       </div>
     </div>
   </div>
@@ -3645,37 +3748,39 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Construyo más de lo que vendo."</div>
-        <div class="inner-body">Construir sin vender es hobby. Por cada hora construyendo, una hora vendiendo. Una tool no publicada vale exactamente cero.</div>
+        <div class="inner-body">El builder se enamora de construir. Hay dopamina en crear. Pero construir sin vender es hobby, no negocio. El antídoto: por cada hora construyendo, una hora vendiendo. Sin excepción. Una tool no publicada y no distribuida vale exactamente cero.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
-        <div class="inner-quote">"Pensamiento de producto como superpoder."</div>
-        <div class="inner-body">Empiezas a ver el mundo en sistemas y activos, no tareas. Un proceso repetitivo se convierte en automatización. Ese modo mental multiplicado por tiempo es exponencial.</div>
+        <div class="inner-quote">"El pensamiento de producto como superpoder."</div>
+        <div class="inner-body">El mayor cambio es cognitivo: empiezas a ver el mundo en términos de sistemas y activos, no de tareas. Una conversación difícil se convierte en script mejorado. Un proceso repetitivo se convierte en automatización. Ese modo mental multiplicado por tiempo es exponencial.</div>
       </div>
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Organización</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Organización — pasar de Notion a sistema operativo real</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card build">
-        <div class="inner-label build-l">▸ Notion → sistema operativo</div>
-        <div class="inner-body">Dashboard de métricas, content calendar, registro financiero + Miro para mapas estratégicos. Sin sistema centralizado creas en paralelo y pierdes contexto.</div>
+        <div class="inner-label build-l">▸ Tu Notion evoluciona a OS completo</div>
+        <div class="inner-quote">"Si no está en Notion, no existe."</div>
+        <div class="inner-body">En esta fase tu workspace necesita: (1) Dashboard central con métricas clave visibles a diario — ingresos, leads activos, contenido publicado; (2) Content calendar integrado con los 3 pilares; (3) Base de datos de herramientas y recursos con estado activo/pausado; (4) Registro financiero básico del negocio. Miro entra aquí para mapas estratégicos y retrospectivas visuales de la fase.</div>
+      </div>
+      <div class="inner-card trap">
+        <div class="inner-label trap-l">▸ El caos del Builder sin sistema</div>
+        <div class="inner-quote">"Tengo 15 tabs de Notion sin conectar."</div>
+        <div class="inner-body">Sin sistema centralizado, el builder crea en paralelo y pierde contexto. La tool que construiste en semana 10 no está conectada al pipeline de la semana 11. El caso de éxito no alimenta el contenido de la semana 12. El sistema no es el trabajo — es la infraestructura que hace que el trabajo valga algo.</div>
       </div>
     </div>
   </div>
 
-  <div class="section-headline">Tu Stack de Herramientas</div>
   <div class="sdiv"><div class="sdiv-label">Stack mínimo — BUILDER</div><div class="sdiv-line"></div></div>
-  <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-    Incluye todo el stack anterior (Claude, Notion, Instagram, Fathom, GHL) + nuevas herramientas:
-  </div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Core / Build</div>
@@ -3694,21 +3799,21 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://n8n.io/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='n8n'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://openai.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='G'" /></div>
             <div>
-              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">n8n</div>
-              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Automatización</div>
+              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">GPT</div>
+              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Complemento</div>
             </div>
           </div>
         </div>
-        <div class="wc-focus">Workflows automatizados</div>
+        <div class="wc-focus">Segundo cerebro para validar</div>
         <ul class="wc-tasks">
-          <li>◆ Conectar herramientas sin código</li>
-          <li>◆ Automatizar seguimiento de leads</li>
-          <li>◆ Secuencias de email + CRM</li>
-          <li>◆ Integrar Claude con tu pipeline</li>
+          <li>◆ Validar ideas con perspectiva distinta</li>
+          <li>◆ Browsing para research de mercado</li>
+          <li>◆ Generación de imágenes para contenido</li>
+          <li>◆ Custom GPT con tu voz para copy</li>
         </ul>
-        <div class="wc-milestone">⬡ Self-hosted gratis · Cloud desde $20/mes</div>
+        <div class="wc-milestone">⬡ Plus $20/mes · si puedes, sí</div>
       </div>
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
@@ -3752,16 +3857,15 @@ main { padding-bottom: 120px; }
   </div>
 
 
-<div class="roi-calc" id="roi-phase-2">
-    <div class="roi-calc-headline">Calculadora de Retorno</div>
-<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-2">
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-2','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-2','opt')">Escenario óptimo</button>
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — BUILDER</div>
-      <div class="roi-subtitle" id="roi-phase-2-sub">Claude Pro $20 + Code + GHL $49 + n8n $20 = $89 total</div>
+      <div class="roi-subtitle" id="roi-phase-2-sub">Claude $20 + Miro $8 + GPT $20 = $48 total</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -3788,7 +3892,7 @@ main { padding-bottom: 120px; }
     <div class="roi-results">
       <div class="roi-result-item">
         <div class="roi-result-label">Inversión mensual</div>
-        <div class="roi-result-val glow-red" id="roi-phase-2-inversion">-$89</div>
+        <div class="roi-result-val glow-red" id="roi-phase-2-inversion">-$48</div>
       </div>
       <div class="roi-result-item">
         <div class="roi-result-label">Ingreso bruto</div>
@@ -3806,7 +3910,7 @@ main { padding-bottom: 120px; }
     <div class="roi-be-banner" id="roi-phase-2-be">
       Mueve los sliders para ver tu retorno real.
     </div>
-    <div class="roi-note" id="roi-phase-2-note">High-ticket desde esta fase. 2 cierres a $1K y el stack queda cubierto 41 veces. Con proceso documentado, cada venta es reproducible.</div>
+    <div class="roi-note" id="roi-phase-2-note">High-ticket desde esta fase. 2 cierres a $1.5K y el stack queda cubierto 62 veces. Con proceso documentado, cada venta es reproducible.</div>
   </div>
 
   <div class="sdiv"><div class="sdiv-label">Finanzas — BUILDER</div><div class="sdiv-line"></div></div>
@@ -3828,7 +3932,7 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
     <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20soy%20Builder%20y%20quiero%20escalar" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
     </div>
     <div class="deliv-grid" data-phase="2">
       <div class="deliv-item" onclick="toggleDeliv(this,2,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Content Engine Activo</div><div class="dt-desc">Publicando 3x/semana con sistema Claude</div></div></div>
@@ -3841,24 +3945,43 @@ main { padding-bottom: 120px; }
   </div>
 </div>
 
-<!-- ══════════════ FASE 4: OWNER ══════════════ -->
+<!-- ══════════════ FASE 4: FOUNDER ══════════════ -->
 <div class="phase-section" id="phase-3">
   <div class="ph-block">
     <div class="ph-giant"><span class="ph-giant-outline">04</span><span style="background:var(--metal-grad);-webkit-background-clip:text;background-clip:text;color:transparent">04</span><div style="font-size:9px;font-weight:700;letter-spacing:0.35em;color:var(--gray5);margin-top:4px;text-transform:uppercase">FASE 04</div></div>
     <div class="ph-meta">
       <div style="width:40px;height:3px;background:#c8a840;margin-bottom:12px;box-shadow:0 0 12px #c8a84088"></div>
       <div class="ph-phase-tag">Fase 04 · Mes 04 · El desafío real</div>
-      <div class="ph-phase-name" style="background:linear-gradient(135deg,#7a6010 0%,#c8a840 40%,#f0d870 100%);-webkit-background-clip:text;background-clip:text;color:transparent">OWNER</div>
-      <div class="ph-why">El Owner no solo opera — <strong>entiende el tablero</strong>. Tiene sistemas que generan leads, un proceso de venta que convierte y activos que trabajan mientras duerme. La diferencia entre owner y builder es la consciencia: el owner sabe exactamente en qué posición está y cuál es el siguiente movimiento óptimo.</div>
+      <div class="ph-phase-name" style="background:linear-gradient(135deg,#7a6010 0%,#c8a840 40%,#f0d870 100%);-webkit-background-clip:text;background-clip:text;color:transparent">FOUNDER</div>
+      <div class="ph-why">El Player no solo juega — <strong>entiende el tablero</strong>. Tiene sistemas que generan leads, un proceso de venta que convierte y activos que trabajan mientras duerme. La diferencia entre player y builder es la consciencia: el player sabe exactamente en qué posición está y cuál es el siguiente movimiento óptimo.</div>
     </div>
     <div class="ph-stats-col">
-      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val green">$5K – $15K</div></div>
+      <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val green">$10K+</div></div>
       <div class="ph-stat-item"><div class="psi-label">Hrs / mes</div><div class="psi-val metal">10 – 20 hrs</div></div>
       <div class="ph-stat-item"><div class="psi-label">Duración</div><div class="psi-val metal">30 días</div></div>
       <div class="ph-stat-item"><div class="psi-label">Estado</div><div class="psi-val" style="color:var(--gray4)">○ BLOQUEADO</div></div>
     </div>
   </div>
 
+
+  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
+  <div class="attrs-wrap" style="padding-bottom:8px;">
+    <div style="background:var(--bg2);border:1px solid var(--border);">
+      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Marketer / growth — agencia sistematizada, white-label, equipo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador — SaaS de nicho, agencia de IA, licencias</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Creador / educator — plataforma de comunidad con acceso pago</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Automatizador — empresa de implementación IA para PyMEs</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>E-commerce — holding de marcas o sistema de distribución</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Recruiter — red de talento, marketplace, modelo de comisión recurrente</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Flipper / inversor digital — portafolio de activos digitales</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Community builder — red de comunidades en múltiples nichos</div>
+        </div>
+        <div style="background:var(--bg2);padding:18px 20px;">
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
+          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / salud — clínica digital, plataforma de segunda opinión</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado — firma de nicho, producto legal escalable</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador / financiero — firma CFO fraccionado con equipo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Coach ejecutivo — programa certificado, formación de coaches</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto — studio sistematizado, licencias de diseño</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Trader — fondo de inversión, academia con track record</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Educador — institución digital o acreditación propia</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor — metodología licenciada, red de franquicias intelectuales</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Odontólogo — cadena de clínicas, marca dental escalable</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Veterinario — red de clínicas, plataforma de servicios pet</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Psicólogo — institución de bienestar, programa certificado</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Ingeniero — firma de consultoría tech, producto industrial</div>
+        </div>
+      </div>
+      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
+        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">En esta fase el skill es tuyo pero el trabajo no. Tienes un sistema que ejecuta, un equipo que opera y activos que generan sin ti. Los de ciclo más largo en esta etapa son los que más escalan — consultoría corporativa, plataformas de salud, firmas legales tech. El ticket es alto y la barrera de entrada los protege.</span>
+      </div>
+    </div>
+  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -3870,7 +3993,7 @@ main { padding-bottom: 120px; }
       </div>
       <div class="attr-cell excellent"><div class="excellent-led"></div>
         <div class="attr-top"><div class="attr-name">Consciencia Estratégica <span style="display:inline-block;margin-left:6px;font-size:7px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:2px 6px;border:1px solid #c8a84040;color:#c8a840;border-radius:0;vertical-align:middle">Systems</span></div><div class="attr-score" style="background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--green)">85</div></div>
-        <div class="attr-desc">El atributo más difícil del Owner — y el más raro. Ves el desafío completo: dónde estás, qué mueve el mercado, qué construir ahora para que valga en 12 meses. No es inteligencia — es experiencia destilada. La mayoría opera tácticamente toda su vida sin llegar acá.</div>
+        <div class="attr-desc">El atributo más difícil del Player — y el más raro. Ves el desafío completo: dónde estás, qué mueve el mercado, qué construir ahora para que valga en 12 meses. No es inteligencia — es experiencia destilada. La mayoría opera tácticamente toda su vida sin llegar acá.</div>
         <div class="attr-bar-track"><div class="attr-bar-fill fill-green" style="width:0%" data-w="85%"></div></div>
         <div class="attr-delta d-ok">✦ Vista completa de tablero</div>
       </div>
@@ -3929,7 +4052,7 @@ main { padding-bottom: 120px; }
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M4-A</div><div class="wc-days">Prioridad 1</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 1</div></div>
         <div class="wc-focus">Embudo Completo</div>
         <ul class="wc-tasks">
           <li>◆ Lead magnet → email sequence → llamada automatizado</li>
@@ -3941,7 +4064,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Embudo activo end-to-end</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M4-B</div><div class="wc-days">Prioridad 2</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 2</div></div>
         <div class="wc-focus">Comunidad Seed</div>
         <ul class="wc-tasks">
           <li>◆ Lanzar grupo privado (Discord / WhatsApp / GHL)</li>
@@ -3953,7 +4076,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Comunidad seed de 30 personas</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M4-C</div><div class="wc-days">Prioridad 3</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 3</div></div>
         <div class="wc-focus">Producto Digital</div>
         <ul class="wc-tasks">
           <li>◆ Lanzar curso, template o recurso pagado</li>
@@ -3965,7 +4088,7 @@ main { padding-bottom: 120px; }
         <div class="wc-milestone">⬡ Producto digital con primeras ventas</div>
       </div>
       <div class="week-card">
-        <div class="wc-header"><div class="wc-num">M4-D</div><div class="wc-days">Prioridad 4</div></div>
+        <div class="wc-header"><div class="wc-priority-badge">Prioridad 4</div></div>
         <div class="wc-focus">Revisión y Proyección</div>
         <ul class="wc-tasks">
           <li>◆ Retro completa de la fase con métricas</li>
@@ -3980,13 +4103,13 @@ main { padding-bottom: 120px; }
   </div>
 
 
-  <div class="sdiv"><div class="sdiv-label">Fracasos del OWNER</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Fracasos del FOUNDER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="fail-grid">
       <div class="fail-card">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Escalar sin proceso — crecer en caos</div>
-        <div class="fail-body">El owner tiene más leads, más clientes, más canales — pero sin sistemas documentados, el crecimiento genera más fricción que libertad. Cada nuevo cliente es una crisis. El objetivo del mes 4 es que el negocio crezca sin que crezcas proporcionalmente tú en horas.</div>
+        <div class="fail-body">El player tiene más leads, más clientes, más canales — pero sin sistemas documentados, el crecimiento genera más fricción que libertad. Cada nuevo cliente es una crisis. El objetivo del mes 4 es que el negocio crezca sin que crezcas proporcionalmente tú en horas.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 60%</span>
       </div>
       <div class="fail-card">
@@ -4010,7 +4133,7 @@ main { padding-bottom: 120px; }
       <div class="fail-card">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">GHL como sistema operativo del negocio</div>
-        <div class="fail-body">Cuando GHL tiene tu pipeline, tus secuencias de email, tu comunidad y tu calendario de ventas integrados — tu negocio opera mientras duermes. El owner que llega al mes 4 con GHL configurado tiene un negocio. El que no, tiene un freelance con más estrés.</div>
+        <div class="fail-body">Cuando GHL tiene tu pipeline, tus secuencias de email, tu comunidad y tu calendario de ventas integrados — tu negocio opera mientras duermes. El player que llega al mes 4 con GHL configurado tiene un negocio. El que no, tiene un freelance con más estrés.</div>
         <span class="fail-tag fail-tag-boost">Negocio que opera solo</span>
       </div>
       <div class="fail-card">
@@ -4022,50 +4145,38 @@ main { padding-bottom: 120px; }
     </div>
   </div>
 
-  <div class="section-headline">Recursos Disponibles</div>
-  <div class="sdiv"><div class="sdiv-label">Repositorio — OWNER</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">🏴‍☠️ Comunidad — cómo usarla en esta fase</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
-    <div class="repo-grid">
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">🧭</div>
-          <div><div class="repo-title">Frameworks de Escala</div><div class="repo-subtitle">Crecer sin crecer en horas</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>Framework de embudo end-to-end: lead magnet → email → llamada → cierre</li>
-            <li>Ritual de comunidad semanal: pregunta + caso + desafío en 30 minutos</li>
-            <li>Template de lanzamiento de producto digital desde audiencia pequeña</li>
-            <li>Matriz de retro: qué medir, cómo decidir, qué escalar, qué eliminar</li>
+    <div class="community-guide" style="background:linear-gradient(145deg,var(--bg3),var(--bg2));border:1px solid var(--border);border-left:3px solid #c8a840;padding:24px 28px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px 32px;">
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Cómo participar</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c8a840;flex-shrink:0">◆</span> Comparte tus logros y hallazgos de esta fase — sin filtro, sin perfeccionismo.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c8a840;flex-shrink:0">◆</span> Haz preguntas específicas de la etapa. Cuanto más concreto, mejor respuesta.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c8a840;flex-shrink:0">◆</span> Nutre a los demás: si ya pasaste por algo, comparte qué hiciste.</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:#c8a840;flex-shrink:0">◆</span> Deja el ego. No compitas — aporta. La comunidad crece cuando todos suman.</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank">Acceder en comunidad <span class="repo-cta-arrow">→</span></a>
-      </div>
-      <div class="repo-card repo-locked">
-      <div class="repo-lock-overlay">
-        <div class="repo-lock-icon">🔒</div>
-        <div class="repo-lock-label">Disponible en Private Build</div>
-        <div class="repo-lock-sub">Accedé desde Private Build para desbloquear este contenido</div>
-      </div>
-        <div class="repo-card-head">
-          <div class="repo-icon">⚡</div>
-          <div><div class="repo-title">Automatizaciones Mes 4</div><div class="repo-subtitle">El stack completo operando</div></div>
-        </div>
-        <div class="repo-body">
-          <ul class="repo-items">
-            <li>GHL: pipeline + email sequences + comunidad + calendario integrados</li>
-            <li>Claude agentes: respuestas automáticas a leads calificados, análisis de métricas</li>
-            <li>AntiGravity: secuencias a escala con segmentación avanzada</li>
-            <li>OpenClaw: scraping e identificación de prospectos del perfil ideal</li>
-            <li>Poppy: repurposing de sesiones de comunidad para Instagram y TikTok</li>
+        <div>
+          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">Temas frecuentes en FOUNDER</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> GHL: qué automatizar primero para no volverse loco</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cómo construir comunidad que se sostenga sola</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Estructura de empresa: cuándo y cómo formalizar</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Delegar sin perder calidad — primeros SOPs reales</li>
           </ul>
         </div>
-        <a class="repo-cta" href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank">Ver automatizaciones <span class="repo-cta-arrow">→</span></a>
+      </div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap;">
+        <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:var(--green);color:#fff;font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          🏴‍☠️ Ir a la comunidad
+        </a>
+        <a href="https://forms.gle/sGzi3f9RwKd4uXjC6" target="_blank"
+           style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:transparent;border:1px solid var(--red-dim);color:var(--red);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;">
+          ◉ Pedir ayuda 1:1
+        </a>
       </div>
     </div>
   </div>
@@ -4075,31 +4186,33 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Ahora que funciona, escalo todo al mismo tiempo."</div>
-        <div class="inner-body">Escalar todo a la vez fragmenta el foco y mata el momentum. Una palanca bien ejecutada vale más que diez en progreso.</div>
+        <div class="inner-body">El player exitoso quiere escalar todo a la vez: nuevo canal, nueva oferta, nueva comunidad. Eso fragmenta el foco y mata el momentum. El principio sigue igual: una cosa bien hecha vale más que diez en progreso. El player que gana escala una palanca a la vez.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
         <div class="inner-quote">"Una identidad que no depende del resultado de la semana."</div>
-        <div class="inner-body">Tomas decisiones desde la experiencia real, no la teoría. Desde la identidad del que ya ejecutó. Ese activo no te lo puede quitar nadie.</div>
+        <div class="inner-body">El mayor logro no es el número en tu cuenta. Es que en el día final tomas decisiones desde un lugar diferente. Desde la experiencia real, no la teoría. Desde la identidad del que ya ejecutó. Ese activo no te lo puede quitar nadie.</div>
       </div>
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Organización</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Organización — operar como empresa, no como freelance</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Notion + GHL integrados</div>
-        <div class="inner-body">Notion = cerebro estratégico (OKRs, dashboard financiero). GHL = sistema operativo (pipeline, emails, comunidad). Sin métricas visibles (CAC, LTV, conversion) no sabes dónde escalar.</div>
+        <div class="inner-quote">"Tu OS personal y tu CRM de negocio deben hablar."</div>
+        <div class="inner-body">En esta fase necesitas dos sistemas que no se pisen: (1) Notion como cerebro estratégico — OKRs de la fase, content calendar, dashboard financiero, retrospectivas; (2) GHL como sistema operativo de negocio — pipeline, emails automáticos, comunidad, landing pages. El Player no usa hojas de cálculo para seguir ventas — tiene un sistema que lo hace solo.</div>
+      </div>
+      <div class="inner-card trap">
+        <div class="inner-label trap-l">▸ Operar sin métricas visibles</div>
+        <div class="inner-quote">"Sé más o menos cuánto entró este mes."</div>
+        <div class="inner-body">El Player que no tiene sus métricas en un dashboard visible opera a ciegas. CAC sin saber, LTV adivinado, conversion rate sin medir. Eso era aceptable al inicio — es inaceptable aquí. Si no puedes decir exactamente qué canal te trae más clientes a menor costo, no sabes dónde escalar. Y sin eso, cualquier decisión de inversión es un gasto.</div>
       </div>
     </div>
   </div>
 
-  <div class="section-headline">Tu Stack de Herramientas</div>
-  <div class="sdiv"><div class="sdiv-label">⚙ Stack completo — OWNER</div><div class="sdiv-line"></div></div>
-  <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-    Incluye todo el stack anterior (Claude, Notion, Instagram, Fathom, GHL, n8n, Miro, Poppy) + herramientas de escala:
-  </div>
+  <div class="sdiv"><div class="sdiv-label">⚙ Stack completo — Fase Player</div><div class="sdiv-line"></div></div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
@@ -4124,7 +4237,7 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="claude-favicon.png" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://claude.ai/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='C'" /></div>
             <div>
               <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Claude</div>
               <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Agentes + build</div>
@@ -4162,36 +4275,35 @@ main { padding-bottom: 120px; }
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
           <div style="display:flex;align-items:center;gap:12px;padding:14px 18px 10px">
-            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://miro.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='M'" /></div>
+            <div style="width:36px;height:36px;background:#1c1c24;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden"><img src="https://openai.com/favicon.ico" style="width:24px;height:24px;object-fit:contain;filter:brightness(1.1)" onerror="this.style.display='none';this.parentNode.innerHTML='G'" /></div>
             <div>
-              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">Miro</div>
-              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Estrategia visual</div>
+              <div style="font-size:14px;font-weight:800;color:var(--metal3);letter-spacing:0.02em;line-height:1">GPT + Miro</div>
+              <div style="font-size:9px;color:var(--gray4);letter-spacing:0.1em;margin-top:3px;text-transform:uppercase">Estrategia</div>
             </div>
           </div>
         </div>
         <div class="wc-focus">Decisiones y visión de negocio</div>
         <ul class="wc-tasks">
-          <li>◆ Mapas estratégicos de la siguiente fase</li>
+          <li>◆ GPT para research de mercado y competencia</li>
+          <li>◆ Miro para mapas estratégicos de la siguiente fase</li>
           <li>◆ Retrospectivas visuales de 90 días</li>
-          <li>◆ Diagrama del embudo completo</li>
-          <li>◆ Propuestas visuales para clientes</li>
+          <li>◆ Diseño del producto de la siguiente iteración</li>
         </ul>
-        <div class="wc-milestone">⬡ Gratis · Starter $8/mes si escala</div>
+        <div class="wc-milestone">⬡ GPT $20/mes · Miro gratis o Starter</div>
       </div>
     </div>
   </div>
 
 
-<div class="roi-calc" id="roi-phase-3">
-    <div class="roi-calc-headline">Calculadora de Retorno</div>
-<div class="roi-calc-sub">Mueve los sliders para ver cuánto necesitas vender</div>
+<div class="sdiv"><div class="sdiv-label">💰 Calculadora de retorno — ¿Qué necesito vender?</div><div class="sdiv-line"></div></div>
+  <div class="roi-calc" id="roi-phase-3">
     <div class="roi-scenario-tab">
       <button class="roi-tab min active" onclick="roiScenario('phase-3','min')">Escenario mínimo</button>
       <button class="roi-tab opt"        onclick="roiScenario('phase-3','opt')">Escenario óptimo</button>
     </div>
     <div class="roi-header">
-      <div class="roi-title">Retorno real — OWNER</div>
-      <div class="roi-subtitle" id="roi-phase-3-sub">GHL Pro $97 + Claude Pro $20 + n8n $20 + Miro $8 = $145 stack completo</div>
+      <div class="roi-title">Retorno real — FOUNDER</div>
+      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + tools $48 = $165 stack completo</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -4218,7 +4330,7 @@ main { padding-bottom: 120px; }
     <div class="roi-results">
       <div class="roi-result-item">
         <div class="roi-result-label">Inversión mensual</div>
-        <div class="roi-result-val glow-red" id="roi-phase-3-inversion">-$145</div>
+        <div class="roi-result-val glow-red" id="roi-phase-3-inversion">-$165</div>
       </div>
       <div class="roi-result-item">
         <div class="roi-result-label">Ingreso bruto</div>
@@ -4236,21 +4348,21 @@ main { padding-bottom: 120px; }
     <div class="roi-be-banner" id="roi-phase-3-be">
       Mueve los sliders para ver tu retorno real.
     </div>
-    <div class="roi-note" id="roi-phase-3-note">El sistema opera solo. Vos defines estrategia, el stack ejecuta. Con 3 ventas de $2K el stack representa 2.7% del ingreso total.</div>
+    <div class="roi-note" id="roi-phase-3-note">El sistema opera solo. Vos defines estrategia, el stack ejecuta. Con 3 ventas de $3.5K el stack representa 1.6% del ingreso total.</div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">Finanzas — OWNER</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">Finanzas — FOUNDER</div><div class="sdiv-line"></div></div>
   <div class="inner-wrap">
     <div class="inner-grid">
       <div class="inner-card build">
         <div class="inner-label build-l">▸ De ingreso a flujo libre</div>
-        <div class="inner-quote">"El Owner tiene libertad financiera de movimiento, no solo ingresos."</div>
+        <div class="inner-quote">"El Player tiene libertad financiera de movimiento, no solo ingresos."</div>
         <div class="inner-body">Con $5K–15K/mes el objetivo no es gastarlo — es estructurarlo. Tarea: (1) Define tu sueldo personal fijo del negocio ($1.5K–3K/mes según contexto); (2) Reinvierte el 30% en stack, contenido y crecimiento; (3) El 20% va a fondo de emergencia del negocio (2 meses de costos fijos cubiertos); (4) Si tienes deuda, el excedente liquida primero la de mayor tasa. La libertad real no es cuánto entra — es no depender de que entre exactamente esa cantidad para vivir.</div>
       </div>
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Lifestyle inflation = trampa del éxito</div>
         <div class="inner-quote">"Ahora que entra más, gasto más. Todos los meses."</div>
-        <div class="inner-body">El Owner que escala gastos al ritmo de sus ingresos nunca llega a la libertad real. El apalancamiento financiero viene de ampliar la brecha entre lo que entra y lo que necesitas para vivir. Estándar de vida lento, fondo de libertad rápido.</div>
+        <div class="inner-body">El Player que escala sus gastos al ritmo de sus ingresos nunca llega a la libertad real. Sigue trabajando por necesidad, no por elección. El apalancamiento financiero real viene de ampliar la brecha entre lo que entra y lo que necesitas para vivir — no de tener un lifestyle más caro. Aumenta tu estándar de vida lento, tu fondo de libertad rápido.</div>
       </div>
     </div>
   </div>
@@ -4260,26 +4372,26 @@ main { padding-bottom: 120px; }
     <div class="income-grid">
       <div class="inc-cell">
         <div class="inc-phase">Fase 1 · SKILLER</div>
-        <div class="inc-range metal">$0–500</div>
+        <div class="inc-range metal">$0–$1,500</div>
         <div class="inc-bar" style="background:var(--gray5)"></div>
         <div class="inc-note">El objetivo no es el dinero — es el primer sí real.</div>
       </div>
       <div class="inc-cell">
         <div class="inc-phase">Fase 2 · OPERATOR</div>
-        <div class="inc-range metal">$500–2K</div>
+        <div class="inc-range metal">$1,500–$3K</div>
         <div class="inc-bar" style="background:var(--metal2)"></div>
         <div class="inc-note">El precio importa menos que la validación del proceso.</div>
       </div>
       <div class="inc-cell">
         <div class="inc-phase">Fase 3 · BUILDER</div>
-        <div class="inc-range metal">$2K–8K</div>
+        <div class="inc-range metal">$3K–$10K</div>
         <div class="inc-bar" style="background:var(--metal-grad2)"></div>
         <div class="inc-note">Primeros high tickets. Sistemas activos. Stack justificado.</div>
       </div>
       <div class="inc-cell current led-active">
         <div class="income-led"></div>
-        <div class="inc-phase">Fase 4 · OWNER</div>
-        <div class="inc-range green">$5K–15K</div>
+        <div class="inc-phase">Fase 4 · FOUNDER</div>
+        <div class="inc-range green">$10K+</div>
         <div class="inc-bar" style="background:var(--green); box-shadow: 0 0 8px var(--green-glow)"></div>
         <div class="inc-note">Embudo + comunidad + producto digital + finanzas ordenadas.</div>
       </div>
@@ -4289,7 +4401,7 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Entregables — completa todos para avanzar a la siguiente fase</div><div class="sdiv-line"></div></div>
   <div class="deliv-wrap">
     <div style="margin-bottom:12px;padding:10px 16px;background:rgba(68,136,255,0.06);border-left:3px solid rgba(68,136,255,0.4);font-size:11px;color:var(--gray3);line-height:1.5;">
-      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20quiero%20aplicar%20al%20Mastermind%20Owner" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
+      Completa este checklist para avanzar a la siguiente fase. Marca solo lo que realmente hiciste. Si hay algo que te está tomando más tiempo o necesitas ayuda, <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank" style="color:var(--green);font-weight:700;text-decoration:none;">pregunta en la comunidad 🏴‍☠️ →</a>
     </div>
     <div class="deliv-grid" data-phase="3">
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Embudo End-to-End en GHL</div><div class="dt-desc">Con conversión medida en cada paso</div></div></div>
@@ -4298,11 +4410,6 @@ main { padding-bottom: 120px; }
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">2 High Tickets Cerrados</div><div class="dt-desc">A precio full, sin descuento</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Dashboard Financiero Activo</div><div class="dt-desc">Sueldo fijo, fondo de emergencia, P&L mensual</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Retro + Plan Siguiente Fase</div><div class="dt-desc">Métricas reales, decisiones claras, siguiente movimiento</div></div></div>
-    
-    <div class="deliv-cta" style="margin-top:16px;padding:14px 20px;background:rgba(56,176,104,0.08);border:1px solid rgba(56,176,104,0.3);text-align:center;display:none;">
-      <div style="font-size:11px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Completaste esta etapa</div>
-      <div style="font-size:13px;color:var(--gray3);margin-bottom:10px;">No pares. El momentum es tu activo más valioso. Agenda tu call para avanzar.</div>
-      <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20complet%C3%A9%20una%20etapa%20y%20quiero%20avanzar" target="_blank" style="display:inline-block;padding:8px 20px;background:var(--green);color:#000;font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Agendar call →</a>
     </div>
   </div>
 
@@ -4311,18 +4418,18 @@ main { padding-bottom: 120px; }
 </main>
 
 <!-- FOOTER -->
-<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:40px 56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;">
-  <div style="max-width:520px;text-align:center;">
+<footer style="background:var(--bg2);border-top:1px solid var(--border);padding:40px 56px;display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;">
+  <div style="max-width:420px;">
     <div style="font-size:9px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4);margin-bottom:10px;">🔒 Private Build</div>
     <p style="font-size:16px;font-weight:700;color:var(--metal3);line-height:1.5;margin-bottom:6px;">Emprender es solitario,<br>para quienes <em style="color:var(--red);font-style:normal;font-weight:800">no saben</em> pedir ayuda.</p>
-    <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20vengo%20de%20Private%20Build" target="_blank"
-       style="display:inline-flex;align-items:center;gap:10px;margin:14px auto 0;padding:10px 20px;background:transparent;border:1px solid var(--green);color:var(--green);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
+    <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t" target="_blank"
+       style="display:inline-flex;align-items:center;gap:10px;margin-top:14px;padding:10px 20px;background:transparent;border:1px solid var(--green);color:var(--green);font-size:9px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
        onmouseover="this.style.boxShadow='0 0 20px rgba(56,176,104,0.3)'"
        onmouseout="this.style.boxShadow=''">
       Necesito ayuda →
     </a>
   </div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;">
     <div style="font-size:8px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;color:var(--gray4)">Siguiente fase</div>
     <button id="footerNextBtn" onclick="footerNext()" 
       style="background:transparent;border:1px solid var(--border2);color:var(--gray4);padding:10px 24px;font-family:'Open Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:all 0.2s;">
@@ -4340,7 +4447,7 @@ main { padding-bottom: 120px; }
     <button class="bb-phase-pill active" id="bbp0" onclick="switchPhase(0)">01 · SKILLER</button>
     <button class="bb-phase-pill bb-locked" id="bbp1" onclick="switchPhase(1)">02 · OPERATOR</button>
     <button class="bb-phase-pill bb-locked" id="bbp2" onclick="switchPhase(2)">03 · BUILDER</button>
-    <button class="bb-phase-pill bb-locked" id="bbp3" onclick="switchPhase(3)">04 · OWNER</button>
+    <button class="bb-phase-pill bb-locked" id="bbp3" onclick="switchPhase(3)">04 · FOUNDER</button>
   </div>
   <!-- Progress tracks -->
   <div class="bb-progress-block">
@@ -4381,10 +4488,20 @@ main { padding-bottom: 120px; }
 <div class="levelup-overlay" id="levelupOverlay">
   <div class="levelup-particles" id="levelupParticles"></div>
   <div class="levelup-inner">
-    <div class="levelup-label">⚡ LEVEL UP</div>
+    <div class="levelup-label" id="levelupLabel">⚡ FASE COMPLETADA</div>
     <div class="levelup-rank" id="levelupRank">OPERATOR</div>
-    <div class="levelup-sub" id="levelupSub">Mes 1 completado. Avanzas al siguiente nivel.</div>
-    <button class="levelup-continue" onclick="confirmLevelUp()">Continuar al Mes 2 →</button>
+    <div class="levelup-sub" id="levelupSub">Mes 1 completado. Has ganado tu próxima etapa.</div>
+    <div class="levelup-btns">
+      <a class="levelup-share" id="levelupShare"
+         href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t"
+         target="_blank"
+         onclick="trackShare()">
+        🏴‍☠️ Compartir en la comunidad
+      </a>
+      <button class="levelup-continue" id="levelupContinueBtn" onclick="confirmLevelUp()">
+        Continuar a la siguiente fase →
+      </button>
+    </div>
   </div>
 </div>
 
@@ -4394,9 +4511,9 @@ main { padding-bottom: 120px; }
 let currentPhase = 0;
 let levelUpPending = -1;
 let appUnlocked = false;
-const rankNames = ['SKILLER','OPERATOR','BUILDER','OWNER'];
-const nextNames = ['OPERATOR','BUILDER','OWNER','—'];
-const phaseNames = ['Fase 1 — SKILLER','Fase 2 — OPERATOR','Fase 3 — BUILDER','Fase 4 — OWNER'];
+const rankNames = ['SKILLER','OPERATOR','BUILDER','FOUNDER'];
+const nextNames = ['OPERATOR','BUILDER','FOUNDER','—'];
+const phaseNames = ['Fase 1 — SKILLER','Fase 2 — OPERATOR','Fase 3 — BUILDER','Fase 4 — FOUNDER'];
 const xpThresh  = [0, 250, 500, 750];
 
 function unlockApp(source) {
@@ -4477,12 +4594,58 @@ function checkPhaseComplete(phase) {
   }
 }
 
+const phaseColors = {
+  0: { grad:'linear-gradient(135deg,#c0c0d8 0%,#f0f0ff 40%,#d0d0e8 100%)', glow:'rgba(192,192,220,0.5)', color:'#c8c8e8' },
+  1: { grad:'linear-gradient(135deg,#b86820 0%,#e88c30 40%,#ffb060 100%)', glow:'rgba(232,140,48,0.5)',  color:'#e88c30' },
+  2: { grad:'linear-gradient(135deg,#1a6fcc 0%,#3a9fff 40%,#88ccff 100%)', glow:'rgba(58,159,255,0.5)', color:'#3a9fff' },
+  3: { grad:'linear-gradient(135deg,#7a6010 0%,#c8a840 40%,#f0d870 100%)', glow:'rgba(200,168,64,0.5)',  color:'#c8a840' }
+};
+const phaseShareMsgs = [
+  'Completé la Fase SKILLER de Private Build 🔒 — ya tengo mi oferta definida y mis primeras conversaciones reales. https://privatebuild.app',
+  'Fase OPERATOR completada 🔒 — primeros clientes cerrados y sistema funcionando. https://privatebuild.app',
+  'Fase BUILDER en el mapa 🔒 — workflows activos, primer high ticket cerrado. https://privatebuild.app',
+  'Alcancé FOUNDER en Private Build 🔒 — infraestructura lista, libertad real. https://privatebuild.app'
+];
+
 function showLevelUp(completedPhase) {
   const nextPhase = completedPhase + 1;
-  document.getElementById('levelupRank').textContent = rankNames[nextPhase];
-  document.getElementById('levelupSub').textContent = 'Mes ' + (completedPhase+1) + ' completado. Desbloqueando ' + rankNames[nextPhase] + '.';
-  spawnParticles();
-  document.getElementById('levelupOverlay').classList.add('active');
+  const overlay = document.getElementById('levelupOverlay');
+  const pc = phaseColors[completedPhase] || phaseColors[2];
+  const nextPc = phaseColors[nextPhase] || phaseColors[3];
+
+  // Apply phase color to overlay
+  overlay.style.setProperty('--lu-grad', nextPc.grad);
+  overlay.style.setProperty('--lu-glow', nextPc.glow);
+  overlay.style.setProperty('--lu-color', nextPc.color);
+  overlay.className = 'levelup-overlay active phase-' + completedPhase;
+
+  document.getElementById('levelupRank').textContent = rankNames[nextPhase] || 'FOUNDER';
+  document.getElementById('levelupSub').textContent =
+    'Fase ' + (completedPhase+1) + ' completada — has ganado el derecho a continuar. Compártelo antes de avanzar.';
+
+  // Update share message
+  const shareEl = document.getElementById('levelupShare');
+  if (shareEl) {
+    const msg = encodeURIComponent(phaseShareMsgs[completedPhase] || phaseShareMsgs[0]);
+    shareEl.href = 'https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t';
+  }
+
+  // Continue button text
+  const continueBtn = document.getElementById('levelupContinueBtn');
+  if (continueBtn && nextPhase < 4) {
+    continueBtn.textContent = 'Continuar a ' + rankNames[nextPhase] + ' →';
+  } else if (continueBtn) {
+    continueBtn.textContent = '✦ Desafío completado';
+  }
+
+  // Particle color matches phase
+  spawnParticles(pc.color);
+  overlay.classList.add('active');
+}
+
+function trackShare() {
+  // Log share event — future: send to analytics/Notion
+  console.log('Phase shared:', currentPhase);
 }
 
 function confirmLevelUp() {
@@ -4493,20 +4656,22 @@ function confirmLevelUp() {
   }
 }
 
-function spawnParticles() {
+function spawnParticles(color) {
   const container = document.getElementById('levelupParticles');
   container.innerHTML = '';
   const cx = window.innerWidth / 2;
   const cy = window.innerHeight / 2;
-  for (let i = 0; i < 40; i++) {
+  const c1 = color || '#4488ff';
+  const c2 = color ? color + 'aa' : '#88bbff';
+  for (let i = 0; i < 50; i++) {
     const p = document.createElement('div');
     p.className = 'lp';
-    const angle = (i / 40) * Math.PI * 2;
-    const dist = 120 + Math.random() * 200;
+    const angle = (i / 50) * Math.PI * 2;
+    const dist = 100 + Math.random() * 220;
     const dx = Math.cos(angle) * dist;
     const dy = Math.sin(angle) * dist;
-    const dur = (0.8 + Math.random() * 0.8).toFixed(2) + 's';
-    p.style.cssText = `left:${cx}px;top:${cy}px;--dx:${dx}px;--dy:${dy}px;--dur:${dur};background:${Math.random()>0.5?'#4488ff':'#88bbff'};opacity:${0.6+Math.random()*0.4};`;
+    const dur = (0.7 + Math.random() * 0.9).toFixed(2) + 's';
+    p.style.cssText = `left:${cx}px;top:${cy}px;--dx:${dx}px;--dy:${dy}px;--dur:${dur};background:${Math.random()>0.5?c1:c2};opacity:${0.6+Math.random()*0.4};`;
     container.appendChild(p);
   }
 }
@@ -4631,23 +4796,57 @@ function showToast(msg) {
   t._timer = setTimeout(() => t.classList.remove('show'), 2600);
 }
 
+
+// ─── Identification Quiz ──────────────────
+function toggleQuiz() {
+  const body = document.getElementById('quizBody');
+  const btn  = document.getElementById('quizToggle');
+  const open = body.style.display === 'none';
+  body.style.display = open ? 'block' : 'none';
+  btn.textContent = open ? '▵ ¿Cómo sé si esto es para mí?' : '▿ ¿Cómo sé si esto es para mí?';
+}
+
+const quizMessages = {
+  fit: {
+    cls: '',
+    msg: '<strong>Este mapa es para ti.</strong> Lo que describes es exactamente el arco que recorre Private Build — de tener una habilidad a construir un sistema que trabaje contigo. Empieza desde SKILLER aunque ya tengas clientes: el orden importa.'
+  },
+  maybe: {
+    cls: 'warn',
+    msg: '<strong>Todavía no — pero pronto.</strong> Este desafío requiere tener algo que el mercado valore hoy. Si estás en formación, el paso previo es identificar con qué habilidad puedes cobrar en los próximos 90 días. Cuando lo tengas, vuelve.'
+  },
+  no: {
+    cls: 'warn',
+    msg: '<strong>Esto no es urgente para ti ahora.</strong> Private Build es para quienes quieren construir algo propio con sentido de urgencia real. Sin esa energía, el mapa no tiene tracción. Guárdalo para cuando algo cambie.'
+  }
+};
+
+function selectProfile(btn, result) {
+  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  const r = document.getElementById('quizResult');
+  const data = quizMessages[result];
+  r.innerHTML = data.msg;
+  r.className = 'quiz-result show ' + data.cls;
+}
+
 // ─── ROI Calculator Interactivo ───────────
 const roiConfig = {
   'phase-0': {
-    min: { tools:0,   mentoria:0, precio_min:50,  precio_max:500,  precio_step:50,  precio_def:150, ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Stack $0 — todo lo que ganas es ganancia neta',          nota:'Stack completamente gratis. Con 1 sola venta ya estás en positivo.' },
-    opt: { tools:0,   mentoria:0, precio_min:50,  precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:4,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'El límite es tu capacidad de agendar y cerrar. 4 ventas a $300 = $1.200 neto.' }
+    min: { tools:0,   mentoria:0, precio_min:50,  precio_max:750,  precio_step:50,  precio_def:250, ventas_min:1, ventas_max:15, ventas_def:3,  sub:'Stack $0 — todo lo que ganas es ganancia neta',          nota:'Stack completamente gratis. 3 ventas a $250 = $750. Con 6 llegas a $1,500.' },
+    opt: { tools:0,   mentoria:0, precio_min:100, precio_max:1500, precio_step:50,  precio_def:500, ventas_min:1, ventas_max:15, ventas_def:3,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'3 ventas a $500 = $1.500 neto. El límite es tu capacidad de agendar y cerrar.' }
   },
   'phase-1': {
-    min: { tools:69,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude free + GPT custom (incluido) + GHL Lite $49 = $49 total',             nota:'1 venta de $300 ya cubre el stack. 100 contactos/mes para 2–4 cierres.' },
-    opt: { tools:69,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack $69, precio más alto, margen del 97%',       nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $69 = 2.8% del ingreso.' }
+    min: { tools:20,  mentoria:0, precio_min:200, precio_max:1500, precio_step:50,  precio_def:500, ventas_min:1, ventas_max:15, ventas_def:3,  sub:'Claude Pro $20 — ese es todo tu costo fijo',             nota:'3 ventas a $500 = $1.500. Stack $20 = 1.3% del ingreso. El juego es outreach.' },
+    opt: { tools:20,  mentoria:0, precio_min:300, precio_max:3000, precio_step:100, precio_def:750, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack, precio más alto, margen del 99%',           nota:'4 ventas a $750 = $3.000 neto. Stack $20 = 0.7% del ingreso.' }
   },
   'phase-2': {
-    min: { tools:89,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude Pro $20 + Code + GHL $49 + n8n $20 = $89 total',            nota:'2 high-tickets = stack cubierto 22 veces. Con proceso documentado, es reproducible.' },
-    opt: { tools:89,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1.5% del ingreso cuando el ticket sube',         nota:'3 × $2K = $6.000. $89 de stack. Margen 98.5%. El negocio fondea el próximo trimestre.' }
+    min: { tools:48,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:1500,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Claude $20 + Miro $8 + GPT $20 = $48 total',            nota:'3 high-tickets a $1.5K = $4.500. Stack cubierto 93 veces. Reproducible.' },
+    opt: { tools:48,  mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:3000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 0.5% del ingreso cuando el ticket sube',         nota:'3 × $3K = $9.000. $48 de stack. Margen 99.5%. El negocio fondea el próximo trimestre.' }
   },
   'phase-3': {
-    min: { tools:145, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL Pro $97 + Claude Pro $20 + n8n $20 + Miro $8 = $145',       nota:'3 × $2K = $6K. Stack = 2.4%. El sistema opera, tú diseñas.' },
-    opt: { tools:145, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 0.9%. Para esto se construyó todo.' }
+    min: { tools:165, mentoria:0, precio_min:1500,precio_max:10000,precio_step:500, precio_def:3500,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + tools $48 = $165',               nota:'3 × $3.5K = $10.5K. Stack = 1.6%. El sistema opera, tú diseñas.' },
+    opt: { tools:165, mentoria:0, precio_min:2000,precio_max:15000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:4,  sub:'$20K+/mes · 15 horas · libertad real',                  nota:'4 × $5K = $20K. Stack = 0.8%. Para esto se construyó todo.' }
   }
 };
 
@@ -4726,44 +4925,8 @@ function initROI() {
 }
 
 
-
-// ─── SCROLL REVEAL ───
-function initScrollReveal() {
-  document.querySelectorAll('.sdiv, .attrs-wrap, .inner-wrap, .weeks-wrap, .roi-calc, .deliv-wrap, .income-wrap, .roi-calc, .fail-grid, .section-headline').forEach(el => {
-    el.classList.add('sr');
-  });
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        if (entry.target.classList.contains('roi-calc')) {
-          entry.target.classList.add('animate-in');
-        }
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.sr').forEach(el => observer.observe(el));
-}
-
 window.addEventListener('load', () => {
-  initScrollReveal();
-});
-
-// Calculator scroll observer - wiggle sliders on enter
-document.querySelectorAll('.roi-calc').forEach(calc => {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if(e.isIntersecting) {
-        e.target.classList.add('in-view');
-        // Trigger recalc to show values
-        const id = e.target.id;
-        if(id && typeof roiCalc === 'function') roiCalc(id.replace('roi-',''));
-        obs.unobserve(e.target);
-      }
-    });
-  }, {threshold: 0.3});
-  obs.observe(calc);
+  // App starts locked behind splash — unlockApp() handles init
 });
 </script>
 </body>
