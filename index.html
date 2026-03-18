@@ -2390,6 +2390,32 @@ main { padding-bottom: 120px; }
 /* Fix repo-grid to 2 columns */
 .repo-grid { grid-template-columns: repeat(2, 1fr) !important; }
 @media(max-width:768px) { .repo-grid { grid-template-columns: 1fr !important; } }
+
+/* Calculator scroll animation */
+@keyframes sliderWiggle {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(15px); }
+  40% { transform: translateX(-5px); }
+  60% { transform: translateX(8px); }
+  80% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+.roi-calc.in-view .roi-slider { animation: sliderWiggle 1.2s ease-out; }
+.roi-calc.in-view .roi-calc-headline { animation: fadeUp 0.6s ease-out; }
+.roi-calc { opacity: 0.3; transition: opacity 0.5s; }
+.roi-calc.in-view { opacity: 1; }
+
+/* Bigger calculator */
+.roi-calc-headline { font-size: 28px !important; font-weight: 900 !important; letter-spacing: -0.02em; }
+.roi-calc-sub { font-size: 14px !important; margin-bottom: 16px; }
+.roi-scenario-tab button { font-size: 12px !important; padding: 10px 24px !important; }
+.roi-slider { height: 8px !important; }
+.roi-slider::-webkit-slider-thumb { width: 22px !important; height: 22px !important; }
+.roi-result-val { font-size: 24px !important; }
+
+/* Bigger section headlines */
+.section-headline { font-size: 32px !important; font-weight: 900 !important; }
+.sdiv-label { font-size: 11px !important; font-weight: 800 !important; }
 </style>
 </head>
 <body>
@@ -3234,7 +3260,7 @@ main { padding-bottom: 120px; }
           <li>◆ Generar respuestas a objeciones</li>
           <li>◆ Escribir caso de éxito del cliente beta</li>
         </ul>
-        <div class="wc-milestone">⬡ Claude Pro recomendado desde aquí</div>
+        <div class="wc-milestone">⬡ Claude free + GPT custom (incluido en programa)</div>
       </div>
       <div class="week-card">
         <div class="wc-header" style="flex-direction:column;align-items:stretch;padding:0;border-bottom:1px solid var(--border)">
@@ -3306,7 +3332,7 @@ main { padding-bottom: 120px; }
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — OPERATOR</div>
-      <div class="roi-subtitle" id="roi-phase-1-sub">Claude Pro $20 + GHL Starter $49 = $69 total</div>
+      <div class="roi-subtitle" id="roi-phase-1-sub">Claude free + GPT custom (incluido) + GHL Lite $49 = $49 total</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -3735,7 +3761,7 @@ main { padding-bottom: 120px; }
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — BUILDER</div>
-      <div class="roi-subtitle" id="roi-phase-2-sub">Claude $20 + GHL $49 + n8n $20 = $89 total</div>
+      <div class="roi-subtitle" id="roi-phase-2-sub">Claude Pro $20 + Code + GHL $49 + n8n $20 = $89 total</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -4165,7 +4191,7 @@ main { padding-bottom: 120px; }
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — OWNER</div>
-      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + n8n $20 + Miro $8 = $145 stack completo</div>
+      <div class="roi-subtitle" id="roi-phase-3-sub">GHL Pro $97 + Claude Pro $20 + n8n $20 + Miro $8 = $145 stack completo</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
@@ -4272,6 +4298,11 @@ main { padding-bottom: 120px; }
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">2 High Tickets Cerrados</div><div class="dt-desc">A precio full, sin descuento</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Dashboard Financiero Activo</div><div class="dt-desc">Sueldo fijo, fondo de emergencia, P&L mensual</div></div></div>
       <div class="deliv-item" onclick="toggleDeliv(this,3,10)"><div class="dchk"></div><div class="deliv-text"><div class="dt-title">Retro + Plan Siguiente Fase</div><div class="dt-desc">Métricas reales, decisiones claras, siguiente movimiento</div></div></div>
+    
+    <div class="deliv-cta" style="margin-top:16px;padding:14px 20px;background:rgba(56,176,104,0.08);border:1px solid rgba(56,176,104,0.3);text-align:center;display:none;">
+      <div style="font-size:11px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--green);margin-bottom:6px;">✓ Completaste esta etapa</div>
+      <div style="font-size:13px;color:var(--gray3);margin-bottom:10px;">No pares. El momentum es tu activo más valioso. Agenda tu call para avanzar.</div>
+      <a href="https://api.whatsapp.com/send?phone=+56978048922&text=Hola%20Patrick%2C%20complet%C3%A9%20una%20etapa%20y%20quiero%20avanzar" target="_blank" style="display:inline-block;padding:8px 20px;background:var(--green);color:#000;font-size:10px;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;text-decoration:none;">Agendar call →</a>
     </div>
   </div>
 
@@ -4607,15 +4638,15 @@ const roiConfig = {
     opt: { tools:0,   mentoria:0, precio_min:50,  precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:4,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'El límite es tu capacidad de agendar y cerrar. 4 ventas a $300 = $1.200 neto.' }
   },
   'phase-1': {
-    min: { tools:69,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude Pro $20 + GHL Starter $49 = $69 total',             nota:'1 venta de $300 ya cubre el stack. 100 contactos/mes para 2–4 cierres.' },
+    min: { tools:69,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude free + GPT custom (incluido) + GHL Lite $49 = $49 total',             nota:'1 venta de $300 ya cubre el stack. 100 contactos/mes para 2–4 cierres.' },
     opt: { tools:69,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack $69, precio más alto, margen del 97%',       nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $69 = 2.8% del ingreso.' }
   },
   'phase-2': {
-    min: { tools:89,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude $20 + GHL $49 + n8n $20 = $89 total',            nota:'2 high-tickets = stack cubierto 22 veces. Con proceso documentado, es reproducible.' },
+    min: { tools:89,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude Pro $20 + Code + GHL $49 + n8n $20 = $89 total',            nota:'2 high-tickets = stack cubierto 22 veces. Con proceso documentado, es reproducible.' },
     opt: { tools:89,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1.5% del ingreso cuando el ticket sube',         nota:'3 × $2K = $6.000. $89 de stack. Margen 98.5%. El negocio fondea el próximo trimestre.' }
   },
   'phase-3': {
-    min: { tools:145, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + n8n $20 + Miro $8 = $145',       nota:'3 × $2K = $6K. Stack = 2.4%. El sistema opera, tú diseñas.' },
+    min: { tools:145, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL Pro $97 + Claude Pro $20 + n8n $20 + Miro $8 = $145',       nota:'3 × $2K = $6K. Stack = 2.4%. El sistema opera, tú diseñas.' },
     opt: { tools:145, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 0.9%. Para esto se construyó todo.' }
   }
 };
@@ -4717,6 +4748,22 @@ function initScrollReveal() {
 
 window.addEventListener('load', () => {
   initScrollReveal();
+});
+
+// Calculator scroll observer - wiggle sliders on enter
+document.querySelectorAll('.roi-calc').forEach(calc => {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.classList.add('in-view');
+        // Trigger recalc to show values
+        const id = e.target.id;
+        if(id && typeof roiCalc === 'function') roiCalc(id.replace('roi-',''));
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.3});
+  obs.observe(calc);
 });
 </script>
 </body>
