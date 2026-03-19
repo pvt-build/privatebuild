@@ -2186,6 +2186,17 @@ main { position:relative; z-index:1; }
   margin-bottom: 8px;
 }
 .quiz-toggle:hover { color: var(--gray3); }
+.phase-accordion { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
+.pa-item { background:var(--bg3); border:1px solid var(--border); cursor:pointer; transition:border-color 0.2s; }
+.pa-item:hover { border-color:var(--border2); }
+.pa-item.open { border-color:var(--gray5); }
+.pa-header { display:flex; align-items:center; gap:12px; padding:12px 16px; }
+.pa-tag { font-size:10px; font-weight:800; letter-spacing:0.2em; width:24px; }
+.pa-name { font-size:13px; font-weight:700; color:var(--metal3); flex:1; letter-spacing:0.1em; }
+.pa-arrow { color:var(--gray5); font-size:10px; transition:transform 0.2s; }
+.pa-item.open .pa-arrow { transform:rotate(90deg); }
+.pa-body { display:none; padding:0 16px 14px; font-size:12px; color:var(--gray3); line-height:1.6; border-top:1px solid var(--border); margin:0 16px; padding-top:12px; }
+.pa-item.open .pa-body { display:block; }
 @media(max-width:540px) {
   .quiz-opt { font-size: 11px; padding: 10px 12px; }
 }
@@ -2234,6 +2245,7 @@ main { padding-bottom: 120px; }
   .app-header-top { padding: 14px 24px; }
   .sdiv, .attrs-wrap, .weeks-wrap, .inner-wrap, .deliv-wrap, .income-wrap { padding-left:24px; padding-right:24px; }
   .ph-block { padding: 32px 24px 0; }
+  .inner-body, .fail-body { font-size: 12px !important; }
 }
 @media(max-width:540px) {
   .attrs-grid { grid-template-columns: 1fr; }
@@ -2259,6 +2271,20 @@ main { padding-bottom: 120px; }
   footer { padding: 28px 16px !important; }
   .sdiv { padding: 28px 16px 16px; }
   .attrs-wrap, .weeks-wrap, .inner-wrap, .deliv-wrap, .income-wrap { padding-left: 16px; padding-right: 16px; }
+  /* Bigger content in boxes */
+  .attr-desc, .inner-body, .fail-body, .wc-tasks li { font-size: 13px !important; line-height: 1.5 !important; }
+  .attr-name, .wc-focus, .dt-title, .fail-title { font-size: 14px !important; }
+  .attr-score { font-size: 20px !important; }
+  .psi-val { font-size: 15px !important; }
+  .psi-label { font-size: 10px !important; }
+  .ph-phase-name { font-size: 28px !important; }
+  .ph-why { font-size: 13px !important; }
+  .sdiv-label { font-size: 11px !important; }
+  /* Reduce large descriptive texts - probada not full data */
+  .inner-body { max-height: 4.5em; overflow: hidden; position: relative; }
+  .inner-body::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1.5em; background:linear-gradient(transparent, var(--bg2)); pointer-events:none; }
+  .fail-body { max-height: 4.5em; overflow: hidden; position: relative; }
+  .fail-body::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1.5em; background:linear-gradient(transparent, var(--bg2)); pointer-events:none; }
 }
 @media(max-width:380px) {
   .splash-title { font-size: 48px; }
@@ -2495,40 +2521,55 @@ main { padding-bottom: 120px; }
       </div>
     </div>
 
-    <!-- IDENTIFICATION QUIZ -->
+    <!-- PHASE ACCORDION -->
     <div class="splash-quiz" id="splashQuiz">
       <button class="quiz-toggle" onclick="toggleQuiz()" id="quizToggle">
         ▿ ¿Cómo sé si esto es para mí?
       </button>
       <div id="quizBody" style="display:none">
-        <div class="quiz-question">Identifícate — ¿cuál te describe mejor ahora?</div>
-        <div class="quiz-options">
-          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
-            <span class="quiz-opt-icon">💼</span>
-            Tengo una habilidad o servicio, pero no sé cómo estructurar la oferta, conseguir clientes o cobrar bien.
-          </button>
-          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
-            <span class="quiz-opt-icon">📈</span>
-            Ya tengo clientes, pero trabajo demasiado, cobro poco y todo depende de mí. Necesito sistema.
-          </button>
-          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
-            <span class="quiz-opt-icon">🤖</span>
-            Quiero usar IA para escalar lo que hago, pero no sé por dónde empezar sin perder lo que ya tengo.
-          </button>
-          <button class="quiz-opt" onclick="selectProfile(this, 'fit')">
-            <span class="quiz-opt-icon">🏗️</span>
-            Tengo ingresos pero quiero construir algo propio — comunidad, producto, marca — que no dependa solo de mi tiempo.
-          </button>
-          <button class="quiz-opt" onclick="selectProfile(this, 'maybe')">
-            <span class="quiz-opt-icon">🎓</span>
-            Todavía estoy en formación o no tengo ninguna habilidad que el mercado pague hoy.
-          </button>
-          <button class="quiz-opt" onclick="selectProfile(this, 'no')">
-            <span class="quiz-opt-icon">🏢</span>
-            Tengo empleo estable y no planeo cambiar nada en los próximos 12 meses.
-          </button>
+        <div class="quiz-question">¿Dónde estás hoy? Toca tu situación.</div>
+        <div class="phase-accordion">
+          <div class="pa-item" onclick="toggleAccordion(this)">
+            <div class="pa-header">
+              <span class="pa-tag" style="color:var(--gray3)">01</span>
+              <span class="pa-name">SKILLER</span>
+              <span class="pa-arrow">▸</span>
+            </div>
+            <div class="pa-body">
+              Tengo un skill pero no sé cómo empaquetarlo, no tengo clientes fijos y cobro lo que puedo. Necesito estructura y mis primeros $1,500.
+            </div>
+          </div>
+          <div class="pa-item" onclick="toggleAccordion(this)">
+            <div class="pa-header">
+              <span class="pa-tag" style="color:#e88c30">02</span>
+              <span class="pa-name">OPERATOR</span>
+              <span class="pa-arrow">▸</span>
+            </div>
+            <div class="pa-body">
+              Estoy ejecutando para otros y aún no logro ganar más haciéndolo. Tengo clientes pero el ingreso no escala y todo depende de mi tiempo.
+            </div>
+          </div>
+          <div class="pa-item" onclick="toggleAccordion(this)">
+            <div class="pa-header">
+              <span class="pa-tag" style="color:#4488ff">03</span>
+              <span class="pa-name">BUILDER</span>
+              <span class="pa-arrow">▸</span>
+            </div>
+            <div class="pa-body">
+              Vendo a buen precio, tengo una buena oferta pero hago todo manual 💀. Necesito sistemas, automatización y dejar de ser el cuello de botella.
+            </div>
+          </div>
+          <div class="pa-item" onclick="toggleAccordion(this)">
+            <div class="pa-header">
+              <span class="pa-tag" style="color:#c8a840">04</span>
+              <span class="pa-name">FOUNDER</span>
+              <span class="pa-arrow">▸</span>
+            </div>
+            <div class="pa-body">
+              Tengo el negocio armado pero quiero que opere sin mí. Busco infraestructura de agentes, equipo y activos que generen sin mi presencia.
+            </div>
+          </div>
         </div>
-        <div class="quiz-result" id="quizResult"></div>
       </div>
     </div>
 
@@ -2651,24 +2692,6 @@ main { padding-bottom: 120px; }
   </div>
 
 
-  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
-  <div class="attrs-wrap" style="padding-bottom:8px;">
-    <div style="background:var(--bg2);border:1px solid var(--border);">
-      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Social media manager — gestiona cuentas de marcas y personas</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Editor de video — reels, YouTube, TikTok, podcast clips</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Diseñador gráfico / UX — identidad visual, apps, web</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Copywriter — emails, ads, landing pages, scripts de venta</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Gestor de pauta — Meta Ads, Google Ads, TikTok Ads</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Asistente virtual / operaciones — admin, CRM, soporte</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Fotógrafo / videógrafo comercial — marcas, e-commerce, eventos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador web — sitios, Shopify, landing pages</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Especialista en SEO / contenido — tráfico orgánico, blogs</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Traductor / localizador — contenido, legal, técnico</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Automatizador / integrador de IA — Make, Zapier, n8n, agentes</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Community manager — moderación, engagement, Discord, Skool</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Tutor / profesor online — idiomas, programación, música</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Productor musical / voice-over — jingles, podcasts, locución</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Data analyst / BI freelance — dashboards, reportes, insights</div>
-        </div>
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Coach de vida / ejecutivo — procesos, metas, mentalidad</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Nutricionista / entrenador personal — salud y rendimiento</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor de negocios — ventas, operaciones, estrategia PyME</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado / asesor legal — startups, contratos, compliance</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador / asesor financiero — impuestos, P&L, estructura</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto / diseñador de interiores — proyectos de alto valor</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Headhunter / reclutador — talento tech, ejecutivos, nichos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Terapeuta / psicólogo — servicios de salud mental privada</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / profesional de salud — telemedicina, segunda opinión</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Ingeniero / consultor técnico — proyectos industriales, certificaciones</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Trader / analista financiero — gestión de portafolio, educación</div>
-        </div>
-      </div>
-      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
-        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">Si tienes un skill y sabes que hay personas que pagan por él — ya puedes empezar. El ciclo rápido vende en semanas porque el resultado es visible y el cliente decide solo. El ciclo más largo paga tickets de $3K a $10K+ pero requiere más confianza previa. Ambos encajan en el mapa — ajusta tu runway según cuál seas tú.</span>
-      </div>
-    </div>
-  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -3089,24 +3112,6 @@ main { padding-bottom: 120px; }
   </div>
 
 
-  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
-  <div class="attrs-wrap" style="padding-bottom:8px;">
-    <div style="background:var(--bg2);border:1px solid var(--border);">
-      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Social media manager — automatizando creación y scheduling con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Copywriter — produciendo 5x más contenido con Claude y GPT</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Editor de video — clips automáticos con Poppy y CapCut IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Gestor de pauta — optimización y reportes con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Especialista en SEO — contenido a escala, clustering semántico</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador web / no-code — Webflow, Bubble, Framer + IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Consultor de automatización — Make, Zapier, n8n para PyMEs</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Outreach specialist — secuencias y prospección con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Flipper digital — compra/venta de cuentas, dominios, sitios</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Trader con sistema — bots, análisis técnico, gestión de riesgo</div>
-        </div>
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Coach ejecutivo — programa estructurado de 3 meses</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor de negocios — transformación con IA para medianas empresas</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado / legal tech — automatización de contratos y documentos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador / CFO fraccionado — reporting y forecast con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / profesional de salud — telehealth, contenido de autoridad</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto — diseño asistido con IA, renders, presupuestos</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Reclutador — sourcing y filtrado automatizado con IA</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Educador / profesor — cursos propios, cohorts pagos</div>
-        </div>
-      </div>
-      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
-        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">En esta fase, el skill no cambia — cambia cómo lo entregas. Lo que hacías en 10 horas ahora lo haces en 2. Eso libera tiempo para más clientes o para subir el ticket. Los de ciclo más largo compensan con contratos recurrentes que estabilizan el ingreso mes a mes.</span>
-      </div>
-    </div>
-  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -3527,24 +3532,6 @@ main { padding-bottom: 120px; }
   </div>
 
 
-  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
-  <div class="attrs-wrap" style="padding-bottom:8px;">
-    <div style="background:var(--bg2);border:1px solid var(--border);">
-      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Marketer / growth — herramientas públicas, newsletters, comunidad</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador con IA — scripts, herramientas open-source, SaaS micro</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Creador de contenido — canal + oferta educativa propia</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Automatizador — workflows empaquetados como servicio o producto</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Community builder — grupos de nicho con acceso pago</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Consultor de productividad — sistema documentado + curso</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>E-commerce — operación sistematizada con IA y equipo mínimo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Coach con audiencia — masterclass, cohort, programa propio</div>
-        </div>
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / salud — plataforma educativa, comunidad de pacientes</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado — contenido de autoridad, consultoría empaquetada</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto / ingeniero — metodología propia como curso o consultoría</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador — sistema fiscal como producto o programa grupal</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Educador — plataforma de cursos especializada en su nicho</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Trader — señales, formación, comunidad de inversores</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Fitness / nutrición — programa online con resultados documentados</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor corporativo — metodología propia licenciable</div>
-        </div>
-      </div>
-      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
-        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">Aquí dejas de vender horas y empiezas a construir activos: herramientas, contenido, comunidades, productos. Los de ciclo rápido tienen audiencia o demanda inmediata. Los de ciclo más largo construyen posicionamiento de industria — son los que en 12 meses se convierten en referentes de su nicho.</span>
-      </div>
-    </div>
-  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -3965,24 +3952,6 @@ main { padding-bottom: 120px; }
   </div>
 
 
-  <div class="sdiv"><div class="sdiv-label">¿Tu skill encaja en esta fase?</div><div class="sdiv-line"></div></div>
-  <div class="attrs-wrap" style="padding-bottom:8px;">
-    <div style="background:var(--bg2);border:1px solid var(--border);">
-      <div style="display:grid;grid-template-columns:1fr 1fr;background:var(--border);gap:1px;">
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">✓ Arrancan rápido — primeras ventas en semanas</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Marketer / growth — agencia sistematizada, white-label, equipo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Desarrollador — SaaS de nicho, agencia de IA, licencias</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Creador / educator — plataforma de comunidad con acceso pago</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Automatizador — empresa de implementación IA para PyMEs</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>E-commerce — holding de marcas o sistema de distribución</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Recruiter — red de talento, marketplace, modelo de comisión recurrente</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Flipper / inversor digital — portafolio de activos digitales</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:var(--green);font-size:8px;flex-shrink:0">●</span>Community builder — red de comunidades en múltiples nichos</div>
-        </div>
-        <div style="background:var(--bg2);padding:18px 20px;">
-          <div style="font-size:8px;font-weight:800;letter-spacing:0.3em;text-transform:uppercase;color:#4488ff;margin-bottom:12px;">→ Ciclo más largo — ticket mayor, mayor proyección</div>
-          <div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Médico / salud — clínica digital, plataforma de segunda opinión</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Abogado — firma de nicho, producto legal escalable</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Contador / financiero — firma CFO fraccionado con equipo</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Coach ejecutivo — programa certificado, formación de coaches</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Arquitecto — studio sistematizado, licencias de diseño</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Trader — fondo de inversión, academia con track record</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Educador — institución digital o acreditación propia</div><div style="font-size:11px;color:var(--gray2);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;line-height:1.4;"><span style="color:#4488ff;font-size:8px;flex-shrink:0">●</span>Consultor — metodología licenciada, red de franquicias intelectuales</div>
-        </div>
-      </div>
-      <div style="padding:12px 20px;background:var(--bg3);border-top:1px solid var(--border);">
-        <span style="font-size:10px;color:var(--gray3);line-height:1.6;">En esta fase el skill es tuyo pero el trabajo no. Tienes un sistema que ejecuta, un equipo que opera y activos que generan sin ti. Los de ciclo más largo en esta etapa son los que más escalan — consultoría corporativa, plataformas de salud, firmas legales tech. El ticket es alto y la barrera de entrada los protege.</span>
-      </div>
-    </div>
-  </div>
   <div class="sdiv"><div class="sdiv-label">01 · Atributos — ¿Qué debo saber de esta fase?</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="attrs-grid">
@@ -4821,6 +4790,12 @@ const quizMessages = {
     msg: '<strong>Esto no es urgente para ti ahora.</strong> Private Build es para quienes quieren construir algo propio con sentido de urgencia real. Sin esa energía, el mapa no tiene tracción. Guárdalo para cuando algo cambie.'
   }
 };
+
+function toggleAccordion(el) {
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.pa-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
 
 function selectProfile(btn, result) {
   document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
