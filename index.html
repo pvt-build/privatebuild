@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRIVATE BUILD — Freedom Map</title>
+<title>PRIVATE BUILD — Freedom Roadmap</title>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -61,6 +61,50 @@ body {
   overflow-x: hidden;
   cursor: default;
   -webkit-text-size-adjust: 100%;
+}
+
+/* Animated background aurora */
+@keyframes auroraMove {
+  0% { transform: translate(0%, 0%) rotate(0deg); }
+  25% { transform: translate(10%, -5%) rotate(3deg); }
+  50% { transform: translate(-5%, 8%) rotate(-2deg); }
+  75% { transform: translate(-8%, -3%) rotate(4deg); }
+  100% { transform: translate(0%, 0%) rotate(0deg); }
+}
+@keyframes auroraMove2 {
+  0% { transform: translate(0%, 0%) rotate(0deg); }
+  33% { transform: translate(-12%, 6%) rotate(-4deg); }
+  66% { transform: translate(8%, -8%) rotate(3deg); }
+  100% { transform: translate(0%, 0%) rotate(0deg); }
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse 40% 30% at 30% 30%, rgba(68,136,255,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 35% at 70% 60%, rgba(224,53,53,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 25% at 50% 80%, rgba(56,176,104,0.05) 0%, transparent 70%);
+  animation: auroraMove 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#splash::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse 50% 40% at 40% 20%, rgba(68,136,255,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 35% at 70% 70%, rgba(200,168,64,0.06) 0%, transparent 60%);
+  animation: auroraMove2 25s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* clean — no overlays */
@@ -303,6 +347,9 @@ body {
   font-size: 7px; font-weight: 700; letter-spacing: 0.2em;
   text-transform: uppercase; color: var(--gray5);
 }
+
+.splash-inner { position: relative; z-index: 2; }
+#app { position: relative; z-index: 1; }
 
 /* App revealed state */
 #app {
@@ -1395,49 +1442,41 @@ main { position:relative; z-index:1; }
 
 /* SPLASH JOURNEY */
 .splash-journey {
-  display: flex;
-  align-items: stretch;
-  gap: 6px;
-  margin: 14px auto 20px;
-  max-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin: 20px auto 24px;
+  max-width: 780px;
   width: 100%;
   padding: 0 8px;
 }
 .sj-item {
-  flex: 1;
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.07);
-  padding: 16px 16px 14px;
+  padding: 18px 16px 14px;
   text-align: left;
   position: relative;
-  transition: all 0.2s;
+  transition: all 0.3s;
+  cursor: pointer;
+  overflow: hidden;
 }
 .sj-item:hover {
   background: rgba(255,255,255,0.06);
   border-color: rgba(255,255,255,0.14);
-  transform: translateY(-2px);
-}
-.sj-num {
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 0.25em;
-  color: var(--gray5);
-  margin-bottom: 6px;
-  text-transform: uppercase;
 }
 .sj-name {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   line-height: 1;
 }
 .sj-desc {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 400;
   color: var(--gray3);
-  line-height: 1.45;
+  line-height: 1.5;
 }
 .sj-etapa {
   font-size: 7px;
@@ -1455,11 +1494,38 @@ main { position:relative; z-index:1; }
 .sj-2 { border-top: 2px solid rgba(232,140,48,0.4); }
 .sj-3 { border-top: 2px solid rgba(58,159,255,0.4); }
 .sj-4 { border-top: 2px solid rgba(200,168,64,0.4); }
-.sj-arrow {
-  color: var(--gray5);
+.sj-arrow-down {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
   font-size: 14px;
-  flex-shrink: 0;
-  padding: 0 2px;
+  color: var(--gray5);
+  transition: transform 0.3s;
+  line-height: 1;
+}
+.sj-item.expanded .sj-arrow-down {
+  transform: rotate(180deg);
+}
+.sj-expand {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, margin-top 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+.sj-item.expanded .sj-expand {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 12px;
+}
+.sj-pain {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--gray4);
+  line-height: 1.5;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  font-style: italic;
 }
 
 /* LEVEL UP OVERLAY */
@@ -2186,17 +2252,6 @@ main { position:relative; z-index:1; }
   margin-bottom: 8px;
 }
 .quiz-toggle:hover { color: var(--gray3); }
-.phase-accordion { display:flex; flex-direction:column; gap:6px; margin-top:12px; }
-.pa-item { background:var(--bg3); border:1px solid var(--border); cursor:pointer; transition:border-color 0.2s; }
-.pa-item:hover { border-color:var(--border2); }
-.pa-item.open { border-color:var(--gray5); }
-.pa-header { display:flex; align-items:center; gap:12px; padding:12px 16px; }
-.pa-tag { font-size:10px; font-weight:800; letter-spacing:0.2em; width:24px; }
-.pa-name { font-size:13px; font-weight:700; color:var(--metal3); flex:1; letter-spacing:0.1em; }
-.pa-arrow { color:var(--gray5); font-size:10px; transition:transform 0.2s; }
-.pa-item.open .pa-arrow { transform:rotate(90deg); }
-.pa-body { display:none; padding:0 16px 14px; font-size:12px; color:var(--gray3); line-height:1.6; border-top:1px solid var(--border); margin:0 16px; padding-top:12px; }
-.pa-item.open .pa-body { display:block; }
 @media(max-width:540px) {
   .quiz-opt { font-size: 11px; padding: 10px 12px; }
 }
@@ -2245,7 +2300,6 @@ main { padding-bottom: 120px; }
   .app-header-top { padding: 14px 24px; }
   .sdiv, .attrs-wrap, .weeks-wrap, .inner-wrap, .deliv-wrap, .income-wrap { padding-left:24px; padding-right:24px; }
   .ph-block { padding: 32px 24px 0; }
-  .inner-body, .fail-body { font-size: 12px !important; }
 }
 @media(max-width:540px) {
   .attrs-grid { grid-template-columns: 1fr; }
@@ -2255,7 +2309,6 @@ main { padding-bottom: 120px; }
   .repo-grid  { grid-template-columns: 1fr; }
   .inner-grid { grid-template-columns: 1fr; }
   .income-grid { grid-template-columns: 1fr; }
-  .attrs-wrap [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
   .ph-block { grid-template-columns: 1fr; padding: 24px 16px 0; }
   .ph-giant { display: none; }
   .ph-stats-col { min-width: unset; }
@@ -2263,28 +2316,16 @@ main { padding-bottom: 120px; }
   .snav-logo { display: none; }
   .app-header-top { padding: 12px 16px; flex-wrap: wrap; }
   .app-header-actions { flex-wrap: wrap; gap: 4px; }
-  .splash-journey { flex-direction: column; gap: 8px; }
-  .sj-arrow { transform: rotate(90deg); align-self: center; }
+  .splash-journey { grid-template-columns: 1fr 1fr; gap: 6px; }
   .bottom-bar { flex-wrap: wrap; padding: 8px 12px; gap: 8px; }
   .bb-phases { flex-wrap: wrap; }
   .bb-phase-pill { font-size: 7px; padding: 4px 7px; }
   footer { padding: 28px 16px !important; }
   .sdiv { padding: 28px 16px 16px; }
   .attrs-wrap, .weeks-wrap, .inner-wrap, .deliv-wrap, .income-wrap { padding-left: 16px; padding-right: 16px; }
-  /* Bigger content in boxes */
-  .attr-desc, .inner-body, .fail-body, .wc-tasks li { font-size: 13px !important; line-height: 1.5 !important; }
-  .attr-name, .wc-focus, .dt-title, .fail-title { font-size: 14px !important; }
-  .attr-score { font-size: 20px !important; }
-  .psi-val { font-size: 15px !important; }
-  .psi-label { font-size: 10px !important; }
-  .ph-phase-name { font-size: 28px !important; }
-  .ph-why { font-size: 13px !important; }
-  .sdiv-label { font-size: 11px !important; }
-  /* Reduce large descriptive texts - probada not full data */
-  .inner-body { max-height: 4.5em; overflow: hidden; position: relative; }
-  .inner-body::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1.5em; background:linear-gradient(transparent, var(--bg2)); pointer-events:none; }
-  .fail-body { max-height: 4.5em; overflow: hidden; position: relative; }
-  .fail-body::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1.5em; background:linear-gradient(transparent, var(--bg2)); pointer-events:none; }
+}
+@media(max-width:480px) {
+  .splash-journey { grid-template-columns: 1fr; }
 }
 @media(max-width:380px) {
   .splash-title { font-size: 48px; }
@@ -2485,7 +2526,7 @@ main { padding-bottom: 120px; }
 <!-- ══ SPLASH SCREEN ══ -->
 <div id="splash">
   <div class="splash-inner">
-    <div class="splash-eyebrow">Private Build · Freedom Map</div>
+    <div class="splash-eyebrow">Private Build · Freedom Roadmap</div>
 
     <div class="splash-title-wrap">
       <div class="splash-title">PRIVATE<br>BUILD</div>
@@ -2494,84 +2535,46 @@ main { padding-bottom: 120px; }
 
     <p class="splash-tagline">Desarrolla tus skills, sella tu identidad<br>y multiplícala con herramientas + IA para<br>construir tu negocio y libertad real.</p>
 
-    <!-- Journey preview — 4 stages -->
+    <!-- Journey preview — 4 expandable stages -->
     <div class="splash-journey">
-      <div class="sj-item sj-1">
+      <div class="sj-item sj-1" onclick="toggleSjExpand(this)">
         <div class="sj-etapa">Etapa 01</div>
         <div class="sj-name">SKILLER</div>
-        <div class="sj-desc">Defines quién eres y qué vendes. Manual, sin sistema.</div>
+        <div class="sj-desc">Defines quién eres, qué vendes y a quién. Primera venta real.</div>
+        <div class="sj-arrow-down">▾</div>
+        <div class="sj-expand">
+          <div class="sj-pain">😶 "Tengo un skill pero no sé cómo empaquetarlo ni venderlo. Cobro poco o gratis."</div>
+        </div>
       </div>
-      <div class="sj-arrow">→</div>
-      <div class="sj-item sj-2">
+      <div class="sj-item sj-2" onclick="toggleSjExpand(this)">
         <div class="sj-etapa">Etapa 02</div>
         <div class="sj-name">OPERATOR</div>
-        <div class="sj-desc">Potencias con IA. La oferta probada escala.</div>
+        <div class="sj-desc">Potencias con IA. La oferta probada escala con sistema.</div>
+        <div class="sj-arrow-down">▾</div>
+        <div class="sj-expand">
+          <div class="sj-pain">😤 "Ejecuto para otros y aún no logro ganar más haciéndolo por mi cuenta."</div>
+        </div>
       </div>
-      <div class="sj-arrow">→</div>
-      <div class="sj-item sj-3">
+      <div class="sj-item sj-3" onclick="toggleSjExpand(this)">
         <div class="sj-etapa">Etapa 03</div>
         <div class="sj-name">BUILDER</div>
         <div class="sj-desc">Workflows automáticos. Dejas de operar, empiezas a construir.</div>
+        <div class="sj-arrow-down">▾</div>
+        <div class="sj-expand">
+          <div class="sj-pain">💀 "Vendo a buen precio, tengo buena oferta pero hago todo manual."</div>
+        </div>
       </div>
-      <div class="sj-arrow">→</div>
-      <div class="sj-item sj-4">
+      <div class="sj-item sj-4" onclick="toggleSjExpand(this)">
         <div class="sj-etapa">Etapa 04</div>
         <div class="sj-name">FOUNDER</div>
         <div class="sj-desc">Infraestructura de agentes. El sistema trabaja sin ti.</div>
-      </div>
-    </div>
-
-    <!-- PHASE ACCORDION -->
-    <div class="splash-quiz" id="splashQuiz">
-      <button class="quiz-toggle" onclick="toggleQuiz()" id="quizToggle">
-        ▿ ¿Cómo sé si esto es para mí?
-      </button>
-      <div id="quizBody" style="display:none">
-        <div class="quiz-question">¿Dónde estás hoy? Toca tu situación.</div>
-        <div class="phase-accordion">
-          <div class="pa-item" onclick="toggleAccordion(this)">
-            <div class="pa-header">
-              <span class="pa-tag" style="color:var(--gray3)">01</span>
-              <span class="pa-name">SKILLER</span>
-              <span class="pa-arrow">▸</span>
-            </div>
-            <div class="pa-body">
-              Tengo un skill pero no sé cómo empaquetarlo, no tengo clientes fijos y cobro lo que puedo. Necesito estructura y mis primeros $1,500.
-            </div>
-          </div>
-          <div class="pa-item" onclick="toggleAccordion(this)">
-            <div class="pa-header">
-              <span class="pa-tag" style="color:#e88c30">02</span>
-              <span class="pa-name">OPERATOR</span>
-              <span class="pa-arrow">▸</span>
-            </div>
-            <div class="pa-body">
-              Estoy ejecutando para otros y aún no logro ganar más haciéndolo. Tengo clientes pero el ingreso no escala y todo depende de mi tiempo.
-            </div>
-          </div>
-          <div class="pa-item" onclick="toggleAccordion(this)">
-            <div class="pa-header">
-              <span class="pa-tag" style="color:#4488ff">03</span>
-              <span class="pa-name">BUILDER</span>
-              <span class="pa-arrow">▸</span>
-            </div>
-            <div class="pa-body">
-              Vendo a buen precio, tengo una buena oferta pero hago todo manual 💀. Necesito sistemas, automatización y dejar de ser el cuello de botella.
-            </div>
-          </div>
-          <div class="pa-item" onclick="toggleAccordion(this)">
-            <div class="pa-header">
-              <span class="pa-tag" style="color:#c8a840">04</span>
-              <span class="pa-name">FOUNDER</span>
-              <span class="pa-arrow">▸</span>
-            </div>
-            <div class="pa-body">
-              Tengo el negocio armado pero quiero que opere sin mí. Busco infraestructura de agentes, equipo y activos que generen sin mi presencia.
-            </div>
-          </div>
+        <div class="sj-arrow-down">▾</div>
+        <div class="sj-expand">
+          <div class="sj-pain">🧠 "Tengo el negocio andando pero no escala — soy yo el cuello de botella."</div>
         </div>
       </div>
     </div>
+
 
 
     <div class="splash-ctas">
@@ -2630,13 +2633,13 @@ main { padding-bottom: 120px; }
       <div class="pt-locked">●</div>
       <div class="pt-num">01</div>
       <div class="pt-name">SKILLER</div>
-      <div class="pt-days">Mes 01 · $0–$1,500</div>
+      <div class="pt-days">Mes 01 · $0–$1.5K</div>
     </div>
     <div class="pt-item" onclick="switchPhase(1)">
       <div class="pt-locked">○</div>
       <div class="pt-num">02</div>
       <div class="pt-name">OPERATOR</div>
-      <div class="pt-days">Mes 02 · $1,500–$3K</div>
+      <div class="pt-days">Mes 02 · $1.5K–$3K</div>
     </div>
     <div class="pt-item" onclick="switchPhase(2)">
       <div class="pt-locked">○</div>
@@ -3020,18 +3023,18 @@ main { padding-bottom: 120px; }
         <div class="roi-slider-label">Ticket medio por venta</div>
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-0-slider-precio"
-            min="100" max="1500" step="50"
-            value="300"
+            min="50" max="500" step="50"
+            value="150"
             oninput="roiCalc('phase-0')">
-          <div class="roi-slider-val" id="roi-phase-0-precio-val">$300</div>
+          <div class="roi-slider-val" id="roi-phase-0-precio-val">$150</div>
         </div>
       </div>
       <div class="roi-slider-group">
         <div class="roi-slider-label">Ventas en el mes</div>
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-0-slider-ventas"
-            min="1" max="15" step="1"
-            value="3"
+            min="1" max="10" step="1"
+            value="2"
             oninput="roiCalc('phase-0')">
           <div class="roi-slider-val" id="roi-phase-0-ventas-val">2</div>
         </div>
@@ -3293,7 +3296,7 @@ main { padding-bottom: 120px; }
           <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
             <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Scripts de mensajes que están funcionando ahora</li>
             <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Cómo manejar la objeción "está caro"</li>
-            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Pasar de $500 a $1,000 sin perder clientes</li>
+            <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Pasar de $300 a $600 sin perder clientes</li>
             <li style="font-size:12px;font-weight:400;color:var(--gray2);display:flex;gap:8px;line-height:1.5;"><span style="color:var(--gray5);flex-shrink:0">→</span> Automatizar el seguimiento sin perder el toque humano</li>
           </ul>
         </div>
@@ -3440,10 +3443,10 @@ main { padding-bottom: 120px; }
         <div class="roi-slider-label">Ticket medio por venta</div>
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-1-slider-precio"
-            min="200" max="1500" step="50"
-            value="500"
+            min="100" max="1000" step="50"
+            value="300"
             oninput="roiCalc('phase-1')">
-          <div class="roi-slider-val" id="roi-phase-1-precio-val">$500</div>
+          <div class="roi-slider-val" id="roi-phase-1-precio-val">$300</div>
         </div>
       </div>
       <div class="roi-slider-group">
@@ -3451,7 +3454,7 @@ main { padding-bottom: 120px; }
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-1-slider-ventas"
             min="1" max="15" step="1"
-            value="3"
+            value="2"
             oninput="roiCalc('phase-1')">
           <div class="roi-slider-val" id="roi-phase-1-ventas-val">2</div>
         </div>
@@ -3478,7 +3481,7 @@ main { padding-bottom: 120px; }
     <div class="roi-be-banner" id="roi-phase-1-be">
       Mueve los sliders para ver tu retorno real.
     </div>
-    <div class="roi-note" id="roi-phase-1-note">3 ventas de $500 = $1,500. Meta de fase: $1,500–$3K. El juego acá es volumen de outreach: 100 contactos al mes para conseguir 3–5 cierres.</div>
+    <div class="roi-note" id="roi-phase-1-note">Con 1 venta de $300 ya cubres el stack 15 veces. El juego acá es volumen de outreach: 100 contactos al mes para conseguir 2–4 cierres.</div>
   </div>
 
   <div class="sdiv"><div class="sdiv-label">Finanzas — OPERATOR</div><div class="sdiv-line"></div></div>
@@ -3487,7 +3490,7 @@ main { padding-bottom: 120px; }
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Primeros ingresos — cómo manejarlos</div>
         <div class="inner-quote">"El primer dinero del negocio no es para gastar — es para aprender."</div>
-        <div class="inner-body">Cuando entren los primeros $500–1,500, no los mezcles con tus gastos personales. Ábrelos en cuenta separada o subcuenta si tu banco lo permite. Tarea: (1) Registra cada ingreso en Notion con fuente y monto; (2) Asigna el 20% a "fondo de herramientas" (stack futuro); (3) El resto lo dejas para probar que puedes cubrir 1 gasto personal real con el negocio. Ese momento cambia tu relación con el dinero.</div>
+        <div class="inner-body">Cuando entren los primeros $200–500, no los mezcles con tus gastos personales. Ábrelos en cuenta separada o subcuenta si tu banco lo permite. Tarea: (1) Registra cada ingreso en Notion con fuente y monto; (2) Asigna el 20% a "fondo de herramientas" (stack futuro); (3) El resto lo dejas para probar que puedes cubrir 1 gasto personal real con el negocio. Ese momento cambia tu relación con el dinero.</div>
       </div>
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Deuda mala en esta fase</div>
@@ -3860,10 +3863,10 @@ main { padding-bottom: 120px; }
         <div class="roi-slider-label">Ticket medio por venta</div>
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-2-slider-precio"
-            min="500" max="5000" step="250"
-            value="1500"
+            min="500" max="3000" step="100"
+            value="1000"
             oninput="roiCalc('phase-2')">
-          <div class="roi-slider-val" id="roi-phase-2-precio-val">$1500</div>
+          <div class="roi-slider-val" id="roi-phase-2-precio-val">$1000</div>
         </div>
       </div>
       <div class="roi-slider-group">
@@ -3871,7 +3874,7 @@ main { padding-bottom: 120px; }
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-2-slider-ventas"
             min="1" max="10" step="1"
-            value="3"
+            value="2"
             oninput="roiCalc('phase-2')">
           <div class="roi-slider-val" id="roi-phase-2-ventas-val">2</div>
         </div>
@@ -3898,7 +3901,7 @@ main { padding-bottom: 120px; }
     <div class="roi-be-banner" id="roi-phase-2-be">
       Mueve los sliders para ver tu retorno real.
     </div>
-    <div class="roi-note" id="roi-phase-2-note">High-ticket desde esta fase. 3 cierres a $1,500 y llegas a $4,500. Meta: $3K–$10K. Con proceso documentado, cada venta es reproducible.</div>
+    <div class="roi-note" id="roi-phase-2-note">High-ticket desde esta fase. 2 cierres a $1K y el stack queda cubierto 41 veces. Con proceso documentado, cada venta es reproducible.</div>
   </div>
 
   <div class="sdiv"><div class="sdiv-label">Finanzas — BUILDER</div><div class="sdiv-line"></div></div>
@@ -4273,17 +4276,17 @@ main { padding-bottom: 120px; }
     </div>
     <div class="roi-header">
       <div class="roi-title">Retorno real — FOUNDER</div>
-      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + tools $48 = $165</div>
+      <div class="roi-subtitle" id="roi-phase-3-sub">GHL $97 + Claude $20 + tools $48 = $165 stack completo</div>
     </div>
     <div class="roi-sliders">
       <div class="roi-slider-group">
         <div class="roi-slider-label">Ticket medio por venta</div>
         <div class="roi-slider-row">
           <input type="range" class="roi-slider" id="roi-phase-3-slider-precio"
-            min="2000" max="10000" step="500"
-            value="3500"
+            min="1000" max="5000" step="250"
+            value="2000"
             oninput="roiCalc('phase-3')">
-          <div class="roi-slider-val" id="roi-phase-3-precio-val">$3500</div>
+          <div class="roi-slider-val" id="roi-phase-3-precio-val">$2000</div>
         </div>
       </div>
       <div class="roi-slider-group">
@@ -4318,7 +4321,7 @@ main { padding-bottom: 120px; }
     <div class="roi-be-banner" id="roi-phase-3-be">
       Mueve los sliders para ver tu retorno real.
     </div>
-    <div class="roi-note" id="roi-phase-3-note">El sistema opera solo. Vos defines estrategia, el stack ejecuta. Con 3 ventas de $3,500 = $10,500. Stack = 1.6% del ingreso. Sin techo.</div>
+    <div class="roi-note" id="roi-phase-3-note">El sistema opera solo. Vos defines estrategia, el stack ejecuta. Con 3 ventas de $2K el stack representa 2.7% del ingreso total.</div>
   </div>
 
   <div class="sdiv"><div class="sdiv-label">Finanzas — FOUNDER</div><div class="sdiv-line"></div></div>
@@ -4327,7 +4330,7 @@ main { padding-bottom: 120px; }
       <div class="inner-card build">
         <div class="inner-label build-l">▸ De ingreso a flujo libre</div>
         <div class="inner-quote">"El Player tiene libertad financiera de movimiento, no solo ingresos."</div>
-        <div class="inner-body">Con $10K+/mes el objetivo no es gastarlo — es estructurarlo. Tarea: (1) Define tu sueldo personal fijo del negocio ($2K–4K/mes según contexto); (2) Reinvierte el 30% en stack, contenido y crecimiento; (3) El 20% va a fondo de emergencia del negocio (2 meses de costos fijos cubiertos); (4) Si tienes deuda, el excedente liquida primero la de mayor tasa. La libertad real no es cuánto entra — es no depender de que entre exactamente esa cantidad para vivir.</div>
+        <div class="inner-body">Con $10K+/mes el objetivo no es gastarlo — es estructurarlo. Tarea: (1) Define tu sueldo personal fijo del negocio ($1.5K–3K/mes según contexto); (2) Reinvierte el 30% en stack, contenido y crecimiento; (3) El 20% va a fondo de emergencia del negocio (2 meses de costos fijos cubiertos); (4) Si tienes deuda, el excedente liquida primero la de mayor tasa. La libertad real no es cuánto entra — es no depender de que entre exactamente esa cantidad para vivir.</div>
       </div>
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Lifestyle inflation = trampa del éxito</div>
@@ -4342,19 +4345,19 @@ main { padding-bottom: 120px; }
     <div class="income-grid">
       <div class="inc-cell">
         <div class="inc-phase">Fase 1 · SKILLER</div>
-        <div class="inc-range metal">$0–$1,500</div>
+        <div class="inc-range metal">$0–1.5K</div>
         <div class="inc-bar" style="background:var(--gray5)"></div>
         <div class="inc-note">El objetivo no es el dinero — es el primer sí real.</div>
       </div>
       <div class="inc-cell">
         <div class="inc-phase">Fase 2 · OPERATOR</div>
-        <div class="inc-range metal">$1,500–$3K</div>
+        <div class="inc-range metal">$1.5K–3K</div>
         <div class="inc-bar" style="background:var(--metal2)"></div>
         <div class="inc-note">El precio importa menos que la validación del proceso.</div>
       </div>
       <div class="inc-cell">
-        <div class="inc-phase">Fase 3 · BUILDER</div>
-        <div class="inc-range metal">$3K–$10K</div>
+        <div class="inc-phase">Mes 3 · BUILDER</div>
+        <div class="inc-range metal">$3K–10K</div>
         <div class="inc-bar" style="background:var(--metal-grad2)"></div>
         <div class="inc-note">Primeros high tickets. Sistemas activos. Stack justificado.</div>
       </div>
@@ -4767,6 +4770,11 @@ function showToast(msg) {
 }
 
 
+// ─── Expandable Journey Cards ─────────────
+function toggleSjExpand(el) {
+  el.classList.toggle('expanded');
+}
+
 // ─── Identification Quiz ──────────────────
 function toggleQuiz() {
   const body = document.getElementById('quizBody');
@@ -4791,12 +4799,6 @@ const quizMessages = {
   }
 };
 
-function toggleAccordion(el) {
-  const wasOpen = el.classList.contains('open');
-  document.querySelectorAll('.pa-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) el.classList.add('open');
-}
-
 function selectProfile(btn, result) {
   document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
@@ -4809,20 +4811,20 @@ function selectProfile(btn, result) {
 // ─── ROI Calculator Interactivo ───────────
 const roiConfig = {
   'phase-0': {
-    min: { tools:0,   mentoria:0, precio_min:100, precio_max:1500, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:3,  sub:'Stack $0 — todo lo que ganas es ganancia neta',          nota:'Stack completamente gratis. Con 1 sola venta ya estás en positivo. Meta: $1,500.' },
-    opt: { tools:0,   mentoria:0, precio_min:100, precio_max:1500, precio_step:50,  precio_def:500, ventas_min:1, ventas_max:15, ventas_def:5,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'5 ventas a $500 = $2.500 neto. Superas la meta de fase sin inversión.' }
+    min: { tools:0,   mentoria:0, precio_min:50,  precio_max:500,  precio_step:50,  precio_def:150, ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Stack $0 — todo lo que ganas es ganancia neta',          nota:'Stack completamente gratis. Con 1 sola venta ya estás en positivo.' },
+    opt: { tools:0,   mentoria:0, precio_min:50,  precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:4,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'El límite es tu capacidad de agendar y cerrar. 4 ventas a $300 = $1.200 neto.' }
   },
   'phase-1': {
-    min: { tools:20,  mentoria:0, precio_min:200, precio_max:1500, precio_step:50,  precio_def:500, ventas_min:1, ventas_max:15, ventas_def:3,  sub:'Claude Pro $20 — ese es todo tu costo fijo',             nota:'3 ventas de $500 = $1,500. Meta de fase: $1,500–$3K. Stack cubierto 75 veces.' },
-    opt: { tools:20,  mentoria:0, precio_min:200, precio_max:3000, precio_step:100, precio_def:750, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack, precio más alto, margen del 99%',           nota:'4 ventas a $750 = $3.000 neto. Stack $20 = 0.7% del ingreso.' }
+    min: { tools:20,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude Pro $20 — ese es todo tu costo fijo',             nota:'1 venta de $300 ya cubre el stack 15 veces. 100 contactos/mes para 2–4 cierres.' },
+    opt: { tools:20,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack, precio más alto, margen del 99%',           nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $20 = 0.8% del ingreso.' }
   },
   'phase-2': {
-    min: { tools:48,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:1500,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Claude $20 + Miro $8 + GPT $20 = $48 total',            nota:'3 high-tickets de $1,500 = $4,500. Meta de fase: $3K–$10K. Stack cubierto 93 veces.' },
-    opt: { tools:48,  mentoria:0, precio_min:500, precio_max:10000,precio_step:500, precio_def:3000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1% del ingreso cuando el ticket sube',           nota:'3 × $3K = $9.000. $48 de stack. Margen 99.5%. El negocio fondea el próximo trimestre.' }
+    min: { tools:48,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude $20 + Miro $8 + GPT $20 = $48 total',            nota:'2 high-tickets = stack cubierto 41 veces. Con proceso documentado, es reproducible.' },
+    opt: { tools:48,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1% del ingreso cuando el ticket sube',           nota:'3 × $2K = $6.000. $48 de stack. Margen 99.2%. El negocio fondea el próximo trimestre.' }
   },
   'phase-3': {
-    min: { tools:165, mentoria:0, precio_min:2000,precio_max:10000,precio_step:500, precio_def:3500,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + tools $48 = $165',               nota:'3 × $3,500 = $10,500. Stack = 1.6%. El sistema opera, tú diseñas.' },
-    opt: { tools:165, mentoria:0, precio_min:2000,precio_max:20000,precio_step:1000,precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:4,  sub:'$10K+/mes · libertad real · sin techo',                  nota:'4 × $5K = $20K. Stack = 0.8%. Para esto se construyó todo.' }
+    min: { tools:165, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + tools $48 = $165',               nota:'3 × $2K = $6K. Stack = 2.7%. El sistema opera, tú diseñas.' },
+    opt: { tools:165, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 1.1%. Para esto se construyó todo.' }
   }
 };
 
