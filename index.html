@@ -63,6 +63,43 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+/* GLOBAL TEXT SIZE BOOST */
+.attr-name { font-size: 13px !important; }
+.attr-desc { font-size: 13px !important; }
+.attr-score { font-size: 28px !important; }
+.attr-delta { font-size: 11px !important; }
+.ph-phase-tag { font-size: 11px !important; }
+.ph-phase-name { font-size: clamp(36px, 5vw, 52px) !important; }
+.ph-why { font-size: 14px !important; line-height: 1.6 !important; }
+.psi-label { font-size: 10px !important; }
+.psi-val { font-size: 16px !important; }
+.sdiv-label { font-size: 12px !important; }
+.wc-name { font-size: 15px !important; }
+.wc-desc { font-size: 13px !important; }
+.wc-milestone { font-size: 12px !important; }
+.inner-title { font-size: 13px !important; }
+.inner-body { font-size: 13px !important; line-height: 1.6 !important; }
+.fail-title { font-size: 15px !important; }
+.fail-body { font-size: 13px !important; line-height: 1.5 !important; }
+.fail-tag { font-size: 10px !important; }
+.fail-type { font-size: 10px !important; }
+.dt-title { font-size: 14px !important; }
+.dt-desc { font-size: 12px !important; }
+.roi-title { font-size: 16px !important; }
+.roi-subtitle { font-size: 13px !important; }
+.roi-slider-label { font-size: 11px !important; }
+.roi-slider-val { font-size: 16px !important; }
+.roi-result-label { font-size: 10px !important; }
+.roi-result-val { font-size: 22px !important; }
+.roi-note { font-size: 12px !important; }
+.inc-label { font-size: 13px !important; }
+.inc-range { font-size: 15px !important; }
+.week-title { font-size: 14px !important; }
+.week-body { font-size: 12px !important; }
+.pt-name { font-size: 13px !important; }
+.pt-days { font-size: 10px !important; }
+.snav-btn { font-size: 10px !important; }
+
 /* Animated background aurora */
 @keyframes auroraMove {
   0% { transform: translate(0%, 0%) rotate(0deg); }
@@ -1959,6 +1996,28 @@ main { position:relative; z-index:1; }
   transition: all 0.22s;
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+  cursor: pointer;
+}
+.fail-card .fail-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  opacity: 0;
+  margin-top: 0;
+}
+.fail-card.expanded .fail-body {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 8px;
+}
+.fail-card .fail-expand-hint {
+  font-size: 9px;
+  color: var(--gray5);
+  margin-top: 6px;
+  transition: transform 0.3s;
+}
+.fail-card.expanded .fail-expand-hint {
+  transform: rotate(180deg);
 }
 .fail-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.5); }
 .fail-card:hover { background: var(--bg4); }
@@ -2408,12 +2467,13 @@ main { padding-bottom: 120px; }
 }
 .roi-slider-row {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column-reverse;
+  align-items: stretch;
+  gap: 8px;
 }
 .roi-slider {
   -webkit-appearance: none;
-  flex: 1;
+  width: 100%;
   height: 3px;
   background: var(--bg4);
   outline: none;
@@ -2434,7 +2494,8 @@ main { padding-bottom: 120px; }
   font-weight: 800;
   color: var(--metal2);
   min-width: 64px;
-  text-align: right;
+  text-align: center;
+  align-self: center;
   font-variant-numeric: tabular-nums;
 }
 
@@ -2519,6 +2580,53 @@ main { padding-bottom: 120px; }
   .roi-calc { margin: 0 16px 28px; }
   .roi-result { grid-template-columns: 1fr; }
 }
+/* ─── NIVELADOR QUIZ ─────────────────────── */
+.niv-wrap { display:none; max-width:640px; width:100%; margin:0 auto; }
+.niv-wrap.active { display:block; }
+.niv-progress { display:flex; gap:4px; margin-bottom:32px; }
+.niv-progress-dot { flex:1; height:3px; background:var(--border); transition:background 0.3s; }
+.niv-progress-dot.done { background:var(--green); }
+.niv-progress-dot.current { background:var(--metal2); }
+.niv-question { font-size:clamp(16px,3vw,20px); font-weight:700; color:var(--metal3); margin-bottom:24px; line-height:1.4; text-align:center; }
+.niv-options { display:flex; flex-direction:column; gap:10px; }
+.niv-opt { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; font-family:'Open Sans',sans-serif; font-size:14px; color:var(--gray2); cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; }
+.niv-opt:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.18); transform:translateX(4px); }
+.niv-opt .niv-opt-emoji { margin-right:10px; }
+/* RESULT OVERLAY */
+.niv-result { display:none; text-align:center; }
+.niv-result.active { display:block; }
+.niv-result-tag { font-size:9px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--gray5); margin-bottom:8px; }
+.niv-result-stage { font-size:clamp(36px,7vw,56px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
+.niv-result-range { font-size:14px; color:var(--gray4); margin-bottom:24px; font-weight:600; }
+.niv-result-box { background:var(--bg3); border:1px solid var(--border); padding:24px; text-align:left; margin-bottom:28px; }
+.niv-result-section { margin-bottom:16px; }
+.niv-result-section:last-child { margin-bottom:0; }
+.niv-result-label { font-size:8px; font-weight:800; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:8px; }
+.niv-result-label.now { color:var(--red); }
+.niv-result-label.future { color:var(--green); }
+.niv-result-label.missing { color:var(--blue); }
+.niv-result-text { font-size:14px; color:var(--gray2); line-height:1.6; }
+.niv-result-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
+.niv-result-list li { font-size:13px; color:var(--gray3); display:flex; gap:8px; }
+.niv-result-list li::before { content:'·'; color:var(--gray5); flex-shrink:0; }
+.niv-ctas { display:flex; flex-direction:column; gap:10px; max-width:400px; margin:0 auto; }
+.niv-cta { display:flex; align-items:center; justify-content:center; gap:10px; padding:16px 24px; font-family:'Open Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; }
+.niv-cta:hover { transform:translateY(-2px); }
+.niv-cta-notion { background:#1a1a22; color:#fff; border:1px solid var(--border2); }
+.niv-cta-notion:hover { border-color:var(--metal2); box-shadow:0 4px 20px rgba(255,255,255,0.08); }
+.niv-cta-calendly { background:var(--blue); color:#fff; box-shadow:0 4px 20px rgba(68,136,255,0.35); }
+.niv-cta-calendly:hover { box-shadow:0 6px 28px rgba(68,136,255,0.55); }
+.niv-cta-whatsapp { background:var(--green); color:#fff; box-shadow:0 4px 20px rgba(56,176,104,0.35); }
+.niv-cta-whatsapp:hover { box-shadow:0 6px 28px rgba(56,176,104,0.55); }
+.niv-restart { margin-top:20px; background:none; border:none; color:var(--gray5); font-size:11px; cursor:pointer; font-family:'Open Sans',sans-serif; letter-spacing:0.1em; }
+.niv-restart:hover { color:var(--gray3); }
+@media(max-width:540px) {
+  .niv-question { font-size:17px; }
+  .niv-opt { font-size:13px; padding:14px 16px; }
+  .niv-result-stage { font-size:36px; }
+  .niv-ctas { gap:8px; }
+  .niv-cta { font-size:11px; padding:14px 20px; }
+}
 </style>
 </head>
 <body>
@@ -2526,91 +2634,62 @@ main { padding-bottom: 120px; }
 <!-- ══ SPLASH SCREEN ══ -->
 <div id="splash">
   <div class="splash-inner">
-    <div class="splash-eyebrow">Private Build · Freedom Roadmap</div>
+    <div class="splash-eyebrow">Business Freedom Roadmap</div>
 
     <div class="splash-title-wrap">
       <div class="splash-title">PRIVATE<br>BUILD</div>
     </div>
 
-
-    <p class="splash-tagline">Desarrolla tus skills, sella tu identidad<br>y multiplícala con herramientas + IA para<br>construir tu negocio y libertad real.</p>
-
-    <!-- Journey preview — 4 expandable stages -->
-    <div class="splash-journey">
-      <div class="sj-item sj-1" onclick="toggleSjExpand(this)">
-        <div class="sj-etapa">Etapa 01</div>
-        <div class="sj-name">SKILLER</div>
-        <div class="sj-desc">Defines quién eres, qué vendes y a quién. Primera venta real.</div>
-        <div class="sj-arrow-down">▾</div>
-        <div class="sj-expand">
-          <div class="sj-pain">😶 "Tengo un skill pero no sé cómo empaquetarlo ni venderlo. Cobro poco o gratis."</div>
-        </div>
-      </div>
-      <div class="sj-item sj-2" onclick="toggleSjExpand(this)">
-        <div class="sj-etapa">Etapa 02</div>
-        <div class="sj-name">OPERATOR</div>
-        <div class="sj-desc">Potencias con IA. La oferta probada escala con sistema.</div>
-        <div class="sj-arrow-down">▾</div>
-        <div class="sj-expand">
-          <div class="sj-pain">😤 "Ejecuto para otros y aún no logro ganar más haciéndolo por mi cuenta."</div>
-        </div>
-      </div>
-      <div class="sj-item sj-3" onclick="toggleSjExpand(this)">
-        <div class="sj-etapa">Etapa 03</div>
-        <div class="sj-name">BUILDER</div>
-        <div class="sj-desc">Workflows automáticos. Dejas de operar, empiezas a construir.</div>
-        <div class="sj-arrow-down">▾</div>
-        <div class="sj-expand">
-          <div class="sj-pain">💀 "Vendo a buen precio, tengo buena oferta pero hago todo manual."</div>
-        </div>
-      </div>
-      <div class="sj-item sj-4" onclick="toggleSjExpand(this)">
-        <div class="sj-etapa">Etapa 04</div>
-        <div class="sj-name">FOUNDER</div>
-        <div class="sj-desc">Infraestructura de agentes. El sistema trabaja sin ti.</div>
-        <div class="sj-arrow-down">▾</div>
-        <div class="sj-expand">
-          <div class="sj-pain">🧠 "Tengo el negocio andando pero no escala — soy yo el cuello de botella."</div>
-        </div>
+    <!-- INTRO (pre-quiz) -->
+    <div id="nivIntro">
+      <p class="splash-tagline">Descubre en qué etapa estás<br>y accede a tu hoja de ruta personalizada.</p>
+      <div style="margin-top:28px;">
+        <button class="splash-btn splash-btn-primary" onclick="startNivelador()" style="font-size:12px;padding:16px 40px;">
+          <span style="font-size:16px">◉</span> &nbsp;INICIAR NIVELADOR
+        </button>
       </div>
     </div>
 
+    <!-- QUIZ QUESTIONS -->
+    <div class="niv-wrap" id="nivQuiz">
+      <div class="niv-progress" id="nivProgress"></div>
+      <div class="niv-question" id="nivQuestion"></div>
+      <div class="niv-options" id="nivOptions"></div>
+    </div>
 
+    <!-- QUIZ RESULT -->
+    <div class="niv-result" id="nivResult">
+      <div class="niv-result-tag">TU NIVEL ACTUAL</div>
+      <div class="niv-result-stage" id="nivStageName"></div>
+      <div class="niv-result-range" id="nivStageRange"></div>
+      <div class="niv-result-box">
+        <div class="niv-result-section">
+          <div class="niv-result-label now">SITUACIÓN ACTUAL</div>
+          <div class="niv-result-text" id="nivNow"></div>
+        </div>
+        <div class="niv-result-section">
+          <div class="niv-result-label future">RESULTADO DE TOMAR ACCIÓN</div>
+          <div class="niv-result-text" id="nivFuture"></div>
+        </div>
+        <div class="niv-result-section">
+          <div class="niv-result-label missing">LO QUE FALTA</div>
+          <ul class="niv-result-list" id="nivMissing"></ul>
+        </div>
+      </div>
+      <div class="niv-ctas">
+        <a class="niv-cta niv-cta-notion" id="nivCtaNotion" href="#" target="_blank">
+          📋 &nbsp;Accede a frameworks y guías gratuitas
+        </a>
+        <a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">
+          📅 &nbsp;Agendar llamada de oportunidades
+        </a>
+        <a class="niv-cta niv-cta-whatsapp" id="nivCtaWa" href="#" target="_blank">
+          💬 &nbsp;Resolver dudas por WhatsApp
+        </a>
+      </div>
+      <button class="niv-restart" onclick="restartNivelador()">↻ Volver a hacer el nivelador</button>
+    </div>
 
-    <div class="splash-ctas">
-      <button class="splash-btn splash-btn-primary" onclick="unlockApp('form')">
-        <span class="btn-emoji" style="font-size:16px">◉</span> &nbsp;COMENZAR
-      </button>
-      <a href="https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t"
-         target="_blank"
-         class="splash-btn splash-btn-secondary splash-btn-community"
-         onclick="unlockApp('community')">
-        <span class="btn-emoji">🏴‍☠️</span> &nbsp;Unirme a la comunidad
-      </a>
-    </div>
-  </div>
-
-  <div class="splash-road">
-    <div class="splash-road-item">
-      <div class="splash-road-bar"></div>
-      <div class="splash-road-num">01</div>
-      <div class="splash-road-name">SKILLER</div>
-    </div>
-    <div class="splash-road-item">
-      <div class="splash-road-bar"></div>
-      <div class="splash-road-num">02</div>
-      <div class="splash-road-name">OPERATOR</div>
-    </div>
-    <div class="splash-road-item">
-      <div class="splash-road-bar"></div>
-      <div class="splash-road-num">03</div>
-      <div class="splash-road-name">BUILDER</div>
-    </div>
-    <div class="splash-road-item">
-      <div class="splash-road-bar"></div>
-      <div class="splash-road-num">04</div>
-      <div class="splash-road-name">FOUNDER</div>
-    </div>
   </div>
 </div>
 
@@ -2819,37 +2898,37 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Fracasos del SKILLER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="fail-grid">
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Pasar 3 semanas "preparando" sin hablar con nadie</div>
         <div class="fail-body">Perfeccionas el logo, el nombre, la bio, el nicho — todo menos lo único que importa: una conversación real. El mercado no sabe que existes y tú crees que ya estás avanzando.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 80%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Oferta tan amplia que no conecta con nadie</div>
         <div class="fail-body">"Ayudo a personas a mejorar su vida y negocio." Nadie compra eso. Si tu oferta puede ser para cualquiera, no es para nadie. La especificidad es la que convierte.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 70%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Primer rechazo → colapso de identidad</div>
         <div class="fail-body">El primer NO o el primer silencio se interpreta como "esto no funciona" o "no sirvo para esto". No es data — es ego sin entregar. Un NO en el mes 1 es logro, no fracaso.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 65%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Publicar en modo aprendizaje, no en modo performance</div>
         <div class="fail-body">Publicar pensando en qué aprendes hoy — no en cuántos likes consigues — acumula velocidad. Cada post es un rep. Los reps se convierten en músculo. El músculo se convierte en resultados.</div>
         <span class="fail-tag fail-tag-boost">Multiplica velocidad x2</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Documentar todo desde el día 1</div>
         <div class="fail-body">Brain Doc activo + Notion con cada aprendizaje = sistema que crece contigo. Quien documenta en el mes 1 llega al mes 4 con un activo de conocimiento que ningún curso puede darte.</div>
         <span class="fail-tag fail-tag-boost">Activo compounding</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Usar Claude como copiloto de claridad, no como buscador</div>
         <div class="fail-body">Claude no es Google. Es un cerebro externo que procesa tu contexto y te devuelve claridad. Mantener un Brain Doc actualizado y usarlo para iterar tu oferta te hace avanzar en días lo que otros tardan semanas.</div>
@@ -3239,37 +3318,37 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Fracasos del OPERATOR</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="fail-grid">
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Cobrar $100 por algo que vale $500 para "no asustar"</div>
         <div class="fail-body">El precio bajo no genera confianza — la destruye. Un cliente que paga $100 no valora lo que recibe de la misma forma que uno que paga $500. Y tú empiezas a creer que eso es lo que vale tu trabajo. Precio bajo = señal equivocada al mercado y a tu propia mente.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 75%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Iterar la oferta sin datos — solo por intuición</div>
         <div class="fail-body">Cambias el mensaje porque "se siente mejor" sin revisar las llamadas grabadas ni los patrones de respuesta. La iteración sin data es solo movimiento, no progreso. Fathom existe para esto.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 60%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Conseguir 1 cliente y frenar el outreach</div>
         <div class="fail-body">La sensación de tener "un cliente" da falsa seguridad. El outreach se detiene. Pasan 2 semanas. El cliente termina. Quedas en cero y con el pipeline vacío. La prospección no para nunca, ni con clientes activos.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 55%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Grabar y analizar cada llamada con Fathom</div>
         <div class="fail-body">Las palabras exactas que usa el prospecto cuando describe su problema son oro. Literalmente. Esas palabras van a tu copy, a tus posts, a tu pitch. Fathom te las entrega. Los que no graban inventan su copy — los que graban lo roban del mercado.</div>
         <span class="fail-tag fail-tag-boost">Copy que convierte x4</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Tratar cada NO como brief de producto</div>
         <div class="fail-body">El prospecto que no compra te está diciendo exactamente qué falta. Si documenas los NOs con contexto (objeción + momento de la llamada + perfil), al final del mes tienes un roadmap de mejoras más valioso que cualquier curso de ventas.</div>
         <span class="fail-tag fail-tag-boost">Iteración con dirección</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Pedir testimonio estructurado después de cada cliente</div>
         <div class="fail-body">No "¿te gustó?", sino: ¿Cuál era tu situación antes? ¿Qué resultado concreto lograste? ¿A quién recomendarías esto? Ese testimonio en 3 preguntas es tu activo de ventas más poderoso del mes 3 en adelante.</div>
@@ -3659,37 +3738,37 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Fracasos del BUILDER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="fail-grid">
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Construir herramientas que nadie pidió</div>
         <div class="fail-body">Pasas 3 semanas construyendo una tool épica. La publicas. 4 personas la usan. El error: construiste lo que te pareció interesante, no lo que el mercado te pidió en las llamadas de los meses anteriores. Build from demand, not from inspiration.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 65%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Abandonar el outreach porque "el contenido debería traer leads"</div>
         <div class="fail-body">El contenido amplifica. El outreach genera. Antes de tener una audiencia de miles, el outreach directo sigue siendo tu palanca principal. El Builder que frena el outreach esperando que el algoritmo trabaje para él se queda sin pipeline.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 70%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Suscribirse a 6 tools nuevas en el mismo mes</div>
         <div class="fail-body">El Builder descubre GHL, Zapier, Framer, Make, Notion AI, y quiere integrar todo. Resultado: 3 semanas configurando herramientas, cero ingresos, máxima distracción. El stack crece uno a la vez, cuando el ingreso lo justifica.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 55%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Documentar el proceso de build como contenido</div>
         <div class="fail-body">Cada herramienta que construyes, cada sistema que armas, cada automatización que configuras — es contenido. "Construí esto en 2 horas con Claude" genera más autoridad que 10 posts teóricos. El proceso es el producto.</div>
         <span class="fail-tag fail-tag-boost">Autoridad + leads inbound</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Primer high ticket en semana 11 — no mes 4</div>
         <div class="fail-body">La mayoría pospone el high ticket para "cuando tenga más autoridad". Los que lo intentan en el mes 3 descubren que ya tienen suficiente para cerrar a $1K-$3K si tienen 2 meses de prueba social. El momento óptimo es antes de sentirte listo.</div>
         <span class="fail-tag fail-tag-boost">Ingreso x4 en el mismo tiempo</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">Claude como CTO: construir sin aprender a programar</div>
         <div class="fail-body">No necesitas saber React, Python ni APIs. Necesitas saber describir lo que quieres construir con precisión. El Builder que aprende a promtear bien construye en horas lo que antes le costaba semanas o miles de dólares en desarrollo.</div>
@@ -3944,7 +4023,7 @@ main { padding-bottom: 120px; }
       <div style="width:40px;height:3px;background:#c8a840;margin-bottom:12px;box-shadow:0 0 12px #c8a84088"></div>
       <div class="ph-phase-tag">Fase 04 · Mes 04 · El desafío real</div>
       <div class="ph-phase-name" style="background:linear-gradient(135deg,#7a6010 0%,#c8a840 40%,#f0d870 100%);-webkit-background-clip:text;background-clip:text;color:transparent">FOUNDER</div>
-      <div class="ph-why">El Player no solo juega — <strong>entiende el tablero</strong>. Tiene sistemas que generan leads, un proceso de venta que convierte y activos que trabajan mientras duerme. La diferencia entre player y builder es la consciencia: el player sabe exactamente en qué posición está y cuál es el siguiente movimiento óptimo.</div>
+      <div class="ph-why">El Founder no solo opera — <strong>entiende el tablero</strong>. Tiene sistemas que generan leads, un proceso de venta que convierte y activos que trabajan mientras duerme. La diferencia entre builder y founder es la consciencia: el founder sabe exactamente en qué posición está y cuál es el siguiente movimiento óptimo.</div>
     </div>
     <div class="ph-stats-col">
       <div class="ph-stat-item"><div class="psi-label">Ingresos</div><div class="psi-val green">$10K+</div></div>
@@ -3966,7 +4045,7 @@ main { padding-bottom: 120px; }
       </div>
       <div class="attr-cell excellent"><div class="excellent-led"></div>
         <div class="attr-top"><div class="attr-name">Consciencia Estratégica <span style="display:inline-block;margin-left:6px;font-size:7px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;padding:2px 6px;border:1px solid #c8a84040;color:#c8a840;border-radius:0;vertical-align:middle">Systems</span></div><div class="attr-score" style="background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--green)">85</div></div>
-        <div class="attr-desc">El atributo más difícil del Player — y el más raro. Ves el desafío completo: dónde estás, qué mueve el mercado, qué construir ahora para que valga en 12 meses. No es inteligencia — es experiencia destilada. La mayoría opera tácticamente toda su vida sin llegar acá.</div>
+        <div class="attr-desc">El atributo más difícil del Founder — y el más raro. Ves el desafío completo: dónde estás, qué mueve el mercado, qué construir ahora para que valga en 12 meses. No es inteligencia — es experiencia destilada. La mayoría opera tácticamente toda su vida sin llegar acá.</div>
         <div class="attr-bar-track"><div class="attr-bar-fill fill-green" style="width:0%" data-w="85%"></div></div>
         <div class="attr-delta d-ok">✦ Vista completa de tablero</div>
       </div>
@@ -4079,37 +4158,37 @@ main { padding-bottom: 120px; }
   <div class="sdiv"><div class="sdiv-label">Fracasos del FOUNDER</div><div class="sdiv-line"></div></div>
   <div class="attrs-wrap">
     <div class="fail-grid">
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Escalar sin proceso — crecer en caos</div>
-        <div class="fail-body">El player tiene más leads, más clientes, más canales — pero sin sistemas documentados, el crecimiento genera más fricción que libertad. Cada nuevo cliente es una crisis. El objetivo del mes 4 es que el negocio crezca sin que crezcas proporcionalmente tú en horas.</div>
+        <div class="fail-body">El founder tiene más leads, más clientes, más canales — pero sin sistemas documentados, el crecimiento genera más fricción que libertad. Cada nuevo cliente es una crisis. El objetivo del mes 4 es que el negocio crezca sin que crezcas proporcionalmente tú en horas.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 60%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Lanzar comunidad sin ritmo definido</div>
         <div class="fail-body">Grupo creado, 30 personas adentro, y la siguiente semana silencio. Sin un ritual de contenido semanal (pregunta, desafío, caso de éxito), la comunidad muere en 3 semanas. Una comunidad sin pulso es peor que no tenerla.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 65%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-danger">☠ Error fatal</div>
         <div class="fail-title">Hacer la retro de 4 meses y no tomar decisiones</div>
         <div class="fail-body">Calculas tus métricas, ves los patrones, identificas qué canal funcionó y qué no — y luego sigues exactamente igual. La retro sin decisiones es un ritual vacío. El valor está en los cambios que ejecutas después, no en el análisis.</div>
         <span class="fail-tag fail-tag-danger">Probabilidad: 50%</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">La comunidad como canal de ventas involuntario</div>
         <div class="fail-body">Una comunidad activa de 30 personas que ven tu proceso en tiempo real genera más confianza que cualquier landing page. Los miembros se convierten en clientes, referidos y co-creadores. El contenido de la comunidad alimenta tus canales. El leverage es exponencial.</div>
         <span class="fail-tag fail-tag-boost">Canal de ventas sin costo</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">GHL como sistema operativo del negocio</div>
-        <div class="fail-body">Cuando GHL tiene tu pipeline, tus secuencias de email, tu comunidad y tu calendario de ventas integrados — tu negocio opera mientras duermes. El player que llega al mes 4 con GHL configurado tiene un negocio. El que no, tiene un freelance con más estrés.</div>
+        <div class="fail-body">Cuando GHL tiene tu pipeline, tus secuencias de email, tu comunidad y tu calendario de ventas integrados — tu negocio opera mientras duermes. El founder que llega al mes 4 con GHL configurado tiene un negocio. El que no, tiene un freelance con más estrés.</div>
         <span class="fail-tag fail-tag-boost">Negocio que opera solo</span>
       </div>
-      <div class="fail-card">
+      <div class="fail-card" onclick="this.classList.toggle('expanded')">
         <div class="fail-type fail-type-boost">⚡ Potenciador</div>
         <div class="fail-title">La retro como mapa al mes 5-7</div>
         <div class="fail-body">Los 4 meses generaron data real: CAC, LTV, qué canal convierte, qué perfil de cliente es más rentable, qué servicio da más resultado por hora invertida. Eso es un mapa que ningún coach puede darte. Solo la ejecución real lo genera. Úsalo.</div>
@@ -4159,7 +4238,7 @@ main { padding-bottom: 120px; }
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ La trampa de esta fase</div>
         <div class="inner-quote">"Ahora que funciona, escalo todo al mismo tiempo."</div>
-        <div class="inner-body">El player exitoso quiere escalar todo a la vez: nuevo canal, nueva oferta, nueva comunidad. Eso fragmenta el foco y mata el momentum. El principio sigue igual: una cosa bien hecha vale más que diez en progreso. El player que gana escala una palanca a la vez.</div>
+        <div class="inner-body">El founder exitoso quiere escalar todo a la vez: nuevo canal, nueva oferta, nueva comunidad. Eso fragmenta el foco y mata el momentum. El principio sigue igual: una cosa bien hecha vale más que diez en progreso. El founder que gana escala una palanca a la vez.</div>
       </div>
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Lo que se construye de verdad</div>
@@ -4175,17 +4254,17 @@ main { padding-bottom: 120px; }
       <div class="inner-card build">
         <div class="inner-label build-l">▸ Notion + GHL integrados</div>
         <div class="inner-quote">"Tu OS personal y tu CRM de negocio deben hablar."</div>
-        <div class="inner-body">En esta fase necesitas dos sistemas que no se pisen: (1) Notion como cerebro estratégico — OKRs de la fase, content calendar, dashboard financiero, retrospectivas; (2) GHL como sistema operativo de negocio — pipeline, emails automáticos, comunidad, landing pages. El Player no usa hojas de cálculo para seguir ventas — tiene un sistema que lo hace solo.</div>
+        <div class="inner-body">En esta fase necesitas dos sistemas que no se pisen: (1) Notion como cerebro estratégico — OKRs de la fase, content calendar, dashboard financiero, retrospectivas; (2) GHL como sistema operativo de negocio — pipeline, emails automáticos, comunidad, landing pages. El Founder no usa hojas de cálculo para seguir ventas — tiene un sistema que lo hace solo.</div>
       </div>
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Operar sin métricas visibles</div>
         <div class="inner-quote">"Sé más o menos cuánto entró este mes."</div>
-        <div class="inner-body">El Player que no tiene sus métricas en un dashboard visible opera a ciegas. CAC sin saber, LTV adivinado, conversion rate sin medir. Eso era aceptable al inicio — es inaceptable aquí. Si no puedes decir exactamente qué canal te trae más clientes a menor costo, no sabes dónde escalar. Y sin eso, cualquier decisión de inversión es un gasto.</div>
+        <div class="inner-body">El Founder que no tiene sus métricas en un dashboard visible opera a ciegas. CAC sin saber, LTV adivinado, conversion rate sin medir. Eso era aceptable al inicio — es inaceptable aquí. Si no puedes decir exactamente qué canal te trae más clientes a menor costo, no sabes dónde escalar. Y sin eso, cualquier decisión de inversión es un gasto.</div>
       </div>
     </div>
   </div>
 
-  <div class="sdiv"><div class="sdiv-label">⚙ Stack completo — Fase Player</div><div class="sdiv-line"></div></div>
+  <div class="sdiv"><div class="sdiv-label">⚙ Stack completo — Fase Founder</div><div class="sdiv-line"></div></div>
   <div class="weeks-wrap">
     <div class="weeks-grid">
       <div class="week-card">
@@ -4329,13 +4408,13 @@ main { padding-bottom: 120px; }
     <div class="inner-grid">
       <div class="inner-card build">
         <div class="inner-label build-l">▸ De ingreso a flujo libre</div>
-        <div class="inner-quote">"El Player tiene libertad financiera de movimiento, no solo ingresos."</div>
+        <div class="inner-quote">"El Founder tiene libertad financiera de movimiento, no solo ingresos."</div>
         <div class="inner-body">Con $10K+/mes el objetivo no es gastarlo — es estructurarlo. Tarea: (1) Define tu sueldo personal fijo del negocio ($1.5K–3K/mes según contexto); (2) Reinvierte el 30% en stack, contenido y crecimiento; (3) El 20% va a fondo de emergencia del negocio (2 meses de costos fijos cubiertos); (4) Si tienes deuda, el excedente liquida primero la de mayor tasa. La libertad real no es cuánto entra — es no depender de que entre exactamente esa cantidad para vivir.</div>
       </div>
       <div class="inner-card trap">
         <div class="inner-label trap-l">▸ Lifestyle inflation = trampa del éxito</div>
         <div class="inner-quote">"Ahora que entra más, gasto más. Todos los meses."</div>
-        <div class="inner-body">El Player que escala sus gastos al ritmo de sus ingresos nunca llega a la libertad real. Sigue trabajando por necesidad, no por elección. El apalancamiento financiero real viene de ampliar la brecha entre lo que entra y lo que necesitas para vivir — no de tener un lifestyle más caro. Aumenta tu estándar de vida lento, tu fondo de libertad rápido.</div>
+        <div class="inner-body">El Founder que escala sus gastos al ritmo de sus ingresos nunca llega a la libertad real. Sigue trabajando por necesidad, no por elección. El apalancamiento financiero real viene de ampliar la brecha entre lo que entra y lo que necesitas para vivir — no de tener un lifestyle más caro. Aumenta tu estándar de vida lento, tu fondo de libertad rápido.</div>
       </div>
     </div>
   </div>
@@ -4499,6 +4578,7 @@ function unlockApp(source) {
   // Reveal app
   const app = document.getElementById('app');
   app.classList.add('visible');
+  window.scrollTo(0, 0);
 
   // Init bars
   setTimeout(() => {
@@ -4771,41 +4851,157 @@ function showToast(msg) {
 
 
 // ─── Expandable Journey Cards ─────────────
-function toggleSjExpand(el) {
-  el.classList.toggle('expanded');
-}
-
-// ─── Identification Quiz ──────────────────
-function toggleQuiz() {
-  const body = document.getElementById('quizBody');
-  const btn  = document.getElementById('quizToggle');
-  const open = body.style.display === 'none';
-  body.style.display = open ? 'block' : 'none';
-  btn.textContent = open ? '▵ ¿Cómo sé si esto es para mí?' : '▿ ¿Cómo sé si esto es para mí?';
-}
-
-const quizMessages = {
-  fit: {
-    cls: '',
-    msg: '<strong>Este mapa es para ti.</strong> Lo que describes es exactamente el arco que recorre Private Build — de tener una habilidad a construir un sistema que trabaje contigo. Empieza desde SKILLER aunque ya tengas clientes: el orden importa.'
+// ─── NIVELADOR ──────────────────────────────
+const nivQuestions = [
+  {
+    q: '¿Cuál es tu situación hoy?',
+    opts: [
+      { text: '👔 Empleado buscando independizarme', score: 1 },
+      { text: '🎯 Freelance / independiente vendiendo servicios', score: 2 },
+      { text: '📈 Emprendimiento con clientes activos', score: 3 },
+      { text: '🏢 Empresa formalizada con operación', score: 4 }
+    ]
   },
-  maybe: {
-    cls: 'warn',
-    msg: '<strong>Todavía no — pero pronto.</strong> Este desafío requiere tener algo que el mercado valore hoy. Si estás en formación, el paso previo es identificar con qué habilidad puedes cobrar en los próximos 90 días. Cuando lo tengas, vuelve.'
+  {
+    q: '¿Cuánto facturas mensualmente con tu proyecto?',
+    opts: [
+      { text: '$0 – $1,500 USD', score: 1 },
+      { text: '$1,500 – $3,000 USD', score: 2 },
+      { text: '$3,000 – $10,000 USD', score: 3 },
+      { text: '+$10,000 USD', score: 4 }
+    ]
   },
-  no: {
-    cls: 'warn',
-    msg: '<strong>Esto no es urgente para ti ahora.</strong> Private Build es para quienes quieren construir algo propio con sentido de urgencia real. Sin esa energía, el mapa no tiene tracción. Guárdalo para cuando algo cambie.'
+  {
+    q: '¿Cuánto usas IA en tu día a día?',
+    opts: [
+      { text: '🚫 Nada', score: 1 },
+      { text: '🔸 A veces', score: 2 },
+      { text: '⚡ Frecuentemente', score: 3 },
+      { text: '🤖 Para todo', score: 4 }
+    ]
+  },
+  {
+    q: '¿Cuántos clientes tienes hoy?',
+    opts: [
+      { text: '0 — Estoy empleado', score: 1 },
+      { text: '1 a 2 mensuales', score: 2 },
+      { text: '3 a 5 mensuales', score: 3 },
+      { text: '5 a 10 mensuales', score: 3.5 },
+      { text: '+10 mensuales', score: 4 }
+    ]
+  },
+  {
+    q: '¿Cuál es tu objetivo en los próximos 3 a 6 meses?',
+    opts: [
+      { text: '🚀 Independizarme y generar mi primer ingreso propio', score: 1 },
+      { text: '💰 Generar +$2,000 USD mensuales de forma consistente', score: 2 },
+      { text: '⚙️ Contratar personas y tener más tiempo libre', score: 3 },
+      { text: '🏗️ Expandirme sobre $20,000 USD mensuales', score: 4 }
+    ]
+  }
+];
+
+const nivStages = {
+  skiller: {
+    name: 'SKILLER', range: '$0 – $1,500/mes', color: 'var(--metal2)',
+    now: 'Estás empleado o recién partiendo. Sabes que tienes una habilidad que podría darte ingresos propios, pero no tienes oferta clara, no sabes cómo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
+    future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir más rápido y tienes un sistema básico que te da claridad de hacia dónde vas.',
+    missing: ['Oferta definida en 1 frase', 'Primera venta real cerrada', 'Stack mínimo ($0) activado', 'Mentalidad de cobrar por tu valor'],
+    notion: 'https://notion.so', // placeholder
+    wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero más información sobre cómo empezar.'
+  },
+  operator: {
+    name: 'OPERATOR', range: '$1,500 – $3,000/mes', color: '#e88c30',
+    now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay más pero no logras escalar.',
+    future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisación para generar ingresos.',
+    missing: ['Precio justo por tu servicio', 'IA como copiloto de ventas', 'Pipeline de leads constante', 'Proceso de venta documentado'],
+    notion: 'https://notion.so',
+    wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero más información sobre cómo escalar mis ingresos.'
+  },
+  builder: {
+    name: 'BUILDER', range: '$3,000 – $10,000/mes', color: '#3a9fff',
+    now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica más horas tuyas y no puedes crecer sin quemarte.',
+    future: 'Automatizaste tus procesos clave, documentaste tu método y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
+    missing: ['Workflows automáticos', 'Procesos documentados', 'High tickets cerrados', 'Dashboard financiero activo'],
+    notion: 'https://notion.so',
+    wa: 'Hola Patrick, vengo del nivelador. Soy BUILDER y quiero más información sobre automatización y escala.'
+  },
+  founder: {
+    name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
+    now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisión constante, no tienes sistemas autónomos y cada decisión pasa por tu cabeza. Escalar significa más estrés.',
+    future: 'Tienes infraestructura de equipo, agentes autónomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicación.',
+    missing: ['Equipo operando autónomamente', 'Sistemas y agentes autónomos', 'Empresa formalizada (SPA/LLC)', 'Activos que trabajan sin ti'],
+    notion: 'https://notion.so',
+    wa: 'Hola Patrick, vengo del nivelador. Soy FOUNDER y quiero conversar sobre mi proyecto y oportunidades.'
   }
 };
 
-function selectProfile(btn, result) {
-  document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-  const r = document.getElementById('quizResult');
-  const data = quizMessages[result];
-  r.innerHTML = data.msg;
-  r.className = 'quiz-result show ' + data.cls;
+let nivStep = 0;
+let nivScores = [];
+
+function startNivelador() {
+  nivStep = 0; nivScores = [];
+  document.getElementById('nivIntro').style.display = 'none';
+  document.getElementById('nivQuiz').classList.add('active');
+  document.getElementById('nivResult').classList.remove('active');
+  renderNivQuestion();
+}
+
+function renderNivQuestion() {
+  const q = nivQuestions[nivStep];
+  // Progress dots
+  let dots = '';
+  for (let i = 0; i < nivQuestions.length; i++) {
+    const cls = i < nivStep ? 'done' : i === nivStep ? 'current' : '';
+    dots += '<div class="niv-progress-dot ' + cls + '"></div>';
+  }
+  document.getElementById('nivProgress').innerHTML = dots;
+  document.getElementById('nivQuestion').textContent = q.q;
+  let opts = '';
+  q.opts.forEach((o, idx) => {
+    opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ')">' + o.text + '</button>';
+  });
+  document.getElementById('nivOptions').innerHTML = opts;
+}
+
+function nivAnswer(score) {
+  nivScores.push(score);
+  nivStep++;
+  if (nivStep < nivQuestions.length) {
+    renderNivQuestion();
+  } else {
+    showNivResult();
+  }
+}
+
+function showNivResult() {
+  const avg = nivScores.reduce((a, b) => a + b, 0) / nivScores.length;
+  let stageKey;
+  if (avg <= 1.6) stageKey = 'skiller';
+  else if (avg <= 2.4) stageKey = 'operator';
+  else if (avg <= 3.2) stageKey = 'builder';
+  else stageKey = 'founder';
+
+  const s = nivStages[stageKey];
+  document.getElementById('nivQuiz').classList.remove('active');
+  document.getElementById('nivResult').classList.add('active');
+  const nameEl = document.getElementById('nivStageName');
+  nameEl.textContent = s.name;
+  nameEl.style.color = s.color;
+  document.getElementById('nivStageRange').textContent = s.range;
+  document.getElementById('nivNow').textContent = s.now;
+  document.getElementById('nivFuture').textContent = s.future;
+  document.getElementById('nivMissing').innerHTML = s.missing.map(m => '<li>' + m + '</li>').join('');
+  document.getElementById('nivCtaNotion').href = s.notion;
+  const waNum = '56962420478';
+  document.getElementById('nivCtaWa').href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
+}
+
+function restartNivelador() {
+  nivStep = 0; nivScores = [];
+  document.getElementById('nivResult').classList.remove('active');
+  document.getElementById('nivQuiz').classList.add('active');
+  renderNivQuestion();
 }
 
 // ─── ROI Calculator Interactivo ───────────
