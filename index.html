@@ -2587,18 +2587,17 @@ main { padding-bottom: 120px; }
 .niv-progress-dot { flex:1; height:3px; background:var(--border); transition:background 0.3s; }
 .niv-progress-dot.done { background:var(--green); }
 .niv-progress-dot.current { background:var(--metal2); }
-.niv-question { font-size:clamp(16px,3vw,20px); font-weight:700; color:var(--metal3); margin-bottom:24px; line-height:1.4; text-align:center; }
+.niv-question { font-size:clamp(20px,4vw,28px); font-weight:700; color:var(--metal3); margin-bottom:24px; line-height:1.4; text-align:center; }
 .niv-options { display:flex; flex-direction:column; gap:10px; }
-.niv-opt { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); padding:16px 20px; font-family:'Open Sans',sans-serif; font-size:14px; color:var(--gray2); cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; }
-.niv-opt:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.18); transform:translateX(4px); }
+.niv-opt { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid transparent; padding:16px 20px; font-family:'Open Sans',sans-serif; font-size:14px; color:var(--gray2); cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; }
+.niv-opt:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.18); border-left:3px solid var(--blue); transform:translateX(4px); }
 .niv-opt .niv-opt-emoji { margin-right:10px; }
 /* RESULT OVERLAY */
 .niv-result { display:none; text-align:center; }
-.niv-result.active { display:block; }
-.niv-result-tag { font-size:9px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--gray5); margin-bottom:8px; }
-.niv-result-stage { font-size:clamp(36px,7vw,56px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
+.niv-result-tag { font-size:11px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--gray5); margin-bottom:8px; }
+.niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
 .niv-result-range { font-size:14px; color:var(--gray4); margin-bottom:24px; font-weight:600; }
-.niv-result-box { background:var(--bg3); border:1px solid var(--border); padding:24px; text-align:left; margin-bottom:28px; }
+.niv-result-box { background:var(--bg3); border:1px solid var(--border); padding:24px; text-align:left; margin-bottom:28px; box-shadow: 0 0 30px rgba(68,136,255,0.08); }
 .niv-result-section { margin-bottom:16px; }
 .niv-result-section:last-child { margin-bottom:0; }
 .niv-result-label { font-size:8px; font-weight:800; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:8px; }
@@ -2610,26 +2609,125 @@ main { padding-bottom: 120px; }
 .niv-result-list li { font-size:13px; color:var(--gray3); display:flex; gap:8px; }
 .niv-result-list li::before { content:'·'; color:var(--gray5); flex-shrink:0; }
 .niv-ctas { display:flex; flex-direction:column; gap:10px; max-width:400px; margin:0 auto; }
-.niv-cta { display:flex; align-items:center; justify-content:center; gap:10px; padding:16px 24px; font-family:'Open Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; }
+.niv-cta { display:flex; align-items:center; justify-content:center; gap:10px; padding:18px 28px; font-family:'Open Sans',sans-serif; font-size:13px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; }
 .niv-cta:hover { transform:translateY(-2px); }
 .niv-cta-notion { background:#1a1a22; color:#fff; border:1px solid var(--border2); }
 .niv-cta-notion:hover { border-color:var(--metal2); box-shadow:0 4px 20px rgba(255,255,255,0.08); }
-.niv-cta-calendly { background:var(--blue); color:#fff; box-shadow:0 4px 20px rgba(68,136,255,0.35); }
-.niv-cta-calendly:hover { box-shadow:0 6px 28px rgba(68,136,255,0.55); }
 .niv-cta-whatsapp { background:var(--green); color:#fff; box-shadow:0 4px 20px rgba(56,176,104,0.35); }
 .niv-cta-whatsapp:hover { box-shadow:0 6px 28px rgba(56,176,104,0.55); }
-.niv-restart { margin-top:20px; background:none; border:none; color:var(--gray5); font-size:11px; cursor:pointer; font-family:'Open Sans',sans-serif; letter-spacing:0.1em; }
+.niv-restart { margin-top:20px; background:none; border:none; color:var(--gray5); font-size:12px; cursor:pointer; font-family:'Open Sans',sans-serif; letter-spacing:0.1em; }
 .niv-restart:hover { color:var(--gray3); }
+/* ─── FLOATING PARTICLES ─────────────────── */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(20px) scale(0.5); opacity: 0; }
+}
+.floating-particles { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(68,136,255,0.4); border-radius:50%; animation: float-particle linear infinite; }
+.particle:nth-child(2n) { background:rgba(200,168,74,0.3); }
+.particle:nth-child(3n) { background:rgba(56,176,104,0.3); }
+/* ─── PULSE GLOW INICIAR BUTTON ──────────── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224,53,53,0.6), 0 0 20px rgba(224,53,53,0.3); }
+  50% { box-shadow: 0 0 0 12px rgba(224,53,53,0), 0 0 40px rgba(224,53,53,0.5); }
+}
+.niv-start-btn {
+  font-family:'Open Sans',sans-serif;
+  font-size:clamp(13px,2vw,15px);
+  font-weight:800;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  padding:18px 48px;
+  background:var(--red);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  animation: pulseGlow 2s ease-in-out infinite;
+  transition: all 0.2s;
+}
+.niv-start-btn:hover {
+  transform:translateY(-3px) scale(1.03);
+  box-shadow: 0 0 0 2px var(--red), 0 8px 40px rgba(224,53,53,0.6);
+}
+.niv-start-btn::before {
+  content:'';
+  position:absolute;
+  top:-50%; left:-50%; width:200%; height:200%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent 30%);
+  animation: spin 3s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+/* ─── LED RING GLOW FOR RESULT ───────────── */
+@keyframes ledRing {
+  0%, 100% { box-shadow: 0 0 20px var(--led-color, rgba(68,136,255,0.3)), inset 0 0 20px rgba(255,255,255,0.02); }
+  50% { box-shadow: 0 0 40px var(--led-color, rgba(68,136,255,0.5)), 0 0 80px var(--led-color, rgba(68,136,255,0.2)), inset 0 0 30px rgba(255,255,255,0.04); }
+}
+.niv-result.active {
+  display:block;
+  animation: fadeInUp 0.6s ease-out;
+}
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+/* ─── CALENDLY CTA PULSE ────────────────── */
+@keyframes calendlyPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(68,136,255,0.5), 0 4px 20px rgba(68,136,255,0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(68,136,255,0), 0 6px 30px rgba(68,136,255,0.55); }
+}
+.niv-cta-calendly {
+  background:var(--blue); color:#fff;
+  animation: calendlyPulse 2.5s ease-in-out infinite;
+  position:relative;
+}
+.niv-cta-calendly .urgency-badge {
+  display:block;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:0.15em;
+  color:rgba(255,255,255,0.7);
+  margin-top:4px;
+  text-transform:none;
+}
+/* ─── BACK BUTTON FOR QUIZ ──────────────── */
+.niv-back {
+  background:none; border:1px solid var(--border);
+  color:var(--gray4); font-size:11px; font-family:'Open Sans',sans-serif;
+  padding:8px 20px; cursor:pointer; margin-top:20px;
+  letter-spacing:0.1em; transition:all 0.2s;
+}
+.niv-back:hover { border-color:var(--gray3); color:var(--gray2); }
+/* ─── RESULT BOX LED RING WRAPPER ───────── */
+.niv-result-glow {
+  position:relative;
+  padding:2px;
+  background: linear-gradient(135deg, rgba(68,136,255,0.15), rgba(200,168,74,0.1), rgba(68,136,255,0.15));
+  animation: ledRing 3s ease-in-out infinite;
+  margin-bottom:28px;
+}
+.niv-result-glow .niv-result-box {
+  margin-bottom:0;
+  background:var(--bg2);
+}
+/* ─── SPLASH TAGLINE BIGGER ─────────────── */
+.splash-tagline {
+  font-size: clamp(17px, 2.8vw, 24px);
+}
 @media(max-width:540px) {
-  .niv-question { font-size:17px; }
+  .niv-question { font-size:20px; }
   .niv-opt { font-size:13px; padding:14px 16px; }
-  .niv-result-stage { font-size:36px; }
+  .niv-result-stage { font-size:44px; }
   .niv-ctas { gap:8px; }
-  .niv-cta { font-size:11px; padding:14px 20px; }
+  .niv-cta { font-size:12px; padding:16px 22px; }
 }
 </style>
 </head>
 <body>
+<div class="floating-particles" id="particles"></div>
 
 <!-- ══ SPLASH SCREEN ══ -->
 <div id="splash">
@@ -2642,11 +2740,12 @@ main { padding-bottom: 120px; }
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <p class="splash-tagline">Descubre en qué etapa estás<br>y accede a tu hoja de ruta personalizada.</p>
-      <div style="margin-top:28px;">
-        <button class="splash-btn splash-btn-primary" onclick="startNivelador()" style="font-size:12px;padding:16px 40px;">
-          <span style="font-size:16px">◉</span> &nbsp;INICIAR NIVELADOR
+      <p class="splash-tagline">Descubre en qué fase estás y accede al único<br>ecosistema por fases para construir tu proyecto apalancado de IA.</p>
+      <div style="margin-top:32px;">
+        <button class="niv-start-btn" onclick="startNivelador()">
+          ◉ &nbsp;INICIAR NIVELADOR
         </button>
+        <p style="font-size:11px;color:var(--gray5);margin-top:12px;letter-spacing:0.05em;">5 preguntas · 45 segundos · resultado inmediato</p>
       </div>
     </div>
 
@@ -2655,6 +2754,7 @@ main { padding-bottom: 120px; }
       <div class="niv-progress" id="nivProgress"></div>
       <div class="niv-question" id="nivQuestion"></div>
       <div class="niv-options" id="nivOptions"></div>
+      <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
     </div>
 
     <!-- QUIZ RESULT -->
@@ -2662,18 +2762,20 @@ main { padding-bottom: 120px; }
       <div class="niv-result-tag">TU NIVEL ACTUAL</div>
       <div class="niv-result-stage" id="nivStageName"></div>
       <div class="niv-result-range" id="nivStageRange"></div>
-      <div class="niv-result-box">
-        <div class="niv-result-section">
-          <div class="niv-result-label now">SITUACIÓN ACTUAL</div>
-          <div class="niv-result-text" id="nivNow"></div>
-        </div>
-        <div class="niv-result-section">
-          <div class="niv-result-label future">RESULTADO DE TOMAR ACCIÓN</div>
-          <div class="niv-result-text" id="nivFuture"></div>
-        </div>
-        <div class="niv-result-section">
-          <div class="niv-result-label missing">LO QUE FALTA</div>
-          <ul class="niv-result-list" id="nivMissing"></ul>
+      <div class="niv-result-glow" id="nivResultGlow">
+        <div class="niv-result-box">
+          <div class="niv-result-section">
+            <div class="niv-result-label now">SITUACIÓN ACTUAL</div>
+            <div class="niv-result-text" id="nivNow"></div>
+          </div>
+          <div class="niv-result-section">
+            <div class="niv-result-label future">RESULTADO DE TOMAR ACCIÓN</div>
+            <div class="niv-result-text" id="nivFuture"></div>
+          </div>
+          <div class="niv-result-section">
+            <div class="niv-result-label missing">LO QUE FALTA</div>
+            <ul class="niv-result-list" id="nivMissing"></ul>
+          </div>
         </div>
       </div>
       <div class="niv-ctas">
@@ -2682,6 +2784,7 @@ main { padding-bottom: 120px; }
         </a>
         <a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">
           📅 &nbsp;Agendar llamada de oportunidades
+          <span class="urgency-badge">⚡ Últimos 2 cupos esta semana</span>
         </a>
         <a class="niv-cta niv-cta-whatsapp" id="nivCtaWa" href="#" target="_blank">
           💬 &nbsp;Resolver dudas por WhatsApp
@@ -4944,6 +5047,7 @@ function startNivelador() {
   document.getElementById('nivIntro').style.display = 'none';
   document.getElementById('nivQuiz').classList.add('active');
   document.getElementById('nivResult').classList.remove('active');
+  document.getElementById('nivBack').style.display = 'none';
   renderNivQuestion();
 }
 
@@ -4962,6 +5066,7 @@ function renderNivQuestion() {
     opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ')">' + o.text + '</button>';
   });
   document.getElementById('nivOptions').innerHTML = opts;
+  document.getElementById('nivBack').style.display = nivStep > 0 ? 'inline-block' : 'none';
 }
 
 function nivAnswer(score) {
@@ -4988,6 +5093,7 @@ function showNivResult() {
   const nameEl = document.getElementById('nivStageName');
   nameEl.textContent = s.name;
   nameEl.style.color = s.color;
+  document.getElementById('nivResultGlow').style.setProperty('--led-color', s.color.startsWith('var(') ? '' : s.color + '66');
   document.getElementById('nivStageRange').textContent = s.range;
   document.getElementById('nivNow').textContent = s.now;
   document.getElementById('nivFuture').textContent = s.future;
@@ -5002,6 +5108,14 @@ function restartNivelador() {
   document.getElementById('nivResult').classList.remove('active');
   document.getElementById('nivQuiz').classList.add('active');
   renderNivQuestion();
+}
+
+function nivGoBack() {
+  if (nivStep > 0) {
+    nivStep--;
+    nivScores.pop();
+    renderNivQuestion();
+  }
 }
 
 // ─── ROI Calculator Interactivo ───────────
@@ -5098,6 +5212,22 @@ function initROI() {
   });
 }
 
+
+// ─── FLOATING PARTICLES ────────────────────
+(function() {
+  const container = document.getElementById('particles');
+  if (!container) return;
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = '-10px';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 3) + 'px';
+    container.appendChild(p);
+  }
+})();
 
 window.addEventListener('load', () => {
   // App starts locked behind splash — unlockApp() handles init
