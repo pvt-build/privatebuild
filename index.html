@@ -4907,7 +4907,7 @@ const nivStages = {
     now: 'Estás empleado o recién partiendo. Sabes que tienes una habilidad que podría darte ingresos propios, pero no tienes oferta clara, no sabes cómo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
     future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir más rápido y tienes un sistema básico que te da claridad de hacia dónde vas.',
     missing: ['Oferta definida en 1 frase', 'Primera venta real cerrada', 'Stack mínimo ($0) activado', 'Mentalidad de cobrar por tu valor'],
-    notion: 'https://notion.so', // placeholder
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero más información sobre cómo empezar.'
   },
   operator: {
@@ -4915,7 +4915,7 @@ const nivStages = {
     now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay más pero no logras escalar.',
     future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisación para generar ingresos.',
     missing: ['Precio justo por tu servicio', 'IA como copiloto de ventas', 'Pipeline de leads constante', 'Proceso de venta documentado'],
-    notion: 'https://notion.so',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero más información sobre cómo escalar mis ingresos.'
   },
   builder: {
@@ -4923,7 +4923,7 @@ const nivStages = {
     now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica más horas tuyas y no puedes crecer sin quemarte.',
     future: 'Automatizaste tus procesos clave, documentaste tu método y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
     missing: ['Workflows automáticos', 'Procesos documentados', 'High tickets cerrados', 'Dashboard financiero activo'],
-    notion: 'https://notion.so',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy BUILDER y quiero más información sobre automatización y escala.'
   },
   founder: {
@@ -4931,7 +4931,7 @@ const nivStages = {
     now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisión constante, no tienes sistemas autónomos y cada decisión pasa por tu cabeza. Escalar significa más estrés.',
     future: 'Tienes infraestructura de equipo, agentes autónomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicación.',
     missing: ['Equipo operando autónomamente', 'Sistemas y agentes autónomos', 'Empresa formalizada (SPA/LLC)', 'Activos que trabajan sin ti'],
-    notion: 'https://notion.so',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy FOUNDER y quiero conversar sobre mi proyecto y oportunidades.'
   }
 };
@@ -4993,7 +4993,7 @@ function showNivResult() {
   document.getElementById('nivFuture').textContent = s.future;
   document.getElementById('nivMissing').innerHTML = s.missing.map(m => '<li>' + m + '</li>').join('');
   document.getElementById('nivCtaNotion').href = s.notion;
-  const waNum = '56962420478';
+  const waNum = '56978048922';
   document.getElementById('nivCtaWa').href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
 }
 
