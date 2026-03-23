@@ -58,7 +58,7 @@ body {
   font-size: 13px;
   line-height: 1.5;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   cursor: default;
   -webkit-text-size-adjust: 100%;
 }
@@ -148,16 +148,17 @@ body::after {
 
 /* ─── SPLASH SCREEN ──────────────────────── */
 #splash {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+  min-height: 100vh;
+  min-height: 100dvh;
+  z-index: 1;
   background: radial-gradient(ellipse 120% 70% at 50% 30%, rgba(40,40,80,0.95) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(15,30,60,0.5) 0%, transparent 60%), #050508;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  transition: opacity 0.7s ease, visibility 0.7s ease;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
 }
 #splash::before {
   content: '';
@@ -168,17 +169,13 @@ body::after {
     radial-gradient(ellipse 50% 35% at 80% 20%, rgba(68,136,255,0.05) 0%, transparent 60%);
   pointer-events: none;
 }
-#splash.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
 .splash-inner {
   text-align: center;
-  padding: 32px 24px 28px;
-  max-width: 760px;
+  padding: 40px 24px 60px;
+  max-width: 680px;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .splash-eyebrow {
@@ -385,70 +382,6 @@ body::after {
   text-transform: uppercase; color: var(--gray5);
 }
 
-.splash-inner { position: relative; z-index: 2; }
-#app { position: relative; z-index: 1; }
-
-/* App revealed state */
-#app {
-  opacity: 0;
-  transition: opacity 0.6s ease 0.2s;
-  pointer-events: none;
-}
-#app.visible {
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* ─── COMPACT HEADER (post-splash) ──────── */
-.app-header {
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-}
-.app-header-top {
-  padding: 20px 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  border-bottom: 1px solid var(--border);
-}
-.app-logo {
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  background: var(--metal-grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.app-header-actions {
-  display: flex;
-  gap: 8px;
-}
-.app-header-btn {
-  padding: 6px 14px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  border: 1px solid var(--border2);
-  background: transparent;
-  color: var(--gray4);
-  transition: all 0.15s;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.app-header-btn:hover { border-color: var(--metal2); color: var(--metal2); }
-.app-header-btn.red { border-color: var(--red-dim); color: var(--red); }
-.app-header-btn.red:hover { box-shadow: 0 0 12px var(--red-glow); }
-.app-header-btn.green { border-color: var(--green); color: var(--green); }
 
 /* PLAYER CARD */
 .player-card {
@@ -2598,18 +2531,22 @@ main { padding-bottom: 120px; }
 .niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
 .niv-result-range { font-size:14px; color:var(--gray4); margin-bottom:24px; font-weight:600; }
 .niv-result-box { background:var(--bg3); border:1px solid var(--border); padding:24px; text-align:left; margin-bottom:28px; box-shadow: 0 0 30px rgba(68,136,255,0.08); }
-.niv-result-section { margin-bottom:16px; }
-.niv-result-section:last-child { margin-bottom:0; }
-.niv-result-label { font-size:8px; font-weight:800; letter-spacing:0.3em; text-transform:uppercase; margin-bottom:8px; }
+.niv-result-section { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.04); }
+.niv-result-section:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.niv-result-label { font-size:9px; font-weight:800; letter-spacing:0.25em; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.niv-result-label::before { content:''; width:12px; height:1px; }
 .niv-result-label.now { color:var(--red); }
+.niv-result-label.now::before { background:var(--red); }
 .niv-result-label.future { color:var(--green); }
+.niv-result-label.future::before { background:var(--green); }
 .niv-result-label.missing { color:var(--blue); }
-.niv-result-text { font-size:14px; color:var(--gray2); line-height:1.6; }
+.niv-result-label.missing::before { background:var(--blue); }
+.niv-result-text { font-size:clamp(13px,1.6vw,15px); color:var(--gray2); line-height:1.7; }
 .niv-result-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
 .niv-result-list li { font-size:13px; color:var(--gray3); display:flex; gap:8px; }
 .niv-result-list li::before { content:'·'; color:var(--gray5); flex-shrink:0; }
 .niv-ctas { display:flex; flex-direction:column; gap:10px; max-width:360px; margin:0 auto; }
-.niv-cta { display:flex; align-items:center; justify-content:center; gap:10px; padding:14px 20px; font-family:'Open Sans',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; flex-wrap:wrap; }
+.niv-cta { display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; font-family:'Open Sans',sans-serif; font-size:clamp(11px,1.8vw,13px); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; flex-wrap:wrap; width:100%; max-width:360px; margin:0 auto; border-radius:2px; }
 .niv-cta:hover { transform:translateY(-2px); }
 .niv-cta-notion { background:#1a1a22; color:#fff; border:1px solid var(--border2); }
 .niv-cta-notion:hover { border-color:var(--metal2); box-shadow:0 4px 20px rgba(255,255,255,0.08); }
@@ -2699,6 +2636,14 @@ main { padding-bottom: 120px; }
   margin-top:4px;
   text-transform:none;
 }
+@media(min-width:768px) {
+  .niv-cta-calendly { margin-top:8px; }
+}
+@keyframes founderGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,168,64,0.5), 0 4px 20px rgba(200,168,64,0.25); }
+  50% { box-shadow: 0 0 0 8px rgba(200,168,64,0), 0 6px 30px rgba(200,168,64,0.45); }
+}
+.niv-cta-founder { background:linear-gradient(135deg,#8a6e10,#c8a840,#e0c050); animation:founderGlow 2.5s ease-in-out infinite; }
 /* ─── BACK BUTTON FOR QUIZ ──────────────── */
 .niv-back {
   background:none; border:1px solid var(--border);
@@ -2710,27 +2655,50 @@ main { padding-bottom: 120px; }
 /* ─── RESULT BOX AURORA WRAPPER ────────── */
 .niv-result-glow {
   position:relative;
-  border: 1px solid rgba(68,136,255,0.1);
-  border-radius: 2px;
-  animation: auroraGlow 4s ease-in-out infinite;
-  margin-bottom:28px;
-  background: linear-gradient(135deg, rgba(68,136,255,0.03) 0%, rgba(200,168,74,0.02) 50%, rgba(56,176,104,0.02) 100%);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 4px;
+  margin-bottom:24px;
+  background: linear-gradient(160deg, rgba(20,20,30,0.95) 0%, rgba(15,15,22,0.98) 100%);
+  overflow:hidden;
+}
+.niv-result-glow::before {
+  content:'';
+  position:absolute;
+  inset:-1px;
+  border-radius:4px;
+  padding:1px;
+  background: linear-gradient(135deg, rgba(68,136,255,0.15) 0%, rgba(255,255,255,0.03) 30%, rgba(200,168,74,0.1) 60%, rgba(56,176,104,0.08) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events:none;
+  animation: borderRotate 8s linear infinite;
+}
+@keyframes borderRotate {
+  to { filter: hue-rotate(30deg); }
 }
 .niv-result-glow .niv-result-box {
   margin-bottom:0;
-  background: rgba(13,13,16,0.8);
-  backdrop-filter: blur(10px);
+  background:transparent;
+  border:none;
+  box-shadow:none;
 }
 /* ─── SPLASH TAGLINE BIGGER ─────────────── */
 .splash-tagline {
   font-size: clamp(17px, 2.8vw, 24px);
 }
 @media(max-width:540px) {
-  .niv-question { font-size:20px; }
-  .niv-opt { font-size:13px; padding:14px 16px; }
-  .niv-result-stage { font-size:44px; }
+  .splash-title { font-size: clamp(36px, 12vw, 52px); }
+  .niv-question { font-size:18px; }
+  .niv-opt { font-size:13px; padding:12px 14px; }
+  .niv-result-stage { font-size:clamp(32px,10vw,44px); }
   .niv-ctas { gap:8px; }
-  .niv-cta { font-size:12px; padding:16px 22px; }
+  .niv-cta { font-size:11px; padding:12px 16px; max-width:100%; }
+  .niv-result-text { font-size:13px; }
+  .splash-tagline { font-size:15px !important; }
+  .niv-stage-bar { max-width:100%; }
+  .niv-stage-bar-item span { font-size:7px; letter-spacing:0.1em; }
+  .splash-inner { padding:32px 16px 48px; }
 }
 /* ─── STAGE PROGRESS BAR ──────────────────── */
 .niv-stage-bar {
@@ -2758,17 +2726,19 @@ main { padding-bottom: 120px; }
   opacity:0.6;
 }
 .niv-stage-bar-color {
-  height:2px;
+  height:6px;
+  border-radius:3px;
   margin-bottom:6px;
   opacity:0.5;
   transition:opacity 0.5s;
 }
 .niv-stage-bar-item.active .niv-stage-bar-color {
   opacity:1;
+  height:8px;
   box-shadow: 0 0 12px currentColor;
 }
 .niv-stage-bar-item span {
-  font-size:8px;
+  font-size:9px;
   font-weight:700;
   letter-spacing:0.2em;
   text-transform:uppercase;
@@ -2870,7 +2840,6 @@ main { padding-bottom: 120px; }
   100%{background:rgba(2,4,12,0.92)}
 }
 .niv-levelup.active { animation: nivFlash 0.6s ease forwards; }
-body.splash-active { overflow: hidden; }
 </style>
 </head>
 <body class="splash-active">
@@ -2879,27 +2848,6 @@ body.splash-active { overflow: hidden; }
 <!-- ══ SPLASH SCREEN ══ -->
 <div id="splash">
   <div class="splash-inner">
-    <div class="splash-eyebrow">Business Freedom Roadmap</div>
-
-    <!-- STAGE BAR -->
-    <div class="niv-stage-bar" id="nivStageBar" style="display:none;">
-      <div class="niv-stage-bar-item" data-stage="skiller">
-        <div class="niv-stage-bar-color" style="background:var(--metal2)"></div>
-        <span>SKILLER</span>
-      </div>
-      <div class="niv-stage-bar-item" data-stage="operator">
-        <div class="niv-stage-bar-color" style="background:#e88c30"></div>
-        <span>OPERATOR</span>
-      </div>
-      <div class="niv-stage-bar-item" data-stage="builder">
-        <div class="niv-stage-bar-color" style="background:#3a9fff"></div>
-        <span>BUILDER</span>
-      </div>
-      <div class="niv-stage-bar-item" data-stage="founder">
-        <div class="niv-stage-bar-color" style="background:#c8a840"></div>
-        <span>FOUNDER</span>
-      </div>
-    </div>
 
     <div class="splash-title-wrap">
       <div class="splash-title">PRIVATE<br>BUILD</div>
@@ -2926,7 +2874,7 @@ body.splash-active { overflow: hidden; }
 
     <!-- QUIZ RESULT -->
     <div class="niv-result" id="nivResult">
-      <div style="font-size:8px;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--gray5);margin-bottom:20px;opacity:0.5;">PRIVATE BUILD</div>
+      <div style="font-size:7px;font-weight:700;letter-spacing:0.4em;text-transform:uppercase;color:var(--gray5);margin-bottom:12px;opacity:0.3;">PRIVATE BUILD</div>
       <div class="niv-result-tag">TU NIVEL ACTUAL</div>
       <div class="niv-result-stage" id="nivStageName"></div>
       <div class="niv-result-range" id="nivStageRange"></div>
@@ -2944,23 +2892,12 @@ body.splash-active { overflow: hidden; }
             <div class="niv-result-text" id="nivFuture"></div>
           </div>
           <div class="niv-result-section">
-            <div class="niv-result-label missing" style="color:var(--gray4);">REFLEXIÓN</div>
+            <div class="niv-result-label missing" id="nivMotivLabel" style="color:var(--blue);">TU SIGUIENTE PASO</div>
             <div class="niv-result-text" id="nivMissing" style="font-style:italic;color:var(--gray3);"></div>
           </div>
         </div>
       </div>
-      <div class="niv-ctas">
-        <a class="niv-cta niv-cta-notion" id="nivCtaNotion" href="#" target="_blank">
-          📋 &nbsp;Accede a frameworks y guías gratuitas
-        </a>
-        <a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">
-          📅 &nbsp;Agendar llamada de oportunidades
-          <span class="urgency-badge">⚡ Últimos 2 cupos esta semana</span>
-        </a>
-        <a class="niv-cta niv-cta-whatsapp" id="nivCtaWa" href="#" target="_blank">
-          💬 &nbsp;Resolver dudas por WhatsApp
-        </a>
-      </div>
+      <div class="niv-ctas" id="nivCtas"></div>
       <button class="niv-restart" onclick="restartNivelador()">↻ Volver a hacer el nivelador</button>
     </div>
 
@@ -2978,300 +2915,9 @@ body.splash-active { overflow: hidden; }
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-let currentPhase = 0;
-let levelUpPending = -1;
-let appUnlocked = false;
-const rankNames = ['SKILLER','OPERATOR','BUILDER','FOUNDER'];
-const nextNames = ['OPERATOR','BUILDER','FOUNDER','—'];
-const phaseNames = ['Fase 1 — SKILLER','Fase 2 — OPERATOR','Fase 3 — BUILDER','Fase 4 — FOUNDER'];
-const xpThresh  = [0, 250, 500, 750];
-
-function unlockApp(source) {
-  if (appUnlocked) return;
-  appUnlocked = true;
-
-  // Form removed from splash — lives in "Necesito ayuda" footer
-  // Fade out splash
-  document.getElementById('splash').classList.add('hidden');
-  // Reveal app
-  const app = document.getElementById('app');
-  app.classList.add('visible');
-  window.scrollTo(0, 0);
-
-  // Init bars
-  setTimeout(() => {
-    document.querySelectorAll('#phase-0 .attr-bar-fill').forEach(bar => {
-      const target = bar.getAttribute('data-w');
-      bar.style.width = '0%';
-      requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = target; }));
-    });
-    updateStats();
-    updateUnlocks();
-    initROI();
-  }, 300);
-}
-
-function footerNext() {
-  const next = currentPhase + 1;
-  if (next < 4) switchPhase(next);
-}
-
-function switchPhase(n) {
-  if (!appUnlocked) return;
-  // Block: fase anterior debe estar completa
-  if (n > 0) {
-    const prevAll  = document.querySelectorAll('[data-phase="'+(n-1)+'"] .deliv-item');
-    const prevDone = document.querySelectorAll('[data-phase="'+(n-1)+'"] .deliv-item.done');
-    if (prevAll.length > 0 && prevDone.length < prevAll.length) {
-      showToast('⚠ Completa todos los entregables del mes anterior primero');
-      return;
-    }
-  }
-  currentPhase = n;
-  document.querySelectorAll('.phase-section').forEach((s,i) => s.classList.toggle('active', i===n));
-  document.querySelectorAll('.pt-item').forEach((t,i) => t.classList.toggle('active', i===n));
-  document.querySelectorAll('.snav-btn').forEach((b,i) => b.classList.toggle('active', i===n));
-  const activeSection = document.getElementById('phase-'+n);
-  activeSection.querySelectorAll('.attr-bar-fill').forEach(bar => {
-    const target = bar.getAttribute('data-w');
-    bar.style.width = '0%';
-    requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.width = target; }));
-  });
-  updateStats();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function toggleDeliv(el, phase, xpVal) {
-  const item = el.closest('.deliv-item');
-  const chk  = item.querySelector('.dchk');
-  const done = !item.classList.contains('done');
-  item.classList.toggle('done', done);
-  chk.classList.toggle('checked', done);
-  chk.textContent = done ? '✓' : '';
-  if (done) showToast('+ 25 XP  ·  ' + item.querySelector('.dt-title').textContent);
-  updateStats();
-  updateUnlocks();
-  checkPhaseComplete(phase);
-}
-
-function checkPhaseComplete(phase) {
-  const phaseTasks = document.querySelectorAll('[data-phase="'+phase+'"] .deliv-item');
-  const phaseDone  = document.querySelectorAll('[data-phase="'+phase+'"] .deliv-item.done');
-  if (phaseTasks.length > 0 && phaseDone.length === phaseTasks.length) {
-    if (phase < 3) {
-      levelUpPending = phase + 1;
-      setTimeout(() => showLevelUp(phase), 600);
-    }
-  }
-}
-
-const phaseColors = {
-  0: { grad:'linear-gradient(135deg,#c0c0d8 0%,#f0f0ff 40%,#d0d0e8 100%)', glow:'rgba(192,192,220,0.5)', color:'#c8c8e8' },
-  1: { grad:'linear-gradient(135deg,#b86820 0%,#e88c30 40%,#ffb060 100%)', glow:'rgba(232,140,48,0.5)',  color:'#e88c30' },
-  2: { grad:'linear-gradient(135deg,#1a6fcc 0%,#3a9fff 40%,#88ccff 100%)', glow:'rgba(58,159,255,0.5)', color:'#3a9fff' },
-  3: { grad:'linear-gradient(135deg,#7a6010 0%,#c8a840 40%,#f0d870 100%)', glow:'rgba(200,168,64,0.5)',  color:'#c8a840' }
-};
-const phaseShareMsgs = [
-  'Completé la Fase SKILLER de Private Build 🔒 — ya tengo mi oferta definida y mis primeras conversaciones reales. https://privatebuild.app',
-  'Fase OPERATOR completada 🔒 — primeros clientes cerrados y sistema funcionando. https://privatebuild.app',
-  'Fase BUILDER en el mapa 🔒 — workflows activos, primer high ticket cerrado. https://privatebuild.app',
-  'Alcancé FOUNDER en Private Build 🔒 — infraestructura lista, libertad real. https://privatebuild.app'
-];
-
-function showLevelUp(completedPhase) {
-  const nextPhase = completedPhase + 1;
-  const overlay = document.getElementById('levelupOverlay');
-  const pc = phaseColors[completedPhase] || phaseColors[2];
-  const nextPc = phaseColors[nextPhase] || phaseColors[3];
-
-  // Apply phase color to overlay
-  overlay.style.setProperty('--lu-grad', nextPc.grad);
-  overlay.style.setProperty('--lu-glow', nextPc.glow);
-  overlay.style.setProperty('--lu-color', nextPc.color);
-  overlay.className = 'levelup-overlay active phase-' + completedPhase;
-
-  document.getElementById('levelupRank').textContent = rankNames[nextPhase] || 'FOUNDER';
-  document.getElementById('levelupSub').textContent =
-    'Fase ' + (completedPhase+1) + ' completada — has ganado el derecho a continuar. Compártelo antes de avanzar.';
-
-  // Update share message
-  const shareEl = document.getElementById('levelupShare');
-  if (shareEl) {
-    const msg = encodeURIComponent(phaseShareMsgs[completedPhase] || phaseShareMsgs[0]);
-    shareEl.href = 'https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq?mode=gi_t';
-  }
-
-  // Continue button text
-  const continueBtn = document.getElementById('levelupContinueBtn');
-  if (continueBtn && nextPhase < 4) {
-    continueBtn.textContent = 'Continuar a ' + rankNames[nextPhase] + ' →';
-  } else if (continueBtn) {
-    continueBtn.textContent = '✦ Desafío completado';
-  }
-
-  // Particle color matches phase
-  spawnParticles(pc.color);
-  overlay.classList.add('active');
-}
-
-function trackShare() {
-  // Log share event — future: send to analytics/Notion
-  console.log('Phase shared:', currentPhase);
-}
-
-function confirmLevelUp() {
-  document.getElementById('levelupOverlay').classList.remove('active');
-  if (levelUpPending >= 0) {
-    switchPhase(levelUpPending);
-    levelUpPending = -1;
-  }
-}
-
-function spawnParticles(color) {
-  const container = document.getElementById('levelupParticles');
-  container.innerHTML = '';
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
-  const c1 = color || '#4488ff';
-  const c2 = color ? color + 'aa' : '#88bbff';
-  for (let i = 0; i < 50; i++) {
-    const p = document.createElement('div');
-    p.className = 'lp';
-    const angle = (i / 50) * Math.PI * 2;
-    const dist = 100 + Math.random() * 220;
-    const dx = Math.cos(angle) * dist;
-    const dy = Math.sin(angle) * dist;
-    const dur = (0.7 + Math.random() * 0.9).toFixed(2) + 's';
-    p.style.cssText = `left:${cx}px;top:${cy}px;--dx:${dx}px;--dy:${dy}px;--dur:${dur};background:${Math.random()>0.5?c1:c2};opacity:${0.6+Math.random()*0.4};`;
-    container.appendChild(p);
-  }
-}
-
-function triggerLevelUp() {
-  const btn = document.getElementById('bbNextBtn');
-  if (!btn.classList.contains('ready')) return;
-  showLevelUp(currentPhase);
-  levelUpPending = currentPhase + 1;
-}
-
-function updateStats() {
-  const all   = document.querySelectorAll('.deliv-item');
-  const done  = document.querySelectorAll('.deliv-item.done');
-  const xp    = done.length * 25;
-  const pct   = all.length ? Math.round((done.length / all.length) * 100) : 0;
-
-  // Phase-specific progress
-  const phaseAll  = document.querySelectorAll('[data-phase="'+currentPhase+'"] .deliv-item');
-  const phaseDone = document.querySelectorAll('[data-phase="'+currentPhase+'"] .deliv-item.done');
-  const phasePct  = phaseAll.length ? Math.round((phaseDone.length / phaseAll.length) * 100) : 0;
-
-  document.getElementById('bbPhaseFill').style.width  = phasePct + '%';
-  document.getElementById('bbPhasePct').textContent   = phasePct + '%';
-  document.getElementById('bbPhaseLabel').textContent = phaseNames[currentPhase];
-  document.getElementById('bbFill').style.width       = pct + '%';
-  document.getElementById('bbOverallPct').textContent = pct + '%';
-  document.getElementById('bbXP').textContent         = xp;
-  document.getElementById('bbDone').textContent       = done.length + '/' + all.length;
-
-  // rank
-  let rank = 0;
-  for (let i = xpThresh.length - 1; i >= 0; i--) {
-    if (xp >= xpThresh[i]) { rank = i; break; }
-  }
-  const rankName = rankNames[rank];
-  document.getElementById('bbRank').textContent  = rankName;
-  const pcRank = document.getElementById('pcRank');
-  if (pcRank) pcRank.textContent = rankName;
-
-  const next = xpThresh[rank+1] || xpThresh[rank] + 60;
-  const prev = xpThresh[rank];
-  const xpPct = Math.min(100, Math.round(((xp - prev) / (next - prev)) * 100));
-  const pcXpFill = document.getElementById('pcXpFill');
-  if (pcXpFill) pcXpFill.style.width = xpPct + '%';
-  document.getElementById('pcXpCur').textContent  = xp + ' XP';
-  const pcXpNext = document.getElementById('pcXpNext');
-  if (pcXpNext) pcXpNext.textContent = '→ ' + next + ' XP';
-  const pcDone = document.getElementById('pcDone');
-  if (pcDone) pcDone.textContent = done.length;
-  const pcTotal = document.getElementById('pcTotal');
-  if (pcTotal) pcTotal.textContent = all.length;
-
-  // Next phase button (bottom bar)
-  const nextBtn = document.getElementById('bbNextBtn');
-  const phaseComplete = phaseAll.length > 0 && phaseDone.length === phaseAll.length;
-  if (currentPhase < 3) {
-    nextBtn.textContent = '→ ' + rankNames[currentPhase + 1];
-    nextBtn.classList.toggle('ready', phaseComplete);
-  } else {
-    nextBtn.textContent = '✦ COMPLETO';
-    nextBtn.classList.toggle('ready', pct === 100);
-  }
-  // Footer next button
-  const footerBtn = document.getElementById('footerNextBtn');
-  if (footerBtn) {
-    if (currentPhase < 3) {
-      footerBtn.textContent = '→ ' + rankNames[currentPhase + 1];
-      footerBtn.style.borderColor = phaseComplete ? 'var(--blue)' : 'var(--border2)';
-      footerBtn.style.color = phaseComplete ? 'var(--blue)' : 'var(--gray4)';
-    } else {
-      footerBtn.textContent = '✦ DESAFÍO COMPLETADO';
-      footerBtn.style.borderColor = '#c8a840';
-      footerBtn.style.color = '#c8a840';
-    }
-  }
-
-  // Progress bar color morphs: gray→green→blue→gold based on progress
-  const fill = document.getElementById('bbPhaseFill');
-  const overallFill = document.getElementById('bbFill');
-  const getBarColor = (p) => {
-    if (p === 0)  return 'linear-gradient(90deg,#2a2a40,#3a3a58)';
-    if (p < 20)   return 'linear-gradient(90deg,#353555,#6060a0)';
-    if (p < 40)   return 'linear-gradient(90deg,#286040,#38b068)';
-    if (p < 60)   return 'linear-gradient(90deg,#1a4a88,#3a88ff)';
-    if (p < 80)   return 'linear-gradient(90deg,#7a5010,#c8a840)';
-    if (p < 100)  return 'linear-gradient(90deg,#aa3010,#e87040)';
-    return 'linear-gradient(90deg,#2244aa,#44aaff,#44aaff,#2244aa)';
-  };
-  if (fill) { fill.style.background = getBarColor(phasePct); }
-  if (overallFill) { overallFill.style.background = getBarColor(pct); }
-
-  // snav progress
-  document.getElementById('snavFill').style.width  = pct + '%';
-  document.getElementById('snavPct').textContent   = pct + '%';
-}
-
-function updateUnlocks() {
-  const done = document.querySelectorAll('.deliv-item.done');
-  const xp = done.length * 25;
-  document.querySelectorAll('.pt-item').forEach((tab, i) => {
-    const unlocked = xp >= xpThresh[i];
-    tab.classList.toggle('unlocked', unlocked);
-    const lockEl = tab.querySelector('.pt-locked');
-    if (lockEl) lockEl.textContent = unlocked ? '●' : '○';
-  });
-  // Update bottom bar pills
-  for (let i = 0; i < 4; i++) {
-    const pill = document.getElementById('bbp' + i);
-    if (!pill) continue;
-    const unlocked = xp >= xpThresh[i];
-    pill.classList.toggle('bb-locked', !unlocked);
-    pill.classList.toggle('active', i === currentPhase);
-  }
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('show'), 2600);
-}
 
 
-// ─── Expandable Journey Cards ─────────────
 // ─── NIVELADOR ──────────────────────────────
 const nivQuestions = [
   {
@@ -3327,7 +2973,7 @@ const nivStages = {
     name: 'SKILLER', range: '$0 – $1,500/mes', color: 'var(--metal2)',
     now: 'Estás empleado o recién partiendo. Sabes que tienes una habilidad que podría darte ingresos propios, pero no tienes oferta clara, no sabes cómo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
     future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir más rápido y tienes un sistema básico que te da claridad de hacia dónde vas.',
-    missing: 'Emprender sin guía es como navegar sin mapa. Los que más rápido avanzan no son los que más saben — son los que piden ayuda antes de perderse. Tu primer paso no es perfeccionar tu habilidad, es activarla con estructura.',
+    missing: 'Private Build es el ecosistema que te da estructura, frameworks gratuitos y una comunidad que ya recorrió este camino. No necesitas saber todo — necesitas activar tu habilidad con el respaldo correcto. Accede a los recursos gratuitos y empieza hoy.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero más información sobre cómo empezar.'
   },
@@ -3335,7 +2981,7 @@ const nivStages = {
     name: 'OPERATOR', range: '$1,500 – $3,000/mes', color: '#e88c30',
     now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay más pero no logras escalar.',
     future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisación para generar ingresos.',
-    missing: 'Ya demostraste que puedes generar ingresos. Pero seguir haciéndolo todo solo tiene un techo muy claro. Los que escalan no trabajan más duro — construyen sistemas y se rodean de quienes ya lo hicieron.',
+    missing: 'Cada mes que pasa en la misma situación es un mes que no recuperas. Private Build tiene programas diseñados para operators que necesitan escalar con sistema, no con más horas. El acompañamiento es lo que marca la diferencia entre estancarse y despegar.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero más información sobre cómo escalar mis ingresos.'
   },
@@ -3343,7 +2989,7 @@ const nivStages = {
     name: 'BUILDER', range: '$3,000 – $10,000/mes', color: '#3a9fff',
     now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica más horas tuyas y no puedes crecer sin quemarte.',
     future: 'Automatizaste tus procesos clave, documentaste tu método y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
-    missing: 'Tienes el talento y los clientes. Lo que te falta no es más trabajo — es infraestructura. Los que llegan a $20K no lo hacen solos. Automatizan, delegan y piden la perspectiva que no pueden ver desde adentro.',
+    missing: 'Private Build ya tiene frameworks, automatizaciones e infraestructura validada para esta etapa. No necesitas reventar tokens ni seguir frustrándote solo. Una llamada de 30 minutos puede ahorrarte meses de prueba y error.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy BUILDER y quiero más información sobre automatización y escala.'
   },
@@ -3351,7 +2997,7 @@ const nivStages = {
     name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
     now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisión constante, no tienes sistemas autónomos y cada decisión pasa por tu cabeza. Escalar significa más estrés.',
     future: 'Tienes infraestructura de equipo, agentes autónomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicación.',
-    missing: 'Estás más cerca de lo que crees. Pero la diferencia entre facturar bien y tener libertad real es dejar de ser el centro de todo. Los founders que lo logran construyen máquinas que operan sin ellos — y eso se aprende, no se improvisa.',
+    missing: 'A este nivel, lo que necesitas no es un curso — es una conversación directa. Conectemos para explorar cómo Private Build puede complementar lo que ya construiste y llevarlo al siguiente nivel.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy FOUNDER y quiero conversar sobre mi proyecto y oportunidades.'
   }
@@ -3445,37 +3091,54 @@ function dismissNivLevelup() {
   document.getElementById('nivNow').textContent = s.now;
   document.getElementById('nivFuture').textContent = s.future;
   document.getElementById('nivMissing').textContent = s.missing;
-  document.getElementById('nivCtaNotion').href = s.notion;
+
+  // Dynamic CTAs per stage
+  const ctasEl = document.getElementById('nivCtas');
   const waNum = '56978048922';
-  document.getElementById('nivCtaWa').href = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
+  const waLink = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
+
+  if (stageKey === 'skiller') {
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Accede a frameworks gratuitos</a>' +
+      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Unirme a la comunidad WhatsApp</a>';
+  } else if (stageKey === 'operator') {
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Ver programas disponibles</a>' +
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada de diagn\u00f3stico<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>' +
+      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>';
+  } else if (stageKey === 'builder') {
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Frameworks y automatizaciones</a>' +
+      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>' +
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada estrat\u00e9gica<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>';
+  } else {
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp niv-cta-founder" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Conversemos directo por WhatsApp</a>';
+  }
 
   // Update stage bars
   updateStageBars(stageKey);
-
-  // Show stage bar in intro area too
-  document.getElementById('nivStageBar').style.display = 'flex';
 }
 
 function updateStageBars(activeStage) {
   const stages = ['skiller','operator','builder','founder'];
   const activeIdx = stages.indexOf(activeStage);
+  const stageColors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
 
-  ['nivStageBar','nivStageBar2'].forEach(barId => {
-    const bar = document.getElementById(barId);
-    if (!bar) return;
+  const bar = document.getElementById('nivStageBar2');
+  if (!bar) return;
 
-    // Clone stage bar content if empty
-    if (barId === 'nivStageBar2' && !bar.children.length) {
-      bar.innerHTML = document.getElementById('nivStageBar').innerHTML;
-    }
-    bar.style.display = 'flex';
+  // Build stage bar content if empty
+  if (!bar.children.length) {
+    bar.innerHTML = stages.map(s =>
+      '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
+      '<div class="niv-stage-bar-color" style="background:' + stageColors[s] + '"></div>' +
+      '<span>' + s.toUpperCase() + '</span></div>'
+    ).join('');
+  }
+  bar.style.display = 'flex';
 
-    const items = bar.querySelectorAll('.niv-stage-bar-item');
-    items.forEach((item, i) => {
-      item.classList.remove('active','completed');
-      if (i === activeIdx) item.classList.add('active');
-      else if (i < activeIdx) item.classList.add('completed');
-    });
+  const items = bar.querySelectorAll('.niv-stage-bar-item');
+  items.forEach((item, i) => {
+    item.classList.remove('active','completed');
+    if (i === activeIdx) item.classList.add('active');
+    else if (i < activeIdx) item.classList.add('completed');
   });
 }
 
@@ -3513,100 +3176,6 @@ function nivGoBack() {
     nivScores.pop();
     renderNivQuestion();
   }
-}
-
-// ─── ROI Calculator Interactivo ───────────
-const roiConfig = {
-  'phase-0': {
-    min: { tools:0,   mentoria:0, precio_min:50,  precio_max:500,  precio_step:50,  precio_def:150, ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Stack $0 — todo lo que ganas es ganancia neta',          nota:'Stack completamente gratis. Con 1 sola venta ya estás en positivo.' },
-    opt: { tools:0,   mentoria:0, precio_min:50,  precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:4,  sub:'Precio más alto, mismo stack $0, margen del 100%',        nota:'El límite es tu capacidad de agendar y cerrar. 4 ventas a $300 = $1.200 neto.' }
-  },
-  'phase-1': {
-    min: { tools:20,  mentoria:0, precio_min:100, precio_max:1000, precio_step:50,  precio_def:300, ventas_min:1, ventas_max:15, ventas_def:2,  sub:'Claude Pro $20 — ese es todo tu costo fijo',             nota:'1 venta de $300 ya cubre el stack 15 veces. 100 contactos/mes para 2–4 cierres.' },
-    opt: { tools:20,  mentoria:0, precio_min:100, precio_max:2000, precio_step:100, precio_def:600, ventas_min:1, ventas_max:20, ventas_def:4,  sub:'Mismo stack, precio más alto, margen del 99%',           nota:'Mentoría grupal $600 × 4 = $2.400 neto. Stack $20 = 0.8% del ingreso.' }
-  },
-  'phase-2': {
-    min: { tools:48,  mentoria:0, precio_min:500, precio_max:3000, precio_step:100, precio_def:1000,ventas_min:1, ventas_max:10, ventas_def:2,  sub:'Claude $20 + Miro $8 + GPT $20 = $48 total',            nota:'2 high-tickets = stack cubierto 41 veces. Con proceso documentado, es reproducible.' },
-    opt: { tools:48,  mentoria:0, precio_min:500, precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'Stack < 1% del ingreso cuando el ticket sube',           nota:'3 × $2K = $6.000. $48 de stack. Margen 99.2%. El negocio fondea el próximo trimestre.' }
-  },
-  'phase-3': {
-    min: { tools:165, mentoria:0, precio_min:1000,precio_max:5000, precio_step:250, precio_def:2000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'GHL $97 + Claude $20 + tools $48 = $165',               nota:'3 × $2K = $6K. Stack = 2.7%. El sistema opera, tú diseñas.' },
-    opt: { tools:165, mentoria:0, precio_min:1000,precio_max:10000,precio_step:500, precio_def:5000,ventas_min:1, ventas_max:10, ventas_def:3,  sub:'$15K/mes · 15 horas · libertad real',                   nota:'3 × $5K = $15K. Stack = 1.1%. Para esto se construyó todo.' }
-  }
-};
-
-let roiScenarios = { 'phase-0':'min','phase-1':'min','phase-2':'min','phase-3':'min' };
-
-function roiScenario(pid, scenario) {
-  roiScenarios[pid] = scenario;
-  const cfg = roiConfig[pid][scenario];
-  const tabs = document.querySelectorAll('#roi-' + pid + ' .roi-tab');
-  tabs.forEach(t => t.classList.toggle('active', t.classList.contains(scenario)));
-  // Reset sliders to scenario defaults
-  const sliderP = document.getElementById('roi-'+pid+'-slider-precio');
-  const sliderV = document.getElementById('roi-'+pid+'-slider-ventas');
-  if (sliderP) {
-    sliderP.min = cfg.precio_min; sliderP.max = cfg.precio_max;
-    sliderP.step = cfg.precio_step; sliderP.value = cfg.precio_def;
-  }
-  if (sliderV) {
-    sliderV.min = cfg.ventas_min; sliderV.max = cfg.ventas_max;
-    sliderV.value = cfg.ventas_def;
-  }
-  const sub = document.getElementById('roi-'+pid+'-sub');
-  const note = document.getElementById('roi-'+pid+'-note');
-  if (sub) sub.textContent = cfg.sub;
-  if (note) note.textContent = cfg.nota;
-  roiCalc(pid);
-}
-
-function roiCalc(pid) {
-  const cfg = roiConfig[pid][roiScenarios[pid]];
-  const sliderP = document.getElementById('roi-'+pid+'-slider-precio');
-  const sliderV = document.getElementById('roi-'+pid+'-slider-ventas');
-  if (!sliderP) return;
-  const precio = parseInt(sliderP.value);
-  const ventas = parseInt(sliderV.value);
-  const costo = cfg.tools + (cfg.mentoria || 0);
-  const ingreso = precio * ventas;
-  const ganancia = ingreso - costo;
-  const roi = costo > 0 ? (ingreso / costo).toFixed(1) + 'x' : '∞';
-  const beVentas = costo > 0 ? Math.ceil(costo / precio) : 1;
-
-  // Update display values
-  const $ = id => document.getElementById('roi-'+pid+'-'+id);
-  if ($('precio-val')) $('precio-val').textContent = '$' + precio.toLocaleString();
-  if ($('ventas-val')) $('ventas-val').textContent = ventas;
-  if ($('inversion'))  $('inversion').textContent  = '-$' + costo.toLocaleString();
-  if ($('ingreso'))    $('ingreso').textContent    = '$' + ingreso.toLocaleString();
-  if ($('ganancia'))   {
-    $('ganancia').textContent = (ganancia >= 0 ? '+' : '') + '$' + ganancia.toLocaleString();
-    $('ganancia').className = 'roi-result-val ' + (ganancia >= 0 ? 'glow-green' : 'glow-red');
-  }
-  if ($('roi'))        $('roi').textContent = roi;
-
-  // Break-even banner
-  const be = $('be');
-  if (be) {
-    if (ganancia > 0) {
-      be.innerHTML = 'Con <strong>' + beVentas + ' venta' + (beVentas > 1 ? 's' : '') + '</strong> cubres la inversión. Las demás ' + Math.max(0, ventas - beVentas) + ' son ganancia pura.';
-      be.style.background = 'rgba(56,176,104,0.06)';
-      be.style.borderTopColor = 'rgba(56,176,104,0.15)';
-    } else if (ganancia === 0) {
-      be.innerHTML = 'Exacto break-even. Una venta más y estás en positivo.';
-    } else {
-      be.innerHTML = 'Necesitas al menos <strong>' + beVentas + ' venta' + (beVentas > 1 ? 's' : '') + '</strong> para cubrir la inversión del mes.';
-      be.style.background = 'rgba(224,53,53,0.04)';
-      be.style.borderTopColor = 'rgba(224,53,53,0.15)';
-    }
-  }
-}
-
-// Initialize all ROI calculators on load
-function initROI() {
-  ['phase-0','phase-1','phase-2','phase-3'].forEach(pid => {
-    roiCalc(pid);
-  });
 }
 
 
