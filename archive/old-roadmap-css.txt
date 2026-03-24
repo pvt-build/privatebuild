@@ -1,0 +1,44 @@
+/* ═══════════════════════════════════════════════
+   OLD ROADMAP CSS — ARCHIVED FROM index.html
+   Saved on: 2026-03-23
+   These are orphaned CSS classes from the original
+   linear roadmap (#app) that was replaced by the
+   Nivelador quiz system.
+   ═══════════════════════════════════════════════ */
+
+/* GLOBAL TEXT SIZE BOOST (orphan) */
+.attr-name { font-size: 13px !important; }
+.attr-desc { font-size: 13px !important; }
+.attr-score { font-size: 28px !important; }
+.attr-delta { font-size: 11px !important; }
+.ph-phase-tag { font-size: 11px !important; }
+.ph-phase-name { font-size: clamp(36px, 5vw, 52px) !important; }
+.ph-why { font-size: 14px !important; line-height: 1.6 !important; }
+.psi-label { font-size: 10px !important; }
+.psi-val { font-size: 16px !important; }
+.sdiv-label { font-size: 12px !important; }
+.wc-name { font-size: 15px !important; }
+.wc-desc { font-size: 13px !important; }
+.wc-milestone { font-size: 12px !important; }
+.inner-title { font-size: 13px !important; }
+.inner-body { font-size: 13px !important; line-height: 1.6 !important; }
+.fail-title { font-size: 15px !important; }
+.fail-body { font-size: 13px !important; line-height: 1.5 !important; }
+.fail-tag { font-size: 10px !important; }
+.fail-type { font-size: 10px !important; }
+.dt-title { font-size: 14px !important; }
+.dt-desc { font-size: 12px !important; }
+.roi-title { font-size: 16px !important; }
+.roi-subtitle { font-size: 13px !important; }
+.roi-slider-label { font-size: 11px !important; }
+.roi-slider-val { font-size: 16px !important; }
+.roi-result-label { font-size: 10px !important; }
+.roi-result-val { font-size: 22px !important; }
+.roi-note { font-size: 12px !important; }
+.inc-label { font-size: 13px !important; }
+.inc-range { font-size: 15px !important; }
+.week-title { font-size: 14px !important; }
+.week-body { font-size: 12px !important; }
+.pt-name { font-size: 13px !important; }
+.pt-days { font-size: 10px !important; }
+.snav-btn { font-size: 10px !important; }

@@ -48,10 +48,9 @@
 body {
   background: var(--bg);
   background-image:
-    radial-gradient(ellipse 120% 60% at 50% -10%,  rgba(68,100,220,0.08) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 40% at 5% 25%,     rgba(180,40,40,0.05)  0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 95% 60%,    rgba(40,160,100,0.04) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 50% at 50% 110%,  rgba(68,100,220,0.06) 0%, transparent 50%);
+    linear-gradient(rgba(46,46,62,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,46,62,0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
   background-attachment: fixed;
   color: var(--gray2);
   font-family: 'Open Sans', sans-serif;
@@ -63,42 +62,7 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* GLOBAL TEXT SIZE BOOST */
-.attr-name { font-size: 13px !important; }
-.attr-desc { font-size: 13px !important; }
-.attr-score { font-size: 28px !important; }
-.attr-delta { font-size: 11px !important; }
-.ph-phase-tag { font-size: 11px !important; }
-.ph-phase-name { font-size: clamp(36px, 5vw, 52px) !important; }
-.ph-why { font-size: 14px !important; line-height: 1.6 !important; }
-.psi-label { font-size: 10px !important; }
-.psi-val { font-size: 16px !important; }
-.sdiv-label { font-size: 12px !important; }
-.wc-name { font-size: 15px !important; }
-.wc-desc { font-size: 13px !important; }
-.wc-milestone { font-size: 12px !important; }
-.inner-title { font-size: 13px !important; }
-.inner-body { font-size: 13px !important; line-height: 1.6 !important; }
-.fail-title { font-size: 15px !important; }
-.fail-body { font-size: 13px !important; line-height: 1.5 !important; }
-.fail-tag { font-size: 10px !important; }
-.fail-type { font-size: 10px !important; }
-.dt-title { font-size: 14px !important; }
-.dt-desc { font-size: 12px !important; }
-.roi-title { font-size: 16px !important; }
-.roi-subtitle { font-size: 13px !important; }
-.roi-slider-label { font-size: 11px !important; }
-.roi-slider-val { font-size: 16px !important; }
-.roi-result-label { font-size: 10px !important; }
-.roi-result-val { font-size: 22px !important; }
-.roi-note { font-size: 12px !important; }
-.inc-label { font-size: 13px !important; }
-.inc-range { font-size: 15px !important; }
-.week-title { font-size: 14px !important; }
-.week-body { font-size: 12px !important; }
-.pt-name { font-size: 13px !important; }
-.pt-days { font-size: 10px !important; }
-.snav-btn { font-size: 10px !important; }
+/* Old roadmap CSS archived → /archive/old-roadmap-css.txt */
 
 /* Animated background aurora */
 @keyframes auroraMove {
@@ -151,7 +115,12 @@ body::after {
   min-height: 100vh;
   min-height: 100dvh;
   z-index: 1;
-  background: radial-gradient(ellipse 120% 70% at 50% 30%, rgba(40,40,80,0.95) 0%, transparent 65%), radial-gradient(ellipse 60% 50% at 80% 20%, rgba(15,30,60,0.5) 0%, transparent 60%), #050508;
+  background:
+    linear-gradient(rgba(46,46,62,0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,46,62,0.25) 1px, transparent 1px),
+    radial-gradient(ellipse 120% 70% at 50% 30%, rgba(40,40,80,0.95) 0%, transparent 65%),
+    #050508;
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2652,38 +2621,7 @@ main { padding-bottom: 120px; }
   letter-spacing:0.1em; transition:all 0.2s;
 }
 .niv-back:hover { border-color:var(--gray3); color:var(--gray2); }
-/* ─── RESULT BOX AURORA WRAPPER ────────── */
-.niv-result-glow {
-  position:relative;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 4px;
-  margin-bottom:24px;
-  background: linear-gradient(160deg, rgba(20,20,30,0.95) 0%, rgba(15,15,22,0.98) 100%);
-  overflow:hidden;
-}
-.niv-result-glow::before {
-  content:'';
-  position:absolute;
-  inset:-1px;
-  border-radius:4px;
-  padding:1px;
-  background: linear-gradient(135deg, rgba(68,136,255,0.15) 0%, rgba(255,255,255,0.03) 30%, rgba(200,168,74,0.1) 60%, rgba(56,176,104,0.08) 100%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events:none;
-  animation: borderRotate 8s linear infinite;
-}
-@keyframes borderRotate {
-  to { filter: hue-rotate(30deg); }
-}
-.niv-result-glow .niv-result-box {
-  margin-bottom:0;
-  background:transparent;
-  border:none;
-  box-shadow:none;
-  padding:32px 36px;
-}
+/* Old .niv-result-glow removed — replaced by accordion */
 /* ─── SPLASH TAGLINE BIGGER ─────────────── */
 .splash-tagline {
   font-size: clamp(17px, 2.8vw, 24px);
@@ -2916,10 +2854,218 @@ main { padding-bottom: 120px; }
   letter-spacing:0.05em;
   animation: pulse 2s ease-in-out infinite;
 }
+/* ─── ACCORDION DIAGNOSTIC ─────────────────── */
+.niv-accordion-wrap {
+  max-width:520px;
+  margin:0 auto 24px;
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  text-align:left;
+}
+.niv-acc-block {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:border-color 0.3s;
+}
+.niv-acc-block.open {
+  border-color:var(--border2);
+}
+.niv-acc-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:16px 20px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-family:'Open Sans',sans-serif;
+  transition:background 0.2s;
+}
+.niv-acc-header:hover {
+  background:rgba(255,255,255,0.02);
+}
+.niv-acc-icon {
+  width:8px; height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.niv-acc-title {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  flex:1;
+  text-align:left;
+}
+.niv-acc-title.now { color:var(--red); }
+.niv-acc-title.now ~ .niv-acc-icon,
+.niv-acc-header:has(.niv-acc-title.now) .niv-acc-icon { background:var(--red); }
+.niv-acc-title.future { color:var(--green); }
+.niv-acc-header:has(.niv-acc-title.future) .niv-acc-icon { background:var(--green); }
+.niv-acc-title.missing { color:var(--blue); }
+.niv-acc-header:has(.niv-acc-title.missing) .niv-acc-icon { background:var(--blue); }
+.niv-acc-chevron {
+  font-size:14px;
+  color:var(--gray5);
+  transition:transform 0.3s ease;
+  flex-shrink:0;
+}
+.niv-acc-block.open .niv-acc-chevron {
+  transform:rotate(180deg);
+}
+.niv-acc-body {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s cubic-bezier(.4,0,.2,1), padding 0.3s ease;
+  padding:0 20px;
+}
+.niv-acc-block.open .niv-acc-body {
+  max-height:600px;
+  padding:0 20px 20px;
+}
+
+/* ─── DETRACTOR TAGS (red, soft glow) ──────── */
+.niv-detractor-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+.niv-dtag {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--red);
+  border:1px solid rgba(224,53,53,0.3);
+  background:rgba(224,53,53,0.08);
+  padding:5px 12px;
+  border-radius:2px;
+  animation:tagPulse 3s ease-in-out infinite;
+}
+.niv-dtag:nth-child(2) { animation-delay:0.5s; }
+.niv-dtag:nth-child(3) { animation-delay:1s; }
+.niv-dtag:nth-child(4) { animation-delay:1.5s; }
+.niv-dtag:nth-child(5) { animation-delay:2s; }
+@keyframes tagPulse {
+  0%,100% { box-shadow:0 0 0 rgba(224,53,53,0); opacity:0.7; }
+  50% { box-shadow:0 0 12px rgba(224,53,53,0.2); opacity:1; }
+}
+
+/* ─── OUTCOME TAGS (green) ─────────────────── */
+.niv-outcome-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+.niv-otag {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--green);
+  border:1px solid rgba(56,176,104,0.3);
+  background:rgba(56,176,104,0.08);
+  padding:5px 12px;
+  border-radius:2px;
+  opacity:0;
+  transform:translateY(8px);
+  transition:all 0.4s ease;
+}
+.niv-acc-block.open .niv-otag {
+  opacity:1;
+  transform:translateY(0);
+}
+.niv-otag:nth-child(2) { transition-delay:0.1s; }
+.niv-otag:nth-child(3) { transition-delay:0.2s; }
+.niv-otag:nth-child(4) { transition-delay:0.3s; }
+.niv-otag:nth-child(5) { transition-delay:0.4s; }
+
+/* ─── MINI ROADMAP (animated progress) ─────── */
+.niv-mini-roadmap {
+  margin-top:18px;
+  position:relative;
+}
+.niv-mini-track {
+  height:4px;
+  background:var(--bg4);
+  border-radius:2px;
+  position:relative;
+  overflow:hidden;
+}
+.niv-mini-progress {
+  height:100%;
+  width:0%;
+  background:var(--metal-grad);
+  border-radius:2px;
+  transition:width 1.8s cubic-bezier(.4,0,.2,1);
+}
+.niv-acc-block.open .niv-mini-progress {
+  width:100%;
+}
+.niv-mini-nodes {
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+}
+.niv-mini-node {
+  text-align:center;
+  flex:1;
+  position:relative;
+}
+.niv-mini-node::before {
+  content:'';
+  display:block;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--bg4);
+  border:2px solid var(--border);
+  margin:0 auto 6px;
+  transition:all 0.6s ease;
+}
+.niv-acc-block.open .niv-mini-node::before {
+  background:var(--green);
+  border-color:var(--green);
+  box-shadow:0 0 8px rgba(56,176,104,0.4);
+}
+.niv-mini-node:nth-child(2)::before { transition-delay:0.4s; }
+.niv-mini-node:nth-child(3)::before { transition-delay:0.8s; }
+.niv-mini-node:nth-child(4)::before { transition-delay:1.2s; }
+.niv-mini-node:nth-child(5)::before { transition-delay:1.6s; }
+.niv-mini-node-label {
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--gray5);
+  line-height:1.3;
+}
+
+/* ─── MOBILE ACCORDION ────────────────────── */
+@media(max-width:540px) {
+  .niv-acc-header { padding:14px 16px; }
+  .niv-acc-body { padding:0 16px; }
+  .niv-acc-block.open .niv-acc-body { padding:0 16px 16px; }
+  .niv-dtag, .niv-otag { font-size:9px; padding:4px 10px; }
+  .niv-mini-node-label { font-size:7px; }
+  .niv-accordion-wrap { margin:0 auto 20px; }
+  .niv-ctas { max-width:100%; }
+}
+
 /* ─── RESULT STAGE SIZE BOOST ─────────────── */
 .niv-result-stage {
   font-size:clamp(48px,10vw,80px) !important;
-  text-shadow: 0 0 60px currentColor;
+  background: var(--metal-grad) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+  background-size: 200% 100%;
+  animation: titleShimmer 5s ease-in-out infinite;
 }
 </style>
 </head>
@@ -2962,24 +3108,59 @@ main { padding-bottom: 120px; }
 
       <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:28px;"></div>
 
-      <div class="niv-result-glow" id="nivResultGlow">
-        <div class="niv-result-box">
-          <div class="niv-result-section">
-            <div class="niv-result-label now">SITUACIÓN ACTUAL</div>
+      <!-- ACCORDION DIAGNOSTIC -->
+      <div class="niv-accordion-wrap" id="nivAccordionWrap">
+
+        <!-- BLOCK 1: Situación Actual -->
+        <div class="niv-acc-block" data-acc="situacion">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title now">SITUACIÓN ACTUAL</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
             <div class="niv-result-text" id="nivNow"></div>
-          </div>
-          <div class="niv-result-section">
-            <div class="niv-result-label future">RESULTADO DE TOMAR ACCIÓN</div>
-            <div class="niv-result-text" id="nivFuture"></div>
-          </div>
-          <div class="niv-result-section">
-            <div class="niv-result-label missing" id="nivMotivLabel" style="color:var(--blue);">TU SIGUIENTE PASO</div>
-            <div class="niv-result-text" id="nivMissing" style="font-style:italic;color:var(--gray3);"></div>
+            <div class="niv-detractor-tags" id="nivDetractorTags"></div>
           </div>
         </div>
+
+        <!-- BLOCK 2: Resultado de tomar acción -->
+        <div class="niv-acc-block" data-acc="resultado">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCIÓN</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivFuture"></div>
+            <div class="niv-outcome-tags" id="nivOutcomeTags"></div>
+            <div class="niv-mini-roadmap" id="nivMiniRoadmap">
+              <div class="niv-mini-track">
+                <div class="niv-mini-progress" id="nivMiniProgress"></div>
+              </div>
+              <div class="niv-mini-nodes" id="nivMiniNodes"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BLOCK 3: Tu siguiente paso (CTAs inside) -->
+        <div class="niv-acc-block" data-acc="paso">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title missing">TU SIGUIENTE PASO</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivMissing" style="font-style:italic;color:var(--gray3);margin-bottom:20px;"></div>
+            <div class="niv-ctas" id="nivCtas"></div>
+          </div>
+        </div>
+
       </div>
+
+      <!-- COUNTDOWN -->
       <div class="niv-countdown" id="nivCountdown">
-        <div class="niv-countdown-label">◆ Esta oferta expira en</div>
+        <div class="niv-countdown-label">◆ LANZAMIENTO OFICIAL EN</div>
         <div class="niv-countdown-grid" style="grid-template-columns:1fr 1fr; max-width:240px; margin:0 auto;">
           <div class="niv-countdown-cell">
             <span class="niv-countdown-num" id="cdMins2">05</span>
@@ -2992,7 +3173,6 @@ main { padding-bottom: 120px; }
         </div>
         <div class="niv-countdown-urgency">◆ Toma acción ahora — después pierdes acceso a este precio</div>
       </div>
-      <div class="niv-ctas" id="nivCtas"></div>
       <button class="niv-restart" onclick="restartNivelador()">↻ Volver a hacer el nivelador</button>
     </div>
 
@@ -3189,6 +3369,29 @@ function showNivResult() {
   }, 2000);
 }
 
+// ─── DETRACTOR TAGS PER STAGE ────────────────
+const nivDetractors = {
+  skiller: ['Sin oferta clara','Cobras poco o gratis','Sin sistema de ventas','Dependencia del empleo','Sin estructura'],
+  operator: ['Precio bajo','Todo manual','Sin pipeline','Clientes esporádicos','Sin sistema repetible'],
+  builder: ['Cuello de botella','Sin automatización','Todo depende de ti','Entrega manual','Sin procesos'],
+  founder: ['Sin equipo autónomo','Operación centralizada','Sin agentes IA','Escalar = más estrés','Sin activos digitales']
+};
+
+// ─── OUTCOME ROADMAP NODES ───────────────────
+const nivOutcomes = ['x2 Ingresos','Herramientas nuevas','Frameworks','IA Avanzada','Oferta ajustada'];
+
+// ─── ACCORDION TOGGLE ────────────────────────
+function toggleAccordion(btn) {
+  const block = btn.closest('.niv-acc-block');
+  const wasOpen = block.classList.contains('open');
+  block.classList.toggle('open');
+  // Reset mini-roadmap progress when closing
+  if (wasOpen) {
+    const prog = block.querySelector('.niv-mini-progress');
+    if (prog) prog.style.width = '0%';
+  }
+}
+
 function dismissNivLevelup() {
   document.getElementById('nivLevelup').classList.remove('active');
   const stageKey = window._nivStageKey;
@@ -3197,24 +3400,28 @@ function dismissNivLevelup() {
   document.getElementById('nivResult').classList.add('active');
   const nameEl = document.getElementById('nivStageName');
   nameEl.textContent = s.name;
-  nameEl.style.color = s.color;
-
-  // Set glow color
-  const glowEl = document.getElementById('nivResultGlow');
-  if (s.color.startsWith('var(')) {
-    glowEl.style.borderColor = 'rgba(200,200,230,0.15)';
-    glowEl.style.boxShadow = '0 0 30px rgba(200,200,230,0.06)';
-  } else {
-    glowEl.style.borderColor = s.color + '20';
-    glowEl.style.boxShadow = '0 0 30px ' + s.color + '10';
-  }
 
   document.getElementById('nivStageRange').textContent = s.range;
   document.getElementById('nivNow').textContent = s.now;
   document.getElementById('nivFuture').textContent = s.future;
   document.getElementById('nivMissing').textContent = s.missing;
 
-  // Dynamic CTAs per stage
+  // Populate detractor tags (red, pulsing)
+  const dtagsEl = document.getElementById('nivDetractorTags');
+  const dtags = nivDetractors[stageKey] || [];
+  dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag">' + t + '</span>'; }).join('');
+
+  // Populate outcome tags (green)
+  const otagsEl = document.getElementById('nivOutcomeTags');
+  otagsEl.innerHTML = nivOutcomes.map(function(t) { return '<span class="niv-otag">' + t + '</span>'; }).join('');
+
+  // Populate mini-roadmap nodes
+  const nodesEl = document.getElementById('nivMiniNodes');
+  nodesEl.innerHTML = nivOutcomes.map(function(t) {
+    return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
+  }).join('');
+
+  // Dynamic CTAs per stage (now inside "Tu siguiente paso" accordion)
   const ctasEl = document.getElementById('nivCtas');
   const waNum = '56978048922';
   const waLink = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
@@ -3226,11 +3433,17 @@ function dismissNivLevelup() {
     ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Hablar por WhatsApp</a>' +
       '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">📅 &nbsp;Consultoría inicial<span class="urgency-badge">⚡ ÚLTIMOS 2 CUPOS</span></a>';
   } else if (stageKey === 'builder') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>' +
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada estrat\u00e9gica<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>';
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Resolver dudas por WhatsApp</a>' +
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">📅 &nbsp;Agendar llamada estratégica<span class="urgency-badge">⚡ Últimos 2 cupos esta semana</span></a>';
   } else {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp niv-cta-founder" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Conversemos directo por WhatsApp</a>';
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp niv-cta-founder" href="' + waLink + '" target="_blank">💬 &nbsp;Conversemos directo por WhatsApp</a>';
   }
+
+  // Auto-open first accordion after a beat
+  setTimeout(function() {
+    var blocks = document.querySelectorAll('.niv-acc-block');
+    if (blocks[0]) blocks[0].classList.add('open');
+  }, 600);
 
   // Start 5-min countdown
   startCountdown();

@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "privatebuild-static",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8080"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["http-server", ".", "-p", "8080", "-c-1"],
       "port": 8080
     }
   ]
