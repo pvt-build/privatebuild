@@ -2979,26 +2979,18 @@ main { padding-bottom: 120px; }
         </div>
       </div>
       <div class="niv-countdown" id="nivCountdown">
-        <div class="niv-countdown-label">◆ Precio actual disponible por</div>
-        <div class="niv-countdown-grid">
+        <div class="niv-countdown-label">◆ Esta oferta expira en</div>
+        <div class="niv-countdown-grid" style="grid-template-columns:1fr 1fr; max-width:240px; margin:0 auto;">
           <div class="niv-countdown-cell">
-            <span class="niv-countdown-num" id="cdDays">--</span>
-            <span class="niv-countdown-unit">Días</span>
-          </div>
-          <div class="niv-countdown-cell">
-            <span class="niv-countdown-num" id="cdHours">--</span>
-            <span class="niv-countdown-unit">Horas</span>
-          </div>
-          <div class="niv-countdown-cell">
-            <span class="niv-countdown-num" id="cdMins">--</span>
+            <span class="niv-countdown-num" id="cdMins2">05</span>
             <span class="niv-countdown-unit">Min</span>
           </div>
           <div class="niv-countdown-cell">
-            <span class="niv-countdown-num" id="cdSecs">--</span>
+            <span class="niv-countdown-num" id="cdSecs2">00</span>
             <span class="niv-countdown-unit">Seg</span>
           </div>
         </div>
-        <div class="niv-countdown-urgency">◆ Después de esta fecha los valores se actualizan</div>
+        <div class="niv-countdown-urgency">◆ Toma acción ahora — después pierdes acceso a este precio</div>
       </div>
       <div class="niv-ctas" id="nivCtas"></div>
       <button class="niv-restart" onclick="restartNivelador()">↻ Volver a hacer el nivelador</button>
@@ -3228,17 +3220,20 @@ function dismissNivLevelup() {
   const waLink = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
 
   if (stageKey === 'skiller') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Accede a recursos gratuitos</a>' +
-      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Unirme a la comunidad WhatsApp</a>';
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">🚀 &nbsp;ACCEDE AL DESAFÍO DE 30 DÍAS</a>' +
+      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Unirme a la comunidad WhatsApp</a>';
   } else if (stageKey === 'operator') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Hablar por WhatsApp</a>' +
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada de diagn\u00f3stico<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>';
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Hablar por WhatsApp</a>' +
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">📅 &nbsp;Consultoría inicial<span class="urgency-badge">⚡ ÚLTIMOS 2 CUPOS</span></a>';
   } else if (stageKey === 'builder') {
     ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>' +
       '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada estrat\u00e9gica<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>';
   } else {
     ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp niv-cta-founder" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Conversemos directo por WhatsApp</a>';
   }
+
+  // Start 5-min countdown
+  startCountdown();
 
   // Update stage bars
   updateStageBars(stageKey);
@@ -3307,32 +3302,29 @@ function nivGoBack() {
 }
 
 
-// ─── COUNTDOWN TO APRIL 1 ──────────────────
+// ─── 5-MINUTE COUNTDOWN (starts on result show) ──
+let cdTarget = null;
+let cdInterval = null;
+function startCountdown() {
+  cdTarget = Date.now() + (5 * 60 * 1000); // 5 minutes
+  if (cdInterval) clearInterval(cdInterval);
+  updateCountdown();
+  cdInterval = setInterval(updateCountdown, 1000);
+}
 function updateCountdown() {
-  const target = new Date('2026-04-01T00:00:00-04:00').getTime();
-  const now = Date.now();
-  const diff = target - now;
-
+  if (!cdTarget) return;
+  const diff = cdTarget - Date.now();
   if (diff <= 0) {
-    document.getElementById('cdDays').textContent = '00';
-    document.getElementById('cdHours').textContent = '00';
-    document.getElementById('cdMins').textContent = '00';
-    document.getElementById('cdSecs').textContent = '00';
+    document.getElementById('cdMins2').textContent = '00';
+    document.getElementById('cdSecs2').textContent = '00';
+    if (cdInterval) clearInterval(cdInterval);
     return;
   }
-
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-  document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
-  document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
-  document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+  const mins = Math.floor(diff / 60000);
+  const secs = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cdMins2').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cdSecs2').textContent = String(secs).padStart(2, '0');
 }
-setInterval(updateCountdown, 1000);
-updateCountdown();
 
 // ─── FLOATING PARTICLES ────────────────────
 (function() {
