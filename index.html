@@ -57,7 +57,8 @@ body {
   font-size: 13px;
   line-height: 1.5;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   cursor: default;
   -webkit-text-size-adjust: 100%;
 }
@@ -122,12 +123,14 @@ body::after {
     #050508;
   background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
 }
 #splash::before {
   content: '';
@@ -141,10 +144,11 @@ body::after {
 .splash-inner {
   text-align: center;
   padding: 40px 24px 60px;
-  max-width: 680px;
+  max-width: 720px;
   width: 100%;
   position: relative;
   z-index: 2;
+  margin: 0 auto;
 }
 
 .splash-eyebrow {
@@ -2955,54 +2959,26 @@ main { padding-bottom: 120px; }
   50% { box-shadow:0 0 12px rgba(224,53,53,0.2); opacity:1; }
 }
 
-/* ─── OUTCOME TAGS (green) ─────────────────── */
-.niv-outcome-tags {
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:14px;
-}
-.niv-otag {
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--green);
-  border:1px solid rgba(56,176,104,0.3);
-  background:rgba(56,176,104,0.08);
-  padding:5px 12px;
-  border-radius:2px;
-  opacity:0;
-  transform:translateY(8px);
-  transition:all 0.4s ease;
-}
-.niv-acc-block.open .niv-otag {
-  opacity:1;
-  transform:translateY(0);
-}
-.niv-otag:nth-child(2) { transition-delay:0.1s; }
-.niv-otag:nth-child(3) { transition-delay:0.2s; }
-.niv-otag:nth-child(4) { transition-delay:0.3s; }
-.niv-otag:nth-child(5) { transition-delay:0.4s; }
-
-/* ─── MINI ROADMAP (animated progress) ─────── */
+/* ─── MINI ROADMAP (network connection) ──────── */
 .niv-mini-roadmap {
   margin-top:18px;
   position:relative;
 }
 .niv-mini-track {
-  height:4px;
-  background:var(--bg4);
+  height:3px;
+  background:rgba(224,53,53,0.15);
   border-radius:2px;
   position:relative;
   overflow:hidden;
+  margin-top:6px;
 }
 .niv-mini-progress {
   height:100%;
   width:0%;
-  background:var(--metal-grad);
+  background:linear-gradient(90deg, var(--green), #50d080);
   border-radius:2px;
-  transition:width 1.8s cubic-bezier(.4,0,.2,1);
+  transition:width 2.2s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 0 8px rgba(56,176,104,0.3);
 }
 .niv-acc-block.open .niv-mini-progress {
   width:100%;
@@ -3020,18 +2996,19 @@ main { padding-bottom: 120px; }
 .niv-mini-node::before {
   content:'';
   display:block;
-  width:10px;
-  height:10px;
+  width:12px;
+  height:12px;
   border-radius:50%;
   background:var(--bg4);
-  border:2px solid var(--border);
+  border:2px solid var(--red-dim);
   margin:0 auto 6px;
-  transition:all 0.6s ease;
+  transition:all 0.5s ease;
+  box-shadow:0 0 0 rgba(224,53,53,0);
 }
 .niv-acc-block.open .niv-mini-node::before {
   background:var(--green);
   border-color:var(--green);
-  box-shadow:0 0 8px rgba(56,176,104,0.4);
+  box-shadow:0 0 10px rgba(56,176,104,0.5);
 }
 .niv-mini-node:nth-child(2)::before { transition-delay:0.4s; }
 .niv-mini-node:nth-child(3)::before { transition-delay:0.8s; }
@@ -3057,15 +3034,171 @@ main { padding-bottom: 120px; }
   .niv-ctas { max-width:100%; }
 }
 
-/* ─── RESULT STAGE SIZE BOOST ─────────────── */
+/* ─── RESULT STAGE — METALLIC AURORA TEXTURE ─ */
 .niv-result-stage {
   font-size:clamp(48px,10vw,80px) !important;
-  background: var(--metal-grad) !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  color: transparent !important;
-  background-size: 200% 100%;
-  animation: titleShimmer 5s ease-in-out infinite;
+  font-weight:800 !important;
+  line-height:1 !important;
+  position:relative;
+  display:inline-block;
+  background:
+    linear-gradient(135deg, #606080 0%, #9898c0 15%, #d8d8f8 30%, #f8f8ff 45%, #c0c0e0 55%, #8888b0 70%, #b0b0d0 85%, #e0e0f8 100%);
+  background-size:300% 300%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent !important;
+  animation:metalAurora 6s ease-in-out infinite;
+  filter:drop-shadow(0 0 1px rgba(200,200,240,0.3));
+}
+@keyframes metalAurora {
+  0%   { background-position: 0% 0%; }
+  25%  { background-position: 100% 50%; }
+  50%  { background-position: 50% 100%; }
+  75%  { background-position: 0% 50%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* ─── SUCCESS CASES ──────────────────────────── */
+.niv-cases {
+  max-width:520px;
+  margin:32px auto 0;
+}
+.niv-cases-title {
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gray5);
+  text-align:center;
+  margin-bottom:16px;
+}
+.niv-cases-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+}
+.niv-case {
+  background:var(--bg2);
+  padding:16px 14px;
+  position:relative;
+}
+.niv-case::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:var(--metal-grad2);
+  opacity:0.2;
+}
+.niv-case-from {
+  font-size:10px;
+  font-weight:600;
+  color:var(--gray5);
+  margin-bottom:4px;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+}
+.niv-case-to {
+  font-size:13px;
+  font-weight:700;
+  color:var(--metal3);
+  line-height:1.4;
+}
+.niv-case-tag {
+  display:inline-block;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--green);
+  border:1px solid rgba(56,176,104,0.25);
+  background:rgba(56,176,104,0.06);
+  padding:2px 8px;
+  margin-top:6px;
+  border-radius:1px;
+}
+@media(max-width:540px) {
+  .niv-cases-grid { grid-template-columns:1fr; }
+  .niv-case { padding:14px 16px; }
+}
+
+/* ─── LANZAMIENTO BADGE ──────────────────────── */
+.niv-launch-badge {
+  text-align:center;
+  margin:24px auto 0;
+  max-width:520px;
+}
+.niv-launch-inner {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 24px;
+  border:1px solid var(--border);
+  background:var(--bg2);
+}
+.niv-launch-dot {
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+.niv-launch-text {
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--gray4);
+}
+.niv-launch-text span {
+  color:var(--metal3);
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+.niv-footer {
+  max-width:520px;
+  margin:40px auto 0;
+  padding:32px 24px;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.niv-footer-logo {
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:0.4em;
+  text-transform:uppercase;
+  background:var(--metal-grad);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:16px;
+}
+.niv-footer-text {
+  font-size:13px;
+  color:var(--gray4);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.niv-footer-text strong {
+  color:var(--metal3);
+  font-weight:700;
+}
+.niv-footer-closer {
+  font-size:14px;
+  font-weight:700;
+  color:var(--gray3);
+  letter-spacing:0.02em;
+}
+
+/* ─── WHATSAPP OUTLINE VARIANT ───────────────── */
+.niv-cta-whatsapp-outline {
+  background:transparent !important;
+  color:var(--green) !important;
+  border:1px solid var(--green) !important;
+  box-shadow:none !important;
+}
+.niv-cta-whatsapp-outline:hover {
+  background:rgba(56,176,104,0.08) !important;
+  box-shadow:0 4px 20px rgba(56,176,104,0.15) !important;
 }
 </style>
 </head>
@@ -3111,11 +3244,11 @@ main { padding-bottom: 120px; }
       <!-- ACCORDION DIAGNOSTIC -->
       <div class="niv-accordion-wrap" id="nivAccordionWrap">
 
-        <!-- BLOCK 1: Situación Actual -->
+        <!-- BLOCK 1: Situación Actual (red detractor tags) -->
         <div class="niv-acc-block" data-acc="situacion">
           <button class="niv-acc-header" onclick="toggleAccordion(this)">
             <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title now">SITUACIÓN ACTUAL</span>
+            <span class="niv-acc-title now">SITUACION ACTUAL</span>
             <span class="niv-acc-chevron">▾</span>
           </button>
           <div class="niv-acc-body">
@@ -3124,16 +3257,15 @@ main { padding-bottom: 120px; }
           </div>
         </div>
 
-        <!-- BLOCK 2: Resultado de tomar acción -->
+        <!-- BLOCK 2: Resultado (network roadmap with advancing line) -->
         <div class="niv-acc-block" data-acc="resultado">
           <button class="niv-acc-header" onclick="toggleAccordion(this)">
             <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCIÓN</span>
+            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCION</span>
             <span class="niv-acc-chevron">▾</span>
           </button>
           <div class="niv-acc-body">
             <div class="niv-result-text" id="nivFuture"></div>
-            <div class="niv-outcome-tags" id="nivOutcomeTags"></div>
             <div class="niv-mini-roadmap" id="nivMiniRoadmap">
               <div class="niv-mini-track">
                 <div class="niv-mini-progress" id="nivMiniProgress"></div>
@@ -3143,7 +3275,7 @@ main { padding-bottom: 120px; }
           </div>
         </div>
 
-        <!-- BLOCK 3: Tu siguiente paso (CTAs inside) -->
+        <!-- BLOCK 3: Tu siguiente paso (CTAs inside, no italic) -->
         <div class="niv-acc-block" data-acc="paso">
           <button class="niv-acc-header" onclick="toggleAccordion(this)">
             <span class="niv-acc-icon"></span>
@@ -3151,7 +3283,7 @@ main { padding-bottom: 120px; }
             <span class="niv-acc-chevron">▾</span>
           </button>
           <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivMissing" style="font-style:italic;color:var(--gray3);margin-bottom:20px;"></div>
+            <div class="niv-result-text" id="nivMissing" style="color:var(--gray3);margin-bottom:20px;"></div>
             <div class="niv-ctas" id="nivCtas"></div>
           </div>
         </div>
@@ -3160,7 +3292,7 @@ main { padding-bottom: 120px; }
 
       <!-- COUNTDOWN -->
       <div class="niv-countdown" id="nivCountdown">
-        <div class="niv-countdown-label">◆ LANZAMIENTO OFICIAL EN</div>
+        <div class="niv-countdown-label">La consultoria inicial sin costo expira en:</div>
         <div class="niv-countdown-grid" style="grid-template-columns:1fr 1fr; max-width:240px; margin:0 auto;">
           <div class="niv-countdown-cell">
             <span class="niv-countdown-num" id="cdMins2">05</span>
@@ -3171,8 +3303,65 @@ main { padding-bottom: 120px; }
             <span class="niv-countdown-unit">Seg</span>
           </div>
         </div>
-        <div class="niv-countdown-urgency">◆ Toma acción ahora — después pierdes acceso a este precio</div>
+        <div class="niv-countdown-urgency">Toma accion ahora — despues pierdes acceso</div>
       </div>
+
+      <!-- SUCCESS CASES -->
+      <div class="niv-cases">
+        <div class="niv-cases-title">CASOS DE EXITO</div>
+        <div class="niv-cases-grid">
+          <div class="niv-case">
+            <div class="niv-case-from">Medicina estetica</div>
+            <div class="niv-case-to">De $2K/mes a $10K/mes</div>
+            <span class="niv-case-tag">x5 ingresos</span>
+          </div>
+          <div class="niv-case">
+            <div class="niv-case-from">Social Media</div>
+            <div class="niv-case-to">De $0 a $1.500/mes</div>
+            <span class="niv-case-tag">Primer ingreso</span>
+          </div>
+          <div class="niv-case">
+            <div class="niv-case-from">Coaching / Sesiones</div>
+            <div class="niv-case-to">De $30 USD/sesion a programa de $600 USD</div>
+            <span class="niv-case-tag">x20 ticket</span>
+          </div>
+          <div class="niv-case">
+            <div class="niv-case-from">Rubro legal</div>
+            <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
+            <span class="niv-case-tag">Independencia</span>
+          </div>
+          <div class="niv-case">
+            <div class="niv-case-from">Eventos</div>
+            <div class="niv-case-to">De $50 por evento a $250 con agenda llena</div>
+            <span class="niv-case-tag">x5 + demanda</span>
+          </div>
+          <div class="niv-case">
+            <div class="niv-case-from">Freelance creativo</div>
+            <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
+            <span class="niv-case-tag">Modelo escalable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LANZAMIENTO OFICIAL -->
+      <div class="niv-launch-badge">
+        <div class="niv-launch-inner">
+          <span class="niv-launch-dot"></span>
+          <span class="niv-launch-text">LANZAMIENTO OFICIAL — <span>PROXIMAMENTE</span></span>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="niv-footer">
+        <div class="niv-footer-logo">PRIVATE BUILD</div>
+        <div class="niv-footer-text">
+          Cada etapa tiene <strong>procesos identicos</strong>, con distintos niveles de apalancamiento.
+          Hoy la <strong>IA es el multiplicador</strong> para construir tu propia libertad.
+          No importa si eres Skiller, Operator, Builder o Founder — el sistema se adapta a tu fase.
+        </div>
+        <div class="niv-footer-closer">O quieres seguir donde estas?</div>
+      </div>
+
       <button class="niv-restart" onclick="restartNivelador()">↻ Volver a hacer el nivelador</button>
     </div>
 
@@ -3369,16 +3558,21 @@ function showNivResult() {
   }, 2000);
 }
 
-// ─── DETRACTOR TAGS PER STAGE ────────────────
+// ─── DETRACTOR TAGS PER STAGE (no repiten la descripción) ─
 const nivDetractors = {
-  skiller: ['Sin oferta clara','Cobras poco o gratis','Sin sistema de ventas','Dependencia del empleo','Sin estructura'],
-  operator: ['Precio bajo','Todo manual','Sin pipeline','Clientes esporádicos','Sin sistema repetible'],
-  builder: ['Cuello de botella','Sin automatización','Todo depende de ti','Entrega manual','Sin procesos'],
-  founder: ['Sin equipo autónomo','Operación centralizada','Sin agentes IA','Escalar = más estrés','Sin activos digitales']
+  skiller: ['Miedo a dar el salto','Zona de confort','Sin red de apoyo','Parálisis por análisis','Ingresos estancados'],
+  operator: ['Burnout constante','Techo de ingresos','Sin delegación','Prospección fría','Cero automatización'],
+  builder: ['Operas solo','Sin documentación','Crecimiento lineal','Tiempo = dinero','Sin leverage'],
+  founder: ['Micro-management','Sin infraestructura digital','Decisiones reactivas','Equipo dependiente','Sin activos pasivos']
 };
 
-// ─── OUTCOME ROADMAP NODES ───────────────────
-const nivOutcomes = ['x2 Ingresos','Herramientas nuevas','Frameworks','IA Avanzada','Oferta ajustada'];
+// ─── ROADMAP NODES PER STAGE (orden lógico, sin repetir desc) ─
+const nivRoadmapNodes = {
+  skiller: ['Definir oferta','Primer cliente','Sistema basico','IA aplicada','Ingreso recurrente'],
+  operator: ['Pipeline activo','Subir precio','Automatizar entrega','IA como copiloto','Escala repetible'],
+  builder: ['Documentar metodo','Workflows IA','Delegar procesos','Clientes premium','$10K+ mensuales'],
+  founder: ['Agentes autonomos','Equipo operando','Activos digitales','Revenue 24/7','Libertad real']
+};
 
 // ─── ACCORDION TOGGLE ────────────────────────
 function toggleAccordion(btn) {
@@ -3406,37 +3600,39 @@ function dismissNivLevelup() {
   document.getElementById('nivFuture').textContent = s.future;
   document.getElementById('nivMissing').textContent = s.missing;
 
-  // Populate detractor tags (red, pulsing)
+  // Populate detractor tags (red, pulsing — unique per stage, not repeating description)
   const dtagsEl = document.getElementById('nivDetractorTags');
   const dtags = nivDetractors[stageKey] || [];
   dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag">' + t + '</span>'; }).join('');
 
-  // Populate outcome tags (green)
-  const otagsEl = document.getElementById('nivOutcomeTags');
-  otagsEl.innerHTML = nivOutcomes.map(function(t) { return '<span class="niv-otag">' + t + '</span>'; }).join('');
-
-  // Populate mini-roadmap nodes
+  // Populate mini-roadmap nodes (per-stage logical order)
+  const nodes = nivRoadmapNodes[stageKey] || [];
   const nodesEl = document.getElementById('nivMiniNodes');
-  nodesEl.innerHTML = nivOutcomes.map(function(t) {
+  nodesEl.innerHTML = nodes.map(function(t) {
     return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
   }).join('');
 
-  // Dynamic CTAs per stage (now inside "Tu siguiente paso" accordion)
+  // Dynamic CTAs per stage — Consultoria = primary, WhatsApp = outline green
   const ctasEl = document.getElementById('nivCtas');
   const waNum = '56978048922';
   const waLink = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
 
   if (stageKey === 'skiller') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">🚀 &nbsp;ACCEDE AL DESAFÍO DE 30 DÍAS</a>' +
-      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Unirme a la comunidad WhatsApp</a>';
+    ctasEl.innerHTML =
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTORIA INICIAL GRATUITA<span class="urgency-badge">ULTIMOS 2 CUPOS</span></a>' +
+      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Escribir por WhatsApp</a>';
   } else if (stageKey === 'operator') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Hablar por WhatsApp</a>' +
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">📅 &nbsp;Consultoría inicial<span class="urgency-badge">⚡ ÚLTIMOS 2 CUPOS</span></a>';
+    ctasEl.innerHTML =
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTORIA INICIAL GRATUITA<span class="urgency-badge">ULTIMOS 2 CUPOS</span></a>' +
+      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Hablar por WhatsApp</a>';
   } else if (stageKey === 'builder') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">💬 &nbsp;Resolver dudas por WhatsApp</a>' +
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">📅 &nbsp;Agendar llamada estratégica<span class="urgency-badge">⚡ Últimos 2 cupos esta semana</span></a>';
+    ctasEl.innerHTML =
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTORIA INICIAL GRATUITA<span class="urgency-badge">Ultimos 2 cupos esta semana</span></a>' +
+      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Resolver dudas por WhatsApp</a>';
   } else {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp niv-cta-founder" href="' + waLink + '" target="_blank">💬 &nbsp;Conversemos directo por WhatsApp</a>';
+    ctasEl.innerHTML =
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;AGENDAR CONVERSACION DIRECTA</a>' +
+      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Conversemos por WhatsApp</a>';
   }
 
   // Auto-open first accordion after a beat
