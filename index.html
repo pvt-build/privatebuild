@@ -2530,10 +2530,10 @@ main { padding-bottom: 120px; }
 .niv-result-tag { font-size:11px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--gray5); margin-bottom:8px; }
 .niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
 .niv-result-range { font-size:14px; color:var(--gray4); margin-bottom:24px; font-weight:600; }
-.niv-result-box { background:var(--bg3); border:1px solid var(--border); padding:24px; text-align:left; margin-bottom:28px; box-shadow: 0 0 30px rgba(68,136,255,0.08); }
+.niv-result-box { background:var(--bg3); border:1px solid var(--border); padding:32px 36px; text-align:left; margin-bottom:28px; box-shadow: 0 0 30px rgba(68,136,255,0.08); }
 .niv-result-section { margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid rgba(255,255,255,0.04); }
 .niv-result-section:last-child { margin-bottom:0; padding-bottom:0; border-bottom:none; }
-.niv-result-label { font-size:9px; font-weight:800; letter-spacing:0.25em; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.niv-result-label { font-size:10px; font-weight:800; letter-spacing:0.25em; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
 .niv-result-label::before { content:''; width:12px; height:1px; }
 .niv-result-label.now { color:var(--red); }
 .niv-result-label.now::before { background:var(--red); }
@@ -2541,7 +2541,7 @@ main { padding-bottom: 120px; }
 .niv-result-label.future::before { background:var(--green); }
 .niv-result-label.missing { color:var(--blue); }
 .niv-result-label.missing::before { background:var(--blue); }
-.niv-result-text { font-size:clamp(13px,1.6vw,15px); color:var(--gray2); line-height:1.7; }
+.niv-result-text { font-size:clamp(14px,1.8vw,16px); color:var(--gray2); line-height:1.7; }
 .niv-result-list { list-style:none; display:flex; flex-direction:column; gap:4px; }
 .niv-result-list li { font-size:13px; color:var(--gray3); display:flex; gap:8px; }
 .niv-result-list li::before { content:'·'; color:var(--gray5); flex-shrink:0; }
@@ -2682,6 +2682,7 @@ main { padding-bottom: 120px; }
   background:transparent;
   border:none;
   box-shadow:none;
+  padding:32px 36px;
 }
 /* ─── SPLASH TAGLINE BIGGER ─────────────── */
 .splash-tagline {
@@ -2699,6 +2700,9 @@ main { padding-bottom: 120px; }
   .niv-stage-bar { max-width:100%; }
   .niv-stage-bar-item span { font-size:7px; letter-spacing:0.1em; }
   .splash-inner { padding:32px 16px 48px; }
+  .niv-countdown-num { font-size:22px; }
+  .niv-countdown-cell { padding:12px 6px; }
+  .niv-result-stage { font-size:clamp(36px,12vw,48px) !important; }
 }
 /* ─── STAGE PROGRESS BAR ──────────────────── */
 .niv-stage-bar {
@@ -2840,6 +2844,83 @@ main { padding-bottom: 120px; }
   100%{background:rgba(2,4,12,0.92)}
 }
 .niv-levelup.active { animation: nivFlash 0.6s ease forwards; }
+@keyframes stageExplode {
+  0% { transform: scale(0.3); opacity: 0; filter: blur(20px); }
+  40% { transform: scale(1.15); opacity: 1; filter: blur(0); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes pulse {
+  0%,100% { opacity:0.5; }
+  50% { opacity:1; }
+}
+/* ─── COUNTDOWN TIMER ──────────────────────── */
+.niv-countdown {
+  margin:24px auto 8px;
+  max-width:400px;
+}
+.niv-countdown-label {
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--gray5);
+  margin-bottom:12px;
+  text-align:center;
+}
+.niv-countdown-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+}
+.niv-countdown-cell {
+  background:var(--bg2);
+  padding:16px 8px;
+  text-align:center;
+  position:relative;
+}
+.niv-countdown-cell::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:var(--metal-grad2);
+  opacity:0.3;
+}
+.niv-countdown-num {
+  font-size:clamp(24px,4vw,32px);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  background:var(--metal-grad);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  line-height:1;
+  display:block;
+}
+.niv-countdown-unit {
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gray5);
+  margin-top:6px;
+  display:block;
+}
+.niv-countdown-urgency {
+  font-size:10px;
+  font-weight:700;
+  color:var(--red);
+  text-align:center;
+  margin-top:10px;
+  letter-spacing:0.05em;
+  animation: pulse 2s ease-in-out infinite;
+}
+/* ─── RESULT STAGE SIZE BOOST ─────────────── */
+.niv-result-stage {
+  font-size:clamp(48px,10vw,80px) !important;
+  text-shadow: 0 0 60px currentColor;
+}
 </style>
 </head>
 <body class="splash-active">
@@ -2896,6 +2977,28 @@ main { padding-bottom: 120px; }
             <div class="niv-result-text" id="nivMissing" style="font-style:italic;color:var(--gray3);"></div>
           </div>
         </div>
+      </div>
+      <div class="niv-countdown" id="nivCountdown">
+        <div class="niv-countdown-label">◆ Precio actual disponible por</div>
+        <div class="niv-countdown-grid">
+          <div class="niv-countdown-cell">
+            <span class="niv-countdown-num" id="cdDays">--</span>
+            <span class="niv-countdown-unit">Días</span>
+          </div>
+          <div class="niv-countdown-cell">
+            <span class="niv-countdown-num" id="cdHours">--</span>
+            <span class="niv-countdown-unit">Horas</span>
+          </div>
+          <div class="niv-countdown-cell">
+            <span class="niv-countdown-num" id="cdMins">--</span>
+            <span class="niv-countdown-unit">Min</span>
+          </div>
+          <div class="niv-countdown-cell">
+            <span class="niv-countdown-num" id="cdSecs">--</span>
+            <span class="niv-countdown-unit">Seg</span>
+          </div>
+        </div>
+        <div class="niv-countdown-urgency">◆ Después de esta fecha los valores se actualizan</div>
       </div>
       <div class="niv-ctas" id="nivCtas"></div>
       <button class="niv-restart" onclick="restartNivelador()">↻ Volver a hacer el nivelador</button>
@@ -3054,17 +3157,44 @@ function showNivResult() {
   window._nivStageKey = stageKey;
   const s = nivStages[stageKey];
 
-  // Show level-up overlay first
-  const overlay = document.getElementById('nivLevelup');
-  const rankEl = document.getElementById('nivLevelupRank');
-  rankEl.textContent = s.name;
-  rankEl.style.filter = 'drop-shadow(0 0 40px ' + (s.color.startsWith('var(') ? 'rgba(200,200,230,0.4)' : s.color + '66') + ')';
-  document.getElementById('nivLevelupRange').textContent = s.range;
-  overlay.classList.add('active');
-  spawnNivParticles(s.color.startsWith('var(') ? '#d0d0e8' : s.color);
-
   // Hide quiz
   document.getElementById('nivQuiz').classList.remove('active');
+
+  // Show level-up overlay with loading effect
+  const overlay = document.getElementById('nivLevelup');
+  const rankEl = document.getElementById('nivLevelupRank');
+  const rangeEl = document.getElementById('nivLevelupRange');
+  const btnEl = document.querySelector('.niv-levelup-btn');
+  const labelEl = document.querySelector('.niv-levelup-label');
+
+  // Phase 1: Show overlay with "analyzing" state
+  rankEl.textContent = '';
+  rangeEl.textContent = '';
+  btnEl.style.opacity = '0';
+  labelEl.textContent = 'ANALIZANDO RESPUESTAS';
+  labelEl.style.animation = 'pulse 1s ease-in-out infinite';
+  overlay.classList.add('active');
+
+  // Phase 2: Show loading dots
+  let dotCount = 0;
+  const dotInterval = setInterval(() => {
+    dotCount = (dotCount + 1) % 4;
+    labelEl.textContent = 'ANALIZANDO RESPUESTAS' + '.'.repeat(dotCount);
+  }, 400);
+
+  // Phase 3: After 2s, reveal the stage name with impact
+  setTimeout(() => {
+    clearInterval(dotInterval);
+    labelEl.textContent = 'TU NIVEL';
+    labelEl.style.animation = '';
+    rankEl.textContent = s.name;
+    rankEl.style.filter = 'drop-shadow(0 0 40px ' + (s.color.startsWith('var(') ? 'rgba(200,200,230,0.4)' : s.color + '66') + ')';
+    rankEl.style.animation = 'stageExplode 0.8s cubic-bezier(.34,1.56,.64,1)';
+    rangeEl.textContent = s.range;
+    btnEl.style.opacity = '1';
+    btnEl.style.transition = 'opacity 0.5s ease 0.3s';
+    spawnNivParticles(s.color.startsWith('var(') ? '#d0d0e8' : s.color);
+  }, 2000);
 }
 
 function dismissNivLevelup() {
@@ -3098,15 +3228,13 @@ function dismissNivLevelup() {
   const waLink = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
 
   if (stageKey === 'skiller') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Accede a frameworks gratuitos</a>' +
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Accede a recursos gratuitos</a>' +
       '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Unirme a la comunidad WhatsApp</a>';
   } else if (stageKey === 'operator') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Ver programas disponibles</a>' +
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada de diagn\u00f3stico<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>' +
-      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>';
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Hablar por WhatsApp</a>' +
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada de diagn\u00f3stico<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>';
   } else if (stageKey === 'builder') {
-    ctasEl.innerHTML = '<a class="niv-cta niv-cta-notion" href="' + s.notion + '" target="_blank">\ud83d\udccb &nbsp;Frameworks y automatizaciones</a>' +
-      '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>' +
+    ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Resolver dudas por WhatsApp</a>' +
       '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\ud83d\udcc5 &nbsp;Agendar llamada estrat\u00e9gica<span class="urgency-badge">\u26a1 \u00daltimos 2 cupos esta semana</span></a>';
   } else {
     ctasEl.innerHTML = '<a class="niv-cta niv-cta-whatsapp niv-cta-founder" href="' + waLink + '" target="_blank">\ud83d\udcac &nbsp;Conversemos directo por WhatsApp</a>';
@@ -3178,6 +3306,33 @@ function nivGoBack() {
   }
 }
 
+
+// ─── COUNTDOWN TO APRIL 1 ──────────────────
+function updateCountdown() {
+  const target = new Date('2026-04-01T00:00:00-04:00').getTime();
+  const now = Date.now();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById('cdDays').textContent = '00';
+    document.getElementById('cdHours').textContent = '00';
+    document.getElementById('cdMins').textContent = '00';
+    document.getElementById('cdSecs').textContent = '00';
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+  document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
 // ─── FLOATING PARTICLES ────────────────────
 (function() {
