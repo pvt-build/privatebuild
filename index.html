@@ -853,6 +853,31 @@ body::after {
   margin-top:6px;
   border-radius:1px;
 }
+.niv-case-stage {
+  display:inline-block;
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:2px 7px;
+  margin-bottom:8px;
+  border-radius:1px;
+}
+.niv-case-stage.stage-sk-op {
+  color:#e88c30;
+  border:1px solid rgba(232,140,48,0.3);
+  background:rgba(232,140,48,0.08);
+}
+.niv-case-stage.stage-op-bu {
+  color:#3a9fff;
+  border:1px solid rgba(58,159,255,0.3);
+  background:rgba(58,159,255,0.08);
+}
+.niv-case-stage.stage-bu-fo {
+  color:#c8a840;
+  border:1px solid rgba(200,168,64,0.3);
+  background:rgba(200,168,64,0.08);
+}
 @media(max-width:540px) {
   .niv-cases-grid { grid-template-columns:1fr; }
   .niv-case { padding:14px 16px; }
@@ -1145,35 +1170,56 @@ body::after {
       <div class="niv-cases">
         <div class="niv-cases-title">CASOS DE &Eacute;XITO</div>
         <div class="niv-cases-grid">
+          <!-- SKILLER → OPERATOR -->
           <div class="niv-case">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Social Media</div>
             <div class="niv-case-to">De $0 a $1.500/mes</div>
             <span class="niv-case-tag">Primer ingreso</span>
           </div>
           <div class="niv-case">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Coaching / Sesiones</div>
             <div class="niv-case-to">De $30 USD/sesi&oacute;n a programa de $600 USD</div>
             <span class="niv-case-tag">x20 ticket</span>
           </div>
           <div class="niv-case">
-            <div class="niv-case-from">Rubro legal</div>
-            <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
-            <span class="niv-case-tag">Independencia</span>
-          </div>
-          <div class="niv-case">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Eventos</div>
             <div class="niv-case-to">De $50 por evento a $250 con agenda llena</div>
             <span class="niv-case-tag">x5 + demanda</span>
           </div>
           <div class="niv-case">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Freelance creativo</div>
             <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
             <span class="niv-case-tag">Modelo escalable</span>
           </div>
+          <!-- OPERATOR → BUILDER -->
           <div class="niv-case">
+            <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Medicina est&eacute;tica</div>
             <div class="niv-case-to">De $2K/mes a $30K/mes recurrentes</div>
             <span class="niv-case-tag">x15 ingresos</span>
+          </div>
+          <div class="niv-case">
+            <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
+            <div class="niv-case-from">Rubro legal</div>
+            <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
+            <span class="niv-case-tag">Independencia</span>
+          </div>
+          <!-- BUILDER → FOUNDER -->
+          <div class="niv-case">
+            <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
+            <div class="niv-case-from">Due&ntilde;o de Ecommerce</div>
+            <div class="niv-case-to">De $2K/mes a $30K/mes</div>
+            <span class="niv-case-tag">x15 ingresos</span>
+          </div>
+          <div class="niv-case">
+            <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
+            <div class="niv-case-from">Growth Consultant</div>
+            <div class="niv-case-to">De empleado Sr. $3K/mes a consultor indep. +$6K/mes</div>
+            <span class="niv-case-tag">x2 + libertad</span>
           </div>
         </div>
       </div>
