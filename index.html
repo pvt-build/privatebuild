@@ -1041,13 +1041,17 @@ body::after {
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <p class="splash-tagline">Todas las etapas necesitan sistema.<br>Descubre la tuya y accede al ecosistema que te lleva al siguiente nivel.</p>
-      <div style="margin-top:32px;">
+      <p class="splash-tagline">El mercado cambi&oacute;.</p>
+      <p style="font-size:clamp(13px,2vw,15px);color:var(--text-secondary);line-height:1.7;max-width:520px;margin:12px auto 0;">Desarrolla tu habilidad, crea tu oferta, implementa sistemas y multiplica tu impacto apalanc&aacute;ndote con IA para construir tu propio negocio y lograr la libertad que buscas.</p>
+      <p style="font-size:12px;font-weight:700;letter-spacing:0.15em;color:var(--text-muted);margin-top:28px;text-transform:uppercase;">Descubre tu etapa actual aqu&iacute; &#x25BC;</p>
+      <div style="margin-top:16px;">
         <button class="niv-start-btn" onclick="startNivelador()">
-          ◉ &nbsp;INICIAR NIVELADOR
+          &#x25C9; &nbsp;INICIAR NIVELADOR
         </button>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas · 45 segundos · resultado inmediato</p>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 45 segundos &middot; resultado inmediato</p>
       </div>
+      <!-- Stage preview -->
+      <div class="niv-stage-bar" id="nivStageBarPreview" style="margin-top:32px;margin-bottom:0;"></div>
     </div>
 
     <!-- QUIZ QUESTIONS -->
@@ -1598,6 +1602,18 @@ function updateCountdown() {
 
 window.addEventListener('load', () => {
   document.body.classList.add('splash-active');
+  // Populate splash stage preview bar
+  var previewBar = document.getElementById('nivStageBarPreview');
+  if (previewBar) {
+    var stages = ['skiller','operator','builder','founder'];
+    var colors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+    var ranges = { skiller:'$0–$1.5K', operator:'$1.5K–$3K', builder:'$3K–$10K', founder:'$10K+' };
+    previewBar.innerHTML = stages.map(function(s, i) {
+      return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
+        '<div class="niv-stage-bar-color" style="background:' + colors[s] + '"></div>' +
+        '<span><span class="niv-stage-num">0' + (i+1) + '</span><span>' + s.toUpperCase() + '</span><span style="font-size:6px;color:var(--text-disabled);letter-spacing:0.05em;">' + ranges[s] + '</span></span></div>';
+    }).join('');
+  }
 });
 </script>
 </body>
