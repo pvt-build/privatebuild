@@ -396,16 +396,18 @@ body::after {
 }
 .niv-stage-bar-color { display:none; }
 .niv-stage-bar-item span {
-  font-size:8px;
+  font-size:7px;
   font-weight:700;
-  letter-spacing:0.15em;
+  letter-spacing:0.12em;
   text-transform:uppercase;
   color:var(--text-muted);
   position:absolute;
-  top:12px;
+  top:10px;
   left:50%;
   transform:translateX(-50%);
   white-space:nowrap;
+  text-align:center;
+  line-height:1.4;
 }
 .niv-stage-bar-item.active span {
   color:var(--metal3);
@@ -519,9 +521,9 @@ body::after {
   max-width:400px;
 }
 .niv-countdown-label {
-  font-size:9px;
+  font-size:12px;
   font-weight:700;
-  letter-spacing:0.25em;
+  letter-spacing:0.15em;
   text-transform:uppercase;
   color:var(--text-muted);
   margin-bottom:12px;
@@ -754,15 +756,19 @@ body::after {
   .niv-ctas { max-width:100%; }
 }
 
-/* ─── RESULT STAGE — PER-STAGE COLOR (set via JS) ─ */
+/* ─── RESULT STAGE — METALLIC WITH STAGE COLOR ─ */
 .niv-result-stage {
   font-family:'Inter Tight',sans-serif;
   font-size:clamp(48px,10vw,80px) !important;
   font-weight:900 !important;
   line-height:1 !important;
-  letter-spacing:-0.02em;
+  letter-spacing:-0.04em;
   display:inline-block;
-  filter:drop-shadow(0 2px 20px currentColor);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  background-size:200% 100%;
+  animation:titleShimmer 5s ease-in-out infinite;
 }
 
 /* ─── SUCCESS CASES ──────────────────────────── */
@@ -896,16 +902,55 @@ body::after {
   letter-spacing:0.02em;
 }
 
-/* ─── WHATSAPP OUTLINE VARIANT ───────────────── */
-.niv-cta-whatsapp-outline {
-  background:transparent !important;
-  color:var(--green) !important;
-  border:1px solid var(--green) !important;
-  box-shadow:none !important;
+/* ─── GOLD LED GLOW (siguiente paso isolated) ── */
+@keyframes goldLedGlow {
+  0%,100% { box-shadow:0 0 8px rgba(200,168,74,0.2), inset 0 0 0 1px rgba(200,168,74,0.15); border-color:rgba(200,168,74,0.25); }
+  50% { box-shadow:0 0 24px rgba(200,168,74,0.45), inset 0 0 0 1px rgba(200,168,74,0.5); border-color:rgba(200,168,74,0.6); }
 }
-.niv-cta-whatsapp-outline:hover {
-  background:rgba(56,176,104,0.08) !important;
-  box-shadow:0 4px 20px rgba(56,176,104,0.15) !important;
+.niv-acc-block-gold {
+  animation:goldLedGlow 2.5s ease-in-out infinite;
+  margin-top:16px;
+}
+.niv-acc-block-gold .niv-acc-title { color:var(--gold) !important; }
+.niv-acc-block-gold .niv-acc-icon { color:var(--gold) !important; }
+
+/* ─── STAGGERED FADE-IN SYSTEM ─────────────── */
+@keyframes revealUp {
+  from { opacity:0; transform:translateY(18px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.reveal { opacity:0; animation:revealUp 0.5s ease forwards; }
+.reveal-d1 { animation-delay:0.15s; }
+.reveal-d2 { animation-delay:0.3s; }
+.reveal-d3 { animation-delay:0.5s; }
+.reveal-d4 { animation-delay:0.7s; }
+.reveal-d5 { animation-delay:0.9s; }
+.reveal-d6 { animation-delay:1.1s; }
+.reveal-d7 { animation-delay:1.4s; }
+.reveal-d8 { animation-delay:1.7s; }
+
+/* ─── STAGGERED TAG APPEAR ─────────────────── */
+.niv-dtag { opacity:0; animation:revealUp 0.35s ease forwards; }
+.niv-dtag:nth-child(1) { animation-delay:0.4s; }
+.niv-dtag:nth-child(2) { animation-delay:0.7s; }
+.niv-dtag:nth-child(3) { animation-delay:1.0s; }
+.niv-dtag:nth-child(4) { animation-delay:1.3s; }
+.niv-dtag:nth-child(5) { animation-delay:1.6s; }
+
+/* ─── CENTERED ACCORDION TEXT ──────────────── */
+.niv-acc-body { text-align:center; }
+.niv-detractor-tags { justify-content:center; }
+
+/* ─── STAGE NUMBER BOXES ──────────────────── */
+.niv-stage-num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:16px; height:16px; font-size:8px; font-weight:800;
+  border:1px solid var(--border2); color:var(--text-muted);
+  margin-bottom:4px; line-height:1;
+}
+.niv-stage-bar-item.active .niv-stage-num,
+.niv-stage-bar-item.completed .niv-stage-num {
+  border-color:var(--metal2); color:var(--metal3); background:rgba(255,255,255,0.04);
 }
 
 /* ─── COUNTDOWN URGENCY BAR ──────────────────── */
@@ -1043,11 +1088,14 @@ body::after {
           </div>
         </div>
 
-        <!-- BLOCK 3: Tu siguiente paso (CTAs inside, no italic) -->
-        <div class="niv-acc-block" data-acc="paso">
+      </div>
+
+      <!-- BLOCK 3: Tu siguiente paso — ISOLATED with gold glow -->
+      <div class="niv-accordion-wrap" style="margin-top:0;">
+        <div class="niv-acc-block niv-acc-block-gold" data-acc="paso">
           <button class="niv-acc-header" onclick="toggleAccordion(this)">
             <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title missing">TU SIGUIENTE PASO</span>
+            <span class="niv-acc-title">TU SIGUIENTE PASO</span>
             <span class="niv-acc-chevron">▾</span>
           </button>
           <div class="niv-acc-body">
@@ -1055,7 +1103,6 @@ body::after {
             <div class="niv-ctas" id="nivCtas"></div>
           </div>
         </div>
-
       </div>
 
       <!-- COUNTDOWN -->
@@ -1079,11 +1126,6 @@ body::after {
       <div class="niv-cases">
         <div class="niv-cases-title">CASOS DE &Eacute;XITO</div>
         <div class="niv-cases-grid">
-          <div class="niv-case">
-            <div class="niv-case-from">Medicina est&eacute;tica</div>
-            <div class="niv-case-to">De $2K/mes a $10K/mes</div>
-            <span class="niv-case-tag">x5 ingresos</span>
-          </div>
           <div class="niv-case">
             <div class="niv-case-from">Social Media</div>
             <div class="niv-case-to">De $0 a $1.500/mes</div>
@@ -1109,7 +1151,25 @@ body::after {
             <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
             <span class="niv-case-tag">Modelo escalable</span>
           </div>
+          <div class="niv-case">
+            <div class="niv-case-from">Medicina est&eacute;tica</div>
+            <div class="niv-case-to">De $2K/mes a $30K/mes recurrentes</div>
+            <span class="niv-case-tag">x15 ingresos</span>
+          </div>
         </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="niv-footer">
+        <div class="niv-footer-logo">PRIVATE BUILD</div>
+        <div class="niv-footer-text">
+          Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque puedan tener distintos niveles de ingreso y m&aacute;rgenes.
+          Hoy, <strong>construir tu propia infraestructura es clave</strong> para un mundo que se apalanca con IA.
+          Los ingresos que hoy generas, pueden <strong>multiplicarse hasta x10</strong> con una buena oferta, sistemas y automatizaci&oacute;n.
+        </div>
+        <div class="niv-footer-closer" style="margin-top:20px;">La pregunta es...</div>
+        <div class="niv-footer-closer" style="margin-top:8px;font-size:16px;color:var(--metal3);">&iquest;Tomar&aacute;s acci&oacute;n o quieres seguir donde est&aacute;s?</div>
+        <a class="niv-footer-cta" href="https://calendly.com/privatebuildprograms/start" target="_blank">No, quiero cambiar mi situaci&oacute;n &rarr;</a>
       </div>
 
       <!-- LANZAMIENTO OFICIAL -->
@@ -1118,18 +1178,6 @@ body::after {
           <span class="niv-launch-dot"></span>
           <span class="niv-launch-text">LANZAMIENTO OFICIAL — <span>PR&Oacute;XIMAMENTE</span></span>
         </div>
-      </div>
-
-      <!-- FOOTER -->
-      <div class="niv-footer">
-        <div class="niv-footer-logo">PRIVATE BUILD</div>
-        <div class="niv-footer-text">
-          Cada etapa tiene <strong>procesos id&eacute;nticos</strong>, con distintos niveles de apalancamiento.
-          Hoy la <strong>IA es el multiplicador</strong> para construir tu propia libertad.
-          No importa si eres Skiller, Operator, Builder o Founder &mdash; el sistema se adapta a tu fase.
-        </div>
-        <div class="niv-footer-closer">&iquest;O quieres seguir donde est&aacute;s?</div>
-        <a class="niv-footer-cta" href="https://calendly.com/privatebuildprograms/start" target="_blank">No, quiero cambiar mi situaci&oacute;n &rarr;</a>
       </div>
     </div>
 
@@ -1362,13 +1410,15 @@ function dismissNivLevelup() {
   document.getElementById('nivResult').classList.add('active');
   const nameEl = document.getElementById('nivStageName');
   nameEl.textContent = s.name;
-  // Set stage color on title
-  nameEl.style.color = s.color;
-  nameEl.style.background = 'none';
-  nameEl.style.webkitBackgroundClip = 'unset';
-  nameEl.style.backgroundClip = 'unset';
-  nameEl.style.webkitTextFillColor = 'unset';
-  nameEl.style.filter = 'none';
+  // Metallic gradient tinted with stage color
+  var c = s.color.startsWith('var(') ? '#b0b0d0' : s.color;
+  nameEl.style.background = 'linear-gradient(135deg, #404060 0%, ' + c + ' 25%, #f0f0ff 50%, ' + c + ' 75%, #404060 100%)';
+  nameEl.style.backgroundSize = '200% 100%';
+  nameEl.style.webkitBackgroundClip = 'text';
+  nameEl.style.backgroundClip = 'text';
+  nameEl.style.color = 'transparent';
+  nameEl.style.webkitTextFillColor = 'transparent';
+  nameEl.style.filter = 'drop-shadow(0 2px 20px ' + c + ')';
 
   document.getElementById('nivStageRange').textContent = s.range;
   document.getElementById('nivNow').textContent = s.now;
@@ -1387,34 +1437,27 @@ function dismissNivLevelup() {
     return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
   }).join('');
 
-  // Dynamic CTAs per stage — Consultoria = primary, WhatsApp = outline green
+  // Dynamic CTA — solo llamada, sin fuga
   const ctasEl = document.getElementById('nivCtas');
-  const waNum = '56978048922';
-  const waLink = 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(s.wa);
-
-  if (stageKey === 'skiller') {
+  if (stageKey === 'founder') {
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTOR&Iacute;A INICIAL SIN COSTO<span class="urgency-badge">&Uacute;LTIMOS 2 CUPOS</span></a>' +
-      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Escribir por WhatsApp</a>';
-  } else if (stageKey === 'operator') {
-    ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTOR&Iacute;A INICIAL SIN COSTO<span class="urgency-badge">&Uacute;LTIMOS 2 CUPOS</span></a>' +
-      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Hablar por WhatsApp</a>';
-  } else if (stageKey === 'builder') {
-    ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTOR&Iacute;A INICIAL SIN COSTO<span class="urgency-badge">&Uacute;ltimos 2 cupos esta semana</span></a>' +
-      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Resolver dudas por WhatsApp</a>';
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;AGENDAR CONVERSACI&Oacute;N DIRECTA</a>';
   } else {
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;AGENDAR CONVERSACI&Oacute;N DIRECTA</a>' +
-      '<a class="niv-cta niv-cta-whatsapp-outline" href="' + waLink + '" target="_blank">Conversemos por WhatsApp</a>';
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">&#x1F513; &nbsp;CONSULTOR&Iacute;A INICIAL SIN COSTO<span class="urgency-badge">&Uacute;LTIMOS 2 CUPOS</span></a>';
   }
+
+  // Staggered reveal — each section appears gradually
+  var revealEls = document.querySelectorAll('#nivResult > *');
+  revealEls.forEach(function(el, i) {
+    el.classList.add('reveal', 'reveal-d' + Math.min(i, 8));
+  });
 
   // Auto-open first accordion after a beat
   setTimeout(function() {
-    var blocks = document.querySelectorAll('.niv-acc-block');
+    var blocks = document.querySelectorAll('.niv-acc-block:not(.niv-acc-block-gold)');
     if (blocks[0]) blocks[0].classList.add('open');
-  }, 600);
+  }, 800);
 
   // Start 5-min countdown
   startCountdown();
@@ -1431,13 +1474,13 @@ function updateStageBars(activeStage) {
   const bar = document.getElementById('nivStageBar2');
   if (!bar) return;
 
-  // Build stage bar content if empty
+  // Build stage bar content if empty (with numbered boxes)
   if (!bar.children.length) {
-    bar.innerHTML = stages.map(s =>
-      '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
-      '<div class="niv-stage-bar-color" style="background:' + stageColors[s] + '"></div>' +
-      '<span>' + s.toUpperCase() + '</span></div>'
-    ).join('');
+    bar.innerHTML = stages.map(function(s, i) {
+      return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
+        '<div class="niv-stage-bar-color" style="background:' + stageColors[s] + '"></div>' +
+        '<span><span class="niv-stage-num">0' + (i+1) + '</span><br>' + s.toUpperCase() + '</span></div>';
+    }).join('');
   }
   bar.style.display = 'flex';
 
