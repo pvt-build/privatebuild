@@ -359,9 +359,12 @@ body::after {
 }
 .niv-back:hover { border-color:var(--metal2); color:var(--text-primary); }
 /* Old .niv-result-glow removed — replaced by accordion */
-/* ─── SPLASH TAGLINE BIGGER ─────────────── */
+/* ─── SPLASH TAGLINE ─────────────── */
 .splash-tagline {
-  font-size: clamp(17px, 2.8vw, 24px);
+  font-size: clamp(14px, 2.2vw, 17px);
+  max-width:540px;
+  margin-left:auto;
+  margin-right:auto;
 }
 @media(max-width:540px) {
   .splash-title { font-size: clamp(36px, 12vw, 52px); }
@@ -371,7 +374,7 @@ body::after {
   .niv-ctas { gap:8px; }
   .niv-cta { font-size:11px; padding:12px 16px; max-width:100%; }
   .niv-result-text { font-size:13px; }
-  .splash-tagline { font-size:15px !important; }
+  .splash-tagline { font-size:13px !important; }
   .niv-stage-bar { max-width:100%; }
   .niv-stage-bar-item span { font-size:7px; letter-spacing:0.1em; }
   .splash-inner { padding:32px 16px 48px; }
@@ -405,24 +408,25 @@ body::after {
   background:var(--metal-grad2);
 }
 .niv-stage-bar-color { display:none; }
-.niv-stage-bar-item span {
+.niv-stage-bar-item > span {
   font-size:7px;
   font-weight:700;
   letter-spacing:0.08em;
   text-transform:uppercase;
   color:var(--text-muted);
   position:absolute;
-  top:12px;
+  top:14px;
   left:50%;
   transform:translateX(-50%);
   white-space:nowrap;
   text-align:center;
-  line-height:1.2;
+  line-height:1;
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:2px;
+  gap:4px;
 }
+.niv-stage-bar-item > span > span { display:block; }
 .niv-stage-bar-item.active span {
   color:var(--metal3);
 }
@@ -957,9 +961,9 @@ body::after {
 /* ─── STAGE NUMBER BOXES ──────────────────── */
 .niv-stage-num {
   display:inline-flex; align-items:center; justify-content:center;
-  width:14px; height:14px; font-size:7px; font-weight:800;
+  width:16px; height:16px; font-size:8px; font-weight:800;
   border:1px solid var(--border2); color:var(--text-muted);
-  line-height:1; margin-bottom:2px;
+  line-height:1;
 }
 .niv-stage-bar-item.active .niv-stage-num,
 .niv-stage-bar-item.completed .niv-stage-num {
@@ -1041,8 +1045,7 @@ body::after {
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <p class="splash-tagline">El mercado cambi&oacute;.</p>
-      <p style="font-size:clamp(13px,2vw,15px);color:var(--text-secondary);line-height:1.7;max-width:520px;margin:12px auto 0;">Desarrolla tu habilidad, crea tu oferta, implementa sistemas y multiplica tu impacto apalanc&aacute;ndote con IA para construir tu propio negocio y lograr la libertad que buscas.</p>
+      <p class="splash-tagline">El mercado cambi&oacute;. Desarrolla tu habilidad, crea tu oferta, implementa sistemas y multiplica tu impacto apalanc&aacute;ndote con IA para construir tu propio negocio y lograr la libertad que buscas.</p>
       <p style="font-size:12px;font-weight:700;letter-spacing:0.15em;color:var(--text-muted);margin-top:28px;text-transform:uppercase;">Descubre tu etapa actual aqu&iacute; &#x25BC;</p>
       <div style="margin-top:16px;">
         <button class="niv-start-btn" onclick="startNivelador()">
@@ -1051,7 +1054,7 @@ body::after {
         <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 45 segundos &middot; resultado inmediato</p>
       </div>
       <!-- Stage preview -->
-      <div class="niv-stage-bar" id="nivStageBarPreview" style="margin-top:32px;margin-bottom:0;"></div>
+      <div class="niv-stage-bar" id="nivStageBarPreview" style="margin-top:32px;margin-bottom:16px;"></div>
     </div>
 
     <!-- QUIZ QUESTIONS -->
@@ -1064,12 +1067,11 @@ body::after {
 
     <!-- QUIZ RESULT -->
     <div class="niv-result" id="nivResult">
-      <div style="font-size:8px;font-weight:700;letter-spacing:0.5em;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;opacity:0.4;display:inline-flex;align-items:center;gap:6px;">&#x1F512; PRIVATE BUILD</div>
       <div class="niv-result-tag">&#x1F9ED; TU NIVEL ACTUAL</div>
       <div class="niv-result-stage" id="nivStageName"></div>
       <div class="niv-result-range" id="nivStageRange"></div>
 
-      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:48px;"></div>
+      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:56px;"></div>
 
       <!-- ACCORDION DIAGNOSTIC -->
       <div class="niv-accordion-wrap" id="nivAccordionWrap">
