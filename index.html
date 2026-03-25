@@ -65,7 +65,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; — removed to avoid forced scroll after quiz */
   cursor: default;
   -webkit-text-size-adjust: 100%;
 }
@@ -540,7 +540,7 @@ body::after {
 }
 /* ─── COUNTDOWN TIMER ──────────────────────── */
 .niv-countdown {
-  margin:24px auto 8px;
+  margin:20px auto 0;
   max-width:400px;
 }
 .niv-countdown-label {
@@ -986,9 +986,11 @@ body::after {
 /* ─── STAGE NUMBER BOXES ──────────────────── */
 .niv-stage-num {
   display:inline-flex; align-items:center; justify-content:center;
-  width:16px; height:16px; font-size:8px; font-weight:800;
+  width:18px; height:18px; font-size:8px; font-weight:800;
   border:1px solid var(--border2); color:var(--text-muted);
-  line-height:1;
+  line-height:1; text-align:center; vertical-align:middle;
+  padding:0; margin:0 auto; box-sizing:border-box;
+  font-variant-numeric:tabular-nums;
 }
 .niv-stage-bar-item.active .niv-stage-num,
 .niv-stage-bar-item.completed .niv-stage-num {
@@ -1028,19 +1030,14 @@ body::after {
   transform:translateY(-1px);
 }
 
-/* ─── MOBILE STICKY COUNTDOWN BAND ──────────── */
+/* ─── MOBILE COUNTDOWN (no longer sticky) ──────────── */
 @media(max-width:540px) {
   .niv-countdown {
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:100;
-    margin:0;
-    max-width:none;
+    margin:24px auto 8px;
+    max-width:100%;
     background:var(--bg2);
-    border-top:1px solid var(--border);
-    padding:10px 16px;
+    border:1px solid var(--border);
+    padding:14px 16px;
     display:flex;
     flex-wrap:wrap;
     align-items:center;
@@ -1053,7 +1050,6 @@ body::after {
   .niv-countdown-num { font-size:18px; }
   .niv-countdown-urgency { font-size:8px; width:100%; }
   .niv-countdown-bar { max-width:100%; }
-  .niv-footer { padding-bottom:80px; }
 }
 </style>
 </head>
@@ -1145,25 +1141,24 @@ body::after {
           <div class="niv-acc-body">
             <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
             <div class="niv-ctas" id="nivCtas"></div>
+            <!-- COUNTDOWN (inline, not sticky) -->
+            <div class="niv-countdown" id="nivCountdown" style="display:none;">
+              <div class="niv-countdown-label">La consultor&iacute;a inicial sin costo expira en:</div>
+              <div class="niv-countdown-grid" style="grid-template-columns:1fr 1fr; max-width:240px; margin:0 auto;">
+                <div class="niv-countdown-cell">
+                  <span class="niv-countdown-num" id="cdMins2">05</span>
+                  <span class="niv-countdown-unit">Min</span>
+                </div>
+                <div class="niv-countdown-cell">
+                  <span class="niv-countdown-num" id="cdSecs2">00</span>
+                  <span class="niv-countdown-unit">Seg</span>
+                </div>
+              </div>
+              <div class="niv-countdown-bar"><div class="niv-countdown-bar-fill" id="cdBarFill"></div></div>
+              <div class="niv-countdown-urgency">Toma acci&oacute;n ahora &mdash; despu&eacute;s pierdes acceso</div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- COUNTDOWN -->
-      <div class="niv-countdown" id="nivCountdown">
-        <div class="niv-countdown-label">La consultor&iacute;a inicial sin costo expira en:</div>
-        <div class="niv-countdown-grid" style="grid-template-columns:1fr 1fr; max-width:240px; margin:0 auto;">
-          <div class="niv-countdown-cell">
-            <span class="niv-countdown-num" id="cdMins2">05</span>
-            <span class="niv-countdown-unit">Min</span>
-          </div>
-          <div class="niv-countdown-cell">
-            <span class="niv-countdown-num" id="cdSecs2">00</span>
-            <span class="niv-countdown-unit">Seg</span>
-          </div>
-        </div>
-        <div class="niv-countdown-bar"><div class="niv-countdown-bar-fill" id="cdBarFill"></div></div>
-        <div class="niv-countdown-urgency">Toma acci&oacute;n ahora &mdash; despu&eacute;s pierdes acceso</div>
       </div>
 
       <!-- SUCCESS CASES -->
@@ -1235,14 +1230,6 @@ body::after {
         <div class="niv-footer-closer" style="margin-top:20px;">La pregunta es...</div>
         <div class="niv-footer-closer" style="margin-top:8px;font-size:16px;color:var(--metal3);">&iquest;Tomar&aacute;s acci&oacute;n o quieres seguir donde est&aacute;s?</div>
         <a class="niv-footer-cta" href="https://calendly.com/privatebuildprograms/start" target="_blank">No, quiero cambiar mi situaci&oacute;n &rarr;</a>
-
-        <!-- LANZAMIENTO OFICIAL — al final -->
-        <div class="niv-launch-badge" style="margin-top:32px;">
-          <div class="niv-launch-inner">
-            <span class="niv-launch-dot"></span>
-            <span class="niv-launch-text">LANZAMIENTO OFICIAL — <span>PR&Oacute;XIMAMENTE</span></span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -1318,7 +1305,7 @@ const nivStages = {
     name: 'SKILLER', range: '$0 – $1,500/mes', color: 'var(--metal2)',
     now: 'Estás empleado o recién partiendo. Sabes que tienes una habilidad que podría darte ingresos propios, pero no tienes oferta clara, no sabes cómo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
     future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir más rápido y tienes un sistema básico que te da claridad de hacia dónde vas.',
-    missing: 'Private Build es el ecosistema que te da estructura, frameworks gratuitos y una comunidad que ya recorrió este camino. No necesitas saber todo — necesitas activar tu habilidad con el respaldo correcto. Accede a los recursos gratuitos y empieza hoy.',
+    missing: 'Private Build es el ecosistema que te da estructura, frameworks gratuitos y una comunidad que ya recorrió este camino. No necesitas saber todo — necesitas activar tu habilidad con el respaldo correcto.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero más información sobre cómo empezar.'
   },
@@ -1494,7 +1481,7 @@ function dismissNivLevelup() {
   document.getElementById('nivStageRange').textContent = s.range;
   document.getElementById('nivNow').textContent = s.now;
   document.getElementById('nivFuture').textContent = s.future;
-  document.getElementById('nivMissing').textContent = s.missing;
+  // nivMissing set per-stage in CTA section below (skiller gets innerHTML override)
 
   // Populate detractor tags — staggered reveal one by one
   const dtagsEl = document.getElementById('nivDetractorTags');
@@ -1515,18 +1502,28 @@ function dismissNivLevelup() {
     return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
   }).join('');
 
-  // Dynamic CTA per stage
+  // Dynamic CTA per stage — set missing text + buttons
   const ctasEl = document.getElementById('nivCtas');
+  const cdEl = document.getElementById('nivCountdown');
+  const missingEl = document.getElementById('nivMissing');
   if (stageKey === 'skiller') {
+    // Skiller: desafío 30 días + acompañamiento
+    missingEl.innerHTML = s.missing + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="' + s.notion + '" target="_blank">\u{1F513} &nbsp;ACCEDER A RECURSOS GRATUITOS</a>';
+      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F4D3} &nbsp;DESAF\u00cdO 30 D\u00cdAS &mdash; GRATIS</a>' +
+      '<a class="niv-cta" style="background:transparent;border:1px solid var(--border2);color:var(--text-secondary);" href="https://calendly.com/privatebuildprograms/start" target="_blank">NECESITO ACOMPA\u00d1AMIENTO</a>';
+    if (cdEl) cdEl.style.display = 'none';
   } else if (stageKey === 'founder') {
+    missingEl.textContent = s.missing;
     var waLink = 'https://wa.me/56962420484?text=' + encodeURIComponent(s.wa);
     ctasEl.innerHTML =
       '<a class="niv-cta niv-cta-calendly" href="' + waLink + '" target="_blank">\u{1F513} &nbsp;CONECTAR PARA UN CAF\u00c9</a>';
+    if (cdEl) { cdEl.style.display = 'block'; }
   } else {
+    missingEl.textContent = s.missing;
     ctasEl.innerHTML =
       '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\u{1F513} &nbsp;CONSULTOR\u00cdA INICIAL<span class="urgency-badge"><s>Valor normal $97 USD</s> \u2014 SIN COSTO</span></a>';
+    if (cdEl) { cdEl.style.display = 'block'; }
   }
 
   // Staggered reveal — each section appears gradually
