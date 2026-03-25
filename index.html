@@ -313,11 +313,11 @@ body::after {
 }
 .niv-result.active {
   display:block;
-  animation: fadeInUp 0.8s cubic-bezier(.16,1,.3,1);
+  animation: fadeInUp 1.2s cubic-bezier(.16,1,.3,1);
 }
 @keyframes fadeInUp {
-  from { opacity:0; transform:translateY(40px) scale(0.96); }
-  to { opacity:1; transform:translateY(0) scale(1); }
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
 }
 /* ─── CALENDLY CTA PULSE ────────────────── */
 @keyframes calendlyPulse {
@@ -437,20 +437,20 @@ body::after {
   z-index:10000;
   background:rgba(0,0,0,0);
   pointer-events:none;
-  transition:background 0.4s ease;
+  transition:background 0.8s ease;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 .niv-levelup.active {
-  background:rgba(2,4,12,0.92);
+  background:#02040c;
   pointer-events:all;
 }
 .niv-levelup-inner {
   text-align:center;
   opacity:0;
-  transform:scale(0.7) translateY(30px);
-  transition:all 0.7s cubic-bezier(.34,1.56,.64,1);
+  transform:scale(0.92) translateY(16px);
+  transition:all 1s cubic-bezier(.25,.46,.45,.94);
 }
 .niv-levelup.active .niv-levelup-inner {
   opacity:1;
@@ -522,17 +522,21 @@ body::after {
   border-radius:50%;
   animation: particleBurst var(--dur) ease-out forwards;
 }
-@keyframes nivFlash {
-  0%{background:rgba(255,255,255,0)}
-  15%{background:rgba(255,255,255,0.04)}
-  100%{background:rgba(2,4,12,0.92)}
-}
-.niv-levelup.active { animation: nivFlash 0.6s ease forwards; }
+/* Removed aggressive flash — smooth fade via transition instead */
 @keyframes stageExplode {
   0% { transform: scale(0.3); opacity: 0; filter: blur(20px); }
   40% { transform: scale(1.15); opacity: 1; filter: blur(0); }
   60% { transform: scale(0.95); }
   100% { transform: scale(1); }
+}
+@keyframes stageReveal {
+  0% { transform: scale(0.85); opacity: 0; filter: blur(8px); }
+  60% { transform: scale(1.02); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes fadeInSoft {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
 }
 @keyframes pulse {
   0%,100% { opacity:0.5; }
@@ -666,7 +670,7 @@ body::after {
 .niv-acc-body {
   max-height:0;
   overflow:hidden;
-  transition:max-height 0.4s cubic-bezier(.4,0,.2,1), padding 0.3s ease;
+  transition:max-height 0.7s cubic-bezier(.4,0,.2,1), padding 0.5s ease;
   padding:0 20px;
 }
 .niv-acc-block.open .niv-acc-body {
@@ -965,15 +969,15 @@ body::after {
   from { opacity:0; transform:translateY(18px); }
   to { opacity:1; transform:translateY(0); }
 }
-.reveal { opacity:0; animation:revealUp 0.5s ease forwards; }
-.reveal-d1 { animation-delay:0.15s; }
-.reveal-d2 { animation-delay:0.3s; }
-.reveal-d3 { animation-delay:0.5s; }
-.reveal-d4 { animation-delay:0.7s; }
-.reveal-d5 { animation-delay:0.9s; }
-.reveal-d6 { animation-delay:1.1s; }
-.reveal-d7 { animation-delay:1.4s; }
-.reveal-d8 { animation-delay:1.7s; }
+.reveal { opacity:0; animation:revealUp 0.8s ease forwards; }
+.reveal-d1 { animation-delay:0.3s; }
+.reveal-d2 { animation-delay:0.6s; }
+.reveal-d3 { animation-delay:1.0s; }
+.reveal-d4 { animation-delay:1.4s; }
+.reveal-d5 { animation-delay:1.8s; }
+.reveal-d6 { animation-delay:2.2s; }
+.reveal-d7 { animation-delay:2.8s; }
+.reveal-d8 { animation-delay:3.4s; }
 
 /* Tags stagger via JS — .niv-dtag-hidden starts invisible */
 .niv-dtag-hidden { opacity:0; transform:translateY(8px); }
@@ -1070,7 +1074,7 @@ body::after {
       <p style="font-size:12px;font-weight:700;letter-spacing:0.15em;color:var(--text-muted);margin-top:28px;text-transform:uppercase;">Descubre tu etapa actual aqu&iacute; &#x25BC;</p>
       <div style="margin-top:16px;">
         <button class="niv-start-btn" onclick="startNivelador()">
-          &#x25C9; &nbsp;INICIAR NIVELADOR
+          &#x25C9; &nbsp;DESCUBRIR MI ETAPA
         </button>
         <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 45 segundos &middot; resultado inmediato</p>
       </div>
@@ -1088,7 +1092,7 @@ body::after {
 
     <!-- QUIZ RESULT -->
     <div class="niv-result" id="nivResult">
-      <div class="niv-result-tag">&#x1F9ED; TU NIVEL ACTUAL</div>
+      <div class="niv-result-tag">TU ETAPA ACTUAL</div>
       <div class="niv-result-stage" id="nivStageName"></div>
       <div class="niv-result-range" id="nivStageRange"></div>
 
@@ -1223,7 +1227,7 @@ body::after {
       <div class="niv-footer">
         <div class="niv-footer-logo">PRIVATE BUILD</div>
         <div class="niv-footer-text">
-          Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque puedan tener distintos niveles de ingreso y m&aacute;rgenes.
+          Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque puedan tener distintos rangos de ingreso y m&aacute;rgenes.
           Hoy, <strong>construir tu propia infraestructura es clave</strong> para un mundo que se apalanca con IA.
           Los ingresos que hoy generas, pueden <strong>multiplicarse hasta x10</strong> con una buena oferta, sistemas y automatizaci&oacute;n.
         </div>
@@ -1240,10 +1244,10 @@ body::after {
 <div class="niv-levelup" id="nivLevelup">
   <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
   <div class="niv-levelup-inner">
-    <div class="niv-levelup-label">TU NIVEL</div>
+    <div class="niv-levelup-label">TU ETAPA</div>
     <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
     <div class="niv-levelup-range" id="nivLevelupRange">$0 – $1,500/mes</div>
-    <button class="niv-levelup-btn" onclick="dismissNivLevelup()">VER DIAGNÓSTICO →</button>
+    <button class="niv-levelup-btn" onclick="dismissNivLevelup()">VER MI DIAGN&Oacute;STICO &rarr;</button>
   </div>
 </div>
 
@@ -1329,7 +1333,7 @@ const nivStages = {
     name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
     now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisión constante, no tienes sistemas autónomos y cada decisión pasa por tu cabeza. Escalar significa más estrés.',
     future: 'Tienes infraestructura de equipo, agentes autónomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicación.',
-    missing: 'A este nivel, lo que necesitas no es un curso — es una conversación directa. Conectemos para explorar cómo Private Build puede complementar lo que ya construiste y llevarlo al siguiente nivel.',
+    missing: 'A esta etapa, lo que necesitas no es un curso — es una conversación directa. Conectemos para explorar cómo Private Build puede complementar lo que ya construiste y llevarlo más lejos.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy FOUNDER y quiero conversar sobre mi proyecto y oportunidades.'
   }
@@ -1396,34 +1400,36 @@ function showNivResult() {
   const btnEl = document.querySelector('.niv-levelup-btn');
   const labelEl = document.querySelector('.niv-levelup-label');
 
-  // Phase 1: Show overlay with "analyzing" state
+  // Phase 1: Show overlay with gentle "analyzing" state
   rankEl.textContent = '';
   rangeEl.textContent = '';
   btnEl.style.opacity = '0';
-  labelEl.textContent = 'ANALIZANDO RESPUESTAS';
-  labelEl.style.animation = 'pulse 1s ease-in-out infinite';
+  labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS';
+  labelEl.style.animation = 'pulse 1.5s ease-in-out infinite';
+  // Hide splash content so it doesn't bleed through overlay
+  document.getElementById('splash').style.visibility = 'hidden';
   overlay.classList.add('active');
 
-  // Phase 2: Show loading dots
+  // Phase 2: Show loading dots (slower cadence)
   let dotCount = 0;
   const dotInterval = setInterval(() => {
     dotCount = (dotCount + 1) % 4;
-    labelEl.textContent = 'ANALIZANDO RESPUESTAS' + '.'.repeat(dotCount);
-  }, 400);
+    labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
+  }, 500);
 
-  // Phase 3: After 2s, reveal the stage name with impact
+  // Phase 3: After 2.8s, reveal the stage name softly
   setTimeout(() => {
     clearInterval(dotInterval);
-    labelEl.textContent = 'TU NIVEL';
+    labelEl.textContent = 'TU ETAPA';
     labelEl.style.animation = '';
     rankEl.textContent = s.name;
     rankEl.style.filter = 'drop-shadow(0 0 40px ' + (s.color.startsWith('var(') ? 'rgba(200,200,230,0.4)' : s.color + '66') + ')';
-    rankEl.style.animation = 'stageExplode 0.8s cubic-bezier(.34,1.56,.64,1)';
+    rankEl.style.animation = 'stageReveal 1.2s cubic-bezier(.25,.46,.45,.94)';
     rangeEl.textContent = s.range;
+    rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
     btnEl.style.opacity = '1';
-    btnEl.style.transition = 'opacity 0.5s ease 0.3s';
-    spawnNivParticles(s.color.startsWith('var(') ? '#d0d0e8' : s.color);
-  }, 2000);
+    btnEl.style.transition = 'opacity 0.8s ease 0.8s';
+  }, 2800);
 }
 
 // ─── DETRACTOR TAGS PER STAGE (no repiten la descripción) ─
@@ -1455,6 +1461,7 @@ function toggleAccordion(btn) {
 }
 
 function dismissNivLevelup() {
+  document.getElementById('splash').style.visibility = 'visible';
   document.getElementById('nivLevelup').classList.remove('active');
   const stageKey = window._nivStageKey;
   const s = nivStages[stageKey];
@@ -1487,13 +1494,13 @@ function dismissNivLevelup() {
   const dtagsEl = document.getElementById('nivDetractorTags');
   const dtags = nivDetractors[stageKey] || [];
   dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag niv-dtag-hidden">' + t + '</span>'; }).join('');
-  // Tags reveal when situacion accordion auto-opens (800ms + transition time)
+  // Tags reveal when situacion accordion auto-opens (slower stagger)
   setTimeout(function() {
     var tags = dtagsEl.querySelectorAll('.niv-dtag');
     tags.forEach(function(tag, i) {
-      setTimeout(function() { tag.classList.remove('niv-dtag-hidden'); tag.classList.add('niv-dtag-show'); }, i * 400);
+      setTimeout(function() { tag.classList.remove('niv-dtag-hidden'); tag.classList.add('niv-dtag-show'); }, i * 600);
     });
-  }, 1400);
+  }, 2400);
 
   // Populate mini-roadmap nodes (per-stage logical order)
   const nodes = nivRoadmapNodes[stageKey] || [];
@@ -1532,10 +1539,10 @@ function dismissNivLevelup() {
     el.classList.add('reveal', 'reveal-d' + Math.min(i, 8));
   });
 
-  // Auto-open all accordions sequentially
+  // Auto-open accordions sequentially (slower, breathable pace)
   var allBlocks = document.querySelectorAll('.niv-acc-block');
   allBlocks.forEach(function(block, i) {
-    setTimeout(function() { block.classList.add('open'); }, 800 + i * 600);
+    setTimeout(function() { block.classList.add('open'); }, 1800 + i * 1200);
   });
 
   // Start 5-min countdown
