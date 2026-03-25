@@ -328,6 +328,10 @@ body::after {
   animation: calendlyPulse 2.5s ease-in-out infinite;
   position:relative;
 }
+.niv-cta-calendly:hover {
+  box-shadow:0 0 0 2px var(--electric-bright), 0 8px 40px var(--electric-glow) !important;
+  background:var(--electric-bright);
+}
 .niv-cta-calendly .urgency-badge {
   display:block;
   font-size:9px;
@@ -398,16 +402,20 @@ body::after {
 .niv-stage-bar-item span {
   font-size:7px;
   font-weight:700;
-  letter-spacing:0.12em;
+  letter-spacing:0.08em;
   text-transform:uppercase;
   color:var(--text-muted);
   position:absolute;
-  top:10px;
+  top:12px;
   left:50%;
   transform:translateX(-50%);
   white-space:nowrap;
   text-align:center;
-  line-height:1.4;
+  line-height:1.2;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
 }
 .niv-stage-bar-item.active span {
   color:var(--metal3);
@@ -482,9 +490,10 @@ body::after {
   transition:all 0.2s;
 }
 .niv-levelup-btn:hover {
-  border-color:var(--metal2);
+  border-color:var(--metal3);
   color:#fff;
-  box-shadow: 0 0 20px rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.04);
+  box-shadow: 0 0 0 1px var(--metal1), 0 4px 24px rgba(255,255,255,0.12), 0 0 40px rgba(200,200,230,0.08);
   transform:translateY(-2px);
 }
 .niv-levelup-particles {
@@ -668,15 +677,15 @@ body::after {
   background:rgba(224,53,53,0.08);
   padding:5px 12px;
   border-radius:2px;
-  animation:tagPulse 3s ease-in-out infinite;
 }
-.niv-dtag:nth-child(2) { animation-delay:0.5s; }
-.niv-dtag:nth-child(3) { animation-delay:1s; }
-.niv-dtag:nth-child(4) { animation-delay:1.5s; }
-.niv-dtag:nth-child(5) { animation-delay:2s; }
+.niv-dtag-show { animation:tagPulse 3s ease-in-out infinite 0.4s; }
+.niv-dtag-show:nth-child(2) { animation-delay:0.7s; }
+.niv-dtag-show:nth-child(3) { animation-delay:1.0s; }
+.niv-dtag-show:nth-child(4) { animation-delay:1.3s; }
+.niv-dtag-show:nth-child(5) { animation-delay:1.6s; }
 @keyframes tagPulse {
-  0%,100% { box-shadow:0 0 0 rgba(224,53,53,0); opacity:0.7; }
-  50% { box-shadow:0 0 12px rgba(224,53,53,0.2); opacity:1; }
+  0%,100% { box-shadow:0 0 0 rgba(224,53,53,0); }
+  50% { box-shadow:0 0 12px rgba(224,53,53,0.2); }
 }
 
 /* ─── MINI ROADMAP (network connection) ──────── */
@@ -929,13 +938,9 @@ body::after {
 .reveal-d7 { animation-delay:1.4s; }
 .reveal-d8 { animation-delay:1.7s; }
 
-/* ─── STAGGERED TAG APPEAR ─────────────────── */
-.niv-dtag { opacity:0; animation:revealUp 0.35s ease forwards; }
-.niv-dtag:nth-child(1) { animation-delay:0.4s; }
-.niv-dtag:nth-child(2) { animation-delay:0.7s; }
-.niv-dtag:nth-child(3) { animation-delay:1.0s; }
-.niv-dtag:nth-child(4) { animation-delay:1.3s; }
-.niv-dtag:nth-child(5) { animation-delay:1.6s; }
+/* Tags stagger via JS — .niv-dtag-hidden starts invisible */
+.niv-dtag-hidden { opacity:0; transform:translateY(8px); }
+.niv-dtag-show { transition:opacity 0.4s ease, transform 0.4s ease; opacity:1; transform:translateY(0); }
 
 /* ─── CENTERED ACCORDION TEXT ──────────────── */
 .niv-acc-body { text-align:center; }
@@ -944,9 +949,9 @@ body::after {
 /* ─── STAGE NUMBER BOXES ──────────────────── */
 .niv-stage-num {
   display:inline-flex; align-items:center; justify-content:center;
-  width:16px; height:16px; font-size:8px; font-weight:800;
+  width:14px; height:14px; font-size:7px; font-weight:800;
   border:1px solid var(--border2); color:var(--text-muted);
-  margin-bottom:4px; line-height:1;
+  line-height:1; margin-bottom:2px;
 }
 .niv-stage-bar-item.active .niv-stage-num,
 .niv-stage-bar-item.completed .niv-stage-num {
@@ -1052,7 +1057,7 @@ body::after {
       <div class="niv-result-stage" id="nivStageName"></div>
       <div class="niv-result-range" id="nivStageRange"></div>
 
-      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:36px;"></div>
+      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:48px;"></div>
 
       <!-- ACCORDION DIAGNOSTIC -->
       <div class="niv-accordion-wrap" id="nivAccordionWrap">
@@ -1201,27 +1206,27 @@ body::after {
 // ─── NIVELADOR ──────────────────────────────
 const nivQuestions = [
   {
-    q: '¿Cuál es tu situación hoy?',
+    q: '\u00bfCu\u00e1l es tu situaci\u00f3n hoy?',
     opts: [
-      { text: '👔 Empleado buscando independizarme', score: 1 },
-      { text: '🎯 Freelance / independiente vendiendo servicios', score: 2 },
-      { text: '📈 Emprendimiento con clientes activos', score: 3 },
-      { text: '🏢 Empresa formalizada con operación', score: 4 }
+      { text: 'Empleado buscando independizarme', score: 1 },
+      { text: 'Freelance / independiente vendiendo servicios', score: 2 },
+      { text: 'Emprendimiento con clientes activos', score: 3 },
+      { text: 'Empresa formalizada con operaci\u00f3n', score: 4 }
     ]
   },
   {
-    q: '¿Cuánto usas IA en tu día a día?',
+    q: '\u00bfCu\u00e1nto usas IA en tu d\u00eda a d\u00eda?',
     opts: [
-      { text: '🚫 Nada', score: 1 },
-      { text: '🔸 A veces', score: 2 },
-      { text: '⚡ Frecuentemente', score: 3 },
-      { text: '🤖 Para todo', score: 4 }
+      { text: 'Nada', score: 1 },
+      { text: 'A veces', score: 2 },
+      { text: 'Frecuentemente', score: 3 },
+      { text: 'Para todo', score: 4 }
     ]
   },
   {
-    q: '¿Cuántos clientes tienes hoy?',
+    q: '\u00bfCu\u00e1ntos clientes tienes hoy?',
     opts: [
-      { text: '0 — Estoy empleado', score: 1 },
+      { text: '0 \u2014 Estoy empleado', score: 1 },
       { text: '1 a 2 mensuales', score: 2 },
       { text: '3 a 5 mensuales', score: 3 },
       { text: '5 a 10 mensuales', score: 3.5 },
@@ -1229,20 +1234,20 @@ const nivQuestions = [
     ]
   },
   {
-    q: '¿Cuál es tu objetivo en los próximos 3 a 6 meses?',
+    q: '\u00bfCu\u00e1l es tu objetivo en los pr\u00f3ximos 3 a 6 meses?',
     opts: [
-      { text: '🚀 Independizarme y generar mi primer ingreso propio', score: 1 },
-      { text: '💰 Generar +$2,000 USD mensuales de forma consistente', score: 2 },
-      { text: '⚙️ Contratar personas y tener más tiempo libre', score: 3 },
-      { text: '🏗️ Expandirme sobre $20,000 USD mensuales', score: 4 }
+      { text: 'Independizarme y generar mi primer ingreso propio', score: 1 },
+      { text: 'Generar +$2,000 USD mensuales de forma consistente', score: 2 },
+      { text: 'Contratar personas y tener m\u00e1s tiempo libre', score: 3 },
+      { text: 'Expandirme sobre $20,000 USD mensuales', score: 4 }
     ]
   },
   {
-    q: '¿Cuánto facturas mensualmente con tu proyecto?',
+    q: '\u00bfCu\u00e1nto facturas mensualmente con tu proyecto?',
     opts: [
-      { text: '$0 – $1,500 USD', score: 1 },
-      { text: '$1,500 – $3,000 USD', score: 2 },
-      { text: '$3,000 – $10,000 USD', score: 3 },
+      { text: '$0 \u2013 $1,500 USD', score: 1 },
+      { text: '$1,500 \u2013 $3,000 USD', score: 2 },
+      { text: '$3,000 \u2013 $10,000 USD', score: 3 },
       { text: '+$10,000 USD', score: 4 }
     ]
   }
@@ -1261,7 +1266,7 @@ const nivStages = {
     name: 'OPERATOR', range: '$1,500 – $3,000/mes', color: '#e88c30',
     now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay más pero no logras escalar.',
     future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisación para generar ingresos.',
-    missing: 'Cada mes que pasa en la misma situación es un mes que no recuperas. Private Build tiene programas diseñados para operators que necesitan escalar con sistema, no con más horas. El acompañamiento es lo que marca la diferencia entre estancarse y despegar.',
+    missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build tiene programas dise\u00f1ados para operators que necesitan escalar con sistema, no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero más información sobre cómo escalar mis ingresos.'
   },
@@ -1410,25 +1415,38 @@ function dismissNivLevelup() {
   document.getElementById('nivResult').classList.add('active');
   const nameEl = document.getElementById('nivStageName');
   nameEl.textContent = s.name;
-  // Metallic gradient tinted with stage color
-  var c = s.color.startsWith('var(') ? '#b0b0d0' : s.color;
-  nameEl.style.background = 'linear-gradient(135deg, #404060 0%, ' + c + ' 25%, #f0f0ff 50%, ' + c + ' 75%, #404060 100%)';
+  // Per-stage metallic gradient (brand-aligned material feel)
+  var grads = {
+    skiller: 'linear-gradient(135deg, #505068 0%, #9090b0 20%, #d8d8f0 50%, #9090b0 80%, #505068 100%)',
+    operator: 'linear-gradient(135deg, #6a4010 0%, #d08030 20%, #ffe0a0 50%, #d08030 80%, #6a4010 100%)',
+    builder: 'linear-gradient(135deg, #1a3a7a 0%, #3a8aee 20%, #a0d0ff 50%, #3a8aee 80%, #1a3a7a 100%)',
+    founder: 'linear-gradient(135deg, #6a5020 0%, #c8a840 20%, #f0d88a 50%, #c8a840 80%, #6a5020 100%)'
+  };
+  nameEl.style.background = grads[window._nivStageKey];
   nameEl.style.backgroundSize = '200% 100%';
   nameEl.style.webkitBackgroundClip = 'text';
   nameEl.style.backgroundClip = 'text';
   nameEl.style.color = 'transparent';
   nameEl.style.webkitTextFillColor = 'transparent';
-  nameEl.style.filter = 'drop-shadow(0 2px 20px ' + c + ')';
+  var c = s.color.startsWith('var(') ? '#b0b0d0' : s.color;
+  nameEl.style.filter = 'drop-shadow(0 4px 24px ' + c + '60)';
 
   document.getElementById('nivStageRange').textContent = s.range;
   document.getElementById('nivNow').textContent = s.now;
   document.getElementById('nivFuture').textContent = s.future;
   document.getElementById('nivMissing').textContent = s.missing;
 
-  // Populate detractor tags (red, pulsing — unique per stage, not repeating description)
+  // Populate detractor tags — staggered reveal one by one
   const dtagsEl = document.getElementById('nivDetractorTags');
   const dtags = nivDetractors[stageKey] || [];
-  dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag">' + t + '</span>'; }).join('');
+  dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag niv-dtag-hidden">' + t + '</span>'; }).join('');
+  // Reveal each tag with delay after accordion opens
+  setTimeout(function() {
+    var tags = dtagsEl.querySelectorAll('.niv-dtag');
+    tags.forEach(function(tag, i) {
+      setTimeout(function() { tag.classList.remove('niv-dtag-hidden'); tag.classList.add('niv-dtag-show'); }, i * 350);
+    });
+  }, 1000);
 
   // Populate mini-roadmap nodes (per-stage logical order)
   const nodes = nivRoadmapNodes[stageKey] || [];
