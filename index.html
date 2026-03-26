@@ -265,8 +265,8 @@ body.result-mode {
 
 /* [Dead CSS purged — brand alignment v2.0] */
 /* ─── NIVELADOR QUIZ ─────────────────────── */
-.niv-wrap { display:none; max-width:640px; width:100%; margin:0 auto; }
-.niv-wrap.active { display:block; }
+.niv-wrap { display:none; max-width:640px; width:100%; margin:0 auto; padding:0 16px; }
+.niv-wrap.active { display:flex; flex-direction:column; align-items:stretch; justify-content:center; }
 .niv-progress { display:flex; gap:4px; margin-bottom:32px; }
 .niv-progress-dot { flex:1; height:3px; background:var(--border); transition:background 0.3s; }
 .niv-progress-dot.done { background:var(--green); }
@@ -1367,6 +1367,8 @@ let nivScores = [];
 function startNivelador() {
   nivStep = 0; nivScores = [];
   document.getElementById('nivIntro').style.display = 'none';
+  // Hide title to give quiz full centered space
+  document.querySelector('.splash-title-wrap').style.display = 'none';
   document.getElementById('nivQuiz').classList.add('active');
   document.getElementById('nivResult').classList.remove('active');
   document.getElementById('nivBack').style.display = 'none';
