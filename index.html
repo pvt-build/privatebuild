@@ -825,13 +825,30 @@ body.result-mode {
   margin:32px auto 0;
 }
 .niv-cases-title {
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:0.3em;
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(18px,3vw,24px);
+  font-weight:900;
+  letter-spacing:0.08em;
   text-transform:uppercase;
-  color:var(--text-muted);
+  background:var(--metal-grad);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 20px rgba(200,200,230,0.25));
+  animation:titleShimmer 4s ease-in-out infinite;
   text-align:center;
-  margin-bottom:16px;
+  margin-bottom:6px;
+}
+.niv-cases-highlight {
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--green);
+  text-align:center;
+  margin-bottom:20px;
+  text-shadow:0 0 12px rgba(0,200,100,0.3);
 }
 .niv-cases-grid {
   display:grid;
@@ -1041,18 +1058,44 @@ body.result-mode {
 /* ─── FOOTER CTA LINK ────────────────────────── */
 .niv-footer-cta {
   display:inline-block;
-  margin-top:12px;
-  font-size:13px;
-  font-weight:700;
-  color:var(--red);
+  margin-top:20px;
+  padding:14px 32px;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:#fff;
   text-decoration:none;
-  letter-spacing:0.05em;
-  transition:all 0.2s;
-  border-bottom:1px solid transparent;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:2px;
+  transition:all 0.3s;
 }
 .niv-footer-cta:hover {
-  border-bottom-color:var(--red);
-  transform:translateY(-1px);
+  border-color:rgba(255,255,255,0.5);
+  transform:translateY(-2px);
+  text-shadow:0 0 12px rgba(255,255,255,0.4);
+}
+/* Heartbeat glow — emotional pulsing */
+@keyframes heartbeatGlow {
+  0%   { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+  14%  { box-shadow:0 0 16px rgba(255,80,80,0.4), 0 0 40px rgba(255,80,80,0.15); transform:scale(1.03); }
+  28%  { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+  42%  { box-shadow:0 0 20px rgba(255,80,80,0.5), 0 0 50px rgba(255,80,80,0.2); transform:scale(1.04); }
+  56%  { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+  100% { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+}
+.niv-heartbeat {
+  animation: heartbeatGlow 2.4s ease-in-out infinite;
+  border-color:rgba(255,80,80,0.3);
+  color:#ff6060;
+  text-shadow:0 0 8px rgba(255,80,80,0.2);
+}
+.niv-heartbeat:hover {
+  animation-play-state:paused;
+  border-color:rgba(255,80,80,0.6);
+  box-shadow:0 0 30px rgba(255,80,80,0.4), 0 0 60px rgba(255,80,80,0.15);
+  color:#ff4040;
 }
 
 /* ─── MOBILE COUNTDOWN (no longer sticky) ──────────── */
@@ -1190,6 +1233,7 @@ body.result-mode {
       <!-- SUCCESS CASES -->
       <div class="niv-cases">
         <div class="niv-cases-title">CASOS DE &Eacute;XITO</div>
+        <div class="niv-cases-highlight">+$300.000 USD generados por el ecosistema</div>
         <div class="niv-cases-grid">
           <!-- SKILLER → OPERATOR -->
           <div class="niv-case">
@@ -1247,15 +1291,15 @@ body.result-mode {
 
       <!-- FOOTER -->
       <div class="niv-footer">
-        <div class="niv-footer-logo">PRIVATE BUILD</div>
+        <div class="niv-footer-logo">&#x1F512; PRIVATE BUILD</div>
         <div class="niv-footer-text">
           Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque puedan tener distintos rangos de ingreso y m&aacute;rgenes.
           Hoy, <strong>construir tu propia infraestructura es clave</strong> para un mundo que se apalanca con IA.
           Los ingresos que hoy generas, pueden <strong>multiplicarse hasta x10</strong> con una buena oferta, sistemas y automatizaci&oacute;n.
         </div>
         <div class="niv-footer-closer" style="margin-top:20px;">La pregunta es...</div>
-        <div class="niv-footer-closer" style="margin-top:8px;font-size:16px;color:var(--metal3);">&iquest;Tomar&aacute;s acci&oacute;n o quieres seguir donde est&aacute;s?</div>
-        <a class="niv-footer-cta" href="https://calendly.com/privatebuildprograms/start" target="_blank">No, quiero cambiar mi situaci&oacute;n &rarr;</a>
+        <div class="niv-footer-closer" style="margin-top:8px;font-size:16px;color:var(--metal3);">&iquest;Vas a tomar acci&oacute;n o vas a volver donde estabas?</div>
+        <a class="niv-footer-cta niv-heartbeat" href="https://calendly.com/privatebuildprograms/start" target="_blank">No, voy a tomar acci&oacute;n ahora &rarr;</a>
       </div>
     </div>
 
@@ -1556,15 +1600,18 @@ function dismissNivLevelup() {
       '<a class="niv-cta" style="background:transparent;border:1px solid var(--border2);color:var(--text-secondary);" href="https://calendly.com/privatebuildprograms/start" target="_blank">NECESITO ACOMPA\u00d1AMIENTO</a>';
     if (cdEl) cdEl.style.display = 'none';
   } else if (stageKey === 'founder') {
-    missingEl.textContent = s.missing;
+    missingEl.innerHTML = s.missing + '<br><br><span style="color:var(--text-secondary);font-size:13px;">Agenda una llamada y encontremos oportunidades y recursos que te permitan pasar a la siguiente etapa en los pr\u00f3ximos meses.</span>';
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/founder-call" target="_blank">\u{1F513} &nbsp;AGENDAR FOUNDER CALL<span class="urgency-badge"><s>Valor normal $97 USD</s> \u2014 SIN COSTO</span></a>';
-    if (cdEl) { cdEl.style.display = 'block'; }
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/founder-call" target="_blank">AGENDAR LLAMADA</a>' +
+      '<p style="font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.6;max-width:400px;">Si llegaste hasta aqu\u00ed, fue por algo. Puedes tomar la oportunidad o volver donde estabas.</p>';
+    if (cdEl) cdEl.style.display = 'none';
   } else {
-    missingEl.textContent = s.missing;
+    // Operator & Builder
+    missingEl.innerHTML = s.missing + '<br><br><span style="color:var(--text-secondary);font-size:13px;">Agenda una llamada y encontremos oportunidades y recursos que te permitan pasar a la siguiente etapa en los pr\u00f3ximos meses.</span>';
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">\u{1F513} &nbsp;CONSULTOR\u00cdA INICIAL<span class="urgency-badge"><s>Valor normal $97 USD</s> \u2014 SIN COSTO</span></a>';
-    if (cdEl) { cdEl.style.display = 'block'; }
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">AGENDAR LLAMADA</a>' +
+      '<p style="font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.6;max-width:400px;">Si llegaste hasta aqu\u00ed, fue por algo. Puedes tomar la oportunidad o volver donde estabas.</p>';
+    if (cdEl) cdEl.style.display = 'none';
   }
 
   // Staggered reveal — each section appears gradually
