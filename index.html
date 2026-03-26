@@ -1523,9 +1523,8 @@ function dismissNivLevelup() {
     if (cdEl) cdEl.style.display = 'none';
   } else if (stageKey === 'founder') {
     missingEl.textContent = s.missing;
-    var waLink = 'https://wa.me/56978048922?text=' + encodeURIComponent(s.wa);
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="' + waLink + '" target="_blank">\u{1F513} &nbsp;CONECTAR PARA UN CAF\u00c9</a>';
+      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/founder-call" target="_blank">\u{1F513} &nbsp;AGENDAR FOUNDER CALL<span class="urgency-badge"><s>Valor normal $97 USD</s> \u2014 SIN COSTO</span></a>';
     if (cdEl) { cdEl.style.display = 'block'; }
   } else {
     missingEl.textContent = s.missing;
