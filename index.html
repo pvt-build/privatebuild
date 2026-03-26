@@ -129,10 +129,7 @@ body::after {
     radial-gradient(ellipse 120% 70% at 50% 30%, rgba(20,20,28,0.95) 0%, transparent 65%),
     #050508;
   background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
+  display: block;
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;
@@ -156,6 +153,30 @@ body::after {
   position: relative;
   z-index: 2;
   margin: 0 auto;
+  min-height: calc(100vh - 100px);
+  min-height: calc(100dvh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* After quiz result, disable vertical centering and min-height to prevent dead space */
+.splash-inner.result-mode {
+  min-height: 0;
+  justify-content: flex-start;
+}
+#splash.result-mode {
+  min-height: 0;
+  height: auto;
+  overflow: visible;
+}
+#splash.result-mode::before,
+#splash.result-mode::after {
+  display: none !important;
+}
+/* Ensure body scrolls the full page in result mode */
+body.result-mode {
+  min-height: 0;
 }
 
 .splash-title {
@@ -674,7 +695,7 @@ body::after {
   padding:0 20px;
 }
 .niv-acc-block.open .niv-acc-body {
-  max-height:800px;
+  max-height:1200px;
   padding:0 20px 20px;
 }
 
@@ -1463,7 +1484,18 @@ function toggleAccordion(btn) {
 
 function dismissNivLevelup() {
   document.getElementById('splash').style.visibility = 'visible';
-  document.getElementById('nivLevelup').classList.remove('active');
+  // Switch to result mode (remove nested scroll, centering, min-height dead space)
+  document.querySelector('.splash-inner').classList.add('result-mode');
+  document.getElementById('splash').classList.add('result-mode');
+  document.body.classList.add('result-mode');
+  // Hide splash title to free space for result
+  document.querySelector('.splash-title-wrap').style.display = 'none';
+  // Scroll to top of result
+  window.scrollTo({top: 0, behavior: 'instant'});
+  var overlay = document.getElementById('nivLevelup');
+  overlay.classList.remove('active');
+  // Fully hide overlay so it doesn't intercept touch scroll
+  setTimeout(function() { overlay.style.display = 'none'; }, 800);
   const stageKey = window._nivStageKey;
   const s = nivStages[stageKey];
 
