@@ -372,6 +372,8 @@ body.result-mode {
   max-width:540px;
   margin-left:auto;
   margin-right:auto;
+  margin-bottom:16px;
+  padding:0 8px;
 }
 @media(max-width:540px) {
   .splash-title { font-size: clamp(36px, 12vw, 52px); }
@@ -764,14 +766,12 @@ body.result-mode {
   margin-bottom:6px;
 }
 .niv-cases-highlight {
-  font-size:11px;
+  font-size:10px;
   font-weight:700;
   letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--green);
+  color:var(--text-secondary);
   text-align:center;
   margin-bottom:20px;
-  text-shadow:0 0 12px rgba(0,200,100,0.3);
 }
 .niv-cases-grid {
   display:grid;
@@ -1470,12 +1470,9 @@ body.result-mode {
 
 /* ─── STAGE EXPLOSION ────────────────────────── */
 @keyframes stageExplodeIn {
-  0% { transform:scale(0); opacity:0; filter:blur(30px); }
-  20% { opacity:0.5; }
-  50% { transform:scale(1.3); opacity:1; filter:blur(0); text-shadow:0 0 80px currentColor; }
-  70% { transform:scale(0.9); }
-  85% { transform:scale(1.05); }
-  100% { transform:scale(1); text-shadow:none; }
+  0% { opacity:0; filter:blur(20px); }
+  30% { opacity:1; filter:blur(0); }
+  100% { opacity:1; filter:blur(0); }
 }
 @keyframes flashBurst {
   0% { opacity:0; }
@@ -1546,15 +1543,127 @@ body.result-mode {
   flex-shrink:0;
 }
 .niv-calc-arrow:hover {
-  background:rgba(255,255,255,0.08);
-  border-color:rgba(255,255,255,0.2);
-  color:var(--metal3);
+  background:rgba(56,176,104,0.15);
+  border-color:rgba(56,176,104,0.3);
+  color:var(--green);
+}
+.niv-calc-arrow:active {
+  transform:scale(0.9);
 }
 .niv-calc-arrow:first-child {
   border-right:none;
 }
 .niv-calc-arrow:last-child {
   border-left:none;
+}
+@keyframes marqueeRight {
+  0% { transform:translateX(-30%); }
+  100% { transform:translateX(0%); }
+}
+@keyframes marqueeLeft {
+  0% { transform:translateX(0%); }
+  100% { transform:translateX(-30%); }
+}
+.niv-tool-marquee {
+  overflow:hidden;
+  width:100%;
+}
+.niv-tool-marquee-track {
+  display:flex;
+  gap:8px;
+  width:max-content;
+  animation-duration:20s;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+}
+.niv-tool-marquee-track.right { animation-name:marqueeRight; }
+.niv-tool-marquee-track.left { animation-name:marqueeLeft; }
+.niv-tool-marquee-track:hover { animation-play-state:paused; }
+.niv-compound-chart {
+  max-width:440px;
+  margin:0 auto 32px;
+  padding:20px;
+  border:1px solid var(--border);
+  background:var(--bg2);
+  border-radius:4px;
+}
+.niv-compound-title {
+  font-size:12px;
+  font-weight:700;
+  color:var(--metal2);
+  text-align:center;
+  margin-bottom:16px;
+  letter-spacing:0.08em;
+}
+.niv-compound-tracks { display:flex; flex-direction:column; gap:16px; }
+.niv-compound-track {}
+.niv-compound-label {
+  font-size:10px;
+  font-weight:600;
+  color:var(--green);
+  margin-bottom:6px;
+  letter-spacing:0.05em;
+}
+.niv-compound-bars { display:flex; gap:4px; align-items:flex-end; }
+.niv-compound-bar {
+  height:28px;
+  width:var(--w);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.05em;
+  border-radius:2px;
+  transition:width 1.5s cubic-bezier(.4,0,.2,1);
+  min-width:40px;
+}
+.niv-compound-bar.action {
+  background:linear-gradient(90deg, rgba(56,176,104,0.2) 0%, rgba(56,176,104,0.4) 100%);
+  border:1px solid rgba(56,176,104,0.3);
+  color:var(--green);
+}
+.niv-compound-bar.wait {
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--text-muted);
+}
+.niv-compound-years {
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  padding:0 4px;
+  font-size:9px;
+  color:var(--text-muted);
+  letter-spacing:0.05em;
+}
+.niv-rubros { text-align:center; }
+.niv-rubros-spheres {
+  display:flex;
+  justify-content:center;
+  margin-bottom:6px;
+}
+.niv-rubro {
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  margin-left:-6px;
+  position:relative;
+  transition:transform 0.2s;
+}
+.niv-rubro:first-child { margin-left:0; }
+.niv-rubro:hover { transform:translateY(-2px); z-index:1; }
+.niv-rubros-text {
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.08em;
+  opacity:0.7;
 }
 </style>
 </head>
@@ -1572,7 +1681,7 @@ body.result-mode {
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
       <!-- Stage preview FIRST -->
-      <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:24px;"></div>
+      <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:20px;"></div>
       <p class="splash-tagline niv-home-reveal niv-home-d2">Construye tu negocio desde tu habilidad, con IA, sistemas y el respaldo de una comunidad que ya recorri&oacute; el camino.</p>
       <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Descubre tu etapa actual</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
@@ -1581,7 +1690,21 @@ body.result-mode {
         </button>
         <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 45 segundos &middot; resultado inmediato</p>
       </div>
-      <p class="niv-home-reveal niv-home-d5" style="font-size:10px;color:var(--text-muted);margin-top:20px;letter-spacing:0.08em;opacity:0.6;">+40 founders construyendo en el ecosistema</p>
+      <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
+        <div class="niv-rubros">
+          <div class="niv-rubros-spheres">
+            <span class="niv-rubro">&#x2696;&#xFE0F;</span>
+            <span class="niv-rubro">&#x1F489;</span>
+            <span class="niv-rubro">&#x1F4F1;</span>
+            <span class="niv-rubro">&#x1F4AA;</span>
+            <span class="niv-rubro">&#x1F4F7;</span>
+            <span class="niv-rubro">&#x1F916;</span>
+            <span class="niv-rubro">&#x1F697;</span>
+            <span class="niv-rubro">&#x1F34E;</span>
+          </div>
+          <div class="niv-rubros-text">V&aacute;lido para +100 rubros</div>
+        </div>
+      </div>
     </div>
 
     <!-- QUIZ QUESTIONS -->
@@ -1669,8 +1792,8 @@ body.result-mode {
 
       <!-- SUCCESS CASES -->
       <div class="niv-cases">
-        <div class="niv-cases-title">PRIVATE ACHIEVEMENTS</div>
-        <div class="niv-cases-highlight">No importa cu&aacute;l sea tu etapa, construye el camino a la siguiente</div>
+        <div class="niv-cases-title">&#x1F3C6; PRIVATE ACHIEVEMENTS</div>
+        <div class="niv-cases-highlight">Tu tambi&eacute;n puedes construir el camino a tu siguiente etapa</div>
         <div class="niv-cases-grid">
           <!-- SKILLER → OPERATOR -->
           <div class="niv-case">
@@ -1736,13 +1859,35 @@ body.result-mode {
 
       <!-- FOUNDER QUOTES + FINAL CTA -->
       <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
+        <div class="niv-compound-chart">
+          <div class="niv-compound-title">El costo de esperar</div>
+          <div class="niv-compound-tracks">
+            <div class="niv-compound-track">
+              <div class="niv-compound-label">Tomando acci&oacute;n hoy</div>
+              <div class="niv-compound-bars">
+                <div class="niv-compound-bar action" style="--w:10%"><span>$1K</span></div>
+                <div class="niv-compound-bar action" style="--w:30%"><span>$3K</span></div>
+                <div class="niv-compound-bar action" style="--w:100%"><span>$10K</span></div>
+              </div>
+            </div>
+            <div class="niv-compound-track">
+              <div class="niv-compound-label" style="color:var(--text-muted);">Esperando &ldquo;el momento perfecto&rdquo;</div>
+              <div class="niv-compound-bars">
+                <div class="niv-compound-bar wait" style="--w:10%"><span>$1K</span></div>
+                <div class="niv-compound-bar wait" style="--w:15%"><span>$1.5K</span></div>
+                <div class="niv-compound-bar wait" style="--w:20%"><span>$2K</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="niv-compound-years"><span>A&ntilde;o 1</span><span>A&ntilde;o 2</span><span>A&ntilde;o 3</span></div>
+        </div>
         <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
         <div class="niv-urgency-line"></div>
         <div class="niv-urgency-text">
           No te falta informaci&oacute;n ni claridad.<br>
           Te sobra <strong>tolerancia a la espera y a la comodidad.</strong>
         </div>
-        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank">&iquest;O vas a dejar que se escape otro a&ntilde;o m&aacute;s?</a>
+        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank">No, quiero tomar acci&oacute;n ahora &rarr;</a>
       </div>
 
       <!-- FOOTER -->
@@ -1767,7 +1912,7 @@ body.result-mode {
     <div class="niv-levelup-label">TU ETAPA</div>
     <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
     <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
-    <button class="niv-levelup-btn" onclick="dismissNivLevelup()">VER MI DIAGN&Oacute;STICO &rarr;</button>
+    <button class="niv-levelup-btn" onclick="dismissNivLevelup()">Ver mi resultado &rarr;</button>
     <!-- Community mini gate (during analyzing phase) -->
     <div class="niv-community-mini" id="nivCommunityMini">
       <div class="niv-community-title">&Uacute;nete a la comunidad de Founders</div>
@@ -1850,7 +1995,7 @@ const nivStages = {
   },
   operator: {
     name: 'OPERATOR', range: '$1,500 \u2013 $3,000/mes', color: '#e88c30',
-    now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay m\u00e1s pero no logras escalar.',
+    now: 'Ya vendes pero cobras poco y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay m\u00e1s pero no logras escalar.',
     future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisaci\u00f3n para generar ingresos.',
     missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build tiene programas dise\u00f1ados para operators que necesitan escalar con sistema, no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
@@ -1956,16 +2101,16 @@ const nivCalcTargets = {
 // ─── CALL BENEFITS PER STAGE (el "qué", no el "cómo") ──
 const nivCallBenefits = {
   operator: [
-    'Tu diagn\u00f3stico de situaci\u00f3n actual',
-    'El mapa de tu siguiente paso (validado en +100 clientes)',
-    'Tu stack m\u00ednimo viable para esta etapa',
-    'Sin compromiso \u2014 30 minutos de valor puro'
+    'Diagn\u00f3stico de situaci\u00f3n actual',
+    'Mapa de tu siguiente paso',
+    'Stack m\u00ednimo viable',
+    '30 min de valor \u2014 sin compromiso'
   ],
   builder: [
-    'Tu diagn\u00f3stico t\u00e9cnico de stack y procesos',
-    'El sistema validado para llegar a $10K/mes',
-    'Tu roadmap de automatizaci\u00f3n priorizado',
-    'Sin compromiso \u2014 30 minutos de estrategia'
+    'Diagn\u00f3stico t\u00e9cnico de stack',
+    'Sistema validado \u2192 $10K/mes',
+    'Roadmap de automatizaci\u00f3n',
+    '30 min de estrategia \u2014 sin compromiso'
   ]
 };
 
@@ -2104,8 +2249,10 @@ function proceedToLevelUp() {
     labelEl.textContent = 'TU ETAPA';
     labelEl.style.animation = '';
     rankEl.textContent = s.name;
-    rankEl.style.filter = 'drop-shadow(0 0 60px ' + (s.color.startsWith('var(') ? 'rgba(200,200,230,0.5)' : s.color + '88') + ')';
-    rankEl.style.animation = 'stageExplodeIn 1s cubic-bezier(.25,.46,.45,.94)';
+    var stageColors = { skiller:'#b0b0d0', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+    var dropColor = stageColors[stageKey] || '#b0b0d0';
+    rankEl.style.filter = 'drop-shadow(0 0 60px ' + dropColor + '88)';
+    rankEl.style.animation = 'stageExplodeIn 1s ease';
     rangeEl.textContent = s.range;
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
     btnEl.style.transition = 'opacity 0.8s ease 0.8s';
@@ -2151,17 +2298,19 @@ function renderToolStack(stageKey) {
   if (!categories) return '';
   var html = '<div class="niv-tool-stack"><div class="niv-tool-stack-label">STACK DE ESTA ETAPA</div>';
   var catKeys = Object.keys(categories);
-  catKeys.forEach(function(cat) {
+  var dirs = ['right','left'];
+  catKeys.forEach(function(cat, ci) {
     var tools = categories[cat];
-    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">';
+    var itemsHtml = '';
     tools.forEach(function(t) {
       if (t.emoji) {
-        html += '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>';
+        itemsHtml += '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>';
       } else {
-        html += '<span class="niv-tool-item"><img src="' + t.icon + '" alt="' + t.name + '" width="16" height="16"> ' + t.name + '</span>';
+        itemsHtml += '<span class="niv-tool-item"><img src="' + t.icon + '" alt="' + t.name + '" width="16" height="16"> ' + t.name + '</span>';
       }
     });
-    html += '</div></div>';
+    var dir = dirs[ci % 2];
+    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-marquee"><div class="niv-tool-marquee-track ' + dir + '">' + itemsHtml + itemsHtml + '</div></div></div>';
   });
   html += '</div>';
   return html;
@@ -2244,33 +2393,33 @@ function dismissNivLevelup() {
 
   if (stageKey === 'skiller') {
     // TODO: verify this Notion link is live — Patrick must check
-    missingEl.innerHTML = s.missing + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
+    missingEl.innerHTML = s.missing.replace('necesitas activar tu habilidad con el respaldo correcto', '<strong style="color:var(--metal3);">necesitas activar tu habilidad con el respaldo correcto</strong>') + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
     ctasEl.innerHTML =
       '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>' +
-      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} NECESITO ORIENTACI\u00d3N</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Soy Skiller y quiero saber c\u00f3mo apalancarme de IA para generar mis primeros ingresos</a>';
 
   } else if (stageKey === 'operator') {
-    missingEl.innerHTML = s.missing;
+    missingEl.innerHTML = s.missing.replace('El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse', '<strong style="color:var(--metal3);">El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse</strong>');
     var benefitsHtml = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 te llevas de la llamada?</div>';
     nivCallBenefits.operator.forEach(function(b) {
       benefitsHtml += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
     });
     benefitsHtml += '</div>';
     ctasEl.innerHTML = benefitsHtml +
-      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} QUIERO ALCANZAR LOS $3.000/MES</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Soy Operator y quiero apalancarme de IA para sistematizar mis ingresos</a>';
 
   } else if (stageKey === 'builder') {
-    missingEl.innerHTML = s.missing;
+    missingEl.innerHTML = s.missing.replace('Una llamada de 30 minutos puede ahorrarte meses de prueba y error', '<strong style="color:var(--metal3);">Una llamada de 30 minutos puede ahorrarte meses de prueba y error</strong>');
     var benefitsHtml2 = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 te llevas de la llamada?</div>';
     nivCallBenefits.builder.forEach(function(b) {
       benefitsHtml2 += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
     });
     benefitsHtml2 += '</div>';
     ctasEl.innerHTML = benefitsHtml2 +
-      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} QUIERO CONOCER EL SISTEMA PARA LLEGAR A $10K/MES</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Soy Builder y quiero apalancarme de IA para automatizar y escalar</a>';
 
   } else if (stageKey === 'founder') {
-    missingEl.innerHTML = s.missing;
+    missingEl.innerHTML = s.missing.replace('es una conversaci\u00f3n directa', '<strong style="color:var(--metal3);">es una conversaci\u00f3n directa</strong>');
     ctasEl.innerHTML =
       '<a class="niv-cta" style="background:var(--gold);color:#000;font-weight:800;border:none;" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4CB} SUMARME A LA LISTA DE ESPERA MASTERMIND</a>';
   }
@@ -2358,6 +2507,7 @@ function calcStep(delta) {
   var val = parseInt(input.value) || 0;
   val = Math.max(0, val + delta);
   input.value = val;
+  if(navigator.vibrate) navigator.vibrate(10);
   updateCalculator();
 }
 
