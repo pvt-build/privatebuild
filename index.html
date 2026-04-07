@@ -282,7 +282,7 @@ body.result-mode {
 .niv-result-range { font-size:14px; color:var(--text-secondary); margin-bottom:24px; font-weight:600; }
 .niv-result-text { font-size:clamp(14px,1.8vw,16px); color:var(--text-primary); line-height:1.7; padding:0 4px; word-break:break-word; }
 .niv-ctas { display:flex; flex-direction:column; gap:10px; max-width:360px; margin:0 auto; }
-.niv-cta { display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; font-family:'Inter',sans-serif; font-size:clamp(11px,1.8vw,13px); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; flex-wrap:wrap; width:100%; max-width:360px; margin:0 auto; border-radius:2px; }
+.niv-cta { display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; font-family:'Inter',sans-serif; font-size:clamp(11px,1.8vw,13px); font-weight:600; letter-spacing:0.06em; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; flex-wrap:wrap; width:100%; max-width:360px; margin:0 auto; border-radius:2px; }
 .niv-cta:hover { transform:translateY(-2px); }
 /* ─── FLOATING PARTICLES ─────────────────── */
 @keyframes float-particle {
@@ -908,9 +908,31 @@ body.result-mode {
 }
 .niv-footer-closer {
   font-size:14px;
-  font-weight:700;
-  color:var(--metal2);
+  font-weight:600;
+  background:var(--metal-grad);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:titleShimmer 5s ease-in-out infinite;
   letter-spacing:0.02em;
+}
+.niv-footer-brand {
+  margin-top:32px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:0.08em;
+  color:var(--text-muted);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.niv-footer-sep {
+  color:var(--border2);
 }
 
 /* ─── GOLD LED GLOW (siguiente paso isolated) ── */
@@ -1136,12 +1158,20 @@ body.result-mode {
   display:inline-flex;
   align-items:center;
   gap:5px;
-  padding:4px 10px;
-  background:rgba(255,255,255,0.04);
-  border:1px solid var(--border);
+  padding:5px 12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
   font-size:11px;
   color:var(--text-secondary);
-  border-radius:2px;
+  border-radius:20px;
+  transition:all 0.25s ease;
+  cursor:default;
+}
+.niv-tool-item:hover {
+  transform:translateY(-3px);
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(255,255,255,0.12);
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
 }
 .niv-tool-item img {
   width:16px;
@@ -1160,9 +1190,14 @@ body.result-mode {
 }
 .niv-calc-title {
   font-family:'Inter Tight',sans-serif;
-  font-size:clamp(16px,2.5vw,20px);
-  font-weight:800;
-  color:var(--metal3);
+  font-size:clamp(15px,2.5vw,18px);
+  font-weight:700;
+  background:var(--metal-grad);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:titleShimmer 5s ease-in-out infinite;
   margin-bottom:6px;
   line-height:1.4;
 }
@@ -1316,49 +1351,55 @@ body.result-mode {
   margin-top:6px;
 }
 
-/* ─── COUNTDOWN SECTION ──────────────────────── */
-.niv-countdown-section {
+/* ─── FOUNDER QUOTES + URGENCY ──────────────── */
+.niv-urgency-section {
   max-width:520px;
-  margin:32px auto 0;
-  padding:24px 20px;
-  border:1px solid rgba(255,80,80,0.15);
-  background:rgba(255,80,80,0.03);
+  margin:40px auto 0;
   text-align:center;
 }
-.niv-countdown-title {
-  font-family:'Inter Tight',sans-serif;
-  font-size:14px;
-  font-weight:800;
-  color:var(--red);
-  letter-spacing:0.05em;
-  margin-bottom:12px;
+.niv-urgency-quotes {
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  margin-bottom:24px;
 }
-.niv-countdown-timer {
-  font-family:'Inter Tight',sans-serif;
-  font-size:clamp(28px,5vw,36px);
-  font-weight:900;
-  color:var(--metal3);
-  letter-spacing:0.1em;
-  margin-bottom:14px;
-  font-variant-numeric:tabular-nums;
+.niv-urgency-quote {
+  padding:0 16px;
+  opacity:0;
+  transform:translateY(12px);
+  animation:fadeInUp 0.8s ease forwards;
 }
-.niv-countdown-text {
-  font-size:13px;
+.niv-urgency-quote:nth-child(2) { animation-delay:0.4s; }
+.niv-urgency-quote:nth-child(3) { animation-delay:0.8s; }
+.niv-urgency-quote-text {
+  font-size:clamp(13px,2vw,15px);
+  font-style:italic;
   color:var(--text-secondary);
   line-height:1.7;
+  margin-bottom:6px;
+}
+.niv-urgency-quote-author {
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.1em;
+  color:var(--text-muted);
+}
+.niv-urgency-line {
+  width:40px;
+  height:1px;
+  background:var(--border2);
+  margin:0 auto 20px;
+}
+.niv-urgency-text {
+  font-size:13px;
+  color:var(--text-muted);
+  line-height:1.8;
   max-width:400px;
   margin:0 auto;
 }
-.niv-countdown-text strong {
-  color:var(--metal3);
-  font-weight:700;
-}
-@keyframes countdownPulse {
-  0%,100% { border-color:rgba(255,80,80,0.15); }
-  50% { border-color:rgba(255,80,80,0.35); }
-}
-.niv-countdown-section.active {
-  animation:countdownPulse 2s ease-in-out infinite, fadeInUp 0.8s ease;
+.niv-urgency-text strong {
+  color:var(--metal2);
+  font-weight:600;
 }
 
 /* ─── TOOL CATEGORIES ────────────────────────── */
@@ -1378,10 +1419,10 @@ body.result-mode {
   flex-wrap:wrap;
   gap:6px;
   justify-content:center;
-  padding:8px 10px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,0.02);
-  border-radius:2px;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.015);
+  border-radius:8px;
 }
 
 /* ─── QUIZ FIXED HEIGHT ──────────────────────── */
@@ -1601,29 +1642,33 @@ body.result-mode {
         </div>
       </div>
 
-      <!-- COUNTDOWN -->
-      <div class="niv-countdown-section" id="nivCountdown" style="display:none;">
-        <div class="niv-countdown-title">Si hoy no tomas acci&oacute;n, probablemente ma&ntilde;ana tampoco lo hagas.</div>
-        <div class="niv-countdown-timer" id="nivCountdownTimer">01:00</div>
-        <div class="niv-countdown-text">
-          No tienes falta de informaci&oacute;n o claridad...<br>
-          Tienes <strong>exceso de tolerancia a la espera y la comodidad.</strong><br><br>
+      <!-- FOUNDER QUOTES + URGENCY -->
+      <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
+        <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
+        <div class="niv-urgency-line"></div>
+        <div class="niv-urgency-text">
+          No te falta informaci&oacute;n ni claridad.<br>
+          Te sobra <strong>tolerancia a la espera y a la comodidad.</strong><br><br>
           Si no tomas acci&oacute;n hoy, tendr&aacute;s otro a&ntilde;o m&aacute;s en desventaja.
         </div>
-        <a class="niv-cta niv-cta-wa" id="nivCountdownCta" style="margin:16px auto 0;max-width:360px;" href="#" target="_blank">&#x1F4AC; TOMAR ACCI&Oacute;N AHORA</a>
       </div>
 
       <!-- FOOTER -->
       <div class="niv-footer">
         <div class="niv-footer-logo">&#x1F512; PRIVATE BUILD</div>
         <div class="niv-footer-text">
-          Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque puedan tener distintos rangos de ingreso y m&aacute;rgenes.
+          Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque tengan distintos rangos de ingreso y m&aacute;rgenes.
           Hoy, <strong>construir tu propia infraestructura es clave</strong> para un mundo que se apalanca con IA.
-          Los ingresos que hoy generas, pueden <strong>multiplicarse hasta x10</strong> con una buena oferta, sistemas y automatizaci&oacute;n.
+          Los ingresos que hoy generas pueden <strong>multiplicarse hasta x10</strong> con la oferta, sistemas y automatizaci&oacute;n correctos.
         </div>
-        <div class="niv-footer-closer" style="margin-top:20px;">La pregunta es...</div>
-        <div class="niv-footer-closer" style="margin-top:8px;font-size:16px;color:var(--metal3);">&iquest;Vas a tomar acci&oacute;n o vas a volver donde estabas?</div>
-        <a class="niv-footer-cta niv-heartbeat" id="nivFooterCta" href="https://wa.me/56978048922?text=Hola%20Patrick%2C%20vengo%20del%20nivelador.%20Soy%20OPERATOR%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20c%C3%B3mo%20escalar%20mis%20ingresos." target="_blank">No, voy a tomar acci&oacute;n ahora &rarr;</a>
+        <div class="niv-footer-closer" style="margin-top:20px;color:var(--text-secondary);font-weight:400;">La pregunta es...</div>
+        <div class="niv-footer-closer" style="margin-top:8px;font-size:15px;">&iquest;Vas a tomar acci&oacute;n o vas a volver donde estabas?</div>
+        <a class="niv-footer-cta niv-heartbeat" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank">No, voy a tomar acci&oacute;n ahora &rarr;</a>
+        <div class="niv-footer-brand">
+          <span>we all gonna make it &#x1F3F4;&#x200D;&#x2620;&#xFE0F;</span>
+          <span class="niv-footer-sep">&middot;</span>
+          <span>Built with vision &#x1F9ED;</span>
+        </div>
       </div>
     </div>
 
@@ -2143,10 +2188,6 @@ function dismissNivLevelup() {
   if (footerCta && s.wa) {
     footerCta.href = buildWaUrl(s.wa);
   }
-  var countdownCta = document.getElementById('nivCountdownCta');
-  if (countdownCta && s.wa) {
-    countdownCta.href = buildWaUrl(s.wa);
-  }
 
   // Show and configure calculator
   var calcEl = document.getElementById('nivCalculator');
@@ -2173,31 +2214,50 @@ function dismissNivLevelup() {
   // Update stage bars
   updateStageBars(stageKey);
 
-  // Show countdown after accordions open
-  setTimeout(function() { startCountdown(); }, 5000);
+  // Show founder quotes after accordions open
+  setTimeout(function() { showFounderQuotes(); }, 5000);
 }
 
-// ─── COUNTDOWN (1 minute) ────────────────────
-function startCountdown() {
-  var section = document.getElementById('nivCountdown');
-  var timerEl = document.getElementById('nivCountdownTimer');
-  if (!section || !timerEl) return;
+// ─── FOUNDER QUOTES PER STAGE ────────────────
+var nivFounderQuotes = {
+  skiller: [
+    { text: '\u201cThe best time to plant a tree was 20 years ago. The second best time is now.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cIf you\u2019re not embarrassed by the first version of your product, you\u2019ve launched too late.\u201d', author: 'Reid Hoffman' },
+    { text: '\u201cYour brand is what people say about you when you\u2019re not in the room.\u201d', author: 'Jeff Bezos' }
+  ],
+  operator: [
+    { text: '\u201cThe goal is not to do business with everybody who needs what you have. The goal is to do business with people who believe what you believe.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cMost people overestimate what they can do in one year and underestimate what they can do in ten years.\u201d', author: 'Jeff Bezos' },
+    { text: '\u201cIf you only do what you can do, you will never be more than you are now.\u201d', author: 'Alex Hormozi' }
+  ],
+  builder: [
+    { text: '\u201cFree education is abundant. It\u2019s the desire to learn that\u2019s scarce.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cYour margin is my opportunity.\u201d', author: 'Jeff Bezos' },
+    { text: '\u201cThe bottleneck is never the strategy. The bottleneck is always the implementation.\u201d', author: 'Alex Hormozi' }
+  ],
+  founder: [
+    { text: '\u201cSeek wealth, not money or status. Wealth is having assets that earn while you sleep.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cI knew that if I failed I wouldn\u2019t regret that, but I knew the one thing I might regret is not trying.\u201d', author: 'Jeff Bezos' },
+    { text: '\u201cThe constraint on any business is always the owner.\u201d', author: 'Alex Hormozi' }
+  ]
+};
+
+function showFounderQuotes() {
+  var section = document.getElementById('nivUrgency');
+  var container = document.getElementById('nivUrgencyQuotes');
+  if (!section || !container) return;
+
+  var stageKey = window._nivStageKey || 'skiller';
+  var quotes = nivFounderQuotes[stageKey] || nivFounderQuotes.skiller;
+
+  container.innerHTML = quotes.map(function(q) {
+    return '<div class="niv-urgency-quote">' +
+      '<div class="niv-urgency-quote-text">' + q.text + '</div>' +
+      '<div class="niv-urgency-quote-author">\u2014 ' + q.author + '</div>' +
+    '</div>';
+  }).join('');
+
   section.style.display = 'block';
-  section.classList.add('active');
-  var totalSeconds = 60;
-  function tick() {
-    var m = Math.floor(totalSeconds / 60);
-    var s = totalSeconds % 60;
-    timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
-    if (totalSeconds <= 0) {
-      timerEl.textContent = '00:00';
-      section.classList.remove('active');
-      return;
-    }
-    totalSeconds--;
-    setTimeout(tick, 1000);
-  }
-  tick();
 }
 
 // ─── INCOME CALCULATOR (Change #11) ───────────
