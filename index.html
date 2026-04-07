@@ -280,7 +280,7 @@ body.result-mode {
 .niv-result-tag { font-size:11px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
 .niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
 .niv-result-range { font-size:14px; color:var(--text-secondary); margin-bottom:24px; font-weight:600; }
-.niv-result-text { font-size:clamp(14px,1.8vw,16px); color:var(--text-primary); line-height:1.7; }
+.niv-result-text { font-size:clamp(14px,1.8vw,16px); color:var(--text-primary); line-height:1.7; padding:0 4px; word-break:break-word; }
 .niv-ctas { display:flex; flex-direction:column; gap:10px; max-width:360px; margin:0 auto; }
 .niv-cta { display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; font-family:'Inter',sans-serif; font-size:clamp(11px,1.8vw,13px); font-weight:700; letter-spacing:0.08em; text-transform:uppercase; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; flex-wrap:wrap; width:100%; max-width:360px; margin:0 auto; border-radius:2px; }
 .niv-cta:hover { transform:translateY(-2px); }
@@ -1153,17 +1153,24 @@ body.result-mode {
 .niv-calculator {
   max-width:520px;
   margin:32px auto 0;
-  padding:24px 20px;
+  padding:28px 24px;
   background:var(--bg2);
   border:1px solid var(--border);
-  text-align:left;
+  text-align:center;
+}
+.niv-calc-title {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(16px,2.5vw,20px);
+  font-weight:800;
+  color:var(--metal3);
+  margin-bottom:6px;
+  line-height:1.4;
 }
 .niv-calc-label {
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--text-muted);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.02em;
+  color:var(--text-secondary);
   margin-bottom:12px;
 }
 .niv-calc-input-wrap {
@@ -1202,9 +1209,9 @@ body.result-mode {
   color:var(--text-muted);
 }
 .niv-calc-result {
-  margin-top:14px;
-  font-size:14px;
-  font-weight:600;
+  margin-top:16px;
+  font-size:clamp(15px,2.5vw,18px);
+  font-weight:700;
   color:var(--metal3);
   line-height:1.6;
   min-height:22px;
@@ -1218,26 +1225,37 @@ body.result-mode {
 
 /* ─── COMMUNITY MINI (inside level-up overlay) ── */
 .niv-community-mini {
-  display:none;
-  flex-direction:column;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
   align-items:center;
-  gap:10px;
-  margin-top:24px;
-  max-width:380px;
+  justify-content:center;
+  gap:12px;
+  margin-top:28px;
+  max-width:520px;
+  width:100%;
+  padding:0 16px;
   opacity:0;
-  transition:opacity 0.6s ease;
+  transform:translateY(10px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+  pointer-events:none;
 }
 .niv-community-mini.visible {
-  display:flex;
   opacity:1;
+  transform:translateY(0);
+  pointer-events:all;
 }
 .niv-community-mini .niv-community-title {
-  font-size:clamp(14px,2.5vw,18px);
+  font-size:clamp(13px,2.2vw,16px);
   font-weight:700;
   color:var(--metal2);
+  width:100%;
+  text-align:center;
 }
 .niv-community-mini .niv-community-tags {
   gap:6px;
+  justify-content:center;
+  width:100%;
 }
 .niv-community-mini .niv-community-tag {
   font-size:8px;
@@ -1253,6 +1271,8 @@ body.result-mode {
   letter-spacing:0.05em;
   line-height:1.4;
   opacity:0.7;
+  width:100%;
+  text-align:center;
 }
 .niv-community-mini .niv-social-proof-badge {
   margin:0;
@@ -1260,6 +1280,31 @@ body.result-mode {
 }
 .niv-community-mini .niv-social-proof-text {
   font-size:8px;
+}
+.niv-lobby-timer {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  color:var(--text-muted);
+  width:100%;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.niv-lobby-timer span {
+  color:var(--metal2);
+}
+@media(max-width:540px) {
+  .niv-community-mini {
+    gap:10px;
+    padding:0 12px;
+  }
+  .niv-community-mini .niv-community-title {
+    font-size:13px;
+  }
+  .niv-community-mini .niv-community-join {
+    padding:10px 20px;
+    font-size:10px;
+  }
 }
 
 /* ─── CASE QUOTE ─────────────────────────────── */
@@ -1313,7 +1358,7 @@ body.result-mode {
   50% { border-color:rgba(255,80,80,0.35); }
 }
 .niv-countdown-section.active {
-  animation:countdownPulse 2s ease-in-out infinite;
+  animation:countdownPulse 2s ease-in-out infinite, fadeInUp 0.8s ease;
 }
 
 /* ─── TOOL CATEGORIES ────────────────────────── */
@@ -1462,6 +1507,18 @@ body.result-mode {
 
       </div>
 
+      <!-- INCOME CALCULATOR (before siguiente paso) -->
+      <div class="niv-calculator" id="nivCalculator" style="display:none;">
+        <div class="niv-calc-title">&iquest;Cu&aacute;nto necesitas para pasar a tu siguiente etapa?</div>
+        <div class="niv-calc-label">&iquest;Cu&aacute;l es el valor de tus servicios actualmente?</div>
+        <div class="niv-calc-input-wrap" style="margin:0 auto;">
+          <span class="niv-calc-prefix">$</span>
+          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="ej: 200" oninput="updateCalculator()">
+        </div>
+        <div class="niv-calc-result" id="nivCalcResult"></div>
+        <div class="niv-calc-tip" id="nivCalcTip"></div>
+      </div>
+
       <!-- BLOCK 3: Tu siguiente paso — ISOLATED with gold glow -->
       <div class="niv-accordion-wrap" style="margin-top:0;">
         <div class="niv-acc-block niv-acc-block-gold" data-acc="paso">
@@ -1475,17 +1532,6 @@ body.result-mode {
             <div class="niv-ctas" id="nivCtas"></div>
           </div>
         </div>
-      </div>
-
-      <!-- INCOME CALCULATOR (inserted before success cases) -->
-      <div class="niv-calculator" id="nivCalculator" style="display:none;">
-        <div class="niv-calc-label">&iquest;CU&Aacute;NTO COBRAS POR TU SERVICIO?</div>
-        <div class="niv-calc-input-wrap">
-          <span class="niv-calc-prefix">$</span>
-          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="ej: 200" oninput="updateCalculator()">
-        </div>
-        <div class="niv-calc-result" id="nivCalcResult"></div>
-        <div class="niv-calc-tip" id="nivCalcTip"></div>
       </div>
 
       <!-- SUCCESS CASES -->
@@ -1564,6 +1610,7 @@ body.result-mode {
           Tienes <strong>exceso de tolerancia a la espera y la comodidad.</strong><br><br>
           Si no tomas acci&oacute;n hoy, tendr&aacute;s otro a&ntilde;o m&aacute;s en desventaja.
         </div>
+        <a class="niv-cta niv-cta-wa" id="nivCountdownCta" style="margin:16px auto 0;max-width:360px;" href="#" target="_blank">&#x1F4AC; TOMAR ACCI&Oacute;N AHORA</a>
       </div>
 
       <!-- FOOTER -->
@@ -1598,7 +1645,7 @@ body.result-mode {
         <span class="niv-social-proof-dot"></span>
         <span class="niv-social-proof-text">+40 founders construyendo en la comunidad</span>
       </div>
-      <div class="niv-community-title">Unite a la comunidad de Founders</div>
+      <div class="niv-community-title">&Uacute;nete a la comunidad de Founders</div>
       <div class="niv-community-tags">
         <span class="niv-community-tag">Recursos gratuitos</span>
         <span class="niv-community-tag">Q&amp;A</span>
@@ -1606,8 +1653,9 @@ body.result-mode {
         <span class="niv-community-tag">Sorteos</span>
         <span class="niv-community-tag">Beneficios</span>
       </div>
-      <a class="niv-community-join" id="nivCommunityJoin" href="https://wa.me/56978048922?text=Hola%20Patrick%2C%20quiero%20unirme%20a%20la%20comunidad%20de%20Founders." target="_blank">&#x1F4AC; UNIRME A LA COMUNIDAD</a>
+      <a class="niv-community-join" id="nivCommunityJoin" href="https://chat.whatsapp.com/BhfDw1i4jlfFesRScWsckX?mode=gi_t" target="_blank">&#x1F4AC; UNIRME A LA COMUNIDAD</a>
       <div class="niv-community-note">No perder&aacute;s tu resultado &mdash; se abre en otra pesta&ntilde;a</div>
+      <div class="niv-lobby-timer" id="nivLobbyTimer">Tu resultado estar&aacute; listo en <span id="nivLobbyCountdown">11</span>s</div>
     </div>
   </div>
 </div>
@@ -1892,18 +1940,29 @@ function proceedToLevelUp() {
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
   }, 500);
 
-  // Show community mini gate after 1.5s (below analyzing text)
+  // Show community mini gate after 1.5s (smooth fade-in)
   setTimeout(function() {
     communityMini.classList.add('visible');
   }, 1500);
 
-  // After 8 seconds total: hide community, show result with EXPLOSION
+  // Lobby countdown timer (11 seconds total, community shows at 1.5s → ~9.5s visible)
+  var lobbyTotal = 11;
+  var lobbyCountEl = document.getElementById('nivLobbyCountdown');
+  var lobbyRemaining = lobbyTotal;
+  var lobbyInterval = setInterval(function() {
+    lobbyRemaining--;
+    if (lobbyCountEl) lobbyCountEl.textContent = Math.max(lobbyRemaining, 0);
+    if (lobbyRemaining <= 0) clearInterval(lobbyInterval);
+  }, 1000);
+
+  // After 11 seconds total: hide community, show result with EXPLOSION
   setTimeout(function() {
     clearInterval(dotInterval);
+    clearInterval(lobbyInterval);
 
-    // Hide community mini
+    // Smooth hide community mini
     communityMini.classList.remove('visible');
-    communityMini.style.display = 'none';
+    setTimeout(function() { communityMini.style.display = 'none'; }, 800);
 
     // Flash burst
     flashEl.classList.add('fire');
@@ -1923,7 +1982,7 @@ function proceedToLevelUp() {
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
     btnEl.style.transition = 'opacity 0.8s ease 0.8s';
     btnEl.style.opacity = '1';
-  }, 8000);
+  }, lobbyTotal * 1000);
 }
 
 // ─── HELPER: build WhatsApp URL ──────────────
@@ -2079,10 +2138,14 @@ function dismissNivLevelup() {
       '<a class="niv-cta" style="background:var(--gold);color:#000;font-weight:800;border:none;" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4CB} SUMARME A LA LISTA DE ESPERA MASTERMIND</a>';
   }
 
-  // Update footer CTA with stage-specific WhatsApp message
+  // Update footer CTA + countdown CTA with stage-specific WhatsApp message
   var footerCta = document.getElementById('nivFooterCta');
   if (footerCta && s.wa) {
     footerCta.href = buildWaUrl(s.wa);
+  }
+  var countdownCta = document.getElementById('nivCountdownCta');
+  if (countdownCta && s.wa) {
+    countdownCta.href = buildWaUrl(s.wa);
   }
 
   // Show and configure calculator
