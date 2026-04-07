@@ -266,7 +266,7 @@ body.result-mode {
 /* [Dead CSS purged — brand alignment v2.0] */
 /* ─── NIVELADOR QUIZ ─────────────────────── */
 .niv-wrap { display:none; max-width:640px; width:100%; margin:0 auto; padding:0 16px; }
-.niv-wrap.active { display:flex; flex-direction:column; align-items:stretch; justify-content:center; }
+.niv-wrap.active { display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; min-height:340px; }
 .niv-progress { display:flex; gap:4px; margin-bottom:32px; }
 .niv-progress-dot { flex:1; height:3px; background:var(--border); transition:background 0.3s; }
 .niv-progress-dot.done { background:var(--green); }
@@ -340,36 +340,22 @@ body.result-mode {
   from { opacity:0; transform:translateY(30px); }
   to { opacity:1; transform:translateY(0); }
 }
-/* ─── CALENDLY CTA PULSE ────────────────── */
-@keyframes calendlyPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(68,136,255,0.5), 0 4px 20px rgba(68,136,255,0.35); }
-  50% { box-shadow: 0 0 0 8px rgba(68,136,255,0), 0 6px 30px rgba(68,136,255,0.55); }
+/* ─── WHATSAPP CTA PULSE ────────────────── */
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.45), 0 4px 20px rgba(37,211,102,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 6px 30px rgba(37,211,102,0.5); }
 }
-.niv-cta-calendly {
-  background:var(--electric); color:#fff;
-  animation: calendlyPulse 2.5s ease-in-out infinite;
+.niv-cta-wa {
+  background:#25D366; color:#fff;
+  animation: waPulse 2.5s ease-in-out infinite;
   position:relative;
 }
-.niv-cta-calendly:hover {
-  box-shadow:0 0 0 2px var(--electric-bright), 0 8px 40px var(--electric-glow) !important;
-  background:var(--electric-bright);
-}
-.niv-cta-calendly .urgency-badge {
-  display:block;
-  font-size:9px;
-  font-weight:600;
-  letter-spacing:0.1em;
-  color:rgba(255,255,255,0.7);
-  margin-top:4px;
-  text-transform:none;
-}
-.niv-cta-calendly .urgency-badge s {
-  text-decoration:line-through;
-  opacity:0.5;
-  margin-right:4px;
+.niv-cta-wa:hover {
+  box-shadow:0 0 0 2px #2ee676, 0 8px 40px rgba(37,211,102,0.5) !important;
+  background:#2ee676;
 }
 @media(min-width:768px) {
-  .niv-cta-calendly { margin-top:8px; }
+  .niv-cta-wa { margin-top:8px; }
 }
 /* ─── BACK BUTTON FOR QUIZ ──────────────── */
 .niv-back {
@@ -399,8 +385,6 @@ body.result-mode {
   .niv-stage-bar { max-width:100%; }
   .niv-stage-bar-item span { font-size:7px; letter-spacing:0.1em; }
   .splash-inner { padding:32px 16px 48px; }
-  .niv-countdown-num { font-size:22px; }
-  .niv-countdown-cell { padding:12px 6px; }
   .niv-result-stage { font-size:clamp(36px,12vw,48px) !important; }
 }
 /* ─── STAGE PROGRESS BAR ──────────────────── */
@@ -563,68 +547,7 @@ body.result-mode {
   0%,100% { opacity:0.5; }
   50% { opacity:1; }
 }
-/* ─── COUNTDOWN TIMER ──────────────────────── */
-.niv-countdown {
-  margin:20px auto 0;
-  max-width:400px;
-}
-.niv-countdown-label {
-  font-size:14px;
-  font-weight:700;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--text-secondary);
-  margin-bottom:12px;
-  text-align:center;
-}
-.niv-countdown-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:var(--border);
-}
-.niv-countdown-cell {
-  background:var(--bg2);
-  padding:16px 8px;
-  text-align:center;
-  position:relative;
-}
-.niv-countdown-cell::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0; height:1px;
-  background:var(--metal-grad2);
-  opacity:0.3;
-}
-.niv-countdown-num {
-  font-size:clamp(24px,4vw,32px);
-  font-weight:800;
-  letter-spacing:-0.02em;
-  background:var(--metal-grad);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  line-height:1;
-  display:block;
-}
-.niv-countdown-unit {
-  font-size:8px;
-  font-weight:700;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--text-muted);
-  margin-top:6px;
-  display:block;
-}
-.niv-countdown-urgency {
-  font-size:10px;
-  font-weight:700;
-  color:var(--red);
-  text-align:center;
-  margin-top:10px;
-  letter-spacing:0.05em;
-  animation: pulse 2s ease-in-out infinite;
-}
+/* (countdown CSS removed) */
 /* ─── ACCORDION DIAGNOSTIC ─────────────────── */
 .niv-accordion-wrap {
   max-width:520px;
@@ -1039,21 +962,7 @@ body.result-mode {
   border-color:var(--metal2); color:var(--metal3); background:rgba(255,255,255,0.04);
 }
 
-/* ─── COUNTDOWN URGENCY BAR ──────────────────── */
-.niv-countdown-bar {
-  margin:12px auto 0;
-  max-width:240px;
-  height:3px;
-  background:var(--bg4);
-  position:relative;
-  overflow:hidden;
-}
-.niv-countdown-bar-fill {
-  height:100%;
-  width:100%;
-  background:var(--red);
-  transition:width 1s linear;
-}
+/* (countdown bar CSS removed) */
 
 /* ─── FOOTER CTA LINK ────────────────────────── */
 .niv-footer-cta {
@@ -1067,14 +976,15 @@ body.result-mode {
   color:#fff;
   text-decoration:none;
   background:transparent;
-  border:1px solid rgba(255,255,255,0.2);
+  border:1px solid rgba(37,211,102,0.4);
   border-radius:2px;
   transition:all 0.3s;
 }
 .niv-footer-cta:hover {
-  border-color:rgba(255,255,255,0.5);
+  border-color:#25D366;
   transform:translateY(-2px);
-  text-shadow:0 0 12px rgba(255,255,255,0.4);
+  text-shadow:0 0 12px rgba(37,211,102,0.4);
+  box-shadow:0 4px 20px rgba(37,211,102,0.2);
 }
 /* Heartbeat glow — emotional pulsing */
 @keyframes heartbeatGlow {
@@ -1098,26 +1008,377 @@ body.result-mode {
   color:#ff4040;
 }
 
-/* ─── MOBILE COUNTDOWN (no longer sticky) ──────────── */
-@media(max-width:540px) {
-  .niv-countdown {
-    margin:24px auto 8px;
-    max-width:100%;
-    background:var(--bg2);
-    border:1px solid var(--border);
-    padding:14px 16px;
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-  }
-  .niv-countdown-label { margin-bottom:0; font-size:9px; letter-spacing:0.08em; }
-  .niv-countdown-grid { max-width:140px !important; gap:0; }
-  .niv-countdown-cell { padding:6px 8px; }
-  .niv-countdown-num { font-size:18px; }
-  .niv-countdown-urgency { font-size:8px; width:100%; }
-  .niv-countdown-bar { max-width:100%; }
+/* (mobile countdown CSS removed) */
+
+/* ─── COMMUNITY SHARED STYLES ──────────────────── */
+.niv-community-title {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(20px,4vw,28px);
+  font-weight:800;
+  color:var(--metal3);
+  line-height:1.3;
+}
+.niv-community-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  max-width:420px;
+}
+.niv-community-tag {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  border:1px solid var(--border2);
+  background:rgba(255,255,255,0.03);
+  padding:6px 14px;
+  border-radius:2px;
+}
+.niv-community-join {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:16px 36px;
+  background:#25D366;
+  color:#fff;
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  transition:all 0.2s;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.niv-community-join:hover {
+  transform:translateY(-2px);
+  box-shadow:0 0 0 2px #2ee676, 0 8px 40px rgba(37,211,102,0.5);
+  background:#2ee676;
+}
+
+/* ─── SOCIAL PROOF BADGE ──────────────────────── */
+.niv-social-proof-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 16px;
+  border:1px solid rgba(56,176,104,0.2);
+  background:rgba(56,176,104,0.06);
+  margin:0 auto 16px;
+  border-radius:20px;
+}
+.niv-social-proof-dot {
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s ease-in-out infinite;
+  flex-shrink:0;
+}
+.niv-social-proof-text {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  color:var(--green);
+  text-transform:uppercase;
+}
+
+/* ─── CALL BENEFITS BOX ──────────────────────── */
+.niv-call-benefits {
+  max-width:360px;
+  margin:16px auto;
+  padding:16px 20px;
+  border:1px solid var(--border2);
+  background:rgba(255,255,255,0.02);
+  text-align:left;
+}
+.niv-call-benefits-title {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  margin-bottom:10px;
+}
+.niv-call-benefit {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.8;
+}
+.niv-call-benefit-check {
+  color:var(--green);
+  margin-right:6px;
+}
+
+/* ─── TOOL STACK ──────────────────────────────── */
+.niv-tool-stack {
+  margin-top:18px;
+}
+.niv-tool-stack-label {
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:10px;
+}
+.niv-tool-stack-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+}
+.niv-tool-item {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:4px 10px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  font-size:11px;
+  color:var(--text-secondary);
+  border-radius:2px;
+}
+.niv-tool-item img {
+  width:16px;
+  height:16px;
+  border-radius:2px;
+}
+
+/* ─── INCOME CALCULATOR ──────────────────────── */
+.niv-calculator {
+  max-width:520px;
+  margin:32px auto 0;
+  padding:24px 20px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  text-align:left;
+}
+.niv-calc-label {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:12px;
+}
+.niv-calc-input-wrap {
+  display:flex;
+  align-items:center;
+  gap:0;
+  max-width:220px;
+}
+.niv-calc-prefix {
+  padding:12px 12px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-right:none;
+  color:var(--text-secondary);
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:700;
+}
+.niv-calc-input {
+  flex:1;
+  padding:12px 14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--text-primary);
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  outline:none;
+  transition:border-color 0.2s;
+  max-width:160px;
+}
+.niv-calc-input:focus {
+  border-color:var(--green);
+}
+.niv-calc-input::placeholder {
+  color:var(--text-muted);
+}
+.niv-calc-result {
+  margin-top:14px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--metal3);
+  line-height:1.6;
+  min-height:22px;
+}
+.niv-calc-tip {
+  margin-top:8px;
+  font-size:12px;
+  color:var(--gold);
+  line-height:1.5;
+}
+
+/* ─── COMMUNITY MINI (inside level-up overlay) ── */
+.niv-community-mini {
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-top:24px;
+  max-width:380px;
+  opacity:0;
+  transition:opacity 0.6s ease;
+}
+.niv-community-mini.visible {
+  display:flex;
+  opacity:1;
+}
+.niv-community-mini .niv-community-title {
+  font-size:clamp(14px,2.5vw,18px);
+  font-weight:700;
+  color:var(--metal2);
+}
+.niv-community-mini .niv-community-tags {
+  gap:6px;
+}
+.niv-community-mini .niv-community-tag {
+  font-size:8px;
+  padding:4px 10px;
+}
+.niv-community-mini .niv-community-join {
+  padding:12px 28px;
+  font-size:11px;
+}
+.niv-community-note {
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.05em;
+  line-height:1.4;
+  opacity:0.7;
+}
+.niv-community-mini .niv-social-proof-badge {
+  margin:0;
+  padding:6px 12px;
+}
+.niv-community-mini .niv-social-proof-text {
+  font-size:8px;
+}
+
+/* ─── CASE QUOTE ─────────────────────────────── */
+.niv-case-quote {
+  font-size:11px;
+  font-style:italic;
+  color:var(--text-muted);
+  line-height:1.5;
+  margin-top:6px;
+}
+
+/* ─── COUNTDOWN SECTION ──────────────────────── */
+.niv-countdown-section {
+  max-width:520px;
+  margin:32px auto 0;
+  padding:24px 20px;
+  border:1px solid rgba(255,80,80,0.15);
+  background:rgba(255,80,80,0.03);
+  text-align:center;
+}
+.niv-countdown-title {
+  font-family:'Inter Tight',sans-serif;
+  font-size:14px;
+  font-weight:800;
+  color:var(--red);
+  letter-spacing:0.05em;
+  margin-bottom:12px;
+}
+.niv-countdown-timer {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(28px,5vw,36px);
+  font-weight:900;
+  color:var(--metal3);
+  letter-spacing:0.1em;
+  margin-bottom:14px;
+  font-variant-numeric:tabular-nums;
+}
+.niv-countdown-text {
+  font-size:13px;
+  color:var(--text-secondary);
+  line-height:1.7;
+  max-width:400px;
+  margin:0 auto;
+}
+.niv-countdown-text strong {
+  color:var(--metal3);
+  font-weight:700;
+}
+@keyframes countdownPulse {
+  0%,100% { border-color:rgba(255,80,80,0.15); }
+  50% { border-color:rgba(255,80,80,0.35); }
+}
+.niv-countdown-section.active {
+  animation:countdownPulse 2s ease-in-out infinite;
+}
+
+/* ─── TOOL CATEGORIES ────────────────────────── */
+.niv-tool-category {
+  margin-bottom:12px;
+}
+.niv-tool-category-label {
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+.niv-tool-category-items {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  justify-content:center;
+  padding:8px 10px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  border-radius:2px;
+}
+
+/* ─── QUIZ FIXED HEIGHT ──────────────────────── */
+.niv-question {
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ─── STAGE BAR OVERFLOW FIX ──────────────────── */
+.niv-stage-bar {
+  overflow:visible !important;
+}
+.niv-stage-bar-item > span {
+  overflow:visible;
+  min-width:50px;
+}
+
+/* ─── STAGE EXPLOSION ────────────────────────── */
+@keyframes stageExplodeIn {
+  0% { transform:scale(0); opacity:0; filter:blur(30px); }
+  20% { opacity:0.5; }
+  50% { transform:scale(1.3); opacity:1; filter:blur(0); text-shadow:0 0 80px currentColor; }
+  70% { transform:scale(0.9); }
+  85% { transform:scale(1.05); }
+  100% { transform:scale(1); text-shadow:none; }
+}
+@keyframes flashBurst {
+  0% { opacity:0; }
+  15% { opacity:0.4; }
+  100% { opacity:0; }
+}
+.niv-levelup-flash {
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 60%);
+  pointer-events:none;
+  opacity:0;
+}
+.niv-levelup-flash.fire {
+  animation:flashBurst 0.8s ease-out;
 }
 </style>
 </head>
@@ -1141,7 +1402,7 @@ body.result-mode {
           &#x25C9; &nbsp;DESCUBRIR MI ETAPA
         </button>
         <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 45 segundos &middot; resultado inmediato</p>
-        <p style="font-size:10px;color:var(--text-muted);margin-top:18px;letter-spacing:0.08em;opacity:0.6;">+$100K GENERADOS POR BUILDERS EN 2025</p>
+        <p style="font-size:10px;color:var(--text-muted);margin-top:18px;letter-spacing:0.08em;opacity:0.6;">+40 founders construyendo en el ecosistema</p>
       </div>
       <!-- Stage preview -->
       <div class="niv-stage-bar" id="nivStageBarPreview" style="margin-top:32px;margin-bottom:16px;"></div>
@@ -1154,6 +1415,8 @@ body.result-mode {
       <div class="niv-options" id="nivOptions"></div>
       <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
     </div>
+
+    <!-- community gate moved to level-up overlay -->
 
     <!-- QUIZ RESULT -->
     <div class="niv-result" id="nivResult">
@@ -1210,54 +1473,53 @@ body.result-mode {
           <div class="niv-acc-body">
             <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
             <div class="niv-ctas" id="nivCtas"></div>
-            <!-- COUNTDOWN (inline, not sticky) -->
-            <div class="niv-countdown" id="nivCountdown" style="display:none;">
-              <div class="niv-countdown-label">La consultor&iacute;a inicial sin costo expira en:</div>
-              <div class="niv-countdown-grid" style="grid-template-columns:1fr 1fr; max-width:240px; margin:0 auto;">
-                <div class="niv-countdown-cell">
-                  <span class="niv-countdown-num" id="cdMins2">05</span>
-                  <span class="niv-countdown-unit">Min</span>
-                </div>
-                <div class="niv-countdown-cell">
-                  <span class="niv-countdown-num" id="cdSecs2">00</span>
-                  <span class="niv-countdown-unit">Seg</span>
-                </div>
-              </div>
-              <div class="niv-countdown-bar"><div class="niv-countdown-bar-fill" id="cdBarFill"></div></div>
-              <div class="niv-countdown-urgency">Toma acci&oacute;n ahora &mdash; despu&eacute;s pierdes acceso</div>
-            </div>
           </div>
         </div>
       </div>
 
+      <!-- INCOME CALCULATOR (inserted before success cases) -->
+      <div class="niv-calculator" id="nivCalculator" style="display:none;">
+        <div class="niv-calc-label">&iquest;CU&Aacute;NTO COBRAS POR TU SERVICIO?</div>
+        <div class="niv-calc-input-wrap">
+          <span class="niv-calc-prefix">$</span>
+          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="ej: 200" oninput="updateCalculator()">
+        </div>
+        <div class="niv-calc-result" id="nivCalcResult"></div>
+        <div class="niv-calc-tip" id="nivCalcTip"></div>
+      </div>
+
       <!-- SUCCESS CASES -->
       <div class="niv-cases">
-        <div class="niv-cases-title">CASOS DE &Eacute;XITO</div>
-        <div class="niv-cases-highlight">+$300.000 USD generados por el ecosistema</div>
+        <div class="niv-cases-title">CASOS REALES</div>
+        <!-- social proof moved to community gate in overlay -->
         <div class="niv-cases-grid">
           <!-- SKILLER → OPERATOR -->
           <div class="niv-case">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Social Media</div>
             <div class="niv-case-to">De $0 a $1.500/mes</div>
+            <div class="niv-case-quote">&ldquo;Yo sab&iacute;a que pod&iacute;a lograr m&aacute;s con claridad&rdquo;</div>
             <span class="niv-case-tag">Primer ingreso</span>
           </div>
           <div class="niv-case">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
-            <div class="niv-case-from">Coaching / Sesiones</div>
+            <div class="niv-case-from">Nutricionista / Coach</div>
             <div class="niv-case-to">De $30 USD/sesi&oacute;n a programa de $600 USD</div>
+            <div class="niv-case-quote">&ldquo;Hab&iacute;an muchas cosas que no sab&iacute;a antes de comenzar&rdquo;</div>
             <span class="niv-case-tag">x20 ticket</span>
           </div>
           <div class="niv-case">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
-            <div class="niv-case-from">Eventos</div>
+            <div class="niv-case-from">Eventos / DJ&rsquo;s</div>
             <div class="niv-case-to">De $50 por evento a $250 con agenda llena</div>
+            <div class="niv-case-quote">&ldquo;No sab&iacute;amos c&oacute;mo negociar para subir nuestro valor&rdquo;</div>
             <span class="niv-case-tag">x5 + demanda</span>
           </div>
           <div class="niv-case">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Freelance creativo</div>
             <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
+            <div class="niv-case-quote">&ldquo;Lo que armamos fue un antes y un despu&eacute;s, voy a seguir construyendo&rdquo;</div>
             <span class="niv-case-tag">Modelo escalable</span>
           </div>
           <!-- OPERATOR → BUILDER -->
@@ -1265,27 +1527,42 @@ body.result-mode {
             <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Medicina est&eacute;tica</div>
             <div class="niv-case-to">De $2K/mes a $30K/mes recurrentes</div>
+            <div class="niv-case-quote">&ldquo;Implementamos un sistema para dar servicio a muchos clientes sin quemarme&rdquo;</div>
             <span class="niv-case-tag">x15 ingresos</span>
           </div>
           <div class="niv-case">
             <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Rubro legal</div>
             <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
+            <div class="niv-case-quote">&ldquo;Apliqu&eacute; todo en las mentor&iacute;as y ahora tengo que decir que no a algunos proyectos&rdquo;</div>
             <span class="niv-case-tag">Independencia</span>
           </div>
           <!-- BUILDER → FOUNDER -->
           <div class="niv-case">
             <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
-            <div class="niv-case-from">Due&ntilde;o de Ecommerce</div>
+            <div class="niv-case-from">Ecommerce</div>
             <div class="niv-case-to">De $2K/mes a $30K/mes</div>
+            <div class="niv-case-quote">&ldquo;Cada vez crecemos m&aacute;s, cada etapa nueva hay algo nuevo que desbloquear&rdquo;</div>
             <span class="niv-case-tag">x15 ingresos</span>
           </div>
           <div class="niv-case">
             <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
-            <div class="niv-case-from">Growth Consultant</div>
+            <div class="niv-case-from">Consultor&iacute;a</div>
             <div class="niv-case-to">De empleado Sr. $3K/mes a consultor indep. +$6K/mes</div>
+            <div class="niv-case-quote">&ldquo;Todo cambia cuando est&aacute;s dispuesto a dejar tu ego y trabajar genuinamente en tu proyecto&rdquo;</div>
             <span class="niv-case-tag">x2 + libertad</span>
           </div>
+        </div>
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div class="niv-countdown-section" id="nivCountdown" style="display:none;">
+        <div class="niv-countdown-title">Si hoy no tomas acci&oacute;n, probablemente ma&ntilde;ana tampoco lo hagas.</div>
+        <div class="niv-countdown-timer" id="nivCountdownTimer">01:00</div>
+        <div class="niv-countdown-text">
+          No tienes falta de informaci&oacute;n o claridad...<br>
+          Tienes <strong>exceso de tolerancia a la espera y la comodidad.</strong><br><br>
+          Si no tomas acci&oacute;n hoy, tendr&aacute;s otro a&ntilde;o m&aacute;s en desventaja.
         </div>
       </div>
 
@@ -1299,7 +1576,7 @@ body.result-mode {
         </div>
         <div class="niv-footer-closer" style="margin-top:20px;">La pregunta es...</div>
         <div class="niv-footer-closer" style="margin-top:8px;font-size:16px;color:var(--metal3);">&iquest;Vas a tomar acci&oacute;n o vas a volver donde estabas?</div>
-        <a class="niv-footer-cta niv-heartbeat" href="https://calendly.com/privatebuildprograms/start" target="_blank">No, voy a tomar acci&oacute;n ahora &rarr;</a>
+        <a class="niv-footer-cta niv-heartbeat" id="nivFooterCta" href="https://wa.me/56978048922?text=Hola%20Patrick%2C%20vengo%20del%20nivelador.%20Soy%20OPERATOR%20y%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20c%C3%B3mo%20escalar%20mis%20ingresos." target="_blank">No, voy a tomar acci&oacute;n ahora &rarr;</a>
       </div>
     </div>
 
@@ -1309,16 +1586,35 @@ body.result-mode {
 <!-- NIVELADOR LEVEL-UP OVERLAY -->
 <div class="niv-levelup" id="nivLevelup">
   <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
+  <div class="niv-levelup-flash" id="nivLevelupFlash"></div>
   <div class="niv-levelup-inner">
     <div class="niv-levelup-label">TU ETAPA</div>
     <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
-    <div class="niv-levelup-range" id="nivLevelupRange">$0 – $1,500/mes</div>
+    <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
     <button class="niv-levelup-btn" onclick="dismissNivLevelup()">VER MI DIAGN&Oacute;STICO &rarr;</button>
+    <!-- Community mini gate (during analyzing phase) -->
+    <div class="niv-community-mini" id="nivCommunityMini">
+      <div class="niv-social-proof-badge">
+        <span class="niv-social-proof-dot"></span>
+        <span class="niv-social-proof-text">+40 founders construyendo en la comunidad</span>
+      </div>
+      <div class="niv-community-title">Unite a la comunidad de Founders</div>
+      <div class="niv-community-tags">
+        <span class="niv-community-tag">Recursos gratuitos</span>
+        <span class="niv-community-tag">Q&amp;A</span>
+        <span class="niv-community-tag">Eventos</span>
+        <span class="niv-community-tag">Sorteos</span>
+        <span class="niv-community-tag">Beneficios</span>
+      </div>
+      <a class="niv-community-join" id="nivCommunityJoin" href="https://wa.me/56978048922?text=Hola%20Patrick%2C%20quiero%20unirme%20a%20la%20comunidad%20de%20Founders." target="_blank">&#x1F4AC; UNIRME A LA COMUNIDAD</a>
+      <div class="niv-community-note">No perder&aacute;s tu resultado &mdash; se abre en otra pesta&ntilde;a</div>
+    </div>
   </div>
 </div>
 
 <script>
 
+// ─── COMMUNITY GATE DATA ──────────────────────
 
 // ─── NIVELADOR ──────────────────────────────
 const nivQuestions = [
@@ -1372,37 +1668,129 @@ const nivQuestions = [
 
 const nivStages = {
   skiller: {
-    name: 'SKILLER', range: '$0 – $1,500/mes', color: 'var(--metal2)',
-    now: 'Estás empleado o recién partiendo. Sabes que tienes una habilidad que podría darte ingresos propios, pero no tienes oferta clara, no sabes cómo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
-    future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir más rápido y tienes un sistema básico que te da claridad de hacia dónde vas.',
-    missing: 'Private Build es el ecosistema que te da estructura, frameworks gratuitos y una comunidad que ya recorrió este camino. No necesitas saber todo — necesitas activar tu habilidad con el respaldo correcto.',
+    name: 'SKILLER', range: '$0 \u2013 $1,500/mes', color: 'var(--metal2)',
+    now: 'Est\u00e1s empleado o reci\u00e9n partiendo. Sabes que tienes una habilidad que podr\u00eda darte ingresos propios, pero no tienes oferta clara, no sabes c\u00f3mo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
+    future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir m\u00e1s r\u00e1pido y tienes un sistema b\u00e1sico que te da claridad de hacia d\u00f3nde vas.',
+    missing: 'Private Build es el ecosistema que te da estructura, frameworks gratuitos y una comunidad que ya recorri\u00f3 este camino. No necesitas saber todo \u2014 necesitas activar tu habilidad con el respaldo correcto.',
+    // TODO: verify this Notion link is live — Patrick must check
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero más información sobre cómo empezar.'
+    wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo empezar.'
   },
   operator: {
-    name: 'OPERATOR', range: '$1,500 – $3,000/mes', color: '#e88c30',
-    now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay más pero no logras escalar.',
-    future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisación para generar ingresos.',
+    name: 'OPERATOR', range: '$1,500 \u2013 $3,000/mes', color: '#e88c30',
+    now: 'Ya vendes pero cobras bajo y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay m\u00e1s pero no logras escalar.',
+    future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisaci\u00f3n para generar ingresos.',
     missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build tiene programas dise\u00f1ados para operators que necesitan escalar con sistema, no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero más información sobre cómo escalar mis ingresos.'
+    wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo escalar mis ingresos.'
   },
   builder: {
-    name: 'BUILDER', range: '$3,000 – $10,000/mes', color: '#3a9fff',
-    now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica más horas tuyas y no puedes crecer sin quemarte.',
-    future: 'Automatizaste tus procesos clave, documentaste tu método y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
-    missing: 'Private Build ya tiene frameworks, automatizaciones e infraestructura validada para esta etapa. No necesitas reventar tokens ni seguir frustrándote solo. Una llamada de 30 minutos puede ahorrarte meses de prueba y error.',
+    name: 'BUILDER', range: '$3,000 \u2013 $10,000/mes', color: '#3a9fff',
+    now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica m\u00e1s horas tuyas y no puedes crecer sin quemarte.',
+    future: 'Automatizaste tus procesos clave, documentaste tu m\u00e9todo y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
+    missing: 'Private Build ya tiene frameworks, automatizaciones e infraestructura validada para esta etapa. No necesitas reventar tokens ni seguir frustr\u00e1ndote solo. Una llamada de 30 minutos puede ahorrarte meses de prueba y error.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy BUILDER y quiero más información sobre automatización y escala.'
+    wa: 'Hola Patrick, vengo del nivelador. Soy BUILDER y quiero m\u00e1s informaci\u00f3n sobre automatizaci\u00f3n y escala.'
   },
   founder: {
     name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
-    now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisión constante, no tienes sistemas autónomos y cada decisión pasa por tu cabeza. Escalar significa más estrés.',
-    future: 'Tienes infraestructura de equipo, agentes autónomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicación.',
-    missing: 'A esta etapa, lo que necesitas no es un curso — es una conversación directa. Conectemos para explorar cómo Private Build puede complementar lo que ya construiste y llevarlo más lejos.',
+    now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisi\u00f3n constante, no tienes sistemas aut\u00f3nomos y cada decisi\u00f3n pasa por tu cabeza. Escalar significa m\u00e1s estr\u00e9s.',
+    future: 'Tienes infraestructura de equipo, agentes aut\u00f3nomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicaci\u00f3n.',
+    missing: 'A esta etapa, lo que necesitas no es un curso \u2014 es una conversaci\u00f3n directa. Conectemos para explorar c\u00f3mo Private Build puede complementar lo que ya construiste y llevarlo m\u00e1s lejos.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy FOUNDER y quiero conversar sobre mi proyecto y oportunidades.'
   }
+};
+
+// ─── TOOL STACK PER STAGE (categorized) ───────
+var F = function(d) { return 'https://www.google.com/s2/favicons?domain=' + d + '&sz=16'; };
+const nivTools = {
+  skiller: {
+    'Productividad': [
+      { name: 'Bloc de notas', icon: null, emoji: '\u{1F4DD}' },
+      { name: 'Google', icon: F('google.com') }
+    ],
+    'Comunicaci\u00f3n': [
+      { name: 'Instagram', icon: F('instagram.com') },
+      { name: 'WhatsApp', icon: F('whatsapp.com') }
+    ],
+    'IA': [
+      { name: 'ChatGPT', icon: F('chat.openai.com') }
+    ]
+  },
+  operator: {
+    'IA': [
+      { name: 'Claude / GPT', icon: F('claude.ai') }
+    ],
+    'Gesti\u00f3n': [
+      { name: 'Notion', icon: F('notion.so') },
+      { name: 'Canva', icon: F('canva.com') },
+      { name: 'Mir\u00f3', icon: F('miro.com') },
+      { name: 'Fathom', icon: 'https://fathom.video/favicon.ico' }
+    ],
+    'Comunicaci\u00f3n': [
+      { name: 'Instagram', icon: F('instagram.com') },
+      { name: 'WhatsApp', icon: F('whatsapp.com') },
+      { name: 'TikTok', icon: F('tiktok.com') }
+    ]
+  },
+  builder: {
+    'IA': [
+      { name: 'Claude / GPT', icon: F('claude.ai') }
+    ],
+    'Gesti\u00f3n': [
+      { name: 'Notion', icon: F('notion.so') },
+      { name: 'Mir\u00f3', icon: F('miro.com') },
+      { name: 'Fathom', icon: 'https://fathom.video/favicon.ico' },
+      { name: 'Obsidian', icon: F('obsidian.md') }
+    ],
+    'Comunicaci\u00f3n': [
+      { name: 'Instagram', icon: F('instagram.com') },
+      { name: 'WhatsApp', icon: F('whatsapp.com') },
+      { name: 'TikTok', icon: F('tiktok.com') }
+    ],
+    'Automatizaci\u00f3n': [
+      { name: 'GHL', icon: F('gohighlevel.com') },
+      { name: 'n8n', icon: F('n8n.io') }
+    ],
+    'Contenido': [
+      { name: 'Antigravity', icon: F('antigravity.so') },
+      { name: 'Higgsfield', icon: F('higgsfield.ai') }
+    ],
+    'Marketing & Dev': [
+      { name: 'Meta Ads', icon: F('facebook.com') },
+      { name: 'GitHub', icon: F('github.com') }
+    ]
+  },
+  founder: {
+    'Agentes': [
+      { name: 'Agentes IA agrupando los stacks anteriores', icon: null, emoji: '\u{1F916}' }
+    ]
+  }
+};
+
+// ─── CALCULATOR TARGETS PER STAGE ─────────────
+const nivCalcTargets = {
+  skiller: 1000,
+  operator: 3000,
+  builder: 10000,
+  founder: 30000
+};
+
+// ─── CALL BENEFITS PER STAGE (el "qué", no el "cómo") ──
+const nivCallBenefits = {
+  operator: [
+    'Tu diagn\u00f3stico de situaci\u00f3n actual',
+    'El mapa de tu siguiente paso (validado en +100 clientes)',
+    'Tu stack m\u00ednimo viable para esta etapa',
+    'Sin compromiso \u2014 30 minutos de valor puro'
+  ],
+  builder: [
+    'Tu diagn\u00f3stico t\u00e9cnico de stack y procesos',
+    'El sistema validado para llegar a $10K/mes',
+    'Tu roadmap de automatizaci\u00f3n priorizado',
+    'Sin compromiso \u2014 30 minutos de estrategia'
+  ]
 };
 
 let nivStep = 0;
@@ -1411,7 +1799,6 @@ let nivScores = [];
 function startNivelador() {
   nivStep = 0; nivScores = [];
   document.getElementById('nivIntro').style.display = 'none';
-  // Hide title to give quiz full centered space
   document.querySelector('.splash-title-wrap').style.display = 'none';
   document.getElementById('nivQuiz').classList.add('active');
   document.getElementById('nivResult').classList.remove('active');
@@ -1421,7 +1808,6 @@ function startNivelador() {
 
 function renderNivQuestion() {
   const q = nivQuestions[nivStep];
-  // Progress dots
   let dots = '';
   for (let i = 0; i < nivQuestions.length; i++) {
     const cls = i < nivStep ? 'done' : i === nivStep ? 'current' : '';
@@ -1430,7 +1816,7 @@ function renderNivQuestion() {
   document.getElementById('nivProgress').innerHTML = dots;
   document.getElementById('nivQuestion').textContent = q.q;
   let opts = '';
-  q.opts.forEach((o, idx) => {
+  q.opts.forEach(function(o) {
     opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ')">' + o.text + '</button>';
   });
   document.getElementById('nivOptions').innerHTML = opts;
@@ -1447,60 +1833,105 @@ function nivAnswer(score) {
   }
 }
 
+// ─── showNivResult: goes straight to level-up overlay ──
 function showNivResult() {
-  const avg = nivScores.reduce((a, b) => a + b, 0) / nivScores.length;
-  let stageKey;
+  const avg = nivScores.reduce(function(a, b) { return a + b; }, 0) / nivScores.length;
+  var stageKey;
   if (avg <= 1.6) stageKey = 'skiller';
   else if (avg <= 2.4) stageKey = 'operator';
   else if (avg <= 3.2) stageKey = 'builder';
   else stageKey = 'founder';
 
   window._nivStageKey = stageKey;
-  const s = nivStages[stageKey];
 
-  // Hide quiz
+  // Hide quiz, go straight to level-up overlay
   document.getElementById('nivQuiz').classList.remove('active');
+  proceedToLevelUp();
+}
 
-  // Show level-up overlay with loading effect
-  const overlay = document.getElementById('nivLevelup');
-  const rankEl = document.getElementById('nivLevelupRank');
-  const rangeEl = document.getElementById('nivLevelupRange');
-  const btnEl = document.querySelector('.niv-levelup-btn');
-  const labelEl = document.querySelector('.niv-levelup-label');
+// ─── COMMUNITY JOIN handler ──────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var joinBtn = document.getElementById('nivCommunityJoin');
+  if (joinBtn) {
+    joinBtn.addEventListener('click', function() {
+      try {
+        localStorage.setItem('pb_community', JSON.stringify({ stage: window._nivStageKey, ts: Date.now(), joined: true }));
+      } catch(e) {}
+      // WhatsApp opens in new tab, user stays here
+    });
+  }
+});
 
-  // Phase 1: Show overlay with gentle "analyzing" state
+function proceedToLevelUp() {
+  var stageKey = window._nivStageKey;
+  var s = nivStages[stageKey];
+
+  var overlay = document.getElementById('nivLevelup');
+  var rankEl = document.getElementById('nivLevelupRank');
+  var rangeEl = document.getElementById('nivLevelupRange');
+  var btnEl = document.querySelector('.niv-levelup-btn');
+  var labelEl = document.querySelector('.niv-levelup-label');
+  var communityMini = document.getElementById('nivCommunityMini');
+  var flashEl = document.getElementById('nivLevelupFlash');
+
+  // Reset state
   rankEl.textContent = '';
   rangeEl.textContent = '';
   btnEl.style.opacity = '0';
+  btnEl.style.transition = 'none';
+  communityMini.classList.remove('visible');
   labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS';
   labelEl.style.animation = 'pulse 1.5s ease-in-out infinite';
-  // Hide splash content so it doesn't bleed through overlay
   document.getElementById('splash').style.visibility = 'hidden';
   overlay.classList.add('active');
 
-  // Phase 2: Show loading dots (slower cadence)
-  let dotCount = 0;
-  const dotInterval = setInterval(() => {
+  // Dot animation
+  var dotCount = 0;
+  var dotInterval = setInterval(function() {
     dotCount = (dotCount + 1) % 4;
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
   }, 500);
 
-  // Phase 3: After 2.8s, reveal the stage name softly
-  setTimeout(() => {
+  // Show community mini gate after 1.5s (below analyzing text)
+  setTimeout(function() {
+    communityMini.classList.add('visible');
+  }, 1500);
+
+  // After 8 seconds total: hide community, show result with EXPLOSION
+  setTimeout(function() {
     clearInterval(dotInterval);
+
+    // Hide community mini
+    communityMini.classList.remove('visible');
+    communityMini.style.display = 'none';
+
+    // Flash burst
+    flashEl.classList.add('fire');
+    setTimeout(function() { flashEl.classList.remove('fire'); }, 800);
+
+    // Spawn explosion particles
+    var stageColors = { skiller:'#b0b0d0', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+    spawnNivParticles(stageColors[stageKey] || '#b0b0d0');
+
+    // Reveal stage name with explosion animation
     labelEl.textContent = 'TU ETAPA';
     labelEl.style.animation = '';
     rankEl.textContent = s.name;
-    rankEl.style.filter = 'drop-shadow(0 0 40px ' + (s.color.startsWith('var(') ? 'rgba(200,200,230,0.4)' : s.color + '66') + ')';
-    rankEl.style.animation = 'stageReveal 1.2s cubic-bezier(.25,.46,.45,.94)';
+    rankEl.style.filter = 'drop-shadow(0 0 60px ' + (s.color.startsWith('var(') ? 'rgba(200,200,230,0.5)' : s.color + '88') + ')';
+    rankEl.style.animation = 'stageExplodeIn 1s cubic-bezier(.25,.46,.45,.94)';
     rangeEl.textContent = s.range;
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
-    btnEl.style.opacity = '1';
     btnEl.style.transition = 'opacity 0.8s ease 0.8s';
-  }, 2800);
+    btnEl.style.opacity = '1';
+  }, 8000);
 }
 
-// ─── DETRACTOR TAGS PER STAGE (no repiten la descripción) ─
+// ─── HELPER: build WhatsApp URL ──────────────
+function buildWaUrl(baseMsg) {
+  return 'https://wa.me/56978048922?text=' + encodeURIComponent(baseMsg);
+}
+
+// ─── DETRACTOR TAGS PER STAGE ─────────────────
 const nivDetractors = {
   skiller: ['Miedo a dar el salto','Zona de confort','Sin red de apoyo','Par\u00e1lisis por an\u00e1lisis','Ingresos estancados'],
   operator: ['Burnout constante','Techo de ingresos','Sin delegaci\u00f3n','Prospecci\u00f3n fr\u00eda','Cero automatizaci\u00f3n'],
@@ -1508,7 +1939,7 @@ const nivDetractors = {
   founder: ['Micro-management','Sin infraestructura digital','Decisiones reactivas','Equipo dependiente','Sin activos pasivos']
 };
 
-// ─── ROADMAP NODES PER STAGE (orden lógico, sin repetir desc) ─
+// ─── ROADMAP NODES PER STAGE ──────────────────
 const nivRoadmapNodes = {
   skiller: ['Definir oferta','Primer cliente','Sistema b\u00e1sico','IA aplicada','Ingreso recurrente'],
   operator: ['Pipeline activo','Subir precio','Automatizar entrega','IA como copiloto','Escala repetible'],
@@ -1518,44 +1949,60 @@ const nivRoadmapNodes = {
 
 // ─── ACCORDION TOGGLE ────────────────────────
 function toggleAccordion(btn) {
-  const block = btn.closest('.niv-acc-block');
-  const wasOpen = block.classList.contains('open');
+  var block = btn.closest('.niv-acc-block');
+  var wasOpen = block.classList.contains('open');
   block.classList.toggle('open');
-  // Reset mini-roadmap progress when closing
   if (wasOpen) {
-    const prog = block.querySelector('.niv-mini-progress');
+    var prog = block.querySelector('.niv-mini-progress');
     if (prog) prog.style.width = '0%';
   }
 }
 
+// ─── RENDER TOOL STACK FOR A STAGE (categorized, no accumulation) ──
+function renderToolStack(stageKey) {
+  var categories = nivTools[stageKey];
+  if (!categories) return '';
+  var html = '<div class="niv-tool-stack"><div class="niv-tool-stack-label">STACK DE ESTA ETAPA</div>';
+  var catKeys = Object.keys(categories);
+  catKeys.forEach(function(cat) {
+    var tools = categories[cat];
+    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">';
+    tools.forEach(function(t) {
+      if (t.emoji) {
+        html += '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>';
+      } else {
+        html += '<span class="niv-tool-item"><img src="' + t.icon + '" alt="' + t.name + '" width="16" height="16"> ' + t.name + '</span>';
+      }
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
 function dismissNivLevelup() {
   document.getElementById('splash').style.visibility = 'visible';
-  // Switch to result mode (remove nested scroll, centering, min-height dead space)
   document.querySelector('.splash-inner').classList.add('result-mode');
   document.getElementById('splash').classList.add('result-mode');
   document.body.classList.add('result-mode');
-  // Hide splash title to free space for result
   document.querySelector('.splash-title-wrap').style.display = 'none';
-  // Scroll to top of result
   window.scrollTo({top: 0, behavior: 'instant'});
   var overlay = document.getElementById('nivLevelup');
   overlay.classList.remove('active');
-  // Fully hide overlay so it doesn't intercept touch scroll
   setTimeout(function() { overlay.style.display = 'none'; }, 800);
-  const stageKey = window._nivStageKey;
-  const s = nivStages[stageKey];
+  var stageKey = window._nivStageKey;
+  var s = nivStages[stageKey];
 
   document.getElementById('nivResult').classList.add('active');
-  const nameEl = document.getElementById('nivStageName');
+  var nameEl = document.getElementById('nivStageName');
   nameEl.textContent = s.name;
-  // Per-stage metallic gradient (brand-aligned material feel)
   var grads = {
     skiller: 'linear-gradient(135deg, #505068 0%, #9090b0 20%, #d8d8f0 50%, #9090b0 80%, #505068 100%)',
     operator: 'linear-gradient(135deg, #6a4010 0%, #d08030 20%, #ffe0a0 50%, #d08030 80%, #6a4010 100%)',
     builder: 'linear-gradient(135deg, #1a3a7a 0%, #3a8aee 20%, #a0d0ff 50%, #3a8aee 80%, #1a3a7a 100%)',
     founder: 'linear-gradient(135deg, #6a5020 0%, #c8a840 20%, #f0d88a 50%, #c8a840 80%, #6a5020 100%)'
   };
-  nameEl.style.background = grads[window._nivStageKey];
+  nameEl.style.background = grads[stageKey];
   nameEl.style.backgroundSize = '200% 100%';
   nameEl.style.webkitBackgroundClip = 'text';
   nameEl.style.backgroundClip = 'text';
@@ -1567,13 +2014,11 @@ function dismissNivLevelup() {
   document.getElementById('nivStageRange').textContent = s.range;
   document.getElementById('nivNow').textContent = s.now;
   document.getElementById('nivFuture').textContent = s.future;
-  // nivMissing set per-stage in CTA section below (skiller gets innerHTML override)
 
-  // Populate detractor tags — staggered reveal one by one
-  const dtagsEl = document.getElementById('nivDetractorTags');
-  const dtags = nivDetractors[stageKey] || [];
+  // Populate detractor tags
+  var dtagsEl = document.getElementById('nivDetractorTags');
+  var dtags = nivDetractors[stageKey] || [];
   dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag niv-dtag-hidden">' + t + '</span>'; }).join('');
-  // Tags reveal when situacion accordion auto-opens (slower stagger)
   setTimeout(function() {
     var tags = dtagsEl.querySelectorAll('.niv-dtag');
     tags.forEach(function(tag, i) {
@@ -1581,67 +2026,149 @@ function dismissNivLevelup() {
     });
   }, 2400);
 
-  // Populate mini-roadmap nodes (per-stage logical order)
-  const nodes = nivRoadmapNodes[stageKey] || [];
-  const nodesEl = document.getElementById('nivMiniNodes');
+  // Populate mini-roadmap nodes + tool stack
+  var nodes = nivRoadmapNodes[stageKey] || [];
+  var nodesEl = document.getElementById('nivMiniNodes');
   nodesEl.innerHTML = nodes.map(function(t) {
     return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
   }).join('');
 
-  // Dynamic CTA per stage — set missing text + buttons
-  const ctasEl = document.getElementById('nivCtas');
-  const cdEl = document.getElementById('nivCountdown');
-  const missingEl = document.getElementById('nivMissing');
-  if (stageKey === 'skiller') {
-    // Skiller: desafío 30 días + acompañamiento
-    missingEl.innerHTML = s.missing + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
-    ctasEl.innerHTML =
-      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F4D3} &nbsp;DESAF\u00cdO 30 D\u00cdAS &mdash; GRATIS</a>' +
-      '<a class="niv-cta" style="background:transparent;border:1px solid var(--border2);color:var(--text-secondary);" href="https://calendly.com/privatebuildprograms/start" target="_blank">NECESITO ACOMPA\u00d1AMIENTO</a>';
-    if (cdEl) cdEl.style.display = 'none';
-  } else if (stageKey === 'founder') {
-    missingEl.innerHTML = s.missing + '<br><br><span style="color:var(--text-secondary);font-size:13px;">Agenda una llamada y encontremos oportunidades y recursos que te permitan pasar a la siguiente etapa en los pr\u00f3ximos meses.</span>';
-    ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/founder-call" target="_blank">AGENDAR LLAMADA</a>' +
-      '<p style="font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.6;max-width:400px;">Si llegaste hasta aqu\u00ed, fue por algo. Puedes tomar la oportunidad o volver donde estabas.</p>';
-    if (cdEl) cdEl.style.display = 'none';
-  } else {
-    // Operator & Builder
-    missingEl.innerHTML = s.missing + '<br><br><span style="color:var(--text-secondary);font-size:13px;">Agenda una llamada y encontremos oportunidades y recursos que te permitan pasar a la siguiente etapa en los pr\u00f3ximos meses.</span>';
-    ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-calendly" href="https://calendly.com/privatebuildprograms/start" target="_blank">AGENDAR LLAMADA</a>' +
-      '<p style="font-size:12px;color:var(--text-muted);margin-top:16px;line-height:1.6;max-width:400px;">Si llegaste hasta aqu\u00ed, fue por algo. Puedes tomar la oportunidad o volver donde estabas.</p>';
-    if (cdEl) cdEl.style.display = 'none';
+  // Inject tool stack after the mini-roadmap inside the "Resultado" accordion body
+  var resultadoBody = document.querySelector('[data-acc="resultado"] .niv-acc-body');
+  if (resultadoBody) {
+    var existingToolStack = resultadoBody.querySelector('.niv-tool-stack');
+    if (!existingToolStack) {
+      resultadoBody.insertAdjacentHTML('beforeend', renderToolStack(stageKey));
+    }
   }
 
-  // Staggered reveal — each section appears gradually
+  // ─── CUSTOM CTAs PER STAGE (Change #5) ──────
+  var ctasEl = document.getElementById('nivCtas');
+  var missingEl = document.getElementById('nivMissing');
+
+  if (stageKey === 'skiller') {
+    // TODO: verify this Notion link is live — Patrick must check
+    missingEl.innerHTML = s.missing + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
+    ctasEl.innerHTML =
+      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>' +
+      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} NECESITO ORIENTACI\u00d3N</a>';
+
+  } else if (stageKey === 'operator') {
+    missingEl.innerHTML = s.missing;
+    var benefitsHtml = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 te llevas de la llamada?</div>';
+    nivCallBenefits.operator.forEach(function(b) {
+      benefitsHtml += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
+    });
+    benefitsHtml += '</div>';
+    ctasEl.innerHTML = benefitsHtml +
+      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} QUIERO ALCANZAR LOS $3.000/MES</a>';
+
+  } else if (stageKey === 'builder') {
+    missingEl.innerHTML = s.missing;
+    var benefitsHtml2 = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 te llevas de la llamada?</div>';
+    nivCallBenefits.builder.forEach(function(b) {
+      benefitsHtml2 += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
+    });
+    benefitsHtml2 += '</div>';
+    ctasEl.innerHTML = benefitsHtml2 +
+      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} QUIERO CONOCER EL SISTEMA PARA LLEGAR A $10K/MES</a>';
+
+  } else if (stageKey === 'founder') {
+    missingEl.innerHTML = s.missing;
+    ctasEl.innerHTML =
+      '<a class="niv-cta" style="background:var(--gold);color:#000;font-weight:800;border:none;" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4CB} SUMARME A LA LISTA DE ESPERA MASTERMIND</a>';
+  }
+
+  // Update footer CTA with stage-specific WhatsApp message
+  var footerCta = document.getElementById('nivFooterCta');
+  if (footerCta && s.wa) {
+    footerCta.href = buildWaUrl(s.wa);
+  }
+
+  // Show and configure calculator
+  var calcEl = document.getElementById('nivCalculator');
+  if (calcEl) {
+    calcEl.style.display = 'block';
+    window._nivCalcTarget = nivCalcTargets[stageKey] || 3000;
+    document.getElementById('nivCalcInput').value = '';
+    document.getElementById('nivCalcResult').textContent = '';
+    document.getElementById('nivCalcTip').textContent = '';
+  }
+
+  // Staggered reveal
   var revealEls = document.querySelectorAll('#nivResult > *');
   revealEls.forEach(function(el, i) {
     el.classList.add('reveal', 'reveal-d' + Math.min(i, 8));
   });
 
-  // Auto-open accordions sequentially (slower, breathable pace)
+  // Auto-open accordions sequentially
   var allBlocks = document.querySelectorAll('.niv-acc-block');
   allBlocks.forEach(function(block, i) {
     setTimeout(function() { block.classList.add('open'); }, 1800 + i * 1200);
   });
 
-  // Start 5-min countdown
-  startCountdown();
-
   // Update stage bars
   updateStageBars(stageKey);
+
+  // Show countdown after accordions open
+  setTimeout(function() { startCountdown(); }, 5000);
+}
+
+// ─── COUNTDOWN (1 minute) ────────────────────
+function startCountdown() {
+  var section = document.getElementById('nivCountdown');
+  var timerEl = document.getElementById('nivCountdownTimer');
+  if (!section || !timerEl) return;
+  section.style.display = 'block';
+  section.classList.add('active');
+  var totalSeconds = 60;
+  function tick() {
+    var m = Math.floor(totalSeconds / 60);
+    var s = totalSeconds % 60;
+    timerEl.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+    if (totalSeconds <= 0) {
+      timerEl.textContent = '00:00';
+      section.classList.remove('active');
+      return;
+    }
+    totalSeconds--;
+    setTimeout(tick, 1000);
+  }
+  tick();
+}
+
+// ─── INCOME CALCULATOR (Change #11) ───────────
+function updateCalculator() {
+  var price = parseFloat(document.getElementById('nivCalcInput').value) || 0;
+  var target = window._nivCalcTarget || 3000;
+  var resultEl = document.getElementById('nivCalcResult');
+  var tipEl = document.getElementById('nivCalcTip');
+
+  if (price <= 0) {
+    resultEl.textContent = '';
+    tipEl.textContent = '';
+    return;
+  }
+
+  var clients = Math.ceil(target / price);
+  resultEl.textContent = 'Necesitas ' + clients + ' clientes para llegar a $' + target.toLocaleString() + '/mes';
+
+  if (clients > 30) {
+    var suggestedPrice = Math.ceil(target / 10);
+    tipEl.textContent = 'Tip: sube tu ticket. Con $' + suggestedPrice + ' solo necesitas 10 clientes.';
+  } else {
+    tipEl.textContent = '';
+  }
 }
 
 function updateStageBars(activeStage) {
-  const stages = ['skiller','operator','builder','founder'];
-  const activeIdx = stages.indexOf(activeStage);
-  const stageColors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+  var stages = ['skiller','operator','builder','founder'];
+  var activeIdx = stages.indexOf(activeStage);
+  var stageColors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
 
-  const bar = document.getElementById('nivStageBar2');
+  var bar = document.getElementById('nivStageBar2');
   if (!bar) return;
 
-  // Build stage bar content if empty (with numbered boxes)
   if (!bar.children.length) {
     bar.innerHTML = stages.map(function(s, i) {
       return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
@@ -1651,8 +2178,8 @@ function updateStageBars(activeStage) {
   }
   bar.style.display = 'flex';
 
-  const items = bar.querySelectorAll('.niv-stage-bar-item');
-  items.forEach((item, i) => {
+  var items = bar.querySelectorAll('.niv-stage-bar-item');
+  items.forEach(function(item, i) {
     item.classList.remove('active','completed');
     if (i === activeIdx) item.classList.add('active');
     else if (i < activeIdx) item.classList.add('completed');
@@ -1660,21 +2187,24 @@ function updateStageBars(activeStage) {
 }
 
 function spawnNivParticles(color) {
-  const container = document.getElementById('nivLevelupParticles');
+  var container = document.getElementById('nivLevelupParticles');
   container.innerHTML = '';
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
-  for (let i = 0; i < 30; i++) {
-    const p = document.createElement('div');
+  var cx = window.innerWidth / 2;
+  var cy = window.innerHeight / 2;
+  // Bigger explosion: 60 particles, wider spread
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement('div');
     p.className = 'nlp';
     p.style.left = cx + 'px';
     p.style.top = cy + 'px';
     p.style.background = color;
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 80 + Math.random() * 200;
+    p.style.width = (2 + Math.random() * 4) + 'px';
+    p.style.height = p.style.width;
+    var angle = Math.random() * Math.PI * 2;
+    var dist = 100 + Math.random() * 350;
     p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
     p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-    p.style.setProperty('--dur', (0.6 + Math.random() * 0.8) + 's');
+    p.style.setProperty('--dur', (0.5 + Math.random() * 1.2) + 's');
     container.appendChild(p);
   }
 }
@@ -1687,42 +2217,12 @@ function nivGoBack() {
   }
 }
 
-
-// ─── 5-MINUTE COUNTDOWN (starts on result show) ──
-let cdTarget = null;
-let cdInterval = null;
-function startCountdown() {
-  cdTarget = Date.now() + (5 * 60 * 1000); // 5 minutes
-  if (cdInterval) clearInterval(cdInterval);
-  updateCountdown();
-  cdInterval = setInterval(updateCountdown, 1000);
-}
-function updateCountdown() {
-  if (!cdTarget) return;
-  const total = 5 * 60 * 1000;
-  const diff = cdTarget - Date.now();
-  if (diff <= 0) {
-    document.getElementById('cdMins2').textContent = '00';
-    document.getElementById('cdSecs2').textContent = '00';
-    var bar = document.getElementById('cdBarFill');
-    if (bar) bar.style.width = '0%';
-    if (cdInterval) clearInterval(cdInterval);
-    return;
-  }
-  const mins = Math.floor(diff / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-  document.getElementById('cdMins2').textContent = String(mins).padStart(2, '0');
-  document.getElementById('cdSecs2').textContent = String(secs).padStart(2, '0');
-  var bar = document.getElementById('cdBarFill');
-  if (bar) bar.style.width = ((diff / total) * 100) + '%';
-}
-
 // ─── FLOATING PARTICLES ────────────────────
 (function() {
-  const container = document.getElementById('particles');
+  var container = document.getElementById('particles');
   if (!container) return;
-  for (let i = 0; i < 20; i++) {
-    const p = document.createElement('div');
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
     p.className = 'particle';
     p.style.left = Math.random() * 100 + '%';
     p.style.bottom = '-10px';
@@ -1733,14 +2233,13 @@ function updateCountdown() {
   }
 })();
 
-window.addEventListener('load', () => {
+window.addEventListener('load', function() {
   document.body.classList.add('splash-active');
-  // Populate splash stage preview bar
   var previewBar = document.getElementById('nivStageBarPreview');
   if (previewBar) {
     var stages = ['skiller','operator','builder','founder'];
     var colors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
-    var ranges = { skiller:'$0–$1.5K', operator:'$1.5K–$3K', builder:'$3K–$10K', founder:'$10K+' };
+    var ranges = { skiller:'$0\u2013$1.5K', operator:'$1.5K\u2013$3K', builder:'$3K\u2013$10K', founder:'$10K+' };
     previewBar.innerHTML = stages.map(function(s, i) {
       return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
         '<div class="niv-stage-bar-color" style="background:' + colors[s] + '"></div>' +
