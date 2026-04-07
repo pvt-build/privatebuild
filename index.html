@@ -1402,6 +1402,32 @@ body.result-mode {
   font-weight:600;
 }
 
+/* ─── FINAL METALLIC CTA ─────────────────────── */
+.niv-final-cta {
+  display:inline-block;
+  margin-top:24px;
+  padding:16px 40px;
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.04em;
+  color:#fff;
+  text-decoration:none;
+  background:linear-gradient(135deg, #404060 0%, #6868a0 40%, #9090c0 50%, #6868a0 60%, #404060 100%);
+  background-size:200% 100%;
+  animation:titleShimmer 4s ease-in-out infinite;
+  border:1px solid rgba(180,180,220,0.25);
+  border-radius:2px;
+  box-shadow:0 0 24px rgba(140,140,200,0.2), 0 0 60px rgba(140,140,200,0.08);
+  transition:all 0.3s ease;
+  cursor:pointer;
+}
+.niv-final-cta:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 32px rgba(160,160,220,0.35), 0 0 80px rgba(160,160,220,0.15), 0 8px 30px rgba(0,0,0,0.3);
+  border-color:rgba(200,200,240,0.5);
+}
+
 /* ─── TOOL CATEGORIES ────────────────────────── */
 .niv-tool-category {
   margin-bottom:12px;
@@ -1708,28 +1734,20 @@ body.result-mode {
         </div>
       </div>
 
-      <!-- FOUNDER QUOTES + URGENCY -->
+      <!-- FOUNDER QUOTES + FINAL CTA -->
       <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
         <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
         <div class="niv-urgency-line"></div>
         <div class="niv-urgency-text">
           No te falta informaci&oacute;n ni claridad.<br>
-          Te sobra <strong>tolerancia a la espera y a la comodidad.</strong><br><br>
-          Si no tomas acci&oacute;n hoy, tendr&aacute;s otro a&ntilde;o m&aacute;s en desventaja.
+          Te sobra <strong>tolerancia a la espera y a la comodidad.</strong>
         </div>
+        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank">&iquest;O vas a dejar que se escape otro a&ntilde;o m&aacute;s?</a>
       </div>
 
       <!-- FOOTER -->
       <div class="niv-footer">
         <div class="niv-footer-logo">&#x1F512; PRIVATE BUILD</div>
-        <div class="niv-footer-text">
-          Cada negocio tiene <strong>procesos id&eacute;nticos</strong>, aunque tengan distintos rangos de ingreso y m&aacute;rgenes.
-          Hoy, <strong>construir tu propia infraestructura es clave</strong> para un mundo que se apalanca con IA.
-          Los ingresos que hoy generas pueden <strong>multiplicarse hasta x10</strong> con la oferta, sistemas y automatizaci&oacute;n correctos.
-        </div>
-        <div class="niv-footer-closer" style="margin-top:20px;color:var(--text-secondary);font-weight:400;">La pregunta es...</div>
-        <div class="niv-footer-closer" style="margin-top:8px;font-size:15px;">&iquest;Vas a tomar acci&oacute;n o vas a volver donde estabas?</div>
-        <a class="niv-footer-cta niv-heartbeat" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank">No, voy a tomar acci&oacute;n ahora &rarr;</a>
         <div class="niv-footer-brand">
           <span>we all gonna make it &#x1F3F4;&#x200D;&#x2620;&#xFE0F;</span>
           <span class="niv-footer-sep">&middot;</span>
@@ -2295,24 +2313,24 @@ function dismissNivLevelup() {
 // ─── FOUNDER QUOTES PER STAGE ────────────────
 var nivFounderQuotes = {
   skiller: [
-    { text: '\u201cThe best time to plant a tree was 20 years ago. The second best time is now.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cIf you\u2019re not embarrassed by the first version of your product, you\u2019ve launched too late.\u201d', author: 'Reid Hoffman' },
-    { text: '\u201cYour brand is what people say about you when you\u2019re not in the room.\u201d', author: 'Jeff Bezos' }
+    { text: '\u201cEl mejor momento para plantar un \u00e1rbol fue hace 20 a\u00f1os. El segundo mejor momento es ahora.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cSi no te averg\u00fcenza la primera versi\u00f3n de tu producto, lanzaste demasiado tarde.\u201d', author: 'Reid Hoffman' },
+    { text: '\u201cTu marca es lo que la gente dice de ti cuando no est\u00e1s en la habitaci\u00f3n.\u201d', author: 'Jeff Bezos' }
   ],
   operator: [
-    { text: '\u201cThe goal is not to do business with everybody who needs what you have. The goal is to do business with people who believe what you believe.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cMost people overestimate what they can do in one year and underestimate what they can do in ten years.\u201d', author: 'Jeff Bezos' },
-    { text: '\u201cIf you only do what you can do, you will never be more than you are now.\u201d', author: 'Alex Hormozi' }
+    { text: '\u201cEl objetivo no es hacer negocios con todos los que necesitan lo que tienes. Es hacer negocios con quienes creen en lo que t\u00fa crees.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cLa mayor\u00eda sobreestima lo que puede hacer en un a\u00f1o y subestima lo que puede hacer en diez.\u201d', author: 'Jeff Bezos' },
+    { text: '\u201cSi solo haces lo que ya sabes hacer, nunca ser\u00e1s m\u00e1s de lo que ya eres.\u201d', author: 'Alex Hormozi' }
   ],
   builder: [
-    { text: '\u201cFree education is abundant. It\u2019s the desire to learn that\u2019s scarce.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cYour margin is my opportunity.\u201d', author: 'Jeff Bezos' },
-    { text: '\u201cThe bottleneck is never the strategy. The bottleneck is always the implementation.\u201d', author: 'Alex Hormozi' }
+    { text: '\u201cLa educaci\u00f3n gratuita es abundante. Lo que escasea es el deseo de aprender.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cTu margen es mi oportunidad.\u201d', author: 'Jeff Bezos' },
+    { text: '\u201cEl cuello de botella nunca es la estrategia. El cuello de botella siempre es la implementaci\u00f3n.\u201d', author: 'Alex Hormozi' }
   ],
   founder: [
-    { text: '\u201cSeek wealth, not money or status. Wealth is having assets that earn while you sleep.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cI knew that if I failed I wouldn\u2019t regret that, but I knew the one thing I might regret is not trying.\u201d', author: 'Jeff Bezos' },
-    { text: '\u201cThe constraint on any business is always the owner.\u201d', author: 'Alex Hormozi' }
+    { text: '\u201cBusca riqueza, no dinero ni estatus. Riqueza es tener activos que generan mientras duermes.\u201d', author: 'Naval Ravikant' },
+    { text: '\u201cSab\u00eda que si fallaba no me arrepentir\u00eda, pero sab\u00eda que lo \u00fanico de lo que podr\u00eda arrepentirme es de no haberlo intentado.\u201d', author: 'Jeff Bezos' },
+    { text: '\u201cLa restricci\u00f3n de cualquier negocio siempre es el due\u00f1o.\u201d', author: 'Alex Hormozi' }
   ]
 };
 
