@@ -1357,32 +1357,81 @@ body.result-mode {
   margin:40px auto 0;
   text-align:center;
 }
-.niv-urgency-quotes {
+.niv-quote-carousel {
+  position:relative;
+  max-width:440px;
+  margin:0 auto 24px;
+  overflow:hidden;
+  min-height:140px;
+}
+.niv-quote-track {
   display:flex;
-  flex-direction:column;
-  gap:20px;
-  margin-bottom:24px;
+  transition:transform 0.5s cubic-bezier(.4,0,.2,1);
 }
-.niv-urgency-quote {
-  padding:0 16px;
-  opacity:0;
-  transform:translateY(12px);
-  animation:fadeInUp 0.8s ease forwards;
+.niv-quote-card {
+  min-width:100%;
+  padding:20px 24px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid var(--border2);
+  border-radius:6px;
+  text-align:center;
+  box-sizing:border-box;
 }
-.niv-urgency-quote:nth-child(2) { animation-delay:0.4s; }
-.niv-urgency-quote:nth-child(3) { animation-delay:0.8s; }
-.niv-urgency-quote-text {
+.niv-quote-card-text {
   font-size:clamp(13px,2vw,15px);
   font-style:italic;
   color:var(--text-secondary);
   line-height:1.7;
-  margin-bottom:6px;
+  margin-bottom:10px;
 }
-.niv-urgency-quote-author {
+.niv-quote-card-author {
   font-size:10px;
-  font-weight:600;
+  font-weight:700;
   letter-spacing:0.1em;
   color:var(--text-muted);
+  text-transform:uppercase;
+}
+.niv-quote-dots {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+.niv-quote-dot {
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--border2);
+  cursor:pointer;
+  transition:background 0.3s;
+}
+.niv-quote-dot.active {
+  background:var(--metal2);
+}
+.niv-quote-arrows {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px;
+}
+.niv-quote-arrow {
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--text-secondary);
+  font-size:14px;
+  cursor:pointer;
+  border-radius:50%;
+  transition:all 0.2s;
+}
+.niv-quote-arrow:hover {
+  background:rgba(255,255,255,0.08);
+  color:var(--text-primary);
+  border-color:var(--border2);
 }
 .niv-urgency-line {
   width:40px;
@@ -1426,6 +1475,27 @@ body.result-mode {
   transform:translateY(-3px);
   box-shadow:0 0 32px rgba(160,160,220,0.35), 0 0 80px rgba(160,160,220,0.15), 0 8px 30px rgba(0,0,0,0.3);
   border-color:rgba(200,200,240,0.5);
+}
+.niv-final-cta.splash-active {
+  animation:ctaExpand 0.5s ease forwards !important;
+}
+@keyframes ctaExpand {
+  0% { transform:scale(1); box-shadow:0 0 24px rgba(140,140,200,0.2); }
+  30% { transform:scale(0.94); }
+  60% { transform:scale(1.06); box-shadow:0 0 60px rgba(160,160,220,0.6), 0 0 120px rgba(160,160,220,0.2); }
+  100% { transform:scale(1); box-shadow:0 0 24px rgba(140,140,200,0.2); }
+}
+.niv-cta-ripple {
+  position:fixed;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(160,160,220,0.4) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:99999;
+  animation:rippleOut 0.7s ease-out forwards;
+}
+@keyframes rippleOut {
+  0% { width:0; height:0; opacity:1; }
+  100% { width:300px; height:300px; opacity:0; }
 }
 
 /* ─── TOOL CATEGORIES ────────────────────────── */
@@ -1723,7 +1793,7 @@ body.result-mode {
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
       <!-- Stage preview FIRST -->
-      <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:48px;"></div>
+      <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:60px;"></div>
       <p class="splash-tagline niv-home-reveal niv-home-d2">Convi&eacute;rtete en founder y logra la libertad que buscas, construyendo un negocio desde tu habilidad y apalanc&aacute;ndote con sistemas integrados con IA.</p>
       <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Descubre tu etapa actual</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
@@ -1910,11 +1980,11 @@ body.result-mode {
             <line x1="40" y1="100" x2="420" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
             <line x1="40" y1="60" x2="420" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
             <line x1="40" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
-            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$0</text>
-            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$12.5K</text>
-            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$25K</text>
-            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$37.5K</text>
-            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$50K+</text>
+            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$100</text>
+            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$500</text>
+            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$3K</text>
+            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$15K</text>
+            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$50K+</text>
             <text x="40" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">0</text>
             <text x="116" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 1</text>
             <text x="192" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 2</text>
@@ -1936,19 +2006,17 @@ body.result-mode {
         <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
         <div class="niv-urgency-line"></div>
         <div style="margin:24px auto;max-width:420px;">
-          <p style="font-size:clamp(15px,2.5vw,18px);color:var(--red);line-height:1.7;text-decoration:underline;text-underline-offset:4px;font-weight:600;">T&uacute; decides si comenzar a construir hoy...</p>
-          <p style="font-size:clamp(14px,2.2vw,16px);color:var(--text-secondary);line-height:1.7;margin-top:8px;">&iquest;o prefieres perder <strong style="color:var(--text-primary);">otro a&ntilde;o m&aacute;s</strong> en el mismo lugar?</p>
+          <p style="font-size:clamp(14px,2.2vw,16px);color:var(--text-secondary);line-height:1.7;font-weight:500;">T&uacute; decides si comenzar a construir hoy...</p>
+          <p style="font-size:clamp(15px,2.5vw,18px);color:var(--red);line-height:1.7;margin-top:8px;text-decoration:underline;text-underline-offset:4px;font-weight:600;">&iquest;o prefieres perder <strong>otro a&ntilde;o m&aacute;s</strong> en el mismo lugar?</p>
         </div>
-        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank">No, quiero tomar acci&oacute;n ahora &rarr;</a>
+        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank" onclick="ctaSplash(event)">No, quiero tomar acci&oacute;n ahora &rarr;</a>
       </div>
 
       <!-- FOOTER -->
       <div class="niv-footer">
         <div class="niv-footer-logo">&#x1F512; PRIVATE BUILD</div>
         <div class="niv-footer-brand">
-          <span>we all gonna make it &#x1F3F4;&#x200D;&#x2620;&#xFE0F;</span>
-          <span class="niv-footer-sep">&middot;</span>
-          <span>Built with vision &#x1F9ED;</span>
+          <span>Built with purpose and vision for all entrepreneurs &#x1F3F4;&#x200D;&#x2620;&#xFE0F;</span>
         </div>
       </div>
     </div>
@@ -2118,9 +2186,9 @@ const nivTools = {
       { name: 'n8n', icon: F('n8n.io') }
     ],
     'Contenido': [
-      { name: 'Antigravity', icon: F('antigravity.so') },
+      { name: 'Antigravity', icon: 'https://antigravity.so/favicon.ico' },
       { name: 'Higgsfield', icon: F('higgsfield.ai') },
-      { name: 'Poppy AI', icon: F('poppy.ai') }
+      { name: 'Poppy AI', icon: 'https://meetpoppy.ai/favicon.ico' }
     ],
     'Marketing & Dev': [
       { name: 'Meta Ads', icon: F('facebook.com') },
@@ -2508,65 +2576,121 @@ function dismissNivLevelup() {
   setTimeout(function() { showFounderQuotes(); }, 5000);
 }
 
-// ─── FOUNDER QUOTES PER STAGE ────────────────
-var nivFounderQuotes = {
-  skiller: [
-    { text: '\u201cEl mejor momento para plantar un \u00e1rbol fue hace 20 a\u00f1os. El segundo mejor momento es ahora.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cSi no te averg\u00fcenza la primera versi\u00f3n de tu producto, lanzaste demasiado tarde.\u201d', author: 'Reid Hoffman' },
-    { text: '\u201cTu marca es lo que la gente dice de ti cuando no est\u00e1s en la habitaci\u00f3n.\u201d', author: 'Jeff Bezos' }
-  ],
-  operator: [
-    { text: '\u201cEl objetivo no es hacer negocios con todos los que necesitan lo que tienes. Es hacer negocios con quienes creen en lo que t\u00fa crees.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cLa mayor\u00eda sobreestima lo que puede hacer en un a\u00f1o y subestima lo que puede hacer en diez.\u201d', author: 'Jeff Bezos' },
-    { text: '\u201cSi solo haces lo que ya sabes hacer, nunca ser\u00e1s m\u00e1s de lo que ya eres.\u201d', author: 'Alex Hormozi' }
-  ],
-  builder: [
-    { text: '\u201cLa educaci\u00f3n gratuita es abundante. Lo que escasea es el deseo de aprender.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cTu margen es mi oportunidad.\u201d', author: 'Jeff Bezos' },
-    { text: '\u201cEl cuello de botella nunca es la estrategia. El cuello de botella siempre es la implementaci\u00f3n.\u201d', author: 'Alex Hormozi' }
-  ],
-  founder: [
-    { text: '\u201cBusca riqueza, no dinero ni estatus. Riqueza es tener activos que generan mientras duermes.\u201d', author: 'Naval Ravikant' },
-    { text: '\u201cSab\u00eda que si fallaba no me arrepentir\u00eda, pero sab\u00eda que lo \u00fanico de lo que podr\u00eda arrepentirme es de no haberlo intentado.\u201d', author: 'Jeff Bezos' },
-    { text: '\u201cLa restricci\u00f3n de cualquier negocio siempre es el due\u00f1o.\u201d', author: 'Alex Hormozi' }
-  ]
-};
+// ─── FOUNDER QUOTES (decisión, leverage, construir, propósito) ──
+var nivFounderQuotes = [
+  { text: '\u201cLa \u00fanica decisi\u00f3n que importa es la que tomas cuando nadie te est\u00e1 mirando.\u201d', author: 'Naval Ravikant' },
+  { text: '\u201cEl leverage es lo que separa a quien trabaja 80 horas de quien genera mientras duerme.\u201d', author: 'Alex Hormozi' },
+  { text: '\u201cNo construyas un negocio que te atrape. Construye uno que te libere.\u201d', author: 'Naval Ravikant' },
+  { text: '\u201cSab\u00eda que si fallaba no me arrepentir\u00eda. Lo \u00fanico de lo que podr\u00eda arrepentirme es de no haberlo intentado.\u201d', author: 'Jeff Bezos' },
+  { text: '\u201cLa restricci\u00f3n de cualquier negocio siempre es el due\u00f1o. Crece t\u00fa primero.\u201d', author: 'Alex Hormozi' },
+  { text: '\u201cEl prop\u00f3sito no se encuentra. Se construye todos los d\u00edas con cada decisi\u00f3n que tomas.\u201d', author: 'Jeff Bezos' }
+];
+
+var _quoteIdx = 0;
+var _quoteAutoInterval = null;
 
 function showFounderQuotes() {
   var section = document.getElementById('nivUrgency');
   var container = document.getElementById('nivUrgencyQuotes');
   if (!section || !container) return;
 
-  var stageKey = window._nivStageKey || 'skiller';
-  var quotes = nivFounderQuotes[stageKey] || nivFounderQuotes.skiller;
-
-  container.innerHTML = quotes.map(function(q) {
-    return '<div class="niv-urgency-quote">' +
-      '<div class="niv-urgency-quote-text">' + q.text + '</div>' +
-      '<div class="niv-urgency-quote-author">\u2014 ' + q.author + '</div>' +
+  var quotes = nivFounderQuotes;
+  var cardsHtml = quotes.map(function(q) {
+    return '<div class="niv-quote-card">' +
+      '<div class="niv-quote-card-text">' + q.text + '</div>' +
+      '<div class="niv-quote-card-author">\u2014 ' + q.author + '</div>' +
     '</div>';
   }).join('');
 
+  var dotsHtml = quotes.map(function(_, i) {
+    return '<span class="niv-quote-dot' + (i === 0 ? ' active' : '') + '" onclick="goToQuote(' + i + ')"></span>';
+  }).join('');
+
+  container.innerHTML =
+    '<div class="niv-quote-carousel">' +
+      '<div class="niv-quote-track" id="nivQuoteTrack">' + cardsHtml + '</div>' +
+    '</div>' +
+    '<div class="niv-quote-dots" id="nivQuoteDots">' + dotsHtml + '</div>' +
+    '<div class="niv-quote-arrows">' +
+      '<button class="niv-quote-arrow" onclick="quoteNav(-1)">\u2190</button>' +
+      '<button class="niv-quote-arrow" onclick="quoteNav(1)">\u2192</button>' +
+    '</div>';
+
+  // Enable swipe on mobile
+  var track = document.getElementById('nivQuoteTrack');
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) quoteNav(dx < 0 ? 1 : -1);
+  }, {passive:true});
+
+  // Auto-rotate every 5s
+  _quoteIdx = 0;
+  clearInterval(_quoteAutoInterval);
+  _quoteAutoInterval = setInterval(function() { quoteNav(1); }, 5000);
+
   section.style.display = 'block';
-  animateIncomeChart();
+  setupChartObserver();
+}
+
+function goToQuote(idx) {
+  _quoteIdx = idx;
+  var track = document.getElementById('nivQuoteTrack');
+  var dots = document.querySelectorAll('#nivQuoteDots .niv-quote-dot');
+  if (!track) return;
+  track.style.transform = 'translateX(-' + (_quoteIdx * 100) + '%)';
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === _quoteIdx); });
+  // Reset auto interval
+  clearInterval(_quoteAutoInterval);
+  _quoteAutoInterval = setInterval(function() { quoteNav(1); }, 5000);
+}
+
+function quoteNav(dir) {
+  var total = nivFounderQuotes.length;
+  _quoteIdx = (_quoteIdx + dir + total) % total;
+  goToQuote(_quoteIdx);
+}
+
+var _chartAnimated = false;
+function setupChartObserver() {
+  var chart = document.getElementById('nivIncomeChart');
+  if (!chart || _chartAnimated) return;
+  if (!('IntersectionObserver' in window)) { animateIncomeChart(); return; }
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !_chartAnimated) {
+        _chartAnimated = true;
+        animateIncomeChart();
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(chart);
 }
 
 function animateIncomeChart() {
   var xMin = 40, xMax = 420, yMin = 20, yMax = 180;
   var xRange = xMax - xMin;
   var yRange = yMax - yMin;
-  var maxIncome = 50000; // $50K USD scale
-  var intervals = 10; // 10 x 6-month intervals = 5 years
+  var intervals = 10;
   var xStep = xRange / intervals;
 
-  function yFor(val) { return yMax - (val / maxIncome) * yRange; }
+  // Logarithmic Y scale
+  var logMin = Math.log(100);
+  var logMax = Math.log(55000);
+  function yFor(val) {
+    if (val <= 0) return yMax;
+    var logVal = Math.log(Math.max(val, 100));
+    return yMax - ((logVal - logMin) / (logMax - logMin)) * yRange;
+  }
   function xFor(i) { return xMin + i * xStep; }
 
-  // Employee: starts $1.5K, +$500/6mo, caps at $4.5K then flat forever
-  var empData = [0, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 4500, 4500, 4500];
+  // Employee: gradual climb, caps at $4.5K (log scale makes flat visible)
+  var empData = [100, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 4500, 4500, 4500];
 
-  // Founder: volatile with dips, no ceiling, reaches $50K+ year 5
-  var founderData = [0, 500, 1800, 1200, 4000, 2800, 7000, 12000, 9000, 22000, 50000];
+  // Founder: volatile with dips, reaches $50K year 5
+  var founderData = [100, 500, 1800, 1200, 4000, 2800, 7000, 12000, 9000, 22000, 50000];
 
   var empPoints = empData.map(function(v, i) { return xFor(i) + ',' + yFor(v); }).join(' ');
   var founderPoints = founderData.map(function(v, i) { return xFor(i) + ',' + yFor(v); }).join(' ');
@@ -2575,14 +2699,19 @@ function animateIncomeChart() {
   founderData.forEach(function(v, i) { areaD += ' L' + xFor(i) + ',' + yFor(v); });
   areaD += ' L' + xFor(intervals) + ',' + yMax + ' Z';
 
-  // Build dots
   var dotsEmpHtml = '';
   var dotsFounderHtml = '';
+  var eLabels = ['','$1.5K','','','$3K','','','$4.5K','','','$4.5K'];
+  var fLabels = ['','','$1.8K','','$4K','','$7K','$12K','','$22K','$50K'];
   empData.forEach(function(v, i) {
-    dotsEmpHtml += '<circle class="niv-chart-dot-employee" cx="' + xFor(i) + '" cy="' + yFor(v) + '" r="3"/>';
+    var cy = yFor(v);
+    dotsEmpHtml += '<circle class="niv-chart-dot-employee" cx="' + xFor(i) + '" cy="' + cy + '" r="3"/>';
+    if (eLabels[i]) dotsEmpHtml += '<text class="niv-chart-dot-employee" x="' + xFor(i) + '" y="' + (cy + 14) + '" fill="rgba(224,53,53,0.6)" font-size="7" text-anchor="middle" font-family="Inter">' + eLabels[i] + '</text>';
   });
   founderData.forEach(function(v, i) {
-    dotsFounderHtml += '<circle class="niv-chart-dot-founder" cx="' + xFor(i) + '" cy="' + yFor(v) + '" r="3"/>';
+    var cy = yFor(v);
+    dotsFounderHtml += '<circle class="niv-chart-dot-founder" cx="' + xFor(i) + '" cy="' + cy + '" r="3"/>';
+    if (fLabels[i]) dotsFounderHtml += '<text class="niv-chart-dot-founder" x="' + xFor(i) + '" y="' + (cy - 8) + '" fill="rgba(56,176,104,0.7)" font-size="7" text-anchor="middle" font-family="Inter">' + fLabels[i] + '</text>';
   });
 
   document.getElementById('nivChartEmployee').setAttribute('points', empPoints);
@@ -2591,20 +2720,18 @@ function animateIncomeChart() {
   document.getElementById('nivChartDotsEmployee').innerHTML = dotsEmpHtml;
   document.getElementById('nivChartDotsFounder').innerHTML = dotsFounderHtml;
 
-  // Position ceiling label at employee cap ($4.5K)
   var ceil = document.getElementById('nivChartCeiling');
   var ceilY = yFor(4500);
-  ceil.setAttribute('x', xFor(8) + 5);
-  ceil.setAttribute('y', ceilY - 6);
+  ceil.setAttribute('x', xFor(9) + 8);
+  ceil.setAttribute('y', ceilY + 3);
 
   setTimeout(function() {
     document.getElementById('nivChartEmployee').classList.add('animate');
     document.getElementById('nivChartFounder').classList.add('animate');
     document.getElementById('nivChartAreaFounder').classList.add('animate');
-    // Stagger dots appearance
     var allDots = document.querySelectorAll('.niv-chart-dot-employee, .niv-chart-dot-founder');
     allDots.forEach(function(dot, i) {
-      setTimeout(function() { dot.classList.add('animate'); }, 200 + i * 150);
+      setTimeout(function() { dot.classList.add('animate'); }, 200 + i * 120);
     });
     ceil.style.transition = 'opacity 1s ease 2.5s';
     ceil.style.opacity = '1';
@@ -2612,6 +2739,25 @@ function animateIncomeChart() {
 }
 
 // ─── INCOME CALCULATOR ──────────────────────
+function ctaSplash(e) {
+  if(navigator.vibrate) navigator.vibrate([30,50,30]);
+  var btn = e.currentTarget;
+  btn.classList.add('splash-active');
+  // Ripple from click/tap
+  var ripple = document.createElement('div');
+  ripple.className = 'niv-cta-ripple';
+  var rect = btn.getBoundingClientRect();
+  ripple.style.left = (rect.left + rect.width/2 - 150) + 'px';
+  ripple.style.top = (rect.top + rect.height/2 - 150) + 'px';
+  document.body.appendChild(ripple);
+  setTimeout(function() { ripple.remove(); }, 700);
+  setTimeout(function() { btn.classList.remove('splash-active'); }, 500);
+  // Small delay before nav so user sees splash
+  e.preventDefault();
+  var href = btn.href;
+  setTimeout(function() { window.open(href, '_blank'); }, 300);
+}
+
 function calcStep(delta) {
   var input = document.getElementById('nivCalcInput');
   var val = parseInt(input.value) || 0;
