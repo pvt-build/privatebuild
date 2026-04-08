@@ -1579,15 +1579,15 @@ body.result-mode {
 .niv-tool-marquee-track.right { animation-name:marqueeRight; }
 .niv-tool-marquee-track.left { animation-name:marqueeLeft; }
 .niv-tool-marquee-track:hover { animation-play-state:paused; }
-.niv-compound-chart {
-  max-width:440px;
+.niv-income-chart {
+  max-width:480px;
   margin:0 auto 32px;
-  padding:20px;
+  padding:20px 16px;
   border:1px solid var(--border);
   background:var(--bg2);
   border-radius:4px;
 }
-.niv-compound-title {
+.niv-income-chart-title {
   font-size:12px;
   font-weight:700;
   color:var(--metal2);
@@ -1595,47 +1595,77 @@ body.result-mode {
   margin-bottom:16px;
   letter-spacing:0.08em;
 }
-.niv-compound-tracks { display:flex; flex-direction:column; gap:16px; }
-.niv-compound-track {}
-.niv-compound-label {
+.niv-income-chart svg {
+  width:100%;
+  height:auto;
+  display:block;
+}
+.niv-income-chart-legend {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:12px;
   font-size:10px;
   font-weight:600;
-  color:var(--green);
-  margin-bottom:6px;
-  letter-spacing:0.05em;
+  letter-spacing:0.06em;
 }
-.niv-compound-bars { display:flex; gap:4px; align-items:flex-end; }
-.niv-compound-bar {
-  height:28px;
-  width:var(--w);
+.niv-income-chart-legend span {
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-size:9px;
+  gap:6px;
+}
+.niv-legend-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  display:inline-block;
+}
+.niv-chart-line-founder {
+  stroke:var(--green);
+  stroke-width:2.5;
+  fill:none;
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  transition:stroke-dashoffset 3s ease;
+}
+.niv-chart-line-founder.animate {
+  stroke-dashoffset:0;
+}
+.niv-chart-line-employee {
+  stroke:var(--text-muted);
+  stroke-width:2;
+  fill:none;
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  transition:stroke-dashoffset 3s ease;
+}
+.niv-chart-line-employee.animate {
+  stroke-dashoffset:0;
+}
+.niv-chart-area-founder {
+  fill:rgba(56,176,104,0.08);
+  opacity:0;
+  transition:opacity 1s ease 2s;
+}
+.niv-chart-area-founder.animate {
+  opacity:1;
+}
+.niv-lobby-item {
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+}
+.niv-lobby-item.show {
+  opacity:1;
+  transform:translateY(0);
+}
+.niv-lobby-urgency {
+  font-size:11px;
   font-weight:700;
-  letter-spacing:0.05em;
-  border-radius:2px;
-  transition:width 1.5s cubic-bezier(.4,0,.2,1);
-  min-width:40px;
-}
-.niv-compound-bar.action {
-  background:linear-gradient(90deg, rgba(56,176,104,0.2) 0%, rgba(56,176,104,0.4) 100%);
-  border:1px solid rgba(56,176,104,0.3);
-  color:var(--green);
-}
-.niv-compound-bar.wait {
-  background:rgba(255,255,255,0.04);
-  border:1px solid var(--border);
-  color:var(--text-muted);
-}
-.niv-compound-years {
-  display:flex;
-  justify-content:space-between;
-  margin-top:8px;
-  padding:0 4px;
-  font-size:9px;
-  color:var(--text-muted);
-  letter-spacing:0.05em;
+  letter-spacing:0.08em;
+  color:var(--gold);
+  text-align:center;
+  width:100%;
 }
 .niv-rubros { text-align:center; }
 .niv-rubros-spheres {
@@ -1688,7 +1718,7 @@ body.result-mode {
         <button class="niv-start-btn" onclick="startNivelador()">
           &#x1F9ED; &nbsp;DESCUBRIR MI ETAPA
         </button>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 45 segundos &middot; resultado inmediato</p>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">4 preguntas &middot; 30 segundos &middot; resultado inmediato</p>
       </div>
       <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
         <div class="niv-rubros">
@@ -1699,8 +1729,8 @@ body.result-mode {
             <span class="niv-rubro">&#x1F4AA;</span>
             <span class="niv-rubro">&#x1F4F7;</span>
             <span class="niv-rubro">&#x1F916;</span>
-            <span class="niv-rubro">&#x1F697;</span>
-            <span class="niv-rubro">&#x1F34E;</span>
+            <span class="niv-rubro">&#x1F957;</span>
+            <span class="niv-rubro">&#x1F4BB;</span>
           </div>
           <div class="niv-rubros-text">V&aacute;lido para +100 rubros</div>
         </div>
@@ -1859,27 +1889,35 @@ body.result-mode {
 
       <!-- FOUNDER QUOTES + FINAL CTA -->
       <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
-        <div class="niv-compound-chart">
-          <div class="niv-compound-title">El costo de esperar</div>
-          <div class="niv-compound-tracks">
-            <div class="niv-compound-track">
-              <div class="niv-compound-label">Tomando acci&oacute;n hoy</div>
-              <div class="niv-compound-bars">
-                <div class="niv-compound-bar action" style="--w:10%"><span>$1K</span></div>
-                <div class="niv-compound-bar action" style="--w:30%"><span>$3K</span></div>
-                <div class="niv-compound-bar action" style="--w:100%"><span>$10K</span></div>
-              </div>
-            </div>
-            <div class="niv-compound-track">
-              <div class="niv-compound-label" style="color:var(--text-muted);">Esperando &ldquo;el momento perfecto&rdquo;</div>
-              <div class="niv-compound-bars">
-                <div class="niv-compound-bar wait" style="--w:10%"><span>$1K</span></div>
-                <div class="niv-compound-bar wait" style="--w:15%"><span>$1.5K</span></div>
-                <div class="niv-compound-bar wait" style="--w:20%"><span>$2K</span></div>
-              </div>
-            </div>
+        <div class="niv-income-chart" id="nivIncomeChart">
+          <div class="niv-income-chart-title">El costo de esperar</div>
+          <svg viewBox="0 0 440 200" id="nivChartSvg">
+            <line x1="40" y1="20" x2="40" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="40" y1="180" x2="420" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="40" y1="140" x2="420" y2="140" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="40" y1="100" x2="420" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="40" y1="60" x2="420" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="40" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$0</text>
+            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$2.5M</text>
+            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$5M</text>
+            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$7.5M</text>
+            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="end" font-family="Inter">$10M</text>
+            <text x="40" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">0</text>
+            <text x="116" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 1</text>
+            <text x="192" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 2</text>
+            <text x="268" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 3</text>
+            <text x="344" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 4</text>
+            <text x="420" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 5</text>
+            <path class="niv-chart-area-founder" id="nivChartAreaFounder" d=""/>
+            <polyline class="niv-chart-line-employee" id="nivChartEmployee" points=""/>
+            <polyline class="niv-chart-line-founder" id="nivChartFounder" points=""/>
+            <text id="nivChartCeiling" x="344" y="52" fill="rgba(255,255,255,0.3)" font-size="8" font-family="Inter" opacity="0">TECHO &#8594;</text>
+          </svg>
+          <div class="niv-income-chart-legend">
+            <span><span class="niv-legend-dot" style="background:var(--green);"></span> Founder</span>
+            <span><span class="niv-legend-dot" style="background:var(--text-muted);"></span> Empleado</span>
           </div>
-          <div class="niv-compound-years"><span>A&ntilde;o 1</span><span>A&ntilde;o 2</span><span>A&ntilde;o 3</span></div>
         </div>
         <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
         <div class="niv-urgency-line"></div>
@@ -1915,16 +1953,17 @@ body.result-mode {
     <button class="niv-levelup-btn" onclick="dismissNivLevelup()">Ver mi resultado &rarr;</button>
     <!-- Community mini gate (during analyzing phase) -->
     <div class="niv-community-mini" id="nivCommunityMini">
-      <div class="niv-community-title">&Uacute;nete a la comunidad de Founders</div>
-      <div class="niv-community-tags">
+      <div class="niv-community-title niv-lobby-item">&Uacute;nete a la comunidad de Founders</div>
+      <div class="niv-community-tags niv-lobby-item">
         <span class="niv-community-tag">Recursos</span>
         <span class="niv-community-tag">Q&amp;A</span>
         <span class="niv-community-tag">Eventos</span>
         <span class="niv-community-tag">Beneficios</span>
       </div>
-      <a class="niv-community-join" id="nivCommunityJoin" href="https://chat.whatsapp.com/BhfDw1i4jlfFesRScWsckX?mode=gi_t" target="_blank">&#x1F4AC; Unirme a la comunidad</a>
-      <div class="niv-community-note">Se abre en otra pesta&ntilde;a &mdash; no pierdes tu resultado</div>
-      <div class="niv-lobby-timer" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">11</span>s</div>
+      <div class="niv-lobby-item niv-lobby-urgency">&#x1F512; Solo quedan 7 cupos antes de cerrarla</div>
+      <a class="niv-community-join niv-lobby-item" id="nivCommunityJoin" href="https://chat.whatsapp.com/BhfDw1i4jlfFesRScWsckX?mode=gi_t" target="_blank">&#x1F4AC; Unirme a la comunidad</a>
+      <div class="niv-community-note niv-lobby-item">Se abre en otra pesta&ntilde;a &mdash; no pierdes tu resultado</div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">13</span>s</div>
     </div>
   </div>
 </div>
@@ -1942,15 +1981,6 @@ const nivQuestions = [
       { text: 'Freelance / independiente vendiendo servicios', score: 2 },
       { text: 'Emprendimiento con clientes activos', score: 3 },
       { text: 'Empresa formalizada con operaci\u00f3n', score: 4 }
-    ]
-  },
-  {
-    q: '\u00bfCu\u00e1nto usas IA en tu d\u00eda a d\u00eda?',
-    opts: [
-      { text: 'Nada', score: 1 },
-      { text: 'A veces', score: 2 },
-      { text: 'Frecuentemente', score: 3 },
-      { text: 'Para todo', score: 4 }
     ]
   },
   {
@@ -2197,6 +2227,7 @@ function proceedToLevelUp() {
 
   // Reset state
   rankEl.textContent = '';
+  rankEl.style.opacity = '0';
   rangeEl.textContent = '';
   btnEl.style.opacity = '0';
   btnEl.style.transition = 'none';
@@ -2213,13 +2244,17 @@ function proceedToLevelUp() {
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
   }, 500);
 
-  // Show community mini gate after 1.5s (smooth fade-in)
+  // Show community mini gate after 1.5s (staggered reveal)
   setTimeout(function() {
     communityMini.classList.add('visible');
+    var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
+    lobbyItems.forEach(function(item, i) {
+      setTimeout(function() { item.classList.add('show'); }, i * 1500);
+    });
   }, 1500);
 
-  // Lobby countdown timer (11 seconds total, community shows at 1.5s → ~9.5s visible)
-  var lobbyTotal = 11;
+  // Lobby countdown timer (13 seconds total)
+  var lobbyTotal = 13;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -2248,11 +2283,13 @@ function proceedToLevelUp() {
     // Reveal stage name with explosion animation
     labelEl.textContent = 'TU ETAPA';
     labelEl.style.animation = '';
-    rankEl.textContent = s.name;
     var stageColors = { skiller:'#b0b0d0', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
     var dropColor = stageColors[stageKey] || '#b0b0d0';
     rankEl.style.filter = 'drop-shadow(0 0 60px ' + dropColor + '88)';
-    rankEl.style.animation = 'stageExplodeIn 1s ease';
+    rankEl.style.animation = 'none';
+    rankEl.textContent = s.name;
+    rankEl.offsetHeight;
+    rankEl.style.animation = 'stageExplodeIn 1s ease forwards';
     rangeEl.textContent = s.range;
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
     btnEl.style.transition = 'opacity 0.8s ease 0.8s';
@@ -2298,8 +2335,7 @@ function renderToolStack(stageKey) {
   if (!categories) return '';
   var html = '<div class="niv-tool-stack"><div class="niv-tool-stack-label">STACK DE ESTA ETAPA</div>';
   var catKeys = Object.keys(categories);
-  var dirs = ['right','left'];
-  catKeys.forEach(function(cat, ci) {
+  catKeys.forEach(function(cat) {
     var tools = categories[cat];
     var itemsHtml = '';
     tools.forEach(function(t) {
@@ -2309,8 +2345,7 @@ function renderToolStack(stageKey) {
         itemsHtml += '<span class="niv-tool-item"><img src="' + t.icon + '" alt="' + t.name + '" width="16" height="16"> ' + t.name + '</span>';
       }
     });
-    var dir = dirs[ci % 2];
-    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-marquee"><div class="niv-tool-marquee-track ' + dir + '">' + itemsHtml + itemsHtml + '</div></div></div>';
+    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">' + itemsHtml + '</div></div>';
   });
   html += '</div>';
   return html;
@@ -2499,6 +2534,50 @@ function showFounderQuotes() {
   }).join('');
 
   section.style.display = 'block';
+  animateIncomeChart();
+}
+
+function animateIncomeChart() {
+  var xMin = 40, xMax = 420, yMin = 20, yMax = 180;
+  var xRange = xMax - xMin;
+  var yRange = yMax - yMin;
+  var maxIncome = 10000000;
+  var intervals = 10;
+  var xStep = xRange / intervals;
+
+  function yFor(val) { return yMax - (val / maxIncome) * yRange; }
+  function xFor(i) { return xMin + i * xStep; }
+
+  // Employee: starts $500K, +$500K/6mo, caps at $4M then flat
+  var empData = [0];
+  var empVal = 500000;
+  for (var i = 1; i <= intervals; i++) {
+    empData.push(Math.min(empVal, 4000000));
+    empVal += 500000;
+  }
+
+  // Founder: volatile with dips but unlimited ceiling
+  var founderData = [0, 200000, 600000, 400000, 1200000, 800000, 2000000, 3500000, 3000000, 5500000, 8500000];
+
+  var empPoints = empData.map(function(v, i) { return xFor(i) + ',' + yFor(v); }).join(' ');
+  var founderPoints = founderData.map(function(v, i) { return xFor(i) + ',' + yFor(v); }).join(' ');
+
+  var areaD = 'M' + xFor(0) + ',' + yMax;
+  founderData.forEach(function(v, i) { areaD += ' L' + xFor(i) + ',' + yFor(v); });
+  areaD += ' L' + xFor(intervals) + ',' + yMax + ' Z';
+
+  document.getElementById('nivChartEmployee').setAttribute('points', empPoints);
+  document.getElementById('nivChartFounder').setAttribute('points', founderPoints);
+  document.getElementById('nivChartAreaFounder').setAttribute('d', areaD);
+
+  setTimeout(function() {
+    document.getElementById('nivChartEmployee').classList.add('animate');
+    document.getElementById('nivChartFounder').classList.add('animate');
+    document.getElementById('nivChartAreaFounder').classList.add('animate');
+    var ceil = document.getElementById('nivChartCeiling');
+    ceil.style.transition = 'opacity 1s ease 2.5s';
+    ceil.style.opacity = '1';
+  }, 300);
 }
 
 // ─── INCOME CALCULATOR ──────────────────────
@@ -2524,7 +2603,7 @@ function updateCalculator() {
   }
 
   var clients = Math.ceil(target / price);
-  resultEl.textContent = 'Necesitas ' + clients + ' clientes para llegar a $' + target.toLocaleString() + '/mes';
+  resultEl.innerHTML = 'Necesitas <span style="font-size:clamp(24px,5vw,36px);font-weight:900;color:var(--green);display:block;margin:8px 0;">' + clients + ' clientes</span> para llegar a $' + target.toLocaleString() + '/mes';
 
   if (clients > 30) {
     var suggestedPrice = Math.ceil(target / 10);
