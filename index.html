@@ -1240,6 +1240,14 @@ body.result-mode {
 .niv-calc-input:focus {
   border-color:var(--green);
 }
+.niv-calc-input::-webkit-outer-spin-button,
+.niv-calc-input::-webkit-inner-spin-button {
+  -webkit-appearance:none;
+  margin:0;
+}
+.niv-calc-input[type=number] {
+  -moz-appearance:textfield;
+}
 .niv-calc-input::placeholder {
   color:var(--text-muted);
 }
@@ -1366,16 +1374,17 @@ body.result-mode {
 }
 .niv-quote-track {
   display:flex;
-  transition:transform 0.5s cubic-bezier(.4,0,.2,1);
+  transition:transform 0.8s cubic-bezier(.25,.46,.45,.94);
 }
 .niv-quote-card {
   min-width:100%;
-  padding:20px 24px;
-  background:rgba(255,255,255,0.03);
+  padding:24px 28px;
+  background:var(--bg3);
   border:1px solid var(--border2);
-  border-radius:6px;
+  border-radius:8px;
   text-align:center;
   box-sizing:border-box;
+  box-shadow:0 4px 24px rgba(0,0,0,0.3), 0 0 40px rgba(140,140,200,0.06);
 }
 .niv-quote-card-text {
   font-size:clamp(13px,2vw,15px);
@@ -1972,7 +1981,8 @@ body.result-mode {
       <!-- FOUNDER QUOTES + FINAL CTA -->
       <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
         <div class="niv-income-chart" id="nivIncomeChart">
-          <div class="niv-income-chart-title">El costo de esperar</div>
+          <div class="niv-income-chart-title">Tu costo de no tomar acci&oacute;n</div>
+          <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-bottom:12px;letter-spacing:0.05em;">Como empleado, <span style="color:var(--red);font-weight:700;">tienes techo</span>. Como founder, <span style="color:var(--green);font-weight:700;">no hay l&iacute;mite</span>.</div>
           <svg viewBox="0 0 440 200" id="nivChartSvg">
             <line x1="40" y1="20" x2="40" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
             <line x1="40" y1="180" x2="420" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
@@ -2045,7 +2055,7 @@ body.result-mode {
       <div class="niv-lobby-item niv-lobby-urgency">&#x1F512; Solo quedan 7 cupos antes de cerrarla</div>
       <a class="niv-community-join niv-lobby-item" id="nivCommunityJoin" href="https://chat.whatsapp.com/BhfDw1i4jlfFesRScWsckX?mode=gi_t" target="_blank">&#x1F4AC; Unirme a la comunidad</a>
       <div class="niv-community-note niv-lobby-item">Se abre en otra pesta&ntilde;a &mdash; no pierdes tu resultado</div>
-      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">15</span>s</div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">17</span>s</div>
     </div>
   </div>
 </div>
@@ -2335,8 +2345,8 @@ function proceedToLevelUp() {
     });
   }, 1500);
 
-  // Lobby countdown timer (15 seconds total)
-  var lobbyTotal = 15;
+  // Lobby countdown timer (17 seconds total)
+  var lobbyTotal = 17;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -2345,14 +2355,20 @@ function proceedToLevelUp() {
     if (lobbyRemaining <= 0) clearInterval(lobbyInterval);
   }, 1000);
 
-  // After 11 seconds total: hide community, show result with EXPLOSION
+  // Hide community first, then explosion after fade-out
   setTimeout(function() {
     clearInterval(dotInterval);
     clearInterval(lobbyInterval);
 
     // Smooth hide community mini
     communityMini.classList.remove('visible');
-    setTimeout(function() { communityMini.style.display = 'none'; }, 800);
+    var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
+    lobbyItems.forEach(function(item) { item.classList.remove('show'); });
+  }, lobbyTotal * 1000);
+
+  // Explosion fires 1.2s after community starts hiding (fully gone)
+  setTimeout(function() {
+    communityMini.style.display = 'none';
 
     // Flash burst
     flashEl.classList.add('fire');
@@ -2365,7 +2381,6 @@ function proceedToLevelUp() {
     // Reveal stage name with explosion animation
     labelEl.textContent = 'TU ETAPA';
     labelEl.style.animation = '';
-    var stageColors = { skiller:'#b0b0d0', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
     var dropColor = stageColors[stageKey] || '#b0b0d0';
     rankEl.style.filter = 'drop-shadow(0 0 60px ' + dropColor + '88)';
     rankEl.style.animation = 'none';
@@ -2376,7 +2391,7 @@ function proceedToLevelUp() {
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
     btnEl.style.transition = 'opacity 0.8s ease 0.8s';
     btnEl.style.opacity = '1';
-  }, lobbyTotal * 1000);
+  }, lobbyTotal * 1000 + 1200);
 }
 
 // ─── HELPER: build WhatsApp URL ──────────────
