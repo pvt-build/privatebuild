@@ -517,6 +517,53 @@ body.result-mode {
   box-shadow:0 0 0 2px var(--gold), 0 8px 40px var(--gold-glow);
   transform:translateY(-2px);
 }
+.niv-lead-form {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-top:8px;
+  width:100%;
+  max-width:280px;
+}
+.niv-lead-input {
+  width:100%;
+  padding:12px 14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.14);
+  color:var(--text-primary);
+  font-family:'Inter',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  outline:none;
+  transition:border-color 0.2s;
+  text-align:center;
+}
+.niv-lead-input:focus {
+  border-color:var(--gold);
+}
+.niv-lead-input::placeholder {
+  color:var(--text-muted);
+}
+.niv-lead-note {
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.02em;
+  text-align:center;
+}
+.niv-value-teaser {
+  max-width:320px;
+  margin:0 auto;
+  font-size:13px;
+  line-height:1.6;
+  color:var(--text-secondary);
+  font-style:italic;
+  text-align:center;
+}
+.niv-value-teaser strong {
+  color:var(--gold-bright);
+  font-style:normal;
+}
 .niv-levelup-particles {
   position:absolute;
   inset:0;
@@ -2042,20 +2089,16 @@ body.result-mode {
     <div class="niv-levelup-label">TU ETAPA</div>
     <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
     <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
-    <button class="niv-levelup-btn" onclick="dismissNivLevelup()">Ver mi resultado &rarr;</button>
-    <!-- Community mini gate (during analyzing phase) -->
+    <form class="niv-lead-form" id="nivLeadForm" onsubmit="submitNivLead(event)">
+      <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre" autocomplete="name" required>
+      <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp (+56...)" autocomplete="tel" required>
+      <button class="niv-levelup-btn" type="submit">Ver mi resultado completo &rarr;</button>
+      <div class="niv-lead-note">Para armar tu diagn&oacute;stico personalizado &mdash; nada de spam.</div>
+    </form>
+    <!-- Value teaser (during analyzing phase, replaces community gate) -->
     <div class="niv-community-mini" id="nivCommunityMini">
-      <div class="niv-community-title niv-lobby-item">&Uacute;nete a la comunidad de Founders</div>
-      <div class="niv-community-tags niv-lobby-item">
-        <span class="niv-community-tag">Recursos</span>
-        <span class="niv-community-tag">Q&amp;A</span>
-        <span class="niv-community-tag">Eventos</span>
-        <span class="niv-community-tag">Beneficios</span>
-      </div>
-      <div class="niv-lobby-item niv-lobby-urgency">&#x1F512; Solo quedan 7 cupos antes de cerrarla</div>
-      <a class="niv-community-join niv-lobby-item" id="nivCommunityJoin" href="https://chat.whatsapp.com/BhfDw1i4jlfFesRScWsckX?mode=gi_t" target="_blank">&#x1F4AC; Unirme a la comunidad</a>
-      <div class="niv-community-note niv-lobby-item">Se abre en otra pesta&ntilde;a &mdash; no pierdes tu resultado</div>
-      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">17</span>s</div>
+      <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">5</span>s</div>
     </div>
   </div>
 </div>
@@ -2292,17 +2335,56 @@ function showNivResult() {
   proceedToLevelUp();
 }
 
-// ─── COMMUNITY JOIN handler ──────────────────
-document.addEventListener('DOMContentLoaded', function() {
-  var joinBtn = document.getElementById('nivCommunityJoin');
-  if (joinBtn) {
-    joinBtn.addEventListener('click', function() {
-      try {
-        localStorage.setItem('pb_community', JSON.stringify({ stage: window._nivStageKey, ts: Date.now(), joined: true }));
-      } catch(e) {}
-      // WhatsApp opens in new tab, user stays here
-    });
-  }
+// ─── CAPTURA DE LEADS → Make.com ──────────────
+// TODO Patrick: pegar acá la URL del webhook (Make.com → Custom Webhook trigger)
+// apenas la tengas. Hasta entonces el envío falla en silencio (se guarda igual
+// en localStorage como respaldo) y no bloquea a nadie de ver su resultado.
+const MAKE_WEBHOOK_URL = 'https://hook.us1.make.com/PEGAR_TU_WEBHOOK_AQUI';
+
+function sendToMake(payload) {
+  payload.ts = new Date().toISOString();
+  payload.source = 'nivelador-funnel';
+  // Respaldo local por si el webhook falla o no está configurado todavía
+  try {
+    var log = JSON.parse(localStorage.getItem('pb_funnel_log') || '[]');
+    log.push(payload);
+    localStorage.setItem('pb_funnel_log', JSON.stringify(log));
+  } catch (e) {}
+  if (!MAKE_WEBHOOK_URL || MAKE_WEBHOOK_URL.indexOf('PEGAR_TU_WEBHOOK_AQUI') !== -1) return;
+  fetch(MAKE_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function(e) { console.warn('Make webhook falló, dato queda en localStorage:', e); });
+}
+
+function submitNivLead(event) {
+  event.preventDefault();
+  var name = document.getElementById('nivLeadName').value.trim();
+  var phone = document.getElementById('nivLeadPhone').value.trim();
+  if (!name || phone.replace(/\D/g, '').length < 8) return; // required ya cubre vacío, esto cubre teléfono basura
+
+  sendToMake({
+    event: 'lead_capturado',
+    name: name,
+    phone: phone,
+    stage: window._nivStageKey,
+    quiz_scores: nivScores
+  });
+
+  dismissNivLevelup();
+}
+
+// ─── TRACKING DE CLICS EN CTAs (WhatsApp / Notion) ────
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('.niv-cta, .niv-cta-wa, #nivFooterCta, #nivCommunityJoin');
+  if (!link) return;
+  sendToMake({
+    event: 'cta_click',
+    stage: window._nivStageKey || null,
+    href: link.href,
+    text: link.textContent.trim().slice(0, 80)
+  });
 });
 
 function proceedToLevelUp() {
@@ -2312,7 +2394,7 @@ function proceedToLevelUp() {
   var overlay = document.getElementById('nivLevelup');
   var rankEl = document.getElementById('nivLevelupRank');
   var rangeEl = document.getElementById('nivLevelupRange');
-  var btnEl = document.querySelector('.niv-levelup-btn');
+  var formEl = document.getElementById('nivLeadForm');
   var labelEl = document.querySelector('.niv-levelup-label');
   var communityMini = document.getElementById('nivCommunityMini');
   var flashEl = document.getElementById('nivLevelupFlash');
@@ -2321,8 +2403,10 @@ function proceedToLevelUp() {
   rankEl.textContent = '';
   rankEl.style.opacity = '0';
   rangeEl.textContent = '';
-  btnEl.style.opacity = '0';
-  btnEl.style.transition = 'none';
+  formEl.style.opacity = '0';
+  formEl.style.transition = 'none';
+  document.getElementById('nivLeadName').value = '';
+  document.getElementById('nivLeadPhone').value = '';
   communityMini.classList.remove('visible');
   labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS';
   labelEl.style.animation = 'pulse 1.5s ease-in-out infinite';
@@ -2336,8 +2420,13 @@ function proceedToLevelUp() {
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
   }, 500);
 
-  // Show community mini gate after 1.5s (staggered reveal)
+  // Show value teaser after 1.5s (staggered reveal) — no mapa, solo un adelanto
   setTimeout(function() {
+    var teaserEl = document.getElementById('nivValueTeaser');
+    if (teaserEl) {
+      var q = nivFounderQuotes[Math.floor(Math.random() * nivFounderQuotes.length)];
+      teaserEl.innerHTML = '&#x201C;' + q.text.replace(/^“|”$/g, '') + '&#x201D;<br><strong>&mdash; ' + q.author + '</strong>';
+    }
     communityMini.classList.add('visible');
     var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
     lobbyItems.forEach(function(item, i) {
@@ -2345,8 +2434,8 @@ function proceedToLevelUp() {
     });
   }, 1500);
 
-  // Lobby countdown timer (17 seconds total)
-  var lobbyTotal = 17;
+  // Lobby countdown timer (5 segundos — antes eran 17, bajado a pedido de Patrick)
+  var lobbyTotal = 5;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -2389,8 +2478,8 @@ function proceedToLevelUp() {
     rankEl.style.animation = 'stageExplodeIn 1s ease forwards';
     rangeEl.textContent = s.range;
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
-    btnEl.style.transition = 'opacity 0.8s ease 0.8s';
-    btnEl.style.opacity = '1';
+    formEl.style.transition = 'opacity 0.8s ease 0.8s';
+    formEl.style.opacity = '1';
   }, lobbyTotal * 1000 + 1200);
 }
 
