@@ -222,6 +222,18 @@ body.result-mode {
   text-shadow: 0 2px 20px rgba(255,255,255,0.06);
 }
 
+/* Efecto ruleta: la palabra cambia en el mismo lugar (visión → habilidad → propósito) para hablarle a distintos focos de audiencia sin rehacer el copy */
+@keyframes nivWordFade {
+  0%, 100% { opacity:1; transform:translateY(0); }
+  50% { opacity:0; transform:translateY(-8px); }
+}
+.niv-word-rotator {
+  display:inline-block;
+  color:var(--gold);
+  font-weight:800;
+  animation: nivWordFade 2.4s ease-in-out infinite;
+}
+
 .splash-ctas {
   display: flex;
   gap: 14px;
@@ -276,7 +288,10 @@ body.result-mode {
 .niv-opt { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid transparent; padding:16px 20px; font-family:'Inter',sans-serif; font-size:14px; color:var(--text-primary); cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; }
 .niv-opt:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.18); border-left:3px solid var(--electric); transform:translateX(4px); }
 /* RESULT OVERLAY */
-.niv-result { display:none; text-align:center; }
+/* El padre es flex+align-items:center, así que sin width el bloque tomaba su max-content
+   (440px) y se desbordaba en mobile. Con width:100% respeta el ancho real de la pantalla
+   y el tope de 440px deja el desktop igual que antes. */
+.niv-result { display:none; text-align:center; width:100%; max-width:440px; margin:0 auto; }
 .niv-result-tag { font-size:11px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
 .niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
 .niv-result-range { font-size:14px; color:var(--text-secondary); margin-bottom:24px; font-weight:600; }
@@ -475,9 +490,10 @@ body.result-mode {
   font-family:'Inter Tight',sans-serif;
   font-size:clamp(56px,12vw,100px);
   font-weight:900;
-  letter-spacing:-0.03em;
+  letter-spacing:-0.01em;
   line-height:1;
   margin-bottom:8px;
+  padding-right:0.06em;
   background: var(--metal-grad);
   -webkit-background-clip:text;
   background-clip:text;
@@ -551,6 +567,60 @@ body.result-mode {
   letter-spacing:0.02em;
   text-align:center;
 }
+.niv-phone-row {
+  display:flex;
+  gap:8px;
+}
+.niv-country-select {
+  flex:0 0 104px;
+  padding:12px 4px 12px 8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.14);
+  color:var(--text-primary);
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  outline:none;
+  transition:border-color 0.2s;
+  text-align:left;
+  cursor:pointer;
+}
+.niv-country-select option { background:#0d0f14; color:#fff; }
+.niv-country-select:focus {
+  border-color:var(--gold);
+}
+.niv-phone-row .niv-lead-input {
+  flex:1;
+  min-width:0;
+  text-align:left;
+}
+
+/* ─── CTA AGENDAR LLAMADA (azul = alta intención; el verde queda solo para WhatsApp) ─── */
+@keyframes callPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(58,159,255,0.40), 0 4px 20px rgba(58,159,255,0.28); }
+  50% { box-shadow: 0 0 0 8px rgba(58,159,255,0), 0 6px 30px rgba(58,159,255,0.45); }
+}
+.niv-cta-call {
+  background:#2b7fd4; color:#fff;
+  animation: callPulse 2.8s ease-in-out infinite;
+  position:relative;
+}
+.niv-cta-call:hover {
+  box-shadow:0 0 0 2px #3a9fff, 0 8px 40px rgba(58,159,255,0.45) !important;
+  background:#3a9fff;
+}
+@media(min-width:768px) { .niv-cta-call { margin-top:8px; } }
+
+@media(prefers-reduced-motion:reduce) {
+  .niv-cta-call, .niv-cta-wa { animation:none; }
+}
+
+/* ─── PULSO DE LA FLECHA DE LA CALCULADORA (se activa al entrar en viewport) ─── */
+@keyframes arrowNudge {
+  0%, 100% { transform:translateX(0); box-shadow:0 0 0 0 rgba(200,168,74,0); }
+  50% { transform:translateX(3px); box-shadow:0 0 14px 0 rgba(200,168,74,0.35); }
+}
+.niv-arrow-hint { animation: arrowNudge 1.8s ease-in-out 3; border-color:rgba(200,168,74,0.5) !important; }
 .niv-value-teaser {
   max-width:320px;
   margin:0 auto;
@@ -563,6 +633,40 @@ body.result-mode {
 .niv-value-teaser strong {
   color:var(--gold-bright);
   font-style:normal;
+}
+
+/* ─── BENEFICIOS DURANTE EL ANÁLISIS (sube el valor percibido antes del resultado) ─── */
+.niv-lobby-benefits {
+  max-width:320px;
+  margin:18px auto 4px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  text-align:left;
+}
+.niv-lobby-benefit {
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--text-secondary);
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity 0.7s ease, transform 0.7s cubic-bezier(.22,.61,.36,1);
+}
+.niv-lobby-benefit.show { opacity:1; transform:translateY(0); }
+.niv-lobby-benefit strong { color:var(--text-primary); font-weight:700; }
+.niv-lobby-benefit-check {
+  flex:0 0 auto;
+  color:var(--green);
+  font-weight:800;
+  font-size:11px;
+  line-height:1.6;
+}
+@media(max-width:540px) {
+  .niv-lobby-benefits { max-width:290px; gap:8px; }
+  .niv-lobby-benefit { font-size:12px; }
 }
 .niv-levelup-particles {
   position:absolute;
@@ -820,11 +924,61 @@ body.result-mode {
   text-align:center;
   margin-bottom:20px;
 }
+/* ─── TABS DE RUBRO (filtro de casos) ─── */
+.niv-cases-tabs {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  margin-bottom:16px;
+}
+.niv-cases-tab {
+  font-family:'Inter',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.10);
+  padding:7px 12px;
+  border-radius:2px;
+  cursor:pointer;
+  transition:color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  white-space:nowrap;
+}
+.niv-cases-tab:hover {
+  color:var(--text-secondary);
+  border-color:rgba(255,255,255,0.22);
+}
+.niv-cases-tab.active {
+  color:var(--gold-bright, #d9b95c);
+  border-color:rgba(200,168,74,0.55);
+  background:rgba(200,168,74,0.08);
+}
+@media(max-width:540px) {
+  .niv-cases-tabs { gap:5px; }
+  .niv-cases-tab { font-size:9px; padding:6px 9px; letter-spacing:0.05em; }
+}
+
 .niv-cases-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:1px;
   background:var(--border);
+}
+/* Con un rubro seleccionado los casos caen en hilera, uno bajo el otro */
+.niv-cases-grid.filtered { grid-template-columns:1fr; }
+.niv-case.is-hidden { display:none; }
+.niv-case.is-entering {
+  animation: caseFallIn 0.55s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes caseFallIn {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .niv-case.is-entering { animation:none; }
 }
 .niv-case {
   background:var(--bg2);
@@ -999,15 +1153,27 @@ body.result-mode {
   from { opacity:0; transform:translateY(18px); }
   to { opacity:1; transform:translateY(0); }
 }
-.reveal { opacity:0; animation:revealUp 0.8s ease forwards; }
-.reveal-d1 { animation-delay:0.3s; }
-.reveal-d2 { animation-delay:0.6s; }
-.reveal-d3 { animation-delay:1.0s; }
-.reveal-d4 { animation-delay:1.4s; }
-.reveal-d5 { animation-delay:1.8s; }
-.reveal-d6 { animation-delay:2.2s; }
-.reveal-d7 { animation-delay:2.8s; }
-.reveal-d8 { animation-delay:3.4s; }
+/* Entrada por bloques, disparada al scrollear (no por timer): en mobile cada bloque
+   aparece cuando entra en pantalla, lento y suave, para no abrumar de una. */
+.reveal {
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 1.05s cubic-bezier(.22,.61,.36,1), transform 1.05s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity, transform;
+}
+.reveal.revealed { opacity:1; transform:translateY(0); }
+/* Escalonado corto: solo separa los bloques que entran juntos en la misma pantalla */
+.reveal-d1 { transition-delay:0.05s; }
+.reveal-d2 { transition-delay:0.10s; }
+.reveal-d3 { transition-delay:0.15s; }
+.reveal-d4 { transition-delay:0.20s; }
+.reveal-d5 { transition-delay:0.25s; }
+.reveal-d6 { transition-delay:0.30s; }
+.reveal-d7 { transition-delay:0.35s; }
+.reveal-d8 { transition-delay:0.40s; }
+@media(prefers-reduced-motion:reduce) {
+  .reveal { opacity:1; transform:none; transition:none; }
+}
 
 /* Tags stagger via JS — .niv-dtag-hidden starts invisible */
 .niv-dtag-hidden { opacity:0; transform:translateY(8px); }
@@ -1850,7 +2016,7 @@ body.result-mode {
     <div id="nivIntro">
       <!-- Stage preview FIRST -->
       <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:60px;"></div>
-      <p class="splash-tagline niv-home-reveal niv-home-d2">Convi&eacute;rtete en founder y logra la libertad que buscas, construyendo un negocio desde tu habilidad y apalanc&aacute;ndote con sistemas integrados con IA.</p>
+      <p class="splash-tagline niv-home-reveal niv-home-d2">Construye tu negocio desde tu <span class="niv-word-rotator" id="nivWordRotator">visi&oacute;n</span> y logra la libertad que buscas, apalanc&aacute;ndote con sistemas de crecimiento con IA.</p>
       <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Descubre tu etapa actual</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
         <button class="niv-start-btn" onclick="startNivelador()">
@@ -1870,7 +2036,7 @@ body.result-mode {
             <span class="niv-rubro">&#x1F957;</span>
             <span class="niv-rubro">&#x1F4BB;</span>
           </div>
-          <div class="niv-rubros-text">V&aacute;lido para +100 rubros</div>
+          <div class="niv-rubros-text">+20 nichos validados</div>
         </div>
       </div>
     </div>
@@ -1889,9 +2055,12 @@ body.result-mode {
       <p style="font-size:13px;color:var(--text-secondary);text-align:center;margin:0 0 24px;">¿Cómo te lo enviamos?</p>
       <form id="nivLeadForm" onsubmit="submitNivLead(event)" style="display:flex;flex-direction:column;gap:14px;max-width:320px;margin:0 auto;width:100%;">
         <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre" autocomplete="name" required>
-        <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp (+56...)" autocomplete="tel" required>
-        <input class="niv-lead-input" id="nivLeadInstagram" type="text" placeholder="Tu Instagram (opcional)" autocomplete="off">
-        <button class="niv-levelup-btn" type="submit" style="align-self:center;">Ver mi diagnóstico →</button>
+        <div class="niv-phone-row">
+          <select class="niv-country-select" id="nivLeadCountry"></select>
+          <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" inputmode="numeric" required>
+        </div>
+        <input class="niv-lead-input" id="nivLeadInstagram" type="text" placeholder="@tu.instagram" autocomplete="off" required>
+        <button class="niv-levelup-btn" type="submit" style="align-self:center;margin-top:6px;">Ver mi diagnóstico →</button>
         <div class="niv-lead-note">Para armar tu diagnóstico personalizado — nada de spam.</div>
       </form>
     </div>
@@ -1950,7 +2119,7 @@ body.result-mode {
           <button class="niv-calc-arrow" onclick="calcStep(-100)">&larr;</button>
           <span class="niv-calc-prefix">$</span>
           <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="200" oninput="updateCalculator()">
-          <button class="niv-calc-arrow" onclick="calcStep(100)">&rarr;</button>
+          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(100)">&rarr;</button>
         </div>
         <div class="niv-calc-result" id="nivCalcResult"></div>
         <div class="niv-calc-tip" id="nivCalcTip"></div>
@@ -1975,30 +2144,37 @@ body.result-mode {
       <div class="niv-cases">
         <div class="niv-cases-title">&#x1F3C6; Private Achievements</div>
         <div class="niv-cases-highlight" style="font-weight:400;color:var(--text-muted);">Tu tambi&eacute;n puedes construir el camino a tu siguiente etapa</div>
-        <div class="niv-cases-grid">
+        <div class="niv-cases-tabs" id="nivCasesTabs">
+          <button class="niv-cases-tab active" data-market="todos" onclick="filterNivCases('todos', this)">Todos</button>
+          <button class="niv-cases-tab" data-market="ecommerce" onclick="filterNivCases('ecommerce', this)">Ecommerce</button>
+          <button class="niv-cases-tab" data-market="wellness" onclick="filterNivCases('wellness', this)">Salud &amp; Wellness</button>
+          <button class="niv-cases-tab" data-market="servicios" onclick="filterNivCases('servicios', this)">Servicios Pro</button>
+          <button class="niv-cases-tab" data-market="medios" onclick="filterNivCases('medios', this)">Marketing &amp; Medios</button>
+        </div>
+        <div class="niv-cases-grid" id="nivCasesGrid">
           <!-- SKILLER → OPERATOR -->
-          <div class="niv-case">
+          <div class="niv-case" data-market="medios">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Social Media</div>
             <div class="niv-case-to">De $0 a $1.500/mes</div>
             <div class="niv-case-quote">&ldquo;Yo sab&iacute;a que pod&iacute;a lograr m&aacute;s con claridad&rdquo;</div>
             <span class="niv-case-tag">Primer ingreso</span>
           </div>
-          <div class="niv-case">
+          <div class="niv-case" data-market="wellness">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Nutricionista / Coach</div>
             <div class="niv-case-to">De $30 USD/sesi&oacute;n a programa de $600 USD</div>
             <div class="niv-case-quote">&ldquo;Hab&iacute;an muchas cosas que no sab&iacute;a antes de comenzar&rdquo;</div>
             <span class="niv-case-tag">x20 ticket</span>
           </div>
-          <div class="niv-case">
+          <div class="niv-case" data-market="medios">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Eventos / DJ&rsquo;s</div>
             <div class="niv-case-to">De $50 por evento a $250 con agenda llena</div>
             <div class="niv-case-quote">&ldquo;No sab&iacute;amos c&oacute;mo negociar para subir nuestro valor&rdquo;</div>
             <span class="niv-case-tag">x5 + demanda</span>
           </div>
-          <div class="niv-case">
+          <div class="niv-case" data-market="medios">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Freelance creativo</div>
             <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
@@ -2006,14 +2182,14 @@ body.result-mode {
             <span class="niv-case-tag">Modelo escalable</span>
           </div>
           <!-- OPERATOR → BUILDER -->
-          <div class="niv-case">
+          <div class="niv-case" data-market="wellness">
             <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Medicina est&eacute;tica</div>
             <div class="niv-case-to">De $2K/mes a $30K/mes recurrentes</div>
             <div class="niv-case-quote">&ldquo;Implementamos un sistema para dar servicio a muchos clientes sin quemarme&rdquo;</div>
             <span class="niv-case-tag">x15 ingresos</span>
           </div>
-          <div class="niv-case">
+          <div class="niv-case" data-market="servicios">
             <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Rubro legal</div>
             <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
@@ -2021,14 +2197,14 @@ body.result-mode {
             <span class="niv-case-tag">Independencia</span>
           </div>
           <!-- BUILDER → FOUNDER -->
-          <div class="niv-case">
+          <div class="niv-case" data-market="ecommerce">
             <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
             <div class="niv-case-from">Ecommerce</div>
             <div class="niv-case-to">De $2K/mes a $30K/mes</div>
             <div class="niv-case-quote">&ldquo;Cada vez crecemos m&aacute;s, cada etapa nueva hay algo nuevo que desbloquear&rdquo;</div>
             <span class="niv-case-tag">x15 ingresos</span>
           </div>
-          <div class="niv-case">
+          <div class="niv-case" data-market="servicios">
             <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
             <div class="niv-case-from">Consultor&iacute;a</div>
             <div class="niv-case-to">De empleado Sr. $3K/mes a consultor indep. +$6K/mes</div>
@@ -2050,11 +2226,11 @@ body.result-mode {
             <line x1="40" y1="100" x2="420" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
             <line x1="40" y1="60" x2="420" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
             <line x1="40" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
-            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$100</text>
-            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$500</text>
-            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$3K</text>
-            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$15K</text>
-            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$50K+</text>
+            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$0</text>
+            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$14K</text>
+            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$27K</text>
+            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$41K</text>
+            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$55K+</text>
             <text x="40" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">0</text>
             <text x="116" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 1</text>
             <text x="192" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 2</text>
@@ -2106,12 +2282,29 @@ body.result-mode {
     <!-- Value teaser (durante el análisis) — qué te vas a encontrar en el diagnóstico -->
     <div class="niv-community-mini" id="nivCommunityMini">
       <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
-      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">5</span>s</div>
+      <div class="niv-lobby-benefits" id="nivLobbyBenefits"></div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">6</span>s</div>
     </div>
   </div>
 </div>
 
 <script>
+
+// ─── EFECTO RULETA: palabra del headline (visión/habilidad/propósito) ──
+// La animación CSS (nivWordFade) corre sola, continua; acá solo cambiamos el texto
+// justo en el punto bajo de opacidad (mitad del ciclo) para que el swap sea invisible.
+var nivHeroWords = ['visión', 'habilidad', 'propósito'];
+var nivHeroWordIdx = 0;
+function swapNivHeroWord() {
+  var el = document.getElementById('nivWordRotator');
+  if (!el) return;
+  nivHeroWordIdx = (nivHeroWordIdx + 1) % nivHeroWords.length;
+  el.textContent = nivHeroWords[nivHeroWordIdx];
+}
+setTimeout(function() {
+  swapNivHeroWord();
+  setInterval(swapNivHeroWord, 2400);
+}, 1200);
 
 // ─── COMMUNITY GATE DATA ──────────────────────
 
@@ -2178,7 +2371,7 @@ const nivStages = {
     name: 'OPERATOR', range: '$1,500 \u2013 $3,000/mes', color: '#e88c30',
     now: 'Ya vendes pero cobras poco y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay m\u00e1s pero no logras escalar.',
     future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisaci\u00f3n para generar ingresos.',
-    missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build tiene programas dise\u00f1ados para operators que necesitan escalar con sistema, no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
+    missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build est\u00e1 dise\u00f1ado para founders en distintas etapas, para escalar con sistemas \u2014 no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo escalar mis ingresos.'
   },
@@ -2210,7 +2403,7 @@ const nivTools = {
     ],
     'Comunicaci\u00f3n': [
       { name: 'Instagram', icon: F('instagram.com') },
-      { name: 'WhatsApp', icon: F('whatsapp.com') }
+      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' }
     ],
     'IA': [
       { name: 'ChatGPT', icon: F('chat.openai.com') },
@@ -2230,7 +2423,7 @@ const nivTools = {
     ],
     'Comunicaci\u00f3n': [
       { name: 'Instagram', icon: F('instagram.com') },
-      { name: 'WhatsApp', icon: F('whatsapp.com') },
+      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
       { name: 'TikTok', icon: F('tiktok.com') }
     ]
   },
@@ -2247,7 +2440,7 @@ const nivTools = {
     ],
     'Comunicaci\u00f3n': [
       { name: 'Instagram', icon: F('instagram.com') },
-      { name: 'WhatsApp', icon: F('whatsapp.com') },
+      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
       { name: 'TikTok', icon: F('tiktok.com') },
       { name: 'YouTube', icon: F('youtube.com') }
     ],
@@ -2299,6 +2492,25 @@ const nivCallBenefits = {
 let nivStep = 0;
 let nivScores = [];
 
+// Países donde vemos mayor oportunidad de consultoría — evita que el lead tenga que escribir el código de país a mano
+const nivCountries = [
+  { code: '+56', flag: '🇨🇱', label: 'Chile' },
+  { code: '+51', flag: '🇵🇪', label: 'Perú' },
+  { code: '+57', flag: '🇨🇴', label: 'Colombia' },
+  { code: '+52', flag: '🇲🇽', label: 'México' },
+  { code: '+1',  flag: '🇺🇸', label: 'EE.UU.' },
+  { code: '+54', flag: '🇦🇷', label: 'Argentina' },
+  { code: '+593', flag: '🇪🇨', label: 'Ecuador' }
+];
+
+function populateNivCountrySelect() {
+  var sel = document.getElementById('nivLeadCountry');
+  if (!sel || sel.options.length) return;
+  sel.innerHTML = nivCountries.map(function(c) {
+    return '<option value="' + c.code + '">' + c.flag + ' ' + c.code + ' ' + c.label + '</option>';
+  }).join('');
+}
+
 function startNivelador() {
   nivStep = 0; nivScores = []; nivAnswers = [];
   document.getElementById('nivIntro').style.display = 'none';
@@ -2306,6 +2518,7 @@ function startNivelador() {
   document.getElementById('nivQuiz').classList.add('active');
   document.getElementById('nivResult').classList.remove('active');
   document.getElementById('nivBack').style.display = 'none';
+  populateNivCountrySelect();
   renderNivQuestion();
 }
 
@@ -2381,9 +2594,16 @@ function sendToMake(payload) {
 function submitNivLead(event) {
   event.preventDefault();
   var name = document.getElementById('nivLeadName').value.trim();
-  var phone = document.getElementById('nivLeadPhone').value.trim();
-  var instagram = document.getElementById('nivLeadInstagram').value.trim();
-  if (!name || phone.replace(/\D/g, '').length < 8) return; // required ya cubre vacío, esto cubre teléfono basura
+  var countryCode = document.getElementById('nivLeadCountry').value || '+56';
+  var phoneDigits = document.getElementById('nivLeadPhone').value.trim().replace(/\D/g, '');
+  var phone = countryCode + ' ' + phoneDigits;
+  // Normalizamos el handle: la gente lo escribe con/sin @, o pega la URL completa del perfil
+  var instagram = document.getElementById('nivLeadInstagram').value.trim()
+    .replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '')
+    .replace(/\/+$/, '')
+    .replace(/^@+/, '');
+  if (instagram) instagram = '@' + instagram;
+  if (!name || phoneDigits.length < 7 || !instagram) return; // required ya cubre vacío, esto cubre basura
 
   // Notion select no acepta comas en el valor — los montos ($1,500 etc.) rompían la creación del registro entero
   var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
@@ -2451,22 +2671,36 @@ function proceedToLevelUp() {
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
   }, 500);
 
-  // Show value teaser after 1.5s (staggered reveal) — qué se van a encontrar en el diagnóstico, no el mapa (eso es de consultoría)
+  // Teaser + beneficios: mientras "analiza", el lead ve todo lo que viene DESPUÉS del
+  // diagnóstico. Sube el valor percibido antes de mostrar la etapa.
   setTimeout(function() {
     var teaserEl = document.getElementById('nivValueTeaser');
     if (teaserEl) {
       var t = nivValueTeasers[Math.floor(Math.random() * nivValueTeasers.length)];
       teaserEl.innerHTML = t;
     }
+
+    var benefitsEl = document.getElementById('nivLobbyBenefits');
+    if (benefitsEl && !benefitsEl.children.length) {
+      benefitsEl.innerHTML = nivLobbyBenefits.map(function(b) {
+        return '<div class="niv-lobby-benefit"><span class="niv-lobby-benefit-check">✓</span><span>' + b + '</span></div>';
+      }).join('');
+    }
+
     communityMini.classList.add('visible');
     var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
     lobbyItems.forEach(function(item, i) {
-      setTimeout(function() { item.classList.add('show'); }, i * 1500);
+      setTimeout(function() { item.classList.add('show'); }, i * 900);
     });
-  }, 1500);
+    // Los beneficios entran encadenados, rápido pero suave — todos visibles antes de los 3s
+    var benefitRows = communityMini.querySelectorAll('.niv-lobby-benefit');
+    benefitRows.forEach(function(row, i) {
+      setTimeout(function() { row.classList.add('show'); }, 250 + i * 320);
+    });
+  }, 1200);
 
-  // Lobby countdown timer (5 segundos — antes eran 17, bajado a pedido de Patrick)
-  var lobbyTotal = 5;
+  // Lobby countdown (6s: alcanza a leer los beneficios sin que se haga eterno)
+  var lobbyTotal = 6;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -2482,7 +2716,7 @@ function proceedToLevelUp() {
 
     // Smooth hide community mini
     communityMini.classList.remove('visible');
-    var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
+    var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item, .niv-lobby-benefit');
     lobbyItems.forEach(function(item) { item.classList.remove('show'); });
   }, lobbyTotal * 1000);
 
@@ -2516,15 +2750,31 @@ function proceedToLevelUp() {
 
 // ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
 const nivValueTeasers = [
-  'Tu diagnóstico incluye: dónde estás hoy, qué te falta y tu próximo paso concreto.',
-  'Vas a ver el stack de herramientas exacto para tu etapa — sin adivinar.',
-  'Cada etapa tiene sus propios bloqueos típicos. Te mostramos los tuyos.',
-  'Al final vas a tener un mapa claro de hacia dónde vas — no solo un número.'
+  'Tu diagnóstico incluye <strong>dónde estás hoy</strong>, qué te falta y tu próximo paso concreto.',
+  'Vas a ver el <strong>stack de herramientas exacto</strong> para tu etapa — sin adivinar.',
+  'Al final vas a tener un <strong>mapa claro</strong> de hacia dónde vas — no solo un número.'
+];
+
+// Lo que sigue DESPUÉS del diagnóstico — se muestra mientras analiza para que el lead
+// entienda que está entrando a un ecosistema, no bajando un PDF.
+const nivLobbyBenefits = [
+  '<strong>Q&amp;A en vivo</strong> para resolver tus trabas reales',
+  '<strong>Eventos</strong> y sesiones de construcción en vivo',
+  '<strong>Comunidad de founders</strong> que ya recorrió tu etapa',
+  '<strong>Contenido y plantillas</strong> aplicables desde el día uno',
+  '<strong>Networking</strong> con gente construyendo en serio'
 ];
 
 // ─── HELPER: build WhatsApp URL ──────────────
 function buildWaUrl(baseMsg) {
   return 'https://wa.me/56978048922?text=' + encodeURIComponent(baseMsg);
+}
+
+// TODO(Patrick): reemplazar por el link real de Google Calendar (Calendar → Configuración →
+// "Programación de citas" → crear horario → copiar link público, gratis, sin Calendly/GHL).
+// Mientras tanto usa WhatsApp como fallback de agenda para no bloquear el CTA principal.
+function buildCalendarUrl(baseMsg) {
+  return buildWaUrl(baseMsg + ' Quiero agendar una llamada.');
 }
 
 // ─── DETRACTOR TAGS PER STAGE ─────────────────
@@ -2647,7 +2897,8 @@ function dismissNivLevelup() {
     }
   }
 
-  // ─── CUSTOM CTAs PER STAGE (Change #5) ──────
+  // ─── BLOQUE: TOMAR ACCIÓN — CTAs por etapa ──
+  // Único CTA de alta intención: "Agendar llamada". WhatsApp queda solo en el footer.
   var ctasEl = document.getElementById('nivCtas');
   var missingEl = document.getElementById('nivMissing');
 
@@ -2656,7 +2907,7 @@ function dismissNivLevelup() {
     missingEl.innerHTML = s.missing.replace('necesitas activar tu habilidad con el respaldo correcto', '<strong style="color:var(--metal3);">necesitas activar tu habilidad con el respaldo correcto</strong>') + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
     ctasEl.innerHTML =
       '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>' +
-      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Soy Skiller y quiero saber c\u00f3mo apalancarme de IA para generar mis primeros ingresos</a>';
+      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
 
   } else if (stageKey === 'operator') {
     missingEl.innerHTML = s.missing.replace('El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse', '<strong style="color:var(--metal3);">El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse</strong>');
@@ -2666,7 +2917,7 @@ function dismissNivLevelup() {
     });
     benefitsHtml += '</div>';
     ctasEl.innerHTML = benefitsHtml +
-      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Soy Operator y quiero apalancarme de IA para sistematizar mis ingresos</a>';
+      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
 
   } else if (stageKey === 'builder') {
     missingEl.innerHTML = s.missing.replace('yo mismo y mis clientes ya est\u00e1n utilizando', '<strong style="color:var(--metal3);">yo mismo y mis clientes ya est\u00e1n utilizando</strong>');
@@ -2676,12 +2927,12 @@ function dismissNivLevelup() {
     });
     benefitsHtml2 += '</div>';
     ctasEl.innerHTML = benefitsHtml2 +
-      '<a class="niv-cta niv-cta-wa" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Quiero saber m\u00e1s sobre los recursos para esta etapa</a>';
+      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
 
   } else if (stageKey === 'founder') {
     missingEl.innerHTML = s.missing.replace('es una conversaci\u00f3n directa', '<strong style="color:var(--metal3);">es una conversaci\u00f3n directa</strong>');
     ctasEl.innerHTML =
-      '<a class="niv-cta" style="background:var(--gold);color:#000;font-weight:800;border:none;" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4CB} SUMARME A LA LISTA DE ESPERA MASTERMIND</a>';
+      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
   }
 
   // Update footer CTA + countdown CTA with stage-specific WhatsApp message
@@ -2715,8 +2966,112 @@ function dismissNivLevelup() {
   // Update stage bars
   updateStageBars(stageKey);
 
+  // Entrada suave bloque por bloque + pulso de la flecha (todo al scrollear, pensado para mobile)
+  setTimeout(function() {
+    setupNivSoftReveal();
+    setupNivArrowHint();
+  }, 300);
+
   // Show founder quotes after accordions open
-  setTimeout(function() { showFounderQuotes(); }, 5000);
+  setTimeout(function() {
+    showFounderQuotes();
+    // La sección de urgencia recién existe acá (venía en display:none) — la sumamos al observer
+    setupNivSoftReveal();
+  }, 5000);
+}
+
+// ─── FILTRO DE CASOS POR RUBRO ──────────────
+function filterNivCases(market, btn) {
+  var grid = document.getElementById('nivCasesGrid');
+  if (!grid) return;
+
+  var tabs = document.querySelectorAll('#nivCasesTabs .niv-cases-tab');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+
+  // Con un rubro puntual los casos caen en una sola columna, en hilera
+  grid.classList.toggle('filtered', market !== 'todos');
+
+  var cases = grid.querySelectorAll('.niv-case');
+  var shown = 0;
+  cases.forEach(function(el) {
+    var match = (market === 'todos') || el.getAttribute('data-market') === market;
+    el.classList.remove('is-entering');
+    if (!match) { el.classList.add('is-hidden'); return; }
+    el.classList.remove('is-hidden');
+    void el.offsetWidth; // reflow: reinicia la animación en cada cambio de tab
+    el.style.animationDelay = (shown * 60) + 'ms';
+    el.classList.add('is-entering');
+    shown++;
+  });
+}
+
+// ─── ENTRADA SUAVE POR BLOQUES (mobile: lento, sin abrumar) ──
+// Sin IntersectionObserver: chequeo manual en scroll/resize. Es determinista y, sobre todo,
+// tiene red de seguridad — si algo falla, igual se revela todo (nunca una página en blanco).
+var _nivRevealBound = false;
+var _nivRevealTick = false;
+
+function nivRevealInView() {
+  var targets = document.querySelectorAll('#nivResult .reveal:not(.revealed)');
+  if (!targets.length) return true; // ya no queda nada por revelar
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  targets.forEach(function(el) {
+    var r = el.getBoundingClientRect();
+    // Visible si cualquier parte del bloque entró en pantalla (con un margen de 8% abajo)
+    var entered = r.top < vh * 0.92 && r.bottom > 0;
+    if (entered) el.classList.add('revealed');
+  });
+  return document.querySelectorAll('#nivResult .reveal:not(.revealed)').length === 0;
+}
+
+function setupNivSoftReveal() {
+  if (!document.querySelectorAll('#nivResult .reveal:not(.revealed)').length) return;
+
+  nivRevealInView();
+
+  if (!_nivRevealBound) {
+    _nivRevealBound = true;
+    var onScroll = function() {
+      if (_nivRevealTick) return;
+      _nivRevealTick = true;
+      window.requestAnimationFrame(function() {
+        _nivRevealTick = false;
+        nivRevealInView();
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  // Red de seguridad: pase lo que pase, a los 6s no queda nada invisible
+  setTimeout(function() {
+    document.querySelectorAll('#nivResult .reveal:not(.revealed)').forEach(function(el) {
+      el.classList.add('revealed');
+    });
+  }, 6000);
+}
+
+// La flecha de la calculadora late suave cuando el bloque entra en pantalla
+var _nivArrowFired = false;
+function setupNivArrowHint() {
+  var calc = document.getElementById('nivCalculator');
+  var arrow = document.getElementById('nivCalcNext');
+  if (!calc || !arrow || _nivArrowFired) return;
+
+  var check = function() {
+    if (_nivArrowFired) return;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var r = calc.getBoundingClientRect();
+    if (r.top < vh * 0.75 && r.bottom > 0) {
+      _nivArrowFired = true;
+      arrow.classList.add('niv-arrow-hint');
+      setTimeout(function() { arrow.classList.remove('niv-arrow-hint'); }, 5600);
+      window.removeEventListener('scroll', check);
+    }
+  };
+  check();
+  window.addEventListener('scroll', check, { passive: true });
 }
 
 // ─── FOUNDER QUOTES (decisión, leverage, construir, propósito) ──
@@ -2796,20 +3151,30 @@ function quoteNav(dir) {
 }
 
 var _chartAnimated = false;
+// Mismo criterio que el reveal: chequeo por scroll + red de seguridad, para que el
+// gráfico nunca quede vacío si el observer no dispara.
 function setupChartObserver() {
   var chart = document.getElementById('nivIncomeChart');
   if (!chart || _chartAnimated) return;
-  if (!('IntersectionObserver' in window)) { animateIncomeChart(); return; }
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting && !_chartAnimated) {
-        _chartAnimated = true;
-        animateIncomeChart();
-        obs.disconnect();
-      }
-    });
-  }, { threshold: 0.3 });
-  obs.observe(chart);
+
+  var draw = function() {
+    if (_chartAnimated) return;
+    _chartAnimated = true;
+    animateIncomeChart();
+    window.removeEventListener('scroll', check);
+  };
+
+  var check = function() {
+    if (_chartAnimated) return;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var r = chart.getBoundingClientRect();
+    if (r.top < vh * 0.85 && r.bottom > 0) draw();
+  };
+
+  check();
+  window.addEventListener('scroll', check, { passive: true });
+  // Si por lo que sea nunca se detecta, se dibuja igual
+  setTimeout(draw, 8000);
 }
 
 function animateIncomeChart() {
@@ -2819,13 +3184,14 @@ function animateIncomeChart() {
   var intervals = 10;
   var xStep = xRange / intervals;
 
-  // Logarithmic Y scale
-  var logMin = Math.log(100);
-  var logMax = Math.log(55000);
+  // Escala lineal — la logarítmica aplastaba la distancia real entre quedarte
+  // estancado en $3-5K y llegar a $20-50K, que es justo lo que este gráfico
+  // tiene que mostrar (el "hockey stick" del founder vs. el techo del empleado)
+  var valMin = 0;
+  var valMax = 55000;
   function yFor(val) {
-    if (val <= 0) return yMax;
-    var logVal = Math.log(Math.max(val, 100));
-    return yMax - ((logVal - logMin) / (logMax - logMin)) * yRange;
+    var v = Math.max(val, 0);
+    return yMax - ((v - valMin) / (valMax - valMin)) * yRange;
   }
   function xFor(i) { return xMin + i * xStep; }
 
