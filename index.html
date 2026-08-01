@@ -2335,11 +2335,11 @@ function showNivResult() {
   proceedToLevelUp();
 }
 
-// ─── CAPTURA DE LEADS → Make.com ──────────────
-// TODO Patrick: pegar acá la URL del webhook (Make.com → Custom Webhook trigger)
-// apenas la tengas. Hasta entonces el envío falla en silencio (se guarda igual
-// en localStorage como respaldo) y no bloquea a nadie de ver su resultado.
-const MAKE_WEBHOOK_URL = 'https://hook.us1.make.com/PEGAR_TU_WEBHOOK_AQUI';
+// ─── CAPTURA DE LEADS → Make.com → Notion CRM ──
+// Escenario Make "Integration Webhooks, Notion" (activo, corre inmediato).
+// Escribe en CRM — Clientes & Comunidad como Estado=Lead, Origen=Quiz.
+// Si el webhook falla, el lead queda respaldado en localStorage igual.
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/h5kbhfuiiup1rbe7p6kdpsc94jhkdpu8';
 
 function sendToMake(payload) {
   payload.ts = new Date().toISOString();
@@ -2364,11 +2364,12 @@ function submitNivLead(event) {
   var phone = document.getElementById('nivLeadPhone').value.trim();
   if (!name || phone.replace(/\D/g, '').length < 8) return; // required ya cubre vacío, esto cubre teléfono basura
 
+  var stageKey = window._nivStageKey || '';
   sendToMake({
     event: 'lead_capturado',
     name: name,
     phone: phone,
-    stage: window._nivStageKey,
+    stage: stageKey.charAt(0).toUpperCase() + stageKey.slice(1),
     quiz_scores: nivScores
   });
 
