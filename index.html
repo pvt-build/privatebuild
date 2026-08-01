@@ -1856,7 +1856,7 @@ body.result-mode {
         <button class="niv-start-btn" onclick="startNivelador()">
           &#x1F9ED; &nbsp;DESCUBRIR MI ETAPA
         </button>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">4 preguntas &middot; 30 segundos &middot; resultado inmediato</p>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
       </div>
       <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
         <div class="niv-rubros">
@@ -1881,6 +1881,19 @@ body.result-mode {
       <div class="niv-question" id="nivQuestion"></div>
       <div class="niv-options" id="nivOptions"></div>
       <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
+    </div>
+
+    <!-- LEAD CAPTURE — antes de mostrar la etapa, no después -->
+    <div class="niv-wrap" id="nivCapture">
+      <div class="niv-question" style="margin-bottom:6px;">Ya casi está tu diagnóstico</div>
+      <p style="font-size:13px;color:var(--text-secondary);text-align:center;margin:0 0 24px;">¿Cómo te lo enviamos?</p>
+      <form id="nivLeadForm" onsubmit="submitNivLead(event)" style="display:flex;flex-direction:column;gap:14px;max-width:320px;margin:0 auto;width:100%;">
+        <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre" autocomplete="name" required>
+        <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp (+56...)" autocomplete="tel" required>
+        <input class="niv-lead-input" id="nivLeadInstagram" type="text" placeholder="Tu Instagram (opcional)" autocomplete="off">
+        <button class="niv-levelup-btn" type="submit" style="align-self:center;">Ver mi diagnóstico →</button>
+        <div class="niv-lead-note">Para armar tu diagnóstico personalizado — nada de spam.</div>
+      </form>
     </div>
 
     <!-- community gate moved to level-up overlay -->
@@ -2089,13 +2102,8 @@ body.result-mode {
     <div class="niv-levelup-label">TU ETAPA</div>
     <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
     <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
-    <form class="niv-lead-form" id="nivLeadForm" onsubmit="submitNivLead(event)">
-      <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre" autocomplete="name" required>
-      <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp (+56...)" autocomplete="tel" required>
-      <button class="niv-levelup-btn" type="submit">Ver mi resultado completo &rarr;</button>
-      <div class="niv-lead-note">Para armar tu diagn&oacute;stico personalizado &mdash; nada de spam.</div>
-    </form>
-    <!-- Value teaser (during analyzing phase, replaces community gate) -->
+    <button class="niv-levelup-btn" id="nivLevelupBtn" onclick="dismissNivLevelup()">Ver mi resultado completo &rarr;</button>
+    <!-- Value teaser (durante el análisis) — qué te vas a encontrar en el diagnóstico -->
     <div class="niv-community-mini" id="nivCommunityMini">
       <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
       <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">5</span>s</div>
@@ -2143,6 +2151,15 @@ const nivQuestions = [
       { text: '$1,500 \u2013 $3,000 USD', score: 2 },
       { text: '$3,000 \u2013 $10,000 USD', score: 3 },
       { text: '+$10,000 USD', score: 4 }
+    ]
+  },
+  {
+    q: '\u00bfQu\u00e9 nivel de uso de IA tienes hoy?',
+    opts: [
+      { text: 'No uso IA todav\u00eda', score: 1 },
+      { text: 'IA gratuita (ChatGPT/Claude/Gemini free)', score: 2 },
+      { text: 'IA de pago (ChatGPT/Claude Pro)', score: 3 },
+      { text: 'Uso avanzado (Claude Max, agentes, infraestructura)', score: 4 }
     ]
   }
 ];
@@ -2283,7 +2300,7 @@ let nivStep = 0;
 let nivScores = [];
 
 function startNivelador() {
-  nivStep = 0; nivScores = [];
+  nivStep = 0; nivScores = []; nivAnswers = [];
   document.getElementById('nivIntro').style.display = 'none';
   document.querySelector('.splash-title-wrap').style.display = 'none';
   document.getElementById('nivQuiz').classList.add('active');
@@ -2302,15 +2319,18 @@ function renderNivQuestion() {
   document.getElementById('nivProgress').innerHTML = dots;
   document.getElementById('nivQuestion').textContent = q.q;
   let opts = '';
-  q.opts.forEach(function(o) {
-    opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ')">' + o.text + '</button>';
+  q.opts.forEach(function(o, i) {
+    opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ', ' + i + ')">' + o.text + '</button>';
   });
   document.getElementById('nivOptions').innerHTML = opts;
   document.getElementById('nivBack').style.display = nivStep > 0 ? 'inline-block' : 'none';
 }
 
-function nivAnswer(score) {
+let nivAnswers = [];
+
+function nivAnswer(score, optIdx) {
   nivScores.push(score);
+  nivAnswers.push(nivQuestions[nivStep].opts[optIdx].text);
   nivStep++;
   if (nivStep < nivQuestions.length) {
     renderNivQuestion();
@@ -2330,9 +2350,9 @@ function showNivResult() {
 
   window._nivStageKey = stageKey;
 
-  // Hide quiz, go straight to level-up overlay
+  // Antes de mostrar la etapa: capturar nombre + WhatsApp
   document.getElementById('nivQuiz').classList.remove('active');
-  proceedToLevelUp();
+  document.getElementById('nivCapture').classList.add('active');
 }
 
 // ─── CAPTURA DE LEADS → Make.com → Notion CRM ──
@@ -2362,18 +2382,30 @@ function submitNivLead(event) {
   event.preventDefault();
   var name = document.getElementById('nivLeadName').value.trim();
   var phone = document.getElementById('nivLeadPhone').value.trim();
+  var instagram = document.getElementById('nivLeadInstagram').value.trim();
   if (!name || phone.replace(/\D/g, '').length < 8) return; // required ya cubre vacío, esto cubre teléfono basura
+
+  // Notion select no acepta comas en el valor — los montos ($1,500 etc.) rompían la creación del registro entero
+  var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
 
   var stageKey = window._nivStageKey || '';
   sendToMake({
     event: 'lead_capturado',
     name: name,
     phone: phone,
+    instagram: instagram,
     stage: stageKey.charAt(0).toUpperCase() + stageKey.slice(1),
+    q1_situacion: stripCommas(nivAnswers[0]),
+    q2_clientes: stripCommas(nivAnswers[1]),
+    q3_objetivo: stripCommas(nivAnswers[2]),
+    q4_ingreso: stripCommas(nivAnswers[3]),
+    q5_nivel_ia: stripCommas(nivAnswers[4]),
     quiz_scores: nivScores
   });
 
-  dismissNivLevelup();
+  // Ya capturamos el lead — ahora sí mostramos el análisis y la etapa
+  document.getElementById('nivCapture').classList.remove('active');
+  proceedToLevelUp();
 }
 
 // ─── TRACKING DE CLICS EN CTAs (WhatsApp / Notion) ────
@@ -2395,7 +2427,7 @@ function proceedToLevelUp() {
   var overlay = document.getElementById('nivLevelup');
   var rankEl = document.getElementById('nivLevelupRank');
   var rangeEl = document.getElementById('nivLevelupRange');
-  var formEl = document.getElementById('nivLeadForm');
+  var btnEl = document.getElementById('nivLevelupBtn');
   var labelEl = document.querySelector('.niv-levelup-label');
   var communityMini = document.getElementById('nivCommunityMini');
   var flashEl = document.getElementById('nivLevelupFlash');
@@ -2404,10 +2436,8 @@ function proceedToLevelUp() {
   rankEl.textContent = '';
   rankEl.style.opacity = '0';
   rangeEl.textContent = '';
-  formEl.style.opacity = '0';
-  formEl.style.transition = 'none';
-  document.getElementById('nivLeadName').value = '';
-  document.getElementById('nivLeadPhone').value = '';
+  btnEl.style.opacity = '0';
+  btnEl.style.transition = 'none';
   communityMini.classList.remove('visible');
   labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS';
   labelEl.style.animation = 'pulse 1.5s ease-in-out infinite';
@@ -2421,12 +2451,12 @@ function proceedToLevelUp() {
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
   }, 500);
 
-  // Show value teaser after 1.5s (staggered reveal) — no mapa, solo un adelanto
+  // Show value teaser after 1.5s (staggered reveal) — qué se van a encontrar en el diagnóstico, no el mapa (eso es de consultoría)
   setTimeout(function() {
     var teaserEl = document.getElementById('nivValueTeaser');
     if (teaserEl) {
-      var q = nivFounderQuotes[Math.floor(Math.random() * nivFounderQuotes.length)];
-      teaserEl.innerHTML = '&#x201C;' + q.text.replace(/^“|”$/g, '') + '&#x201D;<br><strong>&mdash; ' + q.author + '</strong>';
+      var t = nivValueTeasers[Math.floor(Math.random() * nivValueTeasers.length)];
+      teaserEl.innerHTML = t;
     }
     communityMini.classList.add('visible');
     var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
@@ -2479,10 +2509,18 @@ function proceedToLevelUp() {
     rankEl.style.animation = 'stageExplodeIn 1s ease forwards';
     rangeEl.textContent = s.range;
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
-    formEl.style.transition = 'opacity 0.8s ease 0.8s';
-    formEl.style.opacity = '1';
+    btnEl.style.transition = 'opacity 0.8s ease 0.8s';
+    btnEl.style.opacity = '1';
   }, lobbyTotal * 1000 + 1200);
 }
+
+// ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
+const nivValueTeasers = [
+  'Tu diagnóstico incluye: dónde estás hoy, qué te falta y tu próximo paso concreto.',
+  'Vas a ver el stack de herramientas exacto para tu etapa — sin adivinar.',
+  'Cada etapa tiene sus propios bloqueos típicos. Te mostramos los tuyos.',
+  'Al final vas a tener un mapa claro de hacia dónde vas — no solo un número.'
+];
 
 // ─── HELPER: build WhatsApp URL ──────────────
 function buildWaUrl(baseMsg) {
@@ -2947,6 +2985,7 @@ function nivGoBack() {
   if (nivStep > 0) {
     nivStep--;
     nivScores.pop();
+    nivAnswers.pop();
     renderNivQuestion();
   }
 }
