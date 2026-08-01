@@ -615,6 +615,97 @@ body.result-mode {
   .niv-cta-call, .niv-cta-wa { animation:none; }
 }
 
+/* ─── CALIFICACIÓN POST-RESULTADO ───────────────
+   El lead elige de NUESTRO diagnóstico, no responde abierto: confirma el frame. */
+.niv-qual { margin:0 auto 22px; max-width:360px; text-align:left; }
+.niv-qual-q { margin-bottom:18px; }
+.niv-qual-title {
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-primary);
+  line-height:1.45;
+  margin-bottom:4px;
+  text-align:center;
+}
+.niv-qual-sub {
+  font-size:10.5px;
+  color:var(--text-muted);
+  text-align:center;
+  margin-bottom:12px;
+  letter-spacing:0.03em;
+}
+.niv-qual-opts { display:flex; flex-direction:column; gap:7px; margin-top:10px; }
+.niv-qual-opt {
+  width:100%;
+  text-align:left;
+  font-family:'Inter',sans-serif;
+  font-size:12.5px;
+  font-weight:600;
+  color:var(--text-secondary);
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.10);
+  padding:11px 13px;
+  border-radius:2px;
+  cursor:pointer;
+  transition:color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  line-height:1.35;
+}
+.niv-qual-opt:hover {
+  color:var(--text-primary);
+  border-color:rgba(200,168,74,0.45);
+  background:rgba(200,168,74,0.05);
+  transform:translateX(2px);
+}
+.niv-qual-opt.selected {
+  color:var(--gold-bright, #d9b95c);
+  border-color:rgba(200,168,74,0.65);
+  background:rgba(200,168,74,0.10);
+}
+.niv-qual-opt.dimmed { opacity:0.32; pointer-events:none; }
+.niv-qual-done {
+  font-size:12px;
+  color:var(--green);
+  text-align:center;
+  font-weight:600;
+  margin-top:2px;
+}
+@media(prefers-reduced-motion:reduce) {
+  .niv-qual-opt:hover { transform:none; }
+}
+
+/* ─── STACK DE LA ETAPA SIGUIENTE (bloqueado = FOMO, sin regalar el cómo) ─── */
+.niv-tool-locked-label {
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(200,168,74,0.75);
+  text-align:center;
+  margin:18px 0 8px;
+}
+.niv-tool-locked {
+  position:relative;
+  border:1px dashed rgba(200,168,74,0.28);
+  border-radius:3px;
+  padding:12px 10px;
+  overflow:hidden;
+}
+.niv-tool-locked .niv-tool-category-items { filter:blur(4.5px); opacity:0.55; pointer-events:none; }
+.niv-tool-locked-overlay {
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:0.06em;
+  color:var(--text-primary);
+  text-align:center;
+  padding:0 14px;
+  background:linear-gradient(180deg, rgba(6,8,14,0.35), rgba(6,8,14,0.72));
+}
+
 /* ─── PULSO DE LA FLECHA DE LA CALCULADORA (se activa al entrar en viewport) ─── */
 @keyframes arrowNudge {
   0%, 100% { transform:translateX(0); box-shadow:0 0 0 0 rgba(200,168,74,0); }
@@ -2135,6 +2226,24 @@ body.result-mode {
           </button>
           <div class="niv-acc-body">
             <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
+
+            <!-- CALIFICACIÓN — va DESPUÉS del resultado a propósito: el diagnóstico ya
+                 posicionó la autoridad, acá el lead solo confirma cuál le pega. -->
+            <div class="niv-qual" id="nivQual">
+              <div class="niv-qual-q" id="nivQualQ1">
+                <div class="niv-qual-title">De estos, &iquest;cu&aacute;l te pega m&aacute;s hoy?</div>
+                <div class="niv-qual-opts" id="nivQualOpts1"></div>
+              </div>
+              <div class="niv-qual-q" id="nivQualQ2" style="display:none;">
+                <div class="niv-qual-title">&iquest;Cu&aacute;nto has invertido en formaci&oacute;n o soluciones para tu negocio este a&ntilde;o?</div>
+                <div class="niv-qual-sub">S&eacute; honesto contigo</div>
+                <div class="niv-qual-opts" id="nivQualOpts2"></div>
+              </div>
+              <div class="niv-qual-done" id="nivQualDone" style="display:none;">
+                Listo. Con esto ya sabemos por d&oacute;nde partir contigo.
+              </div>
+            </div>
+
             <div class="niv-ctas" id="nivCtas"></div>
           </div>
         </div>
@@ -2476,16 +2585,16 @@ const nivCalcTargets = {
 // ─── CALL BENEFITS PER STAGE (el "qué", no el "cómo") ──
 const nivCallBenefits = {
   operator: [
-    'Diagn\u00f3stico de situaci\u00f3n actual',
-    'Mapa de tu siguiente paso',
-    'Stack m\u00ednimo viable',
-    '30 min de valor \u2014 sin compromiso'
+    'Q&A en vivo para resolver tus trabas',
+    'El stack que usan los que ya escalaron',
+    'Casos reales de tu misma etapa',
+    'Founders construyendo en paralelo'
   ],
   builder: [
-    'Diagn\u00f3stico t\u00e9cnico de stack',
-    'Sistema validado \u2192 $10K/mes',
-    'Roadmap de automatizaci\u00f3n',
-    '30 min de estrategia \u2014 sin compromiso'
+    'Sistemas y workflows ya validados',
+    'Q&A en vivo sobre automatizaci\u00f3n',
+    'Founders operando a tu nivel',
+    'Casos de escala documentados'
   ]
 };
 
@@ -2607,6 +2716,10 @@ function submitNivLead(event) {
 
   // Notion select no acepta comas en el valor — los montos ($1,500 etc.) rompían la creación del registro entero
   var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
+
+  // Guardamos la llave para poder actualizar esta misma fila cuando responda la calificación
+  window._nivLeadPhone = phone;
+  window._nivLeadName = name;
 
   var stageKey = window._nivStageKey || '';
   sendToMake({
@@ -2770,11 +2883,11 @@ function buildWaUrl(baseMsg) {
   return 'https://wa.me/56978048922?text=' + encodeURIComponent(baseMsg);
 }
 
-// TODO(Patrick): reemplazar por el link real de Google Calendar (Calendar → Configuración →
-// "Programación de citas" → crear horario → copiar link público, gratis, sin Calendly/GHL).
-// Mientras tanto usa WhatsApp como fallback de agenda para no bloquear el CTA principal.
-function buildCalendarUrl(baseMsg) {
-  return buildWaUrl(baseMsg + ' Quiero agendar una llamada.');
+// El funnel ya no empuja a una call sin filtrar: entra a la comunidad, y desde ahí
+// Patrick califica con los datos del quiz en mano.
+const COMUNIDAD_URL = 'https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq';
+function buildComunidadUrl() {
+  return COMUNIDAD_URL;
 }
 
 // ─── DETRACTOR TAGS PER STAGE ─────────────────
@@ -2784,6 +2897,78 @@ const nivDetractors = {
   builder: ['Operas solo','Sin documentaci\u00f3n','Crecimiento lineal','Tiempo = dinero','Sin leverage'],
   founder: ['Micro-management','Sin infraestructura digital','Decisiones reactivas','Equipo dependiente','Sin activos pasivos']
 };
+
+// ─── CALIFICACIÓN POST-RESULTADO ──────────────
+// Sin comas a propósito: los select de Notion rechazan valores con coma.
+const nivInversionOpts = [
+  'Nada / Solo educación tradicional',
+  'Menos de $500 (membresía, guía, otros)',
+  'Entre $500 y $2.000',
+  'Entre $2.000 y $5.000',
+  'Más de $5.000'
+];
+
+var _nivQual = { cuello: '', inversion: '' };
+
+function renderNivQual(stageKey) {
+  var opts1 = document.getElementById('nivQualOpts1');
+  var opts2 = document.getElementById('nivQualOpts2');
+  if (!opts1 || !opts2) return;
+
+  // Las opciones salen de NUESTRO diagnóstico de su etapa — el lead confirma, no informa
+  var cuellos = (nivDetractors[stageKey] || []).slice();
+  opts1.innerHTML = cuellos.map(function(c, i) {
+    return '<button type="button" class="niv-qual-opt" onclick="pickNivQual(1, ' + i + ', this)">' + c + '</button>';
+  }).join('');
+
+  opts2.innerHTML = nivInversionOpts.map(function(c, i) {
+    return '<button type="button" class="niv-qual-opt" onclick="pickNivQual(2, ' + i + ', this)">' + c + '</button>';
+  }).join('');
+
+  _nivQual = { cuello: '', inversion: '' };
+  document.getElementById('nivQualQ2').style.display = 'none';
+  document.getElementById('nivQualDone').style.display = 'none';
+}
+
+function pickNivQual(which, idx, btn) {
+  var stageKey = window._nivStageKey || '';
+  var group = btn.parentElement;
+
+  group.querySelectorAll('.niv-qual-opt').forEach(function(o) {
+    o.classList.remove('selected');
+    o.classList.add('dimmed');
+  });
+  btn.classList.remove('dimmed');
+  btn.classList.add('selected');
+
+  if (which === 1) {
+    _nivQual.cuello = (nivDetractors[stageKey] || [])[idx] || '';
+    // La segunda pregunta recién aparece acá: una cosa a la vez, sin abrumar
+    var q2 = document.getElementById('nivQualQ2');
+    q2.style.display = 'block';
+    setTimeout(function() { q2.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 220);
+  } else {
+    _nivQual.inversion = nivInversionOpts[idx] || '';
+  }
+
+  if (_nivQual.cuello && _nivQual.inversion) {
+    document.getElementById('nivQualDone').style.display = 'block';
+    sendNivQual();
+  }
+}
+
+function sendNivQual() {
+  var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
+  sendToMake({
+    event: 'lead_calificado',
+    // el teléfono es la llave para encontrar la fila que ya creamos en la captura
+    phone: window._nivLeadPhone || '',
+    name: window._nivLeadName || '',
+    cuello_botella: stripCommas(_nivQual.cuello),
+    inversion_anual: stripCommas(_nivQual.inversion),
+    stage: (window._nivStageKey || '').charAt(0).toUpperCase() + (window._nivStageKey || '').slice(1)
+  });
+}
 
 // ─── ROADMAP NODES PER STAGE ──────────────────
 const nivRoadmapNodes = {
@@ -2822,6 +3007,27 @@ function renderToolStack(stageKey) {
     });
     html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">' + itemsHtml + '</div></div>';
   });
+
+  // Stack de la etapa siguiente, borroso: se ve que existe algo más, no se ve qué ni cómo.
+  var orden = ['skiller', 'operator', 'builder', 'founder'];
+  var nextKey = orden[orden.indexOf(stageKey) + 1];
+  if (nextKey && nivTools[nextKey]) {
+    var nextCats = nivTools[nextKey];
+    var nextItems = '';
+    Object.keys(nextCats).forEach(function(cat) {
+      nextCats[cat].forEach(function(t) {
+        nextItems += t.emoji
+          ? '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>'
+          : '<span class="niv-tool-item"><img src="' + t.icon + '" alt="" width="16" height="16"> ' + t.name + '</span>';
+      });
+    });
+    html += '<div class="niv-tool-locked-label">El stack de un ' + nextKey.toUpperCase() + '</div>' +
+            '<div class="niv-tool-locked">' +
+              '<div class="niv-tool-category-items">' + nextItems + '</div>' +
+              '<div class="niv-tool-locked-overlay">Se desbloquea cuando llegas a esa etapa</div>' +
+            '</div>';
+  }
+
   html += '</div>';
   return html;
 }
@@ -2907,32 +3113,32 @@ function dismissNivLevelup() {
     missingEl.innerHTML = s.missing.replace('necesitas activar tu habilidad con el respaldo correcto', '<strong style="color:var(--metal3);">necesitas activar tu habilidad con el respaldo correcto</strong>') + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
     ctasEl.innerHTML =
       '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>' +
-      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
 
   } else if (stageKey === 'operator') {
     missingEl.innerHTML = s.missing.replace('El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse', '<strong style="color:var(--metal3);">El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse</strong>');
-    var benefitsHtml = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 te llevas de la llamada?</div>';
+    var benefitsHtml = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 encuentras adentro?</div>';
     nivCallBenefits.operator.forEach(function(b) {
       benefitsHtml += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
     });
     benefitsHtml += '</div>';
     ctasEl.innerHTML = benefitsHtml +
-      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
 
   } else if (stageKey === 'builder') {
     missingEl.innerHTML = s.missing.replace('yo mismo y mis clientes ya est\u00e1n utilizando', '<strong style="color:var(--metal3);">yo mismo y mis clientes ya est\u00e1n utilizando</strong>');
-    var benefitsHtml2 = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 te llevas de la llamada?</div>';
+    var benefitsHtml2 = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 encuentras adentro?</div>';
     nivCallBenefits.builder.forEach(function(b) {
       benefitsHtml2 += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
     });
     benefitsHtml2 += '</div>';
     ctasEl.innerHTML = benefitsHtml2 +
-      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
 
   } else if (stageKey === 'founder') {
     missingEl.innerHTML = s.missing.replace('es una conversaci\u00f3n directa', '<strong style="color:var(--metal3);">es una conversaci\u00f3n directa</strong>');
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-call" href="' + buildCalendarUrl(s.wa) + '" target="_blank">\u{1F4C5} Quiero agendar una llamada</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
   }
 
   // Update footer CTA + countdown CTA with stage-specific WhatsApp message
@@ -2962,6 +3168,9 @@ function dismissNivLevelup() {
   allBlocks.forEach(function(block, i) {
     setTimeout(function() { block.classList.add('open'); }, 1800 + i * 1200);
   });
+
+  // Preguntas de calificación (usan los cuellos de botella de SU etapa)
+  renderNivQual(stageKey);
 
   // Update stage bars
   updateStageBars(stageKey);
