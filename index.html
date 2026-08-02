@@ -50,6 +50,18 @@
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
+/* El swipe lateral movía todo el documento en mobile. Se bloquea el eje X sin tocar el vertical. */
+html {
+  overflow-x:hidden;
+  max-width:100%;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
+}
+/* Doble tap sobre botones hacía zoom y dejaba el estado :hover pegado en touch */
+button, .niv-cta, .niv-calc-arrow, .niv-qual-opt, .niv-cases-tab, .niv-opt {
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
 
 body {
   background: var(--bg);
@@ -65,6 +77,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
+  max-width: 100%;
+  overscroll-behavior-x: none;
   /* scroll-behavior: smooth; — removed to avoid forced scroll after quiz */
   cursor: default;
   -webkit-text-size-adjust: 100%;
@@ -291,7 +305,7 @@ body.result-mode {
 /* El padre es flex+align-items:center, así que sin width el bloque tomaba su max-content
    (440px) y se desbordaba en mobile. Con width:100% respeta el ancho real de la pantalla
    y el tope de 440px deja el desktop igual que antes. */
-.niv-result { display:none; text-align:center; width:100%; max-width:440px; margin:0 auto; }
+.niv-result { display:none; text-align:center; width:100%; max-width:440px; margin:0 auto; padding:0 18px; }
 .niv-result-tag { font-size:11px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
 .niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
 .niv-result-range { font-size:14px; color:var(--text-secondary); margin-bottom:24px; font-weight:600; }
@@ -1935,10 +1949,12 @@ body.result-mode {
   -webkit-user-select:none;
   flex-shrink:0;
 }
-.niv-calc-arrow:hover {
-  background:rgba(56,176,104,0.15);
-  border-color:rgba(56,176,104,0.3);
-  color:var(--green);
+@media (hover:hover) {
+  .niv-calc-arrow:hover {
+    background:rgba(56,176,104,0.15);
+    border-color:rgba(56,176,104,0.3);
+    color:var(--green);
+  }
 }
 .niv-calc-arrow:active {
   transform:scale(0.9);
@@ -2117,12 +2133,12 @@ body.result-mode {
     <div id="nivIntro">
       <!-- Stage preview FIRST -->
       <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:60px;"></div>
-      <p class="splash-tagline niv-home-reveal niv-home-d2">Vende m&aacute;s con sistemas de crecimiento apalancados con IA que <span class="niv-word-rotator" id="nivWordRotator">prospectan</span> por ti.</p>
-      <p class="splash-subline niv-home-reveal niv-home-d2">Para founders que ya venden y quieren dejar de depender de sus propias horas.</p>
-      <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Descubre tu etapa actual</p>
+      <p class="splash-tagline niv-home-reveal niv-home-d2">Identifica los cuellos de botella de tu negocio e implementa sistemas de growth con IA para <span class="niv-word-rotator" id="nivWordRotator">vender m&aacute;s</span> haciendo menos.</p>
+      <p class="splash-subline niv-home-reveal niv-home-d2">Para founders que ya venden y siguen sosteniendo todo con sus propias horas.</p>
+      <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Diagn&oacute;stico gratuito</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
         <button class="niv-start-btn" onclick="startNivelador()">
-          &#x1F9ED; &nbsp;DESCUBRIR MI ETAPA
+          &#x1F9ED; &nbsp;COMENZAR DIAGN&Oacute;STICO
         </button>
         <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
       </div>
@@ -2218,10 +2234,10 @@ body.result-mode {
         <div class="niv-calc-title">Visualiza tu siguiente etapa</div>
         <div class="niv-calc-label">&iquest;Cu&aacute;l es el valor de tus servicios actualmente?</div>
         <div class="niv-calc-arrows">
-          <button class="niv-calc-arrow" onclick="calcStep(-100)">&larr;</button>
+          <button class="niv-calc-arrow" onclick="calcStep(-250)">&larr;</button>
           <span class="niv-calc-prefix">$</span>
           <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="200" oninput="updateCalculator()">
-          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(100)">&rarr;</button>
+          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(250)">&rarr;</button>
         </div>
         <div class="niv-calc-result" id="nivCalcResult"></div>
         <div class="niv-calc-tip" id="nivCalcTip"></div>
@@ -2413,7 +2429,7 @@ body.result-mode {
 // ─── EFECTO RULETA: palabra del headline (visión/habilidad/propósito) ──
 // La animación CSS (nivWordFade) corre sola, continua; acá solo cambiamos el texto
 // justo en el punto bajo de opacidad (mitad del ciclo) para que el swap sea invisible.
-var nivHeroWords = ['prospectan', 'califican', 'cierran', 'entregan'];
+var nivHeroWords = ['vender más', 'escalar', 'delegar', 'crecer'];
 var nivHeroWordIdx = 0;
 function swapNivHeroWord() {
   var el = document.getElementById('nivWordRotator');
@@ -2485,7 +2501,7 @@ const nivStages = {
     missing: 'Ac\u00e1 no te falta informaci\u00f3n. Nunca te falt\u00f3. Lo que define si sales de esta etapa son h\u00e1bitos, mentalidad y prop\u00f3sito \u2014 y eso no se compra, se construye.',
     // TODO: verify this Notion link is live — Patrick must check
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo empezar.'
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
   },
   operator: {
     name: 'OPERATOR', range: '$1,500 \u2013 $3,000/mes', color: '#e88c30',
@@ -2493,7 +2509,7 @@ const nivStages = {
     future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisaci\u00f3n para generar ingresos.',
     missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build est\u00e1 dise\u00f1ado para founders en distintas etapas, para escalar con sistemas \u2014 no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy OPERATOR y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo escalar mis ingresos.'
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
   },
   builder: {
     name: 'BUILDER', range: '$3,000 \u2013 $10,000/mes', color: '#3a9fff',
@@ -2501,7 +2517,7 @@ const nivStages = {
     future: 'Automatizaste tus procesos clave, documentaste tu m\u00e9todo y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
     missing: 'Puedes acceder a recursos, m\u00f3dulos, plantillas, workflows y sistemas validados que actualmente yo mismo y mis clientes ya est\u00e1n utilizando. No necesitas reventar tokens ni seguir frustr\u00e1ndote solo.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy BUILDER y quiero m\u00e1s informaci\u00f3n sobre automatizaci\u00f3n y escala.'
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
   },
   founder: {
     name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
@@ -2509,7 +2525,7 @@ const nivStages = {
     future: 'Tienes infraestructura de equipo, agentes aut\u00f3nomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicaci\u00f3n.',
     missing: 'A esta etapa, lo que necesitas no es un curso \u2014 es una conversaci\u00f3n directa. Conectemos para explorar c\u00f3mo Private Build puede complementar lo que ya construiste y llevarlo m\u00e1s lejos.',
     notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del nivelador. Soy FOUNDER y quiero conversar sobre mi proyecto y oportunidades.'
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
   }
 };
 
@@ -2575,7 +2591,9 @@ const nivTools = {
     ],
     'Marketing & Dev': [
       { name: 'Meta Ads', icon: F('facebook.com') },
-      { name: 'GitHub', icon: F('github.com') }
+      { name: 'GitHub', icon: F('github.com') },
+      { name: 'Vercel', icon: F('vercel.com') },
+      { name: 'VS Code', icon: F('code.visualstudio.com') }
     ]
   },
   founder: {
