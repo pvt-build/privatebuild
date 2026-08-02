@@ -387,8 +387,18 @@ body.result-mode {
   max-width:540px;
   margin-left:auto;
   margin-right:auto;
-  margin-bottom:16px;
+  margin-bottom:10px;
   padding:0 8px;
+}
+/* Sub-línea que filtra: el que ya vende se reconoce, el que va a empezar entiende que no es acá */
+.splash-subline {
+  font-size: clamp(12px, 1.7vw, 14px);
+  font-weight:500;
+  color:var(--text-secondary);
+  max-width:460px;
+  margin:0 auto 16px;
+  padding:0 8px;
+  line-height:1.5;
 }
 @media(max-width:540px) {
   .splash-title { font-size: clamp(36px, 12vw, 52px); }
@@ -2107,7 +2117,8 @@ body.result-mode {
     <div id="nivIntro">
       <!-- Stage preview FIRST -->
       <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:60px;"></div>
-      <p class="splash-tagline niv-home-reveal niv-home-d2">Construye tu negocio desde tu <span class="niv-word-rotator" id="nivWordRotator">visi&oacute;n</span> y logra la libertad que buscas, apalanc&aacute;ndote con sistemas de crecimiento con IA.</p>
+      <p class="splash-tagline niv-home-reveal niv-home-d2">Vende m&aacute;s con sistemas de crecimiento apalancados con IA que <span class="niv-word-rotator" id="nivWordRotator">prospectan</span> por ti.</p>
+      <p class="splash-subline niv-home-reveal niv-home-d2">Para founders que ya venden y quieren dejar de depender de sus propias horas.</p>
       <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Descubre tu etapa actual</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
         <button class="niv-start-btn" onclick="startNivelador()">
@@ -2402,7 +2413,7 @@ body.result-mode {
 // ─── EFECTO RULETA: palabra del headline (visión/habilidad/propósito) ──
 // La animación CSS (nivWordFade) corre sola, continua; acá solo cambiamos el texto
 // justo en el punto bajo de opacidad (mitad del ciclo) para que el swap sea invisible.
-var nivHeroWords = ['visión', 'habilidad', 'propósito'];
+var nivHeroWords = ['prospectan', 'califican', 'cierran', 'entregan'];
 var nivHeroWordIdx = 0;
 function swapNivHeroWord() {
   var el = document.getElementById('nivWordRotator');
@@ -2471,7 +2482,7 @@ const nivStages = {
     name: 'SKILLER', range: '$0 \u2013 $1,500/mes', color: 'var(--metal2)',
     now: 'Est\u00e1s empleado o reci\u00e9n partiendo. Sabes que tienes una habilidad que podr\u00eda darte ingresos propios, pero no tienes oferta clara, no sabes c\u00f3mo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
     future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir m\u00e1s r\u00e1pido y tienes un sistema b\u00e1sico que te da claridad de hacia d\u00f3nde vas.',
-    missing: 'Private Build es el ecosistema que te da estructura, frameworks gratuitos y una comunidad que ya recorri\u00f3 este camino. No necesitas saber todo \u2014 necesitas activar tu habilidad con el respaldo correcto.',
+    missing: 'Ac\u00e1 no te falta informaci\u00f3n. Nunca te falt\u00f3. Lo que define si sales de esta etapa son h\u00e1bitos, mentalidad y prop\u00f3sito \u2014 y eso no se compra, se construye.',
     // TODO: verify this Notion link is live — Patrick must check
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del nivelador. Soy SKILLER y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo empezar.'
@@ -3110,10 +3121,9 @@ function dismissNivLevelup() {
 
   if (stageKey === 'skiller') {
     // TODO: verify this Notion link is live — Patrick must check
-    missingEl.innerHTML = s.missing.replace('necesitas activar tu habilidad con el respaldo correcto', '<strong style="color:var(--metal3);">necesitas activar tu habilidad con el respaldo correcto</strong>') + '<br><br style="line-height:2.4;">... he creado un <strong style="color:var(--metal3);">desaf\u00edo de 30 d\u00edas</strong> para que puedas comenzar por tu propia cuenta a generar tus primeros ingresos desde tu habilidad. <strong style="color:var(--metal3);">Sin costo, sin excusas.</strong> Depende de ti sacarle provecho.';
+    missingEl.innerHTML = s.missing.replace('h\u00e1bitos, mentalidad y prop\u00f3sito', '<strong style="color:var(--metal3);">h\u00e1bitos, mentalidad y prop\u00f3sito</strong>') + '<br><br style="line-height:2.4;">Por eso el desaf\u00edo de 30 d\u00edas es gratis: <strong style="color:var(--metal3);">si en 30 d\u00edas no llegaste, no fue por falta de informaci\u00f3n.</strong> Empieza ah\u00ed. Cuando ya est\u00e9s vendiendo, conversamos.';
     ctasEl.innerHTML =
-      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>' +
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
+      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>';
 
   } else if (stageKey === 'operator') {
     missingEl.innerHTML = s.missing.replace('El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse', '<strong style="color:var(--metal3);">El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse</strong>');
