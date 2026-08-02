@@ -697,37 +697,57 @@ body.result-mode {
   .niv-qual-opt:hover { transform:none; }
 }
 
-/* ─── STACK DE LA ETAPA SIGUIENTE (bloqueado = FOMO, sin regalar el cómo) ─── */
-.niv-tool-locked-label {
+/* ─── SISTEMAS POR ÁREA — el QUÉ a la vista, el CÓMO es la conversación ─── */
+.niv-sis-label {
   font-size:9px;
   font-weight:800;
   letter-spacing:0.18em;
   text-transform:uppercase;
-  color:rgba(200,168,74,0.75);
+  color:rgba(200,168,74,0.8);
   text-align:center;
-  margin:18px 0 8px;
+  margin:22px 0 10px;
 }
-.niv-tool-locked {
-  position:relative;
-  border:1px dashed rgba(200,168,74,0.28);
+.niv-sis-list {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:var(--border);
+  border:1px solid rgba(200,168,74,0.18);
   border-radius:3px;
-  padding:12px 10px;
   overflow:hidden;
 }
-.niv-tool-locked .niv-tool-category-items { filter:blur(4.5px); opacity:0.55; pointer-events:none; }
-.niv-tool-locked-overlay {
-  position:absolute;
-  inset:0;
+.niv-sis-row {
+  background:var(--bg2);
+  padding:10px 12px;
   display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10.5px;
-  font-weight:700;
-  letter-spacing:0.06em;
-  color:var(--text-primary);
+  flex-direction:column;
+  gap:3px;
+  text-align:left;
+}
+.niv-sis-area {
+  font-size:8.5px;
+  font-weight:800;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--gold-bright, #d9b95c);
+}
+.niv-sis-desc {
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--text-secondary);
+  line-height:1.4;
+}
+.niv-sis-nota {
+  font-size:12px;
+  line-height:1.55;
+  color:var(--text-secondary);
   text-align:center;
-  padding:0 14px;
-  background:linear-gradient(180deg, rgba(6,8,14,0.35), rgba(6,8,14,0.72));
+  margin-top:12px;
+  padding:0 4px;
+}
+.niv-sis-nota strong { color:var(--text-primary); font-weight:700; }
+@media(max-width:540px) {
+  .niv-sis-desc { font-size:12px; }
 }
 
 /* ─── PULSO DE LA FLECHA DE LA CALCULADORA (se activa al entrar en viewport) ─── */
@@ -1799,12 +1819,12 @@ body.result-mode {
   letter-spacing:0.04em;
   color:#fff;
   text-decoration:none;
-  background:linear-gradient(135deg, #404060 0%, #6868a0 40%, #9090c0 50%, #6868a0 60%, #404060 100%);
+  background:linear-gradient(135deg, #1c5fa8 0%, #2b7fd4 40%, #4aa3f0 50%, #2b7fd4 60%, #1c5fa8 100%);
   background-size:200% 100%;
   animation:titleShimmer 4s ease-in-out infinite;
-  border:1px solid rgba(180,180,220,0.25);
+  border:1px solid rgba(74,163,240,0.35);
   border-radius:2px;
-  box-shadow:0 0 24px rgba(140,140,200,0.2), 0 0 60px rgba(140,140,200,0.08);
+  box-shadow:0 0 24px rgba(58,159,255,0.28), 0 0 60px rgba(58,159,255,0.12);
   transition:all 0.3s ease;
   cursor:pointer;
 }
@@ -2391,7 +2411,7 @@ body.result-mode {
           <p style="font-size:clamp(14px,2.2vw,16px);color:var(--text-secondary);line-height:1.7;font-weight:500;">T&uacute; decides si comenzar a construir hoy...</p>
           <p style="font-size:clamp(15px,2.5vw,18px);color:var(--red);line-height:1.7;margin-top:8px;text-decoration:underline;text-underline-offset:4px;font-weight:600;">&iquest;o prefieres perder <strong>otro a&ntilde;o m&aacute;s</strong> en el mismo lugar?</p>
         </div>
-        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank" onclick="ctaSplash(event)">No, quiero tomar acci&oacute;n ahora &rarr;</a>
+        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank" onclick="ctaSplash(event)">Quiero tomar acci&oacute;n ahora &rarr;</a>
       </div>
 
       <!-- FOOTER -->
@@ -2927,6 +2947,47 @@ const nivDetractors = {
   founder: ['Micro-management','Sin infraestructura digital','Decisiones reactivas','Equipo dependiente','Sin activos pasivos']
 };
 
+// ─── SISTEMAS POR ÁREA (el QUÉ, sin el CÓMO) ──
+const nivSistemas = {
+  skiller: {
+    areas: [
+      { area: 'Oferta',      sistema: 'Una oferta clara que puedas repetir sin rearmarla' },
+      { area: 'Prospecci\u00f3n', sistema: 'Un canal simple que traiga conversaciones cada semana' },
+      { area: 'Entrega',     sistema: 'Un proceso b\u00e1sico para no quemarte con cada cliente' }
+    ],
+    nota: ''
+  },
+  operator: {
+    areas: [
+      { area: 'Prospecci\u00f3n', sistema: 'Pipeline que no dependa de referidos ni de tu \u00e1nimo' },
+      { area: 'Ventas',      sistema: 'Proceso de cierre repetible, no improvisado por call' },
+      { area: 'Entrega',     sistema: 'M\u00e9todo documentado para no reinventar por cliente' },
+      { area: 'Contenido',   sistema: 'Producci\u00f3n constante sin depender de la inspiraci\u00f3n' }
+    ],
+    nota: 'Hoy probablemente tengas uno o dos. El salto a Builder es tenerlos <strong>los cuatro corriendo a la vez</strong>.'
+  },
+  builder: {
+    areas: [
+      { area: 'Marketing',  sistema: 'Contenido y captaci\u00f3n corriendo sin que t\u00fa los empujes' },
+      { area: 'Ventas',     sistema: 'Calificaci\u00f3n y agenda en autom\u00e1tico, llegas a la call con datos' },
+      { area: 'Entrega',    sistema: 'Onboarding y seguimiento sistematizados' },
+      { area: 'Operaci\u00f3n', sistema: 'Datos y reportes en un solo lugar, no en cinco pesta\u00f1as' },
+      { area: 'Producto',   sistema: 'M\u00e9todo empaquetado y replicable por alguien que no seas t\u00fa' }
+    ],
+    nota: 'Ac\u00e1 la diferencia con Operator no son m\u00e1s herramientas: es tener <strong>un sistema corriendo en cada \u00e1rea</strong>. Cada uno que se activa te devuelve horas. Ese tiempo liberado es el activo, no el ingreso.'
+  },
+  founder: {
+    areas: [
+      { area: 'Equipo',          sistema: 'Gente operando sin pasar cada decisi\u00f3n por ti' },
+      { area: 'Agentes',         sistema: 'IA ejecutando tareas completas, no solo asistiendo' },
+      { area: 'Infraestructura', sistema: 'Activos digitales que generan 24/7' },
+      { area: 'Decisi\u00f3n',      sistema: 'Datos que deciden por ti, no reuniones para decidir' },
+      { area: 'Capital',         sistema: 'Ingresos que no dependen de tu presencia' }
+    ],
+    nota: 'En esta etapa el cuello de botella ya no es el negocio: <strong>eres t\u00fa sosteniendo el control</strong>.'
+  }
+};
+
 // ─── CALIFICACIÓN POST-RESULTADO ──────────────
 // Sin comas a propósito: los select de Notion rechazan valores con coma.
 const nivInversionOpts = [
@@ -3037,24 +3098,16 @@ function renderToolStack(stageKey) {
     html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">' + itemsHtml + '</div></div>';
   });
 
-  // Stack de la etapa siguiente, borroso: se ve que existe algo más, no se ve qué ni cómo.
-  var orden = ['skiller', 'operator', 'builder', 'founder'];
-  var nextKey = orden[orden.indexOf(stageKey) + 1];
-  if (nextKey && nivTools[nextKey]) {
-    var nextCats = nivTools[nextKey];
-    var nextItems = '';
-    Object.keys(nextCats).forEach(function(cat) {
-      nextCats[cat].forEach(function(t) {
-        nextItems += t.emoji
-          ? '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>'
-          : '<span class="niv-tool-item"><img src="' + t.icon + '" alt="" width="16" height="16"> ' + t.name + '</span>';
-      });
+  // Los sistemas que deberían estar corriendo en su etapa: acá va el QUÉ, nunca el CÓMO.
+  var sis = nivSistemas[stageKey];
+  if (sis) {
+    html += '<div class="niv-sis-label">Sistemas que deber\u00edan estar corriendo</div><div class="niv-sis-list">';
+    sis.areas.forEach(function(a) {
+      html += '<div class="niv-sis-row"><span class="niv-sis-area">' + a.area + '</span>' +
+              '<span class="niv-sis-desc">' + a.sistema + '</span></div>';
     });
-    html += '<div class="niv-tool-locked-label">El stack de un ' + nextKey.toUpperCase() + '</div>' +
-            '<div class="niv-tool-locked">' +
-              '<div class="niv-tool-category-items">' + nextItems + '</div>' +
-              '<div class="niv-tool-locked-overlay">Se desbloquea cuando llegas a esa etapa</div>' +
-            '</div>';
+    html += '</div>';
+    if (sis.nota) html += '<div class="niv-sis-nota">' + sis.nota + '</div>';
   }
 
   html += '</div>';
@@ -3151,7 +3204,8 @@ function dismissNivLevelup() {
     });
     benefitsHtml += '</div>';
     ctasEl.innerHTML = benefitsHtml +
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Hablar directo con Patrick</a>';
 
   } else if (stageKey === 'builder') {
     missingEl.innerHTML = s.missing.replace('yo mismo y mis clientes ya est\u00e1n utilizando', '<strong style="color:var(--metal3);">yo mismo y mis clientes ya est\u00e1n utilizando</strong>');
@@ -3161,12 +3215,14 @@ function dismissNivLevelup() {
     });
     benefitsHtml2 += '</div>';
     ctasEl.innerHTML = benefitsHtml2 +
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Hablar directo con Patrick</a>';
 
   } else if (stageKey === 'founder') {
     missingEl.innerHTML = s.missing.replace('es una conversaci\u00f3n directa', '<strong style="color:var(--metal3);">es una conversaci\u00f3n directa</strong>');
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>';
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Hablar directo con Patrick</a>';
   }
 
   // Update footer CTA + countdown CTA with stage-specific WhatsApp message
