@@ -454,7 +454,7 @@ body.result-mode {
 /* ─── SPLASH TAGLINE ─────────────── */
 .splash-tagline {
   font-size: clamp(14px, 2.2vw, 17px);
-  max-width:540px;
+  max-width:760px;
   margin-left:auto;
   margin-right:auto;
   margin-bottom:10px;
@@ -462,8 +462,9 @@ body.result-mode {
 }
 /* Sub-línea que filtra: el que ya vende se reconoce, el que va a empezar entiende que no es acá */
 .splash-subline strong { color:var(--text-primary); font-weight:700; }
-/* El claim se quiebra por sentido, nunca por donde caiga el ancho. */
-.splash-tagline .tl { display:inline; }
+/* El claim se quiebra por sentido, nunca por donde caiga el ancho.
+   Cada bloque es una idea completa: nowrap impide que se parta por la mitad. */
+.splash-tagline .tl { display:inline; white-space:nowrap; }
 .splash-tagline .tl-c { display:block; }
 @media(max-width:640px) {
   .splash-tagline .tl { display:block; }
