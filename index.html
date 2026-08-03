@@ -236,16 +236,46 @@ body.result-mode {
   text-shadow: 0 2px 20px rgba(255,255,255,0.06);
 }
 
-/* Efecto ruleta: la palabra cambia en el mismo lugar (visión → habilidad → propósito) para hablarle a distintos focos de audiencia sin rehacer el copy */
-@keyframes nivWordFade {
-  0%, 100% { opacity:1; transform:translateY(0); }
-  50% { opacity:0; transform:translateY(-8px); }
+/* Las 12 áreas: la grilla ES el argumento. Ver todo lo que un negocio necesita
+   corriendo, junto y de una, es lo que produce el "me falta la mitad". */
+.niv-sisgrid {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:6px;
+  max-width:520px;
+  margin:22px auto 0;
 }
-.niv-word-rotator {
-  display:inline-block;
-  color:var(--gold);
-  font-weight:800;
-  animation: nivWordFade 2.4s ease-in-out infinite;
+.niv-sisbox {
+  font-family:'Inter',sans-serif;
+  font-size:10.5px;
+  font-weight:700;
+  letter-spacing:0.04em;
+  color:var(--text-secondary);
+  background:rgba(255,255,255,0.035);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:2px;
+  padding:9px 4px;
+  text-align:center;
+  white-space:nowrap;
+  transition:color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+@media (hover:hover) {
+  .niv-sisbox:hover {
+    color:var(--text-primary);
+    border-color:rgba(200,168,74,0.45);
+    background:rgba(200,168,74,0.07);
+  }
+}
+.niv-donde {
+  font-size:clamp(13px,2vw,15px);
+  font-weight:700;
+  color:var(--text-primary);
+  margin-top:26px;
+  letter-spacing:0.01em;
+}
+@media(max-width:540px) {
+  .niv-sisgrid { grid-template-columns:repeat(3, 1fr); gap:5px; max-width:330px; }
+  .niv-sisbox { font-size:9.5px; padding:8px 3px; letter-spacing:0.02em; }
 }
 
 .splash-ctas {
@@ -405,6 +435,7 @@ body.result-mode {
   padding:0 8px;
 }
 /* Sub-línea que filtra: el que ya vende se reconoce, el que va a empezar entiende que no es acá */
+.splash-subline strong { color:var(--text-primary); font-weight:700; }
 .splash-subline {
   font-size: clamp(12px, 1.7vw, 14px);
   font-weight:500;
@@ -2153,9 +2184,13 @@ body.result-mode {
     <div id="nivIntro">
       <!-- Stage preview FIRST -->
       <div class="niv-stage-bar niv-home-reveal" id="nivStageBarPreview" style="margin-top:12px;margin-bottom:60px;"></div>
-      <p class="splash-tagline niv-home-reveal niv-home-d2">Identifica los cuellos de botella de tu negocio e implementa sistemas de growth con IA para <span class="niv-word-rotator" id="nivWordRotator">vender m&aacute;s</span> haciendo menos.</p>
-      <p class="splash-subline niv-home-reveal niv-home-d2">Para founders que ya venden y siguen sosteniendo todo con sus propias horas.</p>
-      <p class="niv-home-reveal niv-home-d3" style="font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--text-muted);margin-top:24px;">Diagn&oacute;stico gratuito</p>
+      <p class="splash-tagline niv-home-reveal niv-home-d2">Construye un negocio que venda m&aacute;s, recuperando tiempo y capital implementando sistemas de growth con AI.</p>
+      <p class="splash-subline niv-home-reveal niv-home-d2">Los negocios que escalan no escalan con equipo. Escalan con <strong>infraestructura</strong>.</p>
+
+      <!-- Las 12 áreas: el founder no las inventa, las copia y las implementa -->
+      <div class="niv-sisgrid niv-home-reveal niv-home-d3" id="nivSisGrid"></div>
+
+      <p class="niv-home-reveal niv-home-d4 niv-donde">&iquest;D&oacute;nde est&aacute;s t&uacute;?</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
         <button class="niv-start-btn" onclick="startNivelador()">
           &#x1F9ED; &nbsp;COMENZAR DIAGN&Oacute;STICO
@@ -2446,21 +2481,21 @@ body.result-mode {
 
 <script>
 
-// ─── EFECTO RULETA: palabra del headline (visión/habilidad/propósito) ──
-// La animación CSS (nivWordFade) corre sola, continua; acá solo cambiamos el texto
-// justo en el punto bajo de opacidad (mitad del ciclo) para que el swap sea invisible.
-var nivHeroWords = ['vender más', 'escalar', 'delegar', 'crecer'];
-var nivHeroWordIdx = 0;
-function swapNivHeroWord() {
-  var el = document.getElementById('nivWordRotator');
-  if (!el) return;
-  nivHeroWordIdx = (nivHeroWordIdx + 1) % nivHeroWords.length;
-  el.textContent = nivHeroWords[nivHeroWordIdx];
-}
-setTimeout(function() {
-  swapNivHeroWord();
-  setInterval(swapNivHeroWord, 2400);
-}, 1200);
+// ─── LAS 12 ÁREAS DE UN NEGOCIO CON INFRAESTRUCTURA ──
+// Ordenadas como se construye: cimientos → construcción → salida → ingreso.
+const nivAreas = [
+  'Financiero', 'Backend', 'Datos',
+  'Tecnolog\u00eda', 'Automation', 'Producto',
+  'Marketing', 'Contenido', 'Dise\u00f1o',
+  'Comercial', 'Success', 'Comunidad'
+];
+(function renderNivAreas() {
+  var grid = document.getElementById('nivSisGrid');
+  if (!grid) return;
+  grid.innerHTML = nivAreas.map(function(a) {
+    return '<span class="niv-sisbox">' + a + '</span>';
+  }).join('');
+})();
 
 // ─── COMMUNITY GATE DATA ──────────────────────
 
