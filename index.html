@@ -2859,16 +2859,24 @@ function submitNivLead(event) {
   proceedToLevelUp();
 }
 
-// ─── TRACKING DE CLICS EN CTAs (WhatsApp / Notion) ────
+// ─── TRACKING DE CLICS EN CTAs ────
+// NO va al webhook: este evento no lleva "name", y Nombre es obligatorio en Notion.
+// Cada clic hacía fallar la validación y Make desactivaba el escenario completo,
+// dejando de capturar leads hasta que alguien lo reactivara a mano.
+// Queda solo en localStorage, que es donde sirve para revisar sin romper nada.
 document.addEventListener('click', function(e) {
-  var link = e.target.closest('.niv-cta, .niv-cta-wa, #nivFooterCta, #nivCommunityJoin');
+  var link = e.target.closest('.niv-cta, .niv-cta-wa, .niv-cta-call, #nivFooterCta, #nivCommunityJoin');
   if (!link) return;
-  sendToMake({
-    event: 'cta_click',
-    stage: window._nivStageKey || null,
-    href: link.href,
-    text: link.textContent.trim().slice(0, 80)
-  });
+  try {
+    var log = JSON.parse(localStorage.getItem('pb_cta_log') || '[]');
+    log.push({
+      stage: window._nivStageKey || null,
+      href: link.href,
+      text: link.textContent.trim().slice(0, 80),
+      ts: new Date().toISOString()
+    });
+    localStorage.setItem('pb_cta_log', JSON.stringify(log));
+  } catch (err) {}
 });
 
 function proceedToLevelUp() {
@@ -3117,6 +3125,9 @@ function pickNivQual(which, idx, btn) {
 }
 
 function sendNivQual() {
+  // Sin nombre, Notion rechaza el registro y Make desactiva el escenario.
+  // Si se perdió (por ejemplo, recarga entre la captura y esta pantalla), no enviamos.
+  if (!window._nivLeadName) return;
   var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
   sendToMake({
     event: 'lead_calificado',
