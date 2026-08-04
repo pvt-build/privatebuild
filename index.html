@@ -58,7 +58,7 @@ html {
   touch-action:pan-y;
 }
 /* Doble tap sobre botones hacía zoom y dejaba el estado :hover pegado en touch */
-button, .niv-cta, .niv-calc-arrow, .niv-qual-opt, .niv-cases-tab, .niv-opt {
+button, .niv-cta, .niv-calc-arrow, .niv-cases-tab, .niv-opt {
   touch-action:manipulation;
   -webkit-tap-highlight-color:transparent;
 }
@@ -70,6 +70,7 @@ body {
     linear-gradient(90deg, rgba(46,46,62,0.4) 1px, transparent 1px);
   background-size: 40px 40px;
   background-attachment: fixed;
+  position: relative;
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   font-size: 13px;
@@ -101,6 +102,17 @@ body {
   100% { transform: translate(0%, 0%) rotate(0deg); }
 }
 
+/* Ember — la luz entra por una sola esquina y muere antes de la mitad */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(78% 52% at 4% 112%, rgba(255,77,28,.30), transparent 60%),
+    radial-gradient(56% 40% at 104% -8%, rgba(229,50,45,.14), transparent 58%);
+}
 body::after {
   content: '';
   position: fixed;
@@ -134,6 +146,8 @@ body::after {
 
 /* ─── SPLASH SCREEN ──────────────────────── */
 #splash {
+  position:relative;
+  z-index:1;
   min-height: 100vh;
   min-height: 100dvh;
   z-index: 1;
@@ -262,7 +276,6 @@ body.result-mode {
   width:max-content;
   animation:sisMarquee 38s linear infinite;
 }
-.niv-sismarquee:hover .niv-sismarquee-track { animation-play-state:paused; }
 @keyframes sisMarquee {
   from { transform:translateX(0); }
   to   { transform:translateX(-50%); }
@@ -287,15 +300,15 @@ body.result-mode {
 @media (hover:hover) {
   .niv-sisbox:hover {
     color:var(--text-primary);
-    border-color:rgba(200,168,74,0.45);
-    background:rgba(200,168,74,0.07);
+    border-color:rgba(255,106,61,0.45);
+    background:rgba(255,106,61,0.07);
   }
 }
 .niv-donde {
-  font-size:clamp(13px,2vw,15px);
+  font-size:clamp(14px,2.1vw,16px);
   font-weight:700;
   color:var(--text-primary);
-  margin-top:26px;
+  margin-top:28px;
   letter-spacing:0.01em;
 }
 @media(max-width:540px) {
@@ -461,7 +474,7 @@ body.result-mode {
   padding:0 8px;
 }
 /* Sub-línea que filtra: el que ya vende se reconoce, el que va a empezar entiende que no es acá */
-.splash-subline strong { color:var(--text-primary); font-weight:700; }
+.splash-subline strong { color:#FF6A3D; font-weight:800; letter-spacing:0.01em; }
 /* El claim se quiebra por sentido, nunca por donde caiga el ancho.
    Cada bloque es una idea completa: nowrap impide que se parta por la mitad. */
 .splash-tagline .tl { display:inline; white-space:nowrap; }
@@ -701,64 +714,6 @@ body.result-mode {
 
 @media(prefers-reduced-motion:reduce) {
   .niv-cta-call, .niv-cta-wa { animation:none; }
-}
-
-/* ─── CALIFICACIÓN POST-RESULTADO ───────────────
-   El lead elige de NUESTRO diagnóstico, no responde abierto: confirma el frame. */
-.niv-qual { margin:0 auto 22px; max-width:360px; text-align:left; }
-.niv-qual-q { margin-bottom:18px; }
-.niv-qual-title {
-  font-size:13px;
-  font-weight:700;
-  color:var(--text-primary);
-  line-height:1.45;
-  margin-bottom:4px;
-  text-align:center;
-}
-.niv-qual-sub {
-  font-size:10.5px;
-  color:var(--text-muted);
-  text-align:center;
-  margin-bottom:12px;
-  letter-spacing:0.03em;
-}
-.niv-qual-opts { display:flex; flex-direction:column; gap:7px; margin-top:10px; }
-.niv-qual-opt {
-  width:100%;
-  text-align:left;
-  font-family:'Inter',sans-serif;
-  font-size:12.5px;
-  font-weight:600;
-  color:var(--text-secondary);
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.10);
-  padding:11px 13px;
-  border-radius:2px;
-  cursor:pointer;
-  transition:color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
-  line-height:1.35;
-}
-.niv-qual-opt:hover {
-  color:var(--text-primary);
-  border-color:rgba(200,168,74,0.45);
-  background:rgba(200,168,74,0.05);
-  transform:translateX(2px);
-}
-.niv-qual-opt.selected {
-  color:var(--gold-bright, #d9b95c);
-  border-color:rgba(200,168,74,0.65);
-  background:rgba(200,168,74,0.10);
-}
-.niv-qual-opt.dimmed { opacity:0.32; pointer-events:none; }
-.niv-qual-done {
-  font-size:12px;
-  color:var(--green);
-  text-align:center;
-  font-weight:600;
-  margin-top:2px;
-}
-@media(prefers-reduced-motion:reduce) {
-  .niv-qual-opt:hover { transform:none; }
 }
 
 /* ─── SISTEMAS POR ÁREA — el QUÉ a la vista, el CÓMO es la conversación ─── */
@@ -2216,14 +2171,14 @@ body.result-mode {
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
       <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">Construye un negocio que venda m&aacute;s,</span> <span class="tl">recuperando tiempo y capital</span><span class="tl tl-c">implementando sistemas de growth con IA.</span></p>
-      <p class="splash-subline niv-home-reveal niv-home-d2">Los negocios que escalan no escalan con equipo. Escalan con <strong>infraestructura</strong>.</p>
+      <p class="splash-subline niv-home-reveal niv-home-d2">Hoy los negocios que escalan no lo hacen con equipo,<br>lo hacen con <strong>infraestructura en cada &aacute;rea</strong>:</p>
 
       <!-- Las 12 áreas: el founder no las inventa, las copia y las implementa -->
       <div class="niv-sismarquee niv-home-reveal niv-home-d3">
         <div class="niv-sismarquee-track" id="nivSisGrid"></div>
       </div>
 
-      <p class="niv-home-reveal niv-home-d4 niv-donde">&iquest;D&oacute;nde est&aacute;s t&uacute;?</p>
+      <p class="niv-home-reveal niv-home-d4 niv-donde">&iquest;C&oacute;mo est&aacute;n hoy tus sistemas?</p>
       <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
         <button class="niv-start-btn" onclick="startNivelador()">
           COMENZAR DIAGN&Oacute;STICO&nbsp; &#x1F9ED;
@@ -2341,23 +2296,6 @@ body.result-mode {
           </button>
           <div class="niv-acc-body">
             <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
-
-            <!-- CALIFICACIÓN — va DESPUÉS del resultado a propósito: el diagnóstico ya
-                 posicionó la autoridad, acá el lead solo confirma cuál le pega. -->
-            <div class="niv-qual" id="nivQual">
-              <div class="niv-qual-q" id="nivQualQ1">
-                <div class="niv-qual-title">De estos, &iquest;cu&aacute;l te pega m&aacute;s hoy?</div>
-                <div class="niv-qual-opts" id="nivQualOpts1"></div>
-              </div>
-              <div class="niv-qual-q" id="nivQualQ2" style="display:none;">
-                <div class="niv-qual-title">&iquest;Cu&aacute;nto has invertido en formaci&oacute;n o soluciones para tu negocio este a&ntilde;o?</div>
-                <div class="niv-qual-sub">S&eacute; honesto contigo</div>
-                <div class="niv-qual-opts" id="nivQualOpts2"></div>
-              </div>
-              <div class="niv-qual-done" id="nivQualDone" style="display:none;">
-                Listo. Con esto ya sabemos por d&oacute;nde partir contigo.
-              </div>
-            </div>
 
             <div class="niv-ctas" id="nivCtas"></div>
           </div>
@@ -3065,81 +3003,6 @@ const nivSistemas = {
   }
 };
 
-// ─── CALIFICACIÓN POST-RESULTADO ──────────────
-// Sin comas a propósito: los select de Notion rechazan valores con coma.
-const nivInversionOpts = [
-  'Nada / Solo educación tradicional',
-  'Menos de $500 (membresía, guía, otros)',
-  'Entre $500 y $2.000',
-  'Entre $2.000 y $5.000',
-  'Más de $5.000'
-];
-
-var _nivQual = { cuello: '', inversion: '' };
-
-function renderNivQual(stageKey) {
-  var opts1 = document.getElementById('nivQualOpts1');
-  var opts2 = document.getElementById('nivQualOpts2');
-  if (!opts1 || !opts2) return;
-
-  // Las opciones salen de NUESTRO diagnóstico de su etapa — el lead confirma, no informa
-  var cuellos = (nivDetractors[stageKey] || []).slice();
-  opts1.innerHTML = cuellos.map(function(c, i) {
-    return '<button type="button" class="niv-qual-opt" onclick="pickNivQual(1, ' + i + ', this)">' + c + '</button>';
-  }).join('');
-
-  opts2.innerHTML = nivInversionOpts.map(function(c, i) {
-    return '<button type="button" class="niv-qual-opt" onclick="pickNivQual(2, ' + i + ', this)">' + c + '</button>';
-  }).join('');
-
-  _nivQual = { cuello: '', inversion: '' };
-  document.getElementById('nivQualQ2').style.display = 'none';
-  document.getElementById('nivQualDone').style.display = 'none';
-}
-
-function pickNivQual(which, idx, btn) {
-  var stageKey = window._nivStageKey || '';
-  var group = btn.parentElement;
-
-  group.querySelectorAll('.niv-qual-opt').forEach(function(o) {
-    o.classList.remove('selected');
-    o.classList.add('dimmed');
-  });
-  btn.classList.remove('dimmed');
-  btn.classList.add('selected');
-
-  if (which === 1) {
-    _nivQual.cuello = (nivDetractors[stageKey] || [])[idx] || '';
-    // La segunda pregunta recién aparece acá: una cosa a la vez, sin abrumar
-    var q2 = document.getElementById('nivQualQ2');
-    q2.style.display = 'block';
-    setTimeout(function() { q2.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 220);
-  } else {
-    _nivQual.inversion = nivInversionOpts[idx] || '';
-  }
-
-  if (_nivQual.cuello && _nivQual.inversion) {
-    document.getElementById('nivQualDone').style.display = 'block';
-    sendNivQual();
-  }
-}
-
-function sendNivQual() {
-  // Sin nombre, Notion rechaza el registro y Make desactiva el escenario.
-  // Si se perdió (por ejemplo, recarga entre la captura y esta pantalla), no enviamos.
-  if (!window._nivLeadName) return;
-  var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
-  sendToMake({
-    event: 'lead_calificado',
-    // el teléfono es la llave para encontrar la fila que ya creamos en la captura
-    phone: window._nivLeadPhone || '',
-    name: window._nivLeadName || '',
-    cuello_botella: stripCommas(_nivQual.cuello),
-    inversion_anual: stripCommas(_nivQual.inversion),
-    stage: (window._nivStageKey || '').charAt(0).toUpperCase() + (window._nivStageKey || '').slice(1)
-  });
-}
-
 // ─── ROADMAP NODES PER STAGE ──────────────────
 const nivRoadmapNodes = {
   skiller: ['Definir oferta','Primer cliente','Sistema b\u00e1sico','IA aplicada','Ingreso recurrente'],
@@ -3332,9 +3195,6 @@ function dismissNivLevelup() {
   allBlocks.forEach(function(block, i) {
     setTimeout(function() { block.classList.add('open'); }, 1800 + i * 1200);
   });
-
-  // Preguntas de calificación (usan los cuellos de botella de SU etapa)
-  renderNivQual(stageKey);
 
   // Update stage bars
   updateStageBars(stageKey);
