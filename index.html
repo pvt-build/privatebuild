@@ -2526,7 +2526,6 @@ const nivStages = {
     now: 'Est\u00e1s empleado o reci\u00e9n partiendo. Sabes que tienes una habilidad que podr\u00eda darte ingresos propios, pero no tienes oferta clara, no sabes c\u00f3mo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
     future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir m\u00e1s r\u00e1pido y tienes un sistema b\u00e1sico que te da claridad de hacia d\u00f3nde vas.',
     missing: 'Ac\u00e1 no te falta informaci\u00f3n. Nunca te falt\u00f3. Lo que define si sales de esta etapa son h\u00e1bitos, mentalidad y prop\u00f3sito \u2014 y eso no se compra, se construye.',
-    // TODO: verify this Notion link is live — Patrick must check
     notion: 'https://private-build.notion.site/recursos-gratuitos',
     wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
   },
@@ -3134,7 +3133,6 @@ function dismissNivLevelup() {
   var missingEl = document.getElementById('nivMissing');
 
   if (stageKey === 'skiller') {
-    // TODO: verify this Notion link is live — Patrick must check
     missingEl.innerHTML = s.missing.replace('h\u00e1bitos, mentalidad y prop\u00f3sito', '<strong style="color:var(--metal3);">h\u00e1bitos, mentalidad y prop\u00f3sito</strong>') + '<br><br style="line-height:2.4;">Por eso el desaf\u00edo de 30 d\u00edas es gratis: <strong style="color:var(--metal3);">si en 30 d\u00edas no llegaste, no fue por falta de informaci\u00f3n.</strong> Empieza ah\u00ed. Cuando ya est\u00e9s vendiendo, conversamos.';
     ctasEl.innerHTML =
       '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>';
