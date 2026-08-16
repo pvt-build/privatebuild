@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Private Build">
 <meta property="og:title" content="Private Build — AI Leverage para founders">
-<meta property="og:description" content="No es trabajar más. Afinar la base y apalancarte con sistemas + IA. Consultoría de 12 semanas para founders de servicios.">
+<meta property="og:description" content="No es trabajar más. Afinar la base y apalancarte: sistemas, claridad + IA. Consultoría de 12 semanas para founders de servicios.">
 <meta property="og:locale" content="es_CL">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -111,6 +111,17 @@
   }
   .btn.ghost{ background:transparent; color:var(--ink); border-color:var(--line); font-weight:400; }
   .btn:focus-visible,.btn:hover{ outline:2px solid var(--ink); outline-offset:3px; }
+
+  /* TRÍADA */
+  .triad{ display:grid; grid-template-columns:repeat(auto-fit,minmax(228px,1fr));
+    gap:10px; margin-top:clamp(30px,4.6vw,42px); }
+  .tri{ border:1px solid var(--line); border-radius:var(--r-in); background:var(--s1);
+    padding:20px 22px; display:flex; flex-direction:column; gap:8px; }
+  .tri.hot{ border-color:var(--ember); background:var(--s3); }
+  .tk{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  .tri.hot .tk{ color:var(--ember); }
+  .tt{ font-size:19px; font-weight:700; letter-spacing:-.028em; line-height:1.08; }
+  .tri p{ margin:0; font-size:14.5px; color:var(--ink-2); line-height:1.34; }
 
   /* SECCIÓN */
   section{ padding:clamp(52px,9vw,92px) 0; border-top:1px solid var(--line); }
@@ -262,9 +273,27 @@
     </div>
 
     <p class="deny">No es trabajar más.</p>
-    <h1>Afinar la base<br>y <em>apalancarte</em><br>con sistemas + IA.</h1>
+    <h1>Afinar la base<br>y <em>apalancarte</em>.</h1>
 
-    <p class="hero-sub">Llegaste hasta acá a pulso: cada venta la empujaste tú. <b>Leverage es dejar de empujar y hacer palanca</b> — la misma fuerza tuya moviendo el triple de peso.</p>
+    <p class="hero-sub"><b>Sistemas, claridad + IA.</b> Llegaste hasta acá a pulso: cada venta la empujaste tú. Leverage es dejar de empujar y hacer palanca — la misma fuerza tuya moviendo el triple de peso.</p>
+
+    <div class="triad">
+      <div class="tri">
+        <span class="tk">01 · Sistemas</span>
+        <span class="tt">Lo que ya probé</span>
+        <p>No te traigo teoría. Te traigo lo que corrí en mi propia agencia y en negocios de otros founders, con resultado.</p>
+      </div>
+      <div class="tri hot">
+        <span class="tk">02 · Claridad</span>
+        <span class="tt">Lo que aporto yo</span>
+        <p>Ojos externos sobre tus métricas. Ver dónde está la palanca es lo que no puedes hacer solo después de dos años mirando lo mismo.</p>
+      </div>
+      <div class="tri">
+        <span class="tk">03 · IA</span>
+        <span class="tt">Lo que da velocidad</span>
+        <p>Lo que antes tomaba semanas de análisis, hoy es una pasada. Por eso el sistema se construye en 3 meses y no en dos años.</p>
+      </div>
+    </div>
 
     <div class="cta-row"><a class="btn" href="#empezar">Agendar diagnóstico</a></div>
   </header>
