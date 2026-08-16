@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Consultoría — Private Build</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="../claude-favicon.png">
+<style>
+  :root{
+    --bg:#0B0C0F; --s1:#14161B; --s2:#1A1D24;
+    --line:#252932; --line-2:#1B1E25;
+    --ink:#F4F3F1; --ink-2:#A8A5A0; --ink-3:#8A8781;
+    --ember:#FF4D1C; --live:#32D74B;
+    --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,"Andale Mono",monospace;
+  }
+  @media (prefers-color-scheme:light){
+    :root{ --bg:#EFEDE9; --s1:#E5E2DC; --s2:#DBD7D0; --line:#C6C1B8; --line-2:#D8D4CC;
+      --ink:#111010; --ink-2:#4A463F; --ink-3:#625D55; --live:#1E9E38; }
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  body{
+    margin:0; min-height:100vh; background:
+      radial-gradient(56% 40% at 2% 0%, rgba(255,77,28,.10), transparent 62%),
+      var(--bg);
+    color:var(--ink); font-family:var(--display); font-size:17px; line-height:1.42;
+    -webkit-font-smoothing:antialiased; padding:clamp(28px,6vw,64px) clamp(20px,5vw,48px) 80px;
+  }
+  .col{ max-width:840px; margin:0 auto; }
+  .rail{ display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-3); margin-bottom:clamp(34px,7vw,60px); }
+  h1{ margin:0 0 14px; font-size:clamp(38px,8vw,72px); font-weight:700; letter-spacing:-.04em;
+    text-transform:uppercase; line-height:.92; }
+  h1 em{ font-style:normal; color:var(--ember); }
+  .sub{ margin:0; font-size:17px; color:var(--ink-2); max-width:54ch; }
+  h2{ font-size:clamp(18px,2.6vw,22px); font-weight:700; letter-spacing:-.025em; text-transform:uppercase;
+    margin:clamp(40px,6vw,58px) 0 4px; padding-top:14px; border-top:1px solid var(--line); }
+  .hint{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--ink-3); margin:0 0 18px; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; }
+  a.card{
+    display:flex; flex-direction:column; gap:8px; text-decoration:none; color:inherit;
+    border:1px solid var(--line); border-radius:12px; background:var(--s1); padding:20px 22px;
+  }
+  a.card:hover,a.card:focus-visible{ border-color:var(--ember); outline:none; }
+  a.card .n{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  a.card .t{ font-size:19px; font-weight:700; letter-spacing:-.025em; line-height:1.1; }
+  a.card .d{ font-size:14.5px; color:var(--ink-2); line-height:1.32; }
+  .soon{ border-style:dashed; background:transparent; opacity:.62; }
+  .soon .t{ color:var(--ink-3); }
+  footer{ margin-top:clamp(46px,7vw,72px); padding-top:16px; border-top:1px solid var(--line);
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+</style>
+</head>
+<body>
+<div class="col">
+
+  <div class="rail">
+    <span>[ PRIVATE BUILD ]</span>
+    <span>[ CONSULTORÍA ]</span>
+    <span>[ NO INDEXADO ]</span>
+  </div>
+
+  <h1>Consultoría</h1>
+  <p class="sub">Material del ecosistema: lo que se entrega, se duplica o se copia y pega en el negocio de un cliente. Lo interno vive en <a href="../interno/" style="color:var(--ember)">/interno</a>.</p>
+
+  <h2>Moldes</h2>
+  <p class="hint">Se duplican por cliente, no se editan en su lugar</p>
+  <div class="grid">
+    <span class="card soon">
+      <span class="n">pendiente</span>
+      <span class="t">Roadmap 12 semanas</span>
+      <span class="d">Molde del roadmap por fases con micro-win. Hoy en Docs vivos/consultoria-template.html.</span>
+    </span>
+    <span class="card soon">
+      <span class="n">pendiente</span>
+      <span class="t">Mapa del sistema</span>
+      <span class="d">Las 8 piezas marcadas ya existe / se construye, para llenar en sesión 1.</span>
+    </span>
+    <span class="card soon">
+      <span class="n">pendiente</span>
+      <span class="t">Onboarding</span>
+      <span class="d">Los 5 pasos de "pagó" a sesión 1, con accesos y cadencia.</span>
+    </span>
+  </div>
+
+  <h2>Roadmaps vivos por cliente</h2>
+  <p class="hint">Uno por cliente activo · se comparte por link</p>
+  <div class="grid">
+    <span class="card soon">
+      <span class="n">pendiente de publicar</span>
+      <span class="t">STM</span>
+      <span class="d">Existe en consulting-laurastm-ready-to-push/.</span>
+    </span>
+    <span class="card soon">
+      <span class="n">pendiente de publicar</span>
+      <span class="t">Sabrent</span>
+      <span class="d">Existe en Clientes/KATHE_SABRENT/.</span>
+    </span>
+    <span class="card soon">
+      <span class="n">pendiente</span>
+      <span class="t">Emma Clara</span>
+      <span class="d">Panel enviado y nunca abierto — se recorre en sesión, no se manda por link.</span>
+    </span>
+  </div>
+
+  <h2>Biblioteca</h2>
+  <p class="hint">Framework que se repitió en 2+ clientes → recurso reusable</p>
+  <div class="grid">
+    <span class="card soon">
+      <span class="n">0 recursos</span>
+      <span class="t">Vacía</span>
+      <span class="d">El loop está cortado: faltan las sesiones registradas que la alimentan.</span>
+    </span>
+  </div>
+
+  <footer>[ SE DUPLICA POR CLIENTE · NUNCA SE EDITA EL MOLDE ]</footer>
+
+</div>
+</body>
+</html>
