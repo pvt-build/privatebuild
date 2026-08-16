@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Private Build — AI Leverage para founders</title>
+<meta name="description" content="Consultoría de 12 semanas para founders de servicios: estructuramos tu negocio y codificamos tu criterio en un sistema que tú operas.">
+<meta name="theme-color" content="#0B0C0F">
+<link rel="icon" href="../claude-favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Private Build">
+<meta property="og:title" content="Private Build — AI Leverage para founders">
+<meta property="og:description" content="No es trabajar más. Es apalancarte con IA y sistemas. Consultoría de 12 semanas para founders de servicios.">
+<meta property="og:locale" content="es_CL">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{margin:0}
+  img,svg{max-width:100%}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --bg:#0B0C0F; --s1:#14161B; --s2:#1A1D24; --s3:#20242C;
+    --line:#252932; --line-2:#1B1E25;
+    --ink:#F4F3F1; --ink-2:#A8A5A0; --ink-3:#8A8781;
+    --ember:#FF4D1C; --live:#32D74B;
+    --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,"Andale Mono",monospace;
+    --r-card:14px; --r-in:10px; --r-pill:999px;
+    --field:
+      radial-gradient(56% 40% at 2% 0%, rgba(255,255,255,.06), transparent 62%),
+      radial-gradient(48% 36% at 100% 8%, rgba(255,77,28,.11), transparent 60%),
+      linear-gradient(180deg,#17171A 0%, #0B0C0F 40%, #000 100%);
+  }
+  @media (prefers-color-scheme:light){
+    :root{
+      --bg:#EFEDE9; --s1:#E5E2DC; --s2:#DBD7D0; --s3:#D1CCC4;
+      --line:#C6C1B8; --line-2:#D8D4CC;
+      --ink:#111010; --ink-2:#4A463F; --ink-3:#625D55; --live:#1E9E38;
+      --field:
+        radial-gradient(56% 40% at 2% 0%, rgba(0,0,0,.05), transparent 62%),
+        radial-gradient(48% 36% at 100% 8%, rgba(255,77,28,.13), transparent 60%),
+        linear-gradient(180deg,#F5F3EF 0%, #EFEDE9 40%, #E5E2DC 100%);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#EFEDE9; --s1:#E5E2DC; --s2:#DBD7D0; --s3:#D1CCC4;
+    --line:#C6C1B8; --line-2:#D8D4CC;
+    --ink:#111010; --ink-2:#4A463F; --ink-3:#625D55; --live:#1E9E38;
+    --field:
+      radial-gradient(56% 40% at 2% 0%, rgba(0,0,0,.05), transparent 62%),
+      radial-gradient(48% 36% at 100% 8%, rgba(255,77,28,.13), transparent 60%),
+      linear-gradient(180deg,#F5F3EF 0%, #EFEDE9 40%, #E5E2DC 100%);
+  }
+  :root[data-theme="dark"]{
+    --bg:#0B0C0F; --s1:#14161B; --s2:#1A1D24; --s3:#20242C;
+    --line:#252932; --line-2:#1B1E25;
+    --ink:#F4F3F1; --ink-2:#A8A5A0; --ink-3:#8A8781; --live:#32D74B;
+    --field:
+      radial-gradient(56% 40% at 2% 0%, rgba(255,255,255,.06), transparent 62%),
+      radial-gradient(48% 36% at 100% 8%, rgba(255,77,28,.11), transparent 60%),
+      linear-gradient(180deg,#17171A 0%, #0B0C0F 40%, #000 100%);
+  }
+
+  .site{
+    position:relative; background:var(--field),var(--bg); background-attachment:fixed;
+    color:var(--ink); font-family:var(--display); font-size:17px; line-height:1.42;
+    -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    padding:0 clamp(18px,4.5vw,44px) 0;
+  }
+  .site::after{
+    content:""; position:fixed; inset:0; pointer-events:none;
+    mix-blend-mode:overlay; opacity:.05;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  }
+  @media (prefers-color-scheme:light){ .site::after{ mix-blend-mode:multiply; opacity:.045; } }
+  .col{ position:relative; max-width:1060px; margin:0 auto; }
+
+  /* HERO */
+  .hero{ padding:clamp(28px,6vw,52px) 0 clamp(50px,9vw,92px); }
+  .topbar{
+    display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em;
+    text-transform:uppercase; color:var(--ink-3); padding-bottom:clamp(38px,8vw,78px);
+  }
+  h1{
+    margin:0; font-weight:700; text-transform:uppercase;
+    font-size:clamp(38px,9vw,92px); line-height:.92; letter-spacing:-.035em; overflow-wrap:break-word;
+  }
+  h1 em{ font-style:normal; color:var(--ember); }
+  .hero-sub{
+    margin:clamp(22px,4vw,32px) 0 0; font-size:clamp(17px,2.2vw,21px);
+    color:var(--ink-2); max-width:48ch; line-height:1.42;
+  }
+  .hero-sub b{ color:var(--ink); font-weight:600; }
+  .cta-row{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-top:clamp(26px,4vw,36px); }
+  .btn{
+    display:inline-block; text-decoration:none; border-radius:var(--r-pill);
+    padding:15px 28px; font-family:var(--mono); font-size:12px; letter-spacing:.12em;
+    text-transform:uppercase; background:var(--ember); color:#0B0C0F; font-weight:700; border:1px solid var(--ember);
+  }
+  .btn.ghost{ background:transparent; color:var(--ink); border-color:var(--line); font-weight:400; }
+  .btn:focus-visible,.btn:hover{ outline:2px solid var(--ink); outline-offset:3px; }
+
+  /* SECCIÓN */
+  section{ padding:clamp(52px,9vw,92px) 0; border-top:1px solid var(--line); }
+  .band{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:clamp(20px,3.4vw,30px); }
+  .band .n{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; color:var(--ink-3); }
+  h2{
+    margin:0; font-size:clamp(28px,5.2vw,52px); font-weight:700;
+    letter-spacing:-.035em; text-transform:uppercase; line-height:.98; overflow-wrap:break-word;
+  }
+  h2 em{ font-style:normal; color:var(--ember); }
+  .lead{ font-size:clamp(17px,2.1vw,20px); color:var(--ink-2); max-width:58ch; margin:20px 0 0; line-height:1.42; }
+  .lead b{ color:var(--ink); font-weight:600; }
+
+  /* CAJA CON VISUAL */
+  .g3{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; margin-top:clamp(26px,4vw,38px); }
+  .g2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin-top:clamp(26px,4vw,38px); }
+  .box{
+    border:1px solid var(--line); border-radius:var(--r-card); background:var(--s1);
+    padding:clamp(20px,3vw,26px); display:flex; flex-direction:column; gap:14px;
+  }
+  .box .lab{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  .box h3{ margin:0; font-size:clamp(18px,2.3vw,21px); font-weight:700; letter-spacing:-.025em; line-height:1.15; }
+  .box p{ margin:0; font-size:15.5px; color:var(--ink-2); line-height:1.38; }
+  .box p b{ color:var(--ink); font-weight:600; }
+  .viz{ width:100%; height:76px; display:block; overflow:visible; }
+  .viz .st{ stroke:var(--ink-3); fill:none; stroke-width:1.5; }
+  .viz .hot{ stroke:var(--ember); fill:none; stroke-width:2; }
+  .viz .hotf{ fill:var(--ember); }
+  .viz .dim{ stroke:var(--line); fill:none; stroke-width:1; }
+  .viz .dotf{ fill:var(--ink-3); }
+  .viz .lbl{ fill:var(--ink-3); font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; }
+  .viz .lblh{ fill:var(--ember); font-family:var(--mono); font-size:8px; letter-spacing:.1em; text-transform:uppercase; }
+
+  /* VERSUS */
+  .vs{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:clamp(26px,4vw,38px); align-items:start; }
+  .vscol{ border:1px solid var(--line); border-radius:var(--r-card); background:var(--s1); overflow:hidden; }
+  .vscol.no{ background:transparent; border-style:dashed; }
+  .vscol.si{ border-color:var(--ember); background:var(--s3); }
+  .vshead{ padding:18px 22px; border-bottom:1px solid var(--line); font-family:var(--mono);
+           font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  .vscol.si .vshead{ color:var(--ember); border-color:color-mix(in srgb,var(--ember) 32%,transparent); }
+  .vsitem{ padding:16px 22px; border-bottom:1px solid var(--line-2); }
+  .vsitem:last-child{ border-bottom:0; }
+  .vsitem b{ display:block; font-size:17px; font-weight:700; letter-spacing:-.02em; margin-bottom:5px; }
+  .vsitem span{ font-size:15px; color:var(--ink-2); line-height:1.34; }
+  .vscol.no .vsitem b{ color:var(--ink-3); }
+
+  /* PIEZAS COMO BLOQUES */
+  .grid8{ display:grid; grid-template-columns:repeat(auto-fit,minmax(216px,1fr)); gap:10px; margin-top:clamp(26px,4vw,38px); }
+  .blk{
+    border:1px solid var(--line); border-radius:var(--r-in); background:var(--s1);
+    padding:20px; display:flex; flex-direction:column; gap:10px; min-height:158px;
+  }
+  .blk .no{ font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; color:var(--ink-3); font-variant-numeric:tabular-nums; }
+  .blk .nm{ font-size:19px; font-weight:700; letter-spacing:-.028em; line-height:1.08; }
+  .blk .ia{ font-size:14px; color:var(--ink-2); line-height:1.32; margin-top:auto; }
+  .blk.after{ border-color:var(--ember); background:var(--s3); grid-column:1 / -1; min-height:0; }
+  .blk.after .no,.blk.after .nm{ color:var(--ember); }
+  .blk.after .ia{ margin-top:0; }
+
+  /* SUB-BLOQUE */
+  .sublab{ display:flex; align-items:center; gap:14px; font-family:var(--mono); font-size:10.5px;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); margin-top:clamp(24px,3.6vw,32px); }
+  .sublab::after{ content:""; flex:1; height:1px; background:var(--line); }
+  .sublab.hot{ color:var(--ember); }
+  .sublab.hot::after{ background:color-mix(in srgb,var(--ember) 38%,transparent); }
+
+  /* PUENTE entre bloques */
+  .bridge{ margin:clamp(34px,5vw,52px) 0 0; padding:clamp(22px,3.4vw,30px) 0 0;
+    border-top:1px solid var(--line); }
+  .bridge p{ margin:0; font-size:clamp(20px,3vw,29px); font-weight:700; letter-spacing:-.03em;
+    line-height:1.14; max-width:24ch; }
+  .bridge em{ font-style:normal; color:var(--ember); }
+
+  /* CASO PROPIO — destacado */
+  .mine{ border:1px solid var(--ember); border-radius:var(--r-card); background:var(--s3);
+    padding:clamp(24px,3.6vw,34px); margin-top:clamp(18px,2.6vw,24px);
+    display:grid; grid-template-columns:auto 1fr; gap:clamp(20px,3.4vw,42px); align-items:center; }
+  .mine .fig{ display:flex; flex-direction:column; gap:6px; }
+  .mine .amt{ font-size:clamp(40px,7vw,72px); font-weight:700; letter-spacing:-.05em; line-height:.9;
+    color:var(--ember); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .mine .u{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+  .mine .tx h3{ margin:0 0 10px; font-size:clamp(20px,2.8vw,26px); font-weight:700; letter-spacing:-.03em; line-height:1.12; }
+  .mine .tx p{ margin:0; font-size:16px; color:var(--ink-2); line-height:1.38; max-width:52ch; }
+  .mine .tx p b{ color:var(--ink); font-weight:600; }
+  .mine .k{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ember); display:block; margin-bottom:12px; }
+  @media (max-width:720px){ .mine{ grid-template-columns:1fr; gap:18px; } }
+
+  /* CASOS */
+  .cases{ display:grid; grid-template-columns:repeat(auto-fit,minmax(252px,1fr)); gap:12px; margin-top:clamp(18px,2.6vw,24px); }
+  .case{ border:1px solid var(--line); border-radius:var(--r-card); background:var(--s1); padding:clamp(20px,3vw,26px);
+         display:flex; flex-direction:column; gap:12px; }
+  .case .who{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+  .case .jump{ display:flex; align-items:baseline; gap:9px; flex-wrap:wrap; }
+  .case .from{ font-size:19px; font-weight:600; color:var(--ink-3); letter-spacing:-.02em; font-variant-numeric:tabular-nums; }
+  .case .arw{ font-family:var(--mono); font-size:12px; color:var(--ink-3); }
+  .case .to{ font-size:clamp(28px,3.8vw,38px); font-weight:700; letter-spacing:-.045em; line-height:1; color:var(--ember); font-variant-numeric:tabular-nums; }
+  .case p{ margin:0; font-size:15px; color:var(--ink-2); line-height:1.36; }
+  .case p b{ color:var(--ink); font-weight:600; }
+
+  /* STEPS */
+  .steps{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px; margin-top:clamp(26px,4vw,38px); }
+  .st2{ border:1px solid var(--line); border-radius:var(--r-in); background:var(--s1); padding:20px 22px; display:flex; flex-direction:column; gap:8px; }
+  .st2 .h{ font-size:17.5px; font-weight:700; letter-spacing:-.025em; line-height:1.15; }
+  .st2 p{ margin:0; font-size:15px; color:var(--ink-2); line-height:1.34; }
+
+  /* PLANES */
+  .plans{ display:grid; grid-template-columns:repeat(auto-fit,minmax(258px,1fr)); gap:12px; margin-top:clamp(28px,4vw,40px); }
+  .plan{ border:1px solid var(--line); border-radius:var(--r-card); background:var(--s1); padding:clamp(22px,3vw,30px); display:flex; flex-direction:column; gap:12px; }
+  .plan.core{ border-color:var(--ember); background:var(--s3); }
+  .plan .gate{ font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); }
+  .plan .nm{ font-size:clamp(21px,2.7vw,26px); font-weight:700; letter-spacing:-.03em; text-transform:uppercase; line-height:1.05; }
+  .plan .amt{ font-size:clamp(32px,4.6vw,44px); font-weight:700; letter-spacing:-.045em; line-height:1; font-variant-numeric:tabular-nums; }
+  .plan.core .amt{ color:var(--ember); }
+  .plan .per{ font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); }
+  .plan p{ margin:0; font-size:15px; color:var(--ink-2); line-height:1.36; }
+  .plan p b{ color:var(--ink); font-weight:600; }
+  .plan .own-tag{ align-self:flex-start; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+                  border:1px solid var(--line); border-radius:var(--r-pill); padding:5px 11px; color:var(--ink-3); }
+  .plan.core .own-tag{ color:var(--ember); border-color:color-mix(in srgb,var(--ember) 45%,transparent); }
+  .fine{ margin-top:26px; font-size:15.5px; color:var(--ink-2); max-width:62ch; line-height:1.4; }
+  .fine b{ color:var(--ink); font-weight:600; }
+
+  /* PREGUNTA PREVIA */
+  .ask{ border:1px solid var(--ember); border-radius:var(--r-card); background:var(--s3);
+        padding:clamp(26px,4vw,40px); margin-top:clamp(26px,4vw,38px); }
+  .ask .q{ font-size:clamp(22px,3.4vw,32px); font-weight:700; letter-spacing:-.03em; line-height:1.12; margin:0 0 14px; }
+  .ask p{ margin:0; font-size:16.5px; color:var(--ink-2); line-height:1.4; max-width:56ch; }
+  .ask p b{ color:var(--ink); font-weight:600; }
+
+  footer{
+    border-top:1px solid var(--line); padding:24px 0 40px; display:flex;
+    justify-content:space-between; gap:12px; flex-wrap:wrap;
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3);
+  }
+  @media (max-width:700px){ .vs{ grid-template-columns:1fr; } }
+</style>
+
+<div class="site">
+<div class="col">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="topbar">
+      <span>[ PRIVATE BUILD ]</span>
+      <span>[ AI LEVERAGE · 3 MESES ]</span>
+      <span>@privatebuild.os</span>
+    </div>
+
+    <h1>No es trabajar<br>más. Es <em>apalancarte</em><br>con IA y sistemas.</h1>
+
+    <p class="hero-sub">Llegaste hasta acá a pulso: cada venta la empujaste tú. <b>Leverage es dejar de empujar y hacer palanca</b> — la misma fuerza tuya moviendo el triple de peso.</p>
+
+    <div class="cta-row"><a class="btn" href="#empezar">Agendar diagnóstico</a></div>
+  </header>
+
+  <!-- 01 TECHOS -->
+  <section>
+    <div class="band"><span class="n">[ 01 ]</span></div>
+    <h2>Cada etapa<br>tiene su <em>techo</em></h2>
+    <p class="lead">Y si estás leyendo esto, es porque chocaste con uno de estos. No es falta de ganas ni de talento: es que el techo no se rompe trabajando más, se rompe cambiando la estructura.</p>
+
+    <div class="g3">
+      <div class="box">
+        <span class="lab">Techo 01</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="hot" d="M6 66 C40 62 52 40 74 38 C96 36 104 54 128 40 C150 28 158 46 194 34"/>
+          <path class="st" style="stroke-dasharray:3 3" d="M6 30 H194"/>
+          <text class="lbl" x="6" y="22">techo</text>
+        </svg>
+        <h3>Cada venta parte de cero</h3>
+        <p>Cerraste, sí. Pero si te preguntan cómo lo hiciste, la respuesta honesta es "salió". Y lo que sale, no se planifica: se espera.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Techo 02</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <circle class="hotf" cx="34" cy="38" r="7"/>
+          <path class="st" d="M34 45 V60 M34 60 H160"/>
+          <circle class="dotf" cx="90" cy="60" r="4"/><circle class="dotf" cx="125" cy="60" r="4"/><circle class="dotf" cx="160" cy="60" r="4"/>
+          <path class="dim" d="M42 34 H92 M42 26 H78 M42 42 H84"/>
+          <text class="lbl" x="86" y="22">todo pasa por ti</text>
+        </svg>
+        <h3>Contrataste y te llenaste de pega</h3>
+        <p>Sumaste gente para soltar carga y terminaste enseñando de cero. Sin sistema no delegas: clonas tu cabeza a mano, una persona a la vez.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Techo 03</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="st" d="M18 70 V52 M42 70 V30 M66 70 V60 M90 70 V22 M114 70 V56 M138 70 V38 M162 70 V64 M186 70 V44"/>
+          <text class="lbl" x="6" y="14">reaccionas</text>
+        </svg>
+        <h3>Trabajas a punta de reacción</h3>
+        <p>Haces lo que se te ocurrió el lunes o lo que se cayó el martes. Nunca lo que tocaba.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Techo 04</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="hot" d="M6 58 H62"/>
+          <path class="st" style="stroke-dasharray:2 5" d="M62 58 H194"/>
+          <circle class="hotf" cx="62" cy="58" r="4"/>
+          <text class="lblh" x="6" y="44">ves</text>
+          <text class="lbl" x="70" y="44">no ves</text>
+        </svg>
+        <h3>No sabes qué viene después</h3>
+        <p>Vas manejando de noche con las luces bajas: ves los veinte metros de adelante, no la carretera.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Techo 05</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <circle class="dotf" cx="26" cy="24" r="4"/><circle class="dotf" cx="70" cy="52" r="4"/>
+          <circle class="dotf" cx="108" cy="20" r="4"/><circle class="dotf" cx="146" cy="48" r="4"/><circle class="dotf" cx="182" cy="30" r="4"/>
+          <path class="dim" d="M26 24 L70 52 M108 20 L146 48"/>
+          <path class="st" d="M14 68 H60 M76 68 H120 M136 68 H186"/>
+          <text class="lbl" x="6" y="12">5 ofertas</text>
+        </svg>
+        <h3>Una oferta distinta por cliente</h3>
+        <p>Le vendes algo diferente a cada uno. Al final no tienes una oferta: tienes veinte versiones a medio hacer.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Techo 06</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <rect class="hot" x="8" y="26" width="52" height="26" rx="4"/>
+          <path class="st" style="stroke-dasharray:3 4" d="M60 39 H190"/>
+          <path class="st" d="M182 32 L192 39 L182 46"/>
+          <text class="lblh" x="8" y="18">cobras</text>
+          <text class="lbl" x="96" y="18">entregas</text>
+        </svg>
+        <h3>Tu servicio no tiene dónde terminar</h3>
+        <p>Nadie sabe hasta dónde llega lo que incluye. Ni tu cliente, ni tú. Cobras uno y entregas tres.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 POR QUÉ FALLÓ -->
+  <section>
+    <div class="band"><span class="n">[ 02 ]</span></div>
+    <h2>Por qué lo que<br>probaste no aguantó</h2>
+
+    <div class="g3">
+      <div class="box">
+        <span class="lab">Agencia · freelancer</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <rect class="dim" x="62" y="18" width="76" height="42" rx="6"/>
+          <path class="st" d="M8 39 H56 M50 33 L58 39 L50 45"/>
+          <path class="st" d="M144 39 H192 M186 33 L194 39 L186 45"/>
+          <text class="lbl" x="80" y="43">vacío</text>
+        </svg>
+        <h3>Pagaste por ejecución, no por criterio</h3>
+        <p>Te entregaron la pega hecha y nunca el porqué. Cuando había que decidir algo nuevo, seguías tan a ciegas como antes de contratarlos.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">El día que paraste</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="st" d="M14 70 V56 M38 70 V44 M62 70 V32 M86 70 V22"/>
+          <path class="hot" style="stroke-dasharray:4 4" d="M100 22 L124 70"/>
+          <path class="dim" d="M134 70 H194"/>
+          <text class="lblh" x="132" y="60">cero</text>
+        </svg>
+        <h3>Volviste a cero</h3>
+        <p>Meses pagando y adentro de tu negocio no quedó nada. El sistema, el criterio y los aprendizajes se fueron con ellos. Arrendaste, no construiste.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Cursos de IA</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <circle class="dotf" cx="22" cy="30" r="3.5"/><circle class="dotf" cx="58" cy="58" r="3.5"/>
+          <circle class="dotf" cx="86" cy="22" r="3.5"/><circle class="dotf" cx="118" cy="50" r="3.5"/>
+          <circle class="dotf" cx="152" cy="28" r="3.5"/><circle class="dotf" cx="180" cy="60" r="3.5"/>
+          <text class="lbl" x="6" y="14">acciones sueltas</text>
+        </svg>
+        <h3>No hay sistema, hay acciones</h3>
+        <p>Le pides cosas a la IA y salen buenas. Pero un carrusel suelto no es un negocio: son fuegos artificiales — se ven bien y no queda nada prendido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 EL ORDEN -->
+  <section>
+    <div class="band"><span class="n">[ 03 ]</span></div>
+    <h2>"Quiero marketing<br>con IA"</h2>
+    <p class="lead">Es lo que más me piden. Y es lo que más plata quema cuando se hace en el orden equivocado.</p>
+
+    <div class="g2">
+      <div class="box">
+        <span class="lab">Lo que pasa</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="st" d="M14 70 V30 M32 70 V26 M50 70 V34 M68 70 V24"/>
+          <text class="lbl" x="12" y="18">más campañas</text>
+          <path class="hot" d="M96 46 H176 M170 40 L178 46 L170 52"/>
+          <rect class="hot" x="176" y="34" width="16" height="24" rx="3" style="stroke-dasharray:3 3"/>
+          <text class="lblh" x="122" y="66">mismo resultado</text>
+        </svg>
+        <h3>Campañas sobre una oferta a medio armar</h3>
+        <p>Le metes más presupuesto a la captación y traes más gente al mismo embudo roto. Es lo que veía todos los días con los ecommerce: <b>más tráfico no arregla una oferta que no convence</b>.</p>
+      </div>
+      <div class="box">
+        <span class="lab">Lo que hacemos</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <rect class="st" x="8" y="30" width="34" height="22" rx="4"/>
+          <path class="st" d="M42 41 H58"/>
+          <rect class="st" x="58" y="30" width="34" height="22" rx="4"/>
+          <path class="st" d="M92 41 H108"/>
+          <rect class="hot" x="108" y="26" width="40" height="30" rx="4"/>
+          <path class="hot" d="M148 41 H172 M166 35 L174 41 L166 47"/>
+          <text class="lbl" x="8" y="22">oferta</text>
+          <text class="lbl" x="58" y="22">perfil</text>
+          <text class="lblh" x="108" y="18">marketing</text>
+        </svg>
+        <h3>Primero a quién y con qué. Después, cuánto</h3>
+        <p>Si no entiendes qué quiere tu cliente ni el recorrido que hace de punta a punta, <b>generar contenido no te sirve de nada</b>. El marketing viene después, y ahí sí rinde.</p>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:24px">Por eso las 8 piezas van en orden. No es burocracia: es que cada una sostiene a la siguiente, y saltarse las primeras es pagar caro por aprenderlo.</p>
+  </section>
+
+  <!-- 03 QUÉ NECESITAS -->
+  <section>
+    <div class="band"><span class="n">[ 04 ]</span></div>
+    <h2>¿Qué necesitas<br>hoy?</h2>
+
+    <div class="g3">
+      <div class="box">
+        <span class="lab">Necesidad 01</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194 M6 70 V10"/>
+          <circle class="dotf" cx="40" cy="52" r="3.5"/><circle class="dotf" cx="72" cy="44" r="3.5"/>
+          <circle class="hotf" cx="106" cy="26" r="6"/>
+          <circle class="dotf" cx="140" cy="48" r="3.5"/><circle class="dotf" cx="172" cy="56" r="3.5"/>
+          <path class="hot" style="stroke-dasharray:3 3" d="M106 32 V70 M6 26 H100"/>
+          <text class="lblh" x="112" y="20">acá</text>
+        </svg>
+        <h3>Claridad con data</h3>
+        <p>Tienes tus cuellos de botella identificados, sabes cómo avanzar y <b>dónde invertir tu tiempo</b>. Se acabó decidir a puro olfato.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Necesidad 02</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="hot" d="M14 62 H54 V48 H94 V34 H134 V20 H186"/>
+          <path class="st" style="stroke-dasharray:3 3" d="M134 20 H186"/>
+          <text class="lbl" x="140" y="14">proyectas</text>
+        </svg>
+        <h3>Venta predecible</h3>
+        <p>Sabes cómo crecer y <b>puedes proyectar</b>. Dejas de adivinar el mes y empiezas a construirlo.</p>
+      </div>
+
+      <div class="box">
+        <span class="lab">Necesidad 03</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <rect class="dim" x="8" y="20" width="80" height="40" rx="5"/>
+          <path class="st" d="M14 30 H82 M14 40 H82 M14 50 H70"/>
+          <path class="hot" d="M96 40 H126 M120 34 L128 40 L120 46"/>
+          <rect class="hot" x="138" y="30" width="54" height="20" rx="5"/>
+          <text class="lbl" x="8" y="14">hoy</text>
+          <text class="lblh" x="138" y="24">después</text>
+        </svg>
+        <h3>Recuperar tiempo</h3>
+        <p>Afinas las bases, <b>quitas lo que te drena</b> y usas IA para apalancar los procesos que hoy te comen la semana.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 QUÉ ES -->
+  <section>
+    <div class="band"><span class="n">[ 05 ]</span></div>
+    <h2>Un solo<br>ecosistema</h2>
+    <p class="lead"><b>Private Build es founders, sistemas e IA en un mismo lugar</b>, para recuperar tiempo y ganar libertad — con ventas, no con teoría. El nombre no es adorno: lo único que cambia entre las tres formas de trabajar es <b>quién construye</b>.</p>
+
+    <div class="g3">
+      <div class="box">
+        <span class="lab">Comunidad</span>
+        <h3>Construido para ti</h3>
+        <p>Te dejo todo lo que uso, en video y plantillas. Lo tomas y lo armas a tu ritmo.</p>
+      </div>
+      <div class="box" style="border-color:var(--ember);background:var(--s3)">
+        <span class="lab">Consultoría 1:1</span>
+        <h3 style="color:var(--ember)">Construido contigo</h3>
+        <p>Nos sentamos cada semana sobre tu negocio real. Yo desbloqueo, tú construyes, y el sistema queda tuyo.</p>
+      </div>
+      <div class="box">
+        <span class="lab">Revenue share</span>
+        <h3>Construimos en conjunto</h3>
+        <p>Con el sistema andando, entro a la operación por porcentaje. Socios fuera del papel.</p>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:26px"><b>En la sesión no te implemento nada. Te desbloqueo.</b> Miramos tu problema juntos y te hago las preguntas que no te estás haciendo: ¿viste esta data?, ¿cuál es ese porcentaje?, ¿probaste por acá? Y ahí mismo te paso el recurso que resuelve eso, con el caso de quién ya lo usó y qué le dio. No hay más magia que esa.</p>
+
+    <p class="lead" style="margin-top:18px">Son <b>ojos externos mirando tus métricas</b>, de founder a founder. Desde adentro no ves dónde está tu palanca — no porque seas malo, sino porque llevas dos años mirando lo mismo. Y cuando aparece una herramienta nueva no te digo "úsala": te digo si nos sirve, por qué, y qué cambia en tu rentabilidad. Si no mueve plata ni tiempo, no entra.</p>
+  </section>
+
+  <!-- 05 LAS 8 PIEZAS -->
+  <section>
+    <div class="band"><span class="n">[ 06 ]</span></div>
+    <h2>Las 8 piezas,<br>y la IA<br>en cada una</h2>
+    <p class="lead">La lógica de negocio es la misma de siempre: sin fundaciones no hay edificio. Lo que cambia es la <b>velocidad</b> — cada pieza la construimos con IA desde el primer día, y por eso esto toma 3 meses y no dos años.</p>
+
+    <div class="grid8">
+      <div class="blk"><span class="no">01</span><span class="nm">Foundations</span><span class="ia">Notion como backend, y la IA leyendo tu negocio para encontrar los cuellos que tú ya no ves.</span></div>
+      <div class="blk"><span class="no">02</span><span class="nm">ICP / Avatar</span><span class="ia">Research, benchmarking y diagnóstico para saber quién te compra de verdad — no quién crees tú.</span></div>
+      <div class="blk"><span class="no">03</span><span class="nm">Offer</span><span class="ia">Análisis de lo que hace el mercado, para construir la oferta, sus capas y su precio.</span></div>
+      <div class="blk"><span class="no">04</span><span class="nm">Adquisición</span><span class="ia">Guiones, piezas de contenido, funnel web y cold outreach. Producción real, no ideas.</span></div>
+      <div class="blk"><span class="no">05</span><span class="nm">Captura</span><span class="ia">Setting y seguimiento sin que se te caiga nadie. Acá empiezan los agentes.</span></div>
+      <div class="blk"><span class="no">06</span><span class="nm">Closing</span><span class="ia">Entrenamiento de objeciones y análisis de tus llamadas para ver qué se cae y dónde.</span></div>
+      <div class="blk"><span class="no">07</span><span class="nm">Delivery</span><span class="ia">Productizar y paquetizar: dónde empieza y dónde termina tu servicio, por escrito.</span></div>
+      <div class="blk"><span class="no">08</span><span class="nm">Sistema y loop</span><span class="ia">El backend que toma lo que pasa en cada venta y se lo devuelve al resto.</span></div>
+      <div class="blk after"><span class="no">→ LA VELOCIDAD</span><span class="nm">Por qué toma 3 meses</span><span class="ia">Porque construimos con IA desde la primera sesión: lo que antes eran semanas de análisis hoy es una pasada. Ojo — <b>el sistema opera manual desde el día uno</b>. Automatizar es una capa opcional que se suma después, según cuánto decidas invertir.</span></div>
+    </div>
+  </section>
+
+  <!-- 06 VERSUS -->
+  <section>
+    <div class="band"><span class="n">[ 07 ]</span></div>
+    <h2>Para quién <em>no</em> es,<br>y para quién sí</h2>
+
+    <div class="vs">
+      <div class="vscol no">
+        <div class="vshead">[ No pierdas tu tiempo ]</div>
+        <div class="vsitem"><b>Quieres que alguien lo haga por ti</b><span>Soltar todo sin entenderlo es el camino más corto a perder plata y llenarte de estrés.</span></div>
+        <div class="vsitem"><b>Buscas que te automaticen el negocio</b><span>Si automatizas antes de tener las bases, lo único que logras es que el desorden corra más rápido.</span></div>
+        <div class="vsitem"><b>Todavía no vendes</b><span>Acá se apalanca lo que ya existe. Si aún no hay demanda, no hay nada que multiplicar.</span></div>
+        <div class="vsitem"><b>Tu día es en la calle</b><span>Si no tienes tiempo frente a la pantalla, este formato no te va a rendir.</span></div>
+      </div>
+
+      <div class="vscol si">
+        <div class="vshead">[ Conversemos ]</div>
+        <div class="vsitem"><b>Tienes servicio o producto propio, y ya vende</b><span>Consultoría, coaching, marca personal o un producto aliado. La demanda existe: falta la estructura debajo.</span></div>
+        <div class="vsitem"><b>Tu negocio vive de lo digital</b><span>Vendes o captas por canales digitales y te manejas con tecnología sin que te tiemble la mano.</span></div>
+        <div class="vsitem"><b>Quieres apalancarte, no contratar</b><span>Antes de los $20k al mes no necesitas más gente: necesitas que lo que ya tienes rinda más.</span></div>
+        <div class="vsitem"><b>Te metes tú</b><span>Dos o tres horas por semana, con las manos adentro. Eso no lo mueve nadie por ti.</span></div>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top:24px"><b>Sobre el rubro:</b> las ocho piezas las necesita cualquier negocio, incluido un ecommerce o un showroom. Lo que no hago es el performance marketing de producto — eso lo hace bien una agencia.</p>
+  </section>
+
+  <!-- 07 CASOS -->
+  <section>
+    <div class="band"><span class="n">[ 08 ]</span></div>
+    <h2>Primero<br>lo probé<br>en el <em>mío</em></h2>
+
+    <div class="sublab hot">01 · En mi negocio</div>
+
+    <div class="mine">
+      <div class="fig">
+        <span class="amt">$300k</span>
+        <span class="u">USD en ventas · 2 años</span>
+        <span class="u" style="color:var(--ember)">40% de margen</span>
+      </div>
+      <div class="tx">
+        <span class="k">Empecemos por el mío</span>
+        <h3>Mi propia agencia, con estos mismos sistemas</h3>
+        <p>No es un método que leí y armé para vender. <b>Es el que construí para mi negocio primero</b>, porque lo necesitaba yo. Las ocho piezas salieron de ahí: de tener que resolver mi propia captación, mi propio closing y mi propia entrega, con márgenes reales y sin nadie a quien echarle la culpa.</p>
+      </div>
+    </div>
+
+    <div class="bridge">
+      <p>El mismo sistema que usé para mí, lo usé <em>con ellos</em>.</p>
+    </div>
+
+    <div class="sublab">02 · En negocios de otros founders</div>
+
+    <div class="cases">
+      <div class="case">
+        <span class="who">Founder · Clínica</span>
+        <div class="jump"><span class="from">$3k</span><span class="arw">→</span><span class="to">$50k</span></div>
+        <p>al mes, con <b>sistemas de adquisición y recompra</b>. El paciente no era el problema: el problema era que nadie lo traía de vuelta.</p>
+      </div>
+      <div class="case">
+        <span class="who">Founder · Moda</span>
+        <div class="jump"><span class="from">8%</span><span class="arw">→</span><span class="to">36%</span></div>
+        <p>de tasa de conversión en los últimos 3 meses. <b>Menos gasto y más rentabilidad</b>: creía que la solución era meterle más plata a la captación.</p>
+      </div>
+      <div class="case">
+        <span class="who">Founder · Agencia</span>
+        <div class="jump"><span class="from">$1.000</span><span class="arw">→</span><span class="to">$3.500</span></div>
+        <p>de ticket, <b>más porcentaje en el nicho</b>. Mismo servicio, mismas manos — con sistemas debajo que lo sostienen.</p>
+      </div>
+      <div class="case">
+        <span class="who">Founder · Industrial</span>
+        <div class="jump"><span class="to">50%</span></div>
+        <p>de sus cierres históricos ya eran <b>un mismo perfil de cliente</b>, y nadie lo había nombrado. Dos socios con contactos y experiencia, sin saber por qué no vendían.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 CÓMO -->
+  <section>
+    <div class="band"><span class="n">[ 09 ]</span></div>
+    <h2>Cómo<br>lo hacemos</h2>
+    <p class="lead">Seis cosas. Ninguna es una promesa nueva: es exactamente lo que reciben los clientes que ya están adentro.</p>
+
+    <div class="steps">
+      <div class="st2"><span class="h">12 sesiones semanales de desbloqueo</span><p>Traes el problema real de esa semana, lo miramos juntos y sales con la decisión tomada. No con tarea de investigar.</p></div>
+      <div class="st2"><span class="h">Diagnóstico con tus propios números</span><p>Antes de proponerte nada, te devuelvo tu negocio en cifras: dónde está el margen, dónde el cuello y qué te está costando no verlo.</p></div>
+      <div class="st2"><span class="h">El mapa de tu sistema</span><p>Las piezas marcadas una por una: <b>lo que ya existe</b> en tu negocio y <b>lo que hay que construir</b>. Casi nunca partes de cero.</p></div>
+      <div class="st2"><span class="h">Roadmap de 12 semanas en 3 fases</span><p>Cada fase termina en un resultado medible. El retorno no espera al final: el primero llega en la semana 3.</p></div>
+      <div class="st2"><span class="h">Métricas y claridad semanal</span><p>Revisión semana a semana para que te enfoques solo en lo que genera leverage real, y no en lo que se siente productivo.</p></div>
+      <div class="st2"><span class="h">Tu negocio documentado en Notion</span><p>Queda en tu empresa, operado por ti. Sin retainer y sin depender de mí cuando esto termine.</p></div>
+    </div>
+  </section>
+
+  <!-- 09 MICRO-WIN -->
+  <section>
+    <div class="band"><span class="n">[ 10 ]</span></div>
+    <h2>Cómo sabes<br>que está <em>funcionando</em></h2>
+    <p class="lead">Cada fase termina en un resultado medible, no en una sensación de avance. Tres micro-wins en doce semanas, y el primero llega antes de que termines de pagar.</p>
+
+    <div class="g3">
+      <div class="box">
+        <span class="lab">Semanas 1 a 4</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <rect class="dotf" x="14" y="58" width="12" height="12"/>
+          <rect class="dotf" x="34" y="54" width="12" height="16"/>
+          <rect class="hotf" x="54" y="44" width="12" height="26"/>
+          <text class="lblh" x="52" y="36">S3</text>
+        </svg>
+        <h3>Sabes a quién decirle que no</h3>
+        <p>Criterios de calificación operando. Dejas de gastar horas en gente que nunca iba a comprar.</p>
+      </div>
+      <div class="box">
+        <span class="lab">Semanas 5 a 8</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="st" d="M14 62 H54 V50 H94"/>
+          <path class="hot" d="M94 50 H134 V34 H180"/>
+          <circle class="hotf" cx="180" cy="34" r="4"/>
+          <text class="lblh" x="140" y="26">S6</text>
+        </svg>
+        <h3>Llegan reuniones por proceso</h3>
+        <p>No porque saliste a buscarlas esa semana, sino porque el sistema las trajo.</p>
+      </div>
+      <div class="box">
+        <span class="lab">Semanas 9 a 12</span>
+        <svg class="viz" viewBox="0 0 200 76" aria-hidden="true">
+          <path class="dim" d="M6 70 H194"/>
+          <path class="hot" d="M14 66 C50 60 70 40 104 36 C138 32 160 24 186 18"/>
+          <path class="st" style="stroke-dasharray:3 3" d="M104 36 V70"/>
+          <circle class="hotf" cx="186" cy="18" r="4"/>
+          <text class="lbl" x="106" y="66">tú gestionas</text>
+        </svg>
+        <h3>El pipeline sigue vivo sin ti</h3>
+        <p>Puedes entrar a ejecutar un proyecto sin que la venta siguiente se congele.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 PREGUNTA + PRECIO -->
+  <section id="empezar">
+    <div class="band"><span class="n">[ 11 ]</span></div>
+    <h2>Cómo<br>empezamos</h2>
+
+    <div class="ask">
+      <p class="q">Del 1 al 10, ¿qué tan importante es para ti resolver esto en los próximos 3 meses?</p>
+      <p>Si es un 8 o más, lo que viene te sirve. <b>Si es menos, no gastes tu plata todavía</b> — anda a la comunidad, mira los videos y vuelve cuando esto sea prioridad de verdad. Esto funciona con founders que se meten, no con founders que lo intentan.</p>
+    </div>
+
+    <p class="lead" style="margin-top:34px">Tu facturación de hoy define por dónde entras. No es capricho: es lo que cada etapa puede sostener y, sobre todo, aprovechar. Meterte en el escalón equivocado es plata botada.</p>
+
+    <div class="plans">
+      <div class="plan">
+        <span class="gate">Facturas menos de $2.000 / mes</span>
+        <span class="nm">Desafío 30D</span>
+        <span class="amt">Gratis<span class="per" style="display:inline"> · primer mes</span></span>
+        <span class="own-tag">Construido para ti</span>
+        <p>El primer mes completo de la comunidad, sin costo: todos los videos y plantillas de cada pieza. <b>Después $47 al mes</b> si te quedas. Lo que no tienes acá es el uno a uno: qué usar, cuándo y a qué nivel para tu caso.</p>
+      </div>
+
+      <div class="plan core">
+        <span class="gate">Facturas entre $2.000 y $5.000 / mes</span>
+        <span class="nm">Consultoría 1:1</span>
+        <span class="amt">$2.000<span class="per" style="display:inline"> /3 meses</span></span>
+        <span class="own-tag">Construido contigo</span>
+        <p>Las 8 piezas construidas sobre tu negocio, con desbloqueo semanal, roadmap propio y seguimiento por WhatsApp. <b>$1.500 si decides en la llamada.</b> En 2 pagos, 3 con recargo, o cuotas.</p>
+      </div>
+
+      <div class="plan">
+        <span class="gate">Facturas más de $5.000 / mes</span>
+        <span class="nm">Revenue share</span>
+        <span class="amt">%<span class="per" style="display:inline"> de facturación</span></span>
+        <span class="own-tag">Construimos en conjunto</span>
+        <p>Entro a la operación y crecemos juntos, por porcentaje. <b>Se desbloquea solo después de la consultoría</b> — no entro a un negocio cuyas fases no conozco.</p>
+      </div>
+    </div>
+
+    <p class="fine"><b>Partimos con un diagnóstico de 45 minutos.</b> Conversamos y vemos si tu negocio tiene leverage de verdad: dónde está la palanca y cuánto peso podría mover. Sales con tu cuello de botella con nombre y apellido, trabajemos juntos después o no.</p>
+
+    <div class="cta-row">
+      <a class="btn" href="#empezar">Agendar diagnóstico</a>
+      <a class="btn ghost" href="#empezar">Entrar al Desafío 30D gratis</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>[ PRIVATE BUILD ]</span>
+    <span>[ AI LEVERAGE ]</span>
+    <span>@privatebuild.os</span>
+  </footer>
+
+</div>
+</div>
+
+</body>
+</html>
