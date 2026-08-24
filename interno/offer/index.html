@@ -5,34 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Private Build — Consultoría</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0B0C0F">
+<meta name="theme-color" content="#F7F5F2">
 <meta property="og:title" content="Private Build — Consultoría">
 <meta property="og:description" content="No es trabajar más. Afinar la base y apalancarte: sistemas, claridad + IA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0B0C0F; --s1:#14161B; --s2:#1A1D24; --s3:#20242C;
-    --line:#252932; --line-2:#1B1E25;
-    --ink:#F4F3F1; --ink-2:#A8A5A0; --ink-3:#8A8781;
-    --ember:#FF4D1C; --live:#32D74B;
-    --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
-    --mono:ui-monospace,"SF Mono",Menlo,"Andale Mono",monospace;
+    --bg:#F7F5F2; --s1:#FFFFFF; --s2:#F0EDE8; --s3:#FFF3F1;
+    --line:#E4DDD4; --line-2:#EFEAE3;
+    --ink:#1A1A1A; --ink-2:#5C554E; --ink-3:#6E655A;
+    --ember:#E0342F; --ember-txt:#B8241F; --live:#1E8A5C;
+    --display:'DM Sans',-apple-system,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:'DM Mono',ui-monospace,"SF Mono",Menlo,monospace;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%;overflow:hidden}
   body{
     background:
-      radial-gradient(56% 40% at 2% 0%, rgba(255,255,255,.06), transparent 62%),
-      radial-gradient(48% 36% at 100% 8%, rgba(255,77,28,.11), transparent 60%),
-      linear-gradient(180deg,#17171A 0%, #0B0C0F 40%, #000 100%);
+      radial-gradient(1100px 620px at 10% -8%, rgba(224,52,47,.055), transparent 62%),
+      radial-gradient(900px 560px at 94% 2%, rgba(224,52,47,.035), transparent 60%),
+      linear-gradient(180deg,#FBF9F7 0%, #F7F5F2 44%, #F1EDE8 100%);
+    background-attachment:fixed;
     color:var(--ink); font-family:var(--display); line-height:1.4;
     -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent;
   }
-  body::after{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:60;
-    mix-blend-mode:overlay;opacity:.05;
-    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
-  }
-
   /* ---------- SLIDES ---------- */
   .deck{position:relative;height:100%;width:100%}
   .slide{
@@ -48,7 +46,7 @@
   /* ---------- TIPOGRAFÍA ---------- */
   .eyebrow{font-family:var(--mono);font-size:clamp(10px,1.05vw,12px);letter-spacing:.16em;
     text-transform:uppercase;color:var(--ink-3);margin-bottom:clamp(14px,2vh,22px);display:block}
-  .eyebrow.hot{color:var(--ember)}
+  .eyebrow.hot{color:var(--ember-txt)}
   h1{font-size:clamp(38px,7.4vw,104px);font-weight:700;letter-spacing:-.04em;line-height:.92;
     text-transform:uppercase;overflow-wrap:break-word}
   h2{font-size:clamp(28px,4.6vw,62px);font-weight:700;letter-spacing:-.038em;line-height:.98;
@@ -70,7 +68,7 @@
   .box.ko{border-style:dashed;background:transparent}
   .lab{font-family:var(--mono);font-size:clamp(9px,.85vw,10.5px);letter-spacing:.14em;
     text-transform:uppercase;color:var(--ink-3)}
-  .box.hot .lab{color:var(--ember)}
+  .box.hot .lab{color:var(--ember-txt)}
   .box h3{font-size:clamp(15px,1.45vw,20px);font-weight:700;letter-spacing:-.025em;line-height:1.15}
   .box p{font-size:clamp(13px,1.15vw,16px);color:var(--ink-2);line-height:1.34}
   .box p b{color:var(--ink);font-weight:600}
@@ -78,9 +76,9 @@
   .viz .st{stroke:var(--ink-3);fill:none;stroke-width:1.5}
   .viz .hot{stroke:var(--ember);fill:none;stroke-width:2}
   .viz .hotf{fill:var(--ember)} .viz .dotf{fill:var(--ink-3)}
-  .viz .dim{stroke:var(--line);fill:none;stroke-width:1}
+  .viz .dim{stroke:#D8D0C6;fill:none;stroke-width:1}
   .viz .lbl{fill:var(--ink-3);font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
-  .viz .lblh{fill:var(--ember);font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
+  .viz .lblh{fill:var(--ember-txt);font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase}
 
   /* ---------- PIEZAS ---------- */
   .blk{border:1px solid var(--line);border-radius:11px;background:var(--s1);
@@ -90,7 +88,7 @@
   .blk .ia{font-size:clamp(11.5px,1vw,14px);color:var(--ink-2);line-height:1.3;margin-top:auto}
   .blk.wide{grid-column:1/-1;border-color:var(--ember);background:var(--s3);flex-direction:row;
     align-items:center;gap:clamp(12px,1.6vw,26px);flex-wrap:wrap}
-  .blk.wide .no,.blk.wide .nm{color:var(--ember)}
+  .blk.wide .no{color:var(--ember-txt)} .blk.wide .nm{color:var(--ember)}
   .blk.wide .ia{margin-top:0;flex:1;min-width:240px}
 
   /* ---------- CASOS ---------- */
@@ -129,7 +127,7 @@
   .vshead{padding:clamp(11px,1.2vw,17px) clamp(14px,1.5vw,22px);border-bottom:1px solid var(--line);
     font-family:var(--mono);font-size:clamp(9px,.85vw,10.5px);letter-spacing:.14em;
     text-transform:uppercase;color:var(--ink-3)}
-  .vscol.si .vshead{color:var(--ember);border-color:color-mix(in srgb,var(--ember) 30%,transparent)}
+  .vscol.si .vshead{color:var(--ember-txt);border-color:color-mix(in srgb,var(--ember) 30%,transparent)}
   .vsitem{padding:clamp(10px,1.15vw,16px) clamp(14px,1.5vw,22px);border-bottom:1px solid var(--line-2)}
   .vsitem:last-child{border-bottom:0}
   .vsitem b{display:block;font-size:clamp(13.5px,1.25vw,17px);font-weight:700;letter-spacing:-.02em;margin-bottom:3px}
@@ -153,7 +151,7 @@
   .steps .s{display:grid;grid-template-columns:30px 1fr;gap:14px;padding:clamp(10px,1.3vh,16px) 0;
     border-bottom:1px solid var(--line-2);font-size:clamp(14px,1.3vw,19px);color:var(--ink-2);line-height:1.3}
   .steps .s:first-child{border-top:1px solid var(--line-2)}
-  .steps .k{font-family:var(--mono);font-size:11px;color:var(--ember);padding-top:4px}
+  .steps .k{font-family:var(--mono);font-size:11px;color:var(--ember-txt);padding-top:4px}
   .steps b{color:var(--ink);font-weight:600}
 
   .ask{font-size:clamp(26px,4vw,56px);font-weight:700;letter-spacing:-.035em;line-height:1.08;
@@ -161,7 +159,7 @@
   .ask em{font-style:normal;color:var(--ember)}
 
   /* ---------- CHROME ---------- */
-  .bar{position:fixed;left:0;right:0;bottom:0;height:2px;background:var(--line-2);z-index:50}
+  .bar{position:fixed;left:0;right:0;bottom:0;height:3px;background:var(--line-2);z-index:50}
   .bar i{display:block;height:100%;background:var(--ember);width:0;transition:width .28s ease}
   .hud{position:fixed;bottom:clamp(14px,2.4vh,26px);left:0;right:0;z-index:50;
     display:flex;justify-content:space-between;align-items:center;
@@ -169,10 +167,10 @@
     font-family:var(--mono);font-size:clamp(9.5px,.9vw,11px);letter-spacing:.14em;
     text-transform:uppercase;color:var(--ink-3)}
   .hud .nav{pointer-events:auto;display:flex;gap:8px}
-  .hud button{background:transparent;border:1px solid var(--line);color:var(--ink-3);
+  .hud button{background:var(--s1);border:1px solid var(--line);color:var(--ink-2);
     border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:14px;line-height:1;
     font-family:var(--display);transition:border-color .15s,color .15s}
-  .hud button:hover,.hud button:focus-visible{border-color:var(--ember);color:var(--ember);outline:none}
+  .hud button:hover,.hud button:focus-visible{border-color:var(--ember);color:var(--ember-txt);outline:none}
   .zone{position:fixed;top:0;bottom:44px;width:22%;z-index:40;cursor:pointer;background:transparent}
   .zone.l{left:0} .zone.r{right:0}
   @media (max-width:760px){ .zone{width:32%} .vs{grid-template-columns:1fr} .mine{grid-template-columns:1fr;gap:14px} }
@@ -344,7 +342,7 @@
     <span class="eyebrow hot">09 · Primero en el mío</span>
     <h2>Lo probé<br>en mi negocio<br>antes que en<br>el <em>tuyo</em></h2>
     <div class="mine">
-      <div><span class="amt">$300k</span><span class="u">USD en ventas · 2 años</span><span class="u" style="color:var(--ember)">40% de margen</span></div>
+      <div><span class="amt">$300k</span><span class="u">USD en ventas · 2 años</span><span class="u" style="color:var(--ember-txt)">40% de margen</span></div>
       <div>
         <h3>Mi propia agencia, con estos mismos sistemas</h3>
         <p>No es un método que leí y armé para vender. <b>Es el que construí para mi negocio primero</b>, porque lo necesitaba yo. Las ocho piezas salieron de ahí.</p>
