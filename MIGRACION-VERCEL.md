@@ -9,7 +9,7 @@ capturar data de verdad.
 
 | Hoy (GitHub Pages) | Con Vercel |
 |---|---|
-| `pvt-build.github.io/privatebuild/diagnostico/` | `privatebuild-os.vercel.app/diagnostico` |
+| `pvt-build.github.io/privatebuild/diagnostico/` | `privatebuild.vercel.app/diagnostico` |
 | Solo archivos estáticos | Funciones en `/api` → escribir en Supabase sin exponer llaves |
 | Sin variables de entorno | Llaves de Supabase y PostHog fuera del código |
 | Sin analítica de verdad | Web Analytics + PostHog |
@@ -21,7 +21,7 @@ capturar data de verdad.
    `pvt-build/privatebuild`.
 2. **Framework Preset: Other.** No hay build. Root Directory: `./`.
    Build Command y Output Directory se dejan vacíos.
-3. **Deploy.** Queda en `privatebuild-os.vercel.app`.
+3. **Deploy.** Queda en `privatebuild.vercel.app`.
 4. **Comprobar las rutas:**
    - `/` → el nivelador de siempre
    - `/diagnostico` → el quiz con las tres salidas
@@ -48,9 +48,9 @@ El parámetro `from` identifica de dónde llegó cada lead y viaja con él hasta
 Notion:
 
 ```
-privatebuild-os.vercel.app/diagnostico?from=ig
-privatebuild-os.vercel.app/diagnostico?from=yt
-privatebuild-os.vercel.app/diagnostico?from=private
+privatebuild.vercel.app/diagnostico?from=ig
+privatebuild.vercel.app/diagnostico?from=yt
+privatebuild.vercel.app/diagnostico?from=private
 ```
 
 ## Medición: qué hay y qué falta

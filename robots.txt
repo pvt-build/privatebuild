@@ -1,3 +1,9 @@
+# Private Build
+# El diagnóstico y la raíz se indexan. Lo interno y los moldes de cliente, no.
+
 User-agent: *
+Allow: /
 Disallow: /interno/
 Disallow: /consultoria/
+
+Sitemap: https://privatebuild.vercel.app/sitemap.xml
