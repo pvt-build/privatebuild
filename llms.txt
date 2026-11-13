@@ -1,0 +1,47 @@
+# Private Build
+
+> Consultoría de tres meses para founders que ya tienen un negocio vendiendo.
+> Se ordenan las piezas del negocio y se apalancan con IA. El sistema queda
+> instalado en el negocio del founder, no se va cuando termina la consultoría.
+
+## Qué es
+
+Private Build no es una agencia ni un curso. Es consultoría de desbloqueo
+semanal: el founder trae el problema real de esa semana y sale con la decisión
+tomada. No se implementa por él, se construye con él.
+
+La tesis: casi ningún founder estancado necesita un insumo más (un vendedor,
+más presupuesto, más disciplina). Necesita sistema.
+
+## Las 8 piezas
+
+1. Foundations — el backend del negocio y la IA leyendo sus datos
+2. ICP / Avatar — quién compra de verdad, no quién el founder cree
+3. Offer — market fit, capas y precio
+4. Adquisición — contenido, funnel y cold
+5. Captura — setting y CRM sin que se caiga nadie
+6. Closing — objeciones y análisis de llamadas
+7. Delivery — dónde empieza y termina el servicio
+8. Sistema y loop — el backend que devuelve lo que pasa en cada venta
+
+## Para quién es
+
+Founders con servicio o producto propio que YA vende, negocio digital, que
+quieren apalancarse antes que contratar. Típicamente entre $3.000 y $10.000
+USD al mes.
+
+## Para quién no es
+
+Quien quiere que se lo hagan por él, quien quiere automatizar antes de tener
+bases, y quien todavía no vende.
+
+## Páginas
+
+- /: qué es Private Build y por qué
+- /diagnostico: diagnóstico gratuito de 5 preguntas que ubica al founder en
+  una de cuatro etapas (Skiller, Operator, Builder, Founder) y le devuelve sus
+  cuellos de botella y su siguiente paso
+
+## Contacto
+
+WhatsApp: +56 9 7804 8922
