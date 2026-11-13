@@ -1,0 +1,12 @@
+{
+  "name": "Private Build — Diagnóstico",
+  "short_name": "Diagnóstico",
+  "description": "Descubre en qué etapa está tu negocio y cuál es tu siguiente paso.",
+  "start_url": "/diagnostico?from=app",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "lang": "es"
+}
