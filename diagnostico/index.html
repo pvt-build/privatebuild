@@ -10,6 +10,12 @@
 <meta property="og:description" content="Diagnóstico gratis en 40 segundos. Tu etapa, tus cuellos de botella y tu siguiente paso.">
 <meta property="og:site_name" content="Private Build">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Diagnóstico">
+<link rel="manifest" href="/manifest.webmanifest">
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -2689,6 +2695,7 @@ function startNivelador() {
   document.getElementById('nivResult').classList.remove('active');
   document.getElementById('nivBack').style.display = 'none';
   populateNivCountrySelect();
+  pvtTrack('quiz_start');
   renderNivQuestion();
 }
 
@@ -2714,6 +2721,7 @@ let nivAnswers = [];
 function nivAnswer(score, optIdx) {
   nivScores.push(score);
   nivAnswers.push(nivQuestions[nivStep].opts[optIdx].text);
+  pvtTrack('quiz_answer', { pregunta: nivStep + 1, valor: score });
   nivStep++;
   if (nivStep < nivQuestions.length) {
     renderNivQuestion();
@@ -2799,6 +2807,8 @@ function submitNivLead(event) {
     canal: pvtCanal()
   });
 
+  pvtTrack('lead_submit', { ruta: pvtRuta() });
+
   // Ya capturamos el lead — ahora sí mostramos el análisis y la etapa
   document.getElementById('nivCapture').classList.remove('active');
   proceedToLevelUp();
@@ -2822,9 +2832,17 @@ document.addEventListener('click', function(e) {
     });
     localStorage.setItem('pb_cta_log', JSON.stringify(log));
   } catch (err) {}
+  pvtTrack('cta_click', {
+    ruta: (typeof pvtRuta === 'function' && nivScores.length) ? pvtRuta() : null,
+    destino: link.href,
+    texto: link.textContent.trim().slice(0, 80)
+  });
 });
 
+pvtTrack('diagnostico_view');
+
 function proceedToLevelUp() {
+  pvtTrack('result_view', { ruta: pvtRuta() });
   var stageKey = window._nivStageKey;
   var s = nivStages[stageKey];
 
@@ -2978,6 +2996,32 @@ function pvtRuta() {
   if (ingreso >= 4) return 'equity';
   if (ingreso === 3 || stage === 'builder' || stage === 'founder') return 'programa';
   return 'mision0';
+}
+
+// ─── MEDICIÓN ─────────────────────────────────
+// No amarrada a un proveedor. Cada evento se encola y se guarda local siempre,
+// y además se manda a PostHog solo si PostHog está cargado. Sin proveedor
+// configurado no rompe nada: los eventos quedan en localStorage bajo
+// "pb_eventos" y se pueden revisar desde la consola.
+function pvtTrack(evento, props) {
+  if (!window._pvtEventos) window._pvtEventos = [];
+  var payload = {
+    canal: pvtCanal(),
+    etapa: window._nivStageKey || null,
+    ts: new Date().toISOString()
+  };
+  for (var k in (props || {})) payload[k] = props[k];
+  window._pvtEventos.push([evento, payload]);
+  try {
+    if (window.posthog && typeof window.posthog.capture === 'function') {
+      window.posthog.capture(evento, payload);
+    }
+  } catch (e) {}
+  try {
+    var log = JSON.parse(localStorage.getItem('pb_eventos') || '[]');
+    log.push([evento, payload]);
+    localStorage.setItem('pb_eventos', JSON.stringify(log.slice(-200)));
+  } catch (e) {}
 }
 
 function pvtUrl(key, waMsg) {

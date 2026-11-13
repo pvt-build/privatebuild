@@ -1,11 +1,18 @@
 name: Sync Notion → Private Build
 
+# DESACTIVADO AL MIGRAR A VERCEL (no borrado, se puede revivir).
+#
+# Este workflow pusheaba index.html a main cada hora. Con Vercel conectado al
+# repo, cada push dispara un deploy: el bot estaría redesplegando el sitio 24
+# veces al día y pisando con la versión de Notion lo que construyamos a mano.
+#
+# Queda solo el disparo manual. Para volver a la sincronización automática,
+# descomenta el bloque "schedule".
 on:
-  # Ejecuta automáticamente cada hora
-  schedule:
-    - cron: "0 * * * *"
+  # schedule:
+  #   - cron: "0 * * * *"
 
-  # O manualmente desde GitHub
+  # Disparo manual desde la pestaña Actions
   workflow_dispatch:
     inputs:
       phase:
@@ -13,11 +20,11 @@ on:
         required: false
         default: ""
 
-  # O cuando haces push al repo (para cambios manuales al HTML)
-  push:
-    branches: [main]
-    paths-ignore:
-      - "index.html"   # evita loop infinito
+  # El disparo por push queda fuera: con Vercel, un push del bot es un deploy.
+  # push:
+  #   branches: [main]
+  #   paths-ignore:
+  #     - "index.html"
 
 jobs:
   sync:
