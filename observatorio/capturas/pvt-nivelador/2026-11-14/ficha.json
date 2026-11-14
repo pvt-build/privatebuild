@@ -1,0 +1,44 @@
+{
+  "bytes": 130711,
+  "stack": [
+    "WhatsApp"
+  ],
+  "palancas": [
+    "gamificacion"
+  ],
+  "campos_formulario": [
+    {
+      "type": "text",
+      "placeholder": "Tu nombre"
+    },
+    {
+      "type": "tel",
+      "placeholder": "Tu WhatsApp",
+      "inputmode": "numeric"
+    },
+    {
+      "type": "text",
+      "placeholder": "@tu.instagram"
+    },
+    {
+      "type": "number",
+      "placeholder": "200"
+    }
+  ],
+  "preguntas": [
+    "¿Cómo están hoy tus sistemas?",
+    "¿Cómo te lo enviamos?",
+    "¿Cuál es el valor de tus servicios actualmente?",
+    "en el mismo lugar?"
+  ],
+  "titular": "Private Build — Sistemas con IA para founders que quieren escalar",
+  "lineas_texto": 95,
+  "slug": "pvt-nivelador",
+  "url": "https://privatebuild.vercel.app/",
+  "fecha": "2026-11-14",
+  "dueno": "mio",
+  "categoria": "quiz-lander",
+  "nichos": [
+    "founders de servicios"
+  ]
+}

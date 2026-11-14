@@ -1,0 +1,44 @@
+{
+  "bytes": 139480,
+  "stack": [
+    "WhatsApp"
+  ],
+  "palancas": [
+    "barra de progreso",
+    "gamificacion"
+  ],
+  "campos_formulario": [
+    {
+      "type": "text",
+      "placeholder": "tunegocio"
+    },
+    {
+      "type": "tel",
+      "inputmode": "numeric"
+    },
+    {
+      "type": "number",
+      "placeholder": "200"
+    }
+  ],
+  "preguntas": [
+    "Diagnóstico Private Build — ¿En qué etapa está tu negocio?",
+    "¿Cómo están hoy tus sistemas?",
+    "¿Cuál es tu Instagram?",
+    "¿A qué WhatsApp te lo envío?",
+    "¿Cuál es el valor de tus servicios actualmente?",
+    "en el mismo lugar?"
+  ],
+  "titular": "Diagnóstico Private Build — ¿En qué etapa está tu negocio?",
+  "lineas_texto": 99,
+  "slug": "pvt-diagnostico",
+  "url": "https://privatebuild.vercel.app/diagnostico",
+  "fecha": "2026-11-14",
+  "dueno": "mio",
+  "categoria": "quiz-lander",
+  "nichos": [
+    "founders de servicios",
+    "consultores",
+    "agencias"
+  ]
+}

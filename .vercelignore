@@ -1,0 +1,13 @@
+# Lo que vive en el repo pero NO debe publicarse.
+# Vercel sirve todo archivo estático por defecto: sin esto, las capturas de
+# landers de la competencia quedarían colgando de tu dominio.
+
+observatorio/
+versiones-antiguas/
+archive/
+.privatebuild/
+index.backup.html
+serve.py
+ESTRUCTURA.md
+MIGRACION-VERCEL.md
+scripts/

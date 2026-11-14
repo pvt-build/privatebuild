@@ -1,0 +1,47 @@
+{
+  "bytes": 547176,
+  "stack": [
+    "GoHighLevel",
+    "Meta Pixel",
+    "WhatsApp"
+  ],
+  "palancas": [
+    "barra de progreso",
+    "escasez por tiempo",
+    "gamificacion",
+    "gratis / sin tarjeta"
+  ],
+  "campos_formulario": [
+    {
+      "placeholder": "Nombre"
+    },
+    {
+      "type": "email",
+      "placeholder": "Correo electrónico"
+    },
+    {
+      "type": "tel",
+      "placeholder": "Número de WhatsApp"
+    },
+    {
+      "placeholder": "Usuario de Instagram"
+    }
+  ],
+  "preguntas": [
+    "Me interesa, pero ¿cómo funciona?",
+    "Antes de explicarte: ¿qué te impide hoy llegar a $50k/mes?"
+  ],
+  "titular": "Si eres coach, consultor, infoproductor o tienes un negocio de servicios",
+  "lineas_texto": 192,
+  "slug": "virtus-planescalado",
+  "url": "https://virtusacquisition.com/planescalado",
+  "fecha": "2026-11-14",
+  "dueno": "competencia",
+  "categoria": "quiz-lander",
+  "nichos": [
+    "coaches",
+    "consultores",
+    "infoproductores",
+    "agencias"
+  ]
+}

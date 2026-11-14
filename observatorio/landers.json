@@ -1,0 +1,60 @@
+{
+  "_nota": "Índice del observatorio. Cada entrada es una lander que se vigila en el tiempo. Añadir una es agregar un objeto acá y correr snapshot.py.",
+  "categorias": {
+    "quiz-lander": "Califica con preguntas antes de pedir datos. El dato se gana respondiendo.",
+    "lowticket-lander": "Vende un producto de entrada barato. Checkout directo, sin llamada.",
+    "thankyou-page": "Lo que ve el lead después de convertir. Donde se ordena el siguiente paso."
+  },
+  "landers": [
+    {
+      "slug": "virtus-planescalado",
+      "nombre": "Virtus Acquisition — Plan de escalado",
+      "url": "https://virtusacquisition.com/planescalado",
+      "dueno": "competencia",
+      "categoria": "quiz-lander",
+      "nichos": ["coaches", "consultores", "infoproductores", "agencias"],
+      "idioma": "es",
+      "mecanica": "5 pasos con XP y recursos desbloqueables. 3 de calificación + 2 de datos.",
+      "regalo": "Plan de escalado + calculadora de cuello de botella + clase de 1:40",
+      "destino": "GoHighLevel. Segmenta en LeadCualificadoWeb / LeadNoCualificado.",
+      "visto_en": "anuncio de Instagram (paid_social)",
+      "notas": "El mejor recurso que tiene: muestra el índice de la clase BLOQUEADA antes de pedir el dato."
+    },
+    {
+      "slug": "pvt-diagnostico",
+      "nombre": "Private Build — Diagnóstico de cuello de botella",
+      "url": "https://privatebuild.vercel.app/diagnostico",
+      "local": "diagnostico/index.html",
+      "dueno": "mio",
+      "categoria": "quiz-lander",
+      "nichos": ["founders de servicios", "consultores", "agencias"],
+      "idioma": "es",
+      "mecanica": "6 preguntas, captura en dos pasos (Instagram, luego WhatsApp).",
+      "regalo": "Diagnóstico por WhatsApp: etapa y dos cuellos de botella",
+      "destino": "Bajo $1.500/mes a Misión 0. El resto confirma por WhatsApp.",
+      "notas": "El destino de la bio de Instagram y del tráfico pagado."
+    },
+    {
+      "slug": "pvt-nivelador",
+      "nombre": "Private Build — Nivelador",
+      "url": "https://privatebuild.vercel.app/",
+      "local": "index.html",
+      "dueno": "mio",
+      "categoria": "quiz-lander",
+      "nichos": ["founders de servicios"],
+      "idioma": "es",
+      "mecanica": "El quiz original, 5 preguntas. Tiene links circulando por WhatsApp.",
+      "notas": "No tocar hasta que el tráfico migre al diagnóstico."
+    },
+    {
+      "slug": "pvt-mision-0",
+      "nombre": "Private Build — Misión 0",
+      "url": "PENDIENTE",
+      "dueno": "mio",
+      "categoria": "lowticket-lander",
+      "nichos": ["founders bajo $1.500/mes"],
+      "idioma": "es",
+      "notas": "Falta la URL. Es el destino de los que no califican para el programa."
+    }
+  ]
+}

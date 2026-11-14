@@ -1,0 +1,3702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Build — Sistemas con IA para founders que quieren escalar</title>
+<meta name="description" content="Consultoría de 3 meses para founders que ya venden: ordenamos oferta, adquisición, cierre y entrega, y los apalancamos con IA. El sistema queda instalado en tu negocio, no se va contigo.">
+<link rel="canonical" href="https://privatebuild.vercel.app/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Private Build">
+<meta property="og:url" content="https://privatebuild.vercel.app/">
+<meta property="og:title" content="Private Build — Sistemas con IA para founders">
+<meta property="og:description" content="No te falta un insumo, te falta sistema. Consultoría de 3 meses para founders que ya venden.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Private Build — Sistemas con IA para founders">
+<meta name="twitter:description" content="No te falta un insumo, te falta sistema. Consultoría de 3 meses para founders que ya venden.">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="/manifest.webmanifest">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://privatebuild.vercel.app/#private-build",
+  "name": "Private Build",
+  "url": "https://privatebuild.vercel.app",
+  "description": "Consultoría de tres meses para founders con un negocio que ya vende: se ordenan oferta, adquisición, captura, cierre y entrega, y se apalancan con IA. El sistema queda instalado en el negocio del founder.",
+  "slogan": "Afinar la base y apalancarte. Sistemas, claridad + IA.",
+  "inLanguage": "es",
+  "areaServed": { "@type": "Place", "name": "Latinoamérica y España" },
+  "serviceType": [
+    "Consultoría de negocios",
+    "Sistematización de procesos",
+    "Implementación de IA en pymes",
+    "Automatización comercial"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "Patricio Rubio",
+    "jobTitle": "Founder y consultor de sistemas con IA"
+  },
+  "knowsAbout": [
+    "ICP y avatar de cliente",
+    "Diseño de oferta y pricing",
+    "Adquisición de clientes",
+    "CRM y calificación de leads",
+    "Cierre de ventas",
+    "Documentación de entrega",
+    "Agentes de IA aplicados a la operación"
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Backgrounds (brand depth hierarchy) */
+  --bg:    #0a0a0f;
+  --bg2:   #0f0f16;
+  --bg3:   #141420;
+  --bg4:   #1c1c2a;
+  --bg5:   #242435;
+  /* Borders */
+  --border:  #1e1e2e;
+  --border2: #2a2a3e;
+  --border3: #3a3a55;
+  /* Metallic scale */
+  --metal0: #606078;
+  --metal1: #8888a8;
+  --metal2: #b0b0d0;
+  --metal3: #d8d8f0;
+  --metal4: #f0f0ff;
+  /* Text hierarchy */
+  --text-primary:   #e8e8f8;
+  --text-secondary: #a0a0c0;
+  --text-muted:     #606080;
+  --text-disabled:  #404058;
+  /* Accents */
+  --red:      #e03535;
+  --red-glow: rgba(224,53,53,0.4);
+  --red-dim:  #a02020;
+  --green:      #38b068;
+  --green-glow: rgba(56,176,104,0.35);
+  --electric:        #4466ff;
+  --electric-bright: #6688ff;
+  --electric-glow:   rgba(68,102,255,0.4);
+  --gold:        #c8a84a;
+  --gold-bright: #ffe08a;
+  --gold-glow:   rgba(200,168,74,0.4);
+  --purple:      #7755ff;
+  --purple-glow: rgba(119,85,255,0.35);
+  /* Gradients */
+  --metal-grad:  linear-gradient(135deg, #6060a0 0%, #9898c8 20%, #d8d8f0 50%, #9898c8 80%, #6060a0 100%);
+  --metal-grad2: linear-gradient(90deg, #404060 0%, #8080a8 40%, #c0c0e0 50%, #8080a8 60%, #404060 100%);
+  --electric-grad: linear-gradient(135deg, #2244cc 0%, #4466ff 30%, #88aaff 50%, #4466ff 70%, #2244cc 100%);
+  --gold-grad: linear-gradient(135deg, #8a6a20 0%, #c8a84a 30%, #f0d88a 50%, #c8a84a 70%, #8a6a20 100%);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+/* El swipe lateral movía todo el documento en mobile. Se bloquea el eje X sin tocar el vertical. */
+html {
+  overflow-x:hidden;
+  max-width:100%;
+  overscroll-behavior-x:none;
+  touch-action:pan-y;
+}
+/* Doble tap sobre botones hacía zoom y dejaba el estado :hover pegado en touch */
+button, .niv-cta, .niv-calc-arrow, .niv-cases-tab, .niv-opt {
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    linear-gradient(rgba(46,46,62,0.4) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,46,62,0.4) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  position: relative;
+  color: var(--text-primary);
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: 100%;
+  overscroll-behavior-x: none;
+  /* scroll-behavior: smooth; — removed to avoid forced scroll after quiz */
+  cursor: default;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Old roadmap CSS archived → /archive/old-roadmap-css.txt */
+
+/* Animated background aurora */
+@keyframes auroraMove {
+  0% { transform: translate(0%, 0%) rotate(0deg); }
+  25% { transform: translate(10%, -5%) rotate(3deg); }
+  50% { transform: translate(-5%, 8%) rotate(-2deg); }
+  75% { transform: translate(-8%, -3%) rotate(4deg); }
+  100% { transform: translate(0%, 0%) rotate(0deg); }
+}
+@keyframes auroraMove2 {
+  0% { transform: translate(0%, 0%) rotate(0deg); }
+  33% { transform: translate(-12%, 6%) rotate(-4deg); }
+  66% { transform: translate(8%, -8%) rotate(3deg); }
+  100% { transform: translate(0%, 0%) rotate(0deg); }
+}
+
+/* Ember — la luz entra por una sola esquina y muere antes de la mitad */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(78% 52% at 4% 112%, rgba(255,77,28,.30), transparent 60%),
+    radial-gradient(56% 40% at 104% -8%, rgba(229,50,45,.14), transparent 58%);
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse 40% 30% at 30% 30%, rgba(255,255,255,0.02) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 35% at 70% 60%, rgba(255,255,255,0.015) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 25% at 50% 80%, rgba(255,255,255,0.01) 0%, transparent 70%);
+  animation: auroraMove 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#splash::after {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse 50% 40% at 40% 20%, rgba(255,255,255,0.02) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 35% at 70% 70%, rgba(255,255,255,0.015) 0%, transparent 60%);
+  animation: auroraMove2 25s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* clean — no overlays */
+
+/* ─── SPLASH SCREEN ──────────────────────── */
+#splash {
+  position:relative;
+  z-index:1;
+  min-height: 100vh;
+  min-height: 100dvh;
+  z-index: 1;
+  background:
+    linear-gradient(rgba(46,46,62,0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,46,62,0.25) 1px, transparent 1px),
+    radial-gradient(ellipse 120% 70% at 50% 30%, rgba(20,20,28,0.95) 0%, transparent 65%),
+    #050508;
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+#splash::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255,255,255,0.015) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 80% 20%, rgba(255,255,255,0.01) 0%, transparent 60%);
+  pointer-events: none;
+}
+.splash-inner {
+  text-align: center;
+  padding: 40px 24px 60px;
+  max-width: 720px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  min-height: calc(100vh - 100px);
+  min-height: calc(100dvh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* After quiz result, disable vertical centering and min-height to prevent dead space */
+.splash-inner.result-mode {
+  min-height: 0;
+  justify-content: flex-start;
+}
+#splash.result-mode {
+  min-height: 0;
+  height: auto;
+  overflow: visible;
+}
+#splash.result-mode::before,
+#splash.result-mode::after {
+  display: none !important;
+}
+/* Ensure body scrolls the full page in result mode */
+body.result-mode {
+  min-height: 0;
+}
+
+.splash-title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(52px, 9vw, 100px);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  background: linear-gradient(160deg,
+    #606080 0%,
+    #9090b0 12%,
+    #d0d0f0 28%,
+    #f4f4ff 48%,
+    #e0e0f8 58%,
+    #a8a8c8 76%,
+    #707090 90%,
+    #9090b0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 4px;
+  animation: titleShimmer 6s ease-in-out infinite;
+  background-size: 200% 100%;
+  position: relative;
+}
+
+@keyframes titleShimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+
+.splash-title-wrap {
+  position: relative;
+  margin-bottom: 16px;
+}
+.splash-tagline {
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 700;
+  color: var(--metal3);
+  line-height: 1.4;
+  margin: 12px 0 8px;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 20px rgba(255,255,255,0.06);
+}
+
+/* Las 12 áreas: la grilla ES el argumento. Ver todo lo que un negocio necesita
+   corriendo, junto y de una, es lo que produce el "me falta la mitad". */
+/* El intro no tenía ancho propio: cualquier hijo ancho (el marquee) lo estiraba
+   más allá de la pantalla y se llevaba el difuminado fuera de vista. */
+#nivIntro { width:100%; max-width:100%; }
+
+/* Loop lineal: el desfile no termina nunca, que es justo el mensaje —
+   para cada área del negocio hay un sistema. Los bordes se difuminan con mask
+   para que las cajas entren y salgan sin cortarse en seco. */
+.niv-sismarquee {
+  position:relative;
+  width:100%;
+  max-width:560px;
+  min-width:0;
+  align-self:stretch;
+  margin:24px auto 0;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  mask-image:linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+}
+.niv-sismarquee-track {
+  display:flex;
+  gap:8px;
+  width:max-content;
+  animation:sisMarquee 38s linear infinite;
+}
+@keyframes sisMarquee {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .niv-sismarquee-track { animation:none; }
+}
+.niv-sisbox {
+  flex:0 0 auto;
+  font-family:'Inter Tight',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.05em;
+  color:var(--text-secondary);
+  background:rgba(255,255,255,0.035);
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:2px;
+  padding:10px 18px;
+  text-align:center;
+  white-space:nowrap;
+}
+@media (hover:hover) {
+  .niv-sisbox:hover {
+    color:var(--text-primary);
+    border-color:rgba(255,106,61,0.45);
+    background:rgba(255,106,61,0.07);
+  }
+}
+.niv-donde {
+  font-size:clamp(14px,2.1vw,16px);
+  font-weight:700;
+  color:var(--text-primary);
+  margin-top:28px;
+  letter-spacing:0.01em;
+}
+@media(max-width:540px) {
+  .niv-sisbox { font-size:10px; padding:9px 14px; }
+  .niv-sismarquee-track { gap:7px; }
+}
+
+.splash-ctas {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.splash-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  font-family: 'Inter Tight', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.splash-btn-primary {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 0 0 1px var(--red-dim), 0 6px 30px var(--red-glow);
+}
+.splash-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 50%);
+}
+.splash-btn-primary:hover {
+  box-shadow: 0 0 0 1px var(--red), 0 8px 40px rgba(224,53,53,0.6);
+  transform: translateY(-2px);
+}
+
+/* [Dead CSS purged — brand alignment v2.0] */
+/* ─── NIVELADOR QUIZ ─────────────────────── */
+.niv-wrap { display:none; max-width:640px; width:100%; margin:0 auto; padding:0 16px; }
+.niv-wrap.active { display:flex; flex-direction:column; align-items:stretch; justify-content:flex-start; min-height:340px; }
+.niv-progress { display:flex; gap:4px; margin-bottom:32px; }
+.niv-progress-dot { flex:1; height:3px; background:var(--border); transition:background 0.3s; }
+.niv-progress-dot.done { background:var(--green); }
+.niv-progress-dot.current { background:var(--metal2); }
+.niv-question { font-family:'Inter Tight',sans-serif; font-size:clamp(20px,4vw,28px); font-weight:700; color:var(--metal3); margin-bottom:24px; line-height:1.4; text-align:center; }
+.niv-options { display:flex; flex-direction:column; gap:10px; }
+.niv-opt { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-left:3px solid transparent; padding:16px 20px; font-family:'Inter Tight',sans-serif; font-size:14px; color:var(--text-primary); cursor:pointer; transition:all 0.2s; text-align:left; line-height:1.4; }
+.niv-opt:hover { background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.18); border-left:3px solid var(--electric); transform:translateX(4px); }
+/* RESULT OVERLAY */
+/* El padre es flex+align-items:center, así que sin width el bloque tomaba su max-content
+   (440px) y se desbordaba en mobile. Con width:100% respeta el ancho real de la pantalla
+   y el tope de 440px deja el desktop igual que antes. */
+.niv-result { display:none; text-align:center; width:100%; max-width:440px; margin:0 auto; padding:0 18px; }
+.niv-result-tag { font-size:11px; font-weight:700; letter-spacing:0.4em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; }
+.niv-result-stage { font-size:clamp(44px,9vw,72px); font-weight:800; line-height:1; letter-spacing:-0.02em; margin-bottom:6px; }
+.niv-result-range { font-size:14px; color:var(--text-secondary); margin-bottom:24px; font-weight:600; }
+.niv-result-text { font-size:clamp(14px,1.8vw,16px); color:var(--text-primary); line-height:1.7; padding:0 4px; word-break:break-word; }
+.niv-ctas { display:flex; flex-direction:column; gap:10px; max-width:360px; margin:0 auto; }
+.niv-cta { display:flex; align-items:center; justify-content:center; gap:8px; padding:14px 20px; font-family:'Inter Tight',sans-serif; font-size:clamp(11px,1.8vw,13px); font-weight:600; letter-spacing:0.06em; text-decoration:none; cursor:pointer; border:none; transition:all 0.2s; flex-wrap:wrap; width:100%; max-width:360px; margin:0 auto; border-radius:2px; }
+.niv-cta:hover { transform:translateY(-2px); }
+/* ─── FLOATING PARTICLES ─────────────────── */
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(20px) scale(0.5); opacity: 0; }
+}
+.floating-particles { position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden; }
+.particle { position:absolute; width:2px; height:2px; background:rgba(255,255,255,0.15); border-radius:50%; animation: float-particle linear infinite; }
+.particle:nth-child(2n) { background:rgba(255,255,255,0.1); }
+.particle:nth-child(3n) { background:rgba(255,255,255,0.08); }
+/* ─── PULSE GLOW INICIAR BUTTON ──────────── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(224,53,53,0.6), 0 0 20px rgba(224,53,53,0.3); }
+  50% { box-shadow: 0 0 0 12px rgba(224,53,53,0), 0 0 40px rgba(224,53,53,0.5); }
+}
+.niv-start-btn {
+  white-space:nowrap;
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(13px,2vw,15px);
+  font-weight:800;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  padding:18px 48px;
+  background:var(--red);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  animation: pulseGlow 2s ease-in-out infinite;
+  transition: all 0.2s;
+}
+.niv-start-btn:hover {
+  transform:translateY(-3px) scale(1.03);
+  box-shadow: 0 0 0 2px var(--red), 0 8px 40px rgba(224,53,53,0.6);
+}
+.niv-start-btn::before {
+  content:'';
+  position:absolute;
+  top:-50%; left:-50%; width:200%; height:200%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent 30%);
+  animation: spin 3s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes particleBurst {
+  0% { transform:translate(0,0); opacity:1; }
+  100% { transform:translate(var(--dx),var(--dy)); opacity:0; }
+}
+.niv-result.active {
+  display:block;
+  animation: fadeInUp 1.2s cubic-bezier(.16,1,.3,1);
+}
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+/* ─── WHATSAPP CTA PULSE ────────────────── */
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.45), 0 4px 20px rgba(37,211,102,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(37,211,102,0), 0 6px 30px rgba(37,211,102,0.5); }
+}
+.niv-cta-wa {
+  background:#25D366; color:#fff;
+  animation: waPulse 2.5s ease-in-out infinite;
+  position:relative;
+}
+.niv-cta-wa:hover {
+  box-shadow:0 0 0 2px #2ee676, 0 8px 40px rgba(37,211,102,0.5) !important;
+  background:#2ee676;
+}
+@media(min-width:768px) {
+  .niv-cta-wa { margin-top:8px; }
+}
+/* ─── BACK BUTTON FOR QUIZ ──────────────── */
+.niv-back {
+  background:none; border:1px solid var(--border);
+  color:var(--text-secondary); font-size:11px; font-family:'Inter Tight',sans-serif;
+  padding:8px 20px; cursor:pointer; margin-top:20px;
+  letter-spacing:0.1em; transition:all 0.2s;
+}
+.niv-back:hover { border-color:var(--metal2); color:var(--text-primary); }
+/* Old .niv-result-glow removed — replaced by accordion */
+/* ─── SPLASH TAGLINE ─────────────── */
+.splash-tagline {
+  font-size: clamp(14px, 2.2vw, 17px);
+  max-width:760px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:10px;
+  padding:0 8px;
+}
+/* Sub-línea que filtra: el que ya vende se reconoce, el que va a empezar entiende que no es acá */
+.splash-subline strong { color:#FF6A3D; font-weight:800; letter-spacing:0.01em; }
+/* El claim se quiebra por sentido, nunca por donde caiga el ancho.
+   Cada bloque es una idea completa: nowrap impide que se parta por la mitad. */
+.splash-tagline .tl { display:inline; white-space:nowrap; }
+.splash-tagline .tl-c { display:block; }
+@media(max-width:640px) {
+  .splash-tagline .tl { display:block; }
+}
+.splash-subline {
+  font-size: clamp(12px, 1.7vw, 14px);
+  font-weight:500;
+  color:var(--text-secondary);
+  max-width:460px;
+  margin:0 auto 16px;
+  padding:0 8px;
+  line-height:1.5;
+}
+@media(max-width:540px) {
+  .splash-title { font-size: clamp(36px, 12vw, 52px); }
+  .niv-question { font-size:18px; }
+  .niv-opt { font-size:13px; padding:12px 14px; }
+  .niv-result-stage { font-size:clamp(32px,10vw,44px); }
+  .niv-ctas { gap:8px; }
+  .niv-cta { font-size:11px; padding:12px 16px; max-width:100%; }
+  .niv-result-text { font-size:13px; }
+  .splash-tagline { font-size:13px !important; }
+  .niv-stage-bar { max-width:100%; }
+  .niv-stage-bar-item span { font-size:7px; letter-spacing:0.1em; }
+  .splash-inner { padding:32px 16px 48px; }
+  .niv-result-stage { font-size:clamp(36px,12vw,48px) !important; }
+}
+/* ─── STAGE PROGRESS BAR ──────────────────── */
+.niv-stage-bar {
+  display:flex;
+  justify-content:center;
+  gap:0;
+  margin-bottom:24px;
+  width:100%;
+  max-width:480px;
+  margin-left:auto;
+  margin-right:auto;
+  background:var(--bg4);
+  height:6px;
+  position:relative;
+  overflow:visible;
+}
+.niv-stage-bar-item {
+  flex:1;
+  text-align:center;
+  position:relative;
+  height:6px;
+}
+.niv-stage-bar-item.active,
+.niv-stage-bar-item.completed {
+  background:var(--metal-grad2);
+}
+.niv-stage-bar-color { display:none; }
+.niv-stage-bar-item > span {
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  position:absolute;
+  top:14px;
+  left:50%;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  text-align:center;
+  line-height:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+}
+.niv-stage-bar-item > span > span { display:block; }
+.niv-stage-bar-item.active span {
+  color:var(--metal3);
+}
+/* ─── NIVELADOR LEVEL-UP OVERLAY ──────────── */
+.niv-levelup {
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  background:rgba(0,0,0,0);
+  pointer-events:none;
+  transition:background 0.8s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.niv-levelup.active {
+  background:#02040c;
+  pointer-events:all;
+}
+.niv-levelup-inner {
+  text-align:center;
+  opacity:0;
+  transform:scale(0.92) translateY(16px);
+  transition:all 1s cubic-bezier(.25,.46,.45,.94);
+}
+.niv-levelup.active .niv-levelup-inner {
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+.niv-levelup-label {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.5em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  margin-bottom:8px;
+}
+.niv-levelup-rank {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(56px,12vw,100px);
+  font-weight:900;
+  letter-spacing:-0.01em;
+  line-height:1;
+  margin-bottom:8px;
+  padding-right:0.06em;
+  background: var(--metal-grad);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter: drop-shadow(0 0 40px var(--lu-glow, rgba(68,136,255,0.4)));
+  animation: titleShimmer 4s ease-in-out infinite;
+  background-size: 200% 100%;
+}
+.niv-levelup-range {
+  font-size:14px;
+  font-weight:600;
+  color:var(--text-secondary);
+  margin-bottom:32px;
+  letter-spacing:0.05em;
+}
+@keyframes btnGoldGlow {
+  0%,100% { box-shadow:0 0 8px rgba(200,168,74,0.15), 0 0 0 1px rgba(200,168,74,0.2); border-color:rgba(200,168,74,0.25); }
+  50% { box-shadow:0 0 20px rgba(200,168,74,0.4), 0 0 0 1px rgba(200,168,74,0.5); border-color:rgba(200,168,74,0.6); }
+}
+.niv-levelup-btn {
+  padding:14px 36px;
+  background:transparent;
+  border:1px solid rgba(200,168,74,0.3);
+  color:var(--gold-bright);
+  font-family:'Inter Tight',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:all 0.2s;
+  animation:btnGoldGlow 2.5s ease-in-out infinite;
+}
+.niv-levelup-btn:hover {
+  color:#fff;
+  background:rgba(200,168,74,0.08);
+  box-shadow:0 0 0 2px var(--gold), 0 8px 40px var(--gold-glow);
+  transform:translateY(-2px);
+}
+.niv-lead-form {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:10px;
+  margin-top:8px;
+  width:100%;
+  max-width:280px;
+}
+.niv-lead-input {
+  width:100%;
+  padding:12px 14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.14);
+  color:var(--text-primary);
+  font-family:'Inter Tight',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  outline:none;
+  transition:border-color 0.2s;
+  text-align:center;
+}
+.niv-lead-input:focus {
+  border-color:var(--gold);
+}
+.niv-lead-input::placeholder {
+  color:var(--text-muted);
+}
+.niv-lead-note {
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.02em;
+  text-align:center;
+}
+.niv-phone-row {
+  display:flex;
+  gap:8px;
+}
+.niv-country-select {
+  flex:0 0 104px;
+  padding:12px 4px 12px 8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.14);
+  color:var(--text-primary);
+  font-family:'Inter Tight',sans-serif;
+  font-size:13px;
+  font-weight:600;
+  outline:none;
+  transition:border-color 0.2s;
+  text-align:left;
+  cursor:pointer;
+}
+.niv-country-select option { background:#0d0f14; color:#fff; }
+.niv-country-select:focus {
+  border-color:var(--gold);
+}
+.niv-phone-row .niv-lead-input {
+  flex:1;
+  min-width:0;
+  text-align:left;
+}
+
+/* ─── CTA AGENDAR LLAMADA (azul = alta intención; el verde queda solo para WhatsApp) ─── */
+@keyframes callPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(58,159,255,0.40), 0 4px 20px rgba(58,159,255,0.28); }
+  50% { box-shadow: 0 0 0 8px rgba(58,159,255,0), 0 6px 30px rgba(58,159,255,0.45); }
+}
+.niv-cta-call {
+  background:#2b7fd4; color:#fff;
+  animation: callPulse 2.8s ease-in-out infinite;
+  position:relative;
+}
+.niv-cta-call:hover {
+  box-shadow:0 0 0 2px #3a9fff, 0 8px 40px rgba(58,159,255,0.45) !important;
+  background:#3a9fff;
+}
+@media(min-width:768px) { .niv-cta-call { margin-top:8px; } }
+
+@media(prefers-reduced-motion:reduce) {
+  .niv-cta-call, .niv-cta-wa { animation:none; }
+}
+
+/* ─── SISTEMAS POR ÁREA — el QUÉ a la vista, el CÓMO es la conversación ─── */
+.niv-sis-label {
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(200,168,74,0.8);
+  text-align:center;
+  margin:22px 0 10px;
+}
+.niv-sis-list {
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  background:var(--border);
+  border:1px solid rgba(200,168,74,0.18);
+  border-radius:3px;
+  overflow:hidden;
+}
+.niv-sis-row {
+  background:var(--bg2);
+  padding:10px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  text-align:left;
+}
+.niv-sis-area {
+  font-size:8.5px;
+  font-weight:800;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--gold-bright, #d9b95c);
+}
+.niv-sis-desc {
+  font-size:12.5px;
+  font-weight:500;
+  color:var(--text-secondary);
+  line-height:1.4;
+}
+.niv-sis-nota {
+  font-size:12px;
+  line-height:1.55;
+  color:var(--text-secondary);
+  text-align:center;
+  margin-top:12px;
+  padding:0 4px;
+}
+.niv-sis-nota strong { color:var(--text-primary); font-weight:700; }
+@media(max-width:540px) {
+  .niv-sis-desc { font-size:12px; }
+}
+
+/* ─── PULSO DE LA FLECHA DE LA CALCULADORA (se activa al entrar en viewport) ─── */
+@keyframes arrowNudge {
+  0%, 100% { transform:translateX(0); box-shadow:0 0 0 0 rgba(200,168,74,0); }
+  50% { transform:translateX(3px); box-shadow:0 0 14px 0 rgba(200,168,74,0.35); }
+}
+.niv-arrow-hint { animation: arrowNudge 1.8s ease-in-out 3; border-color:rgba(200,168,74,0.5) !important; }
+.niv-value-teaser {
+  max-width:320px;
+  margin:0 auto;
+  font-size:13px;
+  line-height:1.6;
+  color:var(--text-secondary);
+  font-style:italic;
+  text-align:center;
+}
+.niv-value-teaser strong {
+  color:var(--gold-bright);
+  font-style:normal;
+}
+
+/* ─── BENEFICIOS DURANTE EL ANÁLISIS (sube el valor percibido antes del resultado) ─── */
+.niv-lobby-benefits {
+  max-width:320px;
+  margin:18px auto 4px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  text-align:left;
+}
+.niv-lobby-benefit {
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  font-size:12.5px;
+  line-height:1.45;
+  color:var(--text-secondary);
+  opacity:0;
+  transform:translateY(8px);
+  transition:opacity 0.7s ease, transform 0.7s cubic-bezier(.22,.61,.36,1);
+}
+.niv-lobby-benefit.show { opacity:1; transform:translateY(0); }
+.niv-lobby-benefit strong { color:var(--text-primary); font-weight:700; }
+.niv-lobby-benefit-check {
+  flex:0 0 auto;
+  color:var(--green);
+  font-weight:800;
+  font-size:11px;
+  line-height:1.6;
+}
+@media(max-width:540px) {
+  .niv-lobby-benefits { max-width:290px; gap:8px; }
+  .niv-lobby-benefit { font-size:12px; }
+}
+.niv-levelup-particles {
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+.nlp {
+  position:absolute;
+  width:3px; height:3px;
+  border-radius:50%;
+  animation: particleBurst var(--dur) ease-out forwards;
+}
+/* Removed aggressive flash — smooth fade via transition instead */
+@keyframes stageExplode {
+  0% { transform: scale(0.3); opacity: 0; filter: blur(20px); }
+  40% { transform: scale(1.15); opacity: 1; filter: blur(0); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes stageReveal {
+  0% { transform: scale(0.85); opacity: 0; filter: blur(8px); }
+  60% { transform: scale(1.02); opacity: 1; filter: blur(0); }
+  100% { transform: scale(1); opacity: 1; filter: blur(0); }
+}
+@keyframes fadeInSoft {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes pulse {
+  0%,100% { opacity:0.5; }
+  50% { opacity:1; }
+}
+/* (countdown CSS removed) */
+/* ─── ACCORDION DIAGNOSTIC ─────────────────── */
+.niv-accordion-wrap {
+  max-width:520px;
+  margin:0 auto 24px;
+  display:flex;
+  flex-direction:column;
+  gap:1px;
+  text-align:left;
+}
+.niv-acc-block {
+  background:var(--bg2);
+  border:1px solid var(--border);
+  overflow:hidden;
+  transition:border-color 0.3s;
+}
+.niv-acc-block.open {
+  border-color:var(--border2);
+}
+.niv-acc-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  width:100%;
+  padding:16px 20px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-family:'Inter Tight',sans-serif;
+  transition:background 0.2s;
+}
+.niv-acc-header:hover {
+  background:rgba(255,255,255,0.02);
+}
+.niv-acc-icon {
+  font-size:12px;
+  font-weight:700;
+  flex-shrink:0;
+  line-height:1;
+}
+.niv-acc-icon::before { content:'\203A'; }
+.niv-acc-title {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  flex:1;
+  text-align:left;
+}
+.niv-acc-title.now { color:var(--red); }
+.niv-acc-header:has(.niv-acc-title.now) .niv-acc-icon { color:var(--red); }
+.niv-acc-title.future { color:var(--green); }
+.niv-acc-header:has(.niv-acc-title.future) .niv-acc-icon { color:var(--green); }
+.niv-acc-title.missing { color:var(--electric); }
+.niv-acc-header:has(.niv-acc-title.missing) .niv-acc-icon { color:var(--electric); }
+.niv-acc-chevron {
+  font-size:14px;
+  color:var(--text-muted);
+  transition:transform 0.3s ease;
+  flex-shrink:0;
+}
+.niv-acc-block.open .niv-acc-chevron {
+  transform:rotate(180deg);
+}
+.niv-acc-body {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.7s cubic-bezier(.4,0,.2,1), padding 0.5s ease;
+  padding:0 20px;
+}
+.niv-acc-block.open .niv-acc-body {
+  max-height:1200px;
+  padding:0 20px 20px;
+}
+
+/* ─── DETRACTOR TAGS (red, soft glow) ──────── */
+.niv-detractor-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:14px;
+}
+.niv-dtag {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--red);
+  border:1px solid rgba(224,53,53,0.3);
+  background:rgba(224,53,53,0.08);
+  padding:5px 12px;
+  border-radius:2px;
+}
+.niv-dtag-show { animation:tagPulse 3s ease-in-out infinite 0.4s; }
+.niv-dtag-show:nth-child(2) { animation-delay:0.7s; }
+.niv-dtag-show:nth-child(3) { animation-delay:1.0s; }
+.niv-dtag-show:nth-child(4) { animation-delay:1.3s; }
+.niv-dtag-show:nth-child(5) { animation-delay:1.6s; }
+@keyframes tagPulse {
+  0%,100% { box-shadow:0 0 0 rgba(224,53,53,0); }
+  50% { box-shadow:0 0 12px rgba(224,53,53,0.2); }
+}
+
+/* ─── MINI ROADMAP (network connection) ──────── */
+.niv-mini-roadmap {
+  margin-top:18px;
+  position:relative;
+  padding-top:14px;
+}
+.niv-mini-track {
+  height:2px;
+  background:rgba(255,255,255,0.06);
+  position:absolute;
+  top:19px;
+  left:10%;
+  right:10%;
+  z-index:0;
+  overflow:hidden;
+}
+.niv-mini-progress {
+  height:100%;
+  width:0%;
+  background:var(--green);
+  transition:width 3.5s cubic-bezier(.1,.4,.3,1);
+}
+.niv-acc-block.open .niv-mini-progress {
+  width:100%;
+}
+.niv-mini-nodes {
+  display:flex;
+  justify-content:space-between;
+  position:relative;
+  z-index:1;
+}
+.niv-mini-node {
+  text-align:center;
+  flex:1;
+  position:relative;
+}
+.niv-mini-node::before {
+  content:'';
+  display:block;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--bg4);
+  border:2px solid var(--border);
+  margin:0 auto 6px;
+  transition:all 0.5s ease;
+  position:relative;
+  z-index:2;
+}
+.niv-acc-block.open .niv-mini-node::before {
+  background:var(--green);
+  border-color:var(--green);
+}
+.niv-mini-node:nth-child(2)::before { transition-delay:0.7s; }
+.niv-mini-node:nth-child(3)::before { transition-delay:1.4s; }
+.niv-mini-node:nth-child(4)::before { transition-delay:2.1s; }
+.niv-mini-node:nth-child(5)::before { transition-delay:2.8s; }
+.niv-mini-node-label {
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  line-height:1.3;
+}
+
+/* ─── MOBILE ACCORDION ────────────────────── */
+@media(max-width:540px) {
+  .niv-acc-header { padding:14px 16px; }
+  .niv-acc-body { padding:0 16px; }
+  .niv-acc-block.open .niv-acc-body { padding:0 16px 16px; }
+  .niv-dtag, .niv-otag { font-size:9px; padding:4px 10px; }
+  .niv-mini-node-label { font-size:7px; }
+  .niv-accordion-wrap { margin:0 auto 20px; }
+  .niv-ctas { max-width:100%; }
+}
+
+/* ─── RESULT STAGE — METALLIC WITH STAGE COLOR ─ */
+.niv-result-stage {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(44px,9.5vw,76px) !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+  letter-spacing:-0.04em;
+  display:inline-block;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  background-size:200% 100%;
+  animation:titleShimmer 5s ease-in-out infinite;
+}
+
+/* ─── SUCCESS CASES ──────────────────────────── */
+.niv-cases {
+  max-width:520px;
+  margin:32px auto 0;
+}
+.niv-cases-title {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(18px,3vw,24px);
+  font-weight:900;
+  letter-spacing:0.08em;
+  text-transform:none;
+  background:var(--metal-grad);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 0 20px rgba(200,200,230,0.25));
+  animation:titleShimmer 4s ease-in-out infinite;
+  text-align:center;
+  margin-bottom:6px;
+}
+.niv-cases-highlight {
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:0.08em;
+  color:var(--text-secondary);
+  text-align:center;
+  margin-bottom:20px;
+}
+/* ─── TABS DE RUBRO (filtro de casos) ─── */
+.niv-cases-tabs {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:6px;
+  margin-bottom:16px;
+}
+.niv-cases-tab {
+  font-family:'Inter Tight',sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.10);
+  padding:7px 12px;
+  border-radius:2px;
+  cursor:pointer;
+  transition:color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  white-space:nowrap;
+}
+.niv-cases-tab:hover {
+  color:var(--text-secondary);
+  border-color:rgba(255,255,255,0.22);
+}
+.niv-cases-tab.active {
+  color:var(--gold-bright, #d9b95c);
+  border-color:rgba(200,168,74,0.55);
+  background:rgba(200,168,74,0.08);
+}
+@media(max-width:540px) {
+  .niv-cases-tabs { gap:5px; }
+  .niv-cases-tab { font-size:9px; padding:6px 9px; letter-spacing:0.05em; }
+}
+
+.niv-cases-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+}
+/* Con un rubro seleccionado los casos caen en hilera, uno bajo el otro */
+.niv-cases-grid.filtered { grid-template-columns:1fr; }
+.niv-case.is-hidden { display:none; }
+.niv-case.is-entering {
+  animation: caseFallIn 0.55s cubic-bezier(.22,.61,.36,1) both;
+}
+@keyframes caseFallIn {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .niv-case.is-entering { animation:none; }
+}
+.niv-case {
+  background:var(--bg2);
+  padding:16px 14px;
+  position:relative;
+}
+.niv-case::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0; height:1px;
+  background:var(--metal-grad2);
+  opacity:0.2;
+}
+.niv-case-from {
+  font-size:10px;
+  font-weight:600;
+  color:var(--text-muted);
+  margin-bottom:4px;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+}
+.niv-case-to {
+  font-size:13px;
+  font-weight:700;
+  color:var(--metal3);
+  line-height:1.4;
+}
+.niv-case-tag {
+  display:inline-block;
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--green);
+  border:1px solid rgba(56,176,104,0.25);
+  background:rgba(56,176,104,0.06);
+  padding:2px 8px;
+  margin-top:6px;
+  border-radius:1px;
+}
+.niv-case-stage {
+  display:inline-block;
+  font-size:7px;
+  font-weight:700;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  padding:2px 7px;
+  margin-bottom:8px;
+  border-radius:1px;
+}
+.niv-case-stage.stage-sk-op {
+  color:#e88c30;
+  border:1px solid rgba(232,140,48,0.3);
+  background:rgba(232,140,48,0.08);
+}
+.niv-case-stage.stage-op-bu {
+  color:#3a9fff;
+  border:1px solid rgba(58,159,255,0.3);
+  background:rgba(58,159,255,0.08);
+}
+.niv-case-stage.stage-bu-fo {
+  color:#c8a840;
+  border:1px solid rgba(200,168,64,0.3);
+  background:rgba(200,168,64,0.08);
+}
+@media(max-width:540px) {
+  .niv-cases-grid { grid-template-columns:1fr; }
+  .niv-case { padding:14px 16px; }
+}
+
+/* ─── LANZAMIENTO BADGE ──────────────────────── */
+.niv-launch-badge {
+  text-align:center;
+}
+.niv-launch-inner {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 24px;
+  border:1px solid var(--border);
+  background:var(--bg2);
+}
+.niv-launch-dot {
+  width:6px; height:6px;
+  border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+.niv-launch-text {
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:0.25em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+}
+.niv-launch-text span {
+  color:var(--metal3);
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+.niv-footer {
+  max-width:520px;
+  margin:40px auto 0;
+  padding:32px 24px;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.niv-footer-logo {
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:0.4em;
+  text-transform:uppercase;
+  background:var(--metal-grad);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:16px;
+}
+.niv-footer-text {
+  font-size:13px;
+  color:var(--text-secondary);
+  line-height:1.7;
+  margin-bottom:16px;
+}
+.niv-footer-text strong {
+  color:var(--metal3);
+  font-weight:700;
+}
+.niv-footer-closer {
+  font-size:14px;
+  font-weight:600;
+  background:var(--metal-grad);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:titleShimmer 5s ease-in-out infinite;
+  letter-spacing:0.02em;
+}
+.niv-footer-brand {
+  margin-top:32px;
+  padding-top:20px;
+  border-top:1px solid var(--border);
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:0.08em;
+  color:var(--text-muted);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.niv-footer-sep {
+  color:var(--border2);
+}
+
+/* ─── GOLD LED GLOW (siguiente paso isolated) ── */
+@keyframes goldLedGlow {
+  0%,100% { box-shadow:0 0 8px rgba(200,168,74,0.2), inset 0 0 0 1px rgba(200,168,74,0.15); border-color:rgba(200,168,74,0.25); }
+  50% { box-shadow:0 0 24px rgba(200,168,74,0.45), inset 0 0 0 1px rgba(200,168,74,0.5); border-color:rgba(200,168,74,0.6); }
+}
+.niv-acc-block-gold {
+  animation:goldLedGlow 2.5s ease-in-out infinite;
+  margin-top:16px;
+}
+.niv-acc-block-gold .niv-acc-title { color:var(--gold) !important; }
+.niv-acc-block-gold .niv-acc-icon { color:var(--gold) !important; }
+
+/* ─── STAGGERED FADE-IN SYSTEM ─────────────── */
+@keyframes revealUp {
+  from { opacity:0; transform:translateY(18px); }
+  to { opacity:1; transform:translateY(0); }
+}
+/* Entrada por bloques, disparada al scrollear (no por timer): en mobile cada bloque
+   aparece cuando entra en pantalla, lento y suave, para no abrumar de una. */
+.reveal {
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity 1.05s cubic-bezier(.22,.61,.36,1), transform 1.05s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity, transform;
+}
+.reveal.revealed { opacity:1; transform:translateY(0); }
+/* Escalonado corto: solo separa los bloques que entran juntos en la misma pantalla */
+.reveal-d1 { transition-delay:0.05s; }
+.reveal-d2 { transition-delay:0.10s; }
+.reveal-d3 { transition-delay:0.15s; }
+.reveal-d4 { transition-delay:0.20s; }
+.reveal-d5 { transition-delay:0.25s; }
+.reveal-d6 { transition-delay:0.30s; }
+.reveal-d7 { transition-delay:0.35s; }
+.reveal-d8 { transition-delay:0.40s; }
+@media(prefers-reduced-motion:reduce) {
+  .reveal { opacity:1; transform:none; transition:none; }
+}
+
+/* Tags stagger via JS — .niv-dtag-hidden starts invisible */
+.niv-dtag-hidden { opacity:0; transform:translateY(8px); }
+.niv-dtag-show { transition:opacity 0.4s ease, transform 0.4s ease; opacity:1; transform:translateY(0); }
+
+/* ─── CENTERED ACCORDION TEXT ──────────────── */
+.niv-acc-body { text-align:center; }
+.niv-detractor-tags { justify-content:center; }
+
+/* ─── STAGE NUMBER BOXES ──────────────────── */
+.niv-stage-num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:18px; height:18px; font-size:8px; font-weight:800;
+  border:1px solid var(--border2); color:var(--text-muted);
+  line-height:1; text-align:center; vertical-align:middle;
+  padding:0; margin:0 auto; box-sizing:border-box;
+  font-variant-numeric:tabular-nums;
+}
+.niv-stage-bar-item.active .niv-stage-num,
+.niv-stage-bar-item.completed .niv-stage-num {
+  border-color:var(--metal2); color:var(--metal3); background:rgba(255,255,255,0.04);
+}
+
+/* (countdown bar CSS removed) */
+
+/* ─── FOOTER CTA LINK ────────────────────────── */
+.niv-footer-cta {
+  display:inline-block;
+  margin-top:20px;
+  padding:14px 32px;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:#fff;
+  text-decoration:none;
+  background:transparent;
+  border:1px solid rgba(37,211,102,0.4);
+  border-radius:2px;
+  transition:all 0.3s;
+}
+.niv-footer-cta:hover {
+  border-color:#25D366;
+  transform:translateY(-2px);
+  text-shadow:0 0 12px rgba(37,211,102,0.4);
+  box-shadow:0 4px 20px rgba(37,211,102,0.2);
+}
+/* Heartbeat glow — emotional pulsing */
+@keyframes heartbeatGlow {
+  0%   { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+  14%  { box-shadow:0 0 16px rgba(255,80,80,0.4), 0 0 40px rgba(255,80,80,0.15); transform:scale(1.03); }
+  28%  { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+  42%  { box-shadow:0 0 20px rgba(255,80,80,0.5), 0 0 50px rgba(255,80,80,0.2); transform:scale(1.04); }
+  56%  { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+  100% { box-shadow:0 0 8px rgba(255,80,80,0.15), 0 0 20px rgba(255,80,80,0.05); transform:scale(1); }
+}
+.niv-heartbeat {
+  animation: heartbeatGlow 2.4s ease-in-out infinite;
+  border-color:rgba(255,80,80,0.3);
+  color:#ff6060;
+  text-shadow:0 0 8px rgba(255,80,80,0.2);
+}
+.niv-heartbeat:hover {
+  animation-play-state:paused;
+  border-color:rgba(255,80,80,0.6);
+  box-shadow:0 0 30px rgba(255,80,80,0.4), 0 0 60px rgba(255,80,80,0.15);
+  color:#ff4040;
+}
+
+/* (mobile countdown CSS removed) */
+
+/* ─── COMMUNITY SHARED STYLES ──────────────────── */
+.niv-community-title {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(20px,4vw,28px);
+  font-weight:800;
+  color:var(--metal3);
+  line-height:1.3;
+}
+.niv-community-tags {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  max-width:420px;
+}
+.niv-community-tag {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  border:1px solid var(--border2);
+  background:rgba(255,255,255,0.03);
+  padding:6px 14px;
+  border-radius:2px;
+}
+.niv-community-join {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:16px 36px;
+  background:#25D366;
+  color:#fff;
+  font-family:'Inter Tight',sans-serif;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  transition:all 0.2s;
+  animation: waPulse 2.5s ease-in-out infinite;
+}
+.niv-community-join:hover {
+  transform:translateY(-2px);
+  box-shadow:0 0 0 2px #2ee676, 0 8px 40px rgba(37,211,102,0.5);
+  background:#2ee676;
+}
+
+/* ─── SOCIAL PROOF BADGE ──────────────────────── */
+.niv-social-proof-badge {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 16px;
+  border:1px solid rgba(56,176,104,0.2);
+  background:rgba(56,176,104,0.06);
+  margin:0 auto 16px;
+  border-radius:20px;
+}
+.niv-social-proof-dot {
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--green);
+  animation:pulse 2s ease-in-out infinite;
+  flex-shrink:0;
+}
+.niv-social-proof-text {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  color:var(--green);
+  text-transform:uppercase;
+}
+
+/* ─── CALL BENEFITS BOX ──────────────────────── */
+.niv-call-benefits {
+  max-width:360px;
+  margin:16px auto;
+  padding:16px 20px;
+  border:1px solid var(--border2);
+  background:rgba(255,255,255,0.02);
+  text-align:left;
+}
+.niv-call-benefits-title {
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--text-secondary);
+  margin-bottom:10px;
+}
+.niv-call-benefit {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.8;
+}
+.niv-call-benefit-check {
+  color:var(--green);
+  margin-right:6px;
+}
+
+/* ─── TOOL STACK ──────────────────────────────── */
+.niv-tool-stack {
+  margin-top:18px;
+}
+.niv-tool-stack-label {
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:10px;
+}
+.niv-tool-stack-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+}
+.niv-tool-item {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:5px 12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  font-size:11px;
+  color:var(--text-secondary);
+  border-radius:20px;
+  transition:all 0.25s ease;
+  cursor:default;
+}
+.niv-tool-item:hover {
+  transform:translateY(-3px);
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(255,255,255,0.12);
+  box-shadow:0 4px 12px rgba(0,0,0,0.3);
+}
+.niv-tool-item img {
+  width:16px;
+  height:16px;
+  border-radius:2px;
+}
+
+/* ─── INCOME CALCULATOR ──────────────────────── */
+.niv-calculator {
+  max-width:520px;
+  margin:32px auto 0;
+  padding:28px 24px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  text-align:center;
+}
+.niv-calc-title {
+  font-family:'Inter Tight',sans-serif;
+  font-size:clamp(15px,2.5vw,18px);
+  font-weight:700;
+  background:var(--metal-grad);
+  background-size:200% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:titleShimmer 5s ease-in-out infinite;
+  margin-bottom:6px;
+  line-height:1.4;
+}
+.niv-calc-label {
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:0.02em;
+  color:var(--text-secondary);
+  margin-bottom:12px;
+}
+.niv-calc-input-wrap {
+  display:flex;
+  align-items:center;
+  gap:0;
+  max-width:220px;
+}
+.niv-calc-prefix {
+  padding:12px 12px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-right:none;
+  color:var(--text-secondary);
+  font-family:'Inter Tight',sans-serif;
+  font-size:14px;
+  font-weight:700;
+}
+.niv-calc-input {
+  flex:1;
+  padding:12px 14px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--text-primary);
+  font-family:'Inter Tight',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  outline:none;
+  transition:border-color 0.2s;
+  max-width:160px;
+}
+.niv-calc-input:focus {
+  border-color:var(--green);
+}
+.niv-calc-input::-webkit-outer-spin-button,
+.niv-calc-input::-webkit-inner-spin-button {
+  -webkit-appearance:none;
+  margin:0;
+}
+.niv-calc-input[type=number] {
+  -moz-appearance:textfield;
+}
+.niv-calc-input::placeholder {
+  color:var(--text-muted);
+}
+.niv-calc-result {
+  margin-top:16px;
+  font-size:clamp(15px,2.5vw,18px);
+  font-weight:700;
+  color:var(--metal3);
+  line-height:1.6;
+  min-height:22px;
+}
+.niv-calc-tip {
+  margin-top:8px;
+  font-size:12px;
+  color:var(--gold);
+  line-height:1.5;
+}
+
+/* ─── COMMUNITY MINI (inside level-up overlay) ── */
+.niv-community-mini {
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-top:28px;
+  max-width:520px;
+  width:100%;
+  padding:0 16px;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+  pointer-events:none;
+}
+.niv-community-mini.visible {
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:all;
+}
+.niv-community-mini .niv-community-title {
+  font-size:clamp(13px,2.2vw,16px);
+  font-weight:700;
+  color:var(--metal2);
+  width:100%;
+  text-align:center;
+}
+.niv-community-mini .niv-community-tags {
+  gap:6px;
+  justify-content:center;
+  width:100%;
+}
+.niv-community-mini .niv-community-tag {
+  font-size:8px;
+  padding:4px 10px;
+}
+.niv-community-mini .niv-community-join {
+  padding:12px 28px;
+  font-size:11px;
+}
+.niv-community-note {
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.05em;
+  line-height:1.4;
+  opacity:0.7;
+  width:100%;
+  text-align:center;
+}
+.niv-community-mini .niv-social-proof-badge {
+  margin:0;
+  padding:6px 12px;
+}
+.niv-community-mini .niv-social-proof-text {
+  font-size:8px;
+}
+.niv-lobby-timer {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  color:var(--text-muted);
+  width:100%;
+  text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.niv-lobby-timer span {
+  color:var(--metal2);
+}
+@media(max-width:540px) {
+  .niv-community-mini {
+    gap:10px;
+    padding:0 12px;
+  }
+  .niv-community-mini .niv-community-title {
+    font-size:13px;
+  }
+  .niv-community-mini .niv-community-join {
+    padding:10px 20px;
+    font-size:10px;
+  }
+}
+
+/* ─── CASE QUOTE ─────────────────────────────── */
+.niv-case-quote {
+  font-size:11px;
+  font-style:italic;
+  color:var(--text-muted);
+  line-height:1.5;
+  margin-top:6px;
+}
+
+/* ─── FOUNDER QUOTES + URGENCY ──────────────── */
+.niv-urgency-section {
+  max-width:520px;
+  margin:40px auto 0;
+  text-align:center;
+}
+.niv-quote-carousel {
+  position:relative;
+  max-width:440px;
+  margin:0 auto 24px;
+  overflow:hidden;
+  min-height:140px;
+}
+.niv-quote-track {
+  display:flex;
+  transition:transform 0.8s cubic-bezier(.25,.46,.45,.94);
+}
+.niv-quote-card {
+  min-width:100%;
+  padding:24px 28px;
+  background:var(--bg3);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  text-align:center;
+  box-sizing:border-box;
+  box-shadow:0 4px 24px rgba(0,0,0,0.3), 0 0 40px rgba(140,140,200,0.06);
+}
+.niv-quote-card-text {
+  font-size:clamp(13px,2vw,15px);
+  font-style:italic;
+  color:var(--text-secondary);
+  line-height:1.7;
+  margin-bottom:10px;
+}
+.niv-quote-card-author {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:0.1em;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.niv-quote-dots {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+}
+.niv-quote-dot {
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--border2);
+  cursor:pointer;
+  transition:background 0.3s;
+}
+.niv-quote-dot.active {
+  background:var(--metal2);
+}
+.niv-quote-arrows {
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px;
+}
+.niv-quote-arrow {
+  width:32px;
+  height:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);
+  color:var(--text-secondary);
+  font-size:14px;
+  cursor:pointer;
+  border-radius:50%;
+  transition:all 0.2s;
+}
+.niv-quote-arrow:hover {
+  background:rgba(255,255,255,0.08);
+  color:var(--text-primary);
+  border-color:var(--border2);
+}
+.niv-urgency-line {
+  width:40px;
+  height:1px;
+  background:var(--border2);
+  margin:0 auto 20px;
+}
+.niv-urgency-text {
+  font-size:13px;
+  color:var(--text-muted);
+  line-height:1.8;
+  max-width:400px;
+  margin:0 auto;
+}
+.niv-urgency-text strong {
+  color:var(--metal2);
+  font-weight:600;
+}
+
+/* ─── FINAL METALLIC CTA ─────────────────────── */
+.niv-final-cta {
+  display:inline-block;
+  margin-top:24px;
+  padding:16px 40px;
+  font-family:'Inter Tight',sans-serif;
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:0.04em;
+  color:#fff;
+  text-decoration:none;
+  background:linear-gradient(135deg, #1c5fa8 0%, #2b7fd4 40%, #4aa3f0 50%, #2b7fd4 60%, #1c5fa8 100%);
+  background-size:200% 100%;
+  animation:titleShimmer 4s ease-in-out infinite;
+  border:1px solid rgba(74,163,240,0.35);
+  border-radius:2px;
+  box-shadow:0 0 24px rgba(58,159,255,0.28), 0 0 60px rgba(58,159,255,0.12);
+  transition:all 0.3s ease;
+  cursor:pointer;
+}
+.niv-final-cta:hover {
+  transform:translateY(-3px);
+  box-shadow:0 0 32px rgba(160,160,220,0.35), 0 0 80px rgba(160,160,220,0.15), 0 8px 30px rgba(0,0,0,0.3);
+  border-color:rgba(200,200,240,0.5);
+}
+.niv-final-cta.splash-active {
+  animation:ctaExpand 0.5s ease forwards !important;
+}
+@keyframes ctaExpand {
+  0% { transform:scale(1); box-shadow:0 0 24px rgba(140,140,200,0.2); }
+  30% { transform:scale(0.94); }
+  60% { transform:scale(1.06); box-shadow:0 0 60px rgba(160,160,220,0.6), 0 0 120px rgba(160,160,220,0.2); }
+  100% { transform:scale(1); box-shadow:0 0 24px rgba(140,140,200,0.2); }
+}
+.niv-cta-ripple {
+  position:fixed;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(160,160,220,0.4) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:99999;
+  animation:rippleOut 0.7s ease-out forwards;
+}
+@keyframes rippleOut {
+  0% { width:0; height:0; opacity:1; }
+  100% { width:300px; height:300px; opacity:0; }
+}
+
+/* ─── TOOL CATEGORIES ────────────────────────── */
+.niv-tool-category {
+  margin-bottom:12px;
+}
+.niv-tool-category-label {
+  font-size:8px;
+  font-weight:700;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+.niv-tool-category-items {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  justify-content:center;
+  padding:10px 12px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:rgba(255,255,255,0.015);
+  border-radius:8px;
+}
+
+/* ─── QUIZ FIXED HEIGHT ──────────────────────── */
+.niv-question {
+  min-height:72px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ─── STAGE BAR OVERFLOW FIX ──────────────────── */
+.niv-stage-bar {
+  overflow:visible !important;
+}
+.niv-stage-bar-item > span {
+  overflow:visible;
+  min-width:50px;
+}
+
+/* ─── STAGE EXPLOSION ────────────────────────── */
+@keyframes stageExplodeIn {
+  0% { opacity:0; filter:blur(20px); }
+  30% { opacity:1; filter:blur(0); }
+  100% { opacity:1; filter:blur(0); }
+}
+@keyframes flashBurst {
+  0% { opacity:0; }
+  15% { opacity:0.4; }
+  100% { opacity:0; }
+}
+.niv-levelup-flash {
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 60%);
+  pointer-events:none;
+  opacity:0;
+}
+.niv-levelup-flash.fire {
+  animation:flashBurst 0.8s ease-out;
+}
+
+/* ─── HOME STAGGERED REVEAL ──────────────────── */
+.niv-home-reveal {
+  opacity:0;
+  transform:translateY(16px);
+  animation:fadeInUp 0.8s ease forwards;
+}
+.niv-home-d2 { animation-delay:0.3s; }
+.niv-home-d3 { animation-delay:0.6s; }
+.niv-home-d4 { animation-delay:0.9s; }
+.niv-home-d5 { animation-delay:1.3s; }
+
+/* ─── LOBBY/QUIZ LAYOUT STABILITY ────────────── */
+.niv-levelup-inner {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  min-height:100dvh;
+  padding:40px 20px;
+  width:100%;
+}
+.niv-wrap.active {
+  min-height:380px;
+}
+
+/* ─── CALCULATOR ARROWS ──────────────────────── */
+.niv-calc-arrows {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+  max-width:280px;
+  margin:0 auto;
+}
+.niv-calc-arrow {
+  width:44px;
+  height:44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--text-secondary);
+  font-size:18px;
+  cursor:pointer;
+  transition:all 0.2s;
+  font-family:'Inter Tight',sans-serif;
+  user-select:none;
+  -webkit-user-select:none;
+  flex-shrink:0;
+}
+@media (hover:hover) {
+  .niv-calc-arrow:hover {
+    background:rgba(56,176,104,0.15);
+    border-color:rgba(56,176,104,0.3);
+    color:var(--green);
+  }
+}
+.niv-calc-arrow:active {
+  transform:scale(0.9);
+}
+.niv-calc-arrow:first-child {
+  border-right:none;
+}
+.niv-calc-arrow:last-child {
+  border-left:none;
+}
+@keyframes marqueeRight {
+  0% { transform:translateX(-30%); }
+  100% { transform:translateX(0%); }
+}
+@keyframes marqueeLeft {
+  0% { transform:translateX(0%); }
+  100% { transform:translateX(-30%); }
+}
+.niv-tool-marquee {
+  overflow:hidden;
+  width:100%;
+}
+.niv-tool-marquee-track {
+  display:flex;
+  gap:8px;
+  width:max-content;
+  animation-duration:20s;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+}
+.niv-tool-marquee-track.right { animation-name:marqueeRight; }
+.niv-tool-marquee-track.left { animation-name:marqueeLeft; }
+.niv-tool-marquee-track:hover { animation-play-state:paused; }
+.niv-income-chart {
+  max-width:480px;
+  margin:0 auto 32px;
+  padding:20px 16px;
+  border:1px solid var(--border);
+  background:var(--bg2);
+  border-radius:4px;
+}
+.niv-income-chart-title {
+  font-size:12px;
+  font-weight:700;
+  color:var(--metal2);
+  text-align:center;
+  margin-bottom:16px;
+  letter-spacing:0.08em;
+}
+.niv-income-chart svg {
+  width:100%;
+  height:auto;
+  display:block;
+}
+.niv-income-chart-legend {
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-top:12px;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:0.06em;
+}
+.niv-income-chart-legend span {
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.niv-legend-dot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  display:inline-block;
+}
+.niv-chart-line-founder {
+  stroke:var(--green);
+  stroke-width:2.5;
+  fill:none;
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  transition:stroke-dashoffset 3s ease;
+}
+.niv-chart-line-founder.animate {
+  stroke-dashoffset:0;
+}
+.niv-chart-line-employee {
+  stroke:var(--red);
+  stroke-width:2;
+  fill:none;
+  stroke-dasharray:1000;
+  stroke-dashoffset:1000;
+  transition:stroke-dashoffset 3s ease;
+}
+.niv-chart-line-employee.animate {
+  stroke-dashoffset:0;
+}
+.niv-chart-dot-founder {
+  fill:var(--green);
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+.niv-chart-dot-founder.animate { opacity:1; }
+.niv-chart-dot-employee {
+  fill:var(--red);
+  opacity:0;
+  transition:opacity 0.3s ease;
+}
+.niv-chart-dot-employee.animate { opacity:1; }
+.niv-chart-area-founder {
+  fill:rgba(56,176,104,0.08);
+  opacity:0;
+  transition:opacity 1s ease 2s;
+}
+.niv-chart-area-founder.animate {
+  opacity:1;
+}
+.niv-lobby-item {
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 0.6s ease, transform 0.6s ease;
+}
+.niv-lobby-item.show {
+  opacity:1;
+  transform:translateY(0);
+}
+.niv-lobby-urgency {
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  color:var(--gold);
+  text-align:center;
+  width:100%;
+}
+.niv-rubros { text-align:center; }
+.niv-rubros-spheres {
+  display:flex;
+  justify-content:center;
+  margin-bottom:6px;
+}
+.niv-rubro {
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  margin-left:-6px;
+  position:relative;
+  transition:transform 0.2s;
+}
+.niv-rubro:first-child { margin-left:0; }
+.niv-rubro:hover { transform:translateY(-2px); z-index:1; }
+.niv-rubros-text {
+  font-size:10px;
+  color:var(--text-muted);
+  letter-spacing:0.08em;
+  opacity:0.7;
+}
+
+/* ─── TRÍO TIPOGRÁFICO ───────────────────────────
+   display : Inter Tight  — títulos, etapa, rango. Apretada, para titular.
+   texto   : Inter        — lectura corrida. Más abierta, cansa menos.
+   dato    : JetBrains Mono — cifras, etiquetas y contadores. Alinea y
+             da el aire de instrumento que el resto de la marca ya tiene. */
+:root {
+  --f-display: 'Inter Tight', 'Inter', sans-serif;
+  --f-texto:   'Inter', 'Inter Tight', sans-serif;
+  --f-dato:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+/* texto corrido */
+body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
+.niv-call-benefit, .niv-sub, .splash-tagline, .splash-subline, .niv-calc-label {
+  font-family: var(--f-texto);
+}
+/* titulares */
+.splash-title, .niv-question, .niv-result-stage, .niv-levelup-rank,
+.niv-acc-title, .niv-calc-title, .niv-cta {
+  font-family: var(--f-display);
+}
+/* dato y etiqueta */
+.niv-result-tag, .niv-result-range, .niv-levelup-label, .niv-levelup-range,
+.niv-stage-bar-item > span, .niv-lobby-timer, .niv-calc-result,
+.niv-calc-tip, .niv-calc-input, .niv-detractor-tag, .niv-sisbox, .niv-rubros-text,
+.niv-call-benefits-title {
+  font-family: var(--f-dato);
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+</style>
+</head>
+<body class="splash-active">
+<div class="floating-particles" id="particles"></div>
+
+<!-- ══ SPLASH SCREEN ══ -->
+<div id="splash">
+  <div class="splash-inner">
+
+    <div class="splash-title-wrap">
+      <div class="splash-title">PRIVATE<br>BUILD</div>
+    </div>
+
+    <!-- INTRO (pre-quiz) -->
+    <div id="nivIntro">
+      <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">Construye un negocio que venda m&aacute;s,</span> <span class="tl">recuperando tiempo y capital</span><span class="tl tl-c">implementando sistemas de growth con IA.</span></p>
+      <p class="splash-subline niv-home-reveal niv-home-d2">Hoy los negocios que escalan no lo hacen con equipo,<br>lo hacen con <strong>infraestructura en cada &aacute;rea</strong>:</p>
+
+      <!-- Las 12 áreas: el founder no las inventa, las copia y las implementa -->
+      <div class="niv-sismarquee niv-home-reveal niv-home-d3">
+        <div class="niv-sismarquee-track" id="nivSisGrid"></div>
+      </div>
+
+      <p class="niv-home-reveal niv-home-d4 niv-donde">&iquest;C&oacute;mo est&aacute;n hoy tus sistemas?</p>
+      <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
+        <button class="niv-start-btn" onclick="startNivelador()">
+          COMENZAR DIAGN&Oacute;STICO&nbsp; &#x1F9ED;
+        </button>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
+      </div>
+      <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
+        <div class="niv-rubros">
+          <div class="niv-rubros-spheres">
+            <span class="niv-rubro">&#x2696;&#xFE0F;</span>
+            <span class="niv-rubro">&#x1F489;</span>
+            <span class="niv-rubro">&#x1F4F1;</span>
+            <span class="niv-rubro">&#x1F4AA;</span>
+            <span class="niv-rubro">&#x1F4F7;</span>
+            <span class="niv-rubro">&#x1F916;</span>
+            <span class="niv-rubro">&#x1F957;</span>
+            <span class="niv-rubro">&#x1F4BB;</span>
+          </div>
+          <div class="niv-rubros-text">+20 nichos validados</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ QUESTIONS -->
+    <div class="niv-wrap" id="nivQuiz">
+      <div class="niv-progress" id="nivProgress"></div>
+      <div class="niv-question" id="nivQuestion"></div>
+      <div class="niv-options" id="nivOptions"></div>
+      <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
+    </div>
+
+    <!-- LEAD CAPTURE — antes de mostrar la etapa, no después -->
+    <div class="niv-wrap" id="nivCapture">
+      <div class="niv-question" style="margin-bottom:6px;">Ya casi está tu diagnóstico</div>
+      <p style="font-size:13px;color:var(--text-secondary);text-align:center;margin:0 0 24px;">¿Cómo te lo enviamos?</p>
+      <form id="nivLeadForm" onsubmit="submitNivLead(event)" style="display:flex;flex-direction:column;gap:14px;max-width:320px;margin:0 auto;width:100%;">
+        <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre" autocomplete="name" required>
+        <div class="niv-phone-row">
+          <select class="niv-country-select" id="nivLeadCountry"></select>
+          <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" inputmode="numeric" required>
+        </div>
+        <input class="niv-lead-input" id="nivLeadInstagram" type="text" placeholder="@tu.instagram" autocomplete="off" required>
+        <button class="niv-levelup-btn" type="submit" style="align-self:center;margin-top:6px;">Ver mi diagnóstico →</button>
+        <div class="niv-lead-note">Para armar tu diagnóstico personalizado — nada de spam.</div>
+      </form>
+    </div>
+
+    <!-- community gate moved to level-up overlay -->
+
+    <!-- QUIZ RESULT -->
+    <div class="niv-result" id="nivResult">
+      <div class="niv-result-tag">&#x1F9ED; TU ETAPA ACTUAL</div>
+      <div class="niv-result-stage" id="nivStageName"></div>
+      <div class="niv-result-range" id="nivStageRange"></div>
+
+      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:56px;"></div>
+
+      <!-- ACCORDION DIAGNOSTIC -->
+      <div class="niv-accordion-wrap" id="nivAccordionWrap">
+
+        <!-- BLOCK 1: Situación Actual (red detractor tags) -->
+        <div class="niv-acc-block" data-acc="situacion">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title now">SITUACI&Oacute;N ACTUAL</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivNow"></div>
+            <div class="niv-detractor-tags" id="nivDetractorTags"></div>
+          </div>
+        </div>
+
+        <!-- BLOCK 2: Resultado (network roadmap with advancing line) -->
+        <div class="niv-acc-block" data-acc="resultado">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCI&Oacute;N</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivFuture"></div>
+            <div class="niv-mini-roadmap" id="nivMiniRoadmap">
+              <div class="niv-mini-track">
+                <div class="niv-mini-progress" id="nivMiniProgress"></div>
+              </div>
+              <div class="niv-mini-nodes" id="nivMiniNodes"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INCOME CALCULATOR (before siguiente paso) -->
+      <div class="niv-calculator" id="nivCalculator" style="display:none;">
+        <div class="niv-calc-title">Visualiza tu siguiente etapa</div>
+        <div class="niv-calc-label">&iquest;Cu&aacute;l es el valor de tus servicios actualmente?</div>
+        <div class="niv-calc-arrows">
+          <button class="niv-calc-arrow" onclick="calcStep(-250)">&larr;</button>
+          <span class="niv-calc-prefix">$</span>
+          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="200" oninput="updateCalculator()">
+          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(250)">&rarr;</button>
+        </div>
+        <div class="niv-calc-result" id="nivCalcResult"></div>
+        <div class="niv-calc-tip" id="nivCalcTip"></div>
+      </div>
+
+      <!-- BLOCK 3: Tu siguiente paso — ISOLATED with gold glow -->
+      <div class="niv-accordion-wrap" style="margin-top:0;">
+        <div class="niv-acc-block niv-acc-block-gold" data-acc="paso">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title">TU SIGUIENTE PASO</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
+
+            <div class="niv-ctas" id="nivCtas"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUCCESS CASES -->
+      <div class="niv-cases">
+        <div class="niv-cases-title">&#x1F3C6; Private Achievements</div>
+        <div class="niv-cases-highlight" style="font-weight:400;color:var(--text-muted);">Tu tambi&eacute;n puedes construir el camino a tu siguiente etapa</div>
+        <div class="niv-cases-tabs" id="nivCasesTabs">
+          <button class="niv-cases-tab active" data-market="todos" onclick="filterNivCases('todos', this)">Todos</button>
+          <button class="niv-cases-tab" data-market="ecommerce" onclick="filterNivCases('ecommerce', this)">Ecommerce</button>
+          <button class="niv-cases-tab" data-market="wellness" onclick="filterNivCases('wellness', this)">Salud &amp; Wellness</button>
+          <button class="niv-cases-tab" data-market="servicios" onclick="filterNivCases('servicios', this)">Servicios Pro</button>
+          <button class="niv-cases-tab" data-market="medios" onclick="filterNivCases('medios', this)">Marketing &amp; Medios</button>
+        </div>
+        <div class="niv-cases-grid" id="nivCasesGrid">
+          <!-- SKILLER → OPERATOR -->
+          <div class="niv-case" data-market="medios">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
+            <div class="niv-case-from">Social Media</div>
+            <div class="niv-case-to">De $0 a $1.500/mes</div>
+            <div class="niv-case-quote">&ldquo;Yo sab&iacute;a que pod&iacute;a lograr m&aacute;s con claridad&rdquo;</div>
+            <span class="niv-case-tag">Primer ingreso</span>
+          </div>
+          <div class="niv-case" data-market="wellness">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
+            <div class="niv-case-from">Nutricionista / Coach</div>
+            <div class="niv-case-to">De $30 USD/sesi&oacute;n a programa de $600 USD</div>
+            <div class="niv-case-quote">&ldquo;Hab&iacute;an muchas cosas que no sab&iacute;a antes de comenzar&rdquo;</div>
+            <span class="niv-case-tag">x20 ticket</span>
+          </div>
+          <div class="niv-case" data-market="medios">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
+            <div class="niv-case-from">Eventos / DJ&rsquo;s</div>
+            <div class="niv-case-to">De $50 por evento a $250 con agenda llena</div>
+            <div class="niv-case-quote">&ldquo;No sab&iacute;amos c&oacute;mo negociar para subir nuestro valor&rdquo;</div>
+            <span class="niv-case-tag">x5 + demanda</span>
+          </div>
+          <div class="niv-case" data-market="medios">
+            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
+            <div class="niv-case-from">Freelance creativo</div>
+            <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
+            <div class="niv-case-quote">&ldquo;Lo que armamos fue un antes y un despu&eacute;s, voy a seguir construyendo&rdquo;</div>
+            <span class="niv-case-tag">Modelo escalable</span>
+          </div>
+          <!-- OPERATOR → BUILDER -->
+          <div class="niv-case" data-market="wellness">
+            <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
+            <div class="niv-case-from">Medicina est&eacute;tica</div>
+            <div class="niv-case-to">De $2K/mes a $30K/mes recurrentes</div>
+            <div class="niv-case-quote">&ldquo;Implementamos un sistema para dar servicio a muchos clientes sin quemarme&rdquo;</div>
+            <span class="niv-case-tag">x15 ingresos</span>
+          </div>
+          <div class="niv-case" data-market="servicios">
+            <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
+            <div class="niv-case-from">Rubro legal</div>
+            <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
+            <div class="niv-case-quote">&ldquo;Apliqu&eacute; todo en las mentor&iacute;as y ahora tengo que decir que no a algunos proyectos&rdquo;</div>
+            <span class="niv-case-tag">Independencia</span>
+          </div>
+          <!-- BUILDER → FOUNDER -->
+          <div class="niv-case" data-market="ecommerce">
+            <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
+            <div class="niv-case-from">Ecommerce</div>
+            <div class="niv-case-to">De $2K/mes a $30K/mes</div>
+            <div class="niv-case-quote">&ldquo;Cada vez crecemos m&aacute;s, cada etapa nueva hay algo nuevo que desbloquear&rdquo;</div>
+            <span class="niv-case-tag">x15 ingresos</span>
+          </div>
+          <div class="niv-case" data-market="servicios">
+            <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
+            <div class="niv-case-from">Consultor&iacute;a</div>
+            <div class="niv-case-to">De empleado Sr. $3K/mes a consultor indep. +$6K/mes</div>
+            <div class="niv-case-quote">&ldquo;Todo cambia cuando est&aacute;s dispuesto a dejar tu ego y trabajar genuinamente en tu proyecto&rdquo;</div>
+            <span class="niv-case-tag">x2 + libertad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOUNDER QUOTES + FINAL CTA -->
+      <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
+        <div class="niv-income-chart" id="nivIncomeChart">
+          <div class="niv-income-chart-title">Tu costo de no tomar acci&oacute;n</div>
+          <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-bottom:12px;letter-spacing:0.05em;">Como empleado, <span style="color:var(--red);font-weight:700;">tienes techo</span>. Como founder, <span style="color:var(--green);font-weight:700;">no hay l&iacute;mite</span>.</div>
+          <svg viewBox="0 0 440 200" id="nivChartSvg">
+            <line x1="40" y1="20" x2="40" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="40" y1="180" x2="420" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+            <line x1="40" y1="140" x2="420" y2="140" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="40" y1="100" x2="420" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="40" y1="60" x2="420" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="40" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
+            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$0</text>
+            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$14K</text>
+            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$27K</text>
+            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$41K</text>
+            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$55K+</text>
+            <text x="40" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">0</text>
+            <text x="116" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 1</text>
+            <text x="192" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 2</text>
+            <text x="268" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 3</text>
+            <text x="344" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 4</text>
+            <text x="420" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 5</text>
+            <path class="niv-chart-area-founder" id="nivChartAreaFounder" d=""/>
+            <polyline class="niv-chart-line-employee" id="nivChartEmployee" points=""/>
+            <polyline class="niv-chart-line-founder" id="nivChartFounder" points=""/>
+            <g id="nivChartDotsEmployee"></g>
+            <g id="nivChartDotsFounder"></g>
+            <text id="nivChartCeiling" x="0" y="0" fill="rgba(255,80,80,0.5)" font-size="7" font-family="Inter" font-weight="700" opacity="0">TECHO</text>
+          </svg>
+          <div class="niv-income-chart-legend">
+            <span><span class="niv-legend-dot" style="background:var(--green);"></span> Founder</span>
+            <span><span class="niv-legend-dot" style="background:var(--red);"></span> Empleado</span>
+          </div>
+        </div>
+        <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
+        <div class="niv-urgency-line"></div>
+        <div style="margin:24px auto;max-width:420px;">
+          <p style="font-size:clamp(14px,2.2vw,16px);color:var(--text-secondary);line-height:1.7;font-weight:500;">T&uacute; decides si comenzar a construir hoy...</p>
+          <p style="font-size:clamp(15px,2.5vw,18px);color:var(--red);line-height:1.7;margin-top:8px;text-decoration:underline;text-underline-offset:4px;font-weight:600;">&iquest;o prefieres perder <strong>otro a&ntilde;o m&aacute;s</strong> en el mismo lugar?</p>
+        </div>
+        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank" onclick="ctaSplash(event)">Quiero tomar acci&oacute;n ahora &rarr;</a>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="niv-footer">
+        <div class="niv-footer-logo">&#x1F512; PRIVATE BUILD</div>
+        <div class="niv-footer-brand">
+          <span>Built with purpose and vision for all entrepreneurs &#x1F3F4;&#x200D;&#x2620;&#xFE0F;</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NIVELADOR LEVEL-UP OVERLAY -->
+<div class="niv-levelup" id="nivLevelup">
+  <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
+  <div class="niv-levelup-flash" id="nivLevelupFlash"></div>
+  <div class="niv-levelup-inner">
+    <div class="niv-levelup-label">TU ETAPA</div>
+    <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
+    <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
+    <button class="niv-levelup-btn" id="nivLevelupBtn" onclick="dismissNivLevelup()">Ver mi resultado completo &rarr;</button>
+    <!-- Value teaser (durante el análisis) — qué te vas a encontrar en el diagnóstico -->
+    <div class="niv-community-mini" id="nivCommunityMini">
+      <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
+      <div class="niv-lobby-benefits" id="nivLobbyBenefits"></div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">6</span>s</div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// ─── LAS 12 ÁREAS DE UN NEGOCIO CON INFRAESTRUCTURA ──
+// Ordenadas como se construye: cimientos → construcción → salida → ingreso.
+const nivAreas = [
+  'Financiero', 'Backend', 'Datos',
+  'Tecnolog\u00eda', 'Automation', 'Producto',
+  'Marketing', 'Contenido', 'Dise\u00f1o',
+  'Comercial', 'Success', 'Comunidad'
+];
+(function renderNivAreas() {
+  var grid = document.getElementById('nivSisGrid');
+  if (!grid) return;
+  var una = nivAreas.map(function(a) {
+    return '<span class="niv-sisbox">' + a + '</span>';
+  }).join('');
+  grid.innerHTML = una + una;
+})();
+
+// ─── COMMUNITY GATE DATA ──────────────────────
+
+// ─── NIVELADOR ──────────────────────────────
+const nivQuestions = [
+  {
+    q: '\u00bfCu\u00e1l es tu situaci\u00f3n hoy?',
+    opts: [
+      { text: 'Empleado buscando independizarme', score: 1 },
+      { text: 'Freelance / independiente vendiendo servicios', score: 2 },
+      { text: 'Emprendimiento con clientes activos', score: 3 },
+      { text: 'Empresa formalizada con operaci\u00f3n', score: 4 }
+    ]
+  },
+  {
+    q: '\u00bfCu\u00e1ntos clientes tienes hoy?',
+    opts: [
+      { text: 'Ninguno \u2014 Estoy empleado', score: 1 },
+      { text: '1 a 3 mensuales', score: 2 },
+      { text: '3 a 6 mensuales', score: 3 },
+      { text: '+6 mensuales', score: 4 }
+    ]
+  },
+  {
+    q: '\u00bfCu\u00e1l es tu objetivo en los pr\u00f3ximos 3 a 6 meses?',
+    opts: [
+      { text: 'Independizarme y generar mi primer ingreso propio', score: 1 },
+      { text: 'Generar +$2,000 USD mensuales de forma consistente', score: 2 },
+      { text: 'Contratar personas y tener m\u00e1s tiempo libre', score: 3 },
+      { text: 'Expandirme sobre $20,000 USD mensuales', score: 4 }
+    ]
+  },
+  {
+    q: '\u00bfCu\u00e1l es tu rango de ingresos mensual?',
+    opts: [
+      { text: '$0 \u2013 $1,500 USD', score: 1 },
+      { text: '$1,500 \u2013 $3,000 USD', score: 2 },
+      { text: '$3,000 \u2013 $10,000 USD', score: 3 },
+      { text: '+$10,000 USD', score: 4 }
+    ]
+  },
+  {
+    q: '\u00bfQu\u00e9 nivel de uso de IA tienes hoy?',
+    opts: [
+      { text: 'No uso IA todav\u00eda', score: 1 },
+      { text: 'IA gratuita (ChatGPT/Claude/Gemini free)', score: 2 },
+      { text: 'IA de pago (ChatGPT/Claude Pro)', score: 3 },
+      { text: 'Uso avanzado (Claude Max, agentes, infraestructura)', score: 4 }
+    ]
+  }
+];
+
+const nivStages = {
+  skiller: {
+    name: 'SKILLER', range: '$0 \u2013 $1,500/mes', color: 'var(--metal2)',
+    now: 'Est\u00e1s empleado o reci\u00e9n partiendo. Sabes que tienes una habilidad que podr\u00eda darte ingresos propios, pero no tienes oferta clara, no sabes c\u00f3mo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
+    future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir m\u00e1s r\u00e1pido y tienes un sistema b\u00e1sico que te da claridad de hacia d\u00f3nde vas.',
+    missing: 'Ac\u00e1 no te falta informaci\u00f3n. Nunca te falt\u00f3. Lo que define si sales de esta etapa son h\u00e1bitos, mentalidad y prop\u00f3sito \u2014 y eso no se compra, se construye.',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
+  },
+  operator: {
+    name: 'OPERATOR', range: '$1,500 \u2013 $3,000/mes', color: '#e88c30',
+    now: 'Ya vendes pero cobras poco y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay m\u00e1s pero no logras escalar.',
+    future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisaci\u00f3n para generar ingresos.',
+    missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build est\u00e1 dise\u00f1ado para founders en distintas etapas, para escalar con sistemas \u2014 no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
+  },
+  builder: {
+    name: 'BUILDER', range: '$3,000 \u2013 $10,000/mes', color: '#3a9fff',
+    now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica m\u00e1s horas tuyas y no puedes crecer sin quemarte.',
+    future: 'Automatizaste tus procesos clave, documentaste tu m\u00e9todo y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
+    missing: 'Puedes acceder a recursos, m\u00f3dulos, plantillas, workflows y sistemas validados que actualmente yo mismo y mis clientes ya est\u00e1n utilizando. No necesitas reventar tokens ni seguir frustr\u00e1ndote solo.',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
+  },
+  founder: {
+    name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
+    now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisi\u00f3n constante, no tienes sistemas aut\u00f3nomos y cada decisi\u00f3n pasa por tu cabeza. Escalar significa m\u00e1s estr\u00e9s.',
+    future: 'Tienes infraestructura de equipo, agentes aut\u00f3nomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicaci\u00f3n.',
+    missing: 'A esta etapa, lo que necesitas no es un curso \u2014 es una conversaci\u00f3n directa. Conectemos para explorar c\u00f3mo Private Build puede complementar lo que ya construiste y llevarlo m\u00e1s lejos.',
+    notion: 'https://private-build.notion.site/recursos-gratuitos',
+    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
+  }
+};
+
+// ─── TOOL STACK PER STAGE (categorized) ───────
+var F = function(d) { return 'https://www.google.com/s2/favicons?domain=' + d + '&sz=16'; };
+const nivTools = {
+  skiller: {
+    'Productividad': [
+      { name: 'Bloc de notas', icon: null, emoji: '\u{1F4DD}' },
+      { name: 'Google', icon: F('google.com') }
+    ],
+    'Comunicaci\u00f3n': [
+      { name: 'Instagram', icon: F('instagram.com') },
+      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' }
+    ],
+    'IA': [
+      { name: 'ChatGPT', icon: F('chat.openai.com') },
+      { name: 'Claude', icon: F('claude.ai') }
+    ]
+  },
+  operator: {
+    'IA': [
+      { name: 'ChatGPT Pro', icon: F('chat.openai.com') },
+      { name: 'Claude Pro', icon: F('claude.ai') }
+    ],
+    'Gesti\u00f3n': [
+      { name: 'Notion', icon: F('notion.so') },
+      { name: 'Canva', icon: F('canva.com') },
+      { name: 'Mir\u00f3', icon: F('miro.com') },
+      { name: 'Fathom', icon: 'https://fathom.video/favicon.ico' }
+    ],
+    'Comunicaci\u00f3n': [
+      { name: 'Instagram', icon: F('instagram.com') },
+      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
+      { name: 'TikTok', icon: F('tiktok.com') }
+    ]
+  },
+  builder: {
+    'IA': [
+      { name: 'ChatGPT Max', icon: F('chat.openai.com') },
+      { name: 'Claude Max', icon: F('claude.ai') }
+    ],
+    'Gesti\u00f3n': [
+      { name: 'Notion', icon: F('notion.so') },
+      { name: 'Mir\u00f3', icon: F('miro.com') },
+      { name: 'Fathom', icon: 'https://fathom.video/favicon.ico' },
+      { name: 'Obsidian', icon: F('obsidian.md') }
+    ],
+    'Comunicaci\u00f3n': [
+      { name: 'Instagram', icon: F('instagram.com') },
+      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
+      { name: 'TikTok', icon: F('tiktok.com') },
+      { name: 'YouTube', icon: F('youtube.com') }
+    ],
+    'Automatizaci\u00f3n': [
+      { name: 'GHL', icon: F('gohighlevel.com') },
+      { name: 'n8n', icon: F('n8n.io') }
+    ],
+    'Contenido': [
+      { name: 'Antigravity', icon: 'https://antigravity.so/favicon.ico' },
+      { name: 'Higgsfield', icon: F('higgsfield.ai') },
+      { name: 'Poppy AI', icon: 'https://meetpoppy.ai/favicon.ico' }
+    ],
+    'Marketing & Dev': [
+      { name: 'Meta Ads', icon: F('facebook.com') },
+      { name: 'GitHub', icon: F('github.com') },
+      { name: 'Vercel', icon: F('vercel.com') },
+      { name: 'VS Code', icon: F('code.visualstudio.com') }
+    ]
+  },
+  founder: {
+    'Agentes': [
+      { name: 'Agentes IA agrupando los stacks anteriores', icon: null, emoji: '\u{1F916}' }
+    ]
+  }
+};
+
+// ─── CALCULATOR TARGETS PER STAGE ─────────────
+const nivCalcTargets = {
+  skiller: 1000,
+  operator: 3000,
+  builder: 10000,
+  founder: 30000
+};
+
+// ─── CALL BENEFITS PER STAGE (el "qué", no el "cómo") ──
+const nivCallBenefits = {
+  operator: [
+    'Q&A en vivo para resolver tus trabas',
+    'El stack que usan los que ya escalaron',
+    'Casos reales de tu misma etapa',
+    'Founders construyendo en paralelo'
+  ],
+  builder: [
+    'Sistemas y workflows ya validados',
+    'Q&A en vivo sobre automatizaci\u00f3n',
+    'Founders operando a tu nivel',
+    'Casos de escala documentados'
+  ]
+};
+
+let nivStep = 0;
+let nivScores = [];
+
+// Países donde vemos mayor oportunidad de consultoría — evita que el lead tenga que escribir el código de país a mano
+const nivCountries = [
+  { code: '+56', flag: '🇨🇱', label: 'Chile' },
+  { code: '+51', flag: '🇵🇪', label: 'Perú' },
+  { code: '+57', flag: '🇨🇴', label: 'Colombia' },
+  { code: '+52', flag: '🇲🇽', label: 'México' },
+  { code: '+1',  flag: '🇺🇸', label: 'EE.UU.' },
+  { code: '+54', flag: '🇦🇷', label: 'Argentina' },
+  { code: '+593', flag: '🇪🇨', label: 'Ecuador' }
+];
+
+function populateNivCountrySelect() {
+  var sel = document.getElementById('nivLeadCountry');
+  if (!sel || sel.options.length) return;
+  sel.innerHTML = nivCountries.map(function(c) {
+    return '<option value="' + c.code + '">' + c.flag + ' ' + c.code + ' ' + c.label + '</option>';
+  }).join('');
+}
+
+function startNivelador() {
+  nivStep = 0; nivScores = []; nivAnswers = [];
+  document.getElementById('nivIntro').style.display = 'none';
+  document.querySelector('.splash-title-wrap').style.display = 'none';
+  document.getElementById('nivQuiz').classList.add('active');
+  document.getElementById('nivResult').classList.remove('active');
+  document.getElementById('nivBack').style.display = 'none';
+  populateNivCountrySelect();
+  renderNivQuestion();
+}
+
+function renderNivQuestion() {
+  const q = nivQuestions[nivStep];
+  let dots = '';
+  for (let i = 0; i < nivQuestions.length; i++) {
+    const cls = i < nivStep ? 'done' : i === nivStep ? 'current' : '';
+    dots += '<div class="niv-progress-dot ' + cls + '"></div>';
+  }
+  document.getElementById('nivProgress').innerHTML = dots;
+  document.getElementById('nivQuestion').textContent = q.q;
+  let opts = '';
+  q.opts.forEach(function(o, i) {
+    opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ', ' + i + ')">' + o.text + '</button>';
+  });
+  document.getElementById('nivOptions').innerHTML = opts;
+  document.getElementById('nivBack').style.display = nivStep > 0 ? 'inline-block' : 'none';
+}
+
+let nivAnswers = [];
+
+function nivAnswer(score, optIdx) {
+  nivScores.push(score);
+  nivAnswers.push(nivQuestions[nivStep].opts[optIdx].text);
+  nivStep++;
+  if (nivStep < nivQuestions.length) {
+    renderNivQuestion();
+  } else {
+    showNivResult();
+  }
+}
+
+// ─── showNivResult: goes straight to level-up overlay ──
+function showNivResult() {
+  const avg = nivScores.reduce(function(a, b) { return a + b; }, 0) / nivScores.length;
+  var stageKey;
+  if (avg <= 1.6) stageKey = 'skiller';
+  else if (avg <= 2.4) stageKey = 'operator';
+  else if (avg <= 3.2) stageKey = 'builder';
+  else stageKey = 'founder';
+
+  window._nivStageKey = stageKey;
+
+  // Antes de mostrar la etapa: capturar nombre + WhatsApp
+  document.getElementById('nivQuiz').classList.remove('active');
+  document.getElementById('nivCapture').classList.add('active');
+}
+
+// ─── CAPTURA DE LEADS → Make.com → Notion CRM ──
+// Escenario Make "Integration Webhooks, Notion" (activo, corre inmediato).
+// Escribe en CRM — Clientes & Comunidad como Estado=Lead, Origen=Quiz.
+// Si el webhook falla, el lead queda respaldado en localStorage igual.
+const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/h5kbhfuiiup1rbe7p6kdpsc94jhkdpu8';
+
+function sendToMake(payload) {
+  payload.ts = new Date().toISOString();
+  payload.source = 'nivelador-funnel';
+  // Respaldo local por si el webhook falla o no está configurado todavía
+  try {
+    var log = JSON.parse(localStorage.getItem('pb_funnel_log') || '[]');
+    log.push(payload);
+    localStorage.setItem('pb_funnel_log', JSON.stringify(log));
+  } catch (e) {}
+  if (!MAKE_WEBHOOK_URL || MAKE_WEBHOOK_URL.indexOf('PEGAR_TU_WEBHOOK_AQUI') !== -1) return;
+  fetch(MAKE_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function(e) { console.warn('Make webhook falló, dato queda en localStorage:', e); });
+}
+
+function submitNivLead(event) {
+  event.preventDefault();
+  var name = document.getElementById('nivLeadName').value.trim();
+  var countryCode = document.getElementById('nivLeadCountry').value || '+56';
+  var phoneDigits = document.getElementById('nivLeadPhone').value.trim().replace(/\D/g, '');
+  var phone = countryCode + ' ' + phoneDigits;
+  // Normalizamos el handle: la gente lo escribe con/sin @, o pega la URL completa del perfil
+  var instagram = document.getElementById('nivLeadInstagram').value.trim()
+    .replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '')
+    .replace(/\/+$/, '')
+    .replace(/^@+/, '');
+  if (instagram) instagram = '@' + instagram;
+  if (!name || phoneDigits.length < 7 || !instagram) return; // required ya cubre vacío, esto cubre basura
+
+  // Notion select no acepta comas en el valor — los montos ($1,500 etc.) rompían la creación del registro entero
+  var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
+
+  // Guardamos la llave para poder actualizar esta misma fila cuando responda la calificación
+  window._nivLeadPhone = phone;
+  window._nivLeadName = name;
+
+  var stageKey = window._nivStageKey || '';
+  sendToMake({
+    event: 'lead_capturado',
+    name: name,
+    phone: phone,
+    instagram: instagram,
+    stage: stageKey.charAt(0).toUpperCase() + stageKey.slice(1),
+    q1_situacion: stripCommas(nivAnswers[0]),
+    q2_clientes: stripCommas(nivAnswers[1]),
+    q3_objetivo: stripCommas(nivAnswers[2]),
+    q4_ingreso: stripCommas(nivAnswers[3]),
+    q5_nivel_ia: stripCommas(nivAnswers[4]),
+    quiz_scores: nivScores
+  });
+
+  // Ya capturamos el lead — ahora sí mostramos el análisis y la etapa
+  document.getElementById('nivCapture').classList.remove('active');
+  proceedToLevelUp();
+}
+
+// ─── TRACKING DE CLICS EN CTAs ────
+// NO va al webhook: este evento no lleva "name", y Nombre es obligatorio en Notion.
+// Cada clic hacía fallar la validación y Make desactivaba el escenario completo,
+// dejando de capturar leads hasta que alguien lo reactivara a mano.
+// Queda solo en localStorage, que es donde sirve para revisar sin romper nada.
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('.niv-cta, .niv-cta-wa, .niv-cta-call, #nivFooterCta, #nivCommunityJoin');
+  if (!link) return;
+  try {
+    var log = JSON.parse(localStorage.getItem('pb_cta_log') || '[]');
+    log.push({
+      stage: window._nivStageKey || null,
+      href: link.href,
+      text: link.textContent.trim().slice(0, 80),
+      ts: new Date().toISOString()
+    });
+    localStorage.setItem('pb_cta_log', JSON.stringify(log));
+  } catch (err) {}
+});
+
+function proceedToLevelUp() {
+  var stageKey = window._nivStageKey;
+  var s = nivStages[stageKey];
+
+  var overlay = document.getElementById('nivLevelup');
+  var rankEl = document.getElementById('nivLevelupRank');
+  var rangeEl = document.getElementById('nivLevelupRange');
+  var btnEl = document.getElementById('nivLevelupBtn');
+  var labelEl = document.querySelector('.niv-levelup-label');
+  var communityMini = document.getElementById('nivCommunityMini');
+  var flashEl = document.getElementById('nivLevelupFlash');
+
+  // Reset state
+  rankEl.textContent = '';
+  rankEl.style.opacity = '0';
+  rangeEl.textContent = '';
+  btnEl.style.opacity = '0';
+  btnEl.style.transition = 'none';
+  communityMini.classList.remove('visible');
+  labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS';
+  labelEl.style.animation = 'pulse 1.5s ease-in-out infinite';
+  document.getElementById('splash').style.visibility = 'hidden';
+  overlay.classList.add('active');
+
+  // Dot animation
+  var dotCount = 0;
+  var dotInterval = setInterval(function() {
+    dotCount = (dotCount + 1) % 4;
+    labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
+  }, 500);
+
+  // Teaser + beneficios: mientras "analiza", el lead ve todo lo que viene DESPUÉS del
+  // diagnóstico. Sube el valor percibido antes de mostrar la etapa.
+  setTimeout(function() {
+    var teaserEl = document.getElementById('nivValueTeaser');
+    if (teaserEl) {
+      var t = nivValueTeasers[Math.floor(Math.random() * nivValueTeasers.length)];
+      teaserEl.innerHTML = t;
+    }
+
+    var benefitsEl = document.getElementById('nivLobbyBenefits');
+    if (benefitsEl && !benefitsEl.children.length) {
+      benefitsEl.innerHTML = nivLobbyBenefits.map(function(b) {
+        return '<div class="niv-lobby-benefit"><span class="niv-lobby-benefit-check">✓</span><span>' + b + '</span></div>';
+      }).join('');
+    }
+
+    communityMini.classList.add('visible');
+    var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
+    lobbyItems.forEach(function(item, i) {
+      setTimeout(function() { item.classList.add('show'); }, i * 900);
+    });
+    // Los beneficios entran encadenados, rápido pero suave — todos visibles antes de los 3s
+    var benefitRows = communityMini.querySelectorAll('.niv-lobby-benefit');
+    benefitRows.forEach(function(row, i) {
+      setTimeout(function() { row.classList.add('show'); }, 250 + i * 320);
+    });
+  }, 1200);
+
+  // Lobby countdown (6s: alcanza a leer los beneficios sin que se haga eterno)
+  var lobbyTotal = 6;
+  var lobbyCountEl = document.getElementById('nivLobbyCountdown');
+  var lobbyRemaining = lobbyTotal;
+  var lobbyInterval = setInterval(function() {
+    lobbyRemaining--;
+    if (lobbyCountEl) lobbyCountEl.textContent = Math.max(lobbyRemaining, 0);
+    if (lobbyRemaining <= 0) clearInterval(lobbyInterval);
+  }, 1000);
+
+  // Hide community first, then explosion after fade-out
+  setTimeout(function() {
+    clearInterval(dotInterval);
+    clearInterval(lobbyInterval);
+
+    // Smooth hide community mini
+    communityMini.classList.remove('visible');
+    var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item, .niv-lobby-benefit');
+    lobbyItems.forEach(function(item) { item.classList.remove('show'); });
+  }, lobbyTotal * 1000);
+
+  // Explosion fires 1.2s after community starts hiding (fully gone)
+  setTimeout(function() {
+    communityMini.style.display = 'none';
+
+    // Flash burst
+    flashEl.classList.add('fire');
+    setTimeout(function() { flashEl.classList.remove('fire'); }, 800);
+
+    // Spawn explosion particles
+    var stageColors = { skiller:'#b0b0d0', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+    spawnNivParticles(stageColors[stageKey] || '#b0b0d0');
+
+    // Reveal stage name with explosion animation
+    labelEl.textContent = 'TU ETAPA';
+    labelEl.style.animation = '';
+    var dropColor = stageColors[stageKey] || '#b0b0d0';
+    rankEl.style.filter = 'drop-shadow(0 0 60px ' + dropColor + '88)';
+    rankEl.style.animation = 'none';
+    rankEl.textContent = s.name;
+    rankEl.offsetHeight;
+    rankEl.style.animation = 'stageExplodeIn 1s ease forwards';
+    rangeEl.textContent = s.range;
+    rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
+    btnEl.style.transition = 'opacity 0.8s ease 0.8s';
+    btnEl.style.opacity = '1';
+  }, lobbyTotal * 1000 + 1200);
+}
+
+// ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
+const nivValueTeasers = [
+  'Tu diagnóstico incluye <strong>dónde estás hoy</strong>, qué te falta y tu próximo paso concreto.',
+  'Vas a ver el <strong>stack de herramientas exacto</strong> para tu etapa — sin adivinar.',
+  'Al final vas a tener un <strong>mapa claro</strong> de hacia dónde vas — no solo un número.'
+];
+
+// Lo que sigue DESPUÉS del diagnóstico — se muestra mientras analiza para que el lead
+// entienda que está entrando a un ecosistema, no bajando un PDF.
+const nivLobbyBenefits = [
+  '<strong>Q&amp;A en vivo</strong> para resolver tus trabas reales',
+  '<strong>Eventos</strong> y sesiones de construcción en vivo',
+  '<strong>Comunidad de founders</strong> que ya recorrió tu etapa',
+  '<strong>Contenido y plantillas</strong> aplicables desde el día uno',
+  '<strong>Networking</strong> con gente construyendo en serio'
+];
+
+// ─── HELPER: build WhatsApp URL ──────────────
+function buildWaUrl(baseMsg) {
+  return 'https://wa.me/56978048922?text=' + encodeURIComponent(baseMsg);
+}
+
+// El funnel ya no empuja a una call sin filtrar: entra a la comunidad, y desde ahí
+// Patrick califica con los datos del quiz en mano.
+const COMUNIDAD_URL = 'https://chat.whatsapp.com/GgsNoRUVHbfDQ0GySqrmaq';
+function buildComunidadUrl() {
+  return COMUNIDAD_URL;
+}
+
+// ─── DETRACTOR TAGS PER STAGE ─────────────────
+const nivDetractors = {
+  skiller: ['Miedo a dar el salto','Zona de confort','Sin red de apoyo','Par\u00e1lisis por an\u00e1lisis','Ingresos estancados'],
+  operator: ['Burnout constante','Techo de ingresos','Sin delegaci\u00f3n','Prospecci\u00f3n fr\u00eda','Cero automatizaci\u00f3n'],
+  builder: ['Operas solo','Sin documentaci\u00f3n','Crecimiento lineal','Tiempo = dinero','Sin leverage'],
+  founder: ['Micro-management','Sin infraestructura digital','Decisiones reactivas','Equipo dependiente','Sin activos pasivos']
+};
+
+// ─── SISTEMAS POR ÁREA (el QUÉ, sin el CÓMO) ──
+const nivSistemas = {
+  skiller: {
+    areas: [
+      { area: 'Oferta',      sistema: 'Una oferta clara que puedas repetir sin rearmarla' },
+      { area: 'Prospecci\u00f3n', sistema: 'Un canal simple que traiga conversaciones cada semana' },
+      { area: 'Entrega',     sistema: 'Un proceso b\u00e1sico para no quemarte con cada cliente' }
+    ],
+    nota: ''
+  },
+  operator: {
+    areas: [
+      { area: 'Prospecci\u00f3n', sistema: 'Pipeline que no dependa de referidos ni de tu \u00e1nimo' },
+      { area: 'Ventas',      sistema: 'Proceso de cierre repetible, no improvisado por call' },
+      { area: 'Entrega',     sistema: 'M\u00e9todo documentado para no reinventar por cliente' },
+      { area: 'Contenido',   sistema: 'Producci\u00f3n constante sin depender de la inspiraci\u00f3n' }
+    ],
+    nota: 'Hoy probablemente tengas uno o dos. El salto a Builder es tenerlos <strong>los cuatro corriendo a la vez</strong>.'
+  },
+  builder: {
+    areas: [
+      { area: 'Marketing',  sistema: 'Contenido y captaci\u00f3n corriendo sin que t\u00fa los empujes' },
+      { area: 'Ventas',     sistema: 'Calificaci\u00f3n y agenda en autom\u00e1tico, llegas a la call con datos' },
+      { area: 'Entrega',    sistema: 'Onboarding y seguimiento sistematizados' },
+      { area: 'Operaci\u00f3n', sistema: 'Datos y reportes en un solo lugar, no en cinco pesta\u00f1as' },
+      { area: 'Producto',   sistema: 'M\u00e9todo empaquetado y replicable por alguien que no seas t\u00fa' }
+    ],
+    nota: 'Ac\u00e1 la diferencia con Operator no son m\u00e1s herramientas: es tener <strong>un sistema corriendo en cada \u00e1rea</strong>. Cada uno que se activa te devuelve horas. Ese tiempo liberado es el activo, no el ingreso.'
+  },
+  founder: {
+    areas: [
+      { area: 'Equipo',          sistema: 'Gente operando sin pasar cada decisi\u00f3n por ti' },
+      { area: 'Agentes',         sistema: 'IA ejecutando tareas completas, no solo asistiendo' },
+      { area: 'Infraestructura', sistema: 'Activos digitales que generan 24/7' },
+      { area: 'Decisi\u00f3n',      sistema: 'Datos que deciden por ti, no reuniones para decidir' },
+      { area: 'Capital',         sistema: 'Ingresos que no dependen de tu presencia' }
+    ],
+    nota: 'En esta etapa el cuello de botella ya no es el negocio: <strong>eres t\u00fa sosteniendo el control</strong>.'
+  }
+};
+
+// ─── ROADMAP NODES PER STAGE ──────────────────
+const nivRoadmapNodes = {
+  skiller: ['Definir oferta','Primer cliente','Sistema b\u00e1sico','IA aplicada','Ingreso recurrente'],
+  operator: ['Pipeline activo','Subir precio','Automatizar entrega','IA como copiloto','Escala repetible'],
+  builder: ['Documentar m\u00e9todo','Workflows IA','Delegar procesos','Clientes premium','$10K+ mensuales'],
+  founder: ['Agentes aut\u00f3nomos','Equipo operando','Activos digitales','Revenue 24/7','Libertad real']
+};
+
+// ─── ACCORDION TOGGLE ────────────────────────
+function toggleAccordion(btn) {
+  var block = btn.closest('.niv-acc-block');
+  var wasOpen = block.classList.contains('open');
+  block.classList.toggle('open');
+  if (wasOpen) {
+    var prog = block.querySelector('.niv-mini-progress');
+    if (prog) prog.style.width = '0%';
+  }
+}
+
+// ─── RENDER TOOL STACK FOR A STAGE (categorized, no accumulation) ──
+function renderToolStack(stageKey) {
+  var categories = nivTools[stageKey];
+  if (!categories) return '';
+  var html = '<div class="niv-tool-stack"><div class="niv-tool-stack-label">STACK DE ESTA ETAPA</div>';
+  var catKeys = Object.keys(categories);
+  catKeys.forEach(function(cat) {
+    var tools = categories[cat];
+    var itemsHtml = '';
+    tools.forEach(function(t) {
+      if (t.emoji) {
+        itemsHtml += '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>';
+      } else {
+        itemsHtml += '<span class="niv-tool-item"><img src="' + t.icon + '" alt="' + t.name + '" width="16" height="16"> ' + t.name + '</span>';
+      }
+    });
+    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">' + itemsHtml + '</div></div>';
+  });
+
+  // Los sistemas que deberían estar corriendo en su etapa: acá va el QUÉ, nunca el CÓMO.
+  var sis = nivSistemas[stageKey];
+  if (sis) {
+    html += '<div class="niv-sis-label">Sistemas que deber\u00edan estar corriendo</div><div class="niv-sis-list">';
+    sis.areas.forEach(function(a) {
+      html += '<div class="niv-sis-row"><span class="niv-sis-area">' + a.area + '</span>' +
+              '<span class="niv-sis-desc">' + a.sistema + '</span></div>';
+    });
+    html += '</div>';
+    if (sis.nota) html += '<div class="niv-sis-nota">' + sis.nota + '</div>';
+  }
+
+  html += '</div>';
+  return html;
+}
+
+function dismissNivLevelup() {
+  // Prepare result behind overlay first
+  document.getElementById('splash').style.visibility = 'visible';
+  document.querySelector('.splash-inner').classList.add('result-mode');
+  document.getElementById('splash').classList.add('result-mode');
+  document.body.classList.add('result-mode');
+  document.querySelector('.splash-title-wrap').style.display = 'none';
+  window.scrollTo({top: 0, behavior: 'instant'});
+
+  // Fade out overlay smoothly
+  var overlay = document.getElementById('nivLevelup');
+  overlay.style.transition = 'opacity 0.6s ease';
+  overlay.style.opacity = '0';
+  setTimeout(function() {
+    overlay.classList.remove('active');
+    overlay.style.display = 'none';
+    overlay.style.opacity = '';
+    overlay.style.transition = '';
+  }, 600);
+  var stageKey = window._nivStageKey;
+  var s = nivStages[stageKey];
+
+  document.getElementById('nivResult').classList.add('active');
+  var nameEl = document.getElementById('nivStageName');
+  nameEl.textContent = s.name;
+  var grads = {
+    skiller: 'linear-gradient(135deg, #505068 0%, #9090b0 20%, #d8d8f0 50%, #9090b0 80%, #505068 100%)',
+    operator: 'linear-gradient(135deg, #6a4010 0%, #d08030 20%, #ffe0a0 50%, #d08030 80%, #6a4010 100%)',
+    builder: 'linear-gradient(135deg, #1a3a7a 0%, #3a8aee 20%, #a0d0ff 50%, #3a8aee 80%, #1a3a7a 100%)',
+    founder: 'linear-gradient(135deg, #6a5020 0%, #c8a840 20%, #f0d88a 50%, #c8a840 80%, #6a5020 100%)'
+  };
+  nameEl.style.background = grads[stageKey];
+  nameEl.style.backgroundSize = '200% 100%';
+  nameEl.style.webkitBackgroundClip = 'text';
+  nameEl.style.backgroundClip = 'text';
+  nameEl.style.color = 'transparent';
+  nameEl.style.webkitTextFillColor = 'transparent';
+  var c = s.color.startsWith('var(') ? '#b0b0d0' : s.color;
+  nameEl.style.filter = 'drop-shadow(0 4px 24px ' + c + '60)';
+
+  document.getElementById('nivStageRange').textContent = s.range;
+  document.getElementById('nivNow').textContent = s.now;
+  document.getElementById('nivFuture').textContent = s.future;
+
+  // Populate detractor tags
+  var dtagsEl = document.getElementById('nivDetractorTags');
+  var dtags = nivDetractors[stageKey] || [];
+  dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag niv-dtag-hidden">' + t + '</span>'; }).join('');
+  setTimeout(function() {
+    var tags = dtagsEl.querySelectorAll('.niv-dtag');
+    tags.forEach(function(tag, i) {
+      setTimeout(function() { tag.classList.remove('niv-dtag-hidden'); tag.classList.add('niv-dtag-show'); }, i * 600);
+    });
+  }, 2400);
+
+  // Populate mini-roadmap nodes + tool stack
+  var nodes = nivRoadmapNodes[stageKey] || [];
+  var nodesEl = document.getElementById('nivMiniNodes');
+  nodesEl.innerHTML = nodes.map(function(t) {
+    return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
+  }).join('');
+
+  // Inject tool stack after the mini-roadmap inside the "Resultado" accordion body
+  var resultadoBody = document.querySelector('[data-acc="resultado"] .niv-acc-body');
+  if (resultadoBody) {
+    var existingToolStack = resultadoBody.querySelector('.niv-tool-stack');
+    if (!existingToolStack) {
+      resultadoBody.insertAdjacentHTML('beforeend', renderToolStack(stageKey));
+    }
+  }
+
+  // ─── BLOQUE: TOMAR ACCIÓN — CTAs por etapa ──
+  // Único CTA de alta intención: "Agendar llamada". WhatsApp queda solo en el footer.
+  var ctasEl = document.getElementById('nivCtas');
+  var missingEl = document.getElementById('nivMissing');
+
+  if (stageKey === 'skiller') {
+    missingEl.innerHTML = s.missing.replace('h\u00e1bitos, mentalidad y prop\u00f3sito', '<strong style="color:var(--metal3);">h\u00e1bitos, mentalidad y prop\u00f3sito</strong>') + '<br><br style="line-height:2.4;">Por eso el desaf\u00edo de 30 d\u00edas es gratis: <strong style="color:var(--metal3);">si en 30 d\u00edas no llegaste, no fue por falta de informaci\u00f3n.</strong> Empieza ah\u00ed. Cuando ya est\u00e9s vendiendo, conversamos.';
+    ctasEl.innerHTML =
+      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + s.notion + '" target="_blank">\u{1F513} COMENZAR DESAF\u00cdO \u2014 PRIMEROS $1.000 EN 30 D\u00cdAS</a>';
+
+  } else if (stageKey === 'operator') {
+    missingEl.innerHTML = s.missing.replace('El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse', '<strong style="color:var(--metal3);">El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse</strong>');
+    var benefitsHtml = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 encuentras adentro?</div>';
+    nivCallBenefits.operator.forEach(function(b) {
+      benefitsHtml += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
+    });
+    benefitsHtml += '</div>';
+    ctasEl.innerHTML = benefitsHtml +
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Hablar directo con Patrick</a>';
+
+  } else if (stageKey === 'builder') {
+    missingEl.innerHTML = s.missing.replace('yo mismo y mis clientes ya est\u00e1n utilizando', '<strong style="color:var(--metal3);">yo mismo y mis clientes ya est\u00e1n utilizando</strong>');
+    var benefitsHtml2 = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">\u00bfQu\u00e9 encuentras adentro?</div>';
+    nivCallBenefits.builder.forEach(function(b) {
+      benefitsHtml2 += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
+    });
+    benefitsHtml2 += '</div>';
+    ctasEl.innerHTML = benefitsHtml2 +
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Hablar directo con Patrick</a>';
+
+  } else if (stageKey === 'founder') {
+    missingEl.innerHTML = s.missing.replace('es una conversaci\u00f3n directa', '<strong style="color:var(--metal3);">es una conversaci\u00f3n directa</strong>');
+    ctasEl.innerHTML =
+      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Quiero unirme a la comunidad</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + buildWaUrl(s.wa) + '" target="_blank">\u{1F4AC} Hablar directo con Patrick</a>';
+  }
+
+  // Update footer CTA + countdown CTA with stage-specific WhatsApp message
+  var footerCta = document.getElementById('nivFooterCta');
+  if (footerCta && s.wa) {
+    footerCta.href = buildWaUrl(s.wa);
+  }
+
+  // Show and configure calculator
+  var calcEl = document.getElementById('nivCalculator');
+  if (calcEl) {
+    calcEl.style.display = 'block';
+    window._nivCalcTarget = nivCalcTargets[stageKey] || 3000;
+    document.getElementById('nivCalcInput').value = '';
+    document.getElementById('nivCalcResult').textContent = '';
+    document.getElementById('nivCalcTip').textContent = '';
+  }
+
+  // Staggered reveal
+  var revealEls = document.querySelectorAll('#nivResult > *');
+  revealEls.forEach(function(el, i) {
+    el.classList.add('reveal', 'reveal-d' + Math.min(i, 8));
+  });
+
+  // Auto-open accordions sequentially
+  var allBlocks = document.querySelectorAll('.niv-acc-block');
+  allBlocks.forEach(function(block, i) {
+    setTimeout(function() { block.classList.add('open'); }, 1800 + i * 1200);
+  });
+
+  // Update stage bars
+  updateStageBars(stageKey);
+
+  // Entrada suave bloque por bloque + pulso de la flecha (todo al scrollear, pensado para mobile)
+  setTimeout(function() {
+    setupNivSoftReveal();
+    setupNivArrowHint();
+  }, 300);
+
+  // Show founder quotes after accordions open
+  setTimeout(function() {
+    showFounderQuotes();
+    // La sección de urgencia recién existe acá (venía en display:none) — la sumamos al observer
+    setupNivSoftReveal();
+  }, 5000);
+}
+
+// ─── FILTRO DE CASOS POR RUBRO ──────────────
+function filterNivCases(market, btn) {
+  var grid = document.getElementById('nivCasesGrid');
+  if (!grid) return;
+
+  var tabs = document.querySelectorAll('#nivCasesTabs .niv-cases-tab');
+  tabs.forEach(function(t) { t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+
+  // Con un rubro puntual los casos caen en una sola columna, en hilera
+  grid.classList.toggle('filtered', market !== 'todos');
+
+  var cases = grid.querySelectorAll('.niv-case');
+  var shown = 0;
+  cases.forEach(function(el) {
+    var match = (market === 'todos') || el.getAttribute('data-market') === market;
+    el.classList.remove('is-entering');
+    if (!match) { el.classList.add('is-hidden'); return; }
+    el.classList.remove('is-hidden');
+    void el.offsetWidth; // reflow: reinicia la animación en cada cambio de tab
+    el.style.animationDelay = (shown * 60) + 'ms';
+    el.classList.add('is-entering');
+    shown++;
+  });
+}
+
+// ─── ENTRADA SUAVE POR BLOQUES (mobile: lento, sin abrumar) ──
+// Sin IntersectionObserver: chequeo manual en scroll/resize. Es determinista y, sobre todo,
+// tiene red de seguridad — si algo falla, igual se revela todo (nunca una página en blanco).
+var _nivRevealBound = false;
+var _nivRevealTick = false;
+
+function nivRevealInView() {
+  var targets = document.querySelectorAll('#nivResult .reveal:not(.revealed)');
+  if (!targets.length) return true; // ya no queda nada por revelar
+  var vh = window.innerHeight || document.documentElement.clientHeight;
+  targets.forEach(function(el) {
+    var r = el.getBoundingClientRect();
+    // Visible si cualquier parte del bloque entró en pantalla (con un margen de 8% abajo)
+    var entered = r.top < vh * 0.92 && r.bottom > 0;
+    if (entered) el.classList.add('revealed');
+  });
+  return document.querySelectorAll('#nivResult .reveal:not(.revealed)').length === 0;
+}
+
+function setupNivSoftReveal() {
+  if (!document.querySelectorAll('#nivResult .reveal:not(.revealed)').length) return;
+
+  nivRevealInView();
+
+  if (!_nivRevealBound) {
+    _nivRevealBound = true;
+    var onScroll = function() {
+      if (_nivRevealTick) return;
+      _nivRevealTick = true;
+      window.requestAnimationFrame(function() {
+        _nivRevealTick = false;
+        nivRevealInView();
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  }
+
+  // Red de seguridad: pase lo que pase, a los 6s no queda nada invisible
+  setTimeout(function() {
+    document.querySelectorAll('#nivResult .reveal:not(.revealed)').forEach(function(el) {
+      el.classList.add('revealed');
+    });
+  }, 6000);
+}
+
+// La flecha de la calculadora late suave cuando el bloque entra en pantalla
+var _nivArrowFired = false;
+function setupNivArrowHint() {
+  var calc = document.getElementById('nivCalculator');
+  var arrow = document.getElementById('nivCalcNext');
+  if (!calc || !arrow || _nivArrowFired) return;
+
+  var check = function() {
+    if (_nivArrowFired) return;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var r = calc.getBoundingClientRect();
+    if (r.top < vh * 0.75 && r.bottom > 0) {
+      _nivArrowFired = true;
+      arrow.classList.add('niv-arrow-hint');
+      setTimeout(function() { arrow.classList.remove('niv-arrow-hint'); }, 5600);
+      window.removeEventListener('scroll', check);
+    }
+  };
+  check();
+  window.addEventListener('scroll', check, { passive: true });
+}
+
+// ─── FOUNDER QUOTES (decisión, leverage, construir, propósito) ──
+var nivFounderQuotes = [
+  { text: '\u201cLa \u00fanica decisi\u00f3n que importa es la que tomas cuando nadie te est\u00e1 mirando.\u201d', author: 'Naval Ravikant' },
+  { text: '\u201cEl leverage es lo que separa a quien trabaja 80 horas de quien genera mientras duerme.\u201d', author: 'Alex Hormozi' },
+  { text: '\u201cNo construyas un negocio que te atrape. Construye uno que te libere.\u201d', author: 'Naval Ravikant' },
+  { text: '\u201cSab\u00eda que si fallaba no me arrepentir\u00eda. Lo \u00fanico de lo que podr\u00eda arrepentirme es de no haberlo intentado.\u201d', author: 'Jeff Bezos' },
+  { text: '\u201cLa restricci\u00f3n de cualquier negocio siempre es el due\u00f1o. Crece t\u00fa primero.\u201d', author: 'Alex Hormozi' },
+  { text: '\u201cEl prop\u00f3sito no se encuentra. Se construye todos los d\u00edas con cada decisi\u00f3n que tomas.\u201d', author: 'Jeff Bezos' }
+];
+
+var _quoteIdx = 0;
+var _quoteAutoInterval = null;
+
+function showFounderQuotes() {
+  var section = document.getElementById('nivUrgency');
+  var container = document.getElementById('nivUrgencyQuotes');
+  if (!section || !container) return;
+
+  var quotes = nivFounderQuotes;
+  var cardsHtml = quotes.map(function(q) {
+    return '<div class="niv-quote-card">' +
+      '<div class="niv-quote-card-text">' + q.text + '</div>' +
+      '<div class="niv-quote-card-author">\u2014 ' + q.author + '</div>' +
+    '</div>';
+  }).join('');
+
+  var dotsHtml = quotes.map(function(_, i) {
+    return '<span class="niv-quote-dot' + (i === 0 ? ' active' : '') + '" onclick="goToQuote(' + i + ')"></span>';
+  }).join('');
+
+  container.innerHTML =
+    '<div class="niv-quote-carousel">' +
+      '<div class="niv-quote-track" id="nivQuoteTrack">' + cardsHtml + '</div>' +
+    '</div>' +
+    '<div class="niv-quote-dots" id="nivQuoteDots">' + dotsHtml + '</div>' +
+    '<div class="niv-quote-arrows">' +
+      '<button class="niv-quote-arrow" onclick="quoteNav(-1)">\u2190</button>' +
+      '<button class="niv-quote-arrow" onclick="quoteNav(1)">\u2192</button>' +
+    '</div>';
+
+  // Enable swipe on mobile
+  var track = document.getElementById('nivQuoteTrack');
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) quoteNav(dx < 0 ? 1 : -1);
+  }, {passive:true});
+
+  // Auto-rotate every 5s
+  _quoteIdx = 0;
+  clearInterval(_quoteAutoInterval);
+  _quoteAutoInterval = setInterval(function() { quoteNav(1); }, 5000);
+
+  section.style.display = 'block';
+  setupChartObserver();
+}
+
+function goToQuote(idx) {
+  _quoteIdx = idx;
+  var track = document.getElementById('nivQuoteTrack');
+  var dots = document.querySelectorAll('#nivQuoteDots .niv-quote-dot');
+  if (!track) return;
+  track.style.transform = 'translateX(-' + (_quoteIdx * 100) + '%)';
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === _quoteIdx); });
+  // Reset auto interval
+  clearInterval(_quoteAutoInterval);
+  _quoteAutoInterval = setInterval(function() { quoteNav(1); }, 5000);
+}
+
+function quoteNav(dir) {
+  var total = nivFounderQuotes.length;
+  _quoteIdx = (_quoteIdx + dir + total) % total;
+  goToQuote(_quoteIdx);
+}
+
+var _chartAnimated = false;
+// Mismo criterio que el reveal: chequeo por scroll + red de seguridad, para que el
+// gráfico nunca quede vacío si el observer no dispara.
+function setupChartObserver() {
+  var chart = document.getElementById('nivIncomeChart');
+  if (!chart || _chartAnimated) return;
+
+  var draw = function() {
+    if (_chartAnimated) return;
+    _chartAnimated = true;
+    animateIncomeChart();
+    window.removeEventListener('scroll', check);
+  };
+
+  var check = function() {
+    if (_chartAnimated) return;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var r = chart.getBoundingClientRect();
+    if (r.top < vh * 0.85 && r.bottom > 0) draw();
+  };
+
+  check();
+  window.addEventListener('scroll', check, { passive: true });
+  // Si por lo que sea nunca se detecta, se dibuja igual
+  setTimeout(draw, 8000);
+}
+
+function animateIncomeChart() {
+  var xMin = 40, xMax = 420, yMin = 20, yMax = 180;
+  var xRange = xMax - xMin;
+  var yRange = yMax - yMin;
+  var intervals = 10;
+  var xStep = xRange / intervals;
+
+  // Escala lineal — la logarítmica aplastaba la distancia real entre quedarte
+  // estancado en $3-5K y llegar a $20-50K, que es justo lo que este gráfico
+  // tiene que mostrar (el "hockey stick" del founder vs. el techo del empleado)
+  var valMin = 0;
+  var valMax = 55000;
+  function yFor(val) {
+    var v = Math.max(val, 0);
+    return yMax - ((v - valMin) / (valMax - valMin)) * yRange;
+  }
+  function xFor(i) { return xMin + i * xStep; }
+
+  // Employee: gradual climb, caps at $4.5K (log scale makes flat visible)
+  var empData = [100, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 4500, 4500, 4500];
+
+  // Founder: volatile with dips, reaches $50K year 5
+  var founderData = [100, 500, 1800, 1200, 4000, 2800, 7000, 12000, 9000, 22000, 50000];
+
+  var empPoints = empData.map(function(v, i) { return xFor(i) + ',' + yFor(v); }).join(' ');
+  var founderPoints = founderData.map(function(v, i) { return xFor(i) + ',' + yFor(v); }).join(' ');
+
+  var areaD = 'M' + xFor(0) + ',' + yMax;
+  founderData.forEach(function(v, i) { areaD += ' L' + xFor(i) + ',' + yFor(v); });
+  areaD += ' L' + xFor(intervals) + ',' + yMax + ' Z';
+
+  var dotsEmpHtml = '';
+  var dotsFounderHtml = '';
+  var eLabels = ['','$1.5K','','','$3K','','','$4.5K','','','$4.5K'];
+  var fLabels = ['','','$1.8K','','$4K','','$7K','$12K','','$22K','$50K'];
+  empData.forEach(function(v, i) {
+    var cy = yFor(v);
+    dotsEmpHtml += '<circle class="niv-chart-dot-employee" cx="' + xFor(i) + '" cy="' + cy + '" r="3"/>';
+    if (eLabels[i]) dotsEmpHtml += '<text class="niv-chart-dot-employee" x="' + xFor(i) + '" y="' + (cy + 14) + '" fill="rgba(224,53,53,0.6)" font-size="7" text-anchor="middle" font-family="Inter">' + eLabels[i] + '</text>';
+  });
+  founderData.forEach(function(v, i) {
+    var cy = yFor(v);
+    dotsFounderHtml += '<circle class="niv-chart-dot-founder" cx="' + xFor(i) + '" cy="' + cy + '" r="3"/>';
+    if (fLabels[i]) dotsFounderHtml += '<text class="niv-chart-dot-founder" x="' + xFor(i) + '" y="' + (cy - 8) + '" fill="rgba(56,176,104,0.7)" font-size="7" text-anchor="middle" font-family="Inter">' + fLabels[i] + '</text>';
+  });
+
+  document.getElementById('nivChartEmployee').setAttribute('points', empPoints);
+  document.getElementById('nivChartFounder').setAttribute('points', founderPoints);
+  document.getElementById('nivChartAreaFounder').setAttribute('d', areaD);
+  document.getElementById('nivChartDotsEmployee').innerHTML = dotsEmpHtml;
+  document.getElementById('nivChartDotsFounder').innerHTML = dotsFounderHtml;
+
+  var ceil = document.getElementById('nivChartCeiling');
+  var ceilY = yFor(4500);
+  ceil.setAttribute('x', xFor(9) + 8);
+  ceil.setAttribute('y', ceilY + 3);
+
+  setTimeout(function() {
+    document.getElementById('nivChartEmployee').classList.add('animate');
+    document.getElementById('nivChartFounder').classList.add('animate');
+    document.getElementById('nivChartAreaFounder').classList.add('animate');
+    var allDots = document.querySelectorAll('.niv-chart-dot-employee, .niv-chart-dot-founder');
+    allDots.forEach(function(dot, i) {
+      setTimeout(function() { dot.classList.add('animate'); }, 200 + i * 120);
+    });
+    ceil.style.transition = 'opacity 1s ease 2.5s';
+    ceil.style.opacity = '1';
+  }, 300);
+}
+
+// ─── INCOME CALCULATOR ──────────────────────
+function ctaSplash(e) {
+  if(navigator.vibrate) navigator.vibrate([30,50,30]);
+  var btn = e.currentTarget;
+  btn.classList.add('splash-active');
+  // Ripple from click/tap
+  var ripple = document.createElement('div');
+  ripple.className = 'niv-cta-ripple';
+  var rect = btn.getBoundingClientRect();
+  ripple.style.left = (rect.left + rect.width/2 - 150) + 'px';
+  ripple.style.top = (rect.top + rect.height/2 - 150) + 'px';
+  document.body.appendChild(ripple);
+  setTimeout(function() { ripple.remove(); }, 700);
+  setTimeout(function() { btn.classList.remove('splash-active'); }, 500);
+  // Small delay before nav so user sees splash
+  e.preventDefault();
+  var href = btn.href;
+  setTimeout(function() { window.open(href, '_blank'); }, 300);
+}
+
+function calcStep(delta) {
+  var input = document.getElementById('nivCalcInput');
+  var val = parseInt(input.value) || 0;
+  val = Math.max(0, val + delta);
+  input.value = val;
+  if(navigator.vibrate) navigator.vibrate(10);
+  updateCalculator();
+}
+
+function updateCalculator() {
+  var price = parseFloat(document.getElementById('nivCalcInput').value) || 0;
+  var target = window._nivCalcTarget || 3000;
+  var resultEl = document.getElementById('nivCalcResult');
+  var tipEl = document.getElementById('nivCalcTip');
+
+  if (price <= 0) {
+    resultEl.textContent = '';
+    tipEl.textContent = '';
+    return;
+  }
+
+  var clients = Math.ceil(target / price);
+  resultEl.innerHTML = 'Necesitas <span style="font-size:clamp(24px,5vw,36px);font-weight:900;color:var(--green);display:block;margin:8px 0;">' + clients + ' clientes</span> para llegar a $' + target.toLocaleString() + '/mes';
+
+  if (clients > 30) {
+    var suggestedPrice = Math.ceil(target / 10);
+    tipEl.textContent = 'Tip: sube tu ticket. Con $' + suggestedPrice + ' solo necesitas 10 clientes.';
+  } else {
+    tipEl.textContent = '';
+  }
+}
+
+function updateStageBars(activeStage) {
+  var stages = ['skiller','operator','builder','founder'];
+  var activeIdx = stages.indexOf(activeStage);
+  var stageColors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+
+  var bar = document.getElementById('nivStageBar2');
+  if (!bar) return;
+
+  if (!bar.children.length) {
+    bar.innerHTML = stages.map(function(s, i) {
+      return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
+        '<div class="niv-stage-bar-color" style="background:' + stageColors[s] + '"></div>' +
+        '<span><span class="niv-stage-num">0' + (i+1) + '</span><span>' + s.toUpperCase() + '</span></span></div>';
+    }).join('');
+  }
+  bar.style.display = 'flex';
+
+  var items = bar.querySelectorAll('.niv-stage-bar-item');
+  items.forEach(function(item, i) {
+    item.classList.remove('active','completed');
+    if (i === activeIdx) item.classList.add('active');
+    else if (i < activeIdx) item.classList.add('completed');
+  });
+}
+
+function spawnNivParticles(color) {
+  var container = document.getElementById('nivLevelupParticles');
+  container.innerHTML = '';
+  var cx = window.innerWidth / 2;
+  var cy = window.innerHeight / 2;
+  // Bigger explosion: 60 particles, wider spread
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement('div');
+    p.className = 'nlp';
+    p.style.left = cx + 'px';
+    p.style.top = cy + 'px';
+    p.style.background = color;
+    p.style.width = (2 + Math.random() * 4) + 'px';
+    p.style.height = p.style.width;
+    var angle = Math.random() * Math.PI * 2;
+    var dist = 100 + Math.random() * 350;
+    p.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+    p.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+    p.style.setProperty('--dur', (0.5 + Math.random() * 1.2) + 's');
+    container.appendChild(p);
+  }
+}
+
+function nivGoBack() {
+  if (nivStep > 0) {
+    nivStep--;
+    nivScores.pop();
+    nivAnswers.pop();
+    renderNivQuestion();
+  }
+}
+
+// ─── FLOATING PARTICLES ────────────────────
+(function() {
+  var container = document.getElementById('particles');
+  if (!container) return;
+  for (var i = 0; i < 20; i++) {
+    var p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = '-10px';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 3) + 'px';
+    container.appendChild(p);
+  }
+})();
+
+window.addEventListener('load', function() {
+  document.body.classList.add('splash-active');
+  var previewBar = document.getElementById('nivStageBarPreview');
+  if (previewBar) {
+    var stages = ['skiller','operator','builder','founder'];
+    var colors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+    var ranges = { skiller:'$0\u2013$1.5K', operator:'$1.5K\u2013$3K', builder:'$3K\u2013$10K', founder:'$10K+' };
+    previewBar.innerHTML = stages.map(function(s, i) {
+      return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
+        '<div class="niv-stage-bar-color" style="background:' + colors[s] + '"></div>' +
+        '<span><span class="niv-stage-num">0' + (i+1) + '</span><span>' + s.toUpperCase() + '</span><span style="font-size:6px;color:var(--text-disabled);letter-spacing:0.05em;">' + ranges[s] + '</span></span></div>';
+    }).join('');
+  }
+});
+</script>
+</body>
+</html>
