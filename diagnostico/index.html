@@ -73,34 +73,34 @@
 <style>
 :root {
   /* Backgrounds (brand depth hierarchy) */
-  --bg:    #0a0a0f;
-  --bg2:   #0f0f16;
-  --bg3:   #141420;
-  --bg4:   #1c1c2a;
-  --bg5:   #242435;
+  --bg:    #190f12;
+  --bg2:   #1d1114;
+  --bg3:   #241619;
+  --bg4:   #2c1b1f;
+  --bg5:   #371f24;
   /* Borders */
-  --border:  #1e1e2e;
-  --border2: #2a2a3e;
-  --border3: #3a3a55;
+  --border:  #2e1d20;
+  --border2: #3e2528;
+  --border3: #512f33;
   /* Metallic scale */
-  --metal0: #606078;
-  --metal1: #8888a8;
-  --metal2: #b0b0d0;
-  --metal3: #d8d8f0;
-  --metal4: #f0f0ff;
+  --metal0: #7d6663;
+  --metal1: #a08a86;
+  --metal2: #ddcdc9;
+  --metal3: #faf4f2;
+  --metal4: #fffaf8;
   /* Text hierarchy */
-  --text-primary:   #e8e8f8;
-  --text-secondary: #a0a0c0;
-  --text-muted:     #606080;
-  --text-disabled:  #404058;
+  --text-primary:   #faf4f2;
+  --text-secondary: #ddcdc9;
+  --text-muted:     #b09a96;
+  --text-disabled:  #7d6663;
   /* Accents */
-  --red:      #e03535;
-  --red-glow: rgba(224,53,53,0.4);
-  --red-dim:  #a02020;
+  --red:      #e0342f;
+  --red-glow: rgba(224,52,47,0.42);
+  --red-dim:  #96211d;
   --green:      #38b068;
   --green-glow: rgba(56,176,104,0.35);
-  --electric:        #4466ff;
-  --electric-bright: #6688ff;
+  --electric:        #ff7a63;
+  --electric-bright: #ff9d85;
   --electric-glow:   rgba(68,102,255,0.4);
   --gold:        #c8a84a;
   --gold-bright: #ffe08a;
@@ -108,8 +108,8 @@
   --purple:      #7755ff;
   --purple-glow: rgba(119,85,255,0.35);
   /* Gradients */
-  --metal-grad:  linear-gradient(135deg, #6060a0 0%, #9898c8 20%, #d8d8f0 50%, #9898c8 80%, #6060a0 100%);
-  --metal-grad2: linear-gradient(90deg, #404060 0%, #8080a8 40%, #c0c0e0 50%, #8080a8 60%, #404060 100%);
+  --metal-grad:  linear-gradient(135deg, #7d6663 0%, #c0a9a5 20%, #faf4f2 50%, #c0a9a5 80%, #7d6663 100%);
+  --metal-grad2: linear-gradient(90deg, #4a3134 0%, #96817d 40%, #e8dad7 50%, #96817d 60%, #4a3134 100%);
   --electric-grad: linear-gradient(135deg, #2244cc 0%, #4466ff 30%, #88aaff 50%, #4466ff 70%, #2244cc 100%);
   --gold-grad: linear-gradient(135deg, #8a6a20 0%, #c8a84a 30%, #f0d88a 50%, #c8a84a 70%, #8a6a20 100%);
 }
@@ -131,8 +131,8 @@ button, .niv-cta, .niv-calc-arrow, .niv-cases-tab, .niv-opt {
 body {
   background: var(--bg);
   background-image:
-    linear-gradient(rgba(46,46,62,0.4) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(46,46,62,0.4) 1px, transparent 1px);
+    linear-gradient(rgba(74,46,48,0.38) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74,46,48,0.38) 1px, transparent 1px);
   background-size: 40px 40px;
   background-attachment: fixed;
   position: relative;
@@ -280,13 +280,13 @@ body.result-mode {
   letter-spacing: -0.04em;
   background: linear-gradient(160deg,
     #606080 0%,
-    #9090b0 12%,
+    #a08a86 12%,
     #d0d0f0 28%,
     #f4f4ff 48%,
     #e0e0f8 58%,
     #a8a8c8 76%,
     #707090 90%,
-    #9090b0 100%);
+    #a08a86 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -681,17 +681,17 @@ body.result-mode {
 }
 .niv-levelup-btn {
   padding:14px 36px;
-  background:transparent;
-  border:1px solid rgba(200,168,74,0.3);
-  color:var(--gold-bright);
-  font-family:'Inter Tight',sans-serif;
-  font-size:10px;
+  background:var(--red);
+  border:1px solid var(--red);
+  color:#fff;
+  font-family:var(--f-display);
+  font-size:11px;
   font-weight:700;
   letter-spacing:0.25em;
   text-transform:uppercase;
   cursor:pointer;
   transition:all 0.2s;
-  animation:btnGoldGlow 2.5s ease-in-out infinite;
+  box-shadow:0 0 28px rgba(224,52,47,0.3);
 }
 .niv-levelup-btn:hover {
   color:#fff;
@@ -764,16 +764,16 @@ body.result-mode {
 /* ─── CTA AGENDAR LLAMADA (azul = alta intención; el verde queda solo para WhatsApp) ─── */
 @keyframes callPulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(58,159,255,0.40), 0 4px 20px rgba(58,159,255,0.28); }
-  50% { box-shadow: 0 0 0 8px rgba(58,159,255,0), 0 6px 30px rgba(58,159,255,0.45); }
+  50% { box-shadow: 0 0 0 8px rgba(58,159,255,0), 0 6px 30px rgba(224,52,47,0.45); }
 }
 .niv-cta-call {
-  background:#2b7fd4; color:#fff;
+  background:#c42a26; color:#fff;
   animation: callPulse 2.8s ease-in-out infinite;
   position:relative;
 }
 .niv-cta-call:hover {
-  box-shadow:0 0 0 2px #3a9fff, 0 8px 40px rgba(58,159,255,0.45) !important;
-  background:#3a9fff;
+  box-shadow:0 0 0 2px #ff5a3c, 0 8px 40px rgba(224,52,47,0.45) !important;
+  background:#ff5a3c;
 }
 @media(min-width:768px) { .niv-cta-call { margin-top:8px; } }
 
@@ -1254,7 +1254,7 @@ body.result-mode {
   background:rgba(232,140,48,0.08);
 }
 .niv-case-stage.stage-op-bu {
-  color:#3a9fff;
+  color:#ff5a3c;
   border:1px solid rgba(58,159,255,0.3);
   background:rgba(58,159,255,0.08);
 }
@@ -1903,7 +1903,7 @@ body.result-mode {
   letter-spacing:0.04em;
   color:#fff;
   text-decoration:none;
-  background:linear-gradient(135deg, #1c5fa8 0%, #2b7fd4 40%, #4aa3f0 50%, #2b7fd4 60%, #1c5fa8 100%);
+  background:linear-gradient(135deg, #8c1a16 0%, #c42a26 40%, #ff7a63 50%, #c42a26 60%, #8c1a16 100%);
   background-size:200% 100%;
   animation:titleShimmer 4s ease-in-out infinite;
   border:1px solid rgba(74,163,240,0.35);
@@ -2250,6 +2250,36 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
   letter-spacing: 0.01em;
   font-variant-numeric: tabular-nums;
 }
+
+/* ─── CAPTURA EN DOS PASOS ─────────────────────
+   Un dato por pantalla. En móvil, tres campos juntos se leen como
+   formulario y se abandonan; uno solo se contesta. */
+.niv-cap-step { display:none; flex-direction:column; align-items:center;
+  gap:14px; max-width:340px; margin:0 auto; width:100%; }
+.niv-cap-step.active { display:flex; animation:capIn .22s ease both; }
+@keyframes capIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+.niv-cap-count { font-family:var(--f-dato); font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--text-muted); }
+.niv-cap-sub { font-size:13.5px; color:var(--text-secondary); text-align:center;
+  margin:0 0 4px; max-width:30ch; }
+.niv-cap-back { background:none; border:none; color:var(--text-muted);
+  font-family:var(--f-texto); font-size:12.5px; cursor:pointer; padding:6px; }
+.niv-cap-back:hover { color:var(--text-secondary); }
+.niv-cap-step .niv-lead-input { width:100%; }
+.niv-cap-step .niv-levelup-btn { width:100%; max-width:100%; }
+.niv-cap-error { font-family:var(--f-texto); font-size:12.5px; color:var(--red);
+  min-height:16px; text-align:center; }
+
+/* el arroba vive en la caja, no en el placeholder: así el dato sale limpio */
+.niv-ig-row { display:flex; align-items:stretch; width:100%;
+  border:1px solid var(--border2); border-radius:2px; background:var(--bg3);
+  overflow:hidden; transition:border-color .18s; }
+.niv-ig-row:focus-within { border-color:var(--red); }
+.niv-ig-at { display:flex; align-items:center; padding:0 2px 0 14px;
+  font-family:var(--f-dato); font-size:16px; color:var(--text-muted); }
+.niv-ig-row .niv-ig-input { border:none !important; background:transparent !important;
+  padding-left:2px !important; }
+.niv-ig-row .niv-ig-input:focus { border:none !important; }
 </style>
 </head>
 <body class="splash-active">
@@ -2265,7 +2295,7 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">Construye un negocio que venda m&aacute;s,</span> <span class="tl">recuperando tiempo y capital</span><span class="tl tl-c">implementando sistemas de growth con IA.</span></p>
+      <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">Recibe un diagn&oacute;stico completo</span> <span class="tl">para apalancarte con IA</span><span class="tl tl-c">y escalar tus ventas.</span></p>
       <p class="splash-subline niv-home-reveal niv-home-d2">Hoy los negocios que escalan no lo hacen con equipo,<br>lo hacen con <strong>infraestructura en cada &aacute;rea</strong>:</p>
 
       <!-- Las 12 áreas: el founder no las inventa, las copia y las implementa -->
@@ -2278,7 +2308,7 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
         <button class="niv-start-btn" onclick="startNivelador()">
           COMENZAR DIAGN&Oacute;STICO&nbsp; &#x1F9ED;
         </button>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">5 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
+        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">6 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
       </div>
       <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
         <div class="niv-rubros">
@@ -2307,17 +2337,38 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 
     <!-- LEAD CAPTURE — antes de mostrar la etapa, no después -->
     <div class="niv-wrap" id="nivCapture">
-      <div class="niv-question" style="margin-bottom:6px;">Ya casi está tu diagnóstico</div>
-      <p style="font-size:13px;color:var(--text-secondary);text-align:center;margin:0 0 24px;">¿Cómo te lo enviamos?</p>
-      <form id="nivLeadForm" onsubmit="submitNivLead(event)" style="display:flex;flex-direction:column;gap:14px;max-width:320px;margin:0 auto;width:100%;">
-        <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre" autocomplete="name" required>
-        <div class="niv-phone-row">
-          <select class="niv-country-select" id="nivLeadCountry"></select>
-          <input class="niv-lead-input" id="nivLeadPhone" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" inputmode="numeric" required>
+      <form id="nivLeadForm" onsubmit="capSubmit(event)" autocomplete="on" novalidate>
+
+        <!-- paso 1 de 2 -->
+        <div class="niv-cap-step active" data-cap="ig">
+          <div class="niv-cap-count">Paso 1 de 2</div>
+          <div class="niv-question">&iquest;Cu&aacute;l es tu Instagram?</div>
+          <p class="niv-cap-sub">Para mirar tu negocio antes de armarte el diagn&oacute;stico.</p>
+          <div class="niv-ig-row">
+            <span class="niv-ig-at">@</span>
+            <input class="niv-lead-input niv-ig-input" id="nivLeadInstagram" type="text"
+                   placeholder="tunegocio" autocomplete="off" autocapitalize="off"
+                   spellcheck="false" enterkeyhint="next">
+          </div>
+          <div class="niv-cap-error" id="nivErrIg"></div>
+          <button class="niv-levelup-btn" type="submit">Siguiente &rarr;</button>
         </div>
-        <input class="niv-lead-input" id="nivLeadInstagram" type="text" placeholder="@tu.instagram" autocomplete="off" required>
-        <button class="niv-levelup-btn" type="submit" style="align-self:center;margin-top:6px;">Ver mi diagnóstico →</button>
-        <div class="niv-lead-note">Para armar tu diagnóstico personalizado — nada de spam.</div>
+
+        <!-- paso 2 de 2 -->
+        <div class="niv-cap-step" data-cap="wa">
+          <div class="niv-cap-count">Paso 2 de 2</div>
+          <div class="niv-question">&iquest;A qu&eacute; WhatsApp te lo env&iacute;o?</div>
+          <p class="niv-cap-sub">Llega en minutos. Nada de spam.</p>
+          <div class="niv-phone-row">
+            <select class="niv-country-select" id="nivLeadCountry" onchange="capPais(true)"></select>
+            <input class="niv-lead-input" id="nivLeadPhone" type="tel"
+                   autocomplete="tel" inputmode="numeric" enterkeyhint="go">
+          </div>
+          <div class="niv-cap-error" id="nivErrWa"></div>
+          <button class="niv-levelup-btn" type="submit">Ver mi diagn&oacute;stico &rarr;</button>
+          <button class="niv-cap-back" type="button" onclick="capPrev()">&larr; Volver</button>
+        </div>
+
       </form>
     </div>
 
@@ -2605,6 +2656,15 @@ const nivQuestions = [
     ]
   },
   {
+    q: '\u00bfC\u00f3mo traes clientes hoy?',
+    opts: [
+      { text: 'Solo referidos', score: 1 },
+      { text: 'Contenido lifestyle', score: 2 },
+      { text: 'Contenido para vender', score: 3 },
+      { text: 'Anuncios en Meta', score: 4 }
+    ]
+  },
+  {
     q: '\u00bfQu\u00e9 nivel de uso de IA tienes hoy?',
     opts: [
       { text: 'No uso IA todav\u00eda', score: 1 },
@@ -2633,7 +2693,7 @@ const nivStages = {
     wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
   },
   builder: {
-    name: 'BUILDER', range: '$3,000 \u2013 $10,000/mes', color: '#3a9fff',
+    name: 'BUILDER', range: '$3,000 \u2013 $10,000/mes', color: '#ff5a3c',
     now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica m\u00e1s horas tuyas y no puedes crecer sin quemarte.',
     future: 'Automatizaste tus procesos clave, documentaste tu m\u00e9todo y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
     missing: 'Puedes acceder a recursos, m\u00f3dulos, plantillas, workflows y sistemas validados que actualmente yo mismo y mis clientes ya est\u00e1n utilizando. No necesitas reventar tokens ni seguir frustr\u00e1ndote solo.',
@@ -2753,21 +2813,61 @@ let nivScores = [];
 
 // Países donde vemos mayor oportunidad de consultoría — evita que el lead tenga que escribir el código de país a mano
 const nivCountries = [
-  { code: '+56', flag: '🇨🇱', label: 'Chile' },
-  { code: '+51', flag: '🇵🇪', label: 'Perú' },
-  { code: '+57', flag: '🇨🇴', label: 'Colombia' },
-  { code: '+52', flag: '🇲🇽', label: 'México' },
-  { code: '+1',  flag: '🇺🇸', label: 'EE.UU.' },
-  { code: '+54', flag: '🇦🇷', label: 'Argentina' },
-  { code: '+593', flag: '🇪🇨', label: 'Ecuador' }
+  { code:'+56', flag:'\u{1F1E8}\u{1F1F1}', label:'Chile',     grupos:[1,4,4], ej:'9 1234 5678',  min:9 },
+  { code:'+57', flag:'\u{1F1E8}\u{1F1F4}', label:'Colombia',  grupos:[3,3,4], ej:'300 123 4567', min:10 },
+  { code:'+54', flag:'\u{1F1E6}\u{1F1F7}', label:'Argentina', grupos:[2,4,4], ej:'11 1234 5678', min:10 },
+  { code:'+51', flag:'\u{1F1F5}\u{1F1EA}', label:'Per\u00fa', grupos:[3,3,3], ej:'912 345 678',  min:9 },
+  { code:'+52', flag:'\u{1F1F2}\u{1F1FD}', label:'M\u00e9xico', grupos:[2,4,4], ej:'55 1234 5678', min:10 },
+  { code:'+1',  flag:'\u{1F1FA}\u{1F1F8}', label:'EE.UU.',    grupos:[3,3,4], ej:'555 123 4567', min:10 }
 ];
+
+function paisActual() {
+  var sel = document.getElementById('nivLeadCountry');
+  var code = sel ? sel.value : '+56';
+  for (var i = 0; i < nivCountries.length; i++) {
+    if (nivCountries[i].code === code) return nivCountries[i];
+  }
+  return nivCountries[0];
+}
+
+// Agrupa los dígitos como se escribe un teléfono en ese país.
+function fmtTel(digitos, grupos) {
+  var out = [], i = 0;
+  for (var g = 0; g < grupos.length && i < digitos.length; g++) {
+    out.push(digitos.substr(i, grupos[g]));
+    i += grupos[g];
+  }
+  if (i < digitos.length) out.push(digitos.substr(i));
+  return out.join(' ');
+}
+
+// Al tocar la bandera cambia el ejemplo y se reformatea lo ya escrito.
+function capPais(enfocar) {
+  var pais = paisActual();
+  var inp = document.getElementById('nivLeadPhone');
+  if (!inp) return;
+  inp.placeholder = pais.ej;
+  var tope = pais.grupos.reduce(function(a, b) { return a + b; }, 0);
+  inp.value = fmtTel(inp.value.replace(/\D/g, '').slice(0, tope), pais.grupos);
+  if (enfocar) inp.focus();
+}
 
 function populateNivCountrySelect() {
   var sel = document.getElementById('nivLeadCountry');
   if (!sel || sel.options.length) return;
   sel.innerHTML = nivCountries.map(function(c) {
-    return '<option value="' + c.code + '">' + c.flag + ' ' + c.code + ' ' + c.label + '</option>';
+    return '<option value="' + c.code + '">' + c.flag + ' ' + c.code + '</option>';
   }).join('');
+  capPais(false);
+  var inp = document.getElementById('nivLeadPhone');
+  if (inp && !inp._fmt) {
+    inp._fmt = true;
+    inp.addEventListener('input', function() {
+      var pais = paisActual();
+      var tope = pais.grupos.reduce(function(a, b) { return a + b; }, 0);
+      this.value = fmtTel(this.value.replace(/\D/g, '').slice(0, tope), pais.grupos);
+    });
+  }
 }
 
 function startNivelador() {
@@ -2824,9 +2924,11 @@ function showNivResult() {
 
   window._nivStageKey = stageKey;
 
-  // Antes de mostrar la etapa: capturar nombre + WhatsApp
+  // Antes de mostrar la etapa: Instagram y WhatsApp, un dato por pantalla
   document.getElementById('nivQuiz').classList.remove('active');
   document.getElementById('nivCapture').classList.add('active');
+  populateNivCountrySelect();
+  capIr('ig');
 }
 
 // ─── CAPTURA DE LEADS → Make.com → Notion CRM ──
@@ -2852,45 +2954,90 @@ function sendToMake(payload) {
   }).catch(function(e) { console.warn('Make webhook falló, dato queda en localStorage:', e); });
 }
 
+// El handle llega como lo escriba la gente: con @, sin @, o pegando la URL.
+function limpiarHandle(v) {
+  return (v || '').trim()
+    .replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '')
+    .replace(/[\/?#].*$/, '')
+    .replace(/^@+/, '')
+    .trim();
+}
+
+function capIr(cual) {
+  var pasos = document.querySelectorAll('.niv-cap-step');
+  for (var i = 0; i < pasos.length; i++) {
+    pasos[i].classList.toggle('active', pasos[i].getAttribute('data-cap') === cual);
+  }
+  var foco = cual === 'ig' ? 'nivLeadInstagram' : 'nivLeadPhone';
+  var el = document.getElementById(foco);
+  if (el) setTimeout(function() { el.focus(); }, 60);
+  pvtTrack('captura_paso', { paso: cual });
+}
+
+function capPrev() { capIr('ig'); }
+
+function capSubmit(event) {
+  event.preventDefault();
+  var activo = document.querySelector('.niv-cap-step.active');
+  if (!activo) return;
+  if (activo.getAttribute('data-cap') === 'ig') {
+    var errIg = document.getElementById('nivErrIg');
+    if (!limpiarHandle(document.getElementById('nivLeadInstagram').value)) {
+      if (errIg) errIg.textContent = 'Escribe tu usuario de Instagram';
+      return;
+    }
+    if (errIg) errIg.textContent = '';
+    capIr('wa');
+    return;
+  }
+  submitNivLead(event);
+}
+
 function submitNivLead(event) {
   event.preventDefault();
-  var name = document.getElementById('nivLeadName').value.trim();
-  var countryCode = document.getElementById('nivLeadCountry').value || '+56';
-  var phoneDigits = document.getElementById('nivLeadPhone').value.trim().replace(/\D/g, '');
-  var phone = countryCode + ' ' + phoneDigits;
-  // Normalizamos el handle: la gente lo escribe con/sin @, o pega la URL completa del perfil
-  var instagram = document.getElementById('nivLeadInstagram').value.trim()
-    .replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '')
-    .replace(/\/+$/, '')
-    .replace(/^@+/, '');
-  if (instagram) instagram = '@' + instagram;
-  if (!name || phoneDigits.length < 7 || !instagram) return; // required ya cubre vacío, esto cubre basura
 
-  // Notion select no acepta comas en el valor — los montos ($1,500 etc.) rompían la creación del registro entero
-  var stripCommas = function(s) { return (s || '').replace(/,/g, ''); };
+  var instagram = limpiarHandle(document.getElementById('nivLeadInstagram').value);
+  var pais = paisActual();
+  var digitos = document.getElementById('nivLeadPhone').value.replace(/\D/g, '');
+  var errWa = document.getElementById('nivErrWa');
+  if (digitos.length < pais.min) {
+    if (errWa) errWa.textContent = 'Faltan d\u00edgitos para un n\u00famero de ' + pais.label;
+    return;
+  }
+  if (!instagram) { capIr('ig'); return; }
+  if (errWa) errWa.textContent = '';
 
-  // Guardamos la llave para poder actualizar esta misma fila cuando responda la calificación
+  var phone = pais.code + ' ' + digitos;
+  var handle = '@' + instagram;
+
+  // Notion exige Nombre y no hay campo de nombre: el handle lo cubre.
   window._nivLeadPhone = phone;
-  window._nivLeadName = name;
+  window._nivLeadName = handle;
+  window._nivLeadIg = handle;
 
+  // Notion no acepta comas en un select — los montos las traían
+  var stripCommas = function(x) { return (x || '').replace(/,/g, ''); };
   var stageKey = window._nivStageKey || '';
+
   sendToMake({
     event: 'lead_capturado',
-    name: name,
+    name: handle,
     phone: phone,
-    instagram: instagram,
+    instagram: handle,
+    pais: pais.label,
     stage: stageKey.charAt(0).toUpperCase() + stageKey.slice(1),
     q1_situacion: stripCommas(nivAnswers[0]),
     q2_clientes: stripCommas(nivAnswers[1]),
     q3_objetivo: stripCommas(nivAnswers[2]),
     q4_ingreso: stripCommas(nivAnswers[3]),
-    q5_nivel_ia: stripCommas(nivAnswers[4]),
+    q5_adquisicion: stripCommas(nivAnswers[4]),
+    q6_nivel_ia: stripCommas(nivAnswers[5]),
     quiz_scores: nivScores,
     ruta: pvtRuta(),
     canal: pvtCanal()
   });
 
-  pvtTrack('lead_submit', { ruta: pvtRuta() });
+  pvtTrack('lead_submit', { ruta: pvtRuta(), pais: pais.label });
 
   // Ya capturamos el lead — ahora sí mostramos el análisis y la etapa
   document.getElementById('nivCapture').classList.remove('active');
@@ -2954,7 +3101,7 @@ function proceedToLevelUp() {
   var dotInterval = setInterval(function() {
     dotCount = (dotCount + 1) % 4;
     labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS' + '.'.repeat(dotCount);
-  }, 500);
+  }, 260);
 
   // Teaser + beneficios: mientras "analiza", el lead ve todo lo que viene DESPUÉS del
   // diagnóstico. Sube el valor percibido antes de mostrar la etapa.
@@ -2975,17 +3122,18 @@ function proceedToLevelUp() {
     communityMini.classList.add('visible');
     var lobbyItems = communityMini.querySelectorAll('.niv-lobby-item');
     lobbyItems.forEach(function(item, i) {
-      setTimeout(function() { item.classList.add('show'); }, i * 900);
+      setTimeout(function() { item.classList.add('show'); }, i * 160);
     });
     // Los beneficios entran encadenados, rápido pero suave — todos visibles antes de los 3s
     var benefitRows = communityMini.querySelectorAll('.niv-lobby-benefit');
     benefitRows.forEach(function(row, i) {
-      setTimeout(function() { row.classList.add('show'); }, 250 + i * 320);
+      setTimeout(function() { row.classList.add('show'); }, 80 + i * 110);
     });
-  }, 1200);
+  }, 300);
 
-  // Lobby countdown (6s: alcanza a leer los beneficios sin que se haga eterno)
-  var lobbyTotal = 6;
+  // Lobby de 2s. La sensación de velocidad vale más que el valor percibido
+  // que se ganaba con la espera: el que llega de la bio no espera siete segundos.
+  var lobbyTotal = 2;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -3005,7 +3153,7 @@ function proceedToLevelUp() {
     lobbyItems.forEach(function(item) { item.classList.remove('show'); });
   }, lobbyTotal * 1000);
 
-  // Explosion fires 1.2s after community starts hiding (fully gone)
+  // La etapa aparece 0,4s después: lo justo para que el lobby se desvanezca
   setTimeout(function() {
     communityMini.style.display = 'none';
 
@@ -3014,13 +3162,13 @@ function proceedToLevelUp() {
     setTimeout(function() { flashEl.classList.remove('fire'); }, 800);
 
     // Spawn explosion particles
-    var stageColors = { skiller:'#b0b0d0', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
-    spawnNivParticles(stageColors[stageKey] || '#b0b0d0');
+    var stageColors = { skiller:'#a08a86', operator:'#d8652f', builder:'#e0342f', founder:'#c8a840' };
+    spawnNivParticles(stageColors[stageKey] || '#ddcdc9');
 
     // Reveal stage name with explosion animation
     labelEl.textContent = 'TU ETAPA';
     labelEl.style.animation = '';
-    var dropColor = stageColors[stageKey] || '#b0b0d0';
+    var dropColor = stageColors[stageKey] || '#ddcdc9';
     rankEl.style.filter = 'drop-shadow(0 0 60px ' + dropColor + '88)';
     rankEl.style.animation = 'none';
     rankEl.textContent = s.name;
@@ -3030,7 +3178,7 @@ function proceedToLevelUp() {
     rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
     btnEl.style.transition = 'opacity 0.8s ease 0.8s';
     btnEl.style.opacity = '1';
-  }, lobbyTotal * 1000 + 1200);
+  }, lobbyTotal * 1000 + 400);
 }
 
 // ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
@@ -3074,11 +3222,12 @@ const PVT_RUTAS = {
 
 // q4 = rango de ingresos: 1 = $0–1.5k · 2 = $1.5–3k · 3 = $3–10k · 4 = +$10k
 function pvtRuta() {
+  // q4 = ingreso: 1 = $0–1.5k · 2 = $1.5–3k · 3 = $3–10k · 4 = +$10k
+  // Bajo $1.500 no hay caja para el programa: ofrecerlo quema el lead.
   var ingreso = nivScores[3] || 0;
-  var stage = window._nivStageKey;
+  if (ingreso <= 1) return 'mision0';
   if (ingreso >= 4) return 'equity';
-  if (ingreso === 3 || stage === 'builder' || stage === 'founder') return 'programa';
-  return 'mision0';
+  return 'programa';
 }
 
 // ─── MEDICIÓN ─────────────────────────────────
@@ -3250,9 +3399,9 @@ function dismissNivLevelup() {
   var nameEl = document.getElementById('nivStageName');
   nameEl.textContent = s.name;
   var grads = {
-    skiller: 'linear-gradient(135deg, #505068 0%, #9090b0 20%, #d8d8f0 50%, #9090b0 80%, #505068 100%)',
-    operator: 'linear-gradient(135deg, #6a4010 0%, #d08030 20%, #ffe0a0 50%, #d08030 80%, #6a4010 100%)',
-    builder: 'linear-gradient(135deg, #1a3a7a 0%, #3a8aee 20%, #a0d0ff 50%, #3a8aee 80%, #1a3a7a 100%)',
+    skiller: 'linear-gradient(135deg, #5c4845 0%, #a08a86 20%, #e8dad7 50%, #a08a86 80%, #5c4845 100%)',
+    operator: 'linear-gradient(135deg, #7a2e1c 0%, #d8652f 20%, #ffd0a8 50%, #d8652f 80%, #7a2e1c 100%)',
+    builder: 'linear-gradient(135deg, #8c1a16 0%, #e0342f 20%, #ffa892 50%, #e0342f 80%, #8c1a16 100%)',
     founder: 'linear-gradient(135deg, #6a5020 0%, #c8a840 20%, #f0d88a 50%, #c8a840 80%, #6a5020 100%)'
   };
   nameEl.style.background = grads[stageKey];
@@ -3261,7 +3410,7 @@ function dismissNivLevelup() {
   nameEl.style.backgroundClip = 'text';
   nameEl.style.color = 'transparent';
   nameEl.style.webkitTextFillColor = 'transparent';
-  var c = s.color.startsWith('var(') ? '#b0b0d0' : s.color;
+  var c = s.color.startsWith('var(') ? '#ddcdc9' : s.color;
   nameEl.style.filter = 'drop-shadow(0 4px 24px ' + c + '60)';
 
   document.getElementById('nivStageRange').textContent = s.range;
@@ -3301,46 +3450,49 @@ function dismissNivLevelup() {
   var missingEl = document.getElementById('nivMissing');
 
   var ruta = pvtRuta();
+  var cuellos = (nivDetractors[stageKey] || []).slice(0, 2);
+  var ig = window._nivLeadIg || '';
 
-  if (ruta === 'equity') {
-    // +$10k/mes: no le vendes un programa, le propones entrar por porcentaje.
-    missingEl.innerHTML = 'Tu negocio ya factura lo suficiente para que el problema deje de ser vender. ' +
-      'A este nivel no te sirve otro programa: te sirve <strong style="color:var(--metal3);">alguien con la piel en el juego</strong>. ' +
-      'Entro a construir tus sistemas y me pagas con un porcentaje de lo que crezcamos juntos.';
-    ctasEl.innerHTML =
-      '<div class="niv-call-benefits"><div class="niv-call-benefits-title">C\u00f3mo funciona</div>' +
-        '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>Construyo los sistemas dentro de tu operaci\u00f3n</div>' +
-        '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>Me pagas por resultado, no por hora</div>' +
-        '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>Si no crece, no gano</div>' +
-      '</div>' +
-      '<a class="niv-cta niv-cta-call" href="' + pvtUrl('equity', 'Hola Patrick, vengo del diagn\u00f3stico. Facturo sobre $10k al mes y quiero conversar el modelo por porcentaje.') + '" target="_blank">\u{1F91D} Conversemos un modelo por porcentaje</a>' +
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Entrar a la comunidad</a>';
+  // El mensaje llega con la etapa y los cuellos puestos: Patrick abre el chat
+  // sabiendo con quién habla y no gasta la conversación diagnosticando.
+  function msgDiagnostico() {
+    return 'Hola Patrick, soy ' + ig + '. Termin\u00e9 el diagn\u00f3stico: estoy en etapa '
+      + (s.name || stageKey.toUpperCase())
+      + (cuellos.length ? ' y mis cuellos son ' + cuellos.join(' y ') : '')
+      + '. Quiero mi diagn\u00f3stico completo.';
+  }
 
-  } else if (ruta === 'programa') {
-    // $3k–$10k: es el cliente del programa. Acá va toda la fuerza.
-    missingEl.innerHTML = (s.missing || '') + '<br><br style="line-height:2.4;">Lo que te falta no es otra herramienta: es ' +
-      '<strong style="color:var(--metal3);">un sistema corriendo en cada \u00e1rea</strong>. Eso es lo que construimos en la llamada.';
-    var benefitsPrograma = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">Qu\u00e9 sales con esa llamada</div>';
-    ['Tu cuello de botella con nombre y apellido','El orden en que hay que atacarlo','Un n\u00famero claro de a d\u00f3nde puedes llegar','Trabajemos juntos despu\u00e9s o no'].forEach(function(b) {
-      benefitsPrograma += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>' + b + '</div>';
+  function bloqueCuellos() {
+    if (!cuellos.length) return '';
+    var h = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">Tus dos cuellos de botella</div>';
+    cuellos.forEach(function(c) {
+      h += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2192</span>' + c + '</div>';
     });
-    benefitsPrograma += '</div>';
-    ctasEl.innerHTML = benefitsPrograma +
-      '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', 'Hola Patrick, vengo del diagn\u00f3stico y quiero agendar la llamada para escalar.') + '" target="_blank">\u{1F4C5} Agendar mi llamada para escalar</a>' +
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Entrar a la comunidad</a>';
+    return h + '</div>';
+  }
 
-  } else {
-    // Skiller y Operator: todav\u00eda no hay caja para el programa. Van a Misi\u00f3n 0.
-    missingEl.innerHTML = (s.missing || '') + '<br><br style="line-height:2.4;">Por eso tu siguiente paso no es contratar a nadie: es ' +
-      '<strong style="color:var(--metal3);">poner la base</strong>. Para eso existe Misi\u00f3n 0.';
-    ctasEl.innerHTML =
+  if (ruta === 'mision0') {
+    // Bajo $1.500: no hay caja. Se le abre la puerta chica, no la cara.
+    missingEl.innerHTML = (s.missing || '') + '<br><br style="line-height:2.4;">Tu siguiente paso no es contratar a nadie: es '
+      + '<strong style="color:var(--metal3);">poner la base</strong>. Para eso existe Misi\u00f3n 0.';
+    ctasEl.innerHTML = bloqueCuellos() +
       '<div class="niv-call-benefits"><div class="niv-call-benefits-title">Tu acceso qued\u00f3 desbloqueado</div>' +
         '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>Las 8 piezas de un negocio que s\u00ed escala</div>' +
         '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>Por d\u00f3nde se parte seg\u00fan tu etapa</div>' +
         '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2713</span>Beneficio exclusivo por venir del diagn\u00f3stico</div>' +
       '</div>' +
-      '<a class="niv-cta" style="background:#000;border:1px solid #fff;color:#fff;" href="' + pvtUrl('mision0', 'Hola Patrick, vengo del diagn\u00f3stico y quiero acceder a Misi\u00f3n 0.') + '" target="_blank">\u{1F513} Desbloquear mi acceso a Misi\u00f3n 0</a>' +
-      '<a class="niv-cta niv-cta-wa" href="' + buildComunidadUrl() + '" target="_blank">\u{1F4AC} Entrar a la comunidad</a>';
+      '<a class="niv-cta" style="background:var(--red);color:#fff;" href="' +
+        pvtUrl('mision0', 'Hola Patrick, soy ' + ig + '. Vengo del diagn\u00f3stico y quiero acceder a Misi\u00f3n 0.') +
+        '" target="_blank">\u{1F513} Desbloquear mi acceso a Misi\u00f3n 0</a>';
+
+  } else {
+    // Hay caja. Un solo bot\u00f3n, y que confirmarlo sea el filtro de intenci\u00f3n.
+    missingEl.innerHTML = (s.missing || '') + '<br><br style="line-height:2.4;">Tu diagn\u00f3stico completo te llega por WhatsApp: '
+      + '<strong style="color:var(--metal3);">d\u00f3nde se te cae el sistema y en qu\u00e9 orden arreglarlo</strong>.';
+    ctasEl.innerHTML = bloqueCuellos() +
+      '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msgDiagnostico()) + '" target="_blank">' +
+        '\u2713 S\u00ed, quiero mi diagn\u00f3stico completo</a>' +
+      '<div class="niv-lead-note" style="margin-top:10px;">Te llega hoy. Lo lee Patrick, no un bot.</div>';
   }
 
   // Update footer CTA + countdown CTA with stage-specific WhatsApp message
@@ -3710,7 +3862,7 @@ function updateCalculator() {
 function updateStageBars(activeStage) {
   var stages = ['skiller','operator','builder','founder'];
   var activeIdx = stages.indexOf(activeStage);
-  var stageColors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+  var stageColors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#ff5a3c', founder:'#c8a840' };
 
   var bar = document.getElementById('nivStageBar2');
   if (!bar) return;
@@ -3785,7 +3937,7 @@ window.addEventListener('load', function() {
   var previewBar = document.getElementById('nivStageBarPreview');
   if (previewBar) {
     var stages = ['skiller','operator','builder','founder'];
-    var colors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#3a9fff', founder:'#c8a840' };
+    var colors = { skiller:'var(--metal2)', operator:'#e88c30', builder:'#ff5a3c', founder:'#c8a840' };
     var ranges = { skiller:'$0\u2013$1.5K', operator:'$1.5K\u2013$3K', builder:'$3K\u2013$10K', founder:'$10K+' };
     previewBar.innerHTML = stages.map(function(s, i) {
       return '<div class="niv-stage-bar-item" data-stage="' + s + '">' +
