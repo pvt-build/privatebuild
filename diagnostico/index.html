@@ -2280,6 +2280,35 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 .niv-ig-row .niv-ig-input { border:none !important; background:transparent !important;
   padding-left:2px !important; }
 .niv-ig-row .niv-ig-input:focus { border:none !important; }
+
+/* ─── QUÉ SE LLEVA ─────────────────────────────
+   Tres entregables con nombre antes de la primera pregunta. Nadie contesta
+   seis preguntas por "un diagnóstico"; por tres cosas concretas, sí. */
+.niv-entrega { display:flex; flex-direction:column; gap:10px;
+  max-width:420px; margin:22px auto 0; width:100%; text-align:left; }
+.niv-entrega-item { display:flex; gap:13px; align-items:flex-start;
+  border:1px solid var(--border2); border-left:2px solid var(--red);
+  background:var(--bg3); padding:12px 14px; border-radius:2px; }
+.niv-entrega-n { font-family:var(--f-dato); font-size:10px; color:var(--red);
+  letter-spacing:.1em; padding-top:3px; flex-shrink:0; }
+.niv-entrega-item strong { display:block; font-family:var(--f-display);
+  font-size:14.5px; font-weight:700; color:var(--text-primary); letter-spacing:-.01em; }
+.niv-entrega-item span:not(.niv-entrega-n) { display:block; font-family:var(--f-texto);
+  font-size:12.8px; color:var(--text-secondary); line-height:1.4; margin-top:3px; }
+
+/* La línea que la competencia sí dice: cero fricción, cero compromiso. */
+.niv-sinfriccion { display:flex; justify-content:center; gap:16px; flex-wrap:wrap;
+  margin-top:12px; font-family:var(--f-dato); font-size:10.5px;
+  letter-spacing:.06em; color:var(--green); }
+
+/* El porqué de cada pregunta. Baja el abandono: no estás dando un dato,
+   estás ayudando a que te armen el diagnóstico. */
+.niv-porque { font-family:var(--f-texto); font-size:12.5px; color:var(--text-muted);
+  text-align:center; margin:-14px 0 20px; max-width:34ch;
+  margin-left:auto; margin-right:auto; }
+.niv-cuenta { font-family:var(--f-dato); font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--text-muted); text-align:center;
+  width:100%; margin-bottom:10px; }
 </style>
 </head>
 <body class="splash-active">
@@ -2295,8 +2324,27 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">Recibe un diagn&oacute;stico completo</span> <span class="tl">para apalancarte con IA</span><span class="tl tl-c">y escalar tus ventas.</span></p>
-      <p class="splash-subline niv-home-reveal niv-home-d2">Hoy los negocios que escalan no lo hacen con equipo,<br>lo hacen con <strong>infraestructura en cada &aacute;rea</strong>:</p>
+      <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">El diagn&oacute;stico personalizado</span> <span class="tl">de tu negocio,</span><span class="tl tl-c">para escalar tus ventas con IA.</span></p>
+      <p class="splash-subline niv-home-reveal niv-home-d2">En 40 segundos, sobre tu negocio real. No es un test gen&eacute;rico.</p>
+
+      <!-- Nombrar lo que se lleva. "Un diagnóstico" no mueve a nadie; tres cosas
+           concretas, sí. Y las tres son lo que el quiz entrega de verdad. -->
+      <div class="niv-entrega niv-home-reveal niv-home-d3">
+        <div class="niv-entrega-item">
+          <span class="niv-entrega-n">01</span>
+          <div><strong>Tu etapa, con nombre</strong><span>D&oacute;nde est&aacute;s hoy entre los cuatro niveles, y qu&eacute; factura cada uno.</span></div>
+        </div>
+        <div class="niv-entrega-item">
+          <span class="niv-entrega-n">02</span>
+          <div><strong>Tus dos cuellos de botella</strong><span>Lo que te est&aacute; frenando ahora mismo, dicho con nombre y apellido.</span></div>
+        </div>
+        <div class="niv-entrega-item">
+          <span class="niv-entrega-n">03</span>
+          <div><strong>Tu siguiente paso</strong><span>Qu&eacute; mover primero seg&uacute;n tu etapa. No una lista de 40 cosas.</span></div>
+        </div>
+      </div>
+
+      <p class="splash-subline niv-home-reveal niv-home-d3" style="margin-top:22px;">Lo medimos sobre las <strong>&aacute;reas que sostienen un negocio</strong>:</p>
 
       <!-- Las 12 áreas: el founder no las inventa, las copia y las implementa -->
       <div class="niv-sismarquee niv-home-reveal niv-home-d3">
@@ -2309,6 +2357,9 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
           COMENZAR DIAGN&Oacute;STICO&nbsp; &#x1F9ED;
         </button>
         <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">6 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
+        <div class="niv-sinfriccion">
+          <span>&#x25CF; Gratis</span><span>&#x25CF; Sin tarjeta</span><span>&#x25CF; Llega en minutos</span>
+        </div>
       </div>
       <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
         <div class="niv-rubros">
@@ -2330,7 +2381,9 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
     <!-- QUIZ QUESTIONS -->
     <div class="niv-wrap" id="nivQuiz">
       <div class="niv-progress" id="nivProgress"></div>
+      <div class="niv-cuenta" id="nivCuenta"></div>
       <div class="niv-question" id="nivQuestion"></div>
+      <div class="niv-porque" id="nivPorque"></div>
       <div class="niv-options" id="nivOptions"></div>
       <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
     </div>
@@ -2621,6 +2674,7 @@ const nivAreas = [
 const nivQuestions = [
   {
     q: '\u00bfCu\u00e1l es tu situaci\u00f3n hoy?',
+    por: 'Define desde d\u00f3nde partimos.',
     opts: [
       { text: 'Empleado buscando independizarme', score: 1 },
       { text: 'Freelance / independiente vendiendo servicios', score: 2 },
@@ -2630,6 +2684,7 @@ const nivQuestions = [
   },
   {
     q: '\u00bfCu\u00e1ntos clientes tienes hoy?',
+    por: 'Dice si tu problema es de volumen o de estructura.',
     opts: [
       { text: 'Ninguno \u2014 Estoy empleado', score: 1 },
       { text: '1 a 3 mensuales', score: 2 },
@@ -2639,6 +2694,7 @@ const nivQuestions = [
   },
   {
     q: '\u00bfCu\u00e1l es tu objetivo en los pr\u00f3ximos 3 a 6 meses?',
+    por: 'Marca a qu\u00e9 distancia est\u00e1 tu siguiente etapa.',
     opts: [
       { text: 'Independizarme y generar mi primer ingreso propio', score: 1 },
       { text: 'Generar +$2,000 USD mensuales de forma consistente', score: 2 },
@@ -2648,6 +2704,7 @@ const nivQuestions = [
   },
   {
     q: '\u00bfCu\u00e1l es tu rango de ingresos mensual?',
+    por: 'Con esto calculamos tu ruta. No para venderte nada.',
     opts: [
       { text: '$0 \u2013 $1,500 USD', score: 1 },
       { text: '$1,500 \u2013 $3,000 USD', score: 2 },
@@ -2657,6 +2714,7 @@ const nivQuestions = [
   },
   {
     q: '\u00bfC\u00f3mo traes clientes hoy?',
+    por: 'Ac\u00e1 suele estar el cuello que no ves.',
     opts: [
       { text: 'Solo referidos', score: 1 },
       { text: 'Contenido lifestyle', score: 2 },
@@ -2666,6 +2724,7 @@ const nivQuestions = [
   },
   {
     q: '\u00bfQu\u00e9 nivel de uso de IA tienes hoy?',
+    por: 'Define cu\u00e1nto puedes apalancar, y qu\u00e9 tan r\u00e1pido.',
     opts: [
       { text: 'No uso IA todav\u00eda', score: 1 },
       { text: 'IA gratuita (ChatGPT/Claude/Gemini free)', score: 2 },
@@ -2891,6 +2950,12 @@ function renderNivQuestion() {
   }
   document.getElementById('nivProgress').innerHTML = dots;
   document.getElementById('nivQuestion').textContent = q.q;
+  var cuentaEl = document.getElementById('nivCuenta');
+  if (cuentaEl) cuentaEl.textContent = 'Pregunta ' + (nivStep + 1) + ' de ' + nivQuestions.length;
+
+  // El porqué va debajo de la pregunta, a la vista: tiene que leerse.
+  var porEl = document.getElementById('nivPorque');
+  if (porEl) porEl.textContent = q.por || '';
   let opts = '';
   q.opts.forEach(function(o, i) {
     opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ', ' + i + ')">' + o.text + '</button>';
