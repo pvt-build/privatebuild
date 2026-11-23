@@ -2309,6 +2309,71 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 .niv-cuenta { font-family:var(--f-dato); font-size:10px; letter-spacing:.18em;
   text-transform:uppercase; color:var(--text-muted); text-align:center;
   width:100%; margin-bottom:10px; }
+
+/* ═══ PORTADA ═══ El titular es el diagnóstico, no la marca. */
+.niv-firma { font-family:var(--f-dato); font-size:10px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-muted); text-align:center; margin-bottom:22px; }
+.niv-h1 { font-family:var(--f-display); font-weight:900; text-transform:uppercase;
+  font-size:clamp(32px,8.4vw,52px); line-height:.98; letter-spacing:-.035em;
+  color:var(--text-primary); text-align:center; margin:0 0 18px; text-wrap:balance; }
+.niv-h1-em { color:var(--red); }
+.niv-h1-sub { font-family:var(--f-texto); font-size:clamp(14.5px,1.6vw,17px);
+  color:var(--text-secondary); text-align:center; max-width:40ch; margin:0 auto 26px;
+  line-height:1.5; }
+.niv-hero-cta { display:flex; flex-direction:column; align-items:center; gap:10px; }
+.niv-microcopy { font-family:var(--f-dato); font-size:10.5px; color:var(--text-muted);
+  letter-spacing:.05em; margin:0; }
+
+/* ═══ OPCIÓN MÚLTIPLE ═══ */
+.niv-opt-multi { display:flex !important; align-items:center; gap:11px; }
+.niv-check { width:17px; height:17px; border:1.5px solid var(--border3); border-radius:3px;
+  flex-shrink:0; position:relative; transition:all .15s; }
+.niv-opt-multi.sel { border-left-color:var(--red); background:rgba(224,52,47,.09); }
+.niv-opt-multi.sel .niv-check { background:var(--red); border-color:var(--red); }
+.niv-opt-multi.sel .niv-check::after { content:"\2713"; position:absolute; inset:0;
+  color:#fff; font-size:12px; line-height:15px; text-align:center; font-weight:700; }
+.niv-opt-continuar { margin-top:10px; width:100%; padding:14px 20px; border:none;
+  border-radius:2px; background:var(--red); color:#fff; cursor:pointer;
+  font-family:var(--f-display); font-size:12px; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; transition:opacity .2s; }
+.niv-opt-continuar:disabled { opacity:.3; cursor:not-allowed; }
+
+/* ═══ ÁREAS DEL RESULTADO ═══ El espejo, antes de cualquier texto. */
+.niv-areas { max-width:460px; margin:0 auto 34px; width:100%;
+  border:1px solid var(--border2); border-radius:3px; background:var(--bg3); padding:18px 16px; }
+.niv-areas-tit { font-family:var(--f-dato); font-size:10px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--text-muted); text-align:center; margin-bottom:16px; }
+.niv-areas-list { display:flex; flex-direction:column; gap:11px; }
+.niv-area { display:grid; grid-template-columns:72px 1fr 54px; gap:10px; align-items:center; }
+.niv-area-nom { font-family:var(--f-texto); font-size:13px; color:var(--text-secondary); }
+.niv-area-barra { height:7px; background:rgba(255,255,255,.05); border-radius:4px; overflow:hidden; }
+.niv-area-barra i { display:block; height:100%; border-radius:4px; background:var(--metal1);
+  transition:width .7s cubic-bezier(.2,.8,.2,1); }
+.niv-area-etq { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.06em;
+  text-align:right; color:var(--text-muted); }
+.niv-area.rojo .niv-area-nom { color:var(--text-primary); font-weight:600; }
+.niv-area.rojo .niv-area-barra i { background:var(--red); }
+.niv-area.rojo .niv-area-etq { color:var(--red); }
+.niv-area.medio .niv-area-barra i { background:var(--warn, #e3a33c); }
+.niv-area.bien .niv-area-barra i { background:var(--green); }
+.niv-area.bien .niv-area-etq { color:var(--green); }
+.niv-areas-frase { margin-top:17px; padding-top:15px; border-top:1px solid var(--border);
+  font-family:var(--f-texto); font-size:13.6px; line-height:1.5; color:var(--text-secondary); }
+.niv-areas-frase strong { color:var(--text-primary); display:block; margin-bottom:5px;
+  font-size:15px; font-family:var(--f-display); font-weight:700; }
+
+/* ═══ ESCRITORIO ═══ En pantalla ancha la columna única se ve pobre. */
+@media (min-width:860px) {
+  .niv-h1 { font-size:58px; }
+  .niv-h1-sub { font-size:18px; max-width:46ch; }
+  .niv-entrega { flex-direction:row; max-width:860px; gap:12px; }
+  .niv-entrega-item { flex:1; flex-direction:column; gap:8px; }
+  .niv-cases-grid { grid-template-columns:repeat(3,1fr); max-width:980px; margin-inline:auto; }
+  .niv-areas { max-width:540px; }
+  .niv-area { grid-template-columns:92px 1fr 62px; }
+  #nivOptions { max-width:540px; margin-inline:auto; }
+  .niv-cap-step { max-width:400px; }
+}
 </style>
 </head>
 <body class="splash-active">
@@ -2318,193 +2383,30 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 <div id="splash">
   <div class="splash-inner">
 
-    <div class="splash-title-wrap">
+    <!-- El titular es el diagnóstico, no la marca. La firma va arriba, chica. -->
+    <div class="splash-title-wrap" style="display:none;">
       <div class="splash-title">PRIVATE<br>BUILD</div>
     </div>
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <p class="splash-tagline niv-home-reveal niv-home-d2"><span class="tl">El diagn&oacute;stico personalizado</span> <span class="tl">de tu negocio,</span><span class="tl tl-c">para escalar tus ventas con IA.</span></p>
-      <p class="splash-subline niv-home-reveal niv-home-d2">En 40 segundos, sobre tu negocio real. No es un test gen&eacute;rico.</p>
+      <div class="niv-firma niv-home-reveal">private build &middot; diagn&oacute;stico gratuito</div>
 
-      <!-- Nombrar lo que se lleva. "Un diagnóstico" no mueve a nadie; tres cosas
-           concretas, sí. Y las tres son lo que el quiz entrega de verdad. -->
-      <div class="niv-entrega niv-home-reveal niv-home-d3">
-        <div class="niv-entrega-item">
-          <span class="niv-entrega-n">01</span>
-          <div><strong>Tu etapa, con nombre</strong><span>D&oacute;nde est&aacute;s hoy entre los cuatro niveles, y qu&eacute; factura cada uno.</span></div>
-        </div>
-        <div class="niv-entrega-item">
-          <span class="niv-entrega-n">02</span>
-          <div><strong>Tus dos cuellos de botella</strong><span>Lo que te est&aacute; frenando ahora mismo, dicho con nombre y apellido.</span></div>
-        </div>
-        <div class="niv-entrega-item">
-          <span class="niv-entrega-n">03</span>
-          <div><strong>Tu siguiente paso</strong><span>Qu&eacute; mover primero seg&uacute;n tu etapa. No una lista de 40 cosas.</span></div>
-        </div>
-      </div>
+      <h1 class="niv-h1 niv-home-reveal niv-home-d2">Conoce qu&eacute;<br>te est&aacute; frenando<br><span class="niv-h1-em">para escalar con IA</span></h1>
 
-      <p class="splash-subline niv-home-reveal niv-home-d3" style="margin-top:22px;">Lo medimos sobre las <strong>&aacute;reas que sostienen un negocio</strong>:</p>
+      <p class="niv-h1-sub niv-home-reveal niv-home-d2">Responde 6 preguntas y recibe el diagn&oacute;stico de tu negocio por &aacute;rea, m&aacute;s tu plan para los pr&oacute;ximos 90 d&iacute;as.</p>
 
-      <!-- Las 12 áreas: el founder no las inventa, las copia y las implementa -->
-      <div class="niv-sismarquee niv-home-reveal niv-home-d3">
-        <div class="niv-sismarquee-track" id="nivSisGrid"></div>
-      </div>
-
-      <p class="niv-home-reveal niv-home-d4 niv-donde">&iquest;C&oacute;mo est&aacute;n hoy tus sistemas?</p>
-      <div class="niv-home-reveal niv-home-d4" style="margin-top:14px;">
-        <button class="niv-start-btn" onclick="startNivelador()">
-          COMENZAR DIAGN&Oacute;STICO&nbsp; &#x1F9ED;
-        </button>
-        <p style="font-size:11px;color:var(--text-muted);margin-top:12px;letter-spacing:0.05em;">6 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
+      <div class="niv-home-reveal niv-home-d3 niv-hero-cta">
+        <button class="niv-start-btn" onclick="startNivelador()">COMENZAR MI DIAGN&Oacute;STICO</button>
         <div class="niv-sinfriccion">
-          <span>&#x25CF; Gratis</span><span>&#x25CF; Sin tarjeta</span><span>&#x25CF; Llega en minutos</span>
-        </div>
-      </div>
-      <div class="niv-home-reveal niv-home-d5" style="margin-top:20px;">
-        <div class="niv-rubros">
-          <div class="niv-rubros-spheres">
-            <span class="niv-rubro">&#x2696;&#xFE0F;</span>
-            <span class="niv-rubro">&#x1F489;</span>
-            <span class="niv-rubro">&#x1F4F1;</span>
-            <span class="niv-rubro">&#x1F4AA;</span>
-            <span class="niv-rubro">&#x1F4F7;</span>
-            <span class="niv-rubro">&#x1F916;</span>
-            <span class="niv-rubro">&#x1F957;</span>
-            <span class="niv-rubro">&#x1F4BB;</span>
-          </div>
-          <div class="niv-rubros-text">+20 nichos validados</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- QUIZ QUESTIONS -->
-    <div class="niv-wrap" id="nivQuiz">
-      <div class="niv-progress" id="nivProgress"></div>
-      <div class="niv-cuenta" id="nivCuenta"></div>
-      <div class="niv-question" id="nivQuestion"></div>
-      <div class="niv-porque" id="nivPorque"></div>
-      <div class="niv-options" id="nivOptions"></div>
-      <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
-    </div>
-
-    <!-- LEAD CAPTURE — antes de mostrar la etapa, no después -->
-    <div class="niv-wrap" id="nivCapture">
-      <form id="nivLeadForm" onsubmit="capSubmit(event)" autocomplete="on" novalidate>
-
-        <!-- paso 1 de 2 -->
-        <div class="niv-cap-step active" data-cap="ig">
-          <div class="niv-cap-count">Paso 1 de 2</div>
-          <div class="niv-question">&iquest;Cu&aacute;l es tu Instagram?</div>
-          <p class="niv-cap-sub">Para mirar tu negocio antes de armarte el diagn&oacute;stico.</p>
-          <div class="niv-ig-row">
-            <span class="niv-ig-at">@</span>
-            <input class="niv-lead-input niv-ig-input" id="nivLeadInstagram" type="text"
-                   placeholder="tunegocio" autocomplete="off" autocapitalize="off"
-                   spellcheck="false" enterkeyhint="next">
-          </div>
-          <div class="niv-cap-error" id="nivErrIg"></div>
-          <button class="niv-levelup-btn" type="submit">Siguiente &rarr;</button>
-        </div>
-
-        <!-- paso 2 de 2 -->
-        <div class="niv-cap-step" data-cap="wa">
-          <div class="niv-cap-count">Paso 2 de 2</div>
-          <div class="niv-question">&iquest;A qu&eacute; WhatsApp te lo env&iacute;o?</div>
-          <p class="niv-cap-sub">Llega en minutos. Nada de spam.</p>
-          <div class="niv-phone-row">
-            <select class="niv-country-select" id="nivLeadCountry" onchange="capPais(true)"></select>
-            <input class="niv-lead-input" id="nivLeadPhone" type="tel"
-                   autocomplete="tel" inputmode="numeric" enterkeyhint="go">
-          </div>
-          <div class="niv-cap-error" id="nivErrWa"></div>
-          <button class="niv-levelup-btn" type="submit">Ver mi diagn&oacute;stico &rarr;</button>
-          <button class="niv-cap-back" type="button" onclick="capPrev()">&larr; Volver</button>
-        </div>
-
-      </form>
-    </div>
-
-    <!-- community gate moved to level-up overlay -->
-
-    <!-- QUIZ RESULT -->
-    <div class="niv-result" id="nivResult">
-      <div class="niv-result-tag">&#x1F9ED; TU ETAPA ACTUAL</div>
-      <div class="niv-result-stage" id="nivStageName"></div>
-      <div class="niv-result-range" id="nivStageRange"></div>
-
-      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:56px;"></div>
-
-      <!-- ACCORDION DIAGNOSTIC -->
-      <div class="niv-accordion-wrap" id="nivAccordionWrap">
-
-        <!-- BLOCK 1: Situación Actual (red detractor tags) -->
-        <div class="niv-acc-block" data-acc="situacion">
-          <button class="niv-acc-header" onclick="toggleAccordion(this)">
-            <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title now">SITUACI&Oacute;N ACTUAL</span>
-            <span class="niv-acc-chevron">▾</span>
-          </button>
-          <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivNow"></div>
-            <div class="niv-detractor-tags" id="nivDetractorTags"></div>
-          </div>
-        </div>
-
-        <!-- BLOCK 2: Resultado (network roadmap with advancing line) -->
-        <div class="niv-acc-block" data-acc="resultado">
-          <button class="niv-acc-header" onclick="toggleAccordion(this)">
-            <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCI&Oacute;N</span>
-            <span class="niv-acc-chevron">▾</span>
-          </button>
-          <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivFuture"></div>
-            <div class="niv-mini-roadmap" id="nivMiniRoadmap">
-              <div class="niv-mini-track">
-                <div class="niv-mini-progress" id="nivMiniProgress"></div>
-              </div>
-              <div class="niv-mini-nodes" id="nivMiniNodes"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- INCOME CALCULATOR (before siguiente paso) -->
-      <div class="niv-calculator" id="nivCalculator" style="display:none;">
-        <div class="niv-calc-title">Visualiza tu siguiente etapa</div>
-        <div class="niv-calc-label">&iquest;Cu&aacute;l es el valor de tus servicios actualmente?</div>
-        <div class="niv-calc-arrows">
-          <button class="niv-calc-arrow" onclick="calcStep(-250)">&larr;</button>
-          <span class="niv-calc-prefix">$</span>
-          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="200" oninput="updateCalculator()">
-          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(250)">&rarr;</button>
-        </div>
-        <div class="niv-calc-result" id="nivCalcResult"></div>
-        <div class="niv-calc-tip" id="nivCalcTip"></div>
-      </div>
-
-      <!-- BLOCK 3: Tu siguiente paso — ISOLATED with gold glow -->
-      <div class="niv-accordion-wrap" style="margin-top:0;">
-        <div class="niv-acc-block niv-acc-block-gold" data-acc="paso">
-          <button class="niv-acc-header" onclick="toggleAccordion(this)">
-            <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title">TU SIGUIENTE PASO</span>
-            <span class="niv-acc-chevron">▾</span>
-          </button>
-          <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
-
-            <div class="niv-ctas" id="nivCtas"></div>
-          </div>
+          <span>&#x25CF; Gratis</span><span>&#x25CF; Sin tarjeta</span><span>&#x25CF; 40 segundos</span>
         </div>
       </div>
 
       <!-- SUCCESS CASES -->
       <div class="niv-cases">
-        <div class="niv-cases-title">&#x1F3C6; Private Achievements</div>
-        <div class="niv-cases-highlight" style="font-weight:400;color:var(--text-muted);">Tu tambi&eacute;n puedes construir el camino a tu siguiente etapa</div>
+        <div class="niv-cases-title">Lo que pasa cuando se ordena</div>
+        <div class="niv-cases-highlight" style="font-weight:400;color:var(--text-muted);">Mismos rubros, mismas manos. Lo que cambi&oacute; fue el sistema debajo.</div>
         <div class="niv-cases-tabs" id="nivCasesTabs">
           <button class="niv-cases-tab active" data-market="todos" onclick="filterNivCases('todos', this)">Todos</button>
           <button class="niv-cases-tab" data-market="ecommerce" onclick="filterNivCases('ecommerce', this)">Ecommerce</button>
@@ -2571,6 +2473,179 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
             <div class="niv-case-to">De empleado Sr. $3K/mes a consultor indep. +$6K/mes</div>
             <div class="niv-case-quote">&ldquo;Todo cambia cuando est&aacute;s dispuesto a dejar tu ego y trabajar genuinamente en tu proyecto&rdquo;</div>
             <span class="niv-case-tag">x2 + libertad</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Qué se lleva -->
+      <div class="niv-entrega niv-home-reveal niv-home-d4">
+        <div class="niv-entrega-item">
+          <span class="niv-entrega-n">01</span>
+          <div><strong>Tu etapa, con nombre</strong><span>D&oacute;nde est&aacute;s hoy entre los cuatro niveles, y qu&eacute; factura cada uno.</span></div>
+        </div>
+        <div class="niv-entrega-item">
+          <span class="niv-entrega-n">02</span>
+          <div><strong>Tus &aacute;reas en rojo</strong><span>En cu&aacute;les de las &aacute;reas del negocio se te est&aacute; cayendo, y en cu&aacute;l primero.</span></div>
+        </div>
+        <div class="niv-entrega-item">
+          <span class="niv-entrega-n">03</span>
+          <div><strong>Tu plan de 90 d&iacute;as</strong><span>Qu&eacute; mover primero, segundo y tercero. No una lista de 40 cosas.</span></div>
+        </div>
+      </div>
+
+      <p class="splash-subline niv-home-reveal niv-home-d4" style="margin-top:26px;">Lo medimos sobre las <strong>&aacute;reas que sostienen un negocio</strong>:</p>
+      <div class="niv-sismarquee niv-home-reveal niv-home-d4">
+        <div class="niv-sismarquee-track" id="nivSisGrid"></div>
+      </div>
+
+      <div class="niv-home-reveal niv-home-d5 niv-hero-cta" style="margin-top:30px;">
+        <button class="niv-start-btn" onclick="startNivelador()">QUIERO SABER QU&Eacute; ME EST&Aacute; FRENANDO</button>
+        <p class="niv-microcopy">6 preguntas &middot; 40 segundos &middot; resultado inmediato</p>
+      </div>
+
+      <div class="niv-home-reveal niv-home-d5" style="margin-top:22px;">
+        <div class="niv-rubros">
+          <div class="niv-rubros-spheres">
+            <span class="niv-rubro">&#x2696;&#xFE0F;</span>
+            <span class="niv-rubro">&#x1F489;</span>
+            <span class="niv-rubro">&#x1F4F1;</span>
+            <span class="niv-rubro">&#x1F4AA;</span>
+            <span class="niv-rubro">&#x1F4F7;</span>
+            <span class="niv-rubro">&#x1F916;</span>
+            <span class="niv-rubro">&#x1F957;</span>
+            <span class="niv-rubro">&#x1F4BB;</span>
+          </div>
+          <div class="niv-rubros-text">+20 nichos validados</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ QUESTIONS -->
+    <div class="niv-wrap" id="nivQuiz">
+      <div class="niv-progress" id="nivProgress"></div>
+      <div class="niv-cuenta" id="nivCuenta"></div>
+      <div class="niv-question" id="nivQuestion"></div>
+      <div class="niv-porque" id="nivPorque"></div>
+      <div class="niv-options" id="nivOptions"></div>
+      <button class="niv-back" id="nivBack" onclick="nivGoBack()" style="display:none;">← Volver</button>
+    </div>
+
+    <!-- LEAD CAPTURE — antes de mostrar la etapa, no después -->
+    <div class="niv-wrap" id="nivCapture">
+      <form id="nivLeadForm" onsubmit="capSubmit(event)" autocomplete="on" novalidate>
+
+        <!-- paso 1 de 2 -->
+        <div class="niv-cap-step active" data-cap="ig">
+          <div class="niv-cap-count">Paso 1 de 2</div>
+          <div class="niv-question">&iquest;Cu&aacute;l es tu @?</div>
+          <p class="niv-cap-sub">El @ de tu perfil de marca personal o negocio.</p>
+          <div class="niv-ig-row">
+            <span class="niv-ig-at">@</span>
+            <input class="niv-lead-input niv-ig-input" id="nivLeadInstagram" type="text"
+                   placeholder="tunegocio" autocomplete="off" autocapitalize="off"
+                   spellcheck="false" enterkeyhint="next">
+          </div>
+          <div class="niv-cap-error" id="nivErrIg"></div>
+          <button class="niv-levelup-btn" type="submit">Siguiente &rarr;</button>
+        </div>
+
+        <!-- paso 2 de 2 -->
+        <div class="niv-cap-step" data-cap="wa">
+          <div class="niv-cap-count">Paso 2 de 2</div>
+          <div class="niv-question">&iquest;A qu&eacute; WhatsApp te lo env&iacute;o?</div>
+          <p class="niv-cap-sub">Llega en minutos. Nada de spam.</p>
+          <div class="niv-phone-row">
+            <select class="niv-country-select" id="nivLeadCountry" onchange="capPais(true)"></select>
+            <input class="niv-lead-input" id="nivLeadPhone" type="tel"
+                   autocomplete="tel" inputmode="numeric" enterkeyhint="go">
+          </div>
+          <div class="niv-cap-error" id="nivErrWa"></div>
+          <button class="niv-levelup-btn" type="submit">Ver mi diagn&oacute;stico &rarr;</button>
+          <button class="niv-cap-back" type="button" onclick="capPrev()">&larr; Volver</button>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- community gate moved to level-up overlay -->
+
+    <!-- QUIZ RESULT -->
+    <div class="niv-result" id="nivResult">
+      <div class="niv-result-tag">&#x1F9ED; TU ETAPA ACTUAL</div>
+      <div class="niv-result-stage" id="nivStageName"></div>
+      <div class="niv-result-range" id="nivStageRange"></div>
+
+      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:30px;"></div>
+
+      <!-- El espejo: dónde se le está cayendo, antes de cualquier texto -->
+      <div class="niv-areas" id="nivAreasBox">
+        <div class="niv-areas-tit">D&oacute;nde se te est&aacute; cayendo</div>
+        <div class="niv-areas-list" id="nivAreasList"></div>
+        <div class="niv-areas-frase" id="nivAreasFrase"></div>
+      </div>
+
+      <!-- ACCORDION DIAGNOSTIC -->
+      <div class="niv-accordion-wrap" id="nivAccordionWrap">
+
+        <!-- BLOCK 1: Situación Actual (red detractor tags) -->
+        <div class="niv-acc-block" data-acc="situacion">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title now">SITUACI&Oacute;N ACTUAL</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivNow"></div>
+            <div class="niv-detractor-tags" id="nivDetractorTags"></div>
+          </div>
+        </div>
+
+        <!-- BLOCK 2: Resultado (network roadmap with advancing line) -->
+        <div class="niv-acc-block" data-acc="resultado">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCI&Oacute;N</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivFuture"></div>
+            <div class="niv-mini-roadmap" id="nivMiniRoadmap">
+              <div class="niv-mini-track">
+                <div class="niv-mini-progress" id="nivMiniProgress"></div>
+              </div>
+              <div class="niv-mini-nodes" id="nivMiniNodes"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INCOME CALCULATOR (before siguiente paso) -->
+      <div class="niv-calculator" id="nivCalculator" style="display:none;">
+        <div class="niv-calc-title">Visualiza tu siguiente etapa</div>
+        <div class="niv-calc-label">&iquest;Cu&aacute;l es el valor de tus servicios actualmente?</div>
+        <div class="niv-calc-arrows">
+          <button class="niv-calc-arrow" onclick="calcStep(-250)">&larr;</button>
+          <span class="niv-calc-prefix">$</span>
+          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="200" oninput="updateCalculator()">
+          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(250)">&rarr;</button>
+        </div>
+        <div class="niv-calc-result" id="nivCalcResult"></div>
+        <div class="niv-calc-tip" id="nivCalcTip"></div>
+      </div>
+
+      <!-- BLOCK 3: Tu siguiente paso — ISOLATED with gold glow -->
+      <div class="niv-accordion-wrap" style="margin-top:0;">
+        <div class="niv-acc-block niv-acc-block-gold" data-acc="paso">
+          <button class="niv-acc-header" onclick="toggleAccordion(this)">
+            <span class="niv-acc-icon"></span>
+            <span class="niv-acc-title">TU SIGUIENTE PASO</span>
+            <span class="niv-acc-chevron">▾</span>
+          </button>
+          <div class="niv-acc-body">
+            <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
+
+            <div class="niv-ctas" id="nivCtas"></div>
           </div>
         </div>
       </div>
@@ -2653,12 +2728,9 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 
 // ─── LAS 12 ÁREAS DE UN NEGOCIO CON INFRAESTRUCTURA ──
 // Ordenadas como se construye: cimientos → construcción → salida → ingreso.
-const nivAreas = [
-  'Financiero', 'Backend', 'Datos',
-  'Tecnolog\u00eda', 'Automation', 'Producto',
-  'Marketing', 'Contenido', 'Dise\u00f1o',
-  'Comercial', 'Success', 'Comunidad'
-];
+// Solo las que el diagnóstico mide de verdad. Prometer doce y medir cuatro
+// es lo que hace que el lead desconfíe del resultado.
+const nivAreas = ['Oferta', 'Contenido', 'Captura', 'Cierre', 'Entrega', 'Sistemas'];
 (function renderNivAreas() {
   var grid = document.getElementById('nivSisGrid');
   if (!grid) return;
@@ -2671,68 +2743,102 @@ const nivAreas = [
 // ─── COMMUNITY GATE DATA ──────────────────────
 
 // ─── NIVELADOR ──────────────────────────────
+// Cada opción declara cuánto suma a cada área. Explícito a propósito: el
+// resultado le dice al lead dónde se le cae el negocio, y esa afirmación tiene
+// que poder defenderse. Áreas medidas: oferta, contenido, captura, sistemas.
 const nivQuestions = [
   {
+    key: 'ia',
+    multi: true,
+    q: '\u00bfPara qu\u00e9 usas IA hoy?',
+    por: 'Puedes marcar varias. Define cu\u00e1nto puedes apalancar y qu\u00e9 tan r\u00e1pido.',
+    opts: [
+      { text: 'Para aprender e investigar',              score: 1, areas: { sistemas: 8 } },
+      { text: 'Genero presentaciones y propuestas',      score: 2, areas: { sistemas: 12, oferta: 12 } },
+      { text: 'Estoy editando y generando contenido',    score: 2, areas: { sistemas: 12, contenido: 18 } },
+      { text: 'Tengo sistemas para mi negocio/servicios',score: 3, areas: { sistemas: 30 } },
+      { text: 'Tengo agentes y automatizaciones',        score: 4, areas: { sistemas: 38 } }
+    ]
+  },
+  {
+    key: 'situacion',
     q: '\u00bfCu\u00e1l es tu situaci\u00f3n hoy?',
     por: 'Define desde d\u00f3nde partimos.',
     opts: [
-      { text: 'Empleado buscando independizarme', score: 1 },
-      { text: 'Freelance / independiente vendiendo servicios', score: 2 },
-      { text: 'Emprendimiento con clientes activos', score: 3 },
-      { text: 'Empresa formalizada con operaci\u00f3n', score: 4 }
+      { text: 'Empleado buscando independizarme',            score: 1, areas: { oferta: 8 } },
+      { text: 'Freelance / independiente vendiendo servicios',score: 2, areas: { oferta: 28 } },
+      { text: 'Emprendimiento con clientes activos',         score: 3, areas: { oferta: 45 } },
+      { text: 'Empresa formalizada con operaci\u00f3n',      score: 4, areas: { oferta: 58 } }
     ]
   },
   {
+    key: 'clientes',
     q: '\u00bfCu\u00e1ntos clientes tienes hoy?',
     por: 'Dice si tu problema es de volumen o de estructura.',
     opts: [
-      { text: 'Ninguno \u2014 Estoy empleado', score: 1 },
-      { text: '1 a 3 mensuales', score: 2 },
-      { text: '3 a 6 mensuales', score: 3 },
-      { text: '+6 mensuales', score: 4 }
+      { text: 'Ninguno \u2014 Estoy empleado', score: 1, areas: { captura: 6 } },
+      { text: '1 a 3 mensuales',               score: 2, areas: { captura: 26 } },
+      { text: '3 a 6 mensuales',               score: 3, areas: { captura: 44 } },
+      { text: '+6 mensuales',                  score: 4, areas: { captura: 58 } }
     ]
   },
   {
+    key: 'objetivo',
     q: '\u00bfCu\u00e1l es tu objetivo en los pr\u00f3ximos 3 a 6 meses?',
     por: 'Marca a qu\u00e9 distancia est\u00e1 tu siguiente etapa.',
     opts: [
-      { text: 'Independizarme y generar mi primer ingreso propio', score: 1 },
-      { text: 'Generar +$2,000 USD mensuales de forma consistente', score: 2 },
-      { text: 'Contratar personas y tener m\u00e1s tiempo libre', score: 3 },
-      { text: 'Expandirme sobre $20,000 USD mensuales', score: 4 }
+      { text: 'Independizarme y generar mi primer ingreso propio', score: 1, areas: {} },
+      { text: 'Generar +$2,000 USD mensuales de forma consistente', score: 2, areas: {} },
+      { text: 'Contratar personas y tener m\u00e1s tiempo libre',   score: 3, areas: {} },
+      { text: 'Expandirme sobre $20,000 USD mensuales',            score: 4, areas: {} }
     ]
   },
   {
+    key: 'ingreso',
     q: '\u00bfCu\u00e1l es tu rango de ingresos mensual?',
     por: 'Con esto calculamos tu ruta. No para venderte nada.',
     opts: [
-      { text: '$0 \u2013 $1,500 USD', score: 1 },
-      { text: '$1,500 \u2013 $3,000 USD', score: 2 },
-      { text: '$3,000 \u2013 $10,000 USD', score: 3 },
-      { text: '+$10,000 USD', score: 4 }
+      { text: '$0 \u2013 $1,500 USD',      score: 1, areas: { oferta: 5,  captura: 4 } },
+      { text: '$1,500 \u2013 $3,000 USD',  score: 2, areas: { oferta: 14, captura: 10 } },
+      { text: '$3,000 \u2013 $10,000 USD', score: 3, areas: { oferta: 26, captura: 18 } },
+      { text: '+$10,000 USD',              score: 4, areas: { oferta: 34, captura: 24 } }
     ]
   },
   {
+    key: 'adquisicion',
     q: '\u00bfC\u00f3mo traes clientes hoy?',
     por: 'Ac\u00e1 suele estar el cuello que no ves.',
     opts: [
-      { text: 'Solo referidos', score: 1 },
-      { text: 'Contenido lifestyle', score: 2 },
-      { text: 'Contenido para vender', score: 3 },
-      { text: 'Anuncios en Meta', score: 4 }
-    ]
-  },
-  {
-    q: '\u00bfQu\u00e9 nivel de uso de IA tienes hoy?',
-    por: 'Define cu\u00e1nto puedes apalancar, y qu\u00e9 tan r\u00e1pido.',
-    opts: [
-      { text: 'No uso IA todav\u00eda', score: 1 },
-      { text: 'IA gratuita (ChatGPT/Claude/Gemini free)', score: 2 },
-      { text: 'IA de pago (ChatGPT/Claude Pro)', score: 3 },
-      { text: 'Uso avanzado (Claude Max, agentes, infraestructura)', score: 4 }
+      { text: 'Solo referidos',         score: 1, areas: { contenido: 10, captura: 6 } },
+      { text: 'Contenido lifestyle',    score: 2, areas: { contenido: 40, captura: 12 } },
+      { text: 'Contenido para vender',  score: 3, areas: { contenido: 68, captura: 24 } },
+      { text: 'Anuncios en Meta',       score: 4, areas: { contenido: 76, captura: 30 } }
     ]
   }
 ];
+
+// Nombre y diagnóstico de cada área cuando sale baja.
+const nivAreasDef = {
+  oferta:    { nombre: 'Oferta',    flojo: 'Lo que vendes todav\u00eda no est\u00e1 empaquetado: cada venta se arma de nuevo.' },
+  contenido: { nombre: 'Contenido', flojo: 'No hay un camino desde lo que publicas hasta una conversaci\u00f3n de venta.' },
+  captura:   { nombre: 'Captura',   flojo: 'Las conversaciones que llegan no quedan registradas en ninguna parte.' },
+  sistemas:  { nombre: 'Sistemas',  flojo: 'Usas IA suelta, no como infraestructura que trabaje cuando t\u00fa no est\u00e1s.' }
+};
+
+// Suma las áreas de todo lo respondido y devuelve 0–100 por área.
+function nivCalcAreas() {
+  var tot = { oferta: 0, contenido: 0, captura: 0, sistemas: 0 };
+  nivAreaPicks.forEach(function(ar) {
+    for (var k in ar) { if (tot[k] !== undefined) tot[k] += ar[k]; }
+  });
+  for (var k in tot) tot[k] = Math.max(0, Math.min(100, Math.round(tot[k])));
+  return tot;
+}
+
+// Las dos más bajas son las que se le nombran.
+function nivEnRojo(areas) {
+  return Object.keys(areas).sort(function(a, b) { return areas[a] - areas[b]; }).slice(0, 2);
+}
 
 const nivStages = {
   skiller: {
@@ -2930,7 +3036,7 @@ function populateNivCountrySelect() {
 }
 
 function startNivelador() {
-  nivStep = 0; nivScores = []; nivAnswers = [];
+  nivStep = 0; nivScores = []; nivAnswers = []; nivAreaPicks = []; nivMultiSel = [];
   document.getElementById('nivIntro').style.display = 'none';
   document.querySelector('.splash-title-wrap').style.display = 'none';
   document.getElementById('nivQuiz').classList.add('active');
@@ -2952,23 +3058,73 @@ function renderNivQuestion() {
   document.getElementById('nivQuestion').textContent = q.q;
   var cuentaEl = document.getElementById('nivCuenta');
   if (cuentaEl) cuentaEl.textContent = 'Pregunta ' + (nivStep + 1) + ' de ' + nivQuestions.length;
-
-  // El porqué va debajo de la pregunta, a la vista: tiene que leerse.
   var porEl = document.getElementById('nivPorque');
   if (porEl) porEl.textContent = q.por || '';
+
+  nivMultiSel = [];
   let opts = '';
   q.opts.forEach(function(o, i) {
-    opts += '<button class="niv-opt" onclick="nivAnswer(' + o.score + ', ' + i + ')">' + o.text + '</button>';
+    if (q.multi) {
+      opts += '<button type="button" class="niv-opt niv-opt-multi" data-i="' + i +
+              '" onclick="nivToggle(' + i + ', this)"><span class="niv-check"></span>' + o.text + '</button>';
+    } else {
+      opts += '<button type="button" class="niv-opt" onclick="nivAnswer(' + o.score + ', ' + i + ')">' + o.text + '</button>';
+    }
   });
+  if (q.multi) {
+    opts += '<button type="button" class="niv-opt-continuar" id="nivContinuar" disabled onclick="nivAnswerMulti()">Continuar &rarr;</button>';
+  }
   document.getElementById('nivOptions').innerHTML = opts;
   document.getElementById('nivBack').style.display = nivStep > 0 ? 'inline-block' : 'none';
 }
 
+// ── Opción múltiple ──
+let nivMultiSel = [];
+
+function nivToggle(i, el) {
+  var pos = nivMultiSel.indexOf(i);
+  if (pos === -1) { nivMultiSel.push(i); el.classList.add('sel'); }
+  else { nivMultiSel.splice(pos, 1); el.classList.remove('sel'); }
+  var cont = document.getElementById('nivContinuar');
+  if (cont) {
+    cont.disabled = nivMultiSel.length === 0;
+    cont.textContent = nivMultiSel.length
+      ? 'Continuar \u2192  (' + nivMultiSel.length + ')'
+      : 'Continuar \u2192';
+  }
+}
+
+function nivAnswerMulti() {
+  if (!nivMultiSel.length) return;
+  const q = nivQuestions[nivStep];
+  var elegidas = nivMultiSel.slice().sort(function(a, b) { return a - b; });
+
+  // Para la etapa cuenta el uso más avanzado que declaró, no el promedio:
+  // quien ya tiene agentes está en esa liga aunque también use IA para leer.
+  var maxScore = 1, textos = [], areas = {};
+  elegidas.forEach(function(i) {
+    var o = q.opts[i];
+    if (o.score > maxScore) maxScore = o.score;
+    textos.push(o.text);
+    for (var k in (o.areas || {})) areas[k] = (areas[k] || 0) + o.areas[k];
+  });
+
+  nivScores.push(maxScore);
+  nivAnswers.push(textos.join(' / '));
+  nivAreaPicks.push(areas);
+  pvtTrack('quiz_answer', { pregunta: nivStep + 1, valor: maxScore, marcadas: elegidas.length });
+  nivStep++;
+  if (nivStep < nivQuestions.length) renderNivQuestion(); else showNivResult();
+}
+
 let nivAnswers = [];
+let nivAreaPicks = [];
 
 function nivAnswer(score, optIdx) {
+  var o = nivQuestions[nivStep].opts[optIdx];
   nivScores.push(score);
-  nivAnswers.push(nivQuestions[nivStep].opts[optIdx].text);
+  nivAnswers.push(o.text);
+  nivAreaPicks.push(o.areas || {});
   pvtTrack('quiz_answer', { pregunta: nivStep + 1, valor: score });
   nivStep++;
   if (nivStep < nivQuestions.length) {
@@ -3099,7 +3255,9 @@ function submitNivLead(event) {
     q6_nivel_ia: stripCommas(nivAnswers[5]),
     quiz_scores: nivScores,
     ruta: pvtRuta(),
-    canal: pvtCanal()
+    canal: pvtCanal(),
+    areas: nivCalcAreas(),
+    areas_en_rojo: nivEnRojo(nivCalcAreas()).map(function(k) { return nivAreasDef[k].nombre; }).join(', ')
   });
 
   pvtTrack('lead_submit', { ruta: pvtRuta(), pais: pais.label });
@@ -3286,10 +3444,17 @@ const PVT_RUTAS = {
 };
 
 // q4 = rango de ingresos: 1 = $0–1.5k · 2 = $1.5–3k · 3 = $3–10k · 4 = +$10k
+function nivScoreDe(key) {
+  for (var i = 0; i < nivQuestions.length; i++) {
+    if (nivQuestions[i].key === key) return nivScores[i] || 0;
+  }
+  return 0;
+}
+
 function pvtRuta() {
-  // q4 = ingreso: 1 = $0–1.5k · 2 = $1.5–3k · 3 = $3–10k · 4 = +$10k
+  // 1 = $0–1.5k · 2 = $1.5–3k · 3 = $3–10k · 4 = +$10k
   // Bajo $1.500 no hay caja para el programa: ofrecerlo quema el lead.
-  var ingreso = nivScores[3] || 0;
+  var ingreso = nivScoreDe('ingreso');
   if (ingreso <= 1) return 'mision0';
   if (ingreso >= 4) return 'equity';
   return 'programa';
@@ -3515,21 +3680,65 @@ function dismissNivLevelup() {
   var missingEl = document.getElementById('nivMissing');
 
   var ruta = pvtRuta();
-  var cuellos = (nivDetractors[stageKey] || []).slice(0, 2);
+  var areas = nivCalcAreas();
+  var rojo = nivEnRojo(areas);
+  var cuellos = rojo.map(function(k) { return nivAreasDef[k].nombre; });
+  window._nivAreas = areas;
+  window._nivRojo = rojo;
+
+  // Las cuatro barras, de peor a mejor: lo que falla se lee primero.
+  var listaEl = document.getElementById('nivAreasList');
+  if (listaEl) {
+    var orden = Object.keys(areas).sort(function(a, b) { return areas[a] - areas[b]; });
+    listaEl.innerHTML = orden.map(function(k) {
+      var v = areas[k];
+      var est = v < 40 ? 'rojo' : v < 65 ? 'medio' : 'bien';
+      var etq = v < 40 ? 'en rojo' : v < 65 ? 'a medias' : 'bien';
+      return '<div class="niv-area ' + est + '">' +
+               '<span class="niv-area-nom">' + nivAreasDef[k].nombre + '</span>' +
+               '<span class="niv-area-barra"><i style="width:' + Math.max(v, 4) + '%"></i></span>' +
+               '<span class="niv-area-etq">' + etq + '</span>' +
+             '</div>';
+    }).join('');
+  }
+
+  // La frase tiene que decir lo mismo que las barras. Llamar "problema" a un
+  // área que la barra marca "bien" es la forma más rápida de perder credibilidad.
+  var fraseEl = document.getElementById('nivAreasFrase');
+  if (fraseEl) {
+    var enRojoReal = Object.keys(areas).filter(function(k) { return areas[k] < 40; })
+                       .sort(function(a, b) { return areas[a] - areas[b]; });
+    var tit, cuerpo;
+    if (enRojoReal.length >= 2) {
+      tit = 'Tu problema est\u00e1 en ' + nivAreasDef[enRojoReal[0]].nombre.toLowerCase() +
+            ' y ' + nivAreasDef[enRojoReal[1]].nombre.toLowerCase() + '.';
+      cuerpo = nivAreasDef[enRojoReal[0]].flojo + ' ' + nivAreasDef[enRojoReal[1]].flojo;
+    } else if (enRojoReal.length === 1) {
+      tit = 'Tu problema est\u00e1 en ' + nivAreasDef[enRojoReal[0]].nombre.toLowerCase() + '.';
+      cuerpo = nivAreasDef[enRojoReal[0]].flojo +
+               ' Lo siguiente a mirar es ' + nivAreasDef[rojo[1]].nombre.toLowerCase() + '.';
+    } else {
+      tit = 'No tienes un \u00e1rea en rojo.';
+      cuerpo = 'Lo m\u00e1s flojo es ' + nivAreasDef[rojo[0]].nombre.toLowerCase() + '. ' +
+               nivAreasDef[rojo[0]].flojo;
+    }
+    fraseEl.innerHTML = '<strong>' + tit + '</strong>' + cuerpo;
+    window._nivRojoReal = enRojoReal.length ? enRojoReal : [rojo[0]];
+  }
   var ig = window._nivLeadIg || '';
 
   // El mensaje llega con la etapa y los cuellos puestos: Patrick abre el chat
   // sabiendo con quién habla y no gasta la conversación diagnosticando.
   function msgDiagnostico() {
-    return 'Hola Patrick, soy ' + ig + '. Termin\u00e9 el diagn\u00f3stico: estoy en etapa '
+    return 'Hola Patrick, soy ' + ig + '. Termin\u00e9 el diagn\u00f3stico: estoy en '
       + (s.name || stageKey.toUpperCase())
-      + (cuellos.length ? ' y mis cuellos son ' + cuellos.join(' y ') : '')
-      + '. Quiero mi diagn\u00f3stico completo.';
+      + (cuellos.length ? ' y mis \u00e1reas en rojo son ' + cuellos.join(' y ').toLowerCase() : '')
+      + '. Quiero mi diagn\u00f3stico + plan personalizado para escalar con IA.';
   }
 
   function bloqueCuellos() {
     if (!cuellos.length) return '';
-    var h = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">Tus dos cuellos de botella</div>';
+    var h = '<div class="niv-call-benefits"><div class="niv-call-benefits-title">Tus dos \u00e1reas en rojo</div>';
     cuellos.forEach(function(c) {
       h += '<div class="niv-call-benefit"><span class="niv-call-benefit-check">\u2192</span>' + c + '</div>';
     });
@@ -3556,7 +3765,7 @@ function dismissNivLevelup() {
       + '<strong style="color:var(--metal3);">d\u00f3nde se te cae el sistema y en qu\u00e9 orden arreglarlo</strong>.';
     ctasEl.innerHTML = bloqueCuellos() +
       '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msgDiagnostico()) + '" target="_blank">' +
-        '\u2713 S\u00ed, quiero mi diagn\u00f3stico completo</a>' +
+        'Quiero mi diagn\u00f3stico + plan personalizado para escalar con IA</a>' +
       '<div class="niv-lead-note" style="margin-top:10px;">Te llega hoy. Lo lee Patrick, no un bot.</div>';
   }
 
@@ -3973,12 +4182,12 @@ function spawnNivParticles(color) {
 }
 
 function nivGoBack() {
-  if (nivStep > 0) {
-    nivStep--;
-    nivScores.pop();
-    nivAnswers.pop();
-    renderNivQuestion();
-  }
+  if (nivStep === 0) return;
+  nivStep--;
+  nivScores.pop();
+  nivAnswers.pop();
+  nivAreaPicks.pop();
+  renderNivQuestion();
 }
 
 // ─── FLOATING PARTICLES ────────────────────
