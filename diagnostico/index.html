@@ -69,7 +69,7 @@
 }
 </script>
 <meta name="apple-mobile-web-app-title" content="Diagnóstico">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   /* Backgrounds (brand depth hierarchy) */
@@ -2434,10 +2434,176 @@ body.result-mode .niv-sticky, body:not(.splash-active) .niv-sticky { display:non
   .niv-radar { max-width:390px; }
   .niv-plan { max-width:540px; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   CAPA ESTÉTICA
+   Tres familias nuevas. Bricolage Grotesque tiene carácter en
+   mayúsculas apretadas; Figtree lee cómodo en párrafo; DM Mono
+   alinea cifras sin el aire técnico de una terminal.
+   El rojo deja de ser el color de la página y pasa a ser el de
+   una sola cosa: la acción. Todo lo demás se sostiene con
+   blancos a distintas opacidades, que es lo que da profundidad
+   sin ensuciar.
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --f-display: 'Bricolage Grotesque', ui-sans-serif, -apple-system, sans-serif;
+  --f-texto:   'Figtree', ui-sans-serif, -apple-system, sans-serif;
+  --f-dato:    'DM Mono', ui-monospace, Menlo, monospace;
+
+  /* blancos escalonados: la profundidad sale de acá, no de más rojo */
+  --v1: rgba(255,255,255,.035);
+  --v2: rgba(255,255,255,.055);
+  --v3: rgba(255,255,255,.085);
+  --b1: rgba(255,255,255,.08);
+  --b2: rgba(255,255,255,.14);
+  --vidrio: saturate(140%) blur(14px);
+  --r: 14px;
+  --r-s: 10px;
+}
+
+body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
+.niv-call-benefit, .splash-tagline, .splash-subline, .niv-cap-sub,
+.niv-dolor, .niv-pilar span, .niv-plan-tit, .niv-plan-pasos span,
+.niv-areas-frase, .niv-case-quote { font-family: var(--f-texto); }
+
+.niv-h1, .niv-question, .niv-result-stage, .niv-levelup-rank, .niv-acc-title,
+.niv-calc-title, .niv-cta, .niv-start-btn, .niv-levelup-btn, .niv-claim,
+.niv-cases-title, .niv-areas-frase strong, .niv-case-to, .niv-opt-continuar {
+  font-family: var(--f-display); letter-spacing:-.022em;
+}
+
+.niv-firma, .niv-cuenta, .niv-sec, .niv-microcopy, .niv-sinfriccion,
+.niv-area-nom, .niv-area-etq, .niv-areas-tit, .niv-result-tag, .niv-result-range,
+.niv-levelup-label, .niv-levelup-range, .niv-stage-bar-item > span, .niv-lobby-timer,
+.niv-huincha-track span, .niv-case-from, .niv-case-stage, .niv-case-tag,
+.niv-cases-tab, .niv-pilar b, .niv-plan-pasos b, .niv-entrega-n, .niv-cap-count,
+.niv-case-cuello, .niv-cupos { font-family: var(--f-dato); font-variant-numeric: tabular-nums; }
+
+/* ─── VIDRIO ─── superficies translúcidas, borde claro, radio suave */
+.niv-case, .niv-areas, .niv-dolor, .niv-opt, .niv-lead-input, .niv-ig-row,
+.niv-country-select, .niv-call-benefits, .niv-acc-block, .niv-huincha-track span,
+.niv-cases-tab, .niv-entrega-item, .niv-calculator {
+  background: var(--v1) !important;
+  border: 1px solid var(--b1) !important;
+  border-radius: var(--r-s) !important;
+  backdrop-filter: var(--vidrio);
+  -webkit-backdrop-filter: var(--vidrio);
+}
+.niv-case, .niv-areas, .niv-calculator { border-radius: var(--r) !important; background: var(--v2) !important; }
+.niv-opt { transition: background .18s, border-color .18s, transform .18s; }
+.niv-opt:hover { background: var(--v3) !important; border-color: var(--b2) !important; transform: translateY(-1px); }
+.niv-opt-multi.sel { background: rgba(224,52,47,.14) !important; border-color: rgba(255,125,102,.45) !important; }
+.niv-cases-tab.active { border-color: var(--b2) !important; background: var(--v3) !important; color: var(--text-primary); }
+
+/* el dolor deja la barra roja por un filo tenue: ya no grita */
+.niv-dolor { border-left: 1px solid rgba(255,125,102,.42) !important; }
+
+/* ─── CASOS ─── el crecimiento en verde, el cuello nombrado */
+.niv-case { padding:16px 15px; text-align:center; }
+.niv-case-from { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); }
+.niv-case-to { font-size:17px; font-weight:700; margin-top:7px; line-height:1.24;
+  display:flex; align-items:baseline; justify-content:center; gap:7px; flex-wrap:wrap; }
+.niv-case-de { color:var(--text-muted); font-weight:500; }
+.niv-case-fl { color:var(--text-disabled); font-size:14px; }
+.niv-case-a  { color:var(--green); }
+.niv-case-quote { font-size:12.8px; color:var(--text-secondary); font-style:italic; margin-top:8px; }
+.niv-case-cuello { font-size:9.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--text-disabled); margin-top:11px; padding-top:9px; border-top:1px solid var(--b1); }
+.niv-case-cuello b { color:var(--text-secondary); font-weight:500; }
+.niv-case-tag { display:none; }
+
+/* ─── CUPOS ─── */
+.niv-cupos { display:flex; align-items:center; justify-content:center; gap:8px;
+  margin-top:14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-secondary); }
+.niv-cupos-dot { width:6px; height:6px; border-radius:50%; background:var(--green);
+  box-shadow:0 0 0 3px rgba(73,189,124,.18); animation:cupoLatido 2.2s ease-in-out infinite; }
+@keyframes cupoLatido { 0%,100%{opacity:1} 50%{opacity:.35} }
+
+/* ─── ESPERA ─── barra que avanza y mensajes que rotan */
+.niv-lobby-barra { width:min(240px,70vw); height:2px; border-radius:2px;
+  background:rgba(255,255,255,.1); overflow:hidden; margin:0 auto 20px; }
+.niv-lobby-barra i { display:block; height:100%; width:0; border-radius:2px;
+  background:linear-gradient(90deg, var(--red), #ff9d85); }
+.niv-value-teaser { min-height:44px; display:flex; align-items:center; justify-content:center;
+  text-align:center; font-family:var(--f-texto); font-size:14.5px; color:var(--text-secondary);
+  max-width:30ch; margin:0 auto; line-height:1.4; }
+.niv-value-teaser strong { color:var(--text-primary); font-weight:600; }
+.niv-value-teaser.entra { animation:teaserEntra .45s ease both; }
+@keyframes teaserEntra { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+
+/* ─── MENOS ROJO ─── el acento vuelve a ser excepción */
+.niv-claim { border-block:1px solid var(--b1); }
+.niv-claim b { color:var(--green); }
+.niv-entrega-item { border-left:1px solid var(--b1) !important; }
+.niv-entrega-n, .niv-pilar b, .niv-plan-pasos b { color:var(--text-muted); }
+.niv-h1-em { color:var(--text-primary); opacity:.55; }
+.niv-area.rojo .niv-area-barra i { background:linear-gradient(90deg,var(--red),#ff9d85); }
+
+/* el botón es lo único que conserva el rojo pleno */
+.niv-start-btn, .niv-cta-call, .niv-opt-continuar, .niv-sticky button {
+  border-radius: var(--r-s) !important;
+  box-shadow: 0 10px 34px rgba(224,52,47,.26);
+}
+.niv-levelup-btn { border-radius: var(--r-s) !important; }
+
+/* ─── FOOTER LEGAL ─── */
+.niv-legal { text-align:center; font-family:var(--f-dato); font-size:10px;
+  letter-spacing:.12em; color:var(--text-disabled); padding:34px 0 26px; }
+
+/* ─── RADAR ─── el dibujo deja de ser rojo: el rojo marca solo lo caído */
+.niv-radar { max-width:300px; }
+.niv-areas { padding:20px 16px; }
+.niv-areas-tit { font-size:10px; letter-spacing:.2em; }
+
+/* la fila: nombre con ancho propio para que nunca pise la barra */
+.niv-area { grid-template-columns:86px minmax(0,1fr) 62px; gap:12px; }
+.niv-area-nom { font-size:11.5px; letter-spacing:.02em; font-weight:400;
+  color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.niv-area.rojo .niv-area-nom { color:var(--text-primary); font-weight:500; }
+.niv-area-barra { height:6px; background:rgba(255,255,255,.07); border-radius:3px; }
+.niv-area-barra i { border-radius:3px; }
+.niv-area-etq { font-size:9.5px; letter-spacing:.07em; }
+
+/* lo sano no necesita color: blanco a media opacidad */
+.niv-area.bien .niv-area-barra i { background:rgba(255,255,255,.4); }
+.niv-area.bien .niv-area-etq { color:var(--text-disabled); }
+.niv-area.medio .niv-area-barra i { background:rgba(255,255,255,.22); }
+.niv-area.medio .niv-area-etq { color:var(--text-disabled); }
+.niv-area.rojo .niv-area-barra i { background:var(--red); }
+.niv-area.rojo .niv-area-etq { color:var(--electric); }
+
+@media (min-width:860px) {
+  .niv-area { grid-template-columns:110px minmax(0,1fr) 70px; }
+  .niv-area-nom { font-size:13px; }
+  .niv-radar { max-width:360px; }
+}
+
+/* El strong del título va en bloque; los de dentro del cuerpo, no — si no,
+   cualquier palabra resaltada parte el párrafo y deja huérfano lo que sigue. */
+.niv-areas-frase strong { display:inline; margin-bottom:0; font-size:inherit; }
+.niv-areas-frase > strong:first-child { display:block; margin-bottom:7px;
+  font-size:17px; font-family:var(--f-display); font-weight:700;
+  color:var(--text-primary); letter-spacing:-.022em; line-height:1.24; }
+
+/* Fuera la cuadrícula: ensucia el vidrio y envejece la página. Queda un
+   degradado tenue que da profundidad sin dibujar nada. */
+body { background-image: none !important; }
+body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(900px 540px at 50% -10%, rgba(255,255,255,.045), transparent 70%),
+    radial-gradient(700px 420px at 15% 105%, rgba(224,52,47,.09), transparent 72%); }
+
+/* los botones nunca subrayados */
+.niv-start-btn, .niv-cta, .niv-cta-call, .niv-levelup-btn,
+.niv-opt-continuar, .niv-sticky button { text-decoration:none !important; }
+
+/* la huincha arranca y termina fundida, sin corte seco */
+.niv-huincha { border-block-color:var(--b1) !important; }
 </style>
 </head>
 <body class="splash-active">
 <div class="floating-particles" id="particles"></div>
+<div class="niv-legal-anchor"></div>
 <div class="niv-sticky" id="nivSticky"><button onclick="startNivelador()">Comenzar mi diagn&oacute;stico</button></div>
 
 <!-- ══ SPLASH SCREEN ══ -->
@@ -2455,14 +2621,14 @@ body.result-mode .niv-sticky, body:not(.splash-active) .niv-sticky { display:non
 
       <h1 class="niv-h1 niv-home-reveal niv-home-d2">Conoce qu&eacute;<br>te est&aacute; frenando<br><span class="niv-h1-em">para escalar con IA</span></h1>
 
-      <p class="niv-h1-sub niv-home-reveal niv-home-d2">Responde 6 preguntas y recibe el diagn&oacute;stico de tu negocio por &aacute;rea, m&aacute;s tu plan para los pr&oacute;ximos 90 d&iacute;as.</p>
+      <p class="niv-h1-sub niv-home-reveal niv-home-d2">Responde 8 preguntas y mira tu negocio medido en 7 &aacute;reas. En un minuto sabes cu&aacute;l te est&aacute; frenando.</p>
 
       <div class="niv-claim niv-home-reveal niv-home-d2">Mis clientes hacen un <b>&times;3</b> y hasta un <b>&times;10</b> en facturaci&oacute;n en solo 3 meses.</div>
 
       <div class="niv-home-reveal niv-home-d3 niv-hero-cta">
         <button class="niv-start-btn" onclick="startNivelador()">COMENZAR MI DIAGN&Oacute;STICO</button>
         <div class="niv-sinfriccion">
-          <span>&#x25CF; Gratis</span><span>&#x25CF; Sin tarjeta</span><span>&#x25CF; 40 segundos</span>
+          <span>&#x25CF; Gratis</span><span>&#x25CF; Sin tarjeta</span><span>&#x25CF; 1 minuto</span>
         </div>
       </div>
 
@@ -2636,28 +2802,32 @@ body.result-mode .niv-sticky, body:not(.splash-active) .niv-sticky { display:non
           <div class="niv-case" data-market="medios">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Social Media</div>
-            <div class="niv-case-to">De $0 a $1.500/mes</div>
+            <div class="niv-case-to"><span class="niv-case-de">$0</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$1.500/mes</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Contenido</b></div>
             <div class="niv-case-quote">&ldquo;Yo sab&iacute;a que pod&iacute;a lograr m&aacute;s con claridad&rdquo;</div>
             <span class="niv-case-tag">Primer ingreso</span>
           </div>
           <div class="niv-case" data-market="wellness">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Nutricionista / Coach</div>
-            <div class="niv-case-to">De $30 USD/sesi&oacute;n a programa de $600 USD</div>
+            <div class="niv-case-to"><span class="niv-case-de">$30 USD/sesi&oacute;n</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">programa de $600 USD</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Oferta</b></div>
             <div class="niv-case-quote">&ldquo;Hab&iacute;an muchas cosas que no sab&iacute;a antes de comenzar&rdquo;</div>
             <span class="niv-case-tag">x20 ticket</span>
           </div>
           <div class="niv-case" data-market="medios">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Eventos / DJ&rsquo;s</div>
-            <div class="niv-case-to">De $50 por evento a $250 con agenda llena</div>
+            <div class="niv-case-to"><span class="niv-case-de">$50 por evento</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$250 con agenda llena</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Oferta</b></div>
             <div class="niv-case-quote">&ldquo;No sab&iacute;amos c&oacute;mo negociar para subir nuestro valor&rdquo;</div>
             <span class="niv-case-tag">x5 + demanda</span>
           </div>
           <div class="niv-case" data-market="medios">
             <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
             <div class="niv-case-from">Freelance creativo</div>
-            <div class="niv-case-to">De cobrar por hora a paquetes de $800+</div>
+            <div class="niv-case-to"><span class="niv-case-de">cobrar por hora</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">paquetes de $800+</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Oferta</b></div>
             <div class="niv-case-quote">&ldquo;Lo que armamos fue un antes y un despu&eacute;s, voy a seguir construyendo&rdquo;</div>
             <span class="niv-case-tag">Modelo escalable</span>
           </div>
@@ -2665,14 +2835,16 @@ body.result-mode .niv-sticky, body:not(.splash-active) .niv-sticky { display:non
           <div class="niv-case" data-market="wellness">
             <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Medicina est&eacute;tica</div>
-            <div class="niv-case-to">De $2K/mes a $30K/mes recurrentes</div>
+            <div class="niv-case-to"><span class="niv-case-de">$2K/mes</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$30K/mes recurrentes</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Entrega</b></div>
             <div class="niv-case-quote">&ldquo;Implementamos un sistema para dar servicio a muchos clientes sin quemarme&rdquo;</div>
             <span class="niv-case-tag">x15 ingresos</span>
           </div>
           <div class="niv-case" data-market="servicios">
             <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
             <div class="niv-case-from">Rubro legal</div>
-            <div class="niv-case-to">De dependiente a +$3.5K/mes</div>
+            <div class="niv-case-to"><span class="niv-case-de">dependiente</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">+$3.5K/mes</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Avatar</b></div>
             <div class="niv-case-quote">&ldquo;Apliqu&eacute; todo en las mentor&iacute;as y ahora tengo que decir que no a algunos proyectos&rdquo;</div>
             <span class="niv-case-tag">Independencia</span>
           </div>
@@ -2680,14 +2852,16 @@ body.result-mode .niv-sticky, body:not(.splash-active) .niv-sticky { display:non
           <div class="niv-case" data-market="ecommerce">
             <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
             <div class="niv-case-from">Ecommerce</div>
-            <div class="niv-case-to">De $2K/mes a $30K/mes</div>
+            <div class="niv-case-to"><span class="niv-case-de">$2K/mes</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$30K/mes</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Captura</b></div>
             <div class="niv-case-quote">&ldquo;Cada vez crecemos m&aacute;s, cada etapa nueva hay algo nuevo que desbloquear&rdquo;</div>
             <span class="niv-case-tag">x15 ingresos</span>
           </div>
           <div class="niv-case" data-market="servicios">
             <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
             <div class="niv-case-from">Consultor&iacute;a</div>
-            <div class="niv-case-to">De empleado Sr. $3K/mes a consultor indep. +$6K/mes</div>
+            <div class="niv-case-to"><span class="niv-case-de">empleado Sr. $3K/mes</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">consultor indep. +$6K/mes</span></div>
+            <div class="niv-case-cuello">Cuello de botella: <b>Foundations</b></div>
             <div class="niv-case-quote">&ldquo;Todo cambia cuando est&aacute;s dispuesto a dejar tu ego y trabajar genuinamente en tu proyecto&rdquo;</div>
             <span class="niv-case-tag">x2 + libertad</span>
           </div>
@@ -2765,6 +2939,7 @@ body.result-mode .niv-sticky, body:not(.splash-active) .niv-sticky { display:non
     <button class="niv-levelup-btn" id="nivLevelupBtn" onclick="dismissNivLevelup()">Ver mi resultado completo &rarr;</button>
     <!-- Value teaser (durante el análisis) — qué te vas a encontrar en el diagnóstico -->
     <div class="niv-community-mini" id="nivCommunityMini">
+      <div class="niv-lobby-barra"><i id="nivLobbyBarra"></i></div>
       <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
       <div class="niv-lobby-benefits" id="nivLobbyBenefits"></div>
       <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">6</span>s</div>
@@ -2915,7 +3090,7 @@ function nivPintarRadar(areas) {
   if (!svg) return;
   var ejes = nivAreaOrden.map(function(k) { return { k: nivAreasDef[k].nombre, v: areas[k] }; });
   var cx = 130, cy = 106, R = 68, N = ejes.length;
-  var linea = 'rgba(255,180,170,.17)', ember = '#e0342f', tinta = '#b09a96';
+  var linea = 'rgba(255,255,255,.1)', ember = '#e0342f', tinta = 'rgba(255,255,255,.45)';
 
   function pt(i, r) {
     var a = -Math.PI / 2 + i * (2 * Math.PI / N);
@@ -2937,15 +3112,15 @@ function nivPintarRadar(areas) {
   }
   var dp = [];
   for (var i = 0; i < N; i++) { var p = pt(i, R * ejes[i].v / 100); dp.push(p[0].toFixed(1) + ',' + p[1].toFixed(1)); }
-  out += '<polygon points="' + dp.join(' ') + '" fill="rgba(224,52,47,.26)" stroke="' + ember + '" stroke-width="1.8" stroke-linejoin="round"/>';
+  out += '<polygon points="' + dp.join(' ') + '" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.55)" stroke-width="1.4" stroke-linejoin="round"/>';
 
   for (var i = 0; i < N; i++) {
     var v = ejes[i].v, bajo = v < 40, p = pt(i, R * v / 100);
-    out += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + (bajo ? 3.2 : 2.3) + '" fill="' + (bajo ? ember : '#ff7d66') + '"/>';
+    out += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + (bajo ? 3.4 : 2) + '" fill="' + (bajo ? ember : 'rgba(255,255,255,.55)') + '"/>';
     var l = pt(i, R + 16), anc = 'middle';
     if (l[0] > cx + 5) anc = 'start'; else if (l[0] < cx - 5) anc = 'end';
     out += '<text x="' + l[0].toFixed(1) + '" y="' + (l[1] + 2.8).toFixed(1) + '" text-anchor="' + anc + '" '
-         + 'fill="' + (bajo ? ember : tinta) + '" font-family="JetBrains Mono, monospace" font-size="7.2"'
+         + 'fill="' + (bajo ? '#ff7d66' : tinta) + '" font-family="DM Mono, monospace" font-size="7.4"'
          + (bajo ? ' font-weight="700"' : '') + '>' + ejes[i].k + '</text>';
   }
   svg.innerHTML = out;
@@ -3469,12 +3644,36 @@ function proceedToLevelUp() {
 
   // Teaser + beneficios: mientras "analiza", el lead ve todo lo que viene DESPUÉS del
   // diagnóstico. Sube el valor percibido antes de mostrar la etapa.
+  // La barra avanza de verdad durante los 5 segundos: una espera con progreso
+  // visible se tolera; una sin él se lee como que la página se colgó.
+  var barraEl = document.getElementById('nivLobbyBarra');
+  if (barraEl) {
+    barraEl.style.transition = 'none';
+    barraEl.style.width = '0%';
+    requestAnimationFrame(function() {
+      barraEl.style.transition = 'width 5s linear';
+      barraEl.style.width = '100%';
+    });
+  }
+
+  // Los tres mensajes rotan. Es lo que hace que, aunque hoy no compre,
+  // quiera quedarse cerca.
+  var teaserEl = document.getElementById('nivValueTeaser');
+  var tIdx = 0;
+  if (teaserEl) {
+    teaserEl.innerHTML = nivValueTeasers[0];
+    teaserEl.classList.add('entra');
+  }
+  var teaserInt = setInterval(function() {
+    if (!teaserEl) return;
+    tIdx = (tIdx + 1) % nivValueTeasers.length;
+    teaserEl.classList.remove('entra');
+    void teaserEl.offsetWidth;
+    teaserEl.innerHTML = nivValueTeasers[tIdx];
+    teaserEl.classList.add('entra');
+  }, 1600);
+
   setTimeout(function() {
-    var teaserEl = document.getElementById('nivValueTeaser');
-    if (teaserEl) {
-      var t = nivValueTeasers[Math.floor(Math.random() * nivValueTeasers.length)];
-      teaserEl.innerHTML = t;
-    }
 
     var benefitsEl = document.getElementById('nivLobbyBenefits');
     if (benefitsEl && !benefitsEl.children.length) {
@@ -3510,6 +3709,7 @@ function proceedToLevelUp() {
   setTimeout(function() {
     clearInterval(dotInterval);
     clearInterval(lobbyInterval);
+    clearInterval(teaserInt);
 
     // Smooth hide community mini
     communityMini.classList.remove('visible');
@@ -3546,14 +3746,14 @@ function proceedToLevelUp() {
 }
 
 // ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
+// Lo que rota mientras genera el diagnóstico. No es relleno: es la razón por
+// la que, aunque hoy no compre, quiera quedarse cerca.
 const nivValueTeasers = [
-  'Tu diagnóstico incluye <strong>dónde estás hoy</strong>, qué te falta y tu próximo paso concreto.',
-  'Vas a ver el <strong>stack de herramientas exacto</strong> para tu etapa — sin adivinar.',
-  'Al final vas a tener un <strong>mapa claro</strong> de hacia dónde vas — no solo un número.'
+  '<strong>\u00danete a la comunidad</strong> de founders y emprendedores',
+  '<strong>Beneficios, eventos y comisiones</strong>',
+  '<strong>Apal\u00e1ncate con IA</strong> antes que tu competencia'
 ];
 
-// Lo que sigue DESPUÉS del diagnóstico — se muestra mientras analiza para que el lead
-// entienda que está entrando a un ecosistema, no bajando un PDF.
 const nivLobbyBenefits = [
   '<strong>Q&amp;A en vivo</strong> para resolver tus trabas reales',
   '<strong>Eventos</strong> y sesiones de construcción en vivo',
@@ -3860,6 +4060,7 @@ function dismissNivLevelup() {
       cuerpo = 'Eso no son ' + rojo.length + ' problemas sueltos: es que no tienes un sistema debajo. ' +
                'Cuando una se cae, arrastra a las otras. Las tuyas son <strong>' +
                nombres.slice(0, 3).join(', ') + '</strong>.';
+      cuerpo = cuerpo.replace(/\s*\.\s*$/, '.');
     } else if (rojo.length === 2) {
       tit = 'Tu problema est\u00e1 en ' + nombres[0] + ' y ' + nombres[1] + '.';
       cuerpo = nivAreasDef[rojo[0]].flojo + ' ' + nivAreasDef[rojo[1]].flojo;
@@ -3899,7 +4100,7 @@ function dismissNivLevelup() {
   ctasEl.innerHTML =
     '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msgDiagnostico()) + '" target="_blank">' +
       'Quiero mi plan de 3 meses</a>' +
-    '<div class="niv-lead-note" style="margin-top:10px;">Te respondo yo, por WhatsApp.</div>';
+    '<div class="niv-cupos"><span class="niv-cupos-dot"></span>\u00daltimos 3 cupos este mes</div>';
 
   // Update footer CTA + countdown CTA with stage-specific WhatsApp message
   var footerCta = document.getElementById('nivFooterCta');
@@ -4353,5 +4554,6 @@ window.addEventListener('load', function() {
   }
 });
 </script>
+<div class="niv-legal">Private Build Consulting SpA</div>
 </body>
 </html>
