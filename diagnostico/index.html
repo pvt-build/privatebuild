@@ -69,7 +69,7 @@
 }
 </script>
 <meta name="apple-mobile-web-app-title" content="Diagnóstico">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Figtree:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   /* Backgrounds (brand depth hierarchy) */
@@ -2599,6 +2599,111 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 
 /* la huincha arranca y termina fundida, sin corte seco */
 .niv-huincha { border-block-color:var(--b1) !important; }
+
+/* ═══════════════════════════════════════════════════════
+   SKIN MISIÓN 0
+   Tomado de privatebuild-os.vercel.app/mision-0. No es ember:
+   es gris azulado frío, el acento es VERDE y el rojo casi no
+   aparece — en toda Misión 0 el rojo sale dos veces. Fuentes:
+   Inter Tight y DM Mono, las dos únicas que carga.
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg:    #0b0c10;
+  --bg2:   #0d0e12;
+  --bg3:   #14151a;
+  --bg4:   #17181e;
+  --bg5:   #1b1c20;
+  --border:  #2a2b33;
+  --border2: #3a3b44;
+  --border3: #55575f;
+  --metal0: #55575f;
+  --metal1: #7b7e8c;
+  --metal2: #c9ccd8;
+  --metal3: #ecece9;
+  --metal4: #ffffff;
+  --text-primary:   #ecece9;
+  --text-secondary: #c9ccd8;
+  --text-muted:     #7b7e8c;
+  --text-disabled:  #55575f;
+  --red:      #b3261e;
+  --red-glow: rgba(179,38,30,.35);
+  --green:      #2ed08a;
+  --green-glow: rgba(46,208,138,.3);
+  --electric:        #2ed08a;
+  --electric-bright: #58e0a6;
+  --warn: #f7c94b;
+
+  --f-display: 'Inter Tight', ui-sans-serif, -apple-system, sans-serif;
+  --f-texto:   'Inter Tight', ui-sans-serif, -apple-system, sans-serif;
+  --f-dato:    'DM Mono', ui-monospace, Menlo, monospace;
+
+  --v1: rgba(255,255,255,.028);
+  --v2: rgba(255,255,255,.045);
+  --v3: rgba(255,255,255,.075);
+  --b1: rgba(255,255,255,.07);
+  --b2: rgba(255,255,255,.13);
+  --vidrio: saturate(130%) blur(14px);
+  --r: 14px;
+  --r-s: 12px;
+}
+
+body::after { background:
+  radial-gradient(900px 540px at 50% -10%, rgba(255,255,255,.05), transparent 70%),
+  radial-gradient(760px 440px at 12% 104%, rgba(46,208,138,.07), transparent 72%) !important; }
+
+/* el acento es verde: la acción invita, no alarma */
+.niv-start-btn, .niv-cta-call, .niv-opt-continuar, .niv-sticky button {
+  background: var(--green) !important; border-color: var(--green) !important;
+  color: #07130d !important; font-weight: 700 !important;
+  box-shadow: 0 10px 34px rgba(46,208,138,.22) !important;
+}
+.niv-opt-multi.sel { background: rgba(46,208,138,.1) !important; border-color: rgba(46,208,138,.4) !important; }
+.niv-opt-multi.sel .niv-check { background: var(--green); border-color: var(--green); }
+.niv-opt-multi.sel .niv-check::after { color:#07130d; }
+.niv-dolor { border-left: 1px solid var(--border2) !important; }
+.niv-claim b { color: var(--green); }
+.niv-cupos-dot { background: var(--green); box-shadow:0 0 0 3px rgba(46,208,138,.16); }
+.niv-sinfriccion { color: var(--green); }
+.niv-case-a { color: var(--green); }
+.niv-lobby-barra i { background: linear-gradient(90deg, var(--green), #58e0a6); }
+.niv-h1-em { color: var(--text-primary); opacity:.42; }
+
+/* el rojo queda para una sola cosa: lo que está caído */
+.niv-area.rojo .niv-area-barra i { background: var(--red); }
+.niv-area.rojo .niv-area-etq { color: #e0564c; }
+
+/* ─── el remate del bloque de dolores ─── */
+.niv-remate { font-family:var(--f-display); font-size:clamp(20px,5vw,28px); font-weight:500;
+  color:var(--text-muted); text-align:center; line-height:1.22; letter-spacing:-.03em;
+  margin:26px auto 0; max-width:22ch; }
+.niv-remate strong { color:var(--text-primary); font-weight:700; }
+
+/* ─── las cifras ─── */
+.niv-cifras { display:grid; grid-template-columns:repeat(3,1fr); gap:10px;
+  max-width:520px; margin:30px auto 0; width:100%; }
+.niv-cifras div { text-align:center; padding:14px 8px; border-radius:var(--r-s);
+  background:var(--v1); border:1px solid var(--b1);
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+.niv-cifras b { display:block; font-family:var(--f-display); font-size:clamp(17px,4.4vw,22px);
+  font-weight:700; color:var(--text-primary); letter-spacing:-.03em; }
+.niv-cifras span { display:block; font-family:var(--f-texto); font-size:10.5px;
+  color:var(--text-muted); line-height:1.32; margin-top:5px; }
+
+@media (min-width:860px) {
+  .niv-dolores { grid-template-columns:repeat(3,1fr); }
+  .niv-cifras { max-width:640px; }
+  .niv-cifras b { font-size:26px; }
+  .niv-cifras span { font-size:12px; }
+}
+
+/* La segunda cuadrícula vivía en #splash, no en body. Fuera también:
+   con el vidrio encima, la malla se lee como ruido. */
+#splash {
+  background:
+    radial-gradient(ellipse 120% 70% at 50% 24%, rgba(22,23,29,.92) 0%, transparent 66%),
+    var(--bg) !important;
+  background-size: 100% 100%, 100% 100% !important;
+}
 </style>
 </head>
 <body class="splash-active">
@@ -2632,12 +2737,22 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
         </div>
       </div>
 
-      <p class="niv-sec niv-home-reveal niv-home-d3">Si algo de esto te pasa</p>
+      <p class="niv-sec niv-home-reveal niv-home-d3">Todos partimos igual&hellip;</p>
       <div class="niv-dolores niv-home-reveal niv-home-d3">
-        <div class="niv-dolor">Publicas todas las semanas y no llega una sola conversaci&oacute;n de venta.</div>
-        <div class="niv-dolor">Cada cliente nuevo son m&aacute;s horas tuyas. No puedes tomar otro.</div>
-        <div class="niv-dolor">Cotizas distinto cada vez porque no tienes un precio fijo.</div>
-        <div class="niv-dolor">Usas IA todos los d&iacute;as pero el negocio sigue sin funcionar sin ti.</div>
+        <div class="niv-dolor">Entro a redes y me abrumo con tanta informaci&oacute;n.</div>
+        <div class="niv-dolor">Me comparo con otros que ya van m&aacute;s adelante.</div>
+        <div class="niv-dolor">Me grabo, pero no tengo resultados.</div>
+        <div class="niv-dolor">Manejo la IA, pero siento que me quedo atr&aacute;s.</div>
+        <div class="niv-dolor">No tengo a nadie que me oriente.</div>
+        <div class="niv-dolor">En mi c&iacute;rculo todos trabajan para otros.</div>
+        <div class="niv-dolor">Me autosaboteo y vuelvo a donde siempre.</div>
+      </div>
+      <p class="niv-remate niv-home-reveal niv-home-d3">No te faltan ganas.<br><strong>Te falta claridad.</strong></p>
+
+      <div class="niv-cifras niv-home-reveal niv-home-d4">
+        <div><b>$300k</b><span>vendidos con mi agencia de growth</span></div>
+        <div><b>+1.5M USD</b><span>generados para mis clientes</span></div>
+        <div><b>+100</b><span>negocios auditados</span></div>
       </div>
 
       <p class="niv-sec niv-home-reveal niv-home-d4">Funciona en</p>
@@ -2955,8 +3070,8 @@ body::after { content:""; position:fixed; inset:0; z-index:-1; pointer-events:no
 // es lo que hace que el lead desconfíe del resultado.
 // Los nichos de la huincha salen de los casos reales: el que llega tiene que
 // poder verse a sí mismo antes de empezar.
-const nivNichos = ['Servicios','Consultor\u00eda','Coaching','Agencia','Ecommerce',
-  'Medicina est\u00e9tica','Legal','Social media','Nutrici\u00f3n','Eventos','Freelance','Inmobiliaria'];
+const nivNichos = ['Ecommerce','App / SaaS','Agencia','Brokers','Coaching','Consultor\u00eda',
+  'Medicina est\u00e9tica','Legal','Servicios','Social media','Nutrici\u00f3n','Eventos','Yachts','Freelance'];
 (function(){
   var t = document.getElementById('nivHuincha');
   if (!t) return;
