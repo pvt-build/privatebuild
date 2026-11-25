@@ -64,7 +64,7 @@
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "inLanguage": "es",
-  "description": "Diagnóstico gratuito de ocho preguntas que evalúa las siete áreas de un negocio (foundations, avatar, oferta, contenido, captura, entrega y backend de IA) y devuelve cuáles están frenando el crecimiento.",
+  "description": "Diagnóstico gratuito de ocho preguntas que evalúa las ocho áreas de un negocio (foundations, oferta, avatar, contenido, captura, ventas, entrega y success) y devuelve cuáles están frenando el crecimiento.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "provider": { "@id": "https://www.privatebuild.io/#private-build" }
 }
@@ -2082,6 +2082,85 @@ html, body { overflow-x:clip; max-width:100%; }
 .niv-ig-row { align-items:stretch; }
 .niv-ig-row .niv-ig-input { padding-left:12px !important; min-width:0; }
 
+/* ─── LA RUEDA DE LAS 8 AREAS ─── el mismo dibujo de Mision 0, pero cada nodo
+   pintado por puntaje: rojo bajo 40, ambar hasta 69, verde de 70 arriba. */
+.niv-rueda { width:100%; max-width:520px; display:block; margin:6px auto 0; overflow:visible; }
+.nr-aro { fill:none; stroke:rgba(255,255,255,.08); stroke-width:2; }
+.nr-flujo { fill:none; stroke:var(--red); stroke-width:2; stroke-dasharray:3 12; opacity:.4;
+  animation:nrFlujo 2.4s linear infinite; }
+@keyframes nrFlujo { to { stroke-dashoffset:-30; } }
+.nr-halo { fill:transparent; }
+.nr-c { fill:var(--osc, #14151A); stroke:rgba(255,255,255,.12); stroke-width:1.5; }
+.nr-ico { overflow:visible; }
+.nr-ico path, .nr-ico circle, .nr-ico rect { fill:none; stroke:currentColor; stroke-width:2.6;
+  stroke-linecap:round; stroke-linejoin:round; }
+.nr-ico .ac { fill:currentColor; stroke:none; }
+.nr-l { font-family:var(--f-dato); font-size:13px; fill:var(--text-muted); }
+.nr-v { font-family:var(--f-dato); font-size:13px; fill:var(--text-disabled);
+  font-variant-numeric:tabular-nums; }
+
+.nr-n.mal   .nr-halo { fill:rgba(229,50,45,.14); }
+.nr-n.mal   .nr-c    { fill:rgba(229,50,45,.16); stroke:var(--red); }
+.nr-n.mal   .nr-ico  { color:var(--red-hi); }
+.nr-n.mal   .nr-l, .nr-n.mal .nr-v { fill:var(--red-hi); }
+
+.nr-n.medio .nr-halo { fill:rgba(227,163,60,.10); }
+.nr-n.medio .nr-c    { fill:rgba(227,163,60,.12); stroke:rgba(227,163,60,.6); }
+.nr-n.medio .nr-ico  { color:#E3A33C; }
+.nr-n.medio .nr-l, .nr-n.medio .nr-v { fill:#E3A33C; }
+
+.nr-n.bien  .nr-halo { fill:rgba(46,208,138,.10); }
+.nr-n.bien  .nr-c    { fill:rgba(46,208,138,.12); stroke:rgba(46,208,138,.55); }
+.nr-n.bien  .nr-ico  { color:var(--green); }
+.nr-n.bien  .nr-l, .nr-n.bien .nr-v { fill:var(--green); }
+
+.niv-leyenda { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:16px;
+  font-family:var(--f-dato); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.niv-leyenda span { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); }
+.niv-leyenda i { width:8px; height:8px; border-radius:50%; display:block; }
+@media (max-width:420px) {
+  .nr-l { font-size:10px; }
+  .nr-v { font-size:9.5px; }
+}
+
+/* ─── CASOS ─── los doce de Mision 0, en la portada: esta pagina recibe
+   trafico frio de anuncios y la prueba tiene que estar antes del quiz. */
+.niv-casos { display:grid; grid-template-columns:1fr; gap:10px; margin-top:20px;
+  width:100%; text-align:left; }
+.niv-caso { border:1px solid var(--b1); border-radius:var(--r-m); padding:14px;
+  background:var(--v1); backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio);
+  display:grid; gap:9px; min-width:0; }
+.niv-caso-h { display:grid; grid-template-columns:44px minmax(0,1fr); gap:11px; align-items:start; }
+.niv-av { width:44px; height:44px; border-radius:50%; overflow:hidden; background:#fff;
+  display:grid; place-items:center; }
+.niv-av img { width:100%; height:100%; object-fit:cover; }
+.niv-av.logo img { object-fit:contain; padding:5px; }
+.niv-av i { font-family:var(--f-display); font-style:normal; font-weight:700; font-size:15px;
+  color:#14151A; }
+.niv-caso-h b { display:block; font-family:var(--f-display); font-size:15px; font-weight:700;
+  letter-spacing:-.02em; line-height:1.2; color:var(--text-primary); }
+.niv-caso-t { display:flex; flex-wrap:wrap; gap:5px; margin-top:7px; }
+.niv-caso-t span { font-family:var(--f-dato); font-size:10px; padding:4px 7px; border-radius:6px;
+  background:rgba(255,255,255,.05); border:1px solid var(--b1); color:var(--text-muted);
+  white-space:nowrap; }
+.niv-caso-t .hito { color:#0b0c10; background:var(--green); border-color:var(--green);
+  font-weight:600; }
+.niv-caso-q { font-size:13.5px; line-height:1.45; color:var(--text-secondary); margin:0; }
+/* En el telefono van en carrusel de tres filas, igual que en Mision 0: doce
+   tarjetas apiladas son un scroll enorme antes de la primera pregunta, y esta
+   pagina recibe trafico frio que se va antes de llegar al boton.
+   Es un contenedor con scroll propio, asi que arrastrar dentro no mueve la
+   pagina y no pelea con el bloqueo lateral. */
+@media (max-width:639px) {
+  .niv-casos { grid-auto-flow:column; grid-template-rows:repeat(3,auto);
+    grid-template-columns:none; grid-auto-columns:84%; overflow-x:auto;
+    scroll-snap-type:x mandatory; scrollbar-width:none; padding-bottom:6px; }
+  .niv-casos::-webkit-scrollbar { display:none; }
+  .niv-caso { scroll-snap-align:start; }
+}
+@media (min-width:640px) { .niv-casos { grid-template-columns:1fr 1fr; } }
+@media (min-width:1000px) { .niv-casos { grid-template-columns:repeat(3,1fr); } }
+
 /* ─── LA NOTA ─── lo primero que ve al terminar. Un numero sobre 100 convierte
    siete barras en una sola cosa que se puede repetir en voz alta. */
 .niv-nota { max-width:620px; margin:0 auto 10px; width:100%; text-align:center;
@@ -3117,6 +3196,22 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         <div class="niv-pilar"><b>04</b><span>El <strong>acompa&ntilde;amiento</strong> de alguien que ya pas&oacute; por ah&iacute;.</span></div>
       </div>
 
+
+      <p class="niv-sec niv-home-reveal niv-home-d4">Al igual que tú, otros founders y emprendedores buscaban claridad para vender y apalancarse con IA</p>
+      <div class="niv-casos niv-home-reveal niv-home-d4">
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/marjorie-emma-clara.jpg" alt="" loading="lazy"></span><div><b>Marjorie · Emma Clara</b><div class="niv-caso-t"><span class="hito">×5</span><span>Moda</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Ya vendía, pero necesitaba claridad para escalar con sistemas e IA.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><i>DM</i></span><div><b>Dra. Medicina Estética</b><div class="niv-caso-t"><span class="hito">×24</span><span>Salud estética</span><span>Servicio</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Tenía un buen servicio, pero no sabía usar anuncios para escalar.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/kathe.jpg" alt="" loading="lazy"></span><div><b>Kathe · GMDS Yachts</b><div class="niv-caso-t"><span class="hito">×7</span><span>Yates</span><span>Agencia</span><span>🇺🇸 Miami</span></div></div></div><p class="niv-caso-q">Vendía a ticket bajo por no sostener las objeciones de su cliente.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/ai-visual-creators.jpg" alt="" loading="lazy"></span><div><b>Cris y Benja · AI Visual Creators</b><div class="niv-caso-t"><span>Video con IA</span><span>Agencia</span><span>🇨🇱 Chile · 🇺🇸 EE. UU.</span></div></div></div><p class="niv-caso-q">Pasaron de low ticket a high ticket con videos cinematográficos de IA.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/pablo-buena-mesa.png" alt="" loading="lazy"></span><div><b>Pablo · Buena Mesa</b><div class="niv-caso-t"><span>Restaurantes</span><span>SaaS</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Llevaba meses sin vender la app que construyó hace 9 meses.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/egly-casabliss.png" alt="" loading="lazy"></span><div><b>Egly · Casabliss</b><div class="niv-caso-t"><span>Hogar</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">No sabía mejorar su e-commerce, porque no entendía a sus clientes.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/nacho-fenix.png" alt="" loading="lazy"></span><div><b>Nacho · Fénix</b><div class="niv-caso-t"><span>Talleres</span><span>SaaS</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Construyó una app, pero no sabía cómo vendérsela a sus clientes.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/amazingcare.png" alt="" loading="lazy"></span><div><b>Ignacio · AmazingCare</b><div class="niv-caso-t"><span class="hito">×2</span><span>Suplementos</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">No tenía claridad para manejar campañas, flujos y automatizaciones.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/juan-pablo-nad.png" alt="" loading="lazy"></span><div><b>Juan Pablo · NAD</b><div class="niv-caso-t"><span>Longevidad</span><span>E-commerce</span><span>🇦🇷 Argentina</span></div></div></div><p class="niv-caso-q">Dependía mucho de su equipo y quería llevar su negocio a la IA.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/vicente-pickering.jpg" alt="" loading="lazy"></span><div><b>Vicente Pickering</b><div class="niv-caso-t"><span>Hyrox</span><span>Coaching</span></div></div></div><p class="niv-caso-q">No tenía una oferta clara, ni sabía quién podía comprar su programa.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/sandra-ovistra.jpg" alt="" loading="lazy"></span><div><b>Sandra · Ovistra</b><div class="niv-caso-t"><span>Viajes deportivos</span><span>Servicio</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Vendía a pulso, con contenido improvisado, sin entender a su cliente.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/laura-stm.jpg" alt="" loading="lazy"></span><div><b>Laura · STM</b><div class="niv-caso-t"><span>B2B</span><span>Servicio</span><span>🇨🇴 Colombia</span></div></div></div><p class="niv-caso-q">No sabía quién era su cliente real y su venta era improvisada.</p></article>
+      </div>
       <div class="niv-home-reveal niv-home-d5 niv-hero-cta" style="margin-top:30px;">
         <button class="niv-start-btn" onclick="startNivelador()">QUIERO SABER QU&Eacute; ME EST&Aacute; FRENANDO</button>
         <p class="niv-microcopy">8 preguntas &middot; 1 minuto &middot; resultado inmediato</p>
@@ -3189,8 +3284,9 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
       <div class="niv-nota" id="nivNota"></div>
 
       <div class="niv-areas" id="nivAreasBox">
-        <div class="niv-areas-tit">Tu negocio por &aacute;rea</div>
-        <svg class="niv-radar" id="nivRadar" viewBox="-16 0 292 224" role="img" aria-label="Tus siete areas de negocio"></svg>
+        <div class="niv-areas-tit">Tu negocio en 8 &aacute;reas</div>
+        <svg class="niv-rueda" id="nivRueda" viewBox="-96 -44 592 486" role="img" aria-label="Las ocho areas de tu negocio, cada una en rojo, ambar o verde"></svg>
+        <div class="niv-leyenda"><span><i style="background:var(--red)"></i>En rojo</span><span><i style="background:#E3A33C"></i>A medias</span><span><i style="background:var(--green)"></i>Sólido</span></div>
         <div class="niv-faltan" id="nivFaltan"></div>
       </div>
 
@@ -3291,11 +3387,11 @@ const nivQuestions = [
     q: '\u00bfPara qu\u00e9 usas IA hoy?',
     por: 'Puedes marcar varias.',
     opts: [
-      { text: 'Para aprender e investigar',               score: 1, areas: { backend: 10 } },
-      { text: 'Genero presentaciones y propuestas',       score: 2, areas: { backend: 14, oferta: 10 } },
-      { text: 'Estoy editando y generando contenido',     score: 2, areas: { backend: 14, contenido: 16 } },
-      { text: 'Tengo sistemas para mi negocio/servicios', score: 3, areas: { backend: 30, entrega: 10 } },
-      { text: 'Tengo agentes y automatizaciones',         score: 4, areas: { backend: 36, entrega: 14 } }
+      { text: 'Para aprender e investigar',               score: 1, areas: { success: 6 } },
+      { text: 'Genero presentaciones y propuestas',       score: 2, areas: { oferta: 12, ventas: 10 } },
+      { text: 'Estoy editando y generando contenido',     score: 2, areas: { contenido: 18 } },
+      { text: 'Tengo sistemas para mi negocio/servicios', score: 3, areas: { entrega: 26, success: 16 } },
+      { text: 'Tengo agentes y automatizaciones',         score: 4, areas: { entrega: 34, success: 24, captura: 12 } }
     ]
   },
   {
@@ -3303,10 +3399,10 @@ const nivQuestions = [
     q: '\u00bfQu\u00e9 situaci\u00f3n te identifica?',
     por: 'Define desde d\u00f3nde partimos.',
     opts: [
-      { text: 'Empleado',                        score: 1, areas: { foundations: 8 } },
-      { text: 'Freelance',                       score: 2, areas: { foundations: 24 } },
-      { text: 'Emprendimiento con clientes',     score: 3, areas: { foundations: 40 } },
-      { text: 'Empresa formalizada',             score: 4, areas: { foundations: 52 } }
+      { text: 'Empleado',                    score: 1, areas: { foundations: 8 } },
+      { text: 'Freelance',                   score: 2, areas: { foundations: 24 } },
+      { text: 'Emprendimiento con clientes', score: 3, areas: { foundations: 40, success: 10 } },
+      { text: 'Empresa formalizada',         score: 4, areas: { foundations: 52, success: 18 } }
     ]
   },
   {
@@ -3315,9 +3411,9 @@ const nivQuestions = [
     por: 'Con esto calculamos tu ruta. No para venderte nada.',
     opts: [
       { text: '$0 \u2013 $1,500 USD',      score: 1, areas: { foundations: 6,  oferta: 5 } },
-      { text: '$1,500 \u2013 $3,000 USD',  score: 2, areas: { foundations: 18, oferta: 14 } },
-      { text: '$3,000 \u2013 $10,000 USD', score: 3, areas: { foundations: 34, oferta: 24 } },
-      { text: 'M\u00e1s de $10,000 USD',   score: 4, areas: { foundations: 44, oferta: 32 } }
+      { text: '$1,500 \u2013 $3,000 USD',  score: 2, areas: { foundations: 18, oferta: 14, ventas: 10 } },
+      { text: '$3,000 \u2013 $10,000 USD', score: 3, areas: { foundations: 34, oferta: 24, ventas: 22 } },
+      { text: 'M\u00e1s de $10,000 USD',   score: 4, areas: { foundations: 44, oferta: 32, ventas: 32 } }
     ]
   },
   {
@@ -3325,11 +3421,11 @@ const nivQuestions = [
     q: '\u00bfCu\u00e1ntos clientes tienes hoy?',
     por: 'Dice si aguantas m\u00e1s volumen o ya est\u00e1s al tope.',
     opts: [
-      { text: 'Ninguno',          score: 1, areas: { entrega: 8 } },
-      { text: '1 a 3 mensuales',  score: 2, areas: { entrega: 26 } },
-      { text: '3 a 6 mensuales',  score: 3, areas: { entrega: 44 } },
-      { text: 'M\u00e1s de 6 mensuales',  score: 4, areas: { entrega: 60 } },
-      { text: 'M\u00e1s de 10 mensuales', score: 4, areas: { entrega: 74 } }
+      { text: 'Ninguno',                  score: 1, areas: { entrega: 8 } },
+      { text: '1 a 3 mensuales',          score: 2, areas: { entrega: 26, success: 14, ventas: 10 } },
+      { text: '3 a 6 mensuales',          score: 3, areas: { entrega: 44, success: 26, ventas: 20 } },
+      { text: 'M\u00e1s de 6 mensuales',  score: 4, areas: { entrega: 60, success: 38, ventas: 28 } },
+      { text: 'M\u00e1s de 10 mensuales', score: 4, areas: { entrega: 74, success: 48, ventas: 34 } }
     ]
   },
   {
@@ -3337,10 +3433,10 @@ const nivQuestions = [
     q: '\u00bfCon qu\u00e9 frecuencia subes contenido?',
     por: 'La constancia pesa m\u00e1s que la calidad del video suelto.',
     opts: [
-      { text: 'No subo contenido',       score: 1, areas: { contenido: 5 } },
-      { text: '1 video a la semana',     score: 2, areas: { contenido: 32 } },
-      { text: '2 a 4 por semana',        score: 3, areas: { contenido: 56 } },
-      { text: '4 a 8 por semana',        score: 4, areas: { contenido: 72 } }
+      { text: 'No subo contenido',   score: 1, areas: { contenido: 5 } },
+      { text: '1 video a la semana', score: 2, areas: { contenido: 32 } },
+      { text: '2 a 4 por semana',    score: 3, areas: { contenido: 56 } },
+      { text: '4 a 8 por semana',    score: 4, areas: { contenido: 72 } }
     ]
   },
   {
@@ -3348,11 +3444,11 @@ const nivQuestions = [
     q: '\u00bfC\u00f3mo traes clientes hoy?',
     por: 'Ac\u00e1 suele estar el cuello que no ves.',
     opts: [
-      { text: 'Referidos',              score: 1, areas: { captura: 10 } },
-      { text: 'Prospecci\u00f3n',        score: 2, areas: { captura: 30 } },
-      { text: 'Contenido viral',        score: 2, areas: { captura: 26, contenido: 12 } },
-      { text: 'Contenido para vender',  score: 3, areas: { captura: 48, contenido: 16 } },
-      { text: 'Anuncios',               score: 4, areas: { captura: 62 } }
+      { text: 'Referidos',             score: 1, areas: { captura: 10, success: 16 } },
+      { text: 'Prospecci\u00f3n',      score: 2, areas: { captura: 30, ventas: 18 } },
+      { text: 'Contenido viral',       score: 2, areas: { captura: 26, contenido: 12 } },
+      { text: 'Contenido para vender', score: 3, areas: { captura: 52, contenido: 16, ventas: 14 } },
+      { text: 'Anuncios',              score: 4, areas: { captura: 72, ventas: 12 } }
     ]
   },
   {
@@ -3360,10 +3456,10 @@ const nivQuestions = [
     q: '\u00bfC\u00f3mo cobras lo que vendes?',
     por: 'Lo que delata si tu oferta est\u00e1 empaquetada o se arma cada vez.',
     opts: [
-      { text: 'Por hora o por sesi\u00f3n',            score: 1, areas: { oferta: 8 } },
-      { text: 'Por proyecto, cotizo cada uno',         score: 2, areas: { oferta: 26 } },
-      { text: 'Tengo un paquete con precio fijo',      score: 3, areas: { oferta: 46 } },
-      { text: 'Tengo varios niveles de precio',        score: 4, areas: { oferta: 58 } }
+      { text: 'Por hora o por sesi\u00f3n',       score: 1, areas: { oferta: 8,  ventas: 6 } },
+      { text: 'Por proyecto, cotizo cada uno',    score: 2, areas: { oferta: 26, ventas: 18 } },
+      { text: 'Tengo un paquete con precio fijo', score: 3, areas: { oferta: 46, ventas: 34 } },
+      { text: 'Tengo varios niveles de precio',   score: 4, areas: { oferta: 58, ventas: 48 } }
     ]
   },
   {
@@ -3371,37 +3467,57 @@ const nivQuestions = [
     q: '\u00bfQu\u00e9 tan claro tienes a qui\u00e9n le vendes?',
     por: '\u00daltima. De ac\u00e1 sale todo lo dem\u00e1s.',
     opts: [
-      { text: 'Le vendo a quien llegue',                      score: 1, areas: { avatar: 10 } },
-      { text: 'Tengo una idea, pero var\u00eda',              score: 2, areas: { avatar: 34 } },
-      { text: 'S\u00e9 mi nicho y lo puedo describir',        score: 3, areas: { avatar: 62 } },
-      { text: 'Conozco muy bien al cliente',                score: 4, areas: { avatar: 88 } }
+      { text: 'Le vendo a quien llegue',               score: 1, areas: { avatar: 10 } },
+      { text: 'Tengo una idea, pero var\u00eda',       score: 2, areas: { avatar: 34 } },
+      { text: 'S\u00e9 mi nicho y lo puedo describir', score: 3, areas: { avatar: 62 } },
+      { text: 'Conozco muy bien al cliente',           score: 4, areas: { avatar: 88 } }
     ]
   }
 ];
 
 const nivAreasDef = {
-  foundations: { nombre: 'Foundations', flojo: 'La base del negocio todav\u00eda no est\u00e1 formalizada: no hay estructura debajo de lo que vendes.' },
-  avatar:      { nombre: 'Avatar',      flojo: 'No tienes claro a qui\u00e9n le vendes, y por eso cada mensaje le habla a cualquiera.' },
-  oferta:      { nombre: 'Oferta',      flojo: 'Lo que vendes no est\u00e1 empaquetado: cada venta se arma de nuevo.' },
-  contenido:   { nombre: 'Contenido',   flojo: 'No hay volumen ni constancia suficiente para que te encuentren.' },
-  captura:     { nombre: 'Captura',     flojo: 'No hay un camino desde lo que publicas hasta una conversaci\u00f3n de venta.' },
-  entrega:     { nombre: 'Entrega',     flojo: 'Entregar depende de tus horas: cada cliente nuevo te cuesta m\u00e1s de lo que rinde.' },
-  backend:     { nombre: 'Backend',     flojo: 'Usas IA suelta, no como infraestructura que trabaje cuando t\u00fa no est\u00e1s.' }
+  foundations: { n: '01', nombre: 'Foundations', ico: 'foundations' },
+  oferta:      { n: '02', nombre: 'Oferta',      ico: 'offer' },
+  avatar:      { n: '03', nombre: 'Avatar',      ico: 'avatar' },
+  contenido:   { n: '04', nombre: 'Contenido',   ico: 'marketing' },
+  captura:     { n: '05', nombre: 'Captura',     ico: 'captura' },
+  ventas:      { n: '06', nombre: 'Ventas',      ico: 'ventas' },
+  entrega:     { n: '07', nombre: 'Entrega',     ico: 'entrega' },
+  success:     { n: '08', nombre: 'Success',     ico: 'success' }
 };
 
-const nivAreaOrden = ['foundations','avatar','oferta','contenido','captura','entrega','backend'];
+const nivAreaOrden = ['foundations','oferta','avatar','contenido','captura','ventas','entrega','success'];
 
-// La frase corta que se le dice cuando el área está caída. Concreta y en su
-// idioma: no "tu captura es baja", sino qué le pasa el lunes por la mañana.
+// La frase corta que se le dice cuando el area esta caida. Concreta y en su
+// idioma: no "tu captura es baja", sino que le pasa el lunes por la maniana.
 const nivAreaFalta = {
   foundations: 'no tienes claros tus n\u00fameros ni tu modelo',
-  avatar:      'no sabes con precisi\u00f3n a qui\u00e9n le hablas',
   oferta:      'cada venta se arma de nuevo, no tienes un paquete',
+  avatar:      'no sabes con precisi\u00f3n a qui\u00e9n le hablas',
   contenido:   'no tienes claridad ni ritmo de contenido',
   captura:     'te falta un sistema para traer agendas nuevas',
+  ventas:      'no conduces la conversaci\u00f3n hasta el s\u00ed',
   entrega:     'se te va el d\u00eda operando',
-  backend:     'usas IA suelta, no como infraestructura'
+  success:     'no hay recompra ni referidos, cada mes partes de cero'
 };
+
+// Los iconos de marca, copiados de assets/sistemas.js de Mision 0 para que las
+// ocho areas se vean iguales en todo el ecosistema. El relleno rojo marca el
+// punto donde actua cada sistema.
+const PB_ICONOS = {
+  foundations:'<path d="M6 40h36"/><path d="M11 40V27h9v13"/><path d="M28 40V19h9v21"/><path d="M6 33h5" stroke-dasharray="2 4"/><rect x="20" y="33" width="8" height="7" class="ac"/>',
+  offer:'<path d="M24 5 41 14v20L24 43 7 34V14z"/><path d="M7 14l17 9 17-9"/><path d="M24 23v20"/><circle cx="24" cy="14" r="3" class="ac"/>',
+  avatar:'<circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="8"/><path d="M24 3v8"/><path d="M24 37v8"/><path d="M3 24h8"/><path d="M37 24h8"/><circle cx="24" cy="24" r="2.8" class="ac"/>',
+  marketing:'<path d="M6 12h36v10H6z"/><path d="M6 26h36v10H6z"/><path d="M18 12v10"/><path d="M30 12v10"/><path d="M12 26v10"/><path d="M24 26v10"/><path d="M36 26v10"/><rect x="18" y="26" width="6" height="10" class="ac"/>',
+  captura:'<path d="M6 8h36L28 25v10l-8 5V25z"/><path d="M24 40v4"/><circle cx="24" cy="44" r="2.6" class="ac"/>',
+  ventas:'<path d="M24 7v34"/><path d="M32 15c0-3.3-3.6-5-8-5s-8 1.7-8 5 3.6 4.6 8 5.5 8 2.2 8 5.5-3.6 5-8 5-8-1.7-8-5"/><circle cx="24" cy="24" r="20" stroke-dasharray="3 5"/>',
+  entrega:'<path d="M4 12l13-5 14 5 13-5v29l-13 5-14-5-13 5z"/><path d="M17 7v29"/><path d="M31 12v29"/><circle cx="31" cy="21" r="4.5" class="ac"/>',
+  success:'<path d="M24 41S6 30 6 18.5A9.5 9.5 0 0 1 24 14a9.5 9.5 0 0 1 18 4.5C42 30 24 41 24 41z"/><path d="M13 24h7l3-6 4 12 3-6h5"/>'
+};
+
+// Rojo bajo 40, ambar hasta 69, verde de 70 para arriba. El mismo corte que
+// usa nivEnRojo, para que el color y la lista digan lo mismo.
+function nivEstado(v) { return v < 40 ? 'mal' : (v < 70 ? 'medio' : 'bien'); }
 
 const M0 = '/diagnostico/img';  // absoluta: la pagina tambien se sirve en /
 
@@ -3434,45 +3550,50 @@ function nivAnimarBal() {
   obs.observe(caja);
 }
 
-function nivPintarRadar(areas) {
-  var svg = document.getElementById('nivRadar');
+// La rueda de las ocho areas, con el mismo trazado que la de Mision 0: ocho
+// nodos sobre un circulo, el orden del loop. Cada nodo se pinta segun el
+// puntaje, que es lo que convierte un grafico bonito en un diagnostico.
+const NIV_NODOS = [[200.0,48.0],[304.7,91.3],[348.0,196.0],[304.7,300.7],[200.0,344.0],[95.3,300.7],[52.0,196.0],[95.3,91.3]];
+
+function nivPintarRueda(areas) {
+  var svg = document.getElementById('nivRueda');
   if (!svg) return;
-  var ejes = nivAreaOrden.map(function(k) { return { k: nivAreasDef[k].nombre, v: areas[k] }; });
-  var cx = 130, cy = 106, R = 68, N = ejes.length;
-  var linea = 'rgba(255,255,255,.1)', ember = '#e0342f', tinta = 'rgba(255,255,255,.45)';
-
-  function pt(i, r) {
-    var a = -Math.PI / 2 + i * (2 * Math.PI / N);
-    return [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  var h = '<circle class="nr-aro" cx="200" cy="196" r="148"></circle>' +
+          '<circle class="nr-flujo" cx="200" cy="196" r="148"></circle>';
+  for (var i = 0; i < nivAreaOrden.length; i++) {
+    var k = nivAreaOrden[i];
+    var d = nivAreasDef[k];
+    var v = areas[k];
+    var est = nivEstado(v);
+    var x = NIV_NODOS[i][0], y = NIV_NODOS[i][1];
+    // La etiqueta sale del circulo por el lado que le toca. Los dos nodos de
+    // los costados van hacia afuera en horizontal: puestos arriba o abajo se
+    // cruzan con el nodo diagonal vecino, que es lo que pasaba antes.
+    var lx = x, ly, ancla = 'middle';
+    if (y > 194 && y < 198) {
+      ancla = x > 200 ? 'start' : 'end';
+      lx = x + (x > 200 ? 46 : -46);
+      ly = y - 4;
+    } else if (y < 196) {
+      ly = y - 50;
+    } else {
+      ly = y + 58;
+    }
+    // En la mitad de arriba el valor va sobre el nombre, para no meterlo
+    // dentro del circulo.
+    var vy = (ancla === 'middle' && y < 196) ? ly - 14 : ly + 14;
+    h += '<g class="nr-n ' + est + '">' +
+           '<circle class="nr-halo" cx="' + x + '" cy="' + y + '" r="40"></circle>' +
+           '<circle class="nr-c" cx="' + x + '" cy="' + y + '" r="31"></circle>' +
+           '<svg class="nr-ico" x="' + (x - 13) + '" y="' + (y - 13) + '" width="26" height="26" ' +
+             'viewBox="0 0 48 48">' + PB_ICONOS[d.ico] + '</svg>' +
+           '<text class="nr-l" x="' + lx + '" y="' + ly + '" text-anchor="' + ancla + '">' +
+             d.n + ' \u00b7 ' + d.nombre + '</text>' +
+           '<text class="nr-v" x="' + lx + '" y="' + vy + '" text-anchor="' + ancla + '">' +
+             v + '/100</text>' +
+         '</g>';
   }
-  function poly(r) {
-    var d = [];
-    for (var i = 0; i < N; i++) { var p = pt(i, r); d.push(p[0].toFixed(1) + ',' + p[1].toFixed(1)); }
-    return d.join(' ');
-  }
-
-  var out = '';
-  for (var g = 1; g <= 3; g++) {
-    out += '<polygon points="' + poly(R * g / 3) + '" fill="none" stroke="' + linea + '" stroke-width="1"/>';
-  }
-  for (var i = 0; i < N; i++) {
-    var e = pt(i, R);
-    out += '<line x1="' + cx + '" y1="' + cy + '" x2="' + e[0].toFixed(1) + '" y2="' + e[1].toFixed(1) + '" stroke="' + linea + '" stroke-width="1"/>';
-  }
-  var dp = [];
-  for (var i = 0; i < N; i++) { var p = pt(i, R * ejes[i].v / 100); dp.push(p[0].toFixed(1) + ',' + p[1].toFixed(1)); }
-  out += '<polygon points="' + dp.join(' ') + '" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.55)" stroke-width="1.4" stroke-linejoin="round"/>';
-
-  for (var i = 0; i < N; i++) {
-    var v = ejes[i].v, bajo = v < 40, p = pt(i, R * v / 100);
-    out += '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="' + (bajo ? 3.4 : 2) + '" fill="' + (bajo ? ember : 'rgba(255,255,255,.55)') + '"/>';
-    var l = pt(i, R + 16), anc = 'middle';
-    if (l[0] > cx + 5) anc = 'start'; else if (l[0] < cx - 5) anc = 'end';
-    out += '<text x="' + l[0].toFixed(1) + '" y="' + (l[1] + 2.8).toFixed(1) + '" text-anchor="' + anc + '" '
-         + 'fill="' + (bajo ? '#ff7d66' : tinta) + '" font-family="DM Mono, monospace" font-size="7.4"'
-         + (bajo ? ' font-weight="700"' : '') + '>' + ejes[i].k + '</text>';
-  }
-  svg.innerHTML = out;
+  svg.innerHTML = h;
 }
 
 function nivCalcAreas() {
@@ -3491,19 +3612,21 @@ function nivCalcAreas() {
 const nivResumenPorArea = {
   foundations: 'Est\u00e1s operando a ciegas: sin tus n\u00fameros claros cualquier decisi\u00f3n de ' +
                'crecimiento es una apuesta.',
-  avatar:      'Le est\u00e1s hablando a todos, y por eso no te compra nadie en particular.',
   oferta:      'Vendes a medida. Cada venta te cuesta lo mismo que la primera, as\u00ed que no ' +
                'hay forma de que escale.',
+  avatar:      'Le est\u00e1s hablando a todos, y por eso no te compra nadie en particular.',
   contenido:   'Publicas sin sistema, entonces tu flujo de clientes depende de tu \u00e1nimo ' +
                'de esa semana.',
   captura:     'No tienes una m\u00e1quina de agendas. Cuando se acaban los referidos, se acaba ' +
                'el mes.',
+  ventas:      'No conduces la conversaci\u00f3n: esperas que el cliente se convenza solo, y la ' +
+               'mayor\u00eda no lo hace.',
   entrega:     'Eres el cuello de botella. Mientras operes t\u00fa, tu techo es tu agenda.',
-  backend:     'Usas IA como herramienta suelta y no como infraestructura, as\u00ed que te ahorra ' +
-               'minutos en vez de devolverte d\u00edas.'
+  success:     'Cada mes partes de cero: sin recompra ni referidos, todo el peso cae en ' +
+               'conseguir clientes nuevos.'
 };
 
-// La nota del negocio: el promedio de las siete areas. No es una metrica de
+// La nota del negocio: el promedio de las ocho areas. No es una metrica de
 // vanidad, es la unica forma de que el lead pueda decir en el chat "saque 36".
 function nivNota(areas) {
   var t = 0;
@@ -3883,8 +4006,9 @@ function submitNivLead(event) {
     quiz_scores: nivScores,
     ruta: pvtRuta(),
     canal: pvtCanal(),
-    foundations: _ar.foundations, avatar: _ar.avatar, oferta: _ar.oferta,
-    contenido: _ar.contenido, captura: _ar.captura, entrega: _ar.entrega, backend: _ar.backend,
+    foundations: _ar.foundations, oferta: _ar.oferta, avatar: _ar.avatar,
+    contenido: _ar.contenido, captura: _ar.captura, ventas: _ar.ventas,
+    entrega: _ar.entrega, success: _ar.success,
     nota: nivNota(_ar),
     areas_en_rojo: nivEnRojo(_ar).map(function(k) { return nivAreasDef[k].nombre; }).join(', ') || 'ninguna',
     respuestas: nivAnswers.join(' | ')
@@ -4294,7 +4418,7 @@ function dismissNivLevelup() {
   var rojo = nivEnRojo(areas);
   window._nivAreas = areas;
 
-  nivPintarRadar(areas);
+  nivPintarRueda(areas);
   nivPintarNota(areas, rojo);
 
   // "Te faltan": las áreas caídas, numeradas por prioridad y dichas en el
