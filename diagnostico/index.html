@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico Private Build — ¿En qué etapa está tu negocio?</title>
-<meta name="description" content="Responde 5 preguntas y descubre en qué etapa está tu negocio, cuáles son tus dos cuellos de botella y cuál es tu siguiente paso concreto. Gratis, 40 segundos.">
+<title>Diagnóstico gratis — Conoce qué te está frenando</title>
+<meta name="description" content="8 preguntas, 60 segundos. Te devuelve qué áreas de tu negocio están frenando tu crecimiento y por qué. Gratis.">
 <link rel="canonical" href="https://privatebuild.vercel.app/diagnostico">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="Private Build">
 <meta property="og:url" content="https://privatebuild.vercel.app/diagnostico">
-<meta property="og:title" content="Diagnóstico gratis: ¿en qué etapa está tu negocio?">
-<meta property="og:description" content="5 preguntas, 40 segundos. Tu etapa, tus cuellos de botella y tu siguiente paso.">
+<meta property="og:title" content="Conoce qué te está frenando">
+<meta property="og:description" content="8 preguntas, 60 segundos. Las áreas de tu negocio que están rotas, en claro.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Diagnóstico gratis: ¿en qué etapa está tu negocio?">
-<meta name="twitter:description" content="5 preguntas, 40 segundos. Tu etapa, tus cuellos de botella y tu siguiente paso.">
+<meta name="twitter:title" content="Conoce qué te está frenando">
+<meta name="twitter:description" content="8 preguntas, 60 segundos. Las áreas de tu negocio que están rotas, en claro.">
 <meta name="theme-color" content="#0a0a0f">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -63,7 +63,7 @@
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "inLanguage": "es",
-  "description": "Diagnóstico gratuito de cinco preguntas que ubica a un founder en una de cuatro etapas de negocio y le devuelve sus cuellos de botella y su siguiente paso.",
+  "description": "Diagnóstico gratuito de ocho preguntas que evalúa las siete áreas de un negocio (foundations, avatar, oferta, contenido, captura, entrega y backend de IA) y devuelve cuáles están frenando el crecimiento.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
   "provider": { "@id": "https://privatebuild.vercel.app/#private-build" }
 }
@@ -3296,114 +3296,9 @@ function nivEnRojo(areas) {
     .sort(function(a, b) { return areas[a] - areas[b]; });
 }
 
-const nivStages = {
-  skiller: {
-    name: 'SKILLER', range: '$0 \u2013 $1,500/mes', color: 'var(--metal2)',
-    now: 'Est\u00e1s empleado o reci\u00e9n partiendo. Sabes que tienes una habilidad que podr\u00eda darte ingresos propios, pero no tienes oferta clara, no sabes c\u00f3mo venderla y te saboteas antes de intentarlo. Cobras poco o gratis cuando lo haces.',
-    future: 'Te independizaste. Construiste una oferta clara de tu habilidad y cerraste tu primer cliente real. Organizas tu proyecto, usas IA para ir m\u00e1s r\u00e1pido y tienes un sistema b\u00e1sico que te da claridad de hacia d\u00f3nde vas.',
-    missing: 'Ac\u00e1 no te falta informaci\u00f3n. Nunca te falt\u00f3. Lo que define si sales de esta etapa son h\u00e1bitos, mentalidad y prop\u00f3sito \u2014 y eso no se compra, se construye.',
-    notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
-  },
-  operator: {
-    name: 'OPERATOR', range: '$1,500 \u2013 $3,000/mes', color: '#e88c30',
-    now: 'Ya vendes pero cobras poco y haces todo manual. Dependes 100% de tu tiempo, no tienes sistema de ventas repetible y cada cliente nuevo es empezar de cero. Sabes que hay m\u00e1s pero no logras escalar.',
-    future: 'Subiste tu precio, tienes un pipeline de leads activo y usas IA como copiloto para prospectar, cerrar y entregar. Tu proceso es repetible y ya no dependes de la improvisaci\u00f3n para generar ingresos.',
-    missing: 'Cada mes que pasa en la misma situaci\u00f3n es un mes que no recuperas. Private Build est\u00e1 dise\u00f1ado para founders en distintas etapas, para escalar con sistemas \u2014 no con m\u00e1s horas. El acompa\u00f1amiento es lo que marca la diferencia entre estancarse y apalancarse.',
-    notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
-  },
-  builder: {
-    name: 'BUILDER', range: '$3,000 \u2013 $10,000/mes', color: '#ff5a3c',
-    now: 'Vendes bien y tienes buena oferta, pero haces todo manual. Eres el cuello de botella de tu propio negocio. Cada nuevo cliente implica m\u00e1s horas tuyas y no puedes crecer sin quemarte.',
-    future: 'Automatizaste tus procesos clave, documentaste tu m\u00e9todo y el negocio puede operar sin tu presencia constante. Llegas a $10K-$20K mensuales con workflows que trabajan por ti.',
-    missing: 'Puedes acceder a recursos, m\u00f3dulos, plantillas, workflows y sistemas validados que actualmente yo mismo y mis clientes ya est\u00e1n utilizando. No necesitas reventar tokens ni seguir frustr\u00e1ndote solo.',
-    notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
-  },
-  founder: {
-    name: 'FOUNDER', range: '$10,000+/mes', color: '#c8a840',
-    now: 'Tu negocio funciona y factura bien, pero todo depende de ti. No tienes equipo que opere sin tu supervisi\u00f3n constante, no tienes sistemas aut\u00f3nomos y cada decisi\u00f3n pasa por tu cabeza. Escalar significa m\u00e1s estr\u00e9s.',
-    future: 'Tienes infraestructura de equipo, agentes aut\u00f3nomos y sistemas que generan sin ti. Empresa formalizada, activos digitales que trabajan 24/7 y libertad real de tiempo y ubicaci\u00f3n.',
-    missing: 'A esta etapa, lo que necesitas no es un curso \u2014 es una conversaci\u00f3n directa. Conectemos para explorar c\u00f3mo Private Build puede complementar lo que ya construiste y llevarlo m\u00e1s lejos.',
-    notion: 'https://private-build.notion.site/recursos-gratuitos',
-    wa: 'Hola Patrick, vengo del diagn\u00f3stico y quiero m\u00e1s informaci\u00f3n sobre c\u00f3mo implementar sistemas en mi negocio.'
-  }
-};
 
 // ─── TOOL STACK PER STAGE (categorized) ───────
 var F = function(d) { return 'https://www.google.com/s2/favicons?domain=' + d + '&sz=16'; };
-const nivTools = {
-  skiller: {
-    'Productividad': [
-      { name: 'Bloc de notas', icon: null, emoji: '\u{1F4DD}' },
-      { name: 'Google', icon: F('google.com') }
-    ],
-    'Comunicaci\u00f3n': [
-      { name: 'Instagram', icon: F('instagram.com') },
-      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' }
-    ],
-    'IA': [
-      { name: 'ChatGPT', icon: F('chat.openai.com') },
-      { name: 'Claude', icon: F('claude.ai') }
-    ]
-  },
-  operator: {
-    'IA': [
-      { name: 'ChatGPT Pro', icon: F('chat.openai.com') },
-      { name: 'Claude Pro', icon: F('claude.ai') }
-    ],
-    'Gesti\u00f3n': [
-      { name: 'Notion', icon: F('notion.so') },
-      { name: 'Canva', icon: F('canva.com') },
-      { name: 'Mir\u00f3', icon: F('miro.com') },
-      { name: 'Fathom', icon: 'https://fathom.video/favicon.ico' }
-    ],
-    'Comunicaci\u00f3n': [
-      { name: 'Instagram', icon: F('instagram.com') },
-      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
-      { name: 'TikTok', icon: F('tiktok.com') }
-    ]
-  },
-  builder: {
-    'IA': [
-      { name: 'ChatGPT Max', icon: F('chat.openai.com') },
-      { name: 'Claude Max', icon: F('claude.ai') }
-    ],
-    'Gesti\u00f3n': [
-      { name: 'Notion', icon: F('notion.so') },
-      { name: 'Mir\u00f3', icon: F('miro.com') },
-      { name: 'Fathom', icon: 'https://fathom.video/favicon.ico' },
-      { name: 'Obsidian', icon: F('obsidian.md') }
-    ],
-    'Comunicaci\u00f3n': [
-      { name: 'Instagram', icon: F('instagram.com') },
-      { name: 'WhatsApp', icon: 'https://cdn.simpleicons.org/whatsapp/25D366' },
-      { name: 'TikTok', icon: F('tiktok.com') },
-      { name: 'YouTube', icon: F('youtube.com') }
-    ],
-    'Automatizaci\u00f3n': [
-      { name: 'GHL', icon: F('gohighlevel.com') },
-      { name: 'n8n', icon: F('n8n.io') }
-    ],
-    'Contenido': [
-      { name: 'Antigravity', icon: 'https://antigravity.so/favicon.ico' },
-      { name: 'Higgsfield', icon: F('higgsfield.ai') },
-      { name: 'Poppy AI', icon: 'https://meetpoppy.ai/favicon.ico' }
-    ],
-    'Marketing & Dev': [
-      { name: 'Meta Ads', icon: F('facebook.com') },
-      { name: 'GitHub', icon: F('github.com') },
-      { name: 'Vercel', icon: F('vercel.com') },
-      { name: 'VS Code', icon: F('code.visualstudio.com') }
-    ]
-  },
-  founder: {
-    'Agentes': [
-      { name: 'Agentes IA agrupando los stacks anteriores', icon: null, emoji: '\u{1F916}' }
-    ]
-  }
-};
 
 // ─── CALCULATOR TARGETS PER STAGE ─────────────
 const nivCalcTargets = {
@@ -3413,21 +3308,6 @@ const nivCalcTargets = {
   founder: 30000
 };
 
-// ─── CALL BENEFITS PER STAGE (el "qué", no el "cómo") ──
-const nivCallBenefits = {
-  operator: [
-    'Q&A en vivo para resolver tus trabas',
-    'El stack que usan los que ya escalaron',
-    'Casos reales de tu misma etapa',
-    'Founders construyendo en paralelo'
-  ],
-  builder: [
-    'Sistemas y workflows ya validados',
-    'Q&A en vivo sobre automatizaci\u00f3n',
-    'Founders operando a tu nivel',
-    'Casos de escala documentados'
-  ]
-};
 
 let nivStep = 0;
 let nivScores = [];
@@ -3813,9 +3693,6 @@ function carrMover(d) {
 
 function proceedToLevelUp() {
   pvtTrack('result_view', { ruta: pvtRuta() });
-  var stageKey = window._nivStageKey;
-  var s = nivStages[stageKey];
-
   var overlay = document.getElementById('nivLevelup');
   var rankEl = document.getElementById('nivLevelupRank');
   var rangeEl = document.getElementById('nivLevelupRange');
@@ -4033,46 +3910,6 @@ const nivDetractors = {
   founder: ['Micro-management','Sin infraestructura digital','Decisiones reactivas','Equipo dependiente','Sin activos pasivos']
 };
 
-// ─── SISTEMAS POR ÁREA (el QUÉ, sin el CÓMO) ──
-const nivSistemas = {
-  skiller: {
-    areas: [
-      { area: 'Oferta',      sistema: 'Una oferta clara que puedas repetir sin rearmarla' },
-      { area: 'Prospecci\u00f3n', sistema: 'Un canal simple que traiga conversaciones cada semana' },
-      { area: 'Entrega',     sistema: 'Un proceso b\u00e1sico para no quemarte con cada cliente' }
-    ],
-    nota: ''
-  },
-  operator: {
-    areas: [
-      { area: 'Prospecci\u00f3n', sistema: 'Pipeline que no dependa de referidos ni de tu \u00e1nimo' },
-      { area: 'Ventas',      sistema: 'Proceso de cierre repetible, no improvisado por call' },
-      { area: 'Entrega',     sistema: 'M\u00e9todo documentado para no reinventar por cliente' },
-      { area: 'Contenido',   sistema: 'Producci\u00f3n constante sin depender de la inspiraci\u00f3n' }
-    ],
-    nota: 'Hoy probablemente tengas uno o dos. El salto a Builder es tenerlos <strong>los cuatro corriendo a la vez</strong>.'
-  },
-  builder: {
-    areas: [
-      { area: 'Marketing',  sistema: 'Contenido y captaci\u00f3n corriendo sin que t\u00fa los empujes' },
-      { area: 'Ventas',     sistema: 'Calificaci\u00f3n y agenda en autom\u00e1tico, llegas a la call con datos' },
-      { area: 'Entrega',    sistema: 'Onboarding y seguimiento sistematizados' },
-      { area: 'Operaci\u00f3n', sistema: 'Datos y reportes en un solo lugar, no en cinco pesta\u00f1as' },
-      { area: 'Producto',   sistema: 'M\u00e9todo empaquetado y replicable por alguien que no seas t\u00fa' }
-    ],
-    nota: 'Ac\u00e1 la diferencia con Operator no son m\u00e1s herramientas: es tener <strong>un sistema corriendo en cada \u00e1rea</strong>. Cada uno que se activa te devuelve horas. Ese tiempo liberado es el activo, no el ingreso.'
-  },
-  founder: {
-    areas: [
-      { area: 'Equipo',          sistema: 'Gente operando sin pasar cada decisi\u00f3n por ti' },
-      { area: 'Agentes',         sistema: 'IA ejecutando tareas completas, no solo asistiendo' },
-      { area: 'Infraestructura', sistema: 'Activos digitales que generan 24/7' },
-      { area: 'Decisi\u00f3n',      sistema: 'Datos que deciden por ti, no reuniones para decidir' },
-      { area: 'Capital',         sistema: 'Ingresos que no dependen de tu presencia' }
-    ],
-    nota: 'En esta etapa el cuello de botella ya no es el negocio: <strong>eres t\u00fa sosteniendo el control</strong>.'
-  }
-};
 
 // ─── ROADMAP NODES PER STAGE ──────────────────
 const nivRoadmapNodes = {
@@ -4093,40 +3930,6 @@ function toggleAccordion(btn) {
   }
 }
 
-// ─── RENDER TOOL STACK FOR A STAGE (categorized, no accumulation) ──
-function renderToolStack(stageKey) {
-  var categories = nivTools[stageKey];
-  if (!categories) return '';
-  var html = '<div class="niv-tool-stack"><div class="niv-tool-stack-label">STACK DE ESTA ETAPA</div>';
-  var catKeys = Object.keys(categories);
-  catKeys.forEach(function(cat) {
-    var tools = categories[cat];
-    var itemsHtml = '';
-    tools.forEach(function(t) {
-      if (t.emoji) {
-        itemsHtml += '<span class="niv-tool-item">' + t.emoji + ' ' + t.name + '</span>';
-      } else {
-        itemsHtml += '<span class="niv-tool-item"><img src="' + t.icon + '" alt="' + t.name + '" width="16" height="16"> ' + t.name + '</span>';
-      }
-    });
-    html += '<div class="niv-tool-category"><div class="niv-tool-category-label">' + cat + '</div><div class="niv-tool-category-items">' + itemsHtml + '</div></div>';
-  });
-
-  // Los sistemas que deberían estar corriendo en su etapa: acá va el QUÉ, nunca el CÓMO.
-  var sis = nivSistemas[stageKey];
-  if (sis) {
-    html += '<div class="niv-sis-label">Sistemas que deber\u00edan estar corriendo</div><div class="niv-sis-list">';
-    sis.areas.forEach(function(a) {
-      html += '<div class="niv-sis-row"><span class="niv-sis-area">' + a.area + '</span>' +
-              '<span class="niv-sis-desc">' + a.sistema + '</span></div>';
-    });
-    html += '</div>';
-    if (sis.nota) html += '<div class="niv-sis-nota">' + sis.nota + '</div>';
-  }
-
-  html += '</div>';
-  return html;
-}
 
 function dismissNivLevelup() {
   // Esta función era la que pintaba la etapa. Ya no hay etapa: pinta el
