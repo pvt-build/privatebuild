@@ -9,7 +9,7 @@ capturar data de verdad.
 
 | Hoy (GitHub Pages) | Con Vercel |
 |---|---|
-| `pvt-build.github.io/privatebuild/diagnostico/` | `privatebuild.vercel.app/diagnostico` |
+| `pvt-build.github.io/privatebuild/diagnostico/` | `www.privatebuild.io/diagnostico` |
 | Solo archivos estáticos | Funciones en `/api` → escribir en Supabase sin exponer llaves |
 | Sin variables de entorno | Llaves de Supabase y PostHog fuera del código |
 | Sin analítica de verdad | Web Analytics + PostHog |
@@ -21,13 +21,13 @@ capturar data de verdad.
    `pvt-build/privatebuild`.
 2. **Framework Preset: Other.** No hay build. Root Directory: `./`.
    Build Command y Output Directory se dejan vacíos.
-3. **Deploy.** Queda en `privatebuild.vercel.app`.
+3. **Deploy.** Queda en `privatebuild-psi.vercel.app` (el nombre `privatebuild.vercel.app` es de otra cuenta).
 4. **Comprobar las rutas:**
    - `/` → el nivelador de siempre
    - `/diagnostico` → el quiz con las tres salidas
    - `/interno/offer` → el deck
-5. **Dominio.** Cuando tengas el definitivo, se agrega en Settings → Domains.
-   Mientras tanto la URL de vercel.app sirve para la bio.
+5. **Dominio.** Hecho: `www.privatebuild.io` (comprado en Vercel el 25-11-2026); `privatebuild.io` redirige a www.
+   Para cambiarlo en el código: `python3 scripts/set-dominio.py <dominio>`.
 
 ## Lo que ya quedó preparado en el repo
 
@@ -48,9 +48,9 @@ El parámetro `from` identifica de dónde llegó cada lead y viaja con él hasta
 Notion:
 
 ```
-privatebuild.vercel.app/diagnostico?from=ig
-privatebuild.vercel.app/diagnostico?from=yt
-privatebuild.vercel.app/diagnostico?from=private
+www.privatebuild.io/diagnostico?from=ig
+www.privatebuild.io/diagnostico?from=yt
+www.privatebuild.io/diagnostico?from=private
 ```
 
 ## Medición: qué hay y qué falta

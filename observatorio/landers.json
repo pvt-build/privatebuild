@@ -23,7 +23,7 @@
     {
       "slug": "pvt-diagnostico",
       "nombre": "Private Build — Diagnóstico de cuello de botella",
-      "url": "https://privatebuild.vercel.app/diagnostico",
+      "url": "https://www.privatebuild.io/diagnostico",
       "local": "diagnostico/index.html",
       "dueno": "mio",
       "categoria": "quiz-lander",
@@ -37,7 +37,7 @@
     {
       "slug": "pvt-nivelador",
       "nombre": "Private Build — Nivelador",
-      "url": "https://privatebuild.vercel.app/",
+      "url": "https://www.privatebuild.io/",
       "local": "index.html",
       "dueno": "mio",
       "categoria": "quiz-lander",
