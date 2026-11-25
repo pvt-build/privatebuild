@@ -7,4 +7,4 @@ Disallow: /interno/
 Disallow: /consultoria/
 Disallow: /observatorio/
 
-Sitemap: https://privatebuild.vercel.app/sitemap.xml
+Sitemap: https://www.privatebuild.io/sitemap.xml
