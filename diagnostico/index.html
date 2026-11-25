@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Founder OS</title>
+<title>Founder OS — Private Build</title>
 <meta name="description" content="8 preguntas, 60 segundos. Te devuelve qué áreas de tu negocio están frenando tu crecimiento y por qué. Gratis.">
-<link rel="canonical" href="https://privatebuild.vercel.app/diagnostico">
+<link rel="canonical" href="https://www.privatebuild.io/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
 <meta property="og:site_name" content="Private Build">
-<meta property="og:url" content="https://privatebuild.vercel.app/diagnostico">
+<meta property="og:url" content="https://www.privatebuild.io/">
 <meta property="og:title" content="Conoce qué te está frenando">
 <meta property="og:description" content="8 preguntas, 60 segundos. Las áreas de tu negocio que están rotas, en claro.">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,9 +25,9 @@
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": "https://privatebuild.vercel.app/#private-build",
+  "@id": "https://www.privatebuild.io/#private-build",
   "name": "Private Build",
-  "url": "https://privatebuild.vercel.app",
+  "url": "https://www.privatebuild.io",
   "description": "Consultoría de tres meses para founders con un negocio que ya vende: se ordenan oferta, adquisición, captura, cierre y entrega, y se apalancan con IA. El sistema queda instalado en el negocio del founder.",
   "slogan": "Afinar la base y apalancarte. Sistemas, claridad + IA.",
   "inLanguage": "es",
@@ -59,13 +59,13 @@
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "Founder OS",
-  "url": "https://privatebuild.vercel.app/diagnostico",
+  "url": "https://www.privatebuild.io/",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
   "inLanguage": "es",
   "description": "Diagnóstico gratuito de ocho preguntas que evalúa las siete áreas de un negocio (foundations, avatar, oferta, contenido, captura, entrega y backend de IA) y devuelve cuáles están frenando el crecimiento.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "provider": { "@id": "https://privatebuild.vercel.app/#private-build" }
+  "provider": { "@id": "https://www.privatebuild.io/#private-build" }
 }
 </script>
 <meta name="apple-mobile-web-app-title" content="Diagnóstico">
@@ -3306,7 +3306,7 @@ const nivAreaFalta = {
   backend:     'usas IA suelta, no como infraestructura'
 };
 
-const M0 = 'img';  // assets propios, servidos junto a esta pagina
+const M0 = '/diagnostico/img';  // absoluta: la pagina tambien se sirve en /
 
 // Dos curvas: la de hoy se aplana en 3K, la otra sigue subiendo. Sin ejes de
 // tiempo falsos — la forma es el argumento, no los números del eje.
