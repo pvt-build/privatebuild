@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diagnóstico gratis — Conoce qué te está frenando</title>
+<title>Founder OS</title>
 <meta name="description" content="8 preguntas, 60 segundos. Te devuelve qué áreas de tu negocio están frenando tu crecimiento y por qué. Gratis.">
 <link rel="canonical" href="https://privatebuild.vercel.app/diagnostico">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -58,7 +58,7 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Diagnóstico Private Build",
+  "name": "Founder OS",
   "url": "https://privatebuild.vercel.app/diagnostico",
   "applicationCategory": "BusinessApplication",
   "operatingSystem": "Web",
@@ -2546,9 +2546,37 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 }
 .niv-levelup-btn { border-radius: var(--r-s) !important; }
 
-/* ─── FOOTER LEGAL ─── */
+/* ─── FOOTER LEGAL ─── solo en la portada: dentro del quiz distrae */
 .niv-legal { text-align:center; font-family:var(--f-dato); font-size:10px;
-  letter-spacing:.12em; color:var(--text-disabled); padding:34px 0 26px; }
+  letter-spacing:.12em; color:var(--text-disabled); padding:18px 0 4px; }
+
+/* ─── OPCION ELEGIDA ─── el toque tiene que verse antes de avanzar */
+.niv-opt.sel { background:rgba(229,50,45,.14) !important;
+  border-color:rgba(255,81,71,.5) !important; border-left-color:var(--red) !important;
+  color:var(--text-primary) !important; transform:none !important; }
+.niv-opt:disabled { cursor:default; }
+.niv-opt:disabled:not(.sel) { opacity:.45; }
+/* :not(.sel) es obligatorio: al elegir se deshabilitan todas, y el mouse queda
+   encima de la elegida, asi que sin esto :disabled:hover le borra el rojo. */
+.niv-opt:disabled:not(.sel):hover { background:rgba(255,255,255,0.04) !important;
+  border-color:rgba(255,255,255,0.08) !important; transform:none !important; }
+.niv-opt.sel:hover { background:rgba(229,50,45,.14) !important;
+  border-color:rgba(255,81,71,.5) !important; transform:none !important; }
+
+/* ─── PUNTAJE POR AREA ─── el numero hace discutible el diagnostico */
+.niv-faltan-l li { grid-template-columns:26px minmax(0,1fr) auto !important; }
+.niv-faltan-l i { grid-column:3; grid-row:1; font-style:normal;
+  font-family:var(--f-dato); font-size:14px; color:var(--red-hi);
+  font-variant-numeric:tabular-nums; white-space:nowrap; }
+.niv-faltan-l i em { font-style:normal; font-size:9px; color:var(--text-muted); }
+
+/* ─── LOGOS CON NOMBRE ─── una grilla de imagenes sueltas no se lee */
+.niv-logos { gap:7px !important; }
+.niv-logo { width:auto !important; height:auto !important; gap:7px; padding:7px 11px 7px 8px;
+  border-radius:999px !important; }
+.niv-logo b { font-family:var(--f-dato); font-size:11px; font-weight:400;
+  color:var(--text-secondary); letter-spacing:.01em; white-space:nowrap; }
+.niv-logo img { width:16px !important; height:16px !important; }
 
 /* ─── RADAR ─── el dibujo deja de ser rojo: el rojo marca solo lo caído */
 .niv-radar { max-width:300px; }
@@ -2753,6 +2781,8 @@ body::after { background:
 .niv-opt-multi.sel { background: rgba(229,50,45,.1) !important; border-color: rgba(255,81,71,.42) !important; }
 .niv-opt-multi.sel .niv-check { background: var(--red); border-color: var(--red); }
 .niv-opt-multi.sel .niv-check::after { color:#fff; }
+.niv-opt.sel { background: rgba(229,50,45,.14) !important;
+  border-color: rgba(255,81,71,.5) !important; border-left-color: var(--red) !important; }
 .niv-lobby-barra i { background: linear-gradient(90deg, var(--red), var(--red-hi)); }
 .niv-sinfriccion { color: var(--text-muted); }
 .niv-sinfriccion span::first-letter { color: var(--green); }
@@ -2886,7 +2916,8 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <div class="niv-firma niv-home-reveal">private build &middot; diagn&oacute;stico gratuito</div>
+      <div class="niv-firma niv-home-reveal">founder os &middot; por private build</div>
+      <div class="niv-legal niv-home-reveal">Private Build Consulting SpA</div>
 
       <h1 class="niv-h1 niv-home-reveal niv-home-d2">Conoce qu&eacute;<br>te est&aacute; frenando<br><span class="niv-h1-em">para escalar tu negocio con IA</span></h1>
 
@@ -3209,7 +3240,7 @@ const nivAreaFalta = {
   backend:     'usas IA suelta, no como infraestructura'
 };
 
-const M0 = 'https://privatebuild-os.vercel.app/mision-0';
+const M0 = 'img';  // assets propios, servidos junto a esta pagina
 
 // Dos curvas: la de hoy se aplana en 3K, la otra sigue subiendo. Sin ejes de
 // tiempo falsos — la forma es el argumento, no los números del eje.
@@ -3289,6 +3320,38 @@ function nivCalcAreas() {
   });
   for (var k in tot) tot[k] = Math.max(0, Math.min(100, Math.round(tot[k])));
   return tot;
+}
+
+// Resumen de la situacion, armado desde el area mas debil. Cuatro lineas
+// sueltas no son un diagnostico; esto las junta en una sola frase que el lead
+// puede repetir, que es lo que despues dice en el chat.
+const nivResumenPorArea = {
+  foundations: 'Est\u00e1s operando a ciegas: sin tus n\u00fameros claros cualquier decisi\u00f3n de ' +
+               'crecimiento es una apuesta.',
+  avatar:      'Le est\u00e1s hablando a todos, y por eso no te compra nadie en particular.',
+  oferta:      'Vendes a medida. Cada venta te cuesta lo mismo que la primera, as\u00ed que no ' +
+               'hay forma de que escale.',
+  contenido:   'Publicas sin sistema, entonces tu flujo de clientes depende de tu \u00e1nimo ' +
+               'de esa semana.',
+  captura:     'No tienes una m\u00e1quina de agendas. Cuando se acaban los referidos, se acaba ' +
+               'el mes.',
+  entrega:     'Eres el cuello de botella. Mientras operes t\u00fa, tu techo es tu agenda.',
+  backend:     'Usas IA como herramienta suelta y no como infraestructura, as\u00ed que te ahorra ' +
+               'minutos en vez de devolverte d\u00edas.'
+};
+
+function nivResumen(areas, rojo, listar) {
+  var peor = listar[0];
+  var frase = '<strong>' + nivResumenPorArea[peor] + '</strong>';
+  if (rojo.length >= 3) {
+    return frase + ' Y no es un problema aislado: con ' + rojo.length + ' \u00e1reas por debajo ' +
+           'del umbral, lo que falta no es arreglar una cosa, es que no hay un sistema debajo.';
+  }
+  if (listar.length >= 2) {
+    return frase + ' Lo segundo m\u00e1s urgente es ' +
+           nivAreasDef[listar[1]].nombre.toLowerCase() + ', y las dos se arrastran entre s\u00ed.';
+  }
+  return frase + ' El resto de tu negocio ya est\u00e1 en pie: arreglado esto, lo dem\u00e1s empuja solo.';
 }
 
 function nivEnRojo(areas) {
@@ -3404,7 +3467,8 @@ function renderNivQuestion() {
       opts += '<button type="button" class="niv-opt niv-opt-multi" data-i="' + i +
               '" onclick="nivToggle(' + i + ', this)"><span class="niv-check"></span>' + o.text + '</button>';
     } else {
-      opts += '<button type="button" class="niv-opt" onclick="nivAnswer(' + o.score + ', ' + i + ')">' + o.text + '</button>';
+      opts += '<button type="button" class="niv-opt" data-i="' + i +
+              '" onclick="nivMarcar(this, ' + o.score + ', ' + i + ')">' + o.text + '</button>';
     }
   });
   if (q.multi) {
@@ -3455,6 +3519,21 @@ function nivAnswerMulti() {
 
 let nivAnswers = [];
 let nivAreaPicks = [];
+
+// Marca la opcion en rojo y recien despues avanza: 220ms es lo que tarda el
+// ojo en registrar el cambio, y menos que eso no se ve.
+function nivMarcar(btn, score, optIdx) {
+  var caja = document.getElementById('nivOptions');
+  if (caja) {
+    var todos = caja.querySelectorAll('.niv-opt');
+    for (var i = 0; i < todos.length; i++) {
+      todos[i].classList.remove('sel');
+      todos[i].disabled = true;
+    }
+  }
+  btn.classList.add('sel');
+  setTimeout(function() { nivAnswer(score, optIdx); }, 220);
+}
 
 function nivAnswer(score, optIdx) {
   var o = nivQuestions[nivStep].opts[optIdx];
@@ -3973,22 +4052,29 @@ function dismissNivLevelup() {
   if (faltanEl) {
     var h = '<p class="niv-faltan-tit">Te faltan</p><ol class="niv-faltan-l">';
     listar.forEach(function(k) {
-      h += '<li><b>' + nivAreasDef[k].nombre + '</b><span>' + nivAreaFalta[k] + '</span></li>';
+      h += '<li><b>' + nivAreasDef[k].nombre + '</b>' +
+           '<i>' + areas[k] + '<em>/100</em></i>' +
+           '<span>' + nivAreaFalta[k] + '</span></li>';
     });
     h += '</ol>';
-    if (listar.length >= 3) {
-      h += '<p class="niv-faltan-nota">No son ' + listar.length + ' problemas sueltos. ' +
-           'Cuando varias \u00e1reas se caen juntas es porque <strong>no hay un sistema debajo</strong>.</p>';
-    }
+    h += '<p class="niv-faltan-nota">' + nivResumen(areas, rojo, listar) + '</p>';
     faltanEl.innerHTML = h;
   }
 
-  var LOGOS = ['claude','chatgpt','notion','manychat','metaads','instagram','tiktok',
-               'youtube','shopify','supabase','metricool','fathom','higgsfield','mercadopago'];
+  var LOGOS = [
+    { k:'claude',      n:'Claude' },      { k:'chatgpt',   n:'ChatGPT' },
+    { k:'notion',      n:'Notion' },      { k:'manychat',  n:'ManyChat' },
+    { k:'metaads',     n:'Meta Ads' },    { k:'instagram', n:'Instagram' },
+    { k:'tiktok',      n:'TikTok' },      { k:'youtube',   n:'YouTube' },
+    { k:'shopify',     n:'Shopify' },     { k:'supabase',  n:'Supabase' },
+    { k:'metricool',   n:'Metricool' },   { k:'fathom',    n:'Fathom' },
+    { k:'higgsfield',  n:'Higgsfield' },  { k:'mercadopago', n:'Mercado Pago' }
+  ];
   var logosEl = document.getElementById('nivLogos');
   if (logosEl && !logosEl.children.length) {
     logosEl.innerHTML = LOGOS.map(function(n) {
-      return '<span class="niv-logo"><img src="' + M0 + '/img/logos/' + n + '.png" alt="" loading="lazy"></span>';
+      return '<span class="niv-logo"><img src="' + M0 + '/logos/' + n.k + '.png" alt="" ' +
+             'loading="lazy" onerror="this.remove()"><b>' + n.n + '</b></span>';
     }).join('');
   }
 
@@ -3996,7 +4082,8 @@ function dismissNivLevelup() {
   var prEl = document.getElementById('nivPruebas');
   if (prEl && !prEl.children.length) {
     prEl.innerHTML = PRUEBAS.map(function(n) {
-      return '<img class="niv-prueba" src="' + M0 + '/img/prueba/' + n + '.jpg" alt="" loading="lazy">';
+      return '<img class="niv-prueba" src="' + M0 + '/prueba/' + n + '.jpg" alt="" ' +
+             'loading="lazy" onerror="this.remove()">';
     }).join('');
   }
 
@@ -4423,6 +4510,6 @@ window.addEventListener('load', function() {
   }
 });
 </script>
-<div class="niv-legal">Private Build Consulting SpA</div>
+
 </body>
 </html>
