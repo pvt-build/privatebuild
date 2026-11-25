@@ -3789,6 +3789,7 @@ function submitNivLead(event) {
     canal: pvtCanal(),
     foundations: _ar.foundations, avatar: _ar.avatar, oferta: _ar.oferta,
     contenido: _ar.contenido, captura: _ar.captura, entrega: _ar.entrega, backend: _ar.backend,
+    nota: nivNota(_ar),
     areas_en_rojo: nivEnRojo(_ar).map(function(k) { return nivAreasDef[k].nombre; }).join(', ') || 'ninguna',
     respuestas: nivAnswers.join(' | ')
   });
