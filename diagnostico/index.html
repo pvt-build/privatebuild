@@ -1993,7 +1993,7 @@ body.result-mode {
    porque el resultado ya es largo y no aguanta una seccion anclada de 250vh. */
 .niv-bal { max-width:720px; margin:44px auto 0; width:100%; --rp:0;
   padding-inline:14px; }
-.niv-bal-p { position:relative; display:grid; grid-template-columns:repeat(7,minmax(0,1fr));
+.niv-bal-p { position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr));
   gap:7px; height:256px; margin-top:20px; }
 .niv-bal-0 { position:absolute; left:0; right:0; bottom:74px; height:1px;
   background:rgba(255,255,255,.18); }
@@ -2016,6 +2016,8 @@ body.result-mode {
   bottom:calc(80px + 170px * var(--h) / 100 * var(--g));
   font-family:var(--f-display); font-size:10.5px; font-weight:700; white-space:nowrap;
   color:var(--green); opacity:var(--g); }
+/* El unico rotulo que no es una cifra no cabe en una columna de ~68px. */
+.nbv.dos { white-space:normal; line-height:1.15; width:100%; text-align:center; }
 .nbar.neg .nbv { bottom:auto; top:calc(100% - 74px + 22px); color:var(--red-hi); }
 .nbx { position:absolute; left:0; right:0; bottom:0; display:grid; justify-items:center;
   text-align:center; font-size:8.5px; line-height:1.22; color:var(--text-muted);
@@ -2081,6 +2083,33 @@ html, body { overflow-x:clip; max-width:100%; }
 .niv-ig-tipo:focus { outline:none; background-color:rgba(229,50,45,.1); }
 .niv-ig-row { align-items:stretch; }
 .niv-ig-row .niv-ig-input { padding-left:12px !important; min-width:0; }
+
+/* ─── EL RESULTADO EN ESCRITORIO ─── el contenedor estaba fijo en 440px, o sea
+   una columna de telefono en una pantalla de 1280: por eso el diagnostico se
+   veia apretado y sin aire. En pantalla ancha se abre, y con eso la nota pasa
+   a dos columnas, los casos a tres y los prints a cinco. */
+@media (min-width:900px) {
+  .splash-inner:has(#nivResult.active) { max-width:1120px !important; }
+  #nivResult.active { max-width:1040px !important; }
+}
+
+/* ─── PRINTS ─── la llamada en si, con de quien es y de donde. Una grilla de
+   capturas sin nombre no prueba nada: podrian ser cualquiera. */
+.niv-pruebas-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.niv-prueba { margin:0; min-width:0; display:grid; gap:8px; }
+.niv-prueba img { width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
+  border-radius:var(--r-s); border:1px solid var(--b1); background:var(--v1); }
+.niv-prueba figcaption { display:grid; gap:5px; min-width:0; }
+.niv-prueba figcaption b { font-family:var(--f-display); font-size:12px; font-weight:700;
+  letter-spacing:-.02em; color:var(--text-primary); line-height:1.2; }
+.niv-prueba-t { display:flex; flex-wrap:wrap; gap:4px; }
+.niv-prueba-t span { font-family:var(--f-dato); font-size:9px; padding:3px 6px;
+  border-radius:5px; background:rgba(255,255,255,.05); border:1px solid var(--b1);
+  color:var(--text-muted); white-space:nowrap; }
+.niv-prueba-t .hito { color:#0b0c10; background:var(--green); border-color:var(--green);
+  font-weight:600; }
+@media (min-width:700px) { .niv-pruebas-g { grid-template-columns:repeat(3,1fr); gap:14px; } }
+@media (min-width:1040px) { .niv-pruebas-g { grid-template-columns:repeat(5,1fr); } }
 
 /* ─── LA RUEDA DE LAS 8 AREAS ─── el mismo dibujo de Mision 0, pero cada nodo
    pintado por puntaje: rojo bajo 40, ambar hasta 69, verde de 70 arriba. */
@@ -2161,35 +2190,51 @@ html, body { overflow-x:clip; max-width:100%; }
 @media (min-width:640px) { .niv-casos { grid-template-columns:1fr 1fr; } }
 @media (min-width:1000px) { .niv-casos { grid-template-columns:repeat(3,1fr); } }
 
-/* ─── LA NOTA ─── lo primero que ve al terminar. Un numero sobre 100 convierte
-   siete barras en una sola cosa que se puede repetir en voz alta. */
-.niv-nota { max-width:620px; margin:0 auto 10px; width:100%; text-align:center;
-  padding:26px 18px 24px; border-radius:var(--r-m); background:var(--v1);
-  border:1px solid var(--b1); backdrop-filter:var(--vidrio);
-  -webkit-backdrop-filter:var(--vidrio); }
-.niv-nota-ok { display:inline-flex; align-items:center; gap:7px; font-family:var(--f-dato);
-  font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--green);
-  border:1px solid rgba(46,208,138,.32); background:rgba(46,208,138,.08);
-  border-radius:999px; padding:5px 12px; }
-.niv-nota-lab { font-family:var(--f-dato); font-size:10px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--text-muted); margin:18px 0 6px; }
-.niv-nota-n { font-family:var(--f-display); font-weight:800; letter-spacing:-.045em;
-  line-height:1; font-variant-numeric:tabular-nums; color:var(--text-primary);
-  font-size:clamp(54px,15vw,76px); }
-.niv-nota-n em { font-style:normal; font-size:.32em; color:var(--text-muted);
-  font-weight:600; letter-spacing:0; }
-.niv-nota-barra { height:5px; border-radius:3px; background:rgba(255,255,255,.07);
-  overflow:hidden; margin:16px auto 0; max-width:330px; }
-.niv-nota-barra i { display:block; height:100%; border-radius:3px;
-  background:linear-gradient(90deg,var(--red),var(--red-hi)); }
-.niv-nota-t { font-size:16px; line-height:1.45; color:var(--text-secondary);
-  margin:18px auto 0; max-width:38ch; }
-.niv-nota-t strong { color:var(--text-primary); font-weight:700; }
-.niv-nota-t .pvt-rojo { color:var(--red-hi); font-weight:700; }
-.niv-nota-sub { font-size:14.5px; line-height:1.45; color:var(--text-muted);
-  margin:9px auto 0; max-width:40ch; }
+/* ─── LA NOTA ─── ficha tecnica, no test de revista: etiqueta arriba, la cifra
+   grande a la izquierda, la escala con su marca de corte, y el veredicto al
+   lado. En movil se apila sin perder el orden de lectura. */
+.niv-nota { max-width:720px; margin:0 auto 10px; width:100%; text-align:left;
+  padding:0; border:1px solid var(--b1); border-radius:var(--r-m);
+  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); overflow:hidden; }
+.niv-nota-top { display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:12px 16px; border-bottom:1px solid var(--b1); }
+.niv-nota-ok { display:inline-flex; align-items:center; gap:6px; font-family:var(--f-dato);
+  font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--green); }
+.niv-nota-ok::before { content:''; width:6px; height:6px; border-radius:50%;
+  background:var(--green); box-shadow:0 0 10px rgba(46,208,138,.9); }
+.niv-nota-ref { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--text-disabled); }
+.niv-nota-cuerpo { display:grid; gap:18px; padding:20px 16px 22px; }
+.niv-nota-cifra { display:flex; align-items:baseline; gap:4px; }
+.niv-nota-n { font-family:var(--f-display); font-weight:800; letter-spacing:-.05em;
+  line-height:.9; font-variant-numeric:tabular-nums; color:var(--text-primary);
+  font-size:clamp(64px,17vw,92px); }
+.niv-nota-n em { font-style:normal; font-size:.28em; color:var(--text-muted);
+  font-weight:600; letter-spacing:-.02em; }
+.niv-nota-lab { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-muted); margin:0 0 10px; }
+/* La escala lleva la marca del 40, que es el corte con el que se decide si un
+   area esta en rojo. Sin ella el numero no se puede interpretar. */
+.niv-nota-esc { position:relative; height:6px; border-radius:3px;
+  background:rgba(255,255,255,.07); margin-top:14px; }
+.niv-nota-esc i { position:absolute; left:0; top:0; bottom:0; border-radius:3px;
+  background:linear-gradient(90deg, var(--red), var(--red-hi)); }
+.niv-nota-esc u { position:absolute; top:-4px; bottom:-4px; width:1px;
+  background:rgba(255,255,255,.3); left:40%; }
+.niv-nota-esc-l { display:flex; justify-content:space-between; margin-top:7px;
+  font-family:var(--f-dato); font-size:9px; letter-spacing:.1em; color:var(--text-disabled); }
+.niv-nota-t { font-family:var(--f-display); font-size:clamp(19px,4.4vw,24px); font-weight:700;
+  letter-spacing:-.03em; line-height:1.2; color:var(--text-primary); margin:0; }
+.niv-nota-t .pvt-rojo { color:var(--red-hi); }
+.niv-nota-sub { font-size:14.5px; line-height:1.5; color:var(--text-secondary);
+  margin:10px 0 0; max-width:42ch; }
 .niv-nota-sub strong { color:var(--green); font-weight:600; }
-@media (min-width:860px){ .niv-nota { padding:32px 26px 30px; } }
+@media (min-width:720px) {
+  .niv-nota-cuerpo { grid-template-columns:minmax(0,260px) minmax(0,1fr); gap:34px;
+    align-items:center; padding:26px 26px 28px; }
+  .niv-nota-top { padding:13px 26px; }
+}
 
 /* ─── ANILLO DE CARGA ─── el circulo que se llena durante la espera.
    Una barra de 3px no se ve en un fondo negro a pantalla completa; un anillo
@@ -2201,11 +2246,13 @@ html, body { overflow-x:clip; max-width:100%; }
 .niv-anillo-base { stroke:rgba(255,255,255,.08); }
 .niv-anillo-fill { stroke:#E5322D; stroke-dasharray:326.73; stroke-dashoffset:326.73;
   filter:drop-shadow(0 0 10px rgba(229,50,45,.55)); }
-.niv-anillo-n { position:absolute; inset:0; display:flex; align-items:baseline;
-  justify-content:center; gap:2px; font-family:'DM Mono',ui-monospace,monospace;
-  color:#ECEDF4; font-variant-numeric:tabular-nums; padding-top:.42em; }
-.niv-anillo-n b { font-size:34px; font-weight:500; letter-spacing:-.02em; }
-.niv-anillo-n em { font-style:normal; font-size:14px; color:#6E7285; }
+.niv-anillo-n { position:absolute; inset:0; display:flex; align-items:center;
+  justify-content:center; gap:1px; line-height:1;
+  color:var(--text-primary); font-variant-numeric:tabular-nums; }
+.niv-anillo-n b { font-family:var(--f-display); font-size:40px; font-weight:800;
+  letter-spacing:-.045em; line-height:1; }
+.niv-anillo-n em { font-family:var(--f-display); font-style:normal; font-size:15px;
+  font-weight:600; color:var(--text-muted); align-self:center; position:relative; top:-11px; }
 .niv-anillo.estalla { animation:anilloEstalla .55s cubic-bezier(.3,0,.2,1) forwards; }
 @keyframes anilloEstalla {
   0%   { transform:scale(1);    opacity:1; }
@@ -2803,12 +2850,16 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 .niv-faltan-l i em { font-style:normal; font-size:9px; color:var(--text-muted); }
 
 /* ─── LOGOS CON NOMBRE ─── una grilla de imagenes sueltas no se lee */
-.niv-logos { gap:7px !important; }
-.niv-logo { width:auto !important; height:auto !important; gap:7px; padding:7px 11px 7px 8px;
-  border-radius:999px !important; }
-.niv-logo b { font-family:var(--f-dato); font-size:11px; font-weight:400;
-  color:var(--text-secondary); letter-spacing:.01em; white-space:nowrap; }
-.niv-logo img { width:16px !important; height:16px !important; }
+.niv-logos { display:flex !important; flex-direction:column; gap:16px !important;
+  align-items:stretch !important; }
+.niv-logo-g { display:grid; gap:8px; }
+.niv-logo-gt { font-family:var(--f-dato); font-size:9px; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--text-disabled); margin:0; text-align:center; }
+.niv-logo-f { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
+.niv-logo { width:44px !important; height:44px !important; border-radius:12px !important;
+  background:rgba(255,255,255,.06) !important; }
+.niv-logo img[src*="vercel"] { filter:invert(1); }
+.niv-logo img { width:22px !important; height:22px !important; }
 
 /* ─── RADAR ─── el dibujo deja de ser rojo: el rojo marca solo lo caído */
 .niv-radar { max-width:300px; }
@@ -3104,9 +3155,6 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 .niv-logo img { width:20px; height:20px; object-fit:contain; opacity:.82; }
 
 /* ═══ PRINTS ═══ */
-.niv-pruebas { max-width:900px; margin:44px auto 0; width:100%; }
-.niv-pruebas-g { display:grid; grid-template-columns:1fr; gap:11px; margin-top:16px; }
-.niv-prueba { width:100%; height:auto; border-radius:var(--r); border:1px solid var(--b1); display:block; }
 
 /* ═══ DOS CAMINOS ═══ */
 
@@ -3302,18 +3350,16 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
       </div>
 
       <div class="niv-bal" id="nivBal">
-        <p class="niv-sec">De d&oacute;nde a d&oacute;nde</p>
+        <p class="niv-sec">C&oacute;mo escala</p>
         <div class="niv-bal-p" aria-hidden="true">
           <div class="niv-bal-0"></div>
-          <div class="nbar neg" style="--h:100;--s:0.00"><span class="nbv">&minus;$197.990</span><i></i><span class="nbx"><b>Hoy</b>Misi&oacute;n 0</span></div>
-          <div class="nbar pos" style="--h:4;--s:0.11"><span class="nbv">+$200K</span><i></i><span class="nbx"><b>Mes 1</b>Venta 1</span></div>
-          <div class="nbar pos" style="--h:10;--s:0.22"><span class="nbv">+$500K</span><i></i><span class="nbx"><b>Mes 1</b>Venta 2</span></div>
-          <div class="nbar neg inv" style="--h:170;--s:0.33"><span class="nbv"></span><i></i><span class="nbx"><b>Mes 2</b>Programa</span></div>
-          <div class="nbar pos" style="--h:24;--s:0.44"><span class="nbv">+$1,2M</span><i></i><span class="nbx"><b>Mes 3</b>Conexi&oacute;n</span></div>
-          <div class="nbar pos" style="--h:58;--s:0.55"><span class="nbv">+$2,9M</span><i></i><span class="nbx"><b>Mes 4</b>Sistemas</span></div>
-          <div class="nbar top" style="--h:100;--s:0.66"><span class="nbv">$5M</span><i></i><span class="nbx"><b>Mes 5</b>Tu meta</span></div>
+          <div class="nbar neg inv" style="--h:170;--s:0.00"><span class="nbv"></span><i></i><span class="nbx"><b>Mes 1</b>Entras al programa</span></div>
+          <div class="nbar pos" style="--h:14;--s:0.16"><span class="nbv dos">Primeras<br>ventas</span><i></i><span class="nbx"><b>Mes 1</b>Oferta y avatar</span></div>
+          <div class="nbar pos" style="--h:34;--s:0.32"><span class="nbv">&times;2</span><i></i><span class="nbx"><b>Mes 2</b>Captura y contenido</span></div>
+          <div class="nbar pos" style="--h:62;--s:0.48"><span class="nbv">&times;4</span><i></i><span class="nbx"><b>Mes 3</b>Ventas y entrega</span></div>
+          <div class="nbar top" style="--h:100;--s:0.64"><span class="nbv">&times;7</span><i></i><span class="nbx"><b>Mes 3+</b>Tu meta</span></div>
         </div>
-        <p class="niv-bal-n">Ejemplo ilustrativo en pesos chilenos. Tus n&uacute;meros dependen de tu oferta y tu ejecuci&oacute;n.</p>
+        <p class="niv-bal-n">Ejemplo ilustrativo del recorrido. Tus n&uacute;meros dependen de tu oferta y tu ejecuci&oacute;n.</p>
       </div>
 
       <div class="niv-cierre">
@@ -3652,14 +3698,25 @@ function nivPintarNota(areas, rojo) {
   window._nivBajas = nombres.join(' y ');
 
   caja.innerHTML =
-    '<span class="niv-nota-ok">\u2713 Diagn\u00f3stico listo</span>' +
-    '<p class="niv-nota-lab">Optimizaci\u00f3n del negocio</p>' +
-    '<div class="niv-nota-n">' + nota + '<em>/100</em></div>' +
-    '<div class="niv-nota-barra"><i style="width:' + Math.max(nota, 3) + '%"></i></div>' +
-    '<p class="niv-nota-t">Tu principal problema est\u00e1 en ' +
-      '<span class="pvt-rojo">' + nivListaY(nombres) + '</span>.</p>' +
-    '<p class="niv-nota-sub">Resolverlo con IA te permite <strong>escalar en menos de ' +
-      '3 meses</strong>.</p>';
+    '<div class="niv-nota-top">' +
+      '<span class="niv-nota-ok">Diagn\u00f3stico listo</span>' +
+      '<span class="niv-nota-ref">' + rojo.length + '/8 en rojo</span>' +
+    '</div>' +
+    '<div class="niv-nota-cuerpo">' +
+      '<div>' +
+        '<p class="niv-nota-lab">Optimizaci\u00f3n del negocio</p>' +
+        '<div class="niv-nota-cifra"><span class="niv-nota-n">' + nota +
+          '<em>/100</em></span></div>' +
+        '<div class="niv-nota-esc"><i style="width:' + Math.max(nota, 2) + '%"></i><u></u></div>' +
+        '<div class="niv-nota-esc-l"><span>0</span><span>corte 40</span><span>100</span></div>' +
+      '</div>' +
+      '<div>' +
+        '<p class="niv-nota-t">Tu principal problema est\u00e1 en ' +
+          '<span class="pvt-rojo">' + nivListaY(nombres) + '</span>.</p>' +
+        '<p class="niv-nota-sub">Resolverlo con IA te permite <strong>escalar en menos de ' +
+          '3 meses</strong>.</p>' +
+      '</div>' +
+    '</div>';
 }
 
 function nivResumen(areas, rojo, listar) {
@@ -4440,29 +4497,56 @@ function dismissNivLevelup() {
     faltanEl.innerHTML = h;
   }
 
+  // Solo los iconos, agrupados por area. La IA va primero porque es el tema
+  // por el que entro el lead; el resto sigue el orden del loop.
   var LOGOS = [
-    { k:'claude',      n:'Claude' },      { k:'chatgpt',   n:'ChatGPT' },
-    { k:'notion',      n:'Notion' },      { k:'manychat',  n:'ManyChat' },
-    { k:'metaads',     n:'Meta Ads' },    { k:'instagram', n:'Instagram' },
-    { k:'tiktok',      n:'TikTok' },      { k:'youtube',   n:'YouTube' },
-    { k:'shopify',     n:'Shopify' },     { k:'supabase',  n:'Supabase' },
-    { k:'metricool',   n:'Metricool' },   { k:'fathom',    n:'Fathom' },
-    { k:'higgsfield',  n:'Higgsfield' },  { k:'mercadopago', n:'Mercado Pago' }
+    { g: 'Inteligencia artificial',
+      l: ['claude.png','chatgpt.png','grok.svg','higgsfield.png','elevenlabs.svg'] },
+    { g: 'Contenido',
+      l: ['instagram.png','tiktok.png','youtube.png','metricool.png'] },
+    { g: 'Captura',
+      l: ['manychat.png','metaads.png','googleforms.svg'] },
+    { g: 'Ventas y entrega',
+      l: ['whatsapp.svg','fathom.png'] },
+    { g: 'Infraestructura',
+      l: ['notion.png','supabase.png','vercel.svg'] },
+    { g: 'Tienda y cobros',
+      l: ['shopify.png','mercadopago.png'] }
   ];
   var logosEl = document.getElementById('nivLogos');
   if (logosEl && !logosEl.children.length) {
-    logosEl.innerHTML = LOGOS.map(function(n) {
-      return '<span class="niv-logo"><img src="' + M0 + '/logos/' + n.k + '.png" alt="" ' +
-             'loading="lazy" onerror="this.remove()"><b>' + n.n + '</b></span>';
+    logosEl.innerHTML = LOGOS.map(function(gr) {
+      return '<div class="niv-logo-g"><p class="niv-logo-gt">' + gr.g + '</p><div class="niv-logo-f">' +
+        gr.l.map(function(f) {
+          return '<span class="niv-logo"><img src="' + M0 + '/logos/' + f + '" alt="" ' +
+                 'loading="lazy" onerror="this.parentNode.remove()"></span>';
+        }).join('') + '</div></div>';
     }).join('');
   }
 
-  var PRUEBAS = ['call-marjorie','call-pablo','call-kathe','call-juanpablo-feliz','call-laura-jairo','call-nacho-fenix'];
+  var PRUEBAS = [
+    { f:'call-marjorie',        q:'Marjorie \u00b7 Emma Clara',  t:['\u00d75','Moda','🇨🇱'] },
+    { f:'call-kathe',           q:'Kathe \u00b7 GMDS Yachts',    t:['\u00d77','Yates','🇺🇸'] },
+    { f:'call-pablo',           q:'Pablo \u00b7 Buena Mesa',     t:['Restaurantes','SaaS','🇨🇱'] },
+    { f:'call-visual',          q:'Cris y Benja \u00b7 AI Visual', t:['Video con IA','Agencia','🇨🇱'] },
+    { f:'call-nacho-fenix',     q:'Nacho \u00b7 F\u00e9nix',     t:['Talleres','SaaS','🇨🇱'] },
+    { f:'call-juanpablo-feliz', q:'Juan Pablo \u00b7 NAD',       t:['Longevidad','E-commerce','🇦🇷'] },
+    { f:'call-laura-jairo',     q:'Laura y Jairo \u00b7 STM',    t:['B2B','Servicio','🇨🇴'] },
+    { f:'call-jairo',           q:'Jairo \u00b7 STM',            t:['B2B','Servicio','🇨🇴'] },
+    { f:'call-sandra',          q:'Sandra \u00b7 Ovistra',       t:['Viajes deportivos','🇨🇱'] },
+    { f:'call-vicente',         q:'Vicente Pickering',            t:['Hyrox','Coaching'] }
+  ];
   var prEl = document.getElementById('nivPruebas');
   if (prEl && !prEl.children.length) {
-    prEl.innerHTML = PRUEBAS.map(function(n) {
-      return '<img class="niv-prueba" src="' + M0 + '/prueba/' + n + '.jpg" alt="" ' +
-             'loading="lazy" onerror="this.remove()">';
+    prEl.innerHTML = PRUEBAS.map(function(c) {
+      var tags = c.t.map(function(x) {
+        return '<span' + (x.charAt(0) === '\u00d7' ? ' class="hito"' : '') + '>' + x + '</span>';
+      }).join('');
+      return '<figure class="niv-prueba">' +
+               '<img src="' + M0 + '/prueba/' + c.f + '.jpg" alt="" loading="lazy" ' +
+               'onerror="this.parentNode.remove()">' +
+               '<figcaption><b>' + c.q + '</b><span class="niv-prueba-t">' + tags + '</span></figcaption>' +
+             '</figure>';
     }).join('');
   }
 
@@ -4481,7 +4565,7 @@ function dismissNivLevelup() {
   var ctasEl = document.getElementById('nivCtas');
   if (ctasEl) {
     ctasEl.innerHTML =
-      '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msg) + '" target="_blank">Quiero m\u00e1s informaci\u00f3n</a>' +
+      '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msg) + '" target="_blank">Quiero mi plan personalizado</a>' +
       '<div class="niv-cupos"><span class="niv-cupos-dot"></span>\u00daltimos 3 cupos este mes</div>';
   }
 
