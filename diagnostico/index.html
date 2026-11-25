@@ -2767,6 +2767,107 @@ body::after { background:
 body::after { background:
   radial-gradient(900px 540px at 50% -10%, rgba(255,255,255,.05), transparent 70%),
   radial-gradient(760px 440px at 12% 104%, rgba(229,50,45,.07), transparent 72%) !important; }
+
+/* ═══ AURA ═══ dos manchas que respiran lento. Si se nota el movimiento,
+   está mal: la idea es que la página no se sienta un PDF. */
+body::after { animation: auraLenta 26s ease-in-out infinite alternate; }
+@keyframes auraLenta {
+  from { transform: translate3d(0,0,0) scale(1); opacity:.85; }
+  to   { transform: translate3d(-2.5%,2%,0) scale(1.08); opacity:1; }
+}
+@media (prefers-reduced-motion:reduce){ body::after{animation:none} }
+
+/* palabras que el lead reconoce como suyas */
+em { font-style:normal; color:var(--red-hi); font-weight:600; }
+.niv-h1-em { color:var(--red) !important; opacity:1 !important;
+  background:rgba(229,50,45,.1); border:1px solid rgba(229,50,45,.24);
+  border-radius:10px; padding:2px 12px 5px; display:inline-block; margin-top:6px;
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+
+/* ═══ CARRUSEL DE DOLORES ═══ */
+.niv-carr { position:relative; max-width:460px; margin:0 auto; width:100%;
+  display:grid; grid-template-columns:34px minmax(0,1fr) 34px; gap:8px; align-items:center; }
+.niv-carr-vp { overflow:hidden; }
+.niv-carr-track { display:flex; transition:transform .42s cubic-bezier(.3,.9,.3,1); }
+.niv-carr-track > * { flex:0 0 100%; }
+.niv-carr .niv-dolor { border:1px solid var(--b1) !important; border-left:1px solid var(--b1) !important;
+  background:var(--v1) !important; border-radius:var(--r) !important; padding:22px 20px;
+  font-size:15.5px; line-height:1.45; text-align:center; min-height:104px;
+  display:flex; align-items:center; justify-content:center;
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+.niv-carr-fl { width:34px; height:34px; border-radius:50%; border:1px solid var(--b1);
+  background:var(--v1); color:var(--text-secondary); font-size:14px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:all .18s; }
+.niv-carr-fl:hover { background:var(--v3); color:var(--text-primary); border-color:var(--b2); }
+.niv-carr-pts { grid-column:2; display:flex; gap:6px; justify-content:center; margin-top:14px; }
+.niv-carr-pts button { width:6px; height:6px; border-radius:50%; border:none; padding:0;
+  background:rgba(255,255,255,.18); cursor:pointer; transition:all .2s; }
+.niv-carr-pts button.on { background:var(--red); width:18px; border-radius:3px; }
+
+/* ═══ TE FALTAN ═══ el bloque que más pesa del resultado */
+.niv-faltan { margin-top:22px; padding-top:20px; border-top:1px solid var(--b1); text-align:left; }
+.niv-faltan-tit { font-family:var(--f-dato); font-size:10px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-muted); margin:0 0 14px; text-align:center; }
+.niv-faltan-l { list-style:none; counter-reset:f; margin:0; padding:0;
+  display:flex; flex-direction:column; gap:10px; }
+.niv-faltan-l li { counter-increment:f; display:grid; grid-template-columns:26px minmax(0,1fr);
+  gap:12px; align-items:baseline; padding:13px 14px; border-radius:var(--r-s);
+  background:var(--v1); border:1px solid var(--b1);
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+.niv-faltan-l li::before { content:counter(f,decimal-leading-zero);
+  font-family:var(--f-dato); font-size:11px; color:var(--red-hi); }
+/* Ambos hijos viven en la segunda columna: sin esto el <span> cae en la
+   columna del contador (26px) y parte el texto en una palabra por linea. */
+.niv-faltan-l b { grid-column:2; grid-row:1; font-family:var(--f-display); font-size:16px;
+  font-weight:600; color:var(--text-primary); letter-spacing:-.025em; }
+.niv-faltan-l span { grid-column:2; grid-row:2; font-size:14px; color:var(--text-secondary);
+  line-height:1.45; margin-top:3px; }
+.niv-faltan-l li::before { grid-column:1; grid-row:1; }
+.niv-faltan-nota { font-size:14px; color:var(--text-secondary); line-height:1.5;
+  margin-top:16px; padding-top:14px; border-top:1px solid var(--b1); text-align:center; }
+.niv-faltan-nota strong { color:var(--text-primary); font-weight:600; }
+
+/* ═══ BACKEND + LOGOS ═══ */
+.niv-backend { max-width:620px; margin:40px auto 0; width:100%; }
+.niv-backend-t { font-size:15px; color:var(--text-secondary); line-height:1.52;
+  text-align:center; max-width:46ch; margin:0 auto; }
+.niv-backend-t strong { color:var(--text-primary); font-weight:600; }
+.niv-logos { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:22px; }
+.niv-logo { width:40px; height:40px; border-radius:var(--r-s); background:var(--v1);
+  border:1px solid var(--b1); display:flex; align-items:center; justify-content:center;
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+.niv-logo img { width:20px; height:20px; object-fit:contain; opacity:.82; }
+
+/* ═══ PRINTS ═══ */
+.niv-pruebas { max-width:900px; margin:44px auto 0; width:100%; }
+.niv-pruebas-g { display:grid; grid-template-columns:1fr; gap:11px; margin-top:16px; }
+.niv-prueba { width:100%; height:auto; border-radius:var(--r); border:1px solid var(--b1); display:block; }
+
+/* ═══ DOS CAMINOS ═══ */
+.niv-caminos { max-width:460px; margin:44px auto 0; width:100%; }
+.niv-caminos-svg { width:100%; height:auto; max-width:100%; margin-top:8px; }
+.niv-caminos-ley { display:flex; flex-direction:column; gap:7px; margin-top:10px; }
+.niv-caminos-ley span { display:flex; align-items:center; gap:9px;
+  font-family:var(--f-dato); font-size:11px; color:var(--text-muted); }
+.niv-caminos-ley i { width:16px; height:2px; border-radius:2px; flex-shrink:0; }
+.niv-caminos-ley i.a { background:#6e7285; }
+.niv-caminos-ley i.b { background:var(--green); }
+
+/* ═══ CIERRE ═══ */
+.niv-cierre { max-width:460px; margin:46px auto 0; width:100%; }
+.niv-cierre-t { font-size:16px; color:var(--text-secondary); line-height:1.5;
+  text-align:center; margin:0 0 22px; }
+.niv-cierre-t strong { color:var(--text-primary); font-weight:600; display:block; margin-top:6px; }
+
+@media (min-width:860px) {
+  .niv-carr { max-width:720px; grid-template-columns:42px minmax(0,1fr) 42px; }
+  .niv-carr .niv-dolor { font-size:17px; min-height:120px; }
+  .niv-faltan-l li { grid-template-columns:30px minmax(0,1fr); padding:15px 18px; }
+  .niv-pruebas-g { grid-template-columns:repeat(3,1fr); }
+  .niv-caminos, .niv-cierre { max-width:560px; }
+  .niv-logo { width:46px; height:46px; }
+  .niv-logo img { width:23px; height:23px; }
+}
 </style>
 </head>
 <body class="splash-active">
@@ -2787,11 +2888,11 @@ body::after { background:
     <div id="nivIntro">
       <div class="niv-firma niv-home-reveal">private build &middot; diagn&oacute;stico gratuito</div>
 
-      <h1 class="niv-h1 niv-home-reveal niv-home-d2">Conoce qu&eacute;<br>te est&aacute; frenando<br><span class="niv-h1-em">para escalar con IA</span></h1>
+      <h1 class="niv-h1 niv-home-reveal niv-home-d2">Conoce qu&eacute;<br>te est&aacute; frenando<br><span class="niv-h1-em">para escalar tu negocio con IA</span></h1>
 
-      <p class="niv-h1-sub niv-home-reveal niv-home-d2">Responde 8 preguntas y mira tu negocio medido en 7 &aacute;reas. En un minuto sabes cu&aacute;l te est&aacute; frenando.</p>
+      <p class="niv-h1-sub niv-home-reveal niv-home-d2">Responde 8 preguntas y mira tu <em>negocio</em> medido en 7 &aacute;reas. En un minuto sabes cu&aacute;l te est&aacute; frenando.</p>
 
-      <div class="niv-claim niv-home-reveal niv-home-d2">Mis clientes hacen un <b>&times;3</b> y hasta un <b>&times;10</b> en facturaci&oacute;n en solo 3 meses.</div>
+      <div class="niv-claim niv-home-reveal niv-home-d2">Mis clientes hacen hasta un <b>&times;7</b> en su facturaci&oacute;n en solo 3 meses.</div>
 
       <div class="niv-home-reveal niv-home-d3 niv-hero-cta">
         <button class="niv-start-btn" onclick="startNivelador()">COMENZAR MI DIAGN&Oacute;STICO</button>
@@ -2801,15 +2902,21 @@ body::after { background:
       </div>
 
       <p class="niv-sec niv-home-reveal niv-home-d3">Todos partimos igual&hellip;</p>
-      <div class="niv-dolores niv-home-reveal niv-home-d3">
-        <div class="niv-dolor">Entro a redes y me abrumo con tanta informaci&oacute;n.</div>
-        <div class="niv-dolor">Me comparo con otros que ya van m&aacute;s adelante.</div>
-        <div class="niv-dolor">Me grabo, pero no tengo resultados.</div>
-        <div class="niv-dolor">Manejo la IA, pero siento que me quedo atr&aacute;s.</div>
-        <div class="niv-dolor">No tengo a nadie que me oriente.</div>
-        <div class="niv-dolor">En mi c&iacute;rculo todos trabajan para otros.</div>
-        <div class="niv-dolor">Me autosaboteo y vuelvo a donde siempre.</div>
+      <div class="niv-carr niv-home-reveal niv-home-d3">
+        <button class="niv-carr-fl izq" type="button" aria-label="Anterior" onclick="carrMover(-1)">&larr;</button>
+        <div class="niv-carr-vp"><div class="niv-carr-track" id="nivCarrTrack">
+          <div class="niv-dolor">Entro a redes y me abrumo con tanta informaci&oacute;n.</div>
+          <div class="niv-dolor">Me comparo con otros que ya van m&aacute;s adelante.</div>
+          <div class="niv-dolor">Me grabo, pero no tengo resultados con mi <em>contenido</em>.</div>
+          <div class="niv-dolor">Manejo la IA, pero siento que me quedo atr&aacute;s.</div>
+          <div class="niv-dolor">No tengo a nadie que me oriente.</div>
+          <div class="niv-dolor">En mi c&iacute;rculo todos trabajan para otros.</div>
+          <div class="niv-dolor">Me autoboicoteo y vuelvo a donde siempre.</div>
+        </div></div>
+        <button class="niv-carr-fl der" type="button" aria-label="Siguiente" onclick="carrMover(1)">&rarr;</button>
+        <div class="niv-carr-pts" id="nivCarrPts"></div>
       </div>
+
       <p class="niv-remate niv-home-reveal niv-home-d3">No te faltan ganas.<br><strong>Te falta claridad.</strong></p>
 
       <div class="niv-cifras niv-home-reveal niv-home-d4">
@@ -2851,26 +2958,38 @@ body::after { background:
     <div class="niv-wrap" id="nivCapture">
       <form id="nivLeadForm" onsubmit="capSubmit(event)" autocomplete="on" novalidate>
 
-        <!-- paso 1 de 2 -->
-        <div class="niv-cap-step active" data-cap="ig">
-          <div class="niv-cap-count">Paso 1 de 2</div>
-          <div class="niv-question">&iquest;Cu&aacute;l es la cuenta o la web de tu negocio?</div>
-          <p class="niv-cap-sub">El @ de tu marca personal o negocio, o tu sitio.</p>
+        <div class="niv-cap-step active" data-cap="nombre">
+          <div class="niv-cap-count">Paso 1 de 3</div>
+          <div class="niv-question">&iquest;C&oacute;mo te llamas?</div>
+          <p class="niv-cap-sub">Para que el diagn&oacute;stico llegue a tu nombre.</p>
+          <input class="niv-lead-input" id="nivLeadName" type="text" placeholder="Tu nombre"
+                 autocomplete="given-name" enterkeyhint="next">
+          <div class="niv-cap-error" id="nivErrNombre"></div>
+          <button class="niv-levelup-btn" type="submit">Siguiente &rarr;</button>
+        </div>
+
+        <div class="niv-cap-step" data-cap="cuenta">
+          <div class="niv-cap-count">Paso 2 de 3</div>
+          <div class="niv-question">&iquest;Cu&aacute;l es tu cuenta o tu web?</div>
+          <p class="niv-cap-sub">Para mirar tu negocio antes de armarte el diagn&oacute;stico.</p>
           <div class="niv-ig-row">
-            <span class="niv-ig-at">@</span>
+            <select class="niv-ig-tipo" id="nivLeadTipo" onchange="capTipo()">
+              <option value="@">@</option>
+              <option value="www.">www.</option>
+            </select>
             <input class="niv-lead-input niv-ig-input" id="nivLeadInstagram" type="text"
-                   placeholder="tunegocio  o  tusitio.com" autocomplete="off" autocapitalize="off"
+                   placeholder="tunegocio" autocomplete="off" autocapitalize="off"
                    spellcheck="false" enterkeyhint="next">
           </div>
           <div class="niv-cap-error" id="nivErrIg"></div>
           <button class="niv-levelup-btn" type="submit">Siguiente &rarr;</button>
+          <button class="niv-cap-back" type="button" onclick="capIr('nombre')">&larr; Volver</button>
         </div>
 
-        <!-- paso 2 de 2 -->
         <div class="niv-cap-step" data-cap="wa">
-          <div class="niv-cap-count">Paso 2 de 2</div>
+          <div class="niv-cap-count">Paso 3 de 3</div>
           <div class="niv-question">&iquest;Cu&aacute;l es tu n&uacute;mero de WhatsApp?</div>
-          <p class="niv-cap-sub">Llega en minutos. Nada de spam.</p>
+          <p class="niv-cap-sub">Ah&iacute; te llega el diagn&oacute;stico. Nada de spam.</p>
           <div class="niv-phone-row">
             <select class="niv-country-select" id="nivLeadCountry" onchange="capPais(true)"></select>
             <input class="niv-lead-input" id="nivLeadPhone" type="tel"
@@ -2878,235 +2997,49 @@ body::after { background:
           </div>
           <div class="niv-cap-error" id="nivErrWa"></div>
           <button class="niv-levelup-btn" type="submit">Ver mi diagn&oacute;stico &rarr;</button>
-          <button class="niv-cap-back" type="button" onclick="capPrev()">&larr; Volver</button>
+          <button class="niv-cap-back" type="button" onclick="capIr('cuenta')">&larr; Volver</button>
         </div>
 
       </form>
     </div>
 
-    <!-- community gate moved to level-up overlay -->
-
-    <!-- QUIZ RESULT -->
+    <!-- ══ RESULTADO ══ La promesa es saber qué te frena, no en qué etapa estás.
+         Por eso no hay nivel, hay áreas. -->
     <div class="niv-result" id="nivResult">
-      <div class="niv-result-tag">&#x1F9ED; TU ETAPA ACTUAL</div>
-      <div class="niv-result-stage" id="nivStageName"></div>
-      <div class="niv-result-range" id="nivStageRange"></div>
 
-      <div id="nivStageBar2" class="niv-stage-bar" style="margin-bottom:30px;"></div>
-
-      <!-- El espejo: dónde se le está cayendo, antes de cualquier texto -->
       <div class="niv-areas" id="nivAreasBox">
         <div class="niv-areas-tit">Tu negocio por &aacute;rea</div>
-        <svg class="niv-radar" id="nivRadar" viewBox="-16 0 292 224" role="img" aria-label="Radar de tus siete areas de negocio"></svg>
-        <div class="niv-areas-list" id="nivAreasList"></div>
-        <div class="niv-areas-frase" id="nivAreasFrase"></div>
+        <svg class="niv-radar" id="nivRadar" viewBox="-16 0 292 224" role="img" aria-label="Tus siete areas de negocio"></svg>
+        <div class="niv-faltan" id="nivFaltan"></div>
       </div>
 
-      <!-- ACCORDION DIAGNOSTIC -->
-      <div class="niv-accordion-wrap" id="nivAccordionWrap">
-
-        <!-- BLOCK 1: Situación Actual (red detractor tags) -->
-        <div class="niv-acc-block" data-acc="situacion">
-          <button class="niv-acc-header" onclick="toggleAccordion(this)">
-            <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title now">SITUACI&Oacute;N ACTUAL</span>
-            <span class="niv-acc-chevron">▾</span>
-          </button>
-          <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivNow"></div>
-            <div class="niv-detractor-tags" id="nivDetractorTags"></div>
-          </div>
-        </div>
-
-        <!-- BLOCK 2: Resultado (network roadmap with advancing line) -->
-        <div class="niv-acc-block" data-acc="resultado">
-          <button class="niv-acc-header" onclick="toggleAccordion(this)">
-            <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title future">RESULTADO DE TOMAR ACCI&Oacute;N</span>
-            <span class="niv-acc-chevron">▾</span>
-          </button>
-          <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivFuture"></div>
-            <div class="niv-mini-roadmap" id="nivMiniRoadmap">
-              <div class="niv-mini-track">
-                <div class="niv-mini-progress" id="nivMiniProgress"></div>
-              </div>
-              <div class="niv-mini-nodes" id="nivMiniNodes"></div>
-            </div>
-          </div>
-        </div>
-
+      <div class="niv-backend">
+        <p class="niv-sec">El backend</p>
+        <p class="niv-backend-t">Para apalancarte con IA hoy necesitas <strong>claridad en cada &aacute;rea</strong> del negocio. No m&aacute;s herramientas: saber cu&aacute;l mover primero.</p>
+        <div class="niv-logos" id="nivLogos"></div>
       </div>
 
-      <!-- INCOME CALCULATOR (before siguiente paso) -->
-      <div class="niv-calculator" id="nivCalculator" style="display:none;">
-        <div class="niv-calc-title">Visualiza tu siguiente etapa</div>
-        <div class="niv-calc-label">&iquest;Cu&aacute;l es el valor de tus servicios actualmente?</div>
-        <div class="niv-calc-arrows">
-          <button class="niv-calc-arrow" onclick="calcStep(-250)">&larr;</button>
-          <span class="niv-calc-prefix">$</span>
-          <input class="niv-calc-input" id="nivCalcInput" type="number" min="0" placeholder="200" oninput="updateCalculator()">
-          <button class="niv-calc-arrow" id="nivCalcNext" onclick="calcStep(250)">&rarr;</button>
-        </div>
-        <div class="niv-calc-result" id="nivCalcResult"></div>
-        <div class="niv-calc-tip" id="nivCalcTip"></div>
+      <div class="niv-pruebas">
+        <p class="niv-sec">Lo que me escriben</p>
+        <div class="niv-pruebas-g" id="nivPruebas"></div>
       </div>
 
-      <!-- BLOCK 3: Tu siguiente paso — ISOLATED with gold glow -->
-      <div class="niv-accordion-wrap" style="margin-top:0;">
-        <div class="niv-acc-block niv-acc-block-gold" data-acc="paso">
-          <button class="niv-acc-header" onclick="toggleAccordion(this)">
-            <span class="niv-acc-icon"></span>
-            <span class="niv-acc-title">TU SIGUIENTE PASO</span>
-            <span class="niv-acc-chevron">▾</span>
-          </button>
-          <div class="niv-acc-body">
-            <div class="niv-result-text" id="nivMissing" style="color:var(--metal2);margin-bottom:20px;"></div>
-
-            <div class="niv-plan" id="nivPlan"></div>
-      <!-- SUCCESS CASES -->
-      <div class="niv-cases">
-        <div class="niv-cases-title">Y esto es lo que han logrado</div>
-        <div class="niv-cases-highlight" style="font-weight:400;color:var(--text-muted);">Mismos rubros, mismas manos. Lo que cambi&oacute; fue el sistema debajo.</div>
-        <div class="niv-cases-tabs" id="nivCasesTabs">
-          <button class="niv-cases-tab active" data-market="todos" onclick="filterNivCases('todos', this)">Todos</button>
-          <button class="niv-cases-tab" data-market="ecommerce" onclick="filterNivCases('ecommerce', this)">Ecommerce</button>
-          <button class="niv-cases-tab" data-market="wellness" onclick="filterNivCases('wellness', this)">Salud &amp; Wellness</button>
-          <button class="niv-cases-tab" data-market="servicios" onclick="filterNivCases('servicios', this)">Servicios Pro</button>
-          <button class="niv-cases-tab" data-market="medios" onclick="filterNivCases('medios', this)">Marketing &amp; Medios</button>
-        </div>
-        <div class="niv-cases-grid" id="nivCasesGrid">
-          <!-- SKILLER → OPERATOR -->
-          <div class="niv-case" data-market="medios">
-            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
-            <div class="niv-case-from">Social Media</div>
-            <div class="niv-case-to"><span class="niv-case-de">$0</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$1.500/mes</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Contenido</b></div>
-            <div class="niv-case-quote">&ldquo;Yo sab&iacute;a que pod&iacute;a lograr m&aacute;s con claridad&rdquo;</div>
-            <span class="niv-case-tag">Primer ingreso</span>
-          </div>
-          <div class="niv-case" data-market="wellness">
-            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
-            <div class="niv-case-from">Nutricionista / Coach</div>
-            <div class="niv-case-to"><span class="niv-case-de">$30 USD/sesi&oacute;n</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">programa de $600 USD</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Oferta</b></div>
-            <div class="niv-case-quote">&ldquo;Hab&iacute;an muchas cosas que no sab&iacute;a antes de comenzar&rdquo;</div>
-            <span class="niv-case-tag">x20 ticket</span>
-          </div>
-          <div class="niv-case" data-market="medios">
-            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
-            <div class="niv-case-from">Eventos / DJ&rsquo;s</div>
-            <div class="niv-case-to"><span class="niv-case-de">$50 por evento</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$250 con agenda llena</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Oferta</b></div>
-            <div class="niv-case-quote">&ldquo;No sab&iacute;amos c&oacute;mo negociar para subir nuestro valor&rdquo;</div>
-            <span class="niv-case-tag">x5 + demanda</span>
-          </div>
-          <div class="niv-case" data-market="medios">
-            <span class="niv-case-stage stage-sk-op">Skiller &rarr; Operator</span>
-            <div class="niv-case-from">Freelance creativo</div>
-            <div class="niv-case-to"><span class="niv-case-de">cobrar por hora</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">paquetes de $800+</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Oferta</b></div>
-            <div class="niv-case-quote">&ldquo;Lo que armamos fue un antes y un despu&eacute;s, voy a seguir construyendo&rdquo;</div>
-            <span class="niv-case-tag">Modelo escalable</span>
-          </div>
-          <!-- OPERATOR → BUILDER -->
-          <div class="niv-case" data-market="wellness">
-            <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
-            <div class="niv-case-from">Medicina est&eacute;tica</div>
-            <div class="niv-case-to"><span class="niv-case-de">$2K/mes</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$30K/mes recurrentes</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Entrega</b></div>
-            <div class="niv-case-quote">&ldquo;Implementamos un sistema para dar servicio a muchos clientes sin quemarme&rdquo;</div>
-            <span class="niv-case-tag">x15 ingresos</span>
-          </div>
-          <div class="niv-case" data-market="servicios">
-            <span class="niv-case-stage stage-op-bu">Operator &rarr; Builder</span>
-            <div class="niv-case-from">Rubro legal</div>
-            <div class="niv-case-to"><span class="niv-case-de">dependiente</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">+$3.5K/mes</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Avatar</b></div>
-            <div class="niv-case-quote">&ldquo;Apliqu&eacute; todo en las mentor&iacute;as y ahora tengo que decir que no a algunos proyectos&rdquo;</div>
-            <span class="niv-case-tag">Independencia</span>
-          </div>
-          <!-- BUILDER → FOUNDER -->
-          <div class="niv-case" data-market="ecommerce">
-            <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
-            <div class="niv-case-from">Ecommerce</div>
-            <div class="niv-case-to"><span class="niv-case-de">$2K/mes</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">$30K/mes</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Captura</b></div>
-            <div class="niv-case-quote">&ldquo;Cada vez crecemos m&aacute;s, cada etapa nueva hay algo nuevo que desbloquear&rdquo;</div>
-            <span class="niv-case-tag">x15 ingresos</span>
-          </div>
-          <div class="niv-case" data-market="servicios">
-            <span class="niv-case-stage stage-bu-fo">Builder &rarr; Founder</span>
-            <div class="niv-case-from">Consultor&iacute;a</div>
-            <div class="niv-case-to"><span class="niv-case-de">empleado Sr. $3K/mes</span><span class="niv-case-fl">&rarr;</span><span class="niv-case-a">consultor indep. +$6K/mes</span></div>
-            <div class="niv-case-cuello">Cuello de botella: <b>Foundations</b></div>
-            <div class="niv-case-quote">&ldquo;Todo cambia cuando est&aacute;s dispuesto a dejar tu ego y trabajar genuinamente en tu proyecto&rdquo;</div>
-            <span class="niv-case-tag">x2 + libertad</span>
-          </div>
-        </div>
-      </div>
-            <div class="niv-ctas" id="nivCtas"></div>
-          </div>
+      <div class="niv-caminos">
+        <p class="niv-sec">Dos caminos</p>
+        <svg class="niv-caminos-svg" viewBox="0 0 320 180" role="img" aria-label="Camino A se estanca en 3 mil, camino B con claridad, sistemas e IA llega a 50 mil"></svg>
+        <div class="niv-caminos-ley">
+          <span><i class="a"></i>Como vas hoy &mdash; techo de $3K</span>
+          <span><i class="b"></i>Claridad + Sistemas + IA &mdash; $50K</span>
         </div>
       </div>
 
-      <!-- FOUNDER QUOTES + FINAL CTA -->
-      <div class="niv-urgency-section" id="nivUrgency" style="display:none;">
-        <div class="niv-income-chart" id="nivIncomeChart">
-          <div class="niv-income-chart-title">Tu costo de no tomar acci&oacute;n</div>
-          <div style="font-size:10px;color:var(--text-muted);text-align:center;margin-bottom:12px;letter-spacing:0.05em;">Como empleado, <span style="color:var(--red);font-weight:700;">tienes techo</span>. Como founder, <span style="color:var(--green);font-weight:700;">no hay l&iacute;mite</span>.</div>
-          <svg viewBox="0 0 440 200" id="nivChartSvg">
-            <line x1="40" y1="20" x2="40" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-            <line x1="40" y1="180" x2="420" y2="180" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-            <line x1="40" y1="140" x2="420" y2="140" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
-            <line x1="40" y1="100" x2="420" y2="100" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
-            <line x1="40" y1="60" x2="420" y2="60" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
-            <line x1="40" y1="20" x2="420" y2="20" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="4"/>
-            <text x="36" y="183" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$0</text>
-            <text x="36" y="143" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$14K</text>
-            <text x="36" y="103" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$27K</text>
-            <text x="36" y="63" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$41K</text>
-            <text x="36" y="23" fill="rgba(255,255,255,0.25)" font-size="7" text-anchor="end" font-family="Inter">$55K+</text>
-            <text x="40" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">0</text>
-            <text x="116" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 1</text>
-            <text x="192" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 2</text>
-            <text x="268" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 3</text>
-            <text x="344" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 4</text>
-            <text x="420" y="195" fill="rgba(255,255,255,0.25)" font-size="8" text-anchor="middle" font-family="Inter">A&#241;o 5</text>
-            <path class="niv-chart-area-founder" id="nivChartAreaFounder" d=""/>
-            <polyline class="niv-chart-line-employee" id="nivChartEmployee" points=""/>
-            <polyline class="niv-chart-line-founder" id="nivChartFounder" points=""/>
-            <g id="nivChartDotsEmployee"></g>
-            <g id="nivChartDotsFounder"></g>
-            <text id="nivChartCeiling" x="0" y="0" fill="rgba(255,80,80,0.5)" font-size="7" font-family="Inter" font-weight="700" opacity="0">TECHO</text>
-          </svg>
-          <div class="niv-income-chart-legend">
-            <span><span class="niv-legend-dot" style="background:var(--green);"></span> Founder</span>
-            <span><span class="niv-legend-dot" style="background:var(--red);"></span> Empleado</span>
-          </div>
-        </div>
-        <div class="niv-urgency-quotes" id="nivUrgencyQuotes"></div>
-        <div class="niv-urgency-line"></div>
-        <div style="margin:24px auto;max-width:420px;">
-          <p style="font-size:clamp(14px,2.2vw,16px);color:var(--text-secondary);line-height:1.7;font-weight:500;">T&uacute; decides si comenzar a construir hoy...</p>
-          <p style="font-size:clamp(15px,2.5vw,18px);color:var(--red);line-height:1.7;margin-top:8px;text-decoration:underline;text-underline-offset:4px;font-weight:600;">&iquest;o prefieres perder <strong>otro a&ntilde;o m&aacute;s</strong> en el mismo lugar?</p>
-        </div>
-        <a class="niv-final-cta" id="nivFooterCta" href="https://wa.me/56978048922" target="_blank" onclick="ctaSplash(event)">Quiero tomar acci&oacute;n ahora &rarr;</a>
+      <div class="niv-cierre">
+        <p class="niv-cierre-t">Ya tienes la claridad de d&oacute;nde est&aacute;s.<br><strong>Ahora puedes recibir un plan personalizado y las herramientas para escalar en solo 3 meses.</strong></p>
+        <div class="niv-ctas" id="nivCtas"></div>
       </div>
 
-      <!-- FOOTER -->
-      <div class="niv-footer">
-        <div class="niv-footer-logo">&#x1F512; PRIVATE BUILD</div>
-        <div class="niv-footer-brand">
-          <span>Built with purpose and vision for all entrepreneurs &#x1F3F4;&#x200D;&#x2620;&#xFE0F;</span>
-        </div>
-      </div>
     </div>
 
-  </div>
-</div>
-
-<!-- NIVELADOR LEVEL-UP OVERLAY -->
 <div class="niv-levelup" id="nivLevelup">
   <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
   <div class="niv-levelup-flash" id="nivLevelupFlash"></div>
@@ -3222,6 +3155,7 @@ const nivQuestions = [
     por: 'Ac\u00e1 suele estar el cuello que no ves.',
     opts: [
       { text: 'Referidos',              score: 1, areas: { captura: 10 } },
+      { text: 'Prospecci\u00f3n',        score: 2, areas: { captura: 30 } },
       { text: 'Contenido viral',        score: 2, areas: { captura: 26, contenido: 12 } },
       { text: 'Contenido para vender',  score: 3, areas: { captura: 48, contenido: 16 } },
       { text: 'Anuncios',               score: 4, areas: { captura: 62 } }
@@ -3246,7 +3180,7 @@ const nivQuestions = [
       { text: 'Le vendo a quien llegue',                      score: 1, areas: { avatar: 10 } },
       { text: 'Tengo una idea, pero var\u00eda',              score: 2, areas: { avatar: 34 } },
       { text: 'S\u00e9 mi nicho y lo puedo describir',        score: 3, areas: { avatar: 62 } },
-      { text: 'S\u00e9 su dolor y con qu\u00e9 palabras lo dice', score: 4, areas: { avatar: 88 } }
+      { text: 'Conozco muy bien al cliente',                score: 4, areas: { avatar: 88 } }
     ]
   }
 ];
@@ -3262,6 +3196,49 @@ const nivAreasDef = {
 };
 
 const nivAreaOrden = ['foundations','avatar','oferta','contenido','captura','entrega','backend'];
+
+// La frase corta que se le dice cuando el área está caída. Concreta y en su
+// idioma: no "tu captura es baja", sino qué le pasa el lunes por la mañana.
+const nivAreaFalta = {
+  foundations: 'no tienes claros tus n\u00fameros ni tu modelo',
+  avatar:      'no sabes con precisi\u00f3n a qui\u00e9n le hablas',
+  oferta:      'cada venta se arma de nuevo, no tienes un paquete',
+  contenido:   'no tienes claridad ni ritmo de contenido',
+  captura:     'te falta un sistema para traer agendas nuevas',
+  entrega:     'se te va el d\u00eda operando',
+  backend:     'usas IA suelta, no como infraestructura'
+};
+
+const M0 = 'https://privatebuild-os.vercel.app/mision-0';
+
+// Dos curvas: la de hoy se aplana en 3K, la otra sigue subiendo. Sin ejes de
+// tiempo falsos — la forma es el argumento, no los números del eje.
+function nivPintarCaminos() {
+  var svg = document.querySelector('.niv-caminos-svg');
+  if (!svg || svg.innerHTML) return;
+  var W = 320, H = 180, x0 = 34, x1 = 300, y0 = 150, y1 = 22;
+  function px(t) { return x0 + (x1 - x0) * t; }
+  function py(v) { return y0 - (y0 - y1) * v; }
+  var A = [], B = [];
+  for (var i = 0; i <= 24; i++) {
+    var t = i / 24;
+    A.push(px(t).toFixed(1) + ',' + py(0.26 * (1 - Math.exp(-4.2 * t))).toFixed(1));
+    B.push(px(t).toFixed(1) + ',' + py(Math.pow(t, 1.7) * 0.94).toFixed(1));
+  }
+  var o = '';
+  [0.26, 0.6, 0.94].forEach(function(v) {
+    o += '<line x1="' + x0 + '" y1="' + py(v).toFixed(1) + '" x2="' + x1 + '" y2="' + py(v).toFixed(1) +
+         '" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="3 5"/>';
+  });
+  o += '<text x="' + (x0 - 6) + '" y="' + (py(0.26) + 3).toFixed(1) + '" text-anchor="end" fill="#55575f" font-family="DM Mono, monospace" font-size="8">$3K</text>';
+  o += '<text x="' + (x0 - 6) + '" y="' + (py(0.94) + 3).toFixed(1) + '" text-anchor="end" fill="#55575f" font-family="DM Mono, monospace" font-size="8">$50K</text>';
+  o += '<polyline points="' + A.join(' ') + '" fill="none" stroke="#6e7285" stroke-width="2" stroke-linecap="round"/>';
+  o += '<polyline points="' + B.join(' ') + '" fill="none" stroke="#2ed08a" stroke-width="2.4" stroke-linecap="round"/>';
+  var fa = A[A.length - 1].split(','), fb = B[B.length - 1].split(',');
+  o += '<circle cx="' + fa[0] + '" cy="' + fa[1] + '" r="3" fill="#6e7285"/>';
+  o += '<circle cx="' + fb[0] + '" cy="' + fb[1] + '" r="3.6" fill="#2ed08a"/>';
+  svg.innerHTML = o;
+}
 
 function nivPintarRadar(areas) {
   var svg = document.getElementById('nivRadar');
@@ -3628,7 +3605,7 @@ function showNivResult() {
   document.getElementById('nivQuiz').classList.remove('active');
   document.getElementById('nivCapture').classList.add('active');
   populateNivCountrySelect();
-  capIr('ig');
+  capIr('nombre');
 }
 
 // ─── CAPTURA DE LEADS → Make.com → Notion CRM ──
@@ -3668,27 +3645,42 @@ function capIr(cual) {
   for (var i = 0; i < pasos.length; i++) {
     pasos[i].classList.toggle('active', pasos[i].getAttribute('data-cap') === cual);
   }
-  var foco = cual === 'ig' ? 'nivLeadInstagram' : 'nivLeadPhone';
+  var foco = cual === 'nombre' ? 'nivLeadName' : cual === 'cuenta' ? 'nivLeadInstagram' : 'nivLeadPhone';
   var el = document.getElementById(foco);
   if (el) setTimeout(function() { el.focus(); }, 60);
   pvtTrack('captura_paso', { paso: cual });
 }
 
-function capPrev() { capIr('ig'); }
+
+
+function capTipo() {
+  var t = document.getElementById('nivLeadTipo');
+  var i = document.getElementById('nivLeadInstagram');
+  if (!t || !i) return;
+  i.placeholder = t.value === '@' ? 'tunegocio' : 'tunegocio.com';
+  i.focus();
+}
 
 function capSubmit(event) {
   event.preventDefault();
-  var activo = document.querySelector('.niv-cap-step.active');
+  var activo = document.querySelector('#nivCapture .niv-cap-step.active');
   if (!activo) return;
-  if (activo.getAttribute('data-cap') === 'ig') {
-    var errIg = document.getElementById('nivErrIg');
+  var cual = activo.getAttribute('data-cap');
+
+  if (cual === 'nombre') {
+    var n = document.getElementById('nivLeadName').value.trim();
+    var e1 = document.getElementById('nivErrNombre');
+    if (n.length < 2) { if (e1) e1.textContent = 'Escribe tu nombre'; return; }
+    if (e1) e1.textContent = '';
+    capIr('cuenta'); return;
+  }
+  if (cual === 'cuenta') {
+    var e2 = document.getElementById('nivErrIg');
     if (!limpiarHandle(document.getElementById('nivLeadInstagram').value)) {
-      if (errIg) errIg.textContent = 'Escribe tu usuario de Instagram';
-      return;
+      if (e2) e2.textContent = 'Escribe tu cuenta o tu web'; return;
     }
-    if (errIg) errIg.textContent = '';
-    capIr('wa');
-    return;
+    if (e2) e2.textContent = '';
+    capIr('wa'); return;
   }
   submitNivLead(event);
 }
@@ -3696,6 +3688,8 @@ function capSubmit(event) {
 function submitNivLead(event) {
   event.preventDefault();
 
+  var nombre = (document.getElementById('nivLeadName').value || '').trim();
+  var tipo = (document.getElementById('nivLeadTipo') || {}).value || '@';
   var instagram = limpiarHandle(document.getElementById('nivLeadInstagram').value);
   var pais = paisActual();
   var digitos = document.getElementById('nivLeadPhone').value.replace(/\D/g, '');
@@ -3704,15 +3698,16 @@ function submitNivLead(event) {
     if (errWa) errWa.textContent = 'Faltan d\u00edgitos para un n\u00famero de ' + pais.label;
     return;
   }
-  if (!instagram) { capIr('ig'); return; }
+  if (!instagram) { capIr('cuenta'); return; }
+  if (nombre.length < 2) { capIr('nombre'); return; }
   if (errWa) errWa.textContent = '';
 
   var phone = pais.code + ' ' + digitos;
-  var handle = '@' + instagram;
+  var handle = tipo === '@' ? '@' + instagram : 'www.' + instagram.replace(/^www\./i, '');
 
   // Notion exige Nombre y no hay campo de nombre: el handle lo cubre.
   window._nivLeadPhone = phone;
-  window._nivLeadName = handle;
+  window._nivLeadName = nombre;
   window._nivLeadIg = handle;
 
   // Notion no acepta comas en un select — los montos las traían
@@ -3722,7 +3717,7 @@ function submitNivLead(event) {
 
   sendToMake({
     event: 'lead_capturado',
-    name: handle,
+    name: nombre,
     phone: phone,
     instagram: handle,
     pais: pais.label,
@@ -3769,6 +3764,34 @@ document.addEventListener('click', function(e) {
 });
 
 pvtTrack('diagnostico_view');
+
+// Carrusel de dolores: estático, con flechas. Uno a la vez obliga a leerlo;
+// los siete apilados se saltan de un scroll.
+var carrIdx = 0;
+function carrMover(d) {
+  var t = document.getElementById('nivCarrTrack');
+  if (!t) return;
+  var n = t.children.length;
+  carrIdx = (carrIdx + d + n) % n;
+  t.style.transform = 'translateX(' + (-carrIdx * 100) + '%)';
+  var pts = document.getElementById('nivCarrPts');
+  if (pts) {
+    for (var i = 0; i < pts.children.length; i++) {
+      pts.children[i].classList.toggle('on', i === carrIdx);
+    }
+  }
+}
+(function(){
+  var t = document.getElementById('nivCarrTrack'), pts = document.getElementById('nivCarrPts');
+  if (!t || !pts) return;
+  for (var i = 0; i < t.children.length; i++) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', 'Ir al ' + (i+1));
+    if (i === 0) b.className = 'on';
+    b.onclick = (function(k){ return function(){ carrMover(k - carrIdx); }; })(i);
+    pts.appendChild(b);
+  }
+})();
 
 // La barra fija aparece cuando el botón original sale de pantalla.
 (function(){
@@ -3895,32 +3918,15 @@ function proceedToLevelUp() {
     lobbyItems.forEach(function(item) { item.classList.remove('show'); });
   }, lobbyTotal * 1000);
 
-  // La etapa aparece 0,4s después: lo justo para que el lobby se desvanezca
+  // Ya no hay pantalla de etapa. La promesa es saber qué te frena, no en qué
+  // nivel estás: un nivel le dice "eres pequeño", un área le dice "esto se
+  // arregla". Al terminar la espera se pasa directo al diagnóstico.
   setTimeout(function() {
     communityMini.style.display = 'none';
-
-    // Flash burst
     flashEl.classList.add('fire');
-    setTimeout(function() { flashEl.classList.remove('fire'); }, 800);
-
-    // Spawn explosion particles
-    var stageColors = { skiller:'#a08a86', operator:'#d8652f', builder:'#e0342f', founder:'#c8a840' };
-    spawnNivParticles(stageColors[stageKey] || '#ddcdc9');
-
-    // Reveal stage name with explosion animation
-    labelEl.textContent = 'TU ETAPA';
-    labelEl.style.animation = '';
-    var dropColor = stageColors[stageKey] || '#ddcdc9';
-    rankEl.style.filter = 'drop-shadow(0 0 60px ' + dropColor + '88)';
-    rankEl.style.animation = 'none';
-    rankEl.textContent = s.name;
-    rankEl.offsetHeight;
-    rankEl.style.animation = 'stageExplodeIn 1s ease forwards';
-    rangeEl.textContent = s.range;
-    rangeEl.style.animation = 'fadeInSoft 1s ease 0.4s both';
-    btnEl.style.transition = 'opacity 0.8s ease 0.8s';
-    btnEl.style.opacity = '1';
-  }, lobbyTotal * 1000 + 400);
+    setTimeout(function() { flashEl.classList.remove('fire'); }, 500);
+    dismissNivLevelup();
+  }, lobbyTotal * 1000 + 350);
 }
 
 // ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
@@ -4123,206 +4129,88 @@ function renderToolStack(stageKey) {
 }
 
 function dismissNivLevelup() {
-  // Prepare result behind overlay first
+  // Esta función era la que pintaba la etapa. Ya no hay etapa: pinta el
+  // diagnóstico por áreas y nada más. Tocaba seis elementos que ya no existen
+  // y reventaba antes de llegar al render.
   document.getElementById('splash').style.visibility = 'visible';
   document.querySelector('.splash-inner').classList.add('result-mode');
   document.getElementById('splash').classList.add('result-mode');
   document.body.classList.add('result-mode');
-  document.querySelector('.splash-title-wrap').style.display = 'none';
-  window.scrollTo({top: 0, behavior: 'instant'});
+  var tw = document.querySelector('.splash-title-wrap');
+  if (tw) tw.style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'instant' });
 
-  // Fade out overlay smoothly
   var overlay = document.getElementById('nivLevelup');
-  overlay.style.transition = 'opacity 0.6s ease';
-  overlay.style.opacity = '0';
-  setTimeout(function() {
-    overlay.classList.remove('active');
-    overlay.style.display = 'none';
-    overlay.style.opacity = '';
-    overlay.style.transition = '';
-  }, 600);
-  var stageKey = window._nivStageKey;
-  var s = nivStages[stageKey];
-
-  document.getElementById('nivResult').classList.add('active');
-  var nameEl = document.getElementById('nivStageName');
-  nameEl.textContent = s.name;
-  var grads = {
-    skiller: 'linear-gradient(135deg, #5c4845 0%, #a08a86 20%, #e8dad7 50%, #a08a86 80%, #5c4845 100%)',
-    operator: 'linear-gradient(135deg, #7a2e1c 0%, #d8652f 20%, #ffd0a8 50%, #d8652f 80%, #7a2e1c 100%)',
-    builder: 'linear-gradient(135deg, #8c1a16 0%, #e0342f 20%, #ffa892 50%, #e0342f 80%, #8c1a16 100%)',
-    founder: 'linear-gradient(135deg, #6a5020 0%, #c8a840 20%, #f0d88a 50%, #c8a840 80%, #6a5020 100%)'
-  };
-  nameEl.style.background = grads[stageKey];
-  nameEl.style.backgroundSize = '200% 100%';
-  nameEl.style.webkitBackgroundClip = 'text';
-  nameEl.style.backgroundClip = 'text';
-  nameEl.style.color = 'transparent';
-  nameEl.style.webkitTextFillColor = 'transparent';
-  var c = s.color.startsWith('var(') ? '#ddcdc9' : s.color;
-  nameEl.style.filter = 'drop-shadow(0 4px 24px ' + c + '60)';
-
-  document.getElementById('nivStageRange').textContent = s.range;
-  document.getElementById('nivNow').textContent = s.now;
-  document.getElementById('nivFuture').textContent = s.future;
-
-  // Populate detractor tags
-  var dtagsEl = document.getElementById('nivDetractorTags');
-  var dtags = nivDetractors[stageKey] || [];
-  dtagsEl.innerHTML = dtags.map(function(t) { return '<span class="niv-dtag niv-dtag-hidden">' + t + '</span>'; }).join('');
-  setTimeout(function() {
-    var tags = dtagsEl.querySelectorAll('.niv-dtag');
-    tags.forEach(function(tag, i) {
-      setTimeout(function() { tag.classList.remove('niv-dtag-hidden'); tag.classList.add('niv-dtag-show'); }, i * 600);
-    });
-  }, 2400);
-
-  // Populate mini-roadmap nodes + tool stack
-  var nodes = nivRoadmapNodes[stageKey] || [];
-  var nodesEl = document.getElementById('nivMiniNodes');
-  nodesEl.innerHTML = nodes.map(function(t) {
-    return '<div class="niv-mini-node"><span class="niv-mini-node-label">' + t + '</span></div>';
-  }).join('');
-
-  // Inject tool stack after the mini-roadmap inside the "Resultado" accordion body
-  var resultadoBody = document.querySelector('[data-acc="resultado"] .niv-acc-body');
-  if (resultadoBody) {
-    var existingToolStack = resultadoBody.querySelector('.niv-tool-stack');
-    if (!existingToolStack) {
-      resultadoBody.insertAdjacentHTML('beforeend', renderToolStack(stageKey));
-    }
+  if (overlay) {
+    overlay.style.transition = 'opacity .5s ease';
+    overlay.style.opacity = '0';
+    setTimeout(function() {
+      overlay.classList.remove('active');
+      overlay.style.display = 'none';
+      overlay.style.opacity = '';
+      overlay.style.transition = '';
+    }, 500);
   }
 
-  // ─── BLOQUE: TOMAR ACCIÓN — CTAs por etapa ──
-  // Único CTA de alta intención: "Agendar llamada". WhatsApp queda solo en el footer.
-  var ctasEl = document.getElementById('nivCtas');
-  var missingEl = document.getElementById('nivMissing');
+  document.getElementById('nivResult').classList.add('active');
 
-  var ruta = pvtRuta();
   var areas = nivCalcAreas();
   var rojo = nivEnRojo(areas);
-  if (!rojo.length) rojo = [nivAreaOrden.slice().sort(function(a,b){ return areas[a]-areas[b]; })[0]];
-  var cuellos = rojo.slice(0, 3).map(function(k) { return nivAreasDef[k].nombre; });
   window._nivAreas = areas;
-  window._nivRojo = rojo;
 
-  // Radar primero: en tres segundos ve su negocio dibujado.
   nivPintarRadar(areas);
 
-  var listaEl = document.getElementById('nivAreasList');
-  if (listaEl) {
-    var orden = nivAreaOrden.slice().sort(function(a, b) { return areas[a] - areas[b]; });
-    listaEl.innerHTML = orden.map(function(k) {
-      var v = areas[k];
-      var est = v < 40 ? 'rojo' : v < 65 ? 'medio' : 'bien';
-      var etq = v < 40 ? 'en rojo' : v < 65 ? 'a medias' : 'bien';
-      return '<div class="niv-area ' + est + '">' +
-               '<span class="niv-area-nom">' + nivAreasDef[k].nombre + '</span>' +
-               '<span class="niv-area-barra"><i style="width:' + Math.max(v, 4) + '%"></i></span>' +
-               '<span class="niv-area-etq">' + etq + '</span>' +
-             '</div>';
+  // "Te faltan": las áreas caídas, numeradas por prioridad y dichas en el
+  // idioma del lead. No "captura: 26", sino qué le pasa el lunes.
+  var orden = nivAreaOrden.slice().sort(function(a, b) { return areas[a] - areas[b]; });
+  // Como máximo cuatro: con siete en pantalla deja de ser un diagnóstico y
+  // pasa a ser una lista de defectos, y el lead se cierra.
+  var listar = (rojo.length ? rojo : orden).slice(0, 4);
+  var faltanEl = document.getElementById('nivFaltan');
+  if (faltanEl) {
+    var h = '<p class="niv-faltan-tit">Te faltan</p><ol class="niv-faltan-l">';
+    listar.forEach(function(k) {
+      h += '<li><b>' + nivAreasDef[k].nombre + '</b><span>' + nivAreaFalta[k] + '</span></li>';
+    });
+    h += '</ol>';
+    if (listar.length >= 3) {
+      h += '<p class="niv-faltan-nota">No son ' + listar.length + ' problemas sueltos. ' +
+           'Cuando varias \u00e1reas se caen juntas es porque <strong>no hay un sistema debajo</strong>.</p>';
+    }
+    faltanEl.innerHTML = h;
+  }
+
+  var LOGOS = ['claude','chatgpt','notion','manychat','metaads','instagram','tiktok',
+               'youtube','shopify','supabase','metricool','fathom','higgsfield','mercadopago'];
+  var logosEl = document.getElementById('nivLogos');
+  if (logosEl && !logosEl.children.length) {
+    logosEl.innerHTML = LOGOS.map(function(n) {
+      return '<span class="niv-logo"><img src="' + M0 + '/img/logos/' + n + '.png" alt="" loading="lazy"></span>';
     }).join('');
   }
 
-  // Tres o más áreas en rojo no son tres problemas. Son uno.
-  var fraseEl = document.getElementById('nivAreasFrase');
-  if (fraseEl) {
-    // El veredicto usa las que están realmente bajo el umbral, no la lista
-    // rellenada: decir "tu problema es X" sobre una barra que marca "a medias"
-    // es la forma más rápida de que deje de creerte.
-    var rojo = nivEnRojo(areas);
-    var nombres = rojo.map(function(k) { return nivAreasDef[k].nombre.toLowerCase(); });
-    var tit, cuerpo;
-    if (rojo.length >= 3) {
-      tit = 'Tienes ' + rojo.length + ' \u00e1reas en rojo al mismo tiempo.';
-      cuerpo = 'Eso no son ' + rojo.length + ' problemas sueltos: es que no tienes un sistema debajo. ' +
-               'Cuando una se cae, arrastra a las otras. Las tuyas son <strong>' +
-               nombres.slice(0, 3).join(', ') + '</strong>.';
-      cuerpo = cuerpo.replace(/\s*\.\s*$/, '.');
-    } else if (rojo.length === 2) {
-      tit = 'Tu problema est\u00e1 en ' + nombres[0] + ' y ' + nombres[1] + '.';
-      cuerpo = nivAreasDef[rojo[0]].flojo + ' ' + nivAreasDef[rojo[1]].flojo;
-    } else if (rojo.length === 1) {
-      tit = 'Tu problema est\u00e1 en ' + nombres[0] + '.';
-      cuerpo = nivAreasDef[rojo[0]].flojo;
-    } else {
-      var masBaja = nivAreaOrden.slice().sort(function(a, b) { return areas[a] - areas[b]; })[0];
-      tit = 'No tienes un \u00e1rea en rojo.';
-      cuerpo = 'Lo m\u00e1s flojo es ' + nivAreasDef[masBaja].nombre.toLowerCase() + '. ' + nivAreasDef[masBaja].flojo;
-    }
-    fraseEl.innerHTML = '<strong>' + tit + '</strong>' + cuerpo;
+  var PRUEBAS = ['call-marjorie','call-pablo','call-kathe','call-juanpablo-feliz','call-laura-jairo','call-nacho-fenix'];
+  var prEl = document.getElementById('nivPruebas');
+  if (prEl && !prEl.children.length) {
+    prEl.innerHTML = PRUEBAS.map(function(n) {
+      return '<img class="niv-prueba" src="' + M0 + '/img/prueba/' + n + '.jpg" alt="" loading="lazy">';
+    }).join('');
   }
 
-  var ig = window._nivLeadIg || '';
+  nivPintarCaminos();
 
-  function msgDiagnostico() {
-    return 'Hola Patrick, soy ' + ig + ', termin\u00e9 el diagn\u00f3stico y me gustar\u00eda saber m\u00e1s ' +
-           'sobre el plan personalizado para escalar con IA en 3 meses.';
+  var nombre = window._nivLeadName || '';
+  var msg = 'Soy ' + nombre + ', vengo del diagn\u00f3stico y me interesa saber c\u00f3mo obtener ' +
+            'claridad sobre c\u00f3mo apalancarme de IA para escalar.';
+  var ctasEl = document.getElementById('nivCtas');
+  if (ctasEl) {
+    ctasEl.innerHTML =
+      '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msg) + '" target="_blank">Quiero m\u00e1s informaci\u00f3n</a>' +
+      '<div class="niv-cupos"><span class="niv-cupos-dot"></span>\u00daltimos 3 cupos este mes</div>';
   }
 
-  // Sin filtro: todos los que terminan van al chat. El filtro lo hace Patrick
-  // en la conversación, no la página.
-  var planEl = document.getElementById('nivPlan');
-  if (planEl) {
-    planEl.innerHTML =
-      '<p class="niv-plan-tit">Nuestros clientes trabajan un <strong>plan personalizado de 3 meses</strong> sobre sus \u00e1reas m\u00e1s d\u00e9biles.</p>' +
-      '<div class="niv-plan-pasos">' +
-        '<div><b>01</b><span>Ordenar la oferta y a qui\u00e9n le hablas</span></div>' +
-        '<div><b>02</b><span>Contenido con esa oferta al frente</span></div>' +
-        '<div><b>03</b><span>Un destino \u00fanico para cada conversaci\u00f3n</span></div>' +
-        '<div><b>04</b><span>Sistemas con IA para que no dependa de tus horas</span></div>' +
-      '</div>';
-  }
-
-  if (missingEl) missingEl.innerHTML = '';
-  ctasEl.innerHTML =
-    '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msgDiagnostico()) + '" target="_blank">' +
-      'Quiero mi plan de 3 meses</a>' +
-    '<div class="niv-cupos"><span class="niv-cupos-dot"></span>\u00daltimos 3 cupos este mes</div>';
-
-  // Update footer CTA + countdown CTA with stage-specific WhatsApp message
-  var footerCta = document.getElementById('nivFooterCta');
-  if (footerCta && s.wa) {
-    footerCta.href = buildWaUrl(s.wa);
-  }
-
-  // Show and configure calculator
-  var calcEl = document.getElementById('nivCalculator');
-  if (calcEl) {
-    calcEl.style.display = 'block';
-    window._nivCalcTarget = nivCalcTargets[stageKey] || 3000;
-    document.getElementById('nivCalcInput').value = '';
-    document.getElementById('nivCalcResult').textContent = '';
-    document.getElementById('nivCalcTip').textContent = '';
-  }
-
-  // Staggered reveal
-  var revealEls = document.querySelectorAll('#nivResult > *');
-  revealEls.forEach(function(el, i) {
-    el.classList.add('reveal', 'reveal-d' + Math.min(i, 8));
-  });
-
-  // Auto-open accordions sequentially
-  var allBlocks = document.querySelectorAll('.niv-acc-block');
-  allBlocks.forEach(function(block, i) {
-    setTimeout(function() { block.classList.add('open'); }, 1800 + i * 1200);
-  });
-
-  // Update stage bars
-  updateStageBars(stageKey);
-
-  // Entrada suave bloque por bloque + pulso de la flecha (todo al scrollear, pensado para mobile)
-  setTimeout(function() {
-    setupNivSoftReveal();
-    setupNivArrowHint();
-  }, 300);
-
-  // Show founder quotes after accordions open
-  setTimeout(function() {
-    showFounderQuotes();
-    // La sección de urgencia recién existe acá (venía en display:none) — la sumamos al observer
-    setupNivSoftReveal();
-  }, 5000);
+  pvtTrack('result_view', { rojo: rojo.join(',') });
+  setTimeout(function() { if (typeof nivRevealInView === 'function') nivRevealInView(); }, 120);
 }
 
 // ─── FILTRO DE CASOS POR RUBRO ──────────────
