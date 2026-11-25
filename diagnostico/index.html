@@ -1700,6 +1700,7 @@ body.result-mode {
 
 /* ─── COMMUNITY MINI (inside level-up overlay) ── */
 .niv-community-mini {
+  margin-top:0 !important;
   display:flex;
   flex-direction:row;
   flex-wrap:wrap;
@@ -1985,15 +1986,71 @@ body.result-mode {
   30% { opacity:1; filter:blur(0); }
   100% { opacity:1; filter:blur(0); }
 }
+/* ─── LA NOTA ─── lo primero que ve al terminar. Un numero sobre 100 convierte
+   siete barras en una sola cosa que se puede repetir en voz alta. */
+.niv-nota { max-width:620px; margin:0 auto 10px; width:100%; text-align:center;
+  padding:26px 18px 24px; border-radius:var(--r-m); background:var(--v1);
+  border:1px solid var(--b1); backdrop-filter:var(--vidrio);
+  -webkit-backdrop-filter:var(--vidrio); }
+.niv-nota-ok { display:inline-flex; align-items:center; gap:7px; font-family:var(--f-dato);
+  font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--green);
+  border:1px solid rgba(46,208,138,.32); background:rgba(46,208,138,.08);
+  border-radius:999px; padding:5px 12px; }
+.niv-nota-lab { font-family:var(--f-dato); font-size:10px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-muted); margin:18px 0 6px; }
+.niv-nota-n { font-family:var(--f-display); font-weight:800; letter-spacing:-.045em;
+  line-height:1; font-variant-numeric:tabular-nums; color:var(--text-primary);
+  font-size:clamp(54px,15vw,76px); }
+.niv-nota-n em { font-style:normal; font-size:.32em; color:var(--text-muted);
+  font-weight:600; letter-spacing:0; }
+.niv-nota-barra { height:5px; border-radius:3px; background:rgba(255,255,255,.07);
+  overflow:hidden; margin:16px auto 0; max-width:330px; }
+.niv-nota-barra i { display:block; height:100%; border-radius:3px;
+  background:linear-gradient(90deg,var(--red),var(--red-hi)); }
+.niv-nota-t { font-size:16px; line-height:1.45; color:var(--text-secondary);
+  margin:18px auto 0; max-width:38ch; }
+.niv-nota-t strong { color:var(--text-primary); font-weight:700; }
+.niv-nota-t .pvt-rojo { color:var(--red-hi); font-weight:700; }
+.niv-nota-sub { font-size:14.5px; line-height:1.45; color:var(--text-muted);
+  margin:9px auto 0; max-width:40ch; }
+.niv-nota-sub strong { color:var(--green); font-weight:600; }
+@media (min-width:860px){ .niv-nota { padding:32px 26px 30px; } }
+
+/* ─── ANILLO DE CARGA ─── el circulo que se llena durante la espera.
+   Una barra de 3px no se ve en un fondo negro a pantalla completa; un anillo
+   de 132px es lo unico que mira el lead mientras espera. */
+.niv-anillo { position:relative; width:132px; height:132px; margin:0 auto 22px;
+  flex:none; }
+.niv-anillo svg { width:100%; height:100%; transform:rotate(-90deg); display:block; }
+.niv-anillo circle { fill:none; stroke-width:5; stroke-linecap:round; }
+.niv-anillo-base { stroke:rgba(255,255,255,.08); }
+.niv-anillo-fill { stroke:#E5322D; stroke-dasharray:326.73; stroke-dashoffset:326.73;
+  filter:drop-shadow(0 0 10px rgba(229,50,45,.55)); }
+.niv-anillo-n { position:absolute; inset:0; display:flex; align-items:baseline;
+  justify-content:center; gap:2px; font-family:'DM Mono',ui-monospace,monospace;
+  color:#ECEDF4; font-variant-numeric:tabular-nums; padding-top:.42em; }
+.niv-anillo-n b { font-size:34px; font-weight:500; letter-spacing:-.02em; }
+.niv-anillo-n em { font-style:normal; font-size:14px; color:#6E7285; }
+.niv-anillo.estalla { animation:anilloEstalla .55s cubic-bezier(.3,0,.2,1) forwards; }
+@keyframes anilloEstalla {
+  0%   { transform:scale(1);    opacity:1; }
+  45%  { transform:scale(.88);  opacity:1; }
+  100% { transform:scale(2.6);  opacity:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .niv-anillo.estalla { animation:none; opacity:0; }
+}
+
 @keyframes flashBurst {
-  0% { opacity:0; }
-  15% { opacity:0.4; }
-  100% { opacity:0; }
+  0%   { opacity:0;   transform:scale(.6); }
+  12%  { opacity:1;   transform:scale(1); }
+  100% { opacity:0;   transform:scale(1.9); }
 }
 .niv-levelup-flash {
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 60%);
+  background:radial-gradient(circle at center,
+    rgba(255,255,255,.85) 0%, rgba(255,81,71,.55) 22%, transparent 58%);
   pointer-events:none;
   opacity:0;
 }
@@ -2524,7 +2581,7 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
   background:rgba(255,255,255,.1); overflow:hidden; margin:0 auto 20px; }
 .niv-lobby-barra i { display:block; height:100%; width:0; border-radius:2px;
   background:linear-gradient(90deg, var(--red), #ff9d85); }
-.niv-value-teaser { min-height:44px; display:flex; align-items:center; justify-content:center;
+.niv-value-teaser { min-height:44px; display:block;
   text-align:center; font-family:var(--f-texto); font-size:14.5px; color:var(--text-secondary);
   max-width:30ch; margin:0 auto; line-height:1.4; }
 .niv-value-teaser strong { color:var(--text-primary); font-weight:600; }
@@ -3038,6 +3095,8 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
          Por eso no hay nivel, hay áreas. -->
     <div class="niv-result" id="nivResult">
 
+      <div class="niv-nota" id="nivNota"></div>
+
       <div class="niv-areas" id="nivAreasBox">
         <div class="niv-areas-tit">Tu negocio por &aacute;rea</div>
         <svg class="niv-radar" id="nivRadar" viewBox="-16 0 292 224" role="img" aria-label="Tus siete areas de negocio"></svg>
@@ -3075,6 +3134,13 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
   <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
   <div class="niv-levelup-flash" id="nivLevelupFlash"></div>
   <div class="niv-levelup-inner">
+    <div class="niv-anillo" id="nivAnillo">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="niv-anillo-base" cx="60" cy="60" r="52"></circle>
+        <circle class="niv-anillo-fill" id="nivAnilloFill" cx="60" cy="60" r="52"></circle>
+      </svg>
+      <span class="niv-anillo-n"><b id="nivAnilloN">0</b><em>%</em></span>
+    </div>
     <div class="niv-levelup-label">TU ETAPA</div>
     <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
     <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
@@ -3339,6 +3405,42 @@ const nivResumenPorArea = {
   backend:     'Usas IA como herramienta suelta y no como infraestructura, as\u00ed que te ahorra ' +
                'minutos en vez de devolverte d\u00edas.'
 };
+
+// La nota del negocio: el promedio de las siete areas. No es una metrica de
+// vanidad, es la unica forma de que el lead pueda decir en el chat "saque 36".
+function nivNota(areas) {
+  var t = 0;
+  for (var i = 0; i < nivAreaOrden.length; i++) t += areas[nivAreaOrden[i]];
+  return Math.round(t / nivAreaOrden.length);
+}
+
+function nivListaY(nombres) {
+  if (nombres.length === 1) return nombres[0];
+  return nombres.slice(0, -1).join(', ') + ' y ' + nombres[nombres.length - 1];
+}
+
+function nivPintarNota(areas, rojo) {
+  var caja = document.getElementById('nivNota');
+  if (!caja) return;
+  var nota = nivNota(areas);
+  window._nivNota = nota;
+
+  var orden = nivAreaOrden.slice().sort(function(a, b) { return areas[a] - areas[b]; });
+  // Como mucho dos: "tu principal problema" en plural de cuatro no es principal.
+  var bajas = (rojo.length ? rojo : orden).slice(0, 2);
+  var nombres = bajas.map(function(k) { return nivAreasDef[k].nombre; });
+  window._nivBajas = nombres.join(' y ');
+
+  caja.innerHTML =
+    '<span class="niv-nota-ok">\u2713 Diagn\u00f3stico listo</span>' +
+    '<p class="niv-nota-lab">Optimizaci\u00f3n del negocio</p>' +
+    '<div class="niv-nota-n">' + nota + '<em>/100</em></div>' +
+    '<div class="niv-nota-barra"><i style="width:' + Math.max(nota, 3) + '%"></i></div>' +
+    '<p class="niv-nota-t">Tu principal problema est\u00e1 en ' +
+      '<span class="pvt-rojo">' + nivListaY(nombres) + '</span>.</p>' +
+    '<p class="niv-nota-sub">Resolverlo con IA te permite <strong>escalar en menos de ' +
+      '3 meses</strong>.</p>';
+}
 
 function nivResumen(areas, rojo, listar) {
   var peor = listar[0];
@@ -3781,15 +3883,12 @@ function proceedToLevelUp() {
   var flashEl = document.getElementById('nivLevelupFlash');
 
   // Reset state
-  rankEl.textContent = '';
-  rankEl.style.opacity = '0';
-  rangeEl.textContent = '';
-  btnEl.style.opacity = '0';
-  btnEl.style.transition = 'none';
+  rankEl.hidden = true;
+  rangeEl.hidden = true;
+  btnEl.hidden = true;
   communityMini.classList.remove('visible');
   labelEl.textContent = 'ANALIZANDO TUS RESPUESTAS';
   labelEl.style.animation = 'pulse 1.5s ease-in-out infinite';
-  document.getElementById('splash').style.visibility = 'hidden';
   overlay.classList.add('active');
 
   // Dot animation
@@ -3812,6 +3911,27 @@ function proceedToLevelUp() {
       barraEl.style.width = '100%';
     });
   }
+
+  // El anillo se llena en los mismos 5 segundos y el numero sube con el.
+  var anilloEl = document.getElementById('nivAnillo');
+  var fillEl = document.getElementById('nivAnilloFill');
+  var numEl = document.getElementById('nivAnilloN');
+  var CIRC = 326.73;
+  if (anilloEl) { anilloEl.classList.remove('estalla'); anilloEl.style.opacity = ''; }
+  if (fillEl) {
+    fillEl.style.transition = 'none';
+    fillEl.style.strokeDashoffset = CIRC;
+    requestAnimationFrame(function() {
+      fillEl.style.transition = 'stroke-dashoffset 5s linear';
+      fillEl.style.strokeDashoffset = '0';
+    });
+  }
+  var t0 = Date.now();
+  var numInt = setInterval(function() {
+    var pct = Math.min(100, Math.round((Date.now() - t0) / 50));
+    if (numEl) numEl.textContent = pct;
+    if (pct >= 100) clearInterval(numInt);
+  }, 60);
 
   // Los tres mensajes rotan. Es lo que hace que, aunque hoy no compre,
   // quiera quedarse cerca.
@@ -3878,11 +3998,44 @@ function proceedToLevelUp() {
   // nivel estás: un nivel le dice "eres pequeño", un área le dice "esto se
   // arregla". Al terminar la espera se pasa directo al diagnóstico.
   setTimeout(function() {
+    clearInterval(numInt);
+    if (numEl) numEl.textContent = '100';
     communityMini.style.display = 'none';
+
+    // La explosion: el anillo se expande y se rompe en particulas, el flash
+    // quema la pantalla, y recien despues entra el diagnostico. Es el unico
+    // momento de premio del funnel; sin el, la espera no compro nada.
+    if (anilloEl) anilloEl.classList.add('estalla');
+    nivParticulas();
     flashEl.classList.add('fire');
-    setTimeout(function() { flashEl.classList.remove('fire'); }, 500);
-    dismissNivLevelup();
-  }, lobbyTotal * 1000 + 350);
+    setTimeout(function() { flashEl.classList.remove('fire'); }, 800);
+    setTimeout(function() { dismissNivLevelup(); }, 520);
+  }, lobbyTotal * 1000 + 250);
+}
+
+// Las particulas salen del centro del anillo en todas direcciones. Se pintan
+// una sola vez y el navegador las borra al terminar la animacion.
+function nivParticulas() {
+  var caja = document.getElementById('nivLevelupParticles');
+  if (!caja) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  caja.innerHTML = '';
+  var frag = document.createDocumentFragment();
+  for (var i = 0; i < 42; i++) {
+    var ang = (Math.PI * 2 * i) / 42 + (Math.random() - 0.5) * 0.3;
+    var dist = 120 + Math.random() * 220;
+    var d = document.createElement('span');
+    d.className = 'nlp';
+    d.style.left = '50%';
+    d.style.top = '50%';
+    d.style.background = i % 3 === 0 ? '#FF5147' : (i % 3 === 1 ? '#E5322D' : '#ECEDF4');
+    d.style.setProperty('--dx', Math.cos(ang) * dist + 'px');
+    d.style.setProperty('--dy', Math.sin(ang) * dist + 'px');
+    d.style.setProperty('--dur', (0.55 + Math.random() * 0.45) + 's');
+    frag.appendChild(d);
+  }
+  caja.appendChild(frag);
+  setTimeout(function() { caja.innerHTML = ''; }, 1200);
 }
 
 // ─── QUÉ TE VAS A ENCONTRAR (teaser durante el análisis) ──
@@ -4041,6 +4194,7 @@ function dismissNivLevelup() {
   window._nivAreas = areas;
 
   nivPintarRadar(areas);
+  nivPintarNota(areas, rojo);
 
   // "Te faltan": las áreas caídas, numeradas por prioridad y dichas en el
   // idioma del lead. No "captura: 26", sino qué le pasa el lunes.
@@ -4090,8 +4244,15 @@ function dismissNivLevelup() {
   nivPintarCaminos();
 
   var nombre = window._nivLeadName || '';
-  var msg = 'Soy ' + nombre + ', vengo del diagn\u00f3stico y me interesa saber c\u00f3mo obtener ' +
-            'claridad sobre c\u00f3mo apalancarme de IA para escalar.';
+  var cuenta = window._nivLeadIg || '';
+  // El chat tiene que abrir con todo lo que el quiz ya sabe: quien es, cual es
+  // su negocio, que nota saco y que areas le fallan.
+  var msg = 'Soy ' + nombre + ', vengo del diagn\u00f3stico. Mi negocio es ' + cuenta +
+            ' y busco claridad para apalancarme con IA.' +
+            (window._nivNota != null
+              ? ' Mi nota fue ' + window._nivNota + '/100 y lo m\u00e1s bajo me sali\u00f3 ' +
+                (window._nivBajas || '').toLowerCase() + '.'
+              : '');
   var ctasEl = document.getElementById('nivCtas');
   if (ctasEl) {
     ctasEl.innerHTML =
