@@ -2704,6 +2704,69 @@ body::after { background:
     var(--bg) !important;
   background-size: 100% 100%, 100% 100% !important;
 }
+
+/* ═══ TOKENS EXACTOS DE MISIÓN 0 ═══
+   Copiados de sus variables, no deducidos: --pvt #E5322D es el color de
+   marca y es el del botón. --verde #2ED08A es crecimiento, no acción.
+   Me había saltado esa distinción y pinté el CTA de verde. */
+:root {
+  --bg:    #0b0c10;
+  --bg2:   #0d0e12;
+  --bg3:   #14151a;
+  --bg4:   #17181e;
+  --bg5:   #1b1c20;
+  --border:  rgba(255,255,255,.09);
+  --border2: rgba(255,255,255,.14);
+  --border3: #55575f;
+  --metal0: #55575f;
+  --metal1: #6e7285;
+  --metal2: #a9adbe;
+  --metal3: #ecedf4;
+  --metal4: #ffffff;
+  --text-primary:   #ecedf4;
+  --text-secondary: #a9adbe;
+  --text-muted:     #6e7285;
+  --text-disabled:  #55575f;
+  --red:      #e5322d;
+  --red-hi:   #ff5147;
+  --red-glow: rgba(229,50,45,.3);
+  --green:      #2ed08a;
+  --electric:        #ff5147;
+  --electric-bright: #ff7d75;
+  --v1: rgba(255,255,255,.04);
+  --v2: rgba(255,255,255,.055);
+  --v3: rgba(255,255,255,.085);
+  --b1: rgba(255,255,255,.09);
+  --b2: rgba(255,255,255,.15);
+}
+
+/* El botón vuelve al rojo de marca. El verde queda donde corresponde:
+   en las cifras de crecimiento. */
+.niv-start-btn, .niv-cta-call, .niv-opt-continuar, .niv-sticky button {
+  background: var(--red) !important; border-color: var(--red) !important;
+  color: #fff !important; font-weight: 600 !important;
+  box-shadow: 0 10px 34px rgba(229,50,45,.24) !important;
+}
+.niv-start-btn:hover, .niv-cta-call:hover, .niv-sticky button:hover {
+  background: var(--red-hi) !important; border-color: var(--red-hi) !important;
+}
+.niv-opt-multi.sel { background: rgba(229,50,45,.1) !important; border-color: rgba(255,81,71,.42) !important; }
+.niv-opt-multi.sel .niv-check { background: var(--red); border-color: var(--red); }
+.niv-opt-multi.sel .niv-check::after { color:#fff; }
+.niv-lobby-barra i { background: linear-gradient(90deg, var(--red), var(--red-hi)); }
+.niv-sinfriccion { color: var(--text-muted); }
+.niv-sinfriccion span::first-letter { color: var(--green); }
+
+/* verde = crecimiento */
+.niv-claim b, .niv-case-a, .niv-cupos-dot { color: var(--green); }
+.niv-cupos-dot { background: var(--green); }
+.niv-area.rojo .niv-area-barra i { background: var(--red); }
+.niv-area.rojo .niv-area-etq { color: var(--red-hi); }
+.niv-area.bien .niv-area-barra i { background: rgba(46,208,138,.55); }
+
+body::after { background:
+  radial-gradient(900px 540px at 50% -10%, rgba(255,255,255,.05), transparent 70%),
+  radial-gradient(760px 440px at 12% 104%, rgba(229,50,45,.07), transparent 72%) !important; }
 </style>
 </head>
 <body class="splash-active">
