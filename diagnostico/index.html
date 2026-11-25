@@ -1987,6 +1987,101 @@ body.result-mode {
   30% { opacity:1; filter:blur(0); }
   100% { opacity:1; filter:blur(0); }
 }
+/* ─── GRAFICO DE BARRAS ─── mismo mecanismo que Mision 0: cada barra tiene su
+   umbral --s y crece cuando el progreso --rp lo pasa, asi entran en cascada.
+   Alla el progreso lo da el scroll; aca lo corre el reloj al entrar en vista,
+   porque el resultado ya es largo y no aguanta una seccion anclada de 250vh. */
+.niv-bal { max-width:720px; margin:44px auto 0; width:100%; --rp:0;
+  padding-inline:14px; }
+.niv-bal-p { position:relative; display:grid; grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:7px; height:256px; margin-top:20px; }
+.niv-bal-0 { position:absolute; left:0; right:0; bottom:74px; height:1px;
+  background:rgba(255,255,255,.18); }
+.nbar { position:relative; min-width:0;
+  --g:clamp(0, calc((var(--rp) - var(--s)) * 7), 1); }
+.nbar i { position:absolute; left:10%; right:10%; bottom:74px;
+  height:calc(170px * var(--h) / 100 * var(--g));
+  border-radius:6px 6px 2px 2px;
+  background:linear-gradient(180deg, var(--green), rgba(46,208,138,.22));
+  box-shadow:0 10px 24px -14px rgba(46,208,138,.9); }
+.nbar.top i { background:linear-gradient(180deg,#2ED08A,#0e9a63);
+  box-shadow:0 0 30px -4px rgba(46,208,138,.75); }
+.nbar.neg i { bottom:auto; top:calc(100% - 74px);
+  height:calc(17px * var(--h) / 100 * var(--g));
+  border-radius:2px 2px 6px 6px;
+  background:linear-gradient(0deg, var(--red), rgba(229,50,45,.35));
+  box-shadow:none; }
+.nbar.inv i { background:linear-gradient(0deg,#B3261E,rgba(229,50,45,.35)); }
+.nbv { position:absolute; left:50%; transform:translateX(-50%);
+  bottom:calc(80px + 170px * var(--h) / 100 * var(--g));
+  font-family:var(--f-display); font-size:10.5px; font-weight:700; white-space:nowrap;
+  color:var(--green); opacity:var(--g); }
+.nbar.neg .nbv { bottom:auto; top:calc(100% - 74px + 22px); color:var(--red-hi); }
+.nbx { position:absolute; left:0; right:0; bottom:0; display:grid; justify-items:center;
+  text-align:center; font-size:8.5px; line-height:1.22; color:var(--text-muted);
+  opacity:calc(.35 + .65 * var(--g)); min-width:0; overflow-wrap:break-word; }
+/* El valor de las barras de los extremos se sale del grafico si va centrado
+   sobre una columna de 46px: se pega al borde que le queda libre. */
+.nbar:first-of-type .nbv { left:0; transform:none; text-align:left; }
+.nbar:last-of-type .nbv { left:auto; right:0; transform:none; text-align:right; }
+.nbx b { display:block; font-family:var(--f-dato); font-size:8.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--text-secondary); }
+.niv-bal-n { font-size:11.5px; color:var(--text-muted); margin-top:14px; text-align:center; }
+@media (min-width:700px) {
+  .niv-bal-p { height:340px; gap:10px; }
+  .nbar i { height:calc(200px * var(--h) / 100 * var(--g)); }
+  .nbv { bottom:calc(80px + 200px * var(--h) / 100 * var(--g)); font-size:13px; }
+  .nbx { font-size:11px; }
+  .nbx b { font-size:9.5px; }
+}
+@media (prefers-reduced-motion:reduce) { .niv-bal { --rp:1 !important; } }
+
+/* ─── JERARQUIA EN MOVIL ─── el bloque de la pregunta se aprieta y las
+   opciones quedan como un grupo aparte, en vez de todo flotando suelto. */
+@media (max-width:600px) {
+  /* El contenedor centra vertical, y en un telefono eso deja ~180px de vacio
+     arriba de la pregunta: el ojo no sabe donde empezar. Durante el quiz y la
+     captura el bloque se ancla arriba. Si el navegador no soporta :has, queda
+     centrado como hasta ahora, que es el comportamiento viejo. */
+  .splash-inner:has(#nivQuiz.active),
+  .splash-inner:has(#nivCapture.active) { justify-content:flex-start; padding-top:14px; }
+  .niv-wrap.active { min-height:0; justify-content:flex-start; padding-top:4px; }
+  .niv-progress { margin-bottom:18px; }
+  #nivCuenta { margin-bottom:10px !important; }
+  .niv-question { margin-bottom:8px; line-height:1.22; }
+  .niv-porque { margin-bottom:22px !important; }
+  .niv-options { gap:8px; }
+  .niv-opt { padding:14px 16px; }
+  .niv-back, .niv-cap-back { margin-top:20px; }
+  .niv-cap-step { gap:0; }
+  .niv-cap-count { margin-bottom:12px; }
+  .niv-cap-sub { margin-bottom:18px !important; }
+}
+
+/* ─── BLOQUEO LATERAL ─── ver nota en el commit: hidden no basta en iOS */
+html, body { overflow-x:clip; max-width:100%; }
+.niv-carr-vp, .niv-huincha { overflow:clip; touch-action:pan-y; }
+.niv-carr-track { touch-action:pan-y; }
+
+/* ─── SELECTOR DE CUENTA ─── sin esto sale con el estilo nativo de iOS:
+   una caja blanca que rompe el formulario entero. */
+.niv-ig-tipo {
+  -webkit-appearance:none; appearance:none;
+  flex:none; width:68px; align-self:stretch;
+  border:none; border-right:1px solid var(--b1);
+  background:rgba(255,255,255,.05);
+  color:var(--text-primary);
+  font-family:var(--f-dato); font-size:14px;
+  padding:0 20px 0 12px; margin:0;
+  cursor:pointer; border-radius:0;
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M0 0h8L4 5z' fill='%236E7285'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 8px center;
+}
+.niv-ig-tipo:focus { outline:none; background-color:rgba(229,50,45,.1); }
+.niv-ig-row { align-items:stretch; }
+.niv-ig-row .niv-ig-input { padding-left:12px !important; min-width:0; }
+
 /* ─── LA NOTA ─── lo primero que ve al terminar. Un numero sobre 100 convierte
    siete barras en una sola cosa que se puede repetir en voz alta. */
 .niv-nota { max-width:620px; margin:0 auto 10px; width:100%; text-align:center;
@@ -2833,8 +2928,11 @@ body::after { background:
   color: #fff !important; font-weight: 600 !important;
   box-shadow: 0 10px 34px rgba(229,50,45,.24) !important;
 }
-.niv-start-btn:hover, .niv-cta-call:hover, .niv-sticky button:hover {
+.niv-start-btn:hover, .niv-cta-call:hover, .niv-sticky button:hover,
+.niv-levelup-btn:hover, .niv-opt-continuar:hover {
   background: var(--red-hi) !important; border-color: var(--red-hi) !important;
+  box-shadow: 0 10px 34px rgba(229,50,45,.3) !important; color:#fff !important;
+  transform: none !important;
 }
 .niv-opt-multi.sel { background: rgba(229,50,45,.1) !important; border-color: rgba(255,81,71,.42) !important; }
 .niv-opt-multi.sel .niv-check { background: var(--red); border-color: var(--red); }
@@ -2932,14 +3030,6 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 .niv-prueba { width:100%; height:auto; border-radius:var(--r); border:1px solid var(--b1); display:block; }
 
 /* ═══ DOS CAMINOS ═══ */
-.niv-caminos { max-width:460px; margin:44px auto 0; width:100%; }
-.niv-caminos-svg { width:100%; height:auto; max-width:100%; margin-top:8px; }
-.niv-caminos-ley { display:flex; flex-direction:column; gap:7px; margin-top:10px; }
-.niv-caminos-ley span { display:flex; align-items:center; gap:9px;
-  font-family:var(--f-dato); font-size:11px; color:var(--text-muted); }
-.niv-caminos-ley i { width:16px; height:2px; border-radius:2px; flex-shrink:0; }
-.niv-caminos-ley i.a { background:#6e7285; }
-.niv-caminos-ley i.b { background:var(--green); }
 
 /* ═══ CIERRE ═══ */
 .niv-cierre { max-width:460px; margin:46px auto 0; width:100%; }
@@ -2952,7 +3042,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
   .niv-carr .niv-dolor { font-size:17px; min-height:120px; }
   .niv-faltan-l li { grid-template-columns:30px minmax(0,1fr); padding:15px 18px; }
   .niv-pruebas-g { grid-template-columns:repeat(3,1fr); }
-  .niv-caminos, .niv-cierre { max-width:560px; }
+  .niv-bal, .niv-cierre { max-width:720px; }
   .niv-logo { width:46px; height:46px; }
   .niv-logo img { width:23px; height:23px; }
 }
@@ -3115,13 +3205,19 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         <div class="niv-pruebas-g" id="nivPruebas"></div>
       </div>
 
-      <div class="niv-caminos">
-        <p class="niv-sec">Dos caminos</p>
-        <svg class="niv-caminos-svg" viewBox="0 0 320 180" role="img" aria-label="Camino A se estanca en 3 mil, camino B con claridad, sistemas e IA llega a 50 mil"></svg>
-        <div class="niv-caminos-ley">
-          <span><i class="a"></i>Como vas hoy &mdash; techo de $3K</span>
-          <span><i class="b"></i>Claridad + Sistemas + IA &mdash; $50K</span>
+      <div class="niv-bal" id="nivBal">
+        <p class="niv-sec">De d&oacute;nde a d&oacute;nde</p>
+        <div class="niv-bal-p" aria-hidden="true">
+          <div class="niv-bal-0"></div>
+          <div class="nbar neg" style="--h:100;--s:0.00"><span class="nbv">&minus;$197.990</span><i></i><span class="nbx"><b>Hoy</b>Misi&oacute;n 0</span></div>
+          <div class="nbar pos" style="--h:4;--s:0.11"><span class="nbv">+$200K</span><i></i><span class="nbx"><b>Mes 1</b>Venta 1</span></div>
+          <div class="nbar pos" style="--h:10;--s:0.22"><span class="nbv">+$500K</span><i></i><span class="nbx"><b>Mes 1</b>Venta 2</span></div>
+          <div class="nbar neg inv" style="--h:170;--s:0.33"><span class="nbv"></span><i></i><span class="nbx"><b>Mes 2</b>Programa</span></div>
+          <div class="nbar pos" style="--h:24;--s:0.44"><span class="nbv">+$1,2M</span><i></i><span class="nbx"><b>Mes 3</b>Conexi&oacute;n</span></div>
+          <div class="nbar pos" style="--h:58;--s:0.55"><span class="nbv">+$2,9M</span><i></i><span class="nbx"><b>Mes 4</b>Sistemas</span></div>
+          <div class="nbar top" style="--h:100;--s:0.66"><span class="nbv">$5M</span><i></i><span class="nbx"><b>Mes 5</b>Tu meta</span></div>
         </div>
+        <p class="niv-bal-n">Ejemplo ilustrativo en pesos chilenos. Tus n&uacute;meros dependen de tu oferta y tu ejecuci&oacute;n.</p>
       </div>
 
       <div class="niv-cierre">
@@ -3311,31 +3407,31 @@ const M0 = '/diagnostico/img';  // absoluta: la pagina tambien se sirve en /
 
 // Dos curvas: la de hoy se aplana en 3K, la otra sigue subiendo. Sin ejes de
 // tiempo falsos — la forma es el argumento, no los números del eje.
-function nivPintarCaminos() {
-  var svg = document.querySelector('.niv-caminos-svg');
-  if (!svg || svg.innerHTML) return;
-  var W = 320, H = 180, x0 = 34, x1 = 300, y0 = 150, y1 = 22;
-  function px(t) { return x0 + (x1 - x0) * t; }
-  function py(v) { return y0 - (y0 - y1) * v; }
-  var A = [], B = [];
-  for (var i = 0; i <= 24; i++) {
-    var t = i / 24;
-    A.push(px(t).toFixed(1) + ',' + py(0.26 * (1 - Math.exp(-4.2 * t))).toFixed(1));
-    B.push(px(t).toFixed(1) + ',' + py(Math.pow(t, 1.7) * 0.94).toFixed(1));
-  }
-  var o = '';
-  [0.26, 0.6, 0.94].forEach(function(v) {
-    o += '<line x1="' + x0 + '" y1="' + py(v).toFixed(1) + '" x2="' + x1 + '" y2="' + py(v).toFixed(1) +
-         '" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="3 5"/>';
-  });
-  o += '<text x="' + (x0 - 6) + '" y="' + (py(0.26) + 3).toFixed(1) + '" text-anchor="end" fill="#55575f" font-family="DM Mono, monospace" font-size="8">$3K</text>';
-  o += '<text x="' + (x0 - 6) + '" y="' + (py(0.94) + 3).toFixed(1) + '" text-anchor="end" fill="#55575f" font-family="DM Mono, monospace" font-size="8">$50K</text>';
-  o += '<polyline points="' + A.join(' ') + '" fill="none" stroke="#6e7285" stroke-width="2" stroke-linecap="round"/>';
-  o += '<polyline points="' + B.join(' ') + '" fill="none" stroke="#2ed08a" stroke-width="2.4" stroke-linecap="round"/>';
-  var fa = A[A.length - 1].split(','), fb = B[B.length - 1].split(',');
-  o += '<circle cx="' + fa[0] + '" cy="' + fa[1] + '" r="3" fill="#6e7285"/>';
-  o += '<circle cx="' + fb[0] + '" cy="' + fb[1] + '" r="3.6" fill="#2ed08a"/>';
-  svg.innerHTML = o;
+// Corre --rp de 0 a 1 cuando el grafico entra en pantalla. Cada barra tiene su
+// umbral --s, asi que entran una tras otra como en Mision 0.
+function nivAnimarBal() {
+  var caja = document.getElementById('nivBal');
+  if (!caja) return;
+  var corrio = false;
+  var correr = function() {
+    if (corrio) return;
+    corrio = true;
+    var t0 = null, DUR = 1500;
+    var paso = function(t) {
+      if (t0 === null) t0 = t;
+      var k = Math.min(1, (t - t0) / DUR);
+      caja.style.setProperty('--rp', k.toFixed(4));
+      if (k < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  };
+  if (!('IntersectionObserver' in window)) { caja.style.setProperty('--rp', '1'); return; }
+  var obs = new IntersectionObserver(function(ents) {
+    for (var i = 0; i < ents.length; i++) {
+      if (ents[i].isIntersecting) { correr(); obs.disconnect(); }
+    }
+  }, { threshold: 0.25 });
+  obs.observe(caja);
 }
 
 function nivPintarRadar(areas) {
@@ -3909,7 +4005,7 @@ function proceedToLevelUp() {
     barraEl.style.transition = 'none';
     barraEl.style.width = '0%';
     requestAnimationFrame(function() {
-      barraEl.style.transition = 'width 5s linear';
+      barraEl.style.transition = 'width 6s linear';
       barraEl.style.width = '100%';
     });
   }
@@ -3924,13 +4020,13 @@ function proceedToLevelUp() {
     fillEl.style.transition = 'none';
     fillEl.style.strokeDashoffset = CIRC;
     requestAnimationFrame(function() {
-      fillEl.style.transition = 'stroke-dashoffset 5s linear';
+      fillEl.style.transition = 'stroke-dashoffset 6s linear';
       fillEl.style.strokeDashoffset = '0';
     });
   }
   var t0 = Date.now();
   var numInt = setInterval(function() {
-    var pct = Math.min(100, Math.round((Date.now() - t0) / 50));
+    var pct = Math.min(100, Math.round((Date.now() - t0) / 60));
     if (numEl) numEl.textContent = pct;
     if (pct >= 100) clearInterval(numInt);
   }, 60);
@@ -3950,7 +4046,7 @@ function proceedToLevelUp() {
     void teaserEl.offsetWidth;
     teaserEl.innerHTML = nivValueTeasers[tIdx];
     teaserEl.classList.add('entra');
-  }, 1600);
+  }, 1000);
 
   setTimeout(function() {
 
@@ -3975,7 +4071,7 @@ function proceedToLevelUp() {
 
   // Lobby de 2s. La sensación de velocidad vale más que el valor percibido
   // que se ganaba con la espera: el que llega de la bio no espera siete segundos.
-  var lobbyTotal = 5;
+  var lobbyTotal = 6;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -4044,8 +4140,11 @@ function nivParticulas() {
 // Lo que rota mientras genera el diagnóstico. No es relleno: es la razón por
 // la que, aunque hoy no compre, quiera quedarse cerca.
 const nivValueTeasers = [
-  '<strong>\u00danete a la comunidad</strong> de founders y emprendedores',
-  '<strong>Beneficios, eventos y comisiones</strong>',
+  '<strong>Comunidad de founders</strong> y emprendedores',
+  '<strong>Noticias y novedades de IA</strong> para negocios',
+  '<strong>Eventos y beneficios</strong>',
+  '<strong>Bonus por acceso anticipado</strong> a las apps',
+  '<strong>Partner program</strong> y cashback',
   '<strong>Apal\u00e1ncate con IA</strong> antes que tu competencia'
 ];
 
@@ -4243,7 +4342,7 @@ function dismissNivLevelup() {
     }).join('');
   }
 
-  nivPintarCaminos();
+  nivAnimarBal();
 
   var nombre = window._nivLeadName || '';
   var cuenta = window._nivLeadIg || '';
