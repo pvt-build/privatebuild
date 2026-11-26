@@ -2084,6 +2084,27 @@ html, body { overflow-x:clip; max-width:100%; }
 .niv-ig-row { align-items:stretch; }
 .niv-ig-row .niv-ig-input { padding-left:12px !important; min-width:0; }
 
+.niv-levelup:not(.active) { display:none !important; }
+
+/* ─── MODO APP ─── una pregunta, una pantalla. Sin scroll de pagina.
+   Si una pregunta no cabe (pantallas muy bajas o texto muy grande), el que
+   scrollea es el bloque de la pregunta, no la pagina: asi nunca queda una
+   opcion fuera de alcance. */
+html.modo-app, body.modo-app {
+  height:100%; max-height:100%; overflow:hidden; overscroll-behavior:none;
+}
+body.modo-app #splash {
+  min-height:0; height:100%; padding-top:0; padding-bottom:0;
+  display:flex; align-items:stretch; overflow:hidden;
+}
+body.modo-app .splash-inner {
+  min-height:0; height:100%; padding-top:max(14px, env(safe-area-inset-top,0px));
+  padding-bottom:max(14px, env(safe-area-inset-bottom,0px));
+  display:flex; flex-direction:column; justify-content:center;
+  overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch;
+}
+body.modo-app .niv-wrap.active { flex:none; }
+
 /* ─── FONDO ─── malla fina mas aura roja a la deriva, como en Mision 0. */
 body::before {
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -3993,6 +4014,9 @@ function startNivelador() {
   document.querySelector('.splash-title-wrap').style.display = 'none';
   document.getElementById('nivQuiz').classList.add('active');
   document.getElementById('nivResult').classList.remove('active');
+  document.documentElement.classList.add('modo-app');
+  document.body.classList.add('modo-app');
+  window.scrollTo(0, 0);
   document.getElementById('nivBack').style.display = 'none';
   populateNivCountrySelect();
   pvtTrack('quiz_start');
@@ -4643,6 +4667,9 @@ function dismissNivLevelup() {
     }, 500);
   }
 
+  // El resultado es un documento largo: vuelve el scroll de pagina.
+  document.documentElement.classList.remove('modo-app');
+  document.body.classList.remove('modo-app');
   document.getElementById('nivResult').classList.add('active');
 
   var areas = nivCalcAreas();
