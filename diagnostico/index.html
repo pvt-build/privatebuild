@@ -2112,6 +2112,24 @@ body.modo-app .pvt-foot { display:none; }
 .pvt-disc { font-size:11.5px; line-height:1.5; color:var(--text-disabled); margin:16px 0 0;
   max-width:70ch; }
 
+/* ─── RENDIMIENTO EN MOVIL ─── el scroll se trababa: decenas de elementos con
+   backdrop-filter sobre un fondo fijo enmascarado y un aura animada obligan a
+   recomponer la pantalla entera en cada pixel de scroll. En el telefono el
+   desenfoque no se nota y el costo si. */
+@media (max-width:760px) {
+  .niv-caso, .niv-logo, .niv-ficha, .niv-dominio, .niv-areas, .niv-nota,
+  .niv-faltan-l li, .niv-dolor, .niv-carr .niv-dolor {
+    backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+  }
+  body::before { -webkit-mask-image:none; mask-image:none; opacity:.5; }
+  body::after { animation:none !important; }
+}
+/* En pantallas que piden menos movimiento, nada se mueve de fondo. */
+@media (prefers-reduced-motion:reduce) {
+  body::after { animation:none !important; }
+  .nr-flujo { animation:none; }
+}
+
 /* ─── DOMINIO VERIFICADO ─── la marca de confianza antes del titular. */
 .niv-dominio { display:inline-flex; align-items:center; gap:6px; margin:0 auto 18px;
   padding:6px 13px 6px 14px; border-radius:999px; border:1px solid var(--b1);
@@ -3374,11 +3392,14 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 .niv-carr-vp { overflow:hidden; }
 .niv-carr-track { display:flex; transition:transform .42s cubic-bezier(.3,.9,.3,1); }
 .niv-carr-track > * { flex:0 0 100%; }
-.niv-carr .niv-dolor { border:1px solid var(--b1) !important; border-left:1px solid var(--b1) !important;
-  background:var(--v1) !important; border-radius:var(--r) !important; padding:22px 20px;
+.niv-carr .niv-dolor { border:1px solid rgba(0,0,0,.07) !important;
+  border-left:1px solid rgba(0,0,0,.07) !important;
+  background:#fff !important; border-radius:var(--r) !important; padding:22px 20px;
   font-size:15.5px; line-height:1.45; text-align:center; min-height:104px;
   display:flex; align-items:center; justify-content:center;
-  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+  color:#14151A !important; }
+/* Un solo hijo, si no el <em> se vuelve otro item del flex. */
+.niv-carr .niv-dolor > span { display:block; }
 .niv-carr-fl { width:34px; height:34px; border-radius:50%; border:1px solid var(--b1);
   background:var(--v1); color:var(--text-secondary); font-size:14px; cursor:pointer;
   display:flex; align-items:center; justify-content:center; transition:all .18s; }
@@ -3481,13 +3502,13 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         <p class="niv-sec niv-sec-claro">Todos partimos igual&hellip;</p>
         <button class="niv-carr-fl izq" type="button" aria-label="Anterior" onclick="carrMover(-1)">&larr;</button>
         <div class="niv-carr-vp"><div class="niv-carr-track" id="nivCarrTrack">
-          <div class="niv-dolor">Entro a redes y me abrumo con tanta informaci&oacute;n.</div>
-          <div class="niv-dolor">Me comparo con otros que ya van m&aacute;s adelante.</div>
-          <div class="niv-dolor">Me grabo, pero no tengo resultados con mi <em>contenido</em>.</div>
-          <div class="niv-dolor">Manejo la IA, pero siento que me quedo atr&aacute;s.</div>
-          <div class="niv-dolor">No tengo a nadie que me oriente.</div>
-          <div class="niv-dolor">En mi c&iacute;rculo todos trabajan para otros.</div>
-          <div class="niv-dolor">Me autoboicoteo y vuelvo a donde siempre.</div>
+          <div class="niv-dolor"><span>Entro a redes y me abrumo con tanta informaci&oacute;n.</span></div>
+          <div class="niv-dolor"><span>Me comparo con otros que ya van m&aacute;s adelante.</span></div>
+          <div class="niv-dolor"><span>Me grabo, pero no tengo resultados con mi <em>contenido</em>.</span></div>
+          <div class="niv-dolor"><span>Manejo la IA, pero siento que me quedo atr&aacute;s.</span></div>
+          <div class="niv-dolor"><span>No tengo a nadie que me oriente.</span></div>
+          <div class="niv-dolor"><span>En mi c&iacute;rculo todos trabajan para otros.</span></div>
+          <div class="niv-dolor"><span>Me autoboicoteo y vuelvo a donde siempre.</span></div>
         </div></div>
         <button class="niv-carr-fl der" type="button" aria-label="Siguiente" onclick="carrMover(1)">&rarr;</button>
         <div class="niv-carr-pts" id="nivCarrPts"></div>
