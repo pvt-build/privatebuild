@@ -2086,6 +2086,133 @@ html, body { overflow-x:clip; max-width:100%; }
 
 .niv-levelup:not(.active) { display:none !important; }
 
+/* ─── FOOTER ─── lo legal vive aca, no suelto arriba del titular. */
+.pvt-foot { position:relative; z-index:1; border-top:1px solid var(--b1);
+  background:rgba(0,0,0,.4); margin-top:40px; }
+body.modo-app .pvt-foot { display:none; }
+.pvt-foot-in { max-width:720px; margin:0 auto;
+  padding-left:max(18px, env(safe-area-inset-left,0px));
+  padding-right:max(18px, env(safe-area-inset-right,0px));
+  padding-block:30px 40px; text-align:left; }
+.pvt-foot-top { display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding-bottom:18px; border-bottom:1px solid var(--b1); margin-bottom:8px; }
+.pvt-foot-dom { font-family:var(--f-dato); font-size:11px; color:var(--text-disabled); }
+.pvt-legal { border-bottom:1px solid var(--b1); }
+.pvt-legal summary { cursor:pointer; list-style:none; padding:14px 0;
+  font-family:var(--f-dato); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text-muted); display:flex; align-items:center; justify-content:space-between; }
+.pvt-legal summary::-webkit-details-marker { display:none; }
+.pvt-legal summary::after { content:'+'; font-size:15px; color:var(--text-disabled); }
+.pvt-legal[open] summary::after { content:'\2013'; }
+.pvt-legal summary:hover { color:var(--text-secondary); }
+.pvt-legal p { font-size:13px; line-height:1.55; color:var(--text-muted); margin:0 0 12px;
+  max-width:70ch; }
+.pvt-legal p:last-child { margin-bottom:16px; }
+.pvt-legal b { color:var(--text-secondary); font-weight:600; }
+.pvt-disc { font-size:11.5px; line-height:1.5; color:var(--text-disabled); margin:16px 0 0;
+  max-width:70ch; }
+
+/* ─── DOMINIO VERIFICADO ─── la marca de confianza antes del titular. */
+.niv-dominio { display:inline-flex; align-items:center; gap:6px; margin:0 auto 18px;
+  padding:6px 13px 6px 14px; border-radius:999px; border:1px solid var(--b1);
+  background:var(--v1); backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
+.niv-dom-url { font-family:var(--f-dato); font-size:12px; letter-spacing:.02em;
+  color:var(--text-secondary); }
+.niv-dom-tick { width:16px; height:16px; flex:none; }
+.niv-dom-tick path:first-child { fill:#2D9BF0; }
+.niv-dom-check { fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round;
+  stroke-linejoin:round; }
+
+/* ─── CASOS EN VERTICAL ─── el carrusel horizontal escondia nueve de los doce
+   y con trafico frio la prueba tiene que verse, no buscarse. */
+@media (max-width:639px) {
+  .niv-casos { grid-auto-flow:row !important; grid-template-rows:none !important;
+    grid-template-columns:1fr !important; grid-auto-columns:auto !important;
+    overflow:visible !important; scroll-snap-type:none !important; }
+  .niv-caso { scroll-snap-align:none; }
+}
+
+/* ─── CARRUSEL DE DOLORES SOBRE BLANCO ─── el corte claro de Mision 0: parte
+   la pagina en dos y hace que el dolor resalte en vez de diluirse en negro. */
+.niv-carr { background:var(--claro, #ECECE9); border-radius:18px; padding:22px 10px 18px;
+  color:#14151A; }
+.niv-carr .niv-dolor { background:#fff !important; border-color:rgba(0,0,0,.08) !important;
+  color:#14151A !important; }
+.niv-carr .niv-dolor em, .niv-carr .niv-dolor strong { color:var(--red) !important; }
+.niv-carr-fl { border-color:rgba(0,0,0,.14) !important; color:#14151A !important;
+  background:#fff !important; }
+.niv-carr-pts button { background:rgba(0,0,0,.18); }
+.niv-carr-pts button.on { background:var(--red); }
+.niv-sec-claro { color:#55575F !important; grid-column:1 / -1; margin:0 0 14px; }
+
+/* ─── LAS 8 SKILLS ─── que hace cada area y en que orden. Es la parte que
+   explica por que el diagnostico mira ocho cosas y no una. */
+.niv-skills { list-style:none; counter-reset:sk; margin:18px 0 0; padding:0;
+  display:grid; gap:1px; border:1px solid var(--b1); border-radius:var(--r-s);
+  overflow:hidden; background:var(--b1); }
+.niv-skills li { display:grid; grid-template-columns:30px minmax(0,1fr); gap:3px 12px;
+  padding:13px 15px; background:rgba(255,255,255,.028); align-items:baseline; }
+.niv-skills b { grid-column:1; grid-row:1 / span 2; font-family:var(--f-dato); font-size:10px;
+  font-weight:400; color:var(--red-hi); }
+.niv-skills span { grid-column:2; grid-row:1; font-family:var(--f-display); font-size:15px;
+  font-weight:700; letter-spacing:-.02em; color:var(--text-primary); }
+.niv-skills em { grid-column:2; grid-row:2; font-style:normal; font-size:13.5px;
+  color:var(--text-muted); line-height:1.4; }
+@media (min-width:760px) { .niv-skills { grid-template-columns:1fr 1fr; } }
+
+/* ─── WINS ─── las tarjetas de WhatsApp de Mision 0. Alla el apilado lo
+   maneja el scroll de una seccion anclada de 300vh; aca el resultado ya es
+   largo y no aguanta eso, asi que --rp lo corre el reloj al entrar en vista y
+   las tarjetas caen una sobre otra igual. */
+.niv-wins { position:relative; --rp:0; height:420px; margin-bottom:26px; }
+.niv-wstack { position:relative; height:100%; width:100%; }
+.wa2 { position:absolute; left:50%; top:50%; margin:0; width:min(330px,84%);
+  padding:13px 11px 10px; border-radius:14px; display:grid; gap:6px;
+  background:#ECE5DD radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px) 0 0/14px 14px;
+  box-shadow:0 26px 52px -22px rgba(0,0,0,.85);
+  --o:clamp(0, calc(var(--rp,0) * (var(--n) + 1.2) - var(--k)), 1);
+  opacity:clamp(0, calc(var(--o) * 3), 1);
+  transform:translate(calc(-50% + var(--dx) * 3.4), calc(-50% + var(--dy) * 2.2 + (1 - var(--o)) * 140px))
+            rotate(var(--r)) scale(calc(.94 + .06 * var(--o))); }
+.wa-m { justify-self:start; max-width:92%; background:#fff; color:#111B21; border-radius:9px;
+  border-top-left-radius:2px; padding:7px 9px 5px; box-shadow:0 1px 1px rgba(0,0,0,.12);
+  display:grid; }
+.wa-m span { font-size:14px; line-height:1.35; }
+.wa-m small { justify-self:end; font-size:10px; color:#667781; margin-top:2px; }
+.wa2 figcaption { justify-self:end; font-family:var(--f-dato); font-size:10.5px; font-weight:500;
+  letter-spacing:.06em; color:#075E54; background:#fff; padding:6px 9px; border-radius:999px;
+  margin-top:2px; }
+@media (min-width:760px) { .niv-wins { height:480px; } .wa2 { width:min(400px,70%); } }
+@media (prefers-reduced-motion:reduce) { .niv-wins { --rp:1; } }
+
+/* ─── OFERTA ─── la unica linea de urgencia de la ficha. */
+.niv-oferta { font-size:14px; color:var(--text-secondary); margin:14px 0 0;
+  padding:10px 14px; border:1px dashed rgba(229,50,45,.4); border-radius:var(--r-s);
+  background:rgba(229,50,45,.07); display:inline-block; }
+.niv-oferta strong { color:var(--red-hi); font-weight:700; }
+.niv-cierre-t .pvt-rojo { color:var(--red-hi); }
+
+/* El boton estaba en 11px con mucho espaciado: se leia enano al lado de la
+   cifra del diagnostico. */
+.niv-cta-call { font-size:15px !important; letter-spacing:.02em !important;
+  text-transform:none !important; padding:18px 30px !important; font-weight:700 !important;
+  width:100%; max-width:420px; }
+
+/* ─── PULSO ─── el borde late mientras se genera el diagnostico. Da la
+   sensacion de que algo esta corriendo de verdad durante los nueve segundos. */
+.niv-pulso { position:absolute; inset:0; pointer-events:none; z-index:1;
+  box-shadow:inset 0 0 90px 10px rgba(229,50,45,.28), inset 0 0 0 1px rgba(229,50,45,.3);
+  animation:nivPulso 2.1s ease-in-out infinite; }
+@keyframes nivPulso {
+  0%,100% { opacity:.35; }
+  50%     { opacity:1; }
+}
+@media (prefers-reduced-motion:reduce) { .niv-pulso { animation:none; opacity:.5; } }
+
+/* El lobby entra en cascada y se queda: antes un mensaje rotaba cada segundo
+   y no se alcanzaba a leer ninguno completo. */
+.niv-lobby-benefit { transition:opacity .5s ease, transform .5s ease; }
+
 /* ─── MODO APP ─── una pregunta, una pantalla. Sin scroll de pagina.
    Si una pregunta no cabe (pantallas muy bajas o texto muy grande), el que
    scrollea es el bloque de la pregunta, no la pagina: asi nunca queda una
@@ -2115,7 +2242,10 @@ body::before {
   -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 35%, #000 20%, transparent 78%);
   mask-image:radial-gradient(ellipse 80% 70% at 50% 35%, #000 20%, transparent 78%);
 }
-#splash, .niv-levelup { position:relative; z-index:1; }
+/* OJO: .niv-levelup NO va aca. Ponerlo en position:relative le quita el
+   fixed y lo mete en el flujo: se queda del tamanio de su caja (se ve un
+   marco con fondo distinto adentro) y la explosion sale descentrada. */
+#splash { position:relative; z-index:1; }
 
 /* ─── LOBBY ─── apilado y centrado. En fila la barra se iba a un costado y el
    teaser quedaba al lado, que es lo que se veia roto. */
@@ -2195,13 +2325,13 @@ body::before {
 .nr-eje { stroke:rgba(255,255,255,.055); stroke-width:1; }
 .nr-radar { fill:rgba(229,50,45,.16); stroke:var(--red-hi); stroke-width:2;
   stroke-linejoin:round; filter:drop-shadow(0 0 12px rgba(229,50,45,.45)); }
-.nr-disco { fill:#0F1116; stroke:rgba(255,255,255,.1); stroke-width:1; }
 .nr-centro { font-family:var(--f-dato); font-size:10px; text-anchor:middle;
-  fill:var(--text-muted); letter-spacing:.16em; text-transform:uppercase; }
+  fill:var(--text-secondary); letter-spacing:.16em; text-transform:uppercase; }
 .nr-centro-n { font-family:var(--f-display); font-size:30px; font-weight:800; text-anchor:middle;
   fill:var(--text-primary); letter-spacing:-.04em; }
-.nr-centro-t { font-family:var(--f-dato); font-size:9px; text-anchor:middle;
-  fill:var(--text-disabled); letter-spacing:.12em; }
+.nr-centro-t { font-family:var(--f-display); font-size:13px; fill:var(--text-muted);
+  font-weight:700; }
+
 .nr-halo { fill:transparent; }
 .nr-c { fill:#101218; stroke:rgba(255,255,255,.14); stroke-width:1.5; }
 .nr-ico { overflow:visible; }
@@ -2229,7 +2359,8 @@ body::before {
 .nr-n.bien  .nr-l, .nr-n.bien .nr-v { fill:var(--green); }
 
 .niv-areas { max-width:none !important; margin:0 !important; padding:0 !important;
-  background:none !important; border:none !important; }
+  background:none !important; border:none !important; box-shadow:none !important;
+  backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
 .niv-leyenda { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:10px;
   font-family:var(--f-dato); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; }
 .niv-leyenda span { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); }
@@ -2739,7 +2870,7 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 /* ═══ PORTADA ═══ El titular es el diagnóstico, no la marca. */
 .niv-firma { font-family:var(--f-dato); font-size:10px; letter-spacing:.2em;
   text-transform:uppercase; color:var(--text-muted); text-align:center; margin-bottom:22px; }
-.niv-h1 { font-family:var(--f-display); font-weight:900; text-transform:uppercase;
+.niv-h1 { font-family:var(--f-display); font-weight:900;
   font-size:clamp(32px,8.4vw,52px); line-height:.98; letter-spacing:-.035em;
   color:var(--text-primary); text-align:center; margin:0 0 18px; text-wrap:balance; }
 .niv-h1-em { color:var(--red); }
@@ -3324,8 +3455,13 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 
     <!-- INTRO (pre-quiz) -->
     <div id="nivIntro">
-      <div class="niv-firma niv-home-reveal">founder os &middot; por private build</div>
-      <div class="niv-legal niv-home-reveal">Private Build Consulting SpA</div>
+      <div class="niv-dominio niv-home-reveal">
+        <span class="niv-dom-url">privatebuild.io</span>
+        <svg class="niv-dom-tick" viewBox="0 0 24 24" aria-label="Verificado" role="img">
+          <path d="M12 2.2 14.6 4l3.1-.3 1 3 2.6 1.8-1.2 2.9 1.2 2.9L18.7 17l-1 3-3.1-.3L12 21.8 9.4 20l-3.1.3-1-3-2.6-1.8 1.2-2.9-1.2-2.9L5.3 7l1-3L9.4 4z"/>
+          <path class="niv-dom-check" d="m8.4 12.1 2.5 2.5 4.7-4.9"/>
+        </svg>
+      </div>
 
       <h1 class="niv-h1 niv-home-reveal niv-home-d2">Conoce qu&eacute;<br>te est&aacute; frenando<br><span class="niv-h1-em">para escalar tu negocio con IA</span></h1>
 
@@ -3340,8 +3476,9 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </div>
       </div>
 
-      <p class="niv-sec niv-home-reveal niv-home-d3">Todos partimos igual&hellip;</p>
+      
       <div class="niv-carr niv-home-reveal niv-home-d3">
+        <p class="niv-sec niv-sec-claro">Todos partimos igual&hellip;</p>
         <button class="niv-carr-fl izq" type="button" aria-label="Anterior" onclick="carrMover(-1)">&larr;</button>
         <div class="niv-carr-vp"><div class="niv-carr-track" id="nivCarrTrack">
           <div class="niv-dolor">Entro a redes y me abrumo con tanta informaci&oacute;n.</div>
@@ -3489,14 +3626,34 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq niv-blq-cta">
-          <p class="niv-cierre-t">Ya tienes la claridad de dónde estás.
-            <strong>Ahora puedes recibir un plan personalizado y las herramientas para
-            escalar en solo 3 meses.</strong></p>
+          <p class="niv-cierre-t">Ya tienes la claridad de d&oacute;nde est&aacute;s.
+            <strong>Ahora puedes recibir tu plan personalizado, los recursos y las
+            herramientas para escalar apalancado de IA en <span class="pvt-rojo">solo
+            3 meses</span>.</strong></p>
+          <p class="niv-oferta">Solo por diciembre y lanzamiento: <strong>los primeros 3
+            llevan bonus.</strong></p>
           <div class="niv-ctas" id="nivCtas"></div>
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>03</b>El backend que lo sostiene</p>
+          <p class="niv-blq-t"><b>03</b>C&oacute;mo se encadenan las 8 &aacute;reas</p>
+          <p class="niv-backend-t">No son ocho temas sueltos: cada una alimenta a la
+            siguiente, y <strong>la que est&aacute; rota le pone el techo a todas las de
+            abajo</strong>.</p>
+          <ol class="niv-skills">
+            <li><b>01</b><span>Foundations</span><em>La lógica del negocio y hacia dónde va</em></li>
+            <li><b>02</b><span>Oferta</span><em>Qué vendes y a qué precio</em></li>
+            <li><b>03</b><span>Avatar</span><em>A quién le vendes y a quién no</em></li>
+            <li><b>04</b><span>Contenido</span><em>Cómo llegan los correctos hasta ti</em></li>
+            <li><b>05</b><span>Captura</span><em>Dónde quedan los que te escriben</em></li>
+            <li><b>06</b><span>Ventas</span><em>Conducir la conversación hasta el sí</em></li>
+            <li><b>07</b><span>Entrega</span><em>Cumplir sin que te cueste la semana</em></li>
+            <li><b>08</b><span>Success</span><em>El loop que sostiene a los otros siete</em></li>
+          </ol>
+        </section>
+
+        <section class="niv-blq">
+          <p class="niv-blq-t"><b>04</b>El backend que lo sostiene</p>
           <p class="niv-backend-t">Para apalancarte con IA hoy necesitas
             <strong>claridad en cada área</strong> del negocio. No más herramientas:
             saber cuál mover primero.</p>
@@ -3504,7 +3661,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>04</b>Cómo escala desde acá</p>
+          <p class="niv-blq-t"><b>05</b>Cómo escala desde acá</p>
           <div class="niv-bal" id="nivBal">
             <div class="niv-bal-p" aria-hidden="true">
               <div class="niv-bal-0"></div>
@@ -3520,13 +3677,31 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>05</b>Founders que ya lo hicieron</p>
+          <p class="niv-blq-t"><b>06</b>Lo que me escriben cuando funciona</p>
+          <div class="niv-wins" id="nivWins" style="--n:12"><div class="niv-wstack">
+            <figure class="wa2" style="--k:0;--dx:-14px;--dy:-10px;--r:-3deg"><div class="wa-m"><span>Saleeee reu con Decisor para proxima semana 🤩💪🏻</span><small>✓✓</small></div><div class="wa-m"><span>Otra cafetería de Rancagua</span><small>✓✓</small></div><figcaption>Pablo · Buena Mesa</figcaption></figure>
+            <figure class="wa2" style="--k:1;--dx:12px;--dy:6px;--r:2deg"><div class="wa-m"><span>Vendimos 74 millones en cyber 😁</span><small>✓✓</small></div><figcaption>Marjorie · Emma Clara</figcaption></figure>
+            <figure class="wa2" style="--k:2;--dx:-8px;--dy:14px;--r:-2deg"><div class="wa-m"><span>Tengo 3 meetings esta semana</span><small>✓✓</small></div><div class="wa-m"><span>Con 3 leads diferentes</span><small>✓✓</small></div><div class="wa-m"><span>Que nervios</span><small>✓✓</small></div><figcaption>Kathe · GMDS Yachts</figcaption></figure>
+            <figure class="wa2" style="--k:3;--dx:12px;--dy:-12px;--r:3deg"><div class="wa-m"><span>Tengo mi primera llamada mañana</span><small>✓✓</small></div><div class="wa-m"><span>Letsgooo 🔥</span><small>✓✓</small></div><figcaption>Vicente Pickering</figcaption></figure>
+            <figure class="wa2" style="--k:4;--dx:-12px;--dy:10px;--r:1deg"><div class="wa-m"><span>Bro hoy sin pauta una persona entra y se gasta 600 Lucas solita</span><small>✓✓</small></div><figcaption>Juan Pablo · NAD</figcaption></figure>
+            <figure class="wa2" style="--k:5;--dx:6px;--dy:-4px;--r:-2deg"><div class="wa-m"><span>Vendimos 46 millones este mes</span><small>✓✓</small></div><div class="wa-m"><span>No me lo creo</span><small>✓✓</small></div><figcaption>Dra. Medicina Estética</figcaption></figure>
+            <figure class="wa2" style="--k:6;--dx:-4px;--dy:16px;--r:2deg"><div class="wa-m"><span>Mañana tenemos una reunión con el que manda en el grupo comercial</span><small>✓✓</small></div><figcaption>Laura · STM</figcaption></figure>
+            <figure class="wa2" style="--k:7;--dx:14px;--dy:10px;--r:-3deg"><div class="wa-m"><span>me encanta que nos desgloses la info asi, quedo super claro</span><small>✓✓</small></div><figcaption>Benja y Cris · AI Visual Creators</figcaption></figure>
+            <figure class="wa2" style="--k:8;--dx:-10px;--dy:-14px;--r:1deg"><div class="wa-m"><span>Mañana tengo una reunión con un cliente potencial</span><small>✓✓</small></div><div class="wa-m"><span>Vamos ctm</span><small>✓✓</small></div></figure>
+            <figure class="wa2" style="--k:9;--dx:4px;--dy:8px;--r:-1deg"><div class="wa-m"><span>Ayer después del cerro fuimos a Barrio Italia y saqué otra Meet para mañana 🤩</span><small>✓✓</small></div><figcaption>Pablo · Buena Mesa</figcaption></figure>
+            <figure class="wa2" style="--k:10;--dx:-14px;--dy:2px;--r:3deg"><div class="wa-m"><span>Cerré mi primera DEMO hermano</span><small>✓✓</small></div><div class="wa-m"><span>No lo puedo creer 🙌🔥</span><small>✓✓</small></div></figure>
+            <figure class="wa2" style="--k:11;--dx:8px;--dy:-10px;--r:-1deg"><div class="wa-m"><span>¡Vendí mis primeros 3 cursos de contenido! 😭</span><small>✓✓</small></div></figure>
+          </div></div>
           <div class="niv-pruebas-g" id="nivPruebas"></div>
         </section>
 
         <footer class="niv-ficha-f">
           <p class="niv-cierre-t"><strong>Tu plan personalizado sale de este
-            diagnóstico.</strong> Te lo armo sobre tus ocho áreas, no sobre un molde.</p>
+            diagn&oacute;stico.</strong> Te lo armo sobre tus ocho &aacute;reas, no sobre un molde,
+            con los recursos y las herramientas para escalar apalancado de IA en
+            <span class="pvt-rojo">solo 3 meses</span>.</p>
+          <p class="niv-oferta">Solo por diciembre y lanzamiento: <strong>los primeros 3
+            llevan bonus.</strong></p>
           <div class="niv-ctas" id="nivCtas2"></div>
           <p class="niv-ficha-firma">Private Build Consulting SpA · privatebuild.io</p>
         </footer>
@@ -3534,30 +3709,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
       </article>
     </div>
 
-<div class="niv-levelup" id="nivLevelup">
-  <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
-  <div class="niv-levelup-flash" id="nivLevelupFlash"></div>
-  <div class="niv-levelup-inner">
-    <div class="niv-anillo" id="nivAnillo">
-      <svg viewBox="0 0 120 120" aria-hidden="true">
-        <circle class="niv-anillo-base" cx="60" cy="60" r="52"></circle>
-        <circle class="niv-anillo-fill" id="nivAnilloFill" cx="60" cy="60" r="52"></circle>
-      </svg>
-      <span class="niv-anillo-n"><b id="nivAnilloN">0</b><em>%</em></span>
-    </div>
-    <div class="niv-levelup-label">TU ETAPA</div>
-    <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
-    <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
-    <button class="niv-levelup-btn" id="nivLevelupBtn" onclick="dismissNivLevelup()">Ver mi resultado completo &rarr;</button>
-    <!-- Value teaser (durante el análisis) — qué te vas a encontrar en el diagnóstico -->
-    <div class="niv-community-mini" id="nivCommunityMini">
-      <div class="niv-lobby-barra"><i id="nivLobbyBarra"></i></div>
-      <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
-      <div class="niv-lobby-benefits" id="nivLobbyBenefits"></div>
-      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">9</span>s</div>
-    </div>
-  </div>
-</div>
+
 
 <script>
 
@@ -3736,14 +3888,17 @@ const M0 = '/diagnostico/img';  // absoluta: la pagina tambien se sirve en /
 // tiempo falsos — la forma es el argumento, no los números del eje.
 // Corre --rp de 0 a 1 cuando el grafico entra en pantalla. Cada barra tiene su
 // umbral --s, asi que entran una tras otra como en Mision 0.
-function nivAnimarBal() {
-  var caja = document.getElementById('nivBal');
+function nivAnimarBal() { nivAnimarProgreso('nivBal', 1500); nivAnimarProgreso('nivWins', 2600); }
+
+// Corre --rp de 0 a 1 cuando el bloque entra en pantalla.
+function nivAnimarProgreso(id, DUR) {
+  var caja = document.getElementById(id);
   if (!caja) return;
   var corrio = false;
   var correr = function() {
     if (corrio) return;
     corrio = true;
-    var t0 = null, DUR = 1500;
+    var t0 = null;
     var paso = function(t) {
       if (t0 === null) t0 = t;
       var k = Math.min(1, (t - t0) / DUR);
@@ -3777,19 +3932,21 @@ function nivPintarRueda(areas) {
   var pts = [], ejes = '';
   for (var i = 0; i < nivAreaOrden.length; i++) {
     var ang = -Math.PI / 2 + i * (Math.PI / 4);
-    var r = RADAR * Math.max(areas[nivAreaOrden[i]], 4) / 100;
+    var HUECO = 26;
+    var r = HUECO + (RADAR - HUECO) * areas[nivAreaOrden[i]] / 100;
     pts.push((CX + r * Math.cos(ang)).toFixed(1) + ',' + (CY + r * Math.sin(ang)).toFixed(1));
-    ejes += '<line class="nr-eje" x1="' + CX + '" y1="' + CY + '" x2="' +
+    ejes += '<line class="nr-eje" x1="' + (CX + 26 * Math.cos(ang)).toFixed(1) +
+            '" y1="' + (CY + 26 * Math.sin(ang)).toFixed(1) + '" x2="' +
             (CX + RADAR * Math.cos(ang)).toFixed(1) + '" y2="' +
             (CY + RADAR * Math.sin(ang)).toFixed(1) + '"></line>';
   }
 
   var mallas = '';
-  [0.25, 0.5, 0.75, 1].forEach(function(k) {
-    var m = [];
+  [0, 0.25, 0.5, 0.75, 1].forEach(function(k) {
+    var m = [], rr = 26 + (RADAR - 26) * k;
     for (var j = 0; j < 8; j++) {
       var a = -Math.PI / 2 + j * (Math.PI / 4);
-      m.push((CX + RADAR * k * Math.cos(a)).toFixed(1) + ',' + (CY + RADAR * k * Math.sin(a)).toFixed(1));
+      m.push((CX + rr * Math.cos(a)).toFixed(1) + ',' + (CY + rr * Math.sin(a)).toFixed(1));
     }
     mallas += '<polygon class="nr-malla" points="' + m.join(' ') + '"></polygon>';
   });
@@ -3798,10 +3955,8 @@ function nivPintarRueda(areas) {
           '<circle class="nr-flujo" cx="200" cy="196" r="148"></circle>' +
           mallas + ejes +
           '<polygon class="nr-radar" points="' + pts.join(' ') + '"></polygon>' +
-          '<circle class="nr-disco" cx="200" cy="196" r="50"></circle>' +
-          '<text class="nr-centro" x="200" y="184">Tu negocio</text>' +
-          '<text class="nr-centro-n" x="200" y="212">' + nivNota(areas) + '</text>' +
-          '<text class="nr-centro-t" x="200" y="226">de 100</text>';
+          '<text class="nr-centro" x="200" y="188">Tu negocio</text>' +
+          '<text class="nr-centro-n" x="200" y="218">' + nivNota(areas) + '<tspan class="nr-centro-t" dx="2">/100</tspan></text>';
 
   for (var i2 = 0; i2 < nivAreaOrden.length; i2++) {
     var k2 = nivAreaOrden[i2];
@@ -3906,10 +4061,9 @@ function nivPintarNota(areas, rojo) {
         '<div class="niv-nota-esc-l"><span>0</span><span>corte 40</span><span>100</span></div>' +
       '</div>' +
       '<div>' +
-        '<p class="niv-nota-t">Tu principal problema est\u00e1 en ' +
+        '<p class="niv-nota-t">Tu principal cuello de botella es ' +
           '<span class="pvt-rojo">' + nivListaY(nombres) + '</span>.</p>' +
-        '<p class="niv-nota-sub">Resolverlo con IA te permite <strong>escalar en menos de ' +
-          '3 meses</strong>.</p>' +
+        '<p class="niv-nota-sub">' + nivResumenPorArea[bajas[0]] + '</p>' +
       '</div>' +
     '</div>';
 }
@@ -4410,29 +4564,14 @@ function proceedToLevelUp() {
     if (pct >= 100) clearInterval(numInt);
   }, 60);
 
-  // Los tres mensajes rotan. Es lo que hace que, aunque hoy no compre,
-  // quiera quedarse cerca.
-  var teaserEl = document.getElementById('nivValueTeaser');
-  var tIdx = 0;
-  if (teaserEl) {
-    teaserEl.innerHTML = nivValueTeasers[0];
-    teaserEl.classList.add('entra');
-  }
-  var teaserInt = setInterval(function() {
-    if (!teaserEl) return;
-    tIdx = (tIdx + 1) % nivValueTeasers.length;
-    teaserEl.classList.remove('entra');
-    void teaserEl.offsetWidth;
-    teaserEl.innerHTML = nivValueTeasers[tIdx];
-    teaserEl.classList.add('entra');
-  }, 1400);
+  var teaserInt = 0;
 
   setTimeout(function() {
 
     var benefitsEl = document.getElementById('nivLobbyBenefits');
     if (benefitsEl && !benefitsEl.children.length) {
-      benefitsEl.innerHTML = nivLobbyBenefits.map(function(b) {
-        return '<div class="niv-lobby-benefit"><span class="niv-lobby-benefit-check">✓</span><span>' + b + '</span></div>';
+      benefitsEl.innerHTML = nivValueTeasers.map(function(b) {
+        return '<div class="niv-lobby-benefit"><span class="niv-lobby-benefit-check">\u2713</span><span>' + b + '</span></div>';
       }).join('');
     }
 
@@ -4444,7 +4583,7 @@ function proceedToLevelUp() {
     // Los beneficios entran encadenados, rápido pero suave — todos visibles antes de los 3s
     var benefitRows = communityMini.querySelectorAll('.niv-lobby-benefit');
     benefitRows.forEach(function(row, i) {
-      setTimeout(function() { row.classList.add('show'); }, 80 + i * 110);
+      setTimeout(function() { row.classList.add('show'); }, 250 + i * 950);
     });
   }, 300);
 
@@ -4671,6 +4810,8 @@ function dismissNivLevelup() {
   document.documentElement.classList.remove('modo-app');
   document.body.classList.remove('modo-app');
   document.getElementById('nivResult').classList.add('active');
+  try { history.pushState({ pvt: 'resultado' }, '', '/resultado'); } catch (e) {}
+  pvtTrack('pagina_resultado', { nota: window._nivNota || null });
 
   var areas = nivCalcAreas();
   var rojo = nivEnRojo(areas);
@@ -4694,7 +4835,11 @@ function dismissNivLevelup() {
            '<span>' + nivAreaFalta[k] + '</span></li>';
     });
     h += '</ol>';
-    h += '<p class="niv-faltan-nota">' + nivResumen(areas, rojo, listar) + '</p>';
+    if (rojo.length >= 3) {
+      h += '<p class="niv-faltan-nota">No es un problema aislado: con <strong>' + rojo.length +
+           ' \u00e1reas</strong> por debajo del umbral, lo que falta no es arreglar una cosa, ' +
+           'es que <strong>no hay un sistema debajo</strong>.</p>';
+    }
     faltanEl.innerHTML = h;
   }
 
@@ -5167,6 +5312,86 @@ window.addEventListener('load', function() {
   }
 });
 </script>
+
+<!-- Cierra .splash-inner y #splash. Estaban sin cerrar, asi que el navegador
+     metia dentro de ellos todo lo que viniera despues: el overlay y el pie. -->
+    </div>
+</div>
+
+<div class="niv-levelup" id="nivLevelup">
+  <div class="niv-pulso" aria-hidden="true"></div>
+  <div class="niv-levelup-particles" id="nivLevelupParticles"></div>
+  <div class="niv-levelup-flash" id="nivLevelupFlash"></div>
+  <div class="niv-levelup-inner">
+    <div class="niv-anillo" id="nivAnillo">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="niv-anillo-base" cx="60" cy="60" r="52"></circle>
+        <circle class="niv-anillo-fill" id="nivAnilloFill" cx="60" cy="60" r="52"></circle>
+      </svg>
+      <span class="niv-anillo-n"><b id="nivAnilloN">0</b><em>%</em></span>
+    </div>
+    <div class="niv-levelup-label">TU ETAPA</div>
+    <div class="niv-levelup-rank" id="nivLevelupRank">SKILLER</div>
+    <div class="niv-levelup-range" id="nivLevelupRange">$0 &ndash; $1,500/mes</div>
+    <button class="niv-levelup-btn" id="nivLevelupBtn" onclick="dismissNivLevelup()">Ver mi resultado completo &rarr;</button>
+    <!-- Value teaser (durante el análisis) — qué te vas a encontrar en el diagnóstico -->
+    <div class="niv-community-mini" id="nivCommunityMini">
+      <div class="niv-lobby-barra"><i id="nivLobbyBarra"></i></div>
+      <div class="niv-lobby-benefits" id="nivLobbyBenefits"></div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">9</span>s</div>
+    </div>
+  </div>
+</div>
+
+<footer class="pvt-foot">
+  <div class="pvt-foot-in">
+    <div class="pvt-foot-top">
+      <span class="niv-marca"><i></i>Private Build</span>
+      <span class="pvt-foot-dom">privatebuild.io</span>
+    </div>
+
+    <details class="pvt-legal">
+      <summary>T&eacute;rminos y condiciones</summary>
+      <p><b>Qu&eacute; es.</b> Founder OS es un diagn&oacute;stico gratuito de ocho preguntas que
+      eval&uacute;a las ocho &aacute;reas de un negocio y devuelve cu&aacute;les est&aacute;n
+      frenando el crecimiento. No es una asesor&iacute;a ni un programa, y no reemplaza
+      asesor&iacute;a profesional contable, legal ni financiera.</p>
+      <p><b>El resultado.</b> El puntaje sale de lo que t&uacute; declaras en el quiz. Si los datos
+      que entregas no reflejan tu negocio, el diagn&oacute;stico tampoco lo har&aacute;.</p>
+      <p><b>Contacto.</b> Al terminar puedes abrir una conversaci&oacute;n por WhatsApp. Es
+      opcional y no implica ninguna obligaci&oacute;n de compra.</p>
+      <p><b>Resultados.</b> Los casos mostrados son de clientes reales y no representan un
+      resultado t&iacute;pico ni garantizado. Lo que logres depende de tu oferta, tu mercado y
+      tu ejecuci&oacute;n.</p>
+      <p><b>Responsable.</b> Private Build Consulting SpA, consultora de negocios con sede en
+      Santiago de Chile. Contacto por Instagram en @privatebuild.os.</p>
+      <p><b>Marcas.</b> Los nombres y logos de herramientas de terceros pertenecen a sus
+      due&ntilde;os y se usan solo para indicar con qu&eacute; se trabaja.</p>
+    </details>
+
+    <details class="pvt-legal">
+      <summary>Pol&iacute;tica de privacidad</summary>
+      <p><b>Qu&eacute; datos.</b> Nombre, cuenta o sitio web y tel&eacute;fono que entregas en el
+      diagn&oacute;stico, m&aacute;s tus respuestas y el puntaje por &aacute;rea.</p>
+      <p><b>Para qu&eacute;.</b> Para armarte el diagn&oacute;stico, contactarte por WhatsApp si
+      lo pides y entender qu&eacute; anuncios funcionan.</p>
+      <p><b>D&oacute;nde quedan.</b> En el CRM de Private Build. No vendemos ni cedemos tus datos
+      a terceros.</p>
+      <p><b>Cookies y medici&oacute;n.</b> El sitio usa herramientas de medici&oacute;n, como el
+      p&iacute;xel de Meta y la anal&iacute;tica del alojamiento, para saber qu&eacute; anuncios
+      funcionan.</p>
+      <p><b>Tus derechos.</b> Puedes pedir acceso, correcci&oacute;n o eliminaci&oacute;n de tus
+      datos cuando quieras, conforme a la Ley 19.628 de Chile, escribiendo a @privatebuild.os.</p>
+    </details>
+
+    <p class="pvt-disc">Este sitio no forma parte de Facebook ni de Meta Platforms, Inc.
+    Adem&aacute;s, este sitio no est&aacute; respaldado por Facebook de ninguna manera. Facebook
+    e Instagram son marcas registradas de Meta Platforms, Inc.</p>
+    <p class="pvt-disc">&copy; 2026 Private Build Consulting SpA. Todos los derechos reservados.
+    Prohibida la reproducci&oacute;n total o parcial de este sitio y sus contenidos sin
+    autorizaci&oacute;n.</p>
+  </div>
+</footer>
 
 </body>
 </html>

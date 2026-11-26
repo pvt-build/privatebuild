@@ -55,6 +55,10 @@
     {
       "source": "/",
       "destination": "/diagnostico"
+    },
+    {
+      "source": "/resultado",
+      "destination": "/diagnostico"
     }
   ]
 }
