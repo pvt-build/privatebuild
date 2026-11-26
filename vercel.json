@@ -57,6 +57,14 @@
       "destination": "/diagnostico"
     },
     {
+      "source": "/diagnostico/preguntas",
+      "destination": "/diagnostico"
+    },
+    {
+      "source": "/diagnostico/resultado",
+      "destination": "/diagnostico"
+    },
+    {
       "source": "/resultado",
       "destination": "/diagnostico"
     }
