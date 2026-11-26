@@ -1703,7 +1703,7 @@ body.result-mode {
 .niv-community-mini {
   margin-top:0 !important;
   display:flex;
-  flex-direction:row;
+  flex-direction:column;
   flex-wrap:wrap;
   align-items:center;
   justify-content:center;
@@ -1994,7 +1994,7 @@ body.result-mode {
 .niv-bal { max-width:720px; margin:44px auto 0; width:100%; --rp:0;
   padding-inline:14px; }
 .niv-bal-p { position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:7px; height:256px; margin-top:20px; }
+  gap:7px; height:292px; margin-top:8px; }
 .niv-bal-0 { position:absolute; left:0; right:0; bottom:74px; height:1px;
   background:rgba(255,255,255,.18); }
 .nbar { position:relative; min-width:0;
@@ -2030,7 +2030,7 @@ body.result-mode {
   text-transform:uppercase; color:var(--text-secondary); }
 .niv-bal-n { font-size:11.5px; color:var(--text-muted); margin-top:14px; text-align:center; }
 @media (min-width:700px) {
-  .niv-bal-p { height:340px; gap:10px; }
+  .niv-bal-p { height:372px; gap:12px; }
   .nbar i { height:calc(200px * var(--h) / 100 * var(--g)); }
   .nbv { bottom:calc(80px + 200px * var(--h) / 100 * var(--g)); font-size:13px; }
   .nbx { font-size:11px; }
@@ -2084,6 +2084,52 @@ html, body { overflow-x:clip; max-width:100%; }
 .niv-ig-row { align-items:stretch; }
 .niv-ig-row .niv-ig-input { padding-left:12px !important; min-width:0; }
 
+/* ─── FONDO ─── malla fina mas aura roja a la deriva, como en Mision 0. */
+body::before {
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size:48px 48px;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 35%, #000 20%, transparent 78%);
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 35%, #000 20%, transparent 78%);
+}
+#splash, .niv-levelup { position:relative; z-index:1; }
+
+/* ─── LOBBY ─── apilado y centrado. En fila la barra se iba a un costado y el
+   teaser quedaba al lado, que es lo que se veia roto. */
+.niv-community-mini { align-items:center !important; gap:0 !important;
+  max-width:460px !important; margin-inline:auto !important; }
+.niv-lobby-barra { width:100%; max-width:340px; margin:0 auto; }
+.niv-value-teaser { width:100%; max-width:380px; margin:20px auto 0 !important; }
+.niv-lobby-benefits { margin:20px auto 0 !important; }
+.niv-lobby-timer { margin-top:18px !important; }
+
+/* ─── OPCIONES ─── todas del mismo ancho y con el mismo alto minimo. Antes
+   cada caja media distinto segun su texto y la columna era angosta: en una
+   pantalla de escritorio sobraba la mitad del ancho. */
+.niv-wrap { max-width:720px !important; }
+.niv-options { gap:9px !important; }
+.niv-opt {
+  width:100%; min-height:62px; display:flex; align-items:center;
+  padding:16px 20px !important; border-radius:var(--r-s) !important;
+  border-left-width:1px !important; font-size:15px !important; line-height:1.3;
+}
+.niv-opt-multi { min-height:62px; }
+.niv-cuenta { margin-bottom:10px !important; }
+.niv-progress { margin-bottom:26px !important; }
+@media (min-width:760px) {
+  /* Dos columnas cuando hay cuatro o mas opciones cortas: llena el ancho sin
+     dejar lineas de texto de 15 caracteres. */
+  .niv-options { display:grid !important; grid-template-columns:1fr 1fr; gap:10px !important; }
+  .niv-options > .niv-opt-continuar { grid-column:1 / -1; }
+  .niv-opt { min-height:70px; font-size:16px !important; }
+  .niv-question { font-size:30px !important; }
+}
+@media (max-width:759px) {
+  .niv-opt { min-height:56px; padding:14px 16px !important; font-size:14.5px !important; }
+}
+
 /* ─── EL RESULTADO EN ESCRITORIO ─── el contenedor estaba fijo en 440px, o sea
    una columna de telefono en una pantalla de 1280: por eso el diagnostico se
    veia apretado y sin aire. En pantalla ancha se abre, y con eso la nota pasa
@@ -2097,8 +2143,14 @@ html, body { overflow-x:clip; max-width:100%; }
    capturas sin nombre no prueba nada: podrian ser cualquiera. */
 .niv-pruebas-g { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
 .niv-prueba { margin:0; min-width:0; display:grid; gap:8px; }
+/* Borde rojo con glow, como las piezas de Mision 0: la prueba tiene que
+   sentirse encendida, no un adjunto gris. */
 .niv-prueba img { width:100%; aspect-ratio:16/10; object-fit:cover; display:block;
-  border-radius:var(--r-s); border:1px solid var(--b1); background:var(--v1); }
+  border-radius:10px; border:1px solid rgba(229,50,45,.45); background:var(--v1);
+  box-shadow:0 0 0 1px rgba(229,50,45,.12), 0 10px 30px -14px rgba(229,50,45,.55);
+  transition:box-shadow .35s, border-color .35s; }
+.niv-prueba:hover img { border-color:var(--red-hi);
+  box-shadow:0 0 0 1px rgba(255,81,71,.3), 0 14px 40px -12px rgba(229,50,45,.8); }
 .niv-prueba figcaption { display:grid; gap:5px; min-width:0; }
 .niv-prueba figcaption b { font-family:var(--f-display); font-size:12px; font-weight:700;
   letter-spacing:-.02em; color:var(--text-primary); line-height:1.2; }
@@ -2111,46 +2163,82 @@ html, body { overflow-x:clip; max-width:100%; }
 @media (min-width:700px) { .niv-pruebas-g { grid-template-columns:repeat(3,1fr); gap:14px; } }
 @media (min-width:1040px) { .niv-pruebas-g { grid-template-columns:repeat(5,1fr); } }
 
-/* ─── LA RUEDA DE LAS 8 AREAS ─── el mismo dibujo de Mision 0, pero cada nodo
-   pintado por puntaje: rojo bajo 40, ambar hasta 69, verde de 70 arriba. */
-.niv-rueda { width:100%; max-width:520px; display:block; margin:6px auto 0; overflow:visible; }
-.nr-aro { fill:none; stroke:rgba(255,255,255,.08); stroke-width:2; }
-.nr-flujo { fill:none; stroke:var(--red); stroke-width:2; stroke-dasharray:3 12; opacity:.4;
-  animation:nrFlujo 2.4s linear infinite; }
-@keyframes nrFlujo { to { stroke-dashoffset:-30; } }
+/* ─── LA RUEDA ─── nodos mas grandes (apenas se veian), radar interior que
+   responde a cada area, y la nota al centro. */
+.niv-rueda { width:100%; max-width:560px; display:block; margin:0 auto; overflow:visible; }
+.nr-aro { fill:none; stroke:rgba(255,255,255,.07); stroke-width:1.5; }
+.nr-flujo { fill:none; stroke:var(--red); stroke-width:1.5; stroke-dasharray:3 14; opacity:.35;
+  animation:nrFlujo 2.6s linear infinite; }
+@keyframes nrFlujo { to { stroke-dashoffset:-34; } }
+.nr-malla { fill:none; stroke:rgba(255,255,255,.07); stroke-width:1; }
+.nr-eje { stroke:rgba(255,255,255,.055); stroke-width:1; }
+.nr-radar { fill:rgba(229,50,45,.16); stroke:var(--red-hi); stroke-width:2;
+  stroke-linejoin:round; filter:drop-shadow(0 0 12px rgba(229,50,45,.45)); }
+.nr-disco { fill:#0F1116; stroke:rgba(255,255,255,.1); stroke-width:1; }
+.nr-centro { font-family:var(--f-dato); font-size:10px; text-anchor:middle;
+  fill:var(--text-muted); letter-spacing:.16em; text-transform:uppercase; }
+.nr-centro-n { font-family:var(--f-display); font-size:30px; font-weight:800; text-anchor:middle;
+  fill:var(--text-primary); letter-spacing:-.04em; }
+.nr-centro-t { font-family:var(--f-dato); font-size:9px; text-anchor:middle;
+  fill:var(--text-disabled); letter-spacing:.12em; }
 .nr-halo { fill:transparent; }
-.nr-c { fill:var(--osc, #14151A); stroke:rgba(255,255,255,.12); stroke-width:1.5; }
+.nr-c { fill:#101218; stroke:rgba(255,255,255,.14); stroke-width:1.5; }
 .nr-ico { overflow:visible; }
 .nr-ico path, .nr-ico circle, .nr-ico rect { fill:none; stroke:currentColor; stroke-width:2.6;
   stroke-linecap:round; stroke-linejoin:round; }
 .nr-ico .ac { fill:currentColor; stroke:none; }
-.nr-l { font-family:var(--f-dato); font-size:13px; fill:var(--text-muted); }
-.nr-v { font-family:var(--f-dato); font-size:13px; fill:var(--text-disabled);
+.nr-l { font-family:var(--f-display); font-size:14px; font-weight:700; letter-spacing:-.02em;
+  fill:var(--text-secondary); }
+.nr-v { font-family:var(--f-dato); font-size:12px; fill:var(--text-disabled);
   font-variant-numeric:tabular-nums; }
 
-.nr-n.mal   .nr-halo { fill:rgba(229,50,45,.14); }
-.nr-n.mal   .nr-c    { fill:rgba(229,50,45,.16); stroke:var(--red); }
+.nr-n.mal   .nr-halo { fill:rgba(229,50,45,.16); }
+.nr-n.mal   .nr-c    { fill:rgba(229,50,45,.20); stroke:var(--red); }
 .nr-n.mal   .nr-ico  { color:var(--red-hi); }
 .nr-n.mal   .nr-l, .nr-n.mal .nr-v { fill:var(--red-hi); }
 
-.nr-n.medio .nr-halo { fill:rgba(227,163,60,.10); }
-.nr-n.medio .nr-c    { fill:rgba(227,163,60,.12); stroke:rgba(227,163,60,.6); }
+.nr-n.medio .nr-halo { fill:rgba(227,163,60,.12); }
+.nr-n.medio .nr-c    { fill:rgba(227,163,60,.15); stroke:rgba(227,163,60,.65); }
 .nr-n.medio .nr-ico  { color:#E3A33C; }
 .nr-n.medio .nr-l, .nr-n.medio .nr-v { fill:#E3A33C; }
 
-.nr-n.bien  .nr-halo { fill:rgba(46,208,138,.10); }
-.nr-n.bien  .nr-c    { fill:rgba(46,208,138,.12); stroke:rgba(46,208,138,.55); }
+.nr-n.bien  .nr-halo { fill:rgba(46,208,138,.12); }
+.nr-n.bien  .nr-c    { fill:rgba(46,208,138,.15); stroke:rgba(46,208,138,.6); }
 .nr-n.bien  .nr-ico  { color:var(--green); }
 .nr-n.bien  .nr-l, .nr-n.bien .nr-v { fill:var(--green); }
 
-.niv-leyenda { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:16px;
-  font-family:var(--f-dato); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+.niv-areas { max-width:none !important; margin:0 !important; padding:0 !important;
+  background:none !important; border:none !important; }
+.niv-leyenda { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:10px;
+  font-family:var(--f-dato); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; }
 .niv-leyenda span { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); }
-.niv-leyenda i { width:8px; height:8px; border-radius:50%; display:block; }
-@media (max-width:420px) {
-  .nr-l { font-size:10px; }
-  .nr-v { font-size:9.5px; }
-}
+.niv-leyenda i { width:7px; height:7px; border-radius:50%; display:block; }
+
+/* ─── TE FALTAN ─── filas de dashboard: area, barra y puntaje alineados en
+   columnas, no tarjetas de distinto alto. */
+.niv-faltan { margin:0; padding:0; border:none; }
+.niv-faltan-tit { display:none; }
+.niv-faltan-l { list-style:none; counter-reset:f; margin:0; padding:0; display:grid; gap:1px;
+  border:1px solid var(--b1); border-radius:var(--r-s); overflow:hidden;
+  background:var(--b1); }
+.niv-faltan-l li { counter-increment:f; display:grid; gap:4px 14px; padding:15px 16px;
+  background:rgba(255,255,255,.028); border:none; border-radius:0;
+  grid-template-columns:28px minmax(0,1fr) 62px; align-items:baseline; }
+.niv-faltan-l li::before { content:counter(f,decimal-leading-zero); grid-column:1; grid-row:1;
+  font-family:var(--f-dato); font-size:10px; color:var(--text-disabled); }
+.niv-faltan-l b { grid-column:2; grid-row:1; font-family:var(--f-display); font-size:16px;
+  font-weight:700; letter-spacing:-.025em; color:var(--text-primary); }
+.niv-faltan-l i { grid-column:3; grid-row:1; font-style:normal; font-family:var(--f-dato);
+  font-size:15px; color:var(--red-hi); font-variant-numeric:tabular-nums; text-align:right;
+  white-space:nowrap; }
+.niv-faltan-l i em { font-style:normal; font-size:9px; color:var(--text-disabled); }
+.niv-faltan-l span { grid-column:2 / -1; grid-row:2; font-size:14px; color:var(--text-secondary);
+  line-height:1.4; }
+.niv-faltan-l span::first-letter { text-transform:uppercase; }
+.niv-faltan, .niv-faltan-l, .niv-faltan-l li { text-align:left; }
+.niv-faltan-nota { font-size:14.5px; color:var(--text-secondary); line-height:1.55;
+  margin:18px 0 0; }
+.niv-faltan-nota strong { color:var(--text-primary); font-weight:600; }
 
 /* ─── CASOS ─── los doce de Mision 0, en la portada: esta pagina recibe
    trafico frio de anuncios y la prueba tiene que estar antes del quiz. */
@@ -2190,50 +2278,88 @@ html, body { overflow-x:clip; max-width:100%; }
 @media (min-width:640px) { .niv-casos { grid-template-columns:1fr 1fr; } }
 @media (min-width:1000px) { .niv-casos { grid-template-columns:repeat(3,1fr); } }
 
-/* ─── LA NOTA ─── ficha tecnica, no test de revista: etiqueta arriba, la cifra
-   grande a la izquierda, la escala con su marca de corte, y el veredicto al
-   lado. En movil se apila sin perder el orden de lectura. */
-.niv-nota { max-width:720px; margin:0 auto 10px; width:100%; text-align:left;
-  padding:0; border:1px solid var(--b1); border-radius:var(--r-m);
-  background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.015));
-  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); overflow:hidden; }
+/* ═══ LA FICHA ═══ todo el diagnostico en una sola pieza. Antes eran seis
+   bloques sueltos flotando sobre el fondo y no se leia como un documento.
+   Marco unico, cabecera con la marca, bloques numerados y pie firmado. */
+.niv-ficha { width:100%; text-align:left; border:1px solid var(--b1);
+  border-radius:18px; overflow:hidden; position:relative;
+  background:linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio);
+  box-shadow:0 40px 90px -50px rgba(0,0,0,.9); }
+/* El filo rojo de arriba es la unica marca de color del marco: dice de quien
+   es la ficha sin poner un logo gigante. */
+.niv-ficha::before { content:''; position:absolute; left:0; right:0; top:0; height:2px; z-index:2;
+  background:linear-gradient(90deg, transparent, var(--red) 22%, var(--red-hi) 50%, var(--red) 78%, transparent); }
+
+.niv-ficha-h { display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 18px; border-bottom:1px solid var(--b1); background:rgba(0,0,0,.22); }
+.niv-marca { display:inline-flex; align-items:center; gap:8px; font-family:var(--f-display);
+  font-size:13px; font-weight:800; letter-spacing:-.02em; color:var(--text-primary); }
+.niv-marca i { width:9px; height:9px; border-radius:2px; background:var(--red);
+  box-shadow:0 0 12px rgba(229,50,45,.9); display:block; flex:none; }
+.niv-ficha-id { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--text-disabled); text-align:right; }
+
+.niv-blq { padding:26px 18px; border-bottom:1px solid rgba(255,255,255,.055); }
+.niv-blq-t { display:flex; align-items:center; gap:10px; margin:0 0 18px;
+  font-family:var(--f-display); font-size:15px; font-weight:700; letter-spacing:-.025em;
+  color:var(--text-primary); }
+.niv-blq-t b { font-family:var(--f-dato); font-size:10px; font-weight:400; color:var(--red-hi);
+  border:1px solid rgba(229,50,45,.35); background:rgba(229,50,45,.1); border-radius:5px;
+  padding:3px 6px; letter-spacing:.08em; flex:none; }
+.niv-blq-cta { background:rgba(229,50,45,.055); text-align:center; }
+.niv-ficha-f { padding:26px 18px 24px; border-top:1px solid var(--b1);
+  background:rgba(0,0,0,.22); text-align:center; }
+.niv-ficha-firma { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.14em;
+  color:var(--text-disabled); margin:18px 0 0; }
+@media (min-width:760px) {
+  .niv-blq { padding:34px 30px; }
+  .niv-ficha-h { padding:16px 30px; }
+  .niv-ficha-f { padding:34px 30px 30px; }
+  .niv-blq-t { font-size:17px; margin-bottom:22px; }
+}
+
+/* ═══ LA NOTA ═══ La cifra deja de ser enorme respecto del total: iba 92px
+   contra 26px y se leia como un marcador de partido, no como una nota. */
+.niv-nota { max-width:none; margin:0; width:auto; text-align:left; padding:26px 18px;
+  border:none; border-radius:0; background:none; backdrop-filter:none;
+  -webkit-backdrop-filter:none; overflow:visible;
+  border-bottom:1px solid rgba(255,255,255,.055); }
 .niv-nota-top { display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding:12px 16px; border-bottom:1px solid var(--b1); }
-.niv-nota-ok { display:inline-flex; align-items:center; gap:6px; font-family:var(--f-dato);
+  padding:0 0 16px; border-bottom:1px solid var(--b1); margin-bottom:20px; }
+.niv-nota-ok { display:inline-flex; align-items:center; gap:7px; font-family:var(--f-dato);
   font-size:9.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--green); }
 .niv-nota-ok::before { content:''; width:6px; height:6px; border-radius:50%;
   background:var(--green); box-shadow:0 0 10px rgba(46,208,138,.9); }
 .niv-nota-ref { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--text-disabled); }
-.niv-nota-cuerpo { display:grid; gap:18px; padding:20px 16px 22px; }
-.niv-nota-cifra { display:flex; align-items:baseline; gap:4px; }
-.niv-nota-n { font-family:var(--f-display); font-weight:800; letter-spacing:-.05em;
-  line-height:.9; font-variant-numeric:tabular-nums; color:var(--text-primary);
-  font-size:clamp(64px,17vw,92px); }
-.niv-nota-n em { font-style:normal; font-size:.28em; color:var(--text-muted);
-  font-weight:600; letter-spacing:-.02em; }
+.niv-nota-cuerpo { display:grid; gap:20px; padding:0; }
+.niv-nota-cifra { display:flex; align-items:baseline; gap:2px; }
+.niv-nota-n { font-family:var(--f-display); font-weight:800; letter-spacing:-.045em;
+  line-height:.92; font-variant-numeric:tabular-nums; color:var(--text-primary);
+  font-size:clamp(46px,11vw,60px); }
+.niv-nota-n em { font-style:normal; font-size:.46em; color:var(--text-muted);
+  font-weight:700; letter-spacing:-.02em; }
 .niv-nota-lab { font-family:var(--f-dato); font-size:9.5px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--text-muted); margin:0 0 10px; }
-/* La escala lleva la marca del 40, que es el corte con el que se decide si un
-   area esta en rojo. Sin ella el numero no se puede interpretar. */
+  text-transform:uppercase; color:var(--text-muted); margin:0 0 8px; }
 .niv-nota-esc { position:relative; height:6px; border-radius:3px;
-  background:rgba(255,255,255,.07); margin-top:14px; }
+  background:rgba(255,255,255,.07); margin-top:14px; max-width:320px; }
 .niv-nota-esc i { position:absolute; left:0; top:0; bottom:0; border-radius:3px;
   background:linear-gradient(90deg, var(--red), var(--red-hi)); }
 .niv-nota-esc u { position:absolute; top:-4px; bottom:-4px; width:1px;
   background:rgba(255,255,255,.3); left:40%; }
-.niv-nota-esc-l { display:flex; justify-content:space-between; margin-top:7px;
+.niv-nota-esc-l { display:flex; justify-content:space-between; margin-top:7px; max-width:320px;
   font-family:var(--f-dato); font-size:9px; letter-spacing:.1em; color:var(--text-disabled); }
-.niv-nota-t { font-family:var(--f-display); font-size:clamp(19px,4.4vw,24px); font-weight:700;
+.niv-nota-t { font-family:var(--f-display); font-size:clamp(19px,4.2vw,25px); font-weight:700;
   letter-spacing:-.03em; line-height:1.2; color:var(--text-primary); margin:0; }
 .niv-nota-t .pvt-rojo { color:var(--red-hi); }
 .niv-nota-sub { font-size:14.5px; line-height:1.5; color:var(--text-secondary);
-  margin:10px 0 0; max-width:42ch; }
+  margin:10px 0 0; max-width:44ch; }
 .niv-nota-sub strong { color:var(--green); font-weight:600; }
-@media (min-width:720px) {
-  .niv-nota-cuerpo { grid-template-columns:minmax(0,260px) minmax(0,1fr); gap:34px;
-    align-items:center; padding:26px 26px 28px; }
-  .niv-nota-top { padding:13px 26px; }
+@media (min-width:760px) {
+  .niv-nota { padding:34px 30px; }
+  .niv-nota-cuerpo { grid-template-columns:minmax(0,290px) minmax(0,1fr); gap:38px;
+    align-items:center; }
 }
 
 /* ─── ANILLO DE CARGA ─── el circulo que se llena durante la espera.
@@ -2842,24 +2968,13 @@ body, .niv-opt, .niv-result-text, .niv-lead-input, .niv-lead-note,
 .niv-opt.sel:hover { background:rgba(229,50,45,.14) !important;
   border-color:rgba(255,81,71,.5) !important; transform:none !important; }
 
-/* ─── PUNTAJE POR AREA ─── el numero hace discutible el diagnostico */
-.niv-faltan-l li { grid-template-columns:26px minmax(0,1fr) auto !important; }
-.niv-faltan-l i { grid-column:3; grid-row:1; font-style:normal;
-  font-family:var(--f-dato); font-size:14px; color:var(--red-hi);
-  font-variant-numeric:tabular-nums; white-space:nowrap; }
-.niv-faltan-l i em { font-style:normal; font-size:9px; color:var(--text-muted); }
-
 /* ─── LOGOS CON NOMBRE ─── una grilla de imagenes sueltas no se lee */
-.niv-logos { display:flex !important; flex-direction:column; gap:16px !important;
-  align-items:stretch !important; }
-.niv-logo-g { display:grid; gap:8px; }
-.niv-logo-gt { font-family:var(--f-dato); font-size:9px; letter-spacing:.18em;
-  text-transform:uppercase; color:var(--text-disabled); margin:0; text-align:center; }
-.niv-logo-f { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; }
-.niv-logo { width:44px !important; height:44px !important; border-radius:12px !important;
-  background:rgba(255,255,255,.06) !important; }
+.niv-logos { display:flex !important; flex-wrap:wrap; justify-content:center;
+  gap:7px !important; margin-top:18px !important; }
+.niv-logo { width:40px !important; height:40px !important; border-radius:10px !important;
+  background:rgba(255,255,255,.055) !important; }
 .niv-logo img[src*="vercel"] { filter:invert(1); }
-.niv-logo img { width:22px !important; height:22px !important; }
+.niv-logo img { width:20px !important; height:20px !important; }
 
 /* ─── RADAR ─── el dibujo deja de ser rojo: el rojo marca solo lo caído */
 .niv-radar { max-width:300px; }
@@ -3081,8 +3196,9 @@ body::after { background:
 .niv-area.bien .niv-area-barra i { background: rgba(46,208,138,.55); }
 
 body::after { background:
-  radial-gradient(900px 540px at 50% -10%, rgba(255,255,255,.05), transparent 70%),
-  radial-gradient(760px 440px at 12% 104%, rgba(229,50,45,.07), transparent 72%) !important; }
+  radial-gradient(900px 540px at 50% -12%, rgba(255,255,255,.055), transparent 70%),
+  radial-gradient(820px 520px at 8% 102%, rgba(229,50,45,.16), transparent 70%),
+  radial-gradient(640px 420px at 98% 18%, rgba(229,50,45,.10), transparent 68%) !important; }
 
 /* ═══ AURA ═══ dos manchas que respiran lento. Si se nota el movimiento,
    está mal: la idea es que la página no se sienta un PDF. */
@@ -3126,10 +3242,6 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
   text-transform:uppercase; color:var(--text-muted); margin:0 0 14px; text-align:center; }
 .niv-faltan-l { list-style:none; counter-reset:f; margin:0; padding:0;
   display:flex; flex-direction:column; gap:10px; }
-.niv-faltan-l li { counter-increment:f; display:grid; grid-template-columns:26px minmax(0,1fr);
-  gap:12px; align-items:baseline; padding:13px 14px; border-radius:var(--r-s);
-  background:var(--v1); border:1px solid var(--b1);
-  backdrop-filter:var(--vidrio); -webkit-backdrop-filter:var(--vidrio); }
 .niv-faltan-l li::before { content:counter(f,decimal-leading-zero);
   font-family:var(--f-dato); font-size:11px; color:var(--red-hi); }
 /* Ambos hijos viven en la segunda columna: sin esto el <span> cae en la
@@ -3144,7 +3256,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 .niv-faltan-nota strong { color:var(--text-primary); font-weight:600; }
 
 /* ═══ BACKEND + LOGOS ═══ */
-.niv-backend { max-width:620px; margin:40px auto 0; width:100%; }
+.niv-backend-t { max-width:52ch; }
 .niv-backend-t { font-size:15px; color:var(--text-secondary); line-height:1.52;
   text-align:center; max-width:46ch; margin:0 auto; }
 .niv-backend-t strong { color:var(--text-primary); font-weight:600; }
@@ -3268,8 +3380,8 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 
     <!-- QUIZ QUESTIONS -->
     <div class="niv-wrap" id="nivQuiz">
-      <div class="niv-progress" id="nivProgress"></div>
       <div class="niv-cuenta" id="nivCuenta"></div>
+      <div class="niv-progress" id="nivProgress"></div>
       <div class="niv-question" id="nivQuestion"></div>
       <div class="niv-porque" id="nivPorque"></div>
       <div class="niv-options" id="nivOptions"></div>
@@ -3328,45 +3440,77 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
     <!-- ══ RESULTADO ══ La promesa es saber qué te frena, no en qué etapa estás.
          Por eso no hay nivel, hay áreas. -->
     <div class="niv-result" id="nivResult">
+      <article class="niv-ficha">
 
-      <div class="niv-nota" id="nivNota"></div>
+        <header class="niv-ficha-h">
+          <span class="niv-marca"><i></i>Private Build</span>
+          <span class="niv-ficha-id">Founder OS · Diagnóstico</span>
+        </header>
 
-      <div class="niv-areas" id="nivAreasBox">
-        <div class="niv-areas-tit">Tu negocio en 8 &aacute;reas</div>
-        <svg class="niv-rueda" id="nivRueda" viewBox="-96 -44 592 486" role="img" aria-label="Las ocho areas de tu negocio, cada una en rojo, ambar o verde"></svg>
-        <div class="niv-leyenda"><span><i style="background:var(--red)"></i>En rojo</span><span><i style="background:#E3A33C"></i>A medias</span><span><i style="background:var(--green)"></i>Sólido</span></div>
-        <div class="niv-faltan" id="nivFaltan"></div>
-      </div>
+        <section class="niv-blq" id="nivNota"></section>
 
-      <div class="niv-backend">
-        <p class="niv-sec">El backend</p>
-        <p class="niv-backend-t">Para apalancarte con IA hoy necesitas <strong>claridad en cada &aacute;rea</strong> del negocio. No m&aacute;s herramientas: saber cu&aacute;l mover primero.</p>
-        <div class="niv-logos" id="nivLogos"></div>
-      </div>
+        <section class="niv-blq">
+          <p class="niv-blq-t"><b>01</b>Tu negocio en 8 áreas</p>
+          <div class="niv-areas" id="nivAreasBox">
+            <svg class="niv-rueda" id="nivRueda" viewBox="-96 -44 592 486" role="img"
+                 aria-label="Las ocho areas de tu negocio, cada una en rojo, ambar o verde"></svg>
+            <div class="niv-leyenda">
+              <span><i style="background:var(--red)"></i>En rojo</span>
+              <span><i style="background:#E3A33C"></i>A medias</span>
+              <span><i style="background:var(--green)"></i>Sólido</span>
+            </div>
+          </div>
+        </section>
 
-      <div class="niv-pruebas">
-        <p class="niv-sec">Lo que me escriben</p>
-        <div class="niv-pruebas-g" id="nivPruebas"></div>
-      </div>
+        <section class="niv-blq">
+          <p class="niv-blq-t"><b>02</b>Lo que te está frenando</p>
+          <div class="niv-faltan" id="nivFaltan"></div>
+        </section>
 
-      <div class="niv-bal" id="nivBal">
-        <p class="niv-sec">C&oacute;mo escala</p>
-        <div class="niv-bal-p" aria-hidden="true">
-          <div class="niv-bal-0"></div>
-          <div class="nbar neg inv" style="--h:170;--s:0.00"><span class="nbv"></span><i></i><span class="nbx"><b>Mes 1</b>Entras al programa</span></div>
-          <div class="nbar pos" style="--h:14;--s:0.16"><span class="nbv dos">Primeras<br>ventas</span><i></i><span class="nbx"><b>Mes 1</b>Oferta y avatar</span></div>
-          <div class="nbar pos" style="--h:34;--s:0.32"><span class="nbv">&times;2</span><i></i><span class="nbx"><b>Mes 2</b>Captura y contenido</span></div>
-          <div class="nbar pos" style="--h:62;--s:0.48"><span class="nbv">&times;4</span><i></i><span class="nbx"><b>Mes 3</b>Ventas y entrega</span></div>
-          <div class="nbar top" style="--h:100;--s:0.64"><span class="nbv">&times;7</span><i></i><span class="nbx"><b>Mes 3+</b>Tu meta</span></div>
-        </div>
-        <p class="niv-bal-n">Ejemplo ilustrativo del recorrido. Tus n&uacute;meros dependen de tu oferta y tu ejecuci&oacute;n.</p>
-      </div>
+        <section class="niv-blq niv-blq-cta">
+          <p class="niv-cierre-t">Ya tienes la claridad de dónde estás.
+            <strong>Ahora puedes recibir un plan personalizado y las herramientas para
+            escalar en solo 3 meses.</strong></p>
+          <div class="niv-ctas" id="nivCtas"></div>
+        </section>
 
-      <div class="niv-cierre">
-        <p class="niv-cierre-t">Ya tienes la claridad de d&oacute;nde est&aacute;s.<br><strong>Ahora puedes recibir un plan personalizado y las herramientas para escalar en solo 3 meses.</strong></p>
-        <div class="niv-ctas" id="nivCtas"></div>
-      </div>
+        <section class="niv-blq">
+          <p class="niv-blq-t"><b>03</b>El backend que lo sostiene</p>
+          <p class="niv-backend-t">Para apalancarte con IA hoy necesitas
+            <strong>claridad en cada área</strong> del negocio. No más herramientas:
+            saber cuál mover primero.</p>
+          <div class="niv-logos" id="nivLogos"></div>
+        </section>
 
+        <section class="niv-blq">
+          <p class="niv-blq-t"><b>04</b>Cómo escala desde acá</p>
+          <div class="niv-bal" id="nivBal">
+            <div class="niv-bal-p" aria-hidden="true">
+              <div class="niv-bal-0"></div>
+              <div class="nbar neg inv" style="--h:170;--s:0.00"><span class="nbv"></span><i></i><span class="nbx"><b>Mes 1</b>Entras al programa</span></div>
+              <div class="nbar pos" style="--h:14;--s:0.16"><span class="nbv dos">Primeras<br>ventas</span><i></i><span class="nbx"><b>Mes 1</b>Claridad, contenido y ventas</span></div>
+              <div class="nbar pos" style="--h:34;--s:0.32"><span class="nbv">&times;2</span><i></i><span class="nbx"><b>Mes 2</b>Oferta y precio</span></div>
+              <div class="nbar pos" style="--h:62;--s:0.48"><span class="nbv">&times;4</span><i></i><span class="nbx"><b>Mes 3</b>Captura, success y entrega</span></div>
+              <div class="nbar top" style="--h:100;--s:0.64"><span class="nbv">&times;7</span><i></i><span class="nbx"><b>Mes 3+</b>Tu meta</span></div>
+            </div>
+            <p class="niv-bal-n">Ejemplo ilustrativo del recorrido. Tus números dependen de
+              tu oferta y tu ejecución.</p>
+          </div>
+        </section>
+
+        <section class="niv-blq">
+          <p class="niv-blq-t"><b>05</b>Founders que ya lo hicieron</p>
+          <div class="niv-pruebas-g" id="nivPruebas"></div>
+        </section>
+
+        <footer class="niv-ficha-f">
+          <p class="niv-cierre-t"><strong>Tu plan personalizado sale de este
+            diagnóstico.</strong> Te lo armo sobre tus ocho áreas, no sobre un molde.</p>
+          <div class="niv-ctas" id="nivCtas2"></div>
+          <p class="niv-ficha-firma">Private Build Consulting SpA · privatebuild.io</p>
+        </footer>
+
+      </article>
     </div>
 
 <div class="niv-levelup" id="nivLevelup">
@@ -3389,7 +3533,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
       <div class="niv-lobby-barra"><i id="nivLobbyBarra"></i></div>
       <div class="niv-value-teaser niv-lobby-item" id="nivValueTeaser"></div>
       <div class="niv-lobby-benefits" id="nivLobbyBenefits"></div>
-      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">6</span>s</div>
+      <div class="niv-lobby-timer niv-lobby-item" id="nivLobbyTimer">Resultado en <span id="nivLobbyCountdown">9</span>s</div>
     </div>
   </div>
 </div>
@@ -3604,37 +3748,67 @@ const NIV_NODOS = [[200.0,48.0],[304.7,91.3],[348.0,196.0],[304.7,300.7],[200.0,
 function nivPintarRueda(areas) {
   var svg = document.getElementById('nivRueda');
   if (!svg) return;
-  var h = '<circle class="nr-aro" cx="200" cy="196" r="148"></circle>' +
-          '<circle class="nr-flujo" cx="200" cy="196" r="148"></circle>';
+  var CX = 200, CY = 196, RADAR = 104;
+
+  // El radar interior: un poligono de ocho vertices, cada uno a la distancia
+  // que marca su puntaje. Es lo que convierte la rueda en un diagnostico de un
+  // vistazo, sin tener que leer los ocho numeros uno por uno.
+  var pts = [], ejes = '';
   for (var i = 0; i < nivAreaOrden.length; i++) {
-    var k = nivAreaOrden[i];
-    var d = nivAreasDef[k];
-    var v = areas[k];
+    var ang = -Math.PI / 2 + i * (Math.PI / 4);
+    var r = RADAR * Math.max(areas[nivAreaOrden[i]], 4) / 100;
+    pts.push((CX + r * Math.cos(ang)).toFixed(1) + ',' + (CY + r * Math.sin(ang)).toFixed(1));
+    ejes += '<line class="nr-eje" x1="' + CX + '" y1="' + CY + '" x2="' +
+            (CX + RADAR * Math.cos(ang)).toFixed(1) + '" y2="' +
+            (CY + RADAR * Math.sin(ang)).toFixed(1) + '"></line>';
+  }
+
+  var mallas = '';
+  [0.25, 0.5, 0.75, 1].forEach(function(k) {
+    var m = [];
+    for (var j = 0; j < 8; j++) {
+      var a = -Math.PI / 2 + j * (Math.PI / 4);
+      m.push((CX + RADAR * k * Math.cos(a)).toFixed(1) + ',' + (CY + RADAR * k * Math.sin(a)).toFixed(1));
+    }
+    mallas += '<polygon class="nr-malla" points="' + m.join(' ') + '"></polygon>';
+  });
+
+  var h = '<circle class="nr-aro" cx="200" cy="196" r="148"></circle>' +
+          '<circle class="nr-flujo" cx="200" cy="196" r="148"></circle>' +
+          mallas + ejes +
+          '<polygon class="nr-radar" points="' + pts.join(' ') + '"></polygon>' +
+          '<circle class="nr-disco" cx="200" cy="196" r="50"></circle>' +
+          '<text class="nr-centro" x="200" y="184">Tu negocio</text>' +
+          '<text class="nr-centro-n" x="200" y="212">' + nivNota(areas) + '</text>' +
+          '<text class="nr-centro-t" x="200" y="226">de 100</text>';
+
+  for (var i2 = 0; i2 < nivAreaOrden.length; i2++) {
+    var k2 = nivAreaOrden[i2];
+    var d = nivAreasDef[k2];
+    var v = areas[k2];
     var est = nivEstado(v);
-    var x = NIV_NODOS[i][0], y = NIV_NODOS[i][1];
+    var x = NIV_NODOS[i2][0], y = NIV_NODOS[i2][1];
     // La etiqueta sale del circulo por el lado que le toca. Los dos nodos de
     // los costados van hacia afuera en horizontal: puestos arriba o abajo se
-    // cruzan con el nodo diagonal vecino, que es lo que pasaba antes.
+    // cruzan con el nodo diagonal vecino.
     var lx = x, ly, ancla = 'middle';
     if (y > 194 && y < 198) {
       ancla = x > 200 ? 'start' : 'end';
-      lx = x + (x > 200 ? 46 : -46);
+      lx = x + (x > 200 ? 52 : -52);
       ly = y - 4;
     } else if (y < 196) {
-      ly = y - 50;
+      ly = y - 56;
     } else {
-      ly = y + 58;
+      ly = y + 64;
     }
-    // En la mitad de arriba el valor va sobre el nombre, para no meterlo
-    // dentro del circulo.
-    var vy = (ancla === 'middle' && y < 196) ? ly - 14 : ly + 14;
+    var vy = (ancla === 'middle' && y < 196) ? ly - 15 : ly + 15;
     h += '<g class="nr-n ' + est + '">' +
-           '<circle class="nr-halo" cx="' + x + '" cy="' + y + '" r="40"></circle>' +
-           '<circle class="nr-c" cx="' + x + '" cy="' + y + '" r="31"></circle>' +
-           '<svg class="nr-ico" x="' + (x - 13) + '" y="' + (y - 13) + '" width="26" height="26" ' +
+           '<circle class="nr-halo" cx="' + x + '" cy="' + y + '" r="44"></circle>' +
+           '<circle class="nr-c" cx="' + x + '" cy="' + y + '" r="35"></circle>' +
+           '<svg class="nr-ico" x="' + (x - 15) + '" y="' + (y - 15) + '" width="30" height="30" ' +
              'viewBox="0 0 48 48">' + PB_ICONOS[d.ico] + '</svg>' +
            '<text class="nr-l" x="' + lx + '" y="' + ly + '" text-anchor="' + ancla + '">' +
-             d.n + ' \u00b7 ' + d.nombre + '</text>' +
+             d.nombre + '</text>' +
            '<text class="nr-v" x="' + lx + '" y="' + vy + '" text-anchor="' + ancla + '">' +
              v + '/100</text>' +
          '</g>';
@@ -4186,7 +4360,7 @@ function proceedToLevelUp() {
     barraEl.style.transition = 'none';
     barraEl.style.width = '0%';
     requestAnimationFrame(function() {
-      barraEl.style.transition = 'width 6s linear';
+      barraEl.style.transition = 'width 9s linear';
       barraEl.style.width = '100%';
     });
   }
@@ -4201,13 +4375,13 @@ function proceedToLevelUp() {
     fillEl.style.transition = 'none';
     fillEl.style.strokeDashoffset = CIRC;
     requestAnimationFrame(function() {
-      fillEl.style.transition = 'stroke-dashoffset 6s linear';
+      fillEl.style.transition = 'stroke-dashoffset 9s linear';
       fillEl.style.strokeDashoffset = '0';
     });
   }
   var t0 = Date.now();
   var numInt = setInterval(function() {
-    var pct = Math.min(100, Math.round((Date.now() - t0) / 60));
+    var pct = Math.min(100, Math.round((Date.now() - t0) / 90));
     if (numEl) numEl.textContent = pct;
     if (pct >= 100) clearInterval(numInt);
   }, 60);
@@ -4227,7 +4401,7 @@ function proceedToLevelUp() {
     void teaserEl.offsetWidth;
     teaserEl.innerHTML = nivValueTeasers[tIdx];
     teaserEl.classList.add('entra');
-  }, 1000);
+  }, 1400);
 
   setTimeout(function() {
 
@@ -4252,7 +4426,7 @@ function proceedToLevelUp() {
 
   // Lobby de 2s. La sensación de velocidad vale más que el valor percibido
   // que se ganaba con la espera: el que llega de la bio no espera siete segundos.
-  var lobbyTotal = 6;
+  var lobbyTotal = 9;
   var lobbyCountEl = document.getElementById('nivLobbyCountdown');
   var lobbyRemaining = lobbyTotal;
   var lobbyInterval = setInterval(function() {
@@ -4497,30 +4671,17 @@ function dismissNivLevelup() {
     faltanEl.innerHTML = h;
   }
 
-  // Solo los iconos, agrupados por area. La IA va primero porque es el tema
-  // por el que entro el lead; el resto sigue el orden del loop.
-  var LOGOS = [
-    { g: 'Inteligencia artificial',
-      l: ['claude.png','chatgpt.png','grok.svg','higgsfield.png','elevenlabs.svg'] },
-    { g: 'Contenido',
-      l: ['instagram.png','tiktok.png','youtube.png','metricool.png'] },
-    { g: 'Captura',
-      l: ['manychat.png','metaads.png','googleforms.svg'] },
-    { g: 'Ventas y entrega',
-      l: ['whatsapp.svg','fathom.png'] },
-    { g: 'Infraestructura',
-      l: ['notion.png','supabase.png','vercel.svg'] },
-    { g: 'Tienda y cobros',
-      l: ['shopify.png','mercadopago.png'] }
-  ];
+  // Todos juntos en una sola tira: separados por area el bloque ocupaba media
+  // pantalla para decir algo que se entiende de un vistazo.
+  var LOGOS = ['claude.png','chatgpt.png','grok.svg','higgsfield.png','elevenlabs.svg',
+    'instagram.png','tiktok.png','youtube.png','metricool.png','manychat.png','metaads.png',
+    'googleforms.svg','whatsapp.svg','fathom.png','notion.png','supabase.png','vercel.svg',
+    'shopify.png','mercadopago.png'];
   var logosEl = document.getElementById('nivLogos');
   if (logosEl && !logosEl.children.length) {
-    logosEl.innerHTML = LOGOS.map(function(gr) {
-      return '<div class="niv-logo-g"><p class="niv-logo-gt">' + gr.g + '</p><div class="niv-logo-f">' +
-        gr.l.map(function(f) {
-          return '<span class="niv-logo"><img src="' + M0 + '/logos/' + f + '" alt="" ' +
-                 'loading="lazy" onerror="this.parentNode.remove()"></span>';
-        }).join('') + '</div></div>';
+    logosEl.innerHTML = LOGOS.map(function(f) {
+      return '<span class="niv-logo"><img src="' + M0 + '/logos/' + f + '" alt="" ' +
+             'loading="lazy" onerror="this.parentNode.remove()"></span>';
     }).join('');
   }
 
@@ -4532,9 +4693,7 @@ function dismissNivLevelup() {
     { f:'call-nacho-fenix',     q:'Nacho \u00b7 F\u00e9nix',     t:['Talleres','SaaS','🇨🇱'] },
     { f:'call-juanpablo-feliz', q:'Juan Pablo \u00b7 NAD',       t:['Longevidad','E-commerce','🇦🇷'] },
     { f:'call-laura-jairo',     q:'Laura y Jairo \u00b7 STM',    t:['B2B','Servicio','🇨🇴'] },
-    { f:'call-jairo',           q:'Jairo \u00b7 STM',            t:['B2B','Servicio','🇨🇴'] },
-    { f:'call-sandra',          q:'Sandra \u00b7 Ovistra',       t:['Viajes deportivos','🇨🇱'] },
-    { f:'call-vicente',         q:'Vicente Pickering',            t:['Hyrox','Coaching'] }
+    { f:'call-sandra',          q:'Sandra \u00b7 Ovistra',       t:['Viajes deportivos','🇨🇱'] }
   ];
   var prEl = document.getElementById('nivPruebas');
   if (prEl && !prEl.children.length) {
@@ -4562,12 +4721,13 @@ function dismissNivLevelup() {
               ? ' Mi nota fue ' + window._nivNota + '/100 y lo m\u00e1s bajo me sali\u00f3 ' +
                 (window._nivBajas || '').toLowerCase() + '.'
               : '');
-  var ctasEl = document.getElementById('nivCtas');
-  if (ctasEl) {
-    ctasEl.innerHTML =
+  var html =
       '<a class="niv-cta niv-cta-call" href="' + pvtUrl('programa', msg) + '" target="_blank">Quiero mi plan personalizado</a>' +
       '<div class="niv-cupos"><span class="niv-cupos-dot"></span>\u00daltimos 3 cupos este mes</div>';
-  }
+  ['nivCtas', 'nivCtas2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = html;
+  });
 
   pvtTrack('result_view', { rojo: rojo.join(',') });
   setTimeout(function() { if (typeof nivRevealInView === 'function') nivRevealInView(); }, 120);
