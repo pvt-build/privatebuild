@@ -196,7 +196,9 @@ body::after {
 
 #splash::after {
   content: '';
-  position: absolute;
+  /* fixed, no absolute: en absolute este adorno de 200% inflaba el
+     scrollHeight del contenedor y lo volvia scrolleable. */
+  position: fixed;
   inset: -50%;
   width: 200%;
   height: 200%;
@@ -224,8 +226,10 @@ body::after {
     #050508;
   background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
   display: block;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* Nada de overflow aca: con un eje en hidden el otro se computa como auto y
+     #splash se volvia un scroll dentro del scroll de la pagina, tragandose el
+     gesto. El recorte horizontal ya lo hacen html y body. */
+  overflow: visible;
   position: relative;
   padding-top: 60px;
   padding-bottom: 40px;
@@ -2159,6 +2163,22 @@ body.modo-app .pvt-foot { display:none; }
 .niv-dom-check { fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round;
   stroke-linejoin:round; }
 
+/* ─── TITULARES ─── el mismo tratamiento de Mision 0: Inter Tight grande,
+   apretada, con el cierre en rojo. Las etiquetas mono de 10px no son un
+   titulo, son una nota al pie. */
+.niv-tit { font-family:var(--f-display); font-weight:700; letter-spacing:-.032em;
+  line-height:1.04; font-size:clamp(26px,5.6vw,42px); color:var(--text-primary);
+  text-align:center; margin:0 auto 10px; max-width:18ch; text-wrap:balance; }
+.niv-tit em { font-style:normal; color:var(--red); }
+.niv-tit-sub { font-size:clamp(14.5px,1.6vw,17px); color:var(--text-secondary);
+  text-align:center; max-width:46ch; margin:0 auto 22px; line-height:1.5; }
+@media (min-width:760px) { .niv-tit { max-width:22ch; } }
+
+/* En la ficha del resultado el titular es mas chico: compite con el dato. */
+.niv-blq-t { font-size:clamp(19px,4.4vw,26px) !important; letter-spacing:-.03em !important;
+  align-items:baseline; }
+.niv-blq-t em { font-style:normal; color:var(--red-hi); }
+
 /* ─── CASOS EN VERTICAL ─── el carrusel horizontal escondia nueve de los doce
    y con trafico frio la prueba tiene que verse, no buscarse. */
 @media (max-width:639px) {
@@ -3543,7 +3563,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
 
       
       <div class="niv-carr niv-home-reveal niv-home-d3">
-        <p class="niv-sec niv-sec-claro">Todos partimos igual&hellip;</p>
+        <p class="niv-tit niv-sec-claro">Todos partimos <em>igual.</em></p>
         <button class="niv-carr-fl izq" type="button" aria-label="Anterior" onclick="carrMover(-1)">&larr;</button>
         <div class="niv-carr-vp"><div class="niv-carr-track" id="nivCarrTrack">
           <div class="niv-dolor"><span>Entro a redes y <strong>me abrumo</strong> con tanta información.</span></div>
@@ -3566,12 +3586,12 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         <div><b>+100</b><span>negocios auditados</span></div>
       </div>
 
-      <p class="niv-sec niv-home-reveal niv-home-d4">Funciona en</p>
+      <p class="niv-tit niv-home-reveal niv-home-d4">Funciona en <em>cualquier nicho.</em></p>
       <div class="niv-huincha niv-home-reveal niv-home-d4">
         <div class="niv-huincha-track" id="nivHuincha"></div>
       </div>
 
-      <p class="niv-sec niv-home-reveal niv-home-d4">Para escalar con IA necesitas</p>
+      <p class="niv-tit niv-home-reveal niv-home-d4">Para escalar con IA <em>necesitas cuatro cosas.</em></p>
       <div class="niv-pilares niv-home-reveal niv-home-d4">
         <div class="niv-pilar"><b>01</b><span>Claridad de tu negocio <strong>por &aacute;rea</strong>, y saber qu&eacute; priorizar.</span></div>
         <div class="niv-pilar"><b>02</b><span>Un solo lugar con las <strong>skills, tutoriales y recursos</strong> &mdash; sin el ruido de redes ni videos de una hora que no aplicas.</span></div>
@@ -3580,16 +3600,16 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
       </div>
 
 
-      <p class="niv-sec niv-home-reveal niv-home-d4">Al igual que tú, otros founders y emprendedores buscaban claridad para vender y apalancarse con IA</p>
+      <p class="niv-tit niv-home-reveal niv-home-d4">Al igual que t&uacute;, otros founders y emprendedores buscaban claridad para vender <em>y apalancarse con IA.</em></p>
       <div class="niv-casos niv-home-reveal niv-home-d4">
-        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/marjorie-emma-clara.jpg" alt="" loading="lazy"></span><div><b>Marjorie · Emma Clara</b><div class="niv-caso-t"><span class="hito">×5</span><span>Moda</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Ya vendía, pero necesitaba claridad para escalar con sistemas e IA.</p></article>
-        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><i>DM</i></span><div><b>Dra. Medicina Estética</b><div class="niv-caso-t"><span class="hito">×24</span><span>Salud estética</span><span>Servicio</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Tenía un buen servicio, pero no sabía usar anuncios para escalar.</p></article>
-        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/kathe.jpg" alt="" loading="lazy"></span><div><b>Kathe · GMDS Yachts</b><div class="niv-caso-t"><span class="hito">×7</span><span>Yates</span><span>Agencia</span><span>🇺🇸 Miami</span></div></div></div><p class="niv-caso-q">Vendía a ticket bajo por no sostener las objeciones de su cliente.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/marjorie-emma-clara.jpg" alt="" loading="lazy"></span><div><b>Marjorie · Emma Clara</b><div class="niv-caso-t"><span>Moda</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Ya vendía, pero necesitaba claridad para escalar con sistemas e IA.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><i>DM</i></span><div><b>Dra. Medicina Estética</b><div class="niv-caso-t"><span>Salud estética</span><span>Servicio</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Tenía un buen servicio, pero no sabía usar anuncios para escalar.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/kathe.jpg" alt="" loading="lazy"></span><div><b>Kathe · GMDS Yachts</b><div class="niv-caso-t"><span>Yates</span><span>Agencia</span><span>🇺🇸 Miami</span></div></div></div><p class="niv-caso-q">Vendía a ticket bajo por no sostener las objeciones de su cliente.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/ai-visual-creators.jpg" alt="" loading="lazy"></span><div><b>Cris y Benja · AI Visual Creators</b><div class="niv-caso-t"><span>Video con IA</span><span>Agencia</span><span>🇨🇱 Chile · 🇺🇸 EE. UU.</span></div></div></div><p class="niv-caso-q">Pasaron de low ticket a high ticket con videos cinematográficos de IA.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/pablo-buena-mesa.png" alt="" loading="lazy"></span><div><b>Pablo · Buena Mesa</b><div class="niv-caso-t"><span>Restaurantes</span><span>SaaS</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Llevaba meses sin vender la app que construyó hace 9 meses.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/egly-casabliss.png" alt="" loading="lazy"></span><div><b>Egly · Casabliss</b><div class="niv-caso-t"><span>Hogar</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">No sabía mejorar su e-commerce, porque no entendía a sus clientes.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/nacho-fenix.png" alt="" loading="lazy"></span><div><b>Nacho · Fénix</b><div class="niv-caso-t"><span>Talleres</span><span>SaaS</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Construyó una app, pero no sabía cómo vendérsela a sus clientes.</p></article>
-        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/amazingcare.png" alt="" loading="lazy"></span><div><b>Ignacio · AmazingCare</b><div class="niv-caso-t"><span class="hito">×2</span><span>Suplementos</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">No tenía claridad para manejar campañas, flujos y automatizaciones.</p></article>
+        <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/amazingcare.png" alt="" loading="lazy"></span><div><b>Ignacio · AmazingCare</b><div class="niv-caso-t"><span>Suplementos</span><span>E-commerce</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">No tenía claridad para manejar campañas, flujos y automatizaciones.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av logo"><img src="/diagnostico/img/casos/juan-pablo-nad.png" alt="" loading="lazy"></span><div><b>Juan Pablo · NAD</b><div class="niv-caso-t"><span>Longevidad</span><span>E-commerce</span><span>🇦🇷 Argentina</span></div></div></div><p class="niv-caso-q">Dependía mucho de su equipo y quería llevar su negocio a la IA.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/vicente-pickering.jpg" alt="" loading="lazy"></span><div><b>Vicente Pickering</b><div class="niv-caso-t"><span>Hyrox</span><span>Coaching</span></div></div></div><p class="niv-caso-q">No tenía una oferta clara, ni sabía quién podía comprar su programa.</p></article>
         <article class="niv-caso"><div class="niv-caso-h"><span class="niv-av"><img src="/diagnostico/img/casos/sandra-ovistra.jpg" alt="" loading="lazy"></span><div><b>Sandra · Ovistra</b><div class="niv-caso-t"><span>Viajes deportivos</span><span>Servicio</span><span>🇨🇱 Chile</span></div></div></div><p class="niv-caso-q">Vendía a pulso, con contenido improvisado, sin entender a su cliente.</p></article>
@@ -3663,7 +3683,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         <section class="niv-blq" id="nivNota"></section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>01</b>Tu negocio en 8 áreas</p>
+          <p class="niv-blq-t"><b>01</b>Tu negocio en <em>8 áreas</em></p>
           <div class="niv-areas" id="nivAreasBox">
             <svg class="niv-rueda" id="nivRueda" viewBox="-96 -44 592 486" role="img"
                  aria-label="Las ocho areas de tu negocio, cada una en rojo, ambar o verde"></svg>
@@ -3676,7 +3696,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>02</b>Lo que te está frenando</p>
+          <p class="niv-blq-t"><b>02</b>Lo que te está <em>frenando</em></p>
           <div class="niv-faltan" id="nivFaltan"></div>
         </section>
 
@@ -3690,7 +3710,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>03</b>El backend que lo sostiene</p>
+          <p class="niv-blq-t"><b>03</b>El backend que <em>lo sostiene</em></p>
           <p class="niv-backend-t">Para apalancarte con IA hoy necesitas
             <strong>claridad en cada área</strong> del negocio. No más herramientas:
             saber cuál mover primero.</p>
@@ -3698,7 +3718,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>04</b>Cómo escala desde acá</p>
+          <p class="niv-blq-t"><b>04</b>Cómo escala <em>desde acá</em></p>
           <div class="niv-bal" id="nivBal">
             <div class="niv-bal-p" aria-hidden="true">
               <div class="niv-bal-0"></div>
@@ -3714,7 +3734,7 @@ em { font-style:normal; color:var(--red-hi); font-weight:600; }
         </section>
 
         <section class="niv-blq">
-          <p class="niv-blq-t"><b>05</b>Otros igual que t&uacute; ya siguen su plan personalizado</p>
+          <p class="niv-blq-t"><b>05</b>Otros igual que t&uacute; ya siguen <em>su plan personalizado</em></p>
           <div class="niv-wins" id="nivWins" style="--n:12"><div class="niv-wstack">
             <figure class="wa2" style="--k:0;--dx:-14px;--dy:-10px;--r:-3deg"><div class="wa-m"><span>Saleeee reu con Decisor para proxima semana 🤩💪🏻</span><small>✓✓</small></div><div class="wa-m"><span>Otra cafetería de Rancagua</span><small>✓✓</small></div><figcaption>Pablo · Buena Mesa</figcaption></figure>
             <figure class="wa2" style="--k:1;--dx:12px;--dy:6px;--r:2deg"><div class="wa-m"><span>Vendimos 74 millones en cyber 😁</span><small>✓✓</small></div><figcaption>Marjorie · Emma Clara</figcaption></figure>
