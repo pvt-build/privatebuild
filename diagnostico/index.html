@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','4548083048790961');
+fbq('track','PageView');
+/* UTM: se guardan al llegar (primer toque de la sesion) para mandarlos con Lead */
+(function(){try{var q=new URLSearchParams(location.search),u={},h=false;['utm_source','utm_medium','utm_campaign'].forEach(function(k){var v=q.get(k);if(v){u[k]=v;h=true}});if(h)sessionStorage.setItem('pvt_utm',JSON.stringify(u));}catch(e){}})();
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4548083048790961&ev=PageView&noscript=1"></noscript>
+<!-- /Meta Pixel -->
+<script>fbq('track','ViewContent',{content_name:'diagnostico'});</script>
 <script src="/medicion.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -4582,7 +4593,27 @@ function carrMover(d) {
   ver();
 })();
 
+// ─── META PIXEL · Lead + DiagnosticoCompletado ─────
+// Se dispara una sola vez por envio, en la primera pantalla posterior al
+// submit del lead (la de resultado). banda_ingreso sale de la pregunta de
+// ingresos ya respondida: bajo 1.500 (primera banda) = mision0; el resto = programa.
+function pvtMetaLead() {
+  if (window._pvtMetaLeadSent) return;
+  window._pvtMetaLeadSent = true;
+  try {
+    if (typeof fbq !== 'function') return;
+    var utm = {};
+    try { utm = JSON.parse(sessionStorage.getItem('pvt_utm') || '{}'); } catch (e) {}
+    var banda = nivScoreDe('ingreso') <= 1 ? 'mision0' : 'programa';
+    var p = { content_name: 'diagnostico', banda_ingreso: banda };
+    for (var k in utm) p[k] = utm[k];
+    fbq('track', 'Lead', p);
+    fbq('trackCustom', 'DiagnosticoCompletado', { banda_ingreso: banda });
+  } catch (e) {}
+}
+
 function proceedToLevelUp() {
+  pvtMetaLead();
   pvtTrack('result_view', { ruta: pvtRuta() });
   var overlay = document.getElementById('nivLevelup');
   var rankEl = document.getElementById('nivLevelupRank');
